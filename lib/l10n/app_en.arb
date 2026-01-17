@@ -1,0 +1,254 @@
+{
+  "@@locale": "en",
+
+  "appName": "Human Design",
+  "@appName": {
+    "description": "The name of the application"
+  },
+
+  "common_save": "Save",
+  "common_cancel": "Cancel",
+  "common_delete": "Delete",
+  "common_edit": "Edit",
+  "common_done": "Done",
+  "common_next": "Next",
+  "common_back": "Back",
+  "common_skip": "Skip",
+  "common_continue": "Continue",
+  "common_loading": "Loading...",
+  "common_error": "Error",
+  "common_retry": "Retry",
+  "common_close": "Close",
+  "common_search": "Search",
+  "common_share": "Share",
+  "common_settings": "Settings",
+  "common_logout": "Log Out",
+  "common_profile": "Profile",
+
+  "auth_signIn": "Sign In",
+  "auth_signUp": "Sign Up",
+  "auth_signInWithApple": "Sign in with Apple",
+  "auth_signInWithGoogle": "Sign in with Google",
+  "auth_signInWithEmail": "Sign in with Email",
+  "auth_email": "Email",
+  "auth_password": "Password",
+  "auth_confirmPassword": "Confirm Password",
+  "auth_forgotPassword": "Forgot Password?",
+  "auth_noAccount": "Don't have an account?",
+  "auth_hasAccount": "Already have an account?",
+  "auth_termsAgree": "By signing up, you agree to our Terms of Service and Privacy Policy",
+
+  "onboarding_welcome": "Welcome to Human Design",
+  "onboarding_welcomeSubtitle": "Discover your unique energetic blueprint",
+  "onboarding_birthData": "Enter Your Birth Data",
+  "onboarding_birthDataSubtitle": "We need this to calculate your chart",
+  "onboarding_birthDate": "Birth Date",
+  "onboarding_birthTime": "Birth Time",
+  "onboarding_birthLocation": "Birth Location",
+  "onboarding_searchLocation": "Search for a city...",
+  "onboarding_unknownTime": "I don't know my birth time",
+  "onboarding_timeImportance": "Knowing your exact birth time is important for an accurate chart",
+
+  "chart_myChart": "My Chart",
+  "chart_viewChart": "View Chart",
+  "chart_calculate": "Calculate Chart",
+  "chart_recalculate": "Recalculate",
+  "chart_share": "Share Chart",
+  "chart_composite": "Composite Chart",
+  "chart_transit": "Today's Transits",
+  "chart_bodygraph": "Bodygraph",
+  "chart_details": "Chart Details",
+
+  "type_manifestor": "Manifestor",
+  "type_generator": "Generator",
+  "type_manifestingGenerator": "Manifesting Generator",
+  "type_projector": "Projector",
+  "type_reflector": "Reflector",
+
+  "type_manifestor_strategy": "To Inform",
+  "type_generator_strategy": "To Respond",
+  "type_manifestingGenerator_strategy": "To Respond",
+  "type_projector_strategy": "To Wait for Invitation",
+  "type_reflector_strategy": "To Wait a Lunar Cycle",
+
+  "authority_emotional": "Emotional",
+  "authority_sacral": "Sacral",
+  "authority_splenic": "Splenic",
+  "authority_ego": "Ego/Heart",
+  "authority_self": "Self-Projected",
+  "authority_environment": "Mental/Environmental",
+  "authority_lunar": "Lunar",
+
+  "definition_none": "No Definition",
+  "definition_single": "Single Definition",
+  "definition_split": "Split Definition",
+  "definition_tripleSplit": "Triple Split",
+  "definition_quadrupleSplit": "Quadruple Split",
+
+  "profile_1_3": "1/3 Investigator/Martyr",
+  "profile_1_4": "1/4 Investigator/Opportunist",
+  "profile_2_4": "2/4 Hermit/Opportunist",
+  "profile_2_5": "2/5 Hermit/Heretic",
+  "profile_3_5": "3/5 Martyr/Heretic",
+  "profile_3_6": "3/6 Martyr/Role Model",
+  "profile_4_6": "4/6 Opportunist/Role Model",
+  "profile_4_1": "4/1 Opportunist/Investigator",
+  "profile_5_1": "5/1 Heretic/Investigator",
+  "profile_5_2": "5/2 Heretic/Hermit",
+  "profile_6_2": "6/2 Role Model/Hermit",
+  "profile_6_3": "6/3 Role Model/Martyr",
+
+  "center_head": "Head",
+  "center_ajna": "Ajna",
+  "center_throat": "Throat",
+  "center_g": "G/Self",
+  "center_heart": "Heart/Ego",
+  "center_sacral": "Sacral",
+  "center_solarPlexus": "Solar Plexus",
+  "center_spleen": "Spleen",
+  "center_root": "Root",
+  "center_defined": "Defined",
+  "center_undefined": "Undefined",
+
+  "section_type": "Type",
+  "section_strategy": "Strategy",
+  "section_authority": "Authority",
+  "section_profile": "Profile",
+  "section_definition": "Definition",
+  "section_centers": "Centers",
+  "section_channels": "Channels",
+  "section_gates": "Gates",
+  "section_conscious": "Conscious (Personality)",
+  "section_unconscious": "Unconscious (Design)",
+
+  "social_friends": "Friends",
+  "social_groups": "Groups",
+  "social_addFriend": "Add Friend",
+  "social_createGroup": "Create Group",
+  "social_invite": "Invite",
+  "social_members": "Members",
+  "social_comments": "Comments",
+  "social_addComment": "Add a comment...",
+  "social_noComments": "No comments yet",
+  "social_shareLimit": "You have {remaining} shares remaining this month",
+  "@social_shareLimit": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "social_visibility": "Visibility",
+  "social_private": "Private",
+  "social_friendsOnly": "Friends Only",
+  "social_public": "Public",
+
+  "transit_title": "Today's Transits",
+  "transit_currentEnergies": "Current Energies",
+  "transit_sunGate": "Sun Gate",
+  "transit_earthGate": "Earth Gate",
+  "transit_moonGate": "Moon Gate",
+  "transit_activeGates": "Active Transit Gates",
+  "transit_activeChannels": "Active Transit Channels",
+  "transit_personalImpact": "Personal Impact",
+  "transit_gateActivated": "Gate {gate} activated by transit",
+  "@transit_gateActivated": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_channelFormed": "Channel {channel} formed with your chart",
+  "@transit_channelFormed": {
+    "placeholders": {
+      "channel": {
+        "type": "String"
+      }
+    }
+  },
+  "transit_noPersonalImpact": "No direct transit connections today",
+  "transit_viewFullTransit": "View Full Transit Chart",
+
+  "affirmation_title": "Daily Affirmation",
+  "affirmation_forYourType": "For Your {type}",
+  "@affirmation_forYourType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "affirmation_basedOnGate": "Based on Gate {gate}",
+  "@affirmation_basedOnGate": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "affirmation_refresh": "New Affirmation",
+  "affirmation_save": "Save Affirmation",
+  "affirmation_saved": "Saved Affirmations",
+  "affirmation_share": "Share Affirmation",
+  "affirmation_notifications": "Daily Affirmation Notifications",
+  "affirmation_notificationTime": "Notification Time",
+
+  "lifestyle_today": "Today",
+  "lifestyle_insights": "Insights",
+  "lifestyle_journal": "Journal",
+  "lifestyle_addJournalEntry": "Add Journal Entry",
+  "lifestyle_journalPrompt": "How are you experiencing your design today?",
+  "lifestyle_noJournalEntries": "No journal entries yet",
+  "lifestyle_mood": "Mood",
+  "lifestyle_energy": "Energy Level",
+  "lifestyle_reflection": "Reflection",
+
+  "penta_title": "Penta",
+  "penta_description": "Group analysis for 3-5 people",
+  "penta_createNew": "Create Penta",
+  "penta_selectMembers": "Select Members",
+  "penta_minMembers": "Minimum 3 members required",
+  "penta_maxMembers": "Maximum 5 members",
+  "penta_groupDynamics": "Group Dynamics",
+  "penta_missingRoles": "Missing Roles",
+  "penta_strengths": "Group Strengths",
+
+  "premium_upgrade": "Upgrade to Premium",
+  "premium_subscribe": "Subscribe",
+  "premium_restore": "Restore Purchases",
+  "premium_features": "Premium Features",
+  "premium_unlimitedShares": "Unlimited Chart Sharing",
+  "premium_groupCharts": "Group Charts",
+  "premium_advancedTransits": "Advanced Transit Analysis",
+  "premium_personalizedAffirmations": "Personalized Affirmations",
+  "premium_journalInsights": "Journal Insights",
+  "premium_adFree": "Ad-Free Experience",
+  "premium_monthly": "Monthly",
+  "premium_yearly": "Yearly",
+  "premium_perMonth": "/month",
+  "premium_perYear": "/year",
+  "premium_bestValue": "Best Value",
+
+  "settings_language": "Language",
+  "settings_theme": "Theme",
+  "settings_themeLight": "Light",
+  "settings_themeDark": "Dark",
+  "settings_themeSystem": "System",
+  "settings_notifications": "Notifications",
+  "settings_privacy": "Privacy",
+  "settings_about": "About",
+  "settings_help": "Help & Support",
+  "settings_terms": "Terms of Service",
+  "settings_privacyPolicy": "Privacy Policy",
+  "settings_version": "Version",
+
+  "error_generic": "Something went wrong",
+  "error_network": "No internet connection",
+  "error_invalidEmail": "Please enter a valid email",
+  "error_invalidPassword": "Password must be at least 8 characters",
+  "error_passwordMismatch": "Passwords do not match",
+  "error_birthDataRequired": "Please enter your birth data",
+  "error_locationRequired": "Please select your birth location",
+  "error_chartCalculation": "Could not calculate your chart"
+}

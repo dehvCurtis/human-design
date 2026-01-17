@@ -1,0 +1,252 @@
+{
+  "@@locale": "uk",
+
+  "appName": "Дизайн Людини",
+
+  "common_save": "Зберегти",
+  "common_cancel": "Скасувати",
+  "common_delete": "Видалити",
+  "common_edit": "Редагувати",
+  "common_done": "Готово",
+  "common_next": "Далі",
+  "common_back": "Назад",
+  "common_skip": "Пропустити",
+  "common_continue": "Продовжити",
+  "common_loading": "Завантаження...",
+  "common_error": "Помилка",
+  "common_retry": "Повторити",
+  "common_close": "Закрити",
+  "common_search": "Пошук",
+  "common_share": "Поділитися",
+  "common_settings": "Налаштування",
+  "common_logout": "Вийти",
+  "common_profile": "Профіль",
+
+  "auth_signIn": "Увійти",
+  "auth_signUp": "Реєстрація",
+  "auth_signInWithApple": "Увійти через Apple",
+  "auth_signInWithGoogle": "Увійти через Google",
+  "auth_signInWithEmail": "Увійти за Email",
+  "auth_email": "Email",
+  "auth_password": "Пароль",
+  "auth_confirmPassword": "Підтвердіть пароль",
+  "auth_forgotPassword": "Забули пароль?",
+  "auth_noAccount": "Немає акаунту?",
+  "auth_hasAccount": "Вже є акаунт?",
+  "auth_termsAgree": "Реєструючись, ви погоджуєтесь з Умовами використання та Політикою конфіденційності",
+
+  "onboarding_welcome": "Ласкаво просимо до Дизайну Людини",
+  "onboarding_welcomeSubtitle": "Відкрийте свій унікальний енергетичний план",
+  "onboarding_birthData": "Введіть дані народження",
+  "onboarding_birthDataSubtitle": "Це потрібно для розрахунку вашої карти",
+  "onboarding_birthDate": "Дата народження",
+  "onboarding_birthTime": "Час народження",
+  "onboarding_birthLocation": "Місце народження",
+  "onboarding_searchLocation": "Введіть назву міста...",
+  "onboarding_unknownTime": "Я не знаю час народження",
+  "onboarding_timeImportance": "Точний час народження важливий для точної карти",
+
+  "chart_myChart": "Моя карта",
+  "chart_viewChart": "Переглянути карту",
+  "chart_calculate": "Розрахувати карту",
+  "chart_recalculate": "Перерахувати",
+  "chart_share": "Поділитися картою",
+  "chart_composite": "Композитна карта",
+  "chart_transit": "Транзити сьогодні",
+  "chart_bodygraph": "Бодіграф",
+  "chart_details": "Деталі карти",
+
+  "type_manifestor": "Маніфестор",
+  "type_generator": "Генератор",
+  "type_manifestingGenerator": "Маніфестуючий Генератор",
+  "type_projector": "Проектор",
+  "type_reflector": "Рефлектор",
+
+  "type_manifestor_strategy": "Інформувати",
+  "type_generator_strategy": "Відгукуватися",
+  "type_manifestingGenerator_strategy": "Відгукуватися",
+  "type_projector_strategy": "Чекати на запрошення",
+  "type_reflector_strategy": "Чекати місячний цикл",
+
+  "authority_emotional": "Емоційний",
+  "authority_sacral": "Сакральний",
+  "authority_splenic": "Селезінковий",
+  "authority_ego": "Его/Серце",
+  "authority_self": "Само-проектований",
+  "authority_environment": "Ментальний/Оточення",
+  "authority_lunar": "Місячний",
+
+  "definition_none": "Без визначеності",
+  "definition_single": "Одинарна визначеність",
+  "definition_split": "Розщеплена визначеність",
+  "definition_tripleSplit": "Потрійне розщеплення",
+  "definition_quadrupleSplit": "Четвертне розщеплення",
+
+  "profile_1_3": "1/3 Дослідник/Мученик",
+  "profile_1_4": "1/4 Дослідник/Опортуніст",
+  "profile_2_4": "2/4 Відлюдник/Опортуніст",
+  "profile_2_5": "2/5 Відлюдник/Єретик",
+  "profile_3_5": "3/5 Мученик/Єретик",
+  "profile_3_6": "3/6 Мученик/Рольова модель",
+  "profile_4_6": "4/6 Опортуніст/Рольова модель",
+  "profile_4_1": "4/1 Опортуніст/Дослідник",
+  "profile_5_1": "5/1 Єретик/Дослідник",
+  "profile_5_2": "5/2 Єретик/Відлюдник",
+  "profile_6_2": "6/2 Рольова модель/Відлюдник",
+  "profile_6_3": "6/3 Рольова модель/Мученик",
+
+  "center_head": "Головний",
+  "center_ajna": "Аджна",
+  "center_throat": "Горловий",
+  "center_g": "G-центр",
+  "center_heart": "Серцевий/Его",
+  "center_sacral": "Сакральний",
+  "center_solarPlexus": "Сонячне сплетіння",
+  "center_spleen": "Селезінковий",
+  "center_root": "Кореневий",
+  "center_defined": "Визначений",
+  "center_undefined": "Невизначений",
+
+  "section_type": "Тип",
+  "section_strategy": "Стратегія",
+  "section_authority": "Авторитет",
+  "section_profile": "Профіль",
+  "section_definition": "Визначеність",
+  "section_centers": "Центри",
+  "section_channels": "Канали",
+  "section_gates": "Ворота",
+  "section_conscious": "Свідоме (Особистість)",
+  "section_unconscious": "Несвідоме (Дизайн)",
+
+  "social_friends": "Друзі",
+  "social_groups": "Групи",
+  "social_addFriend": "Додати друга",
+  "social_createGroup": "Створити групу",
+  "social_invite": "Запросити",
+  "social_members": "Учасники",
+  "social_comments": "Коментарі",
+  "social_addComment": "Додати коментар...",
+  "social_noComments": "Поки немає коментарів",
+  "social_shareLimit": "У вас залишилось {remaining} публікацій цього місяця",
+  "@social_shareLimit": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "social_visibility": "Видимість",
+  "social_private": "Приватно",
+  "social_friendsOnly": "Тільки друзі",
+  "social_public": "Публічно",
+
+  "transit_title": "Транзити сьогодні",
+  "transit_currentEnergies": "Поточні енергії",
+  "transit_sunGate": "Ворота Сонця",
+  "transit_earthGate": "Ворота Землі",
+  "transit_moonGate": "Ворота Місяця",
+  "transit_activeGates": "Активні транзитні ворота",
+  "transit_activeChannels": "Активні транзитні канали",
+  "transit_personalImpact": "Особистий вплив",
+  "transit_gateActivated": "Ворота {gate} активовані транзитом",
+  "@transit_gateActivated": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_channelFormed": "Канал {channel} утворений з вашою картою",
+  "@transit_channelFormed": {
+    "placeholders": {
+      "channel": {
+        "type": "String"
+      }
+    }
+  },
+  "transit_noPersonalImpact": "Немає прямих транзитних зв'язків сьогодні",
+  "transit_viewFullTransit": "Переглянути повну карту транзитів",
+
+  "affirmation_title": "Щоденна афірмація",
+  "affirmation_forYourType": "Для вашого типу {type}",
+  "@affirmation_forYourType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "affirmation_basedOnGate": "На основі воріт {gate}",
+  "@affirmation_basedOnGate": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "affirmation_refresh": "Нова афірмація",
+  "affirmation_save": "Зберегти афірмацію",
+  "affirmation_saved": "Збережені афірмації",
+  "affirmation_share": "Поділитися афірмацією",
+  "affirmation_notifications": "Сповіщення про афірмації",
+  "affirmation_notificationTime": "Час сповіщення",
+
+  "lifestyle_today": "Сьогодні",
+  "lifestyle_insights": "Інсайти",
+  "lifestyle_journal": "Щоденник",
+  "lifestyle_addJournalEntry": "Додати запис",
+  "lifestyle_journalPrompt": "Як ви переживаєте свій дизайн сьогодні?",
+  "lifestyle_noJournalEntries": "Поки немає записів",
+  "lifestyle_mood": "Настрій",
+  "lifestyle_energy": "Рівень енергії",
+  "lifestyle_reflection": "Роздуми",
+
+  "penta_title": "Пента",
+  "penta_description": "Груповий аналіз для 3-5 людей",
+  "penta_createNew": "Створити Пенту",
+  "penta_selectMembers": "Оберіть учасників",
+  "penta_minMembers": "Потрібно мінімум 3 учасники",
+  "penta_maxMembers": "Максимум 5 учасників",
+  "penta_groupDynamics": "Групова динаміка",
+  "penta_missingRoles": "Відсутні ролі",
+  "penta_strengths": "Сильні сторони групи",
+
+  "premium_upgrade": "Перейти на Premium",
+  "premium_subscribe": "Підписатися",
+  "premium_restore": "Відновити покупки",
+  "premium_features": "Можливості Premium",
+  "premium_unlimitedShares": "Безлімітний обмін картами",
+  "premium_groupCharts": "Групові карти",
+  "premium_advancedTransits": "Розширений аналіз транзитів",
+  "premium_personalizedAffirmations": "Персоналізовані афірмації",
+  "premium_journalInsights": "Інсайти щоденника",
+  "premium_pentaAnalysis": "Аналіз Пенти",
+  "premium_adFree": "Без реклами",
+  "premium_monthly": "Щомісяця",
+  "premium_yearly": "Щорічно",
+  "premium_perMonth": "/місяць",
+  "premium_perYear": "/рік",
+  "premium_bestValue": "Найкраща пропозиція",
+
+  "settings_language": "Мова",
+  "settings_theme": "Тема",
+  "settings_themeLight": "Світла",
+  "settings_themeDark": "Темна",
+  "settings_themeSystem": "Системна",
+  "settings_notifications": "Сповіщення",
+  "settings_privacy": "Конфіденційність",
+  "settings_about": "Про додаток",
+  "settings_help": "Допомога та підтримка",
+  "settings_terms": "Умови використання",
+  "settings_privacyPolicy": "Політика конфіденційності",
+  "settings_version": "Версія",
+
+  "error_generic": "Щось пішло не так",
+  "error_network": "Немає підключення до інтернету",
+  "error_invalidEmail": "Введіть коректний email",
+  "error_invalidPassword": "Пароль має бути не менше 8 символів",
+  "error_passwordMismatch": "Паролі не співпадають",
+  "error_birthDataRequired": "Введіть дані народження",
+  "error_locationRequired": "Оберіть місце народження",
+  "error_chartCalculation": "Не вдалося розрахувати карту"
+}

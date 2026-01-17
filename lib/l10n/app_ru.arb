@@ -1,0 +1,251 @@
+{
+  "@@locale": "ru",
+
+  "appName": "Дизайн Человека",
+
+  "common_save": "Сохранить",
+  "common_cancel": "Отмена",
+  "common_delete": "Удалить",
+  "common_edit": "Редактировать",
+  "common_done": "Готово",
+  "common_next": "Далее",
+  "common_back": "Назад",
+  "common_skip": "Пропустить",
+  "common_continue": "Продолжить",
+  "common_loading": "Загрузка...",
+  "common_error": "Ошибка",
+  "common_retry": "Повторить",
+  "common_close": "Закрыть",
+  "common_search": "Поиск",
+  "common_share": "Поделиться",
+  "common_settings": "Настройки",
+  "common_logout": "Выйти",
+  "common_profile": "Профиль",
+
+  "auth_signIn": "Войти",
+  "auth_signUp": "Регистрация",
+  "auth_signInWithApple": "Войти через Apple",
+  "auth_signInWithGoogle": "Войти через Google",
+  "auth_signInWithEmail": "Войти по Email",
+  "auth_email": "Email",
+  "auth_password": "Пароль",
+  "auth_confirmPassword": "Подтвердите пароль",
+  "auth_forgotPassword": "Забыли пароль?",
+  "auth_noAccount": "Нет аккаунта?",
+  "auth_hasAccount": "Уже есть аккаунт?",
+  "auth_termsAgree": "Регистрируясь, вы соглашаетесь с Условиями использования и Политикой конфиденциальности",
+
+  "onboarding_welcome": "Добро пожаловать в Дизайн Человека",
+  "onboarding_welcomeSubtitle": "Откройте свой уникальный энергетический чертёж",
+  "onboarding_birthData": "Введите данные рождения",
+  "onboarding_birthDataSubtitle": "Это необходимо для расчёта вашей карты",
+  "onboarding_birthDate": "Дата рождения",
+  "onboarding_birthTime": "Время рождения",
+  "onboarding_birthLocation": "Место рождения",
+  "onboarding_searchLocation": "Введите название города...",
+  "onboarding_unknownTime": "Я не знаю время рождения",
+  "onboarding_timeImportance": "Точное время рождения важно для точной карты",
+
+  "chart_myChart": "Моя карта",
+  "chart_viewChart": "Показать карту",
+  "chart_calculate": "Рассчитать карту",
+  "chart_recalculate": "Пересчитать",
+  "chart_share": "Поделиться картой",
+  "chart_composite": "Композитная карта",
+  "chart_transit": "Транзиты сегодня",
+  "chart_bodygraph": "Бодиграф",
+  "chart_details": "Детали карты",
+
+  "type_manifestor": "Манифестор",
+  "type_generator": "Генератор",
+  "type_manifestingGenerator": "Манифестирующий Генератор",
+  "type_projector": "Проектор",
+  "type_reflector": "Рефлектор",
+
+  "type_manifestor_strategy": "Информировать",
+  "type_generator_strategy": "Откликаться",
+  "type_manifestingGenerator_strategy": "Откликаться",
+  "type_projector_strategy": "Ждать приглашения",
+  "type_reflector_strategy": "Ждать лунный цикл",
+
+  "authority_emotional": "Эмоциональный",
+  "authority_sacral": "Сакральный",
+  "authority_splenic": "Селезёночный",
+  "authority_ego": "Эго/Сердце",
+  "authority_self": "Само-проецируемый",
+  "authority_environment": "Ментальный/Окружение",
+  "authority_lunar": "Лунный",
+
+  "definition_none": "Без определённости",
+  "definition_single": "Одинарная определённость",
+  "definition_split": "Расщеплённая определённость",
+  "definition_tripleSplit": "Тройное расщепление",
+  "definition_quadrupleSplit": "Четверное расщепление",
+
+  "profile_1_3": "1/3 Исследователь/Мученик",
+  "profile_1_4": "1/4 Исследователь/Оппортунист",
+  "profile_2_4": "2/4 Отшельник/Оппортунист",
+  "profile_2_5": "2/5 Отшельник/Еретик",
+  "profile_3_5": "3/5 Мученик/Еретик",
+  "profile_3_6": "3/6 Мученик/Ролевая модель",
+  "profile_4_6": "4/6 Оппортунист/Ролевая модель",
+  "profile_4_1": "4/1 Оппортунист/Исследователь",
+  "profile_5_1": "5/1 Еретик/Исследователь",
+  "profile_5_2": "5/2 Еретик/Отшельник",
+  "profile_6_2": "6/2 Ролевая модель/Отшельник",
+  "profile_6_3": "6/3 Ролевая модель/Мученик",
+
+  "center_head": "Головной",
+  "center_ajna": "Аджна",
+  "center_throat": "Горловой",
+  "center_g": "G-центр",
+  "center_heart": "Сердечный/Эго",
+  "center_sacral": "Сакральный",
+  "center_solarPlexus": "Солнечное сплетение",
+  "center_spleen": "Селезёночный",
+  "center_root": "Корневой",
+  "center_defined": "Определённый",
+  "center_undefined": "Неопределённый",
+
+  "section_type": "Тип",
+  "section_strategy": "Стратегия",
+  "section_authority": "Авторитет",
+  "section_profile": "Профиль",
+  "section_definition": "Определённость",
+  "section_centers": "Центры",
+  "section_channels": "Каналы",
+  "section_gates": "Ворота",
+  "section_conscious": "Сознательное (Личность)",
+  "section_unconscious": "Бессознательное (Дизайн)",
+
+  "social_friends": "Друзья",
+  "social_groups": "Группы",
+  "social_addFriend": "Добавить друга",
+  "social_createGroup": "Создать группу",
+  "social_invite": "Пригласить",
+  "social_members": "Участники",
+  "social_comments": "Комментарии",
+  "social_addComment": "Добавить комментарий...",
+  "social_noComments": "Пока нет комментариев",
+  "social_shareLimit": "У вас осталось {remaining} публикаций в этом месяце",
+  "@social_shareLimit": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "social_visibility": "Видимость",
+  "social_private": "Приватно",
+  "social_friendsOnly": "Только друзья",
+  "social_public": "Публично",
+
+  "transit_title": "Транзиты сегодня",
+  "transit_currentEnergies": "Текущие энергии",
+  "transit_sunGate": "Ворота Солнца",
+  "transit_earthGate": "Ворота Земли",
+  "transit_moonGate": "Ворота Луны",
+  "transit_activeGates": "Активные транзитные ворота",
+  "transit_activeChannels": "Активные транзитные каналы",
+  "transit_personalImpact": "Личное влияние",
+  "transit_gateActivated": "Ворота {gate} активированы транзитом",
+  "@transit_gateActivated": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_channelFormed": "Канал {channel} образован с вашей картой",
+  "@transit_channelFormed": {
+    "placeholders": {
+      "channel": {
+        "type": "String"
+      }
+    }
+  },
+  "transit_noPersonalImpact": "Нет прямых транзитных связей сегодня",
+  "transit_viewFullTransit": "Показать полную карту транзитов",
+
+  "affirmation_title": "Ежедневная аффирмация",
+  "affirmation_forYourType": "Для вашего типа {type}",
+  "@affirmation_forYourType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "affirmation_basedOnGate": "На основе ворот {gate}",
+  "@affirmation_basedOnGate": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "affirmation_refresh": "Новая аффирмация",
+  "affirmation_save": "Сохранить аффирмацию",
+  "affirmation_saved": "Сохранённые аффирмации",
+  "affirmation_share": "Поделиться аффирмацией",
+  "affirmation_notifications": "Уведомления об аффирмациях",
+  "affirmation_notificationTime": "Время уведомления",
+
+  "lifestyle_today": "Сегодня",
+  "lifestyle_insights": "Инсайты",
+  "lifestyle_journal": "Дневник",
+  "lifestyle_addJournalEntry": "Добавить запись",
+  "lifestyle_journalPrompt": "Как вы переживаете свой дизайн сегодня?",
+  "lifestyle_noJournalEntries": "Пока нет записей",
+  "lifestyle_mood": "Настроение",
+  "lifestyle_energy": "Уровень энергии",
+  "lifestyle_reflection": "Размышление",
+
+  "penta_title": "Пента",
+  "penta_description": "Групповой анализ для 3-5 человек",
+  "penta_createNew": "Создать Пенту",
+  "penta_selectMembers": "Выберите участников",
+  "penta_minMembers": "Минимум 3 участника",
+  "penta_maxMembers": "Максимум 5 участников",
+  "penta_groupDynamics": "Групповая динамика",
+  "penta_missingRoles": "Отсутствующие роли",
+  "penta_strengths": "Сильные стороны группы",
+
+  "premium_upgrade": "Перейти на Premium",
+  "premium_subscribe": "Подписаться",
+  "premium_restore": "Восстановить покупки",
+  "premium_features": "Возможности Premium",
+  "premium_unlimitedShares": "Безлимитный обмен картами",
+  "premium_groupCharts": "Групповые карты",
+  "premium_advancedTransits": "Расширенный анализ транзитов",
+  "premium_personalizedAffirmations": "Персонализированные аффирмации",
+  "premium_journalInsights": "Инсайты дневника",
+  "premium_adFree": "Без рекламы",
+  "premium_monthly": "Ежемесячно",
+  "premium_yearly": "Ежегодно",
+  "premium_perMonth": "/месяц",
+  "premium_perYear": "/год",
+  "premium_bestValue": "Лучшее предложение",
+
+  "settings_language": "Язык",
+  "settings_theme": "Тема",
+  "settings_themeLight": "Светлая",
+  "settings_themeDark": "Тёмная",
+  "settings_themeSystem": "Системная",
+  "settings_notifications": "Уведомления",
+  "settings_privacy": "Конфиденциальность",
+  "settings_about": "О приложении",
+  "settings_help": "Помощь и поддержка",
+  "settings_terms": "Условия использования",
+  "settings_privacyPolicy": "Политика конфиденциальности",
+  "settings_version": "Версия",
+
+  "error_generic": "Что-то пошло не так",
+  "error_network": "Нет подключения к интернету",
+  "error_invalidEmail": "Введите корректный email",
+  "error_invalidPassword": "Пароль должен быть не менее 8 символов",
+  "error_passwordMismatch": "Пароли не совпадают",
+  "error_birthDataRequired": "Введите данные рождения",
+  "error_locationRequired": "Выберите место рождения",
+  "error_chartCalculation": "Не удалось рассчитать карту"
+}
