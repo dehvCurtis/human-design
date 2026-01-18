@@ -4,6 +4,10 @@ import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 import '../../../shared/providers/supabase_provider.dart';
 import '../data/auth_repository.dart';
 
+/// Set to true to bypass authentication during development
+/// WARNING: Set to false for production!
+const bool kBypassAuth = true;
+
 /// Provider for the auth repository
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final client = ref.watch(supabaseClientProvider);
@@ -18,6 +22,11 @@ final authStateChangesProvider = StreamProvider<supabase.AuthState>((ref) {
 
 /// Provider for current auth status
 final authStatusProvider = Provider<AuthStatus>((ref) {
+  // Bypass auth for development
+  if (kBypassAuth) {
+    return AuthStatus.authenticated;
+  }
+
   final authState = ref.watch(authStateChangesProvider);
   return authState.when(
     data: (state) {
@@ -27,7 +36,7 @@ final authStatusProvider = Provider<AuthStatus>((ref) {
       return AuthStatus.unauthenticated;
     },
     loading: () => AuthStatus.loading,
-    error: (_, __) => AuthStatus.error,
+    error: (_, _) => AuthStatus.error,
   );
 });
 
