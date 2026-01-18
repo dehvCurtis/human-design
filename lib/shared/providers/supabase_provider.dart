@@ -28,6 +28,12 @@ final isAuthenticatedProvider = Provider<bool>((ref) {
   return user != null;
 });
 
+/// Provider for the current user ID
+final currentUserIdProvider = Provider<String?>((ref) {
+  final user = ref.watch(currentUserProvider);
+  return user?.id;
+});
+
 /// Initialize Supabase
 Future<void> initializeSupabase() async {
   await Supabase.initialize(

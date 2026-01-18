@@ -455,6 +455,7 @@
   "settings_appearance": "Зовнішній вигляд",
   "settings_language": "Мова",
   "settings_selectLanguage": "Вибір мови",
+  "settings_changeLanguage": "Змінити мову",
   "settings_theme": "Тема",
   "settings_selectTheme": "Вибір теми",
   "settings_chartDisplay": "Відображення карти",

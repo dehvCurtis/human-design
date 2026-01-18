@@ -47,6 +47,16 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
       appBar: AppBar(
         title: Text(l10n.social_title),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.explore_outlined),
+            onPressed: () => context.push(AppRoutes.discover),
+            tooltip: 'Discover',
+          ),
+          IconButton(
+            icon: const Icon(Icons.chat_bubble_outline),
+            onPressed: () => context.push(AppRoutes.messages),
+            tooltip: 'Messages',
+          ),
           if (pendingCount > 0)
             Badge(
               label: Text('$pendingCount'),

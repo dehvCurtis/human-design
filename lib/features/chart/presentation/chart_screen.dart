@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/human_design_constants.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../shared/providers/supabase_provider.dart';
 import '../../../shared/widgets/dialogs/detail_bottom_sheet.dart';
 import '../../home/domain/home_providers.dart';
 import '../domain/models/human_design_chart.dart';
@@ -130,7 +133,32 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: () {
-                // TODO: Navigate to birth data entry
+                final isLoggedIn = ref.read(supabaseClientProvider).auth.currentUser != null;
+                if (isLoggedIn) {
+                  context.push(AppRoutes.birthData);
+                } else {
+                  // Show dialog to prompt login
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Text(l10n.auth_signInRequired),
+                      content: Text(l10n.auth_signInToCalculateChart),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(ctx),
+                          child: Text(l10n.common_cancel),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(ctx);
+                            context.go(AppRoutes.signIn);
+                          },
+                          child: Text(l10n.auth_signIn),
+                        ),
+                      ],
+                    ),
+                  );
+                }
               },
               icon: const Icon(Icons.add),
               label: Text(l10n.chart_addBirthData),

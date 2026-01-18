@@ -20,6 +20,19 @@ import '../../features/settings/domain/settings_state.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/social/presentation/social_screen.dart';
 import '../../features/transits/presentation/transits_screen.dart';
+import '../../features/discovery/presentation/discovery_screen.dart';
+import '../../features/feed/presentation/feed_screen.dart';
+import '../../features/gamification/presentation/achievements_screen.dart';
+import '../../features/gamification/presentation/challenges_screen.dart';
+import '../../features/gamification/presentation/leaderboard_screen.dart';
+import '../../features/messaging/presentation/conversations_screen.dart';
+import '../../features/messaging/presentation/message_detail_screen.dart';
+import '../../features/stories/presentation/stories_screen.dart';
+import '../../features/learning/presentation/learning_screen.dart';
+import '../../features/learning/presentation/content_detail_screen.dart';
+import '../../features/learning/presentation/mentorship_screen.dart';
+import '../../features/learning/presentation/live_sessions_screen.dart';
+import '../../features/sharing/presentation/share_screen.dart';
 
 /// Route names
 class AppRoutes {
@@ -42,6 +55,21 @@ class AppRoutes {
   static const String premium = '/premium';
   static const String savedCharts = '/charts';
   static const String addChart = '/charts/add';
+
+  // Social platform routes
+  static const String discover = '/discover';
+  static const String feed = '/feed';
+  static const String achievements = '/achievements';
+  static const String challenges = '/challenges';
+  static const String leaderboard = '/leaderboard';
+  static const String messages = '/messages';
+  static const String messageDetail = '/messages/:id';
+  static const String stories = '/stories';
+  static const String learning = '/learning';
+  static const String contentDetail = '/learning/:id';
+  static const String mentorship = '/mentorship';
+  static const String sessions = '/sessions';
+  static const String share = '/share';
 }
 
 /// Provider for the router
@@ -75,7 +103,8 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // Not authenticated - redirect to appropriate auth screen
       if (!isAuthenticated) {
-        if (isOnAuthRoute) return null;
+        // Allow staying on auth screens (except splash which should redirect)
+        if (isOnAuthRoute && currentPath != AppRoutes.splash) return null;
         if (needsOnboarding) return AppRoutes.onboarding;
         return AppRoutes.signIn;
       }
@@ -184,6 +213,82 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.profile,
             name: 'profile',
             builder: (context, state) => const ProfileScreen(),
+          ),
+          // Social platform routes
+          GoRoute(
+            path: AppRoutes.discover,
+            name: 'discover',
+            builder: (context, state) => const DiscoveryScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.feed,
+            name: 'feed',
+            builder: (context, state) => const FeedScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.achievements,
+            name: 'achievements',
+            builder: (context, state) => const AchievementsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.challenges,
+            name: 'challenges',
+            builder: (context, state) => const ChallengesScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.leaderboard,
+            name: 'leaderboard',
+            builder: (context, state) => const LeaderboardScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.messages,
+            name: 'messages',
+            builder: (context, state) => const ConversationsScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                name: 'messageDetail',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return MessageDetailScreen(conversationId: id);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.stories,
+            name: 'stories',
+            builder: (context, state) => const StoriesScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.learning,
+            name: 'learning',
+            builder: (context, state) => const LearningScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                name: 'contentDetail',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return ContentDetailScreen(contentId: id);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.mentorship,
+            name: 'mentorship',
+            builder: (context, state) => const MentorshipScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.sessions,
+            name: 'sessions',
+            builder: (context, state) => const LiveSessionsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.share,
+            name: 'share',
+            builder: (context, state) => const ShareScreen(),
           ),
         ],
       ),
@@ -339,6 +444,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   Widget _buildWelcomeContent(BuildContext context, AppLocalizations l10n) {
     return Column(
       children: [
+        // Change language button at top
+        Align(
+          alignment: Alignment.topLeft,
+          child: TextButton.icon(
+            onPressed: () {
+              setState(() {
+                _showLanguageSelector = true;
+              });
+            },
+            icon: const Icon(Icons.language, size: 18),
+            label: Text(l10n.settings_changeLanguage),
+          ),
+        ),
         const Spacer(),
         const Icon(
           Icons.auto_graph,
