@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/human_design_constants.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../ephemeris/mappers/degree_to_gate_mapper.dart';
 import '../../../lifestyle/domain/transit_service.dart';
 
@@ -20,6 +21,8 @@ class TransitSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -35,7 +38,7 @@ class TransitSummaryCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.transitActive.withOpacity(0.1),
+                      color: AppColors.transitActive.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Icon(
@@ -47,7 +50,7 @@ class TransitSummaryCard extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      "Today's Transits",
+                      l10n.transit_today,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -56,7 +59,7 @@ class TransitSummaryCard extends StatelessWidget {
                   Icon(
                     Icons.chevron_right,
                     color:
-                        Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                        Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
                   ),
                 ],
               ),
@@ -68,7 +71,7 @@ class TransitSummaryCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: _TransitGateChip(
-                      planet: 'Sun',
+                      planet: l10n.transit_sun,
                       icon: Icons.wb_sunny,
                       gate: transits.sunGate,
                       color: Colors.amber,
@@ -77,7 +80,7 @@ class TransitSummaryCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: _TransitGateChip(
-                      planet: 'Earth',
+                      planet: l10n.transit_earth,
                       icon: Icons.public,
                       gate: transits.earthGate,
                       color: Colors.green,
@@ -86,7 +89,7 @@ class TransitSummaryCard extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: _TransitGateChip(
-                      planet: 'Moon',
+                      planet: l10n.transit_moon,
                       icon: Icons.nightlight_round,
                       gate: transits.moonGate,
                       color: Colors.blueGrey,
@@ -105,7 +108,7 @@ class TransitSummaryCard extends StatelessWidget {
                   _buildImpactRow(
                     context,
                     Icons.bolt,
-                    '${impact!.newChannelsCount} new channel${impact!.newChannelsCount > 1 ? 's' : ''} activated',
+                    l10n.transit_newChannelsActivated(impact!.newChannelsCount),
                     AppColors.electromagneticConnection,
                   ),
                   const SizedBox(height: 8),
@@ -115,7 +118,7 @@ class TransitSummaryCard extends StatelessWidget {
                   _buildImpactRow(
                     context,
                     Icons.highlight,
-                    '${impact!.highlightedGates.length} gate${impact!.highlightedGates.length > 1 ? 's' : ''} highlighted',
+                    l10n.transit_gatesHighlighted(impact!.highlightedGates.length),
                     AppColors.accent,
                   ),
                 ],
@@ -125,7 +128,7 @@ class TransitSummaryCard extends StatelessWidget {
                   _buildImpactRow(
                     context,
                     Icons.check_circle_outline,
-                    'No direct transit connections today',
+                    l10n.transit_noConnections,
                     AppColors.success,
                   ),
               ],
@@ -149,7 +152,7 @@ class TransitSummaryCard extends StatelessWidget {
         Text(
           text,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
               ),
         ),
       ],
@@ -177,10 +180,10 @@ class _TransitGateChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: color.withOpacity(0.2),
+          color: color.withValues(alpha: 0.2),
         ),
       ),
       child: Column(
@@ -211,7 +214,7 @@ class _TransitGateChip extends StatelessWidget {
               gateData.name,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color:
-                        Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                        Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

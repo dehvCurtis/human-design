@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../chart/domain/models/human_design_chart.dart';
 import '../../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
 
@@ -32,7 +33,7 @@ class ChartPreviewCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
+                      color: AppColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Icon(
@@ -47,7 +48,7 @@ class ChartPreviewCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'My Bodygraph',
+                          AppLocalizations.of(context)!.home_myBodygraph,
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     fontWeight: FontWeight.bold,
@@ -60,7 +61,7 @@ class ChartPreviewCard extends StatelessWidget {
                                     color: Theme.of(context)
                                         .colorScheme
                                         .onSurface
-                                        .withOpacity(0.6),
+                                        .withValues(alpha: 0.6),
                                   ),
                         ),
                       ],
@@ -68,7 +69,7 @@ class ChartPreviewCard extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: onTap,
-                    child: const Text('View Full'),
+                    child: Text(AppLocalizations.of(context)!.common_viewFull),
                   ),
                 ],
               ),
@@ -100,17 +101,17 @@ class ChartPreviewCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   _StatItem(
-                    label: 'Defined Centers',
+                    label: AppLocalizations.of(context)!.home_definedCenters,
                     value: '${chart.definedCenters.length}/9',
                     color: AppColors.centerDefined,
                   ),
                   _StatItem(
-                    label: 'Active Channels',
+                    label: AppLocalizations.of(context)!.home_activeChannels,
                     value: '${chart.activeChannels.length}',
                     color: AppColors.channelConscious,
                   ),
                   _StatItem(
-                    label: 'Active Gates',
+                    label: AppLocalizations.of(context)!.home_activeGates,
                     value: '${chart.allGates.length}',
                     color: AppColors.primary,
                   ),
@@ -150,7 +151,7 @@ class _StatItem extends StatelessWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
               ),
         ),
       ],

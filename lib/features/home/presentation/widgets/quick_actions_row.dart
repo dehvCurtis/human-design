@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 
 /// Row of quick action buttons for navigation
 class QuickActionsRow extends StatelessWidget {
@@ -19,12 +20,14 @@ class QuickActionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Row(
       children: [
         Expanded(
           child: _QuickActionButton(
             icon: Icons.auto_graph,
-            label: 'My Chart',
+            label: l10n.home_myChart,
             color: AppColors.primary,
             onTap: onChartTap,
           ),
@@ -33,7 +36,7 @@ class QuickActionsRow extends StatelessWidget {
         Expanded(
           child: _QuickActionButton(
             icon: Icons.favorite_border,
-            label: 'Composite',
+            label: l10n.home_composite,
             color: AppColors.person2,
             onTap: onCompositeTap,
           ),
@@ -42,7 +45,7 @@ class QuickActionsRow extends StatelessWidget {
         Expanded(
           child: _QuickActionButton(
             icon: Icons.groups_outlined,
-            label: 'Penta',
+            label: l10n.home_penta,
             color: AppColors.secondary,
             onTap: onPentaTap,
           ),
@@ -51,7 +54,7 @@ class QuickActionsRow extends StatelessWidget {
         Expanded(
           child: _QuickActionButton(
             icon: Icons.people_outline,
-            label: 'Friends',
+            label: l10n.home_friends,
             color: AppColors.success,
             onTap: onSocialTap,
           ),
@@ -77,7 +80,7 @@ class _QuickActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: color.withOpacity(0.1),
+      color: color.withValues(alpha: 0.1),
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: onTap,
