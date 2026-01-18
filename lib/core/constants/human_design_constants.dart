@@ -1,7 +1,7 @@
-/// Human Design system constants including gates, channels, centers, and types.
-///
-/// Gate sequence follows the traditional Human Design wheel mapping
-/// starting at 0° Aries with Gate 41.
+// Human Design system constants including gates, channels, centers, and types.
+//
+// Gate sequence follows the traditional Human Design wheel mapping
+// starting at 0° Aries with Gate 41.
 
 // ignore_for_file: constant_identifier_names
 
