@@ -33,12 +33,162 @@ class BodygraphPainter extends CustomPainter {
     canvas.translate(offsetX, offsetY);
     canvas.scale(scale);
 
-    // Draw in order: channels (back), centers (middle), gates (front)
+    // Draw in order: body (back), channels, centers, gates (front)
+    _drawBodySilhouette(canvas);
     _drawChannels(canvas);
     _drawCenters(canvas);
     _drawGates(canvas);
 
     canvas.restore();
+  }
+
+  void _drawBodySilhouette(Canvas canvas) {
+    // Create a subtle gradient fill for the body
+    final bodyGradient = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        AppColors.primary.withAlpha(8),
+        AppColors.primary.withAlpha(15),
+        AppColors.primary.withAlpha(8),
+      ],
+      stops: const [0.0, 0.5, 1.0],
+    );
+
+    final fillPaint = Paint()
+      ..style = PaintingStyle.fill
+      ..shader = bodyGradient.createShader(
+        const Rect.fromLTWH(100, 10, 200, 580),
+      );
+
+    final strokePaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..color = AppColors.primary.withAlpha(40);
+
+    // Create a refined human body silhouette path
+    final bodyPath = Path();
+
+    // Head - elliptical for better proportions
+    final headRect = Rect.fromCenter(
+      center: const Offset(200, 42),
+      width: 62,
+      height: 70,
+    );
+    bodyPath.addOval(headRect);
+
+    // Main body outline with smooth curves
+    final outlinePath = Path();
+
+    // Start from left neck
+    outlinePath.moveTo(178, 72);
+
+    // Left neck to shoulder
+    outlinePath.cubicTo(175, 85, 172, 100, 168, 115);
+    outlinePath.cubicTo(162, 135, 145, 155, 115, 168);
+
+    // Left shoulder curve
+    outlinePath.cubicTo(90, 178, 72, 190, 62, 205);
+
+    // Left arm (upper)
+    outlinePath.cubicTo(50, 225, 42, 260, 38, 295);
+    outlinePath.cubicTo(35, 325, 32, 355, 35, 375);
+
+    // Left hand hint
+    outlinePath.cubicTo(38, 390, 48, 395, 55, 388);
+    outlinePath.cubicTo(62, 380, 58, 365, 55, 345);
+
+    // Left arm (inner) back up
+    outlinePath.cubicTo(52, 320, 58, 285, 68, 250);
+    outlinePath.cubicTo(75, 225, 82, 205, 95, 190);
+
+    // Left torso
+    outlinePath.cubicTo(100, 210, 95, 260, 92, 310);
+    outlinePath.cubicTo(90, 350, 92, 390, 100, 425);
+    outlinePath.cubicTo(105, 448, 115, 465, 130, 478);
+
+    // Left hip
+    outlinePath.cubicTo(145, 490, 155, 498, 165, 502);
+
+    // Left leg outer
+    outlinePath.cubicTo(162, 530, 155, 560, 150, 590);
+
+    // Left foot
+    outlinePath.lineTo(150, 595);
+    outlinePath.lineTo(165, 595);
+
+    // Left leg inner
+    outlinePath.cubicTo(170, 565, 178, 530, 182, 505);
+
+    // Pelvis center
+    outlinePath.cubicTo(190, 510, 200, 512, 210, 510);
+    outlinePath.cubicTo(215, 508, 218, 505, 218, 505);
+
+    // Right leg inner
+    outlinePath.cubicTo(222, 530, 230, 565, 235, 595);
+
+    // Right foot
+    outlinePath.lineTo(250, 595);
+    outlinePath.lineTo(250, 590);
+
+    // Right leg outer
+    outlinePath.cubicTo(245, 560, 238, 530, 235, 502);
+
+    // Right hip
+    outlinePath.cubicTo(245, 498, 255, 490, 270, 478);
+    outlinePath.cubicTo(285, 465, 295, 448, 300, 425);
+
+    // Right torso
+    outlinePath.cubicTo(308, 390, 310, 350, 308, 310);
+    outlinePath.cubicTo(305, 260, 300, 210, 305, 190);
+
+    // Right arm (inner)
+    outlinePath.cubicTo(318, 205, 325, 225, 332, 250);
+    outlinePath.cubicTo(342, 285, 348, 320, 345, 345);
+
+    // Right hand hint
+    outlinePath.cubicTo(342, 365, 338, 380, 345, 388);
+    outlinePath.cubicTo(352, 395, 362, 390, 365, 375);
+
+    // Right arm (outer)
+    outlinePath.cubicTo(368, 355, 365, 325, 362, 295);
+    outlinePath.cubicTo(358, 260, 350, 225, 338, 205);
+
+    // Right shoulder curve
+    outlinePath.cubicTo(328, 190, 310, 178, 285, 168);
+
+    // Right neck
+    outlinePath.cubicTo(255, 155, 238, 135, 232, 115);
+    outlinePath.cubicTo(228, 100, 225, 85, 222, 72);
+
+    // Connect neck sides through head area
+    outlinePath.cubicTo(215, 68, 185, 68, 178, 72);
+
+    outlinePath.close();
+
+    // Draw the filled body
+    canvas.drawPath(outlinePath, fillPaint);
+
+    // Draw subtle stroke
+    canvas.drawPath(outlinePath, strokePaint);
+
+    // Draw head with gradient
+    final headFillPaint = Paint()
+      ..style = PaintingStyle.fill
+      ..color = AppColors.primary.withAlpha(12);
+    canvas.drawOval(headRect, headFillPaint);
+    canvas.drawOval(headRect, strokePaint);
+
+    // Add subtle inner glow/highlight for depth
+    final innerHighlight = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 15
+      ..color = AppColors.primary.withAlpha(5)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+
+    canvas.drawPath(outlinePath, innerHighlight);
   }
 
   void _drawChannels(Canvas canvas) {
@@ -85,7 +235,7 @@ class BodygraphPainter extends CustomPainter {
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2
           ..strokeCap = StrokeCap.round
-          ..color = AppColors.channelInactive.withOpacity(0.3);
+          ..color = AppColors.channelInactive.withValues(alpha: 0.3);
 
         _drawChannelPath(canvas, path, paint);
       }
@@ -265,7 +415,7 @@ class BodygraphPainter extends CustomPainter {
         canvas.drawCircle(position.position, radius, fillPaint);
       } else {
         // Inactive gate
-        fillPaint.color = AppColors.gateInactive.withOpacity(0.3);
+        fillPaint.color = AppColors.gateInactive.withValues(alpha: 0.3);
         canvas.drawCircle(position.position, radius * 0.7, fillPaint);
       }
 
