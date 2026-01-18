@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/constants/human_design_constants.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../chart/domain/models/human_design_chart.dart';
-import '../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
-import '../../lifestyle/domain/affirmation_service.dart';
 import '../../lifestyle/domain/transit_service.dart';
 import '../domain/home_providers.dart';
 import 'widgets/affirmation_card.dart';
@@ -89,7 +87,7 @@ class HomeScreen extends ConsumerWidget {
                         )
                       : const SizedBox.shrink(),
                   loading: () => const _LoadingCard(),
-                  error: (_, __) => const SizedBox.shrink(),
+                  error: (_, _) => const SizedBox.shrink(),
                 ),
 
                 const SizedBox(height: 16),
@@ -102,7 +100,7 @@ class HomeScreen extends ConsumerWidget {
                     onTap: () => context.go(AppRoutes.transits),
                   ),
                   loading: () => const _LoadingCard(),
-                  error: (_, __) => TransitSummaryCard(
+                  error: (_, _) => TransitSummaryCard(
                     transits: transits,
                     impact: null,
                     onTap: () => context.go(AppRoutes.transits),
@@ -142,14 +140,15 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildGreeting(BuildContext context, HumanDesignChart chart) {
+    final l10n = AppLocalizations.of(context)!;
     final hour = DateTime.now().hour;
     String greeting;
     if (hour < 12) {
-      greeting = 'Good morning';
+      greeting = l10n.home_goodMorning;
     } else if (hour < 17) {
-      greeting = 'Good afternoon';
+      greeting = l10n.home_goodAfternoon;
     } else {
-      greeting = 'Good evening';
+      greeting = l10n.home_goodEvening;
     }
 
     return Column(
@@ -158,7 +157,7 @@ class HomeScreen extends ConsumerWidget {
         Text(
           greeting,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
               ),
         ),
         Text(
@@ -172,6 +171,7 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildChartSummary(BuildContext context, HumanDesignChart chart) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -179,7 +179,7 @@ class HomeScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Your Design',
+              l10n.home_yourDesign,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -187,35 +187,35 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             _buildSummaryRow(
               context,
-              'Type',
+              l10n.common_type,
               chart.type.displayName,
               AppColors.primary,
             ),
             const Divider(height: 24),
             _buildSummaryRow(
               context,
-              'Strategy',
+              l10n.common_strategy,
               chart.strategy,
               AppColors.secondary,
             ),
             const Divider(height: 24),
             _buildSummaryRow(
               context,
-              'Authority',
+              l10n.common_authority,
               chart.authority.displayName,
               AppColors.accent,
             ),
             const Divider(height: 24),
             _buildSummaryRow(
               context,
-              'Profile',
+              l10n.common_profile,
               chart.profile.notation,
               AppColors.success,
             ),
             const Divider(height: 24),
             _buildSummaryRow(
               context,
-              'Definition',
+              l10n.common_definition,
               chart.definition.displayName,
               AppColors.info,
             ),
@@ -237,13 +237,13 @@ class HomeScreen extends ConsumerWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
               ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
@@ -259,6 +259,7 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildNoBirthDataState(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -268,11 +269,11 @@ class HomeScreen extends ConsumerWidget {
             Icon(
               Icons.person_add_outlined,
               size: 80,
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 24),
             Text(
-              'Complete Your Profile',
+              l10n.home_completeProfile,
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -280,12 +281,12 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'Enter your birth data to generate your unique Human Design chart.',
+              l10n.chart_addBirthDataPrompt,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
                         .onSurface
-                        .withOpacity(0.7),
+                        .withValues(alpha: 0.7),
                   ),
               textAlign: TextAlign.center,
             ),
@@ -293,7 +294,7 @@ class HomeScreen extends ConsumerWidget {
             FilledButton.icon(
               onPressed: () => context.push(AppRoutes.birthData),
               icon: const Icon(Icons.edit_calendar),
-              label: const Text('Enter Birth Data'),
+              label: Text(l10n.home_enterBirthData),
             ),
           ],
         ),
@@ -302,6 +303,7 @@ class HomeScreen extends ConsumerWidget {
   }
 
   Widget _buildErrorState(BuildContext context, Object error) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -315,7 +317,7 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Something went wrong',
+              l10n.error_generic,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),
@@ -325,7 +327,7 @@ class HomeScreen extends ConsumerWidget {
                     color: Theme.of(context)
                         .colorScheme
                         .onSurface
-                        .withOpacity(0.7),
+                        .withValues(alpha: 0.7),
                   ),
               textAlign: TextAlign.center,
             ),

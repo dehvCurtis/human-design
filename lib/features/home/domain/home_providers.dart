@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/legacy.dart';
 
 import '../../../core/constants/human_design_constants.dart';
 import '../../../shared/providers/supabase_provider.dart';
+import '../../auth/domain/auth_providers.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../chart/domain/usecases/calculate_chart.dart';
 import '../../ephemeris/data/ephemeris_service.dart';
@@ -48,11 +49,11 @@ final userProfileProvider = FutureProvider<UserProfile?>((ref) async {
 
 /// Provider for the user's personal chart
 final userChartProvider = FutureProvider<HumanDesignChart?>((ref) async {
-  // TODO: Remove mock data after testing - restore profile-based chart
-  // For testing: return a mock chart
-  return _createMockChart();
+  // Use mock data when auth is bypassed for testing
+  if (kBypassAuth) {
+    return _createMockChart();
+  }
 
-  /* Original code:
   final profile = await ref.watch(userProfileProvider.future);
   if (profile == null || !profile.hasBirthData) return null;
 
@@ -65,7 +66,6 @@ final userChartProvider = FutureProvider<HumanDesignChart?>((ref) async {
     birthLocation: profile.birthLocation!,
     timezone: profile.timezone!,
   );
-  */
 });
 
 /// Create a mock chart for testing

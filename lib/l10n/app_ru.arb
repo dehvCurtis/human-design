@@ -21,6 +21,64 @@
   "common_settings": "Настройки",
   "common_logout": "Выйти",
   "common_profile": "Профиль",
+  "common_type": "Тип",
+  "common_strategy": "Стратегия",
+  "common_authority": "Авторитет",
+  "common_definition": "Определённость",
+  "common_create": "Создать",
+  "common_viewFull": "Подробнее",
+  "common_send": "Отправить",
+
+  "nav_home": "Главная",
+  "nav_chart": "Карта",
+  "nav_today": "Сегодня",
+  "nav_social": "Социум",
+  "nav_profile": "Профиль",
+
+  "home_goodMorning": "Доброе утро",
+  "home_goodAfternoon": "Добрый день",
+  "home_goodEvening": "Добрый вечер",
+  "home_yourDesign": "Ваш дизайн",
+  "home_completeProfile": "Заполните профиль",
+  "home_enterBirthData": "Введите данные рождения",
+  "home_myChart": "Моя карта",
+  "home_composite": "Композит",
+  "home_penta": "Пента",
+  "home_friends": "Друзья",
+  "home_myBodygraph": "Мой бодиграф",
+  "home_definedCenters": "Определённые центры",
+  "home_activeChannels": "Активные каналы",
+  "home_activeGates": "Активные ворота",
+
+  "transit_today": "Транзиты сегодня",
+  "transit_sun": "Солнце",
+  "transit_earth": "Земля",
+  "transit_moon": "Луна",
+  "transit_gate": "Ворота {number}",
+  "@transit_gate": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_newChannelsActivated": "{count, plural, =1{1 новый канал активирован} few{{count} новых канала активировано} other{{count} новых каналов активировано}}",
+  "@transit_newChannelsActivated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_gatesHighlighted": "{count, plural, =1{1 ворота выделены} few{{count} ворот выделено} other{{count} ворот выделено}}",
+  "@transit_gatesHighlighted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_noConnections": "Нет прямых транзитных связей сегодня",
 
   "auth_signIn": "Войти",
   "auth_signUp": "Регистрация",
@@ -34,6 +92,26 @@
   "auth_noAccount": "Нет аккаунта?",
   "auth_hasAccount": "Уже есть аккаунт?",
   "auth_termsAgree": "Регистрируясь, вы соглашаетесь с Условиями использования и Политикой конфиденциальности",
+  "auth_welcomeBack": "С возвращением",
+  "auth_signInSubtitle": "Войдите, чтобы продолжить путешествие по Дизайну Человека",
+  "auth_signUpSubtitle": "Начните своё путешествие по Дизайну Человека сегодня",
+  "auth_signUpWithApple": "Регистрация через Apple",
+  "auth_signUpWithGoogle": "Регистрация через Google",
+  "auth_enterName": "Введите ваше имя",
+  "auth_nameRequired": "Имя обязательно",
+  "auth_termsOfService": "Условия использования",
+  "auth_privacyPolicy": "Политика конфиденциальности",
+  "auth_acceptTerms": "Пожалуйста, примите Условия использования для продолжения",
+  "auth_resetPasswordTitle": "Сброс пароля",
+  "auth_resetPasswordPrompt": "Введите email и мы отправим вам ссылку для сброса пароля.",
+  "auth_enterEmail": "Введите email",
+  "auth_resetEmailSent": "Письмо для сброса пароля отправлено!",
+  "auth_name": "Имя",
+  "auth_createAccount": "Создать аккаунт",
+  "auth_iAgreeTo": "Я принимаю ",
+  "auth_and": " и ",
+  "auth_birthInformation": "Данные рождения",
+  "auth_calculateMyChart": "Рассчитать мою карту",
 
   "onboarding_welcome": "Добро пожаловать в Дизайн Человека",
   "onboarding_welcomeSubtitle": "Откройте свой уникальный энергетический чертёж",
@@ -45,6 +123,16 @@
   "onboarding_searchLocation": "Введите название города...",
   "onboarding_unknownTime": "Я не знаю время рождения",
   "onboarding_timeImportance": "Точное время рождения важно для точной карты",
+  "onboarding_birthDataExplanation": "Ваши данные рождения используются для расчёта уникальной карты Дизайна Человека. Чем точнее информация, тем точнее будет карта.",
+  "onboarding_noTimeWarning": "Без точного времени рождения некоторые детали карты (восходящий знак и линии ворот) могут быть неточными. По умолчанию будет использоваться полдень.",
+  "onboarding_enterBirthTimeInstead": "Ввести время рождения",
+  "onboarding_birthDataPrivacy": "Ваши данные рождения зашифрованы и хранятся безопасно. Вы можете обновить или удалить их в любое время в настройках профиля.",
+  "onboarding_saveFailed": "Не удалось сохранить данные рождения",
+  "onboarding_fillAllFields": "Пожалуйста, заполните все обязательные поля",
+  "onboarding_selectLanguage": "Выберите язык",
+  "onboarding_getStarted": "Начать",
+  "onboarding_alreadyHaveAccount": "У меня уже есть аккаунт",
+  "onboarding_liveInAlignment": "Откройте свой уникальный энергетический отпечаток и живите в гармонии со своей истинной природой.",
 
   "chart_myChart": "Моя карта",
   "chart_viewChart": "Показать карту",
@@ -55,6 +143,42 @@
   "chart_transit": "Транзиты сегодня",
   "chart_bodygraph": "Бодиграф",
   "chart_details": "Детали карты",
+  "chart_properties": "Свойства",
+  "chart_gates": "Ворота",
+  "chart_channels": "Каналы",
+  "chart_noChartYet": "Пока нет карты",
+  "chart_addBirthDataPrompt": "Добавьте данные рождения для создания вашей уникальной карты Дизайна Человека.",
+  "chart_addBirthData": "Добавить данные рождения",
+  "chart_noActiveChannels": "Нет активных каналов",
+  "chart_channelsFormedBothGates": "Каналы образуются, когда определены оба ворота.",
+  "chart_consciousGates": "Сознательные ворота",
+  "chart_unconsciousGates": "Бессознательные ворота",
+  "chart_personalitySide": "Сторона личности - то, что вы осознаёте",
+  "chart_designSide": "Сторона дизайна - то, что видят в вас другие",
+  "chart_savedCharts": "Сохранённые карты",
+  "chart_addChart": "Добавить карту",
+  "chart_noSavedCharts": "Нет сохранённых карт",
+  "chart_noSavedChartsMessage": "Создайте карты для себя и других, чтобы сохранить их здесь.",
+  "chart_loadFailed": "Не удалось загрузить карты",
+  "chart_renameChart": "Переименовать карту",
+  "chart_rename": "Переименовать",
+  "chart_renameFailed": "Не удалось переименовать карту",
+  "chart_deleteChart": "Удалить карту",
+  "chart_deleteConfirm": "Вы уверены, что хотите удалить \"{name}\"? Это действие нельзя отменить.",
+  "@chart_deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chart_deleteFailed": "Не удалось удалить карту",
+  "chart_you": "Вы",
+  "chart_personName": "Имя",
+  "chart_enterPersonName": "Введите имя человека",
+  "chart_addChartDescription": "Создайте карту для другого человека, введя его данные рождения.",
+  "chart_calculateAndSave": "Рассчитать и сохранить карту",
+  "chart_saved": "Карта успешно сохранена",
 
   "type_manifestor": "Манифестор",
   "type_generator": "Генератор",
@@ -118,9 +242,11 @@
   "section_conscious": "Сознательное (Личность)",
   "section_unconscious": "Бессознательное (Дизайн)",
 
+  "social_title": "Социальное",
   "social_friends": "Друзья",
   "social_groups": "Группы",
   "social_addFriend": "Добавить друга",
+  "social_sendRequest": "Отправить запрос",
   "social_createGroup": "Создать группу",
   "social_invite": "Пригласить",
   "social_members": "Участники",
@@ -139,6 +265,95 @@
   "social_private": "Приватно",
   "social_friendsOnly": "Только друзья",
   "social_public": "Публично",
+  "social_shared": "Общие",
+  "social_noFriendsYet": "Пока нет друзей",
+  "social_noFriendsMessage": "Добавьте друзей для сравнения карт и изучения ваших связей.",
+  "social_noGroupsYet": "Пока нет групп",
+  "social_noGroupsMessage": "Создайте группы для анализа командной динамики с помощью Пента-анализа.",
+  "social_noSharedCharts": "Нет общих карт",
+  "social_noSharedChartsMessage": "Здесь появятся карты, которыми поделились с вами друзья.",
+  "social_pendingRequests": "Ожидающие запросы",
+  "social_friendRequests": "Запросы в друзья",
+  "social_noPendingRequests": "Нет ожидающих запросов",
+  "social_addFriendPrompt": "Введите email друга, чтобы отправить запрос.",
+  "social_emailLabel": "Email",
+  "social_emailHint": "friend@example.com",
+  "social_userNotFound": "Пользователь с таким email не найден",
+  "social_requestSent": "Запрос дружбы отправлен {name}!",
+  "@social_requestSent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_createGroupPrompt": "Создайте группу для анализа командной динамики.",
+  "social_groupName": "Название группы",
+  "social_groupNameHint": "Семья, Команда и т.д.",
+  "social_groupDescription": "Описание (необязательно)",
+  "social_groupDescriptionHint": "Для чего эта группа?",
+  "social_groupCreated": "Группа \"{name}\" создана!",
+  "@social_groupCreated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_friendsSince": "Друзья с {date}",
+  "@social_friendsSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "social_compareCharts": "Сравнить карты",
+  "social_noDescription": "Без описания",
+  "social_admin": "Админ",
+  "social_sharedBy": "Поделился {name}",
+  "@social_sharedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_loadFriendsFailed": "Не удалось загрузить друзей",
+  "social_loadGroupsFailed": "Не удалось загрузить группы",
+  "social_loadSharedFailed": "Не удалось загрузить общие карты",
+  "social_sentAgo": "Отправлено {time}",
+  "@social_sentAgo": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "time_minutesAgo": "{minutes} мин. назад",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "{hours} ч. назад",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "{days} дн. назад",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
 
   "transit_title": "Транзиты сегодня",
   "transit_currentEnergies": "Текущие энергии",
@@ -210,6 +425,15 @@
   "penta_groupDynamics": "Групповая динамика",
   "penta_missingRoles": "Отсутствующие роли",
   "penta_strengths": "Сильные стороны группы",
+  "penta_analysis": "Анализ Пента",
+  "penta_clearAnalysis": "Очистить анализ",
+  "penta_infoText": "Анализ Пента раскрывает естественные роли, возникающие в малых группах из 3-5 человек, показывая, как каждый участник влияет на динамику команды.",
+  "penta_calculating": "Расчёт...",
+  "penta_calculate": "Рассчитать Пента",
+  "penta_groupRoles": "Роли в группе",
+  "penta_electromagneticConnections": "Электромагнитные связи",
+  "penta_connectionsDescription": "Особые энергетические связи между участниками, создающие притяжение и химию.",
+  "penta_areasForAttention": "Области для внимания",
 
   "premium_upgrade": "Перейти на Premium",
   "premium_subscribe": "Подписаться",
@@ -227,8 +451,26 @@
   "premium_perYear": "/год",
   "premium_bestValue": "Лучшее предложение",
 
+  "settings_appearance": "Внешний вид",
   "settings_language": "Язык",
+  "settings_selectLanguage": "Выбор языка",
   "settings_theme": "Тема",
+  "settings_selectTheme": "Выбор темы",
+  "settings_chartDisplay": "Отображение карты",
+  "settings_showGateNumbers": "Показывать номера ворот",
+  "settings_showGateNumbersSubtitle": "Отображать номера ворот на бодиграфе",
+  "settings_use24HourTime": "24-часовой формат",
+  "settings_use24HourTimeSubtitle": "Отображать время в 24-часовом формате",
+  "settings_feedback": "Обратная связь",
+  "settings_hapticFeedback": "Тактильный отклик",
+  "settings_hapticFeedbackSubtitle": "Вибрация при взаимодействии",
+  "settings_account": "Аккаунт",
+  "settings_changePassword": "Изменить пароль",
+  "settings_deleteAccount": "Удалить аккаунт",
+  "settings_deleteAccountConfirm": "Вы уверены, что хотите удалить аккаунт? Это действие необратимо, и все ваши данные будут удалены безвозвратно.",
+  "settings_appVersion": "Версия приложения",
+  "settings_rateApp": "Оценить приложение",
+  "settings_sendFeedback": "Отправить отзыв",
   "settings_themeLight": "Светлая",
   "settings_themeDark": "Тёмная",
   "settings_themeSystem": "Системная",
@@ -247,5 +489,26 @@
   "error_passwordMismatch": "Пароли не совпадают",
   "error_birthDataRequired": "Введите данные рождения",
   "error_locationRequired": "Выберите место рождения",
-  "error_chartCalculation": "Не удалось рассчитать карту"
+  "error_chartCalculation": "Не удалось рассчитать карту",
+
+  "profile_editProfile": "Редактировать профиль",
+  "profile_shareChart": "Поделиться картой",
+  "profile_exportPdf": "Экспорт в PDF",
+  "profile_upgradePremium": "Перейти на Premium",
+  "profile_birthData": "Данные рождения",
+  "profile_chartSummary": "Сводка карты",
+  "profile_viewFullChart": "Смотреть полную карту",
+  "profile_signOut": "Выйти",
+  "profile_signOutConfirm": "Вы уверены, что хотите выйти?",
+  "profile_addBirthDataPrompt": "Добавьте данные рождения для создания вашей карты Дизайна Человека.",
+  "profile_addBirthDataToShare": "Добавьте данные рождения, чтобы поделиться картой",
+  "profile_addBirthDataToExport": "Добавьте данные рождения для экспорта карты",
+  "profile_exportFailed": "Не удалось экспортировать PDF",
+  "profile_signOutConfirmTitle": "Выход",
+  "profile_loadFailed": "Не удалось загрузить профиль",
+  "profile_defaultUserName": "Пользователь Human Design",
+  "profile_birthDate": "Дата",
+  "profile_birthTime": "Время",
+  "profile_birthLocation": "Место",
+  "profile_birthTimezone": "Часовой пояс"
 }

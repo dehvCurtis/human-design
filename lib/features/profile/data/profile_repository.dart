@@ -100,6 +100,44 @@ class ProfileRepository {
     return response;
   }
 
+  /// Get charts for multiple user IDs (for Penta analysis)
+  Future<List<Map<String, dynamic>>> getChartsByUserIds(List<String> userIds) async {
+    if (userIds.isEmpty) return [];
+
+    final response = await _client
+        .from('charts')
+        .select()
+        .inFilter('user_id', userIds);
+
+    return (response as List).cast<Map<String, dynamic>>();
+  }
+
+  /// Get a user's profile by ID
+  Future<UserProfile?> getProfileById(String userId) async {
+    final response = await _client
+        .from('profiles')
+        .select()
+        .eq('id', userId)
+        .maybeSingle();
+
+    if (response == null) return null;
+    return UserProfile.fromJson(response);
+  }
+
+  /// Get profiles for multiple user IDs
+  Future<List<UserProfile>> getProfilesByIds(List<String> userIds) async {
+    if (userIds.isEmpty) return [];
+
+    final response = await _client
+        .from('profiles')
+        .select()
+        .inFilter('id', userIds);
+
+    return (response as List)
+        .map((json) => UserProfile.fromJson(json as Map<String, dynamic>))
+        .toList();
+  }
+
   /// Delete a chart
   Future<void> deleteChart(String chartId) async {
     await _client.from('charts').delete().eq('id', chartId);
@@ -131,6 +169,27 @@ class ProfileRepository {
         .gte('created_at', startOfMonth.toIso8601String());
 
     return (response as List).length;
+  }
+
+  /// Find a user by email address
+  /// Returns null if not found or if it's the current user
+  Future<UserSearchResult?> findUserByEmail(String email) async {
+    final currentUserId = _client.auth.currentUser?.id;
+    final normalizedEmail = email.trim().toLowerCase();
+
+    final response = await _client
+        .from('profiles')
+        .select('id, name, avatar_url, email')
+        .eq('email', normalizedEmail)
+        .maybeSingle();
+
+    if (response == null) return null;
+
+    final userId = response['id'] as String;
+    // Don't return the current user
+    if (userId == currentUserId) return null;
+
+    return UserSearchResult.fromJson(response);
   }
 }
 
@@ -253,6 +312,32 @@ class ChartSummary {
       name: json['name'] as String,
       type: json['type'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
+    );
+  }
+}
+
+/// Result from searching for a user by email
+class UserSearchResult {
+  const UserSearchResult({
+    required this.id,
+    required this.email,
+    this.name,
+    this.avatarUrl,
+  });
+
+  final String id;
+  final String email;
+  final String? name;
+  final String? avatarUrl;
+
+  String get displayName => name ?? email;
+
+  factory UserSearchResult.fromJson(Map<String, dynamic> json) {
+    return UserSearchResult(
+      id: json['id'] as String,
+      email: json['email'] as String,
+      name: json['name'] as String?,
+      avatarUrl: json['avatar_url'] as String?,
     );
   }
 }

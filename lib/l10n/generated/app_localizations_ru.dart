@@ -66,6 +66,128 @@ class AppLocalizationsRu extends AppLocalizations {
   String get common_profile => 'Профиль';
 
   @override
+  String get common_type => 'Тип';
+
+  @override
+  String get common_strategy => 'Стратегия';
+
+  @override
+  String get common_authority => 'Авторитет';
+
+  @override
+  String get common_definition => 'Определённость';
+
+  @override
+  String get common_create => 'Создать';
+
+  @override
+  String get common_viewFull => 'Подробнее';
+
+  @override
+  String get common_send => 'Отправить';
+
+  @override
+  String get nav_home => 'Главная';
+
+  @override
+  String get nav_chart => 'Карта';
+
+  @override
+  String get nav_today => 'Сегодня';
+
+  @override
+  String get nav_social => 'Социум';
+
+  @override
+  String get nav_profile => 'Профиль';
+
+  @override
+  String get home_goodMorning => 'Доброе утро';
+
+  @override
+  String get home_goodAfternoon => 'Добрый день';
+
+  @override
+  String get home_goodEvening => 'Добрый вечер';
+
+  @override
+  String get home_yourDesign => 'Ваш дизайн';
+
+  @override
+  String get home_completeProfile => 'Заполните профиль';
+
+  @override
+  String get home_enterBirthData => 'Введите данные рождения';
+
+  @override
+  String get home_myChart => 'Моя карта';
+
+  @override
+  String get home_composite => 'Композит';
+
+  @override
+  String get home_penta => 'Пента';
+
+  @override
+  String get home_friends => 'Друзья';
+
+  @override
+  String get home_myBodygraph => 'Мой бодиграф';
+
+  @override
+  String get home_definedCenters => 'Определённые центры';
+
+  @override
+  String get home_activeChannels => 'Активные каналы';
+
+  @override
+  String get home_activeGates => 'Активные ворота';
+
+  @override
+  String get transit_today => 'Транзиты сегодня';
+
+  @override
+  String get transit_sun => 'Солнце';
+
+  @override
+  String get transit_earth => 'Земля';
+
+  @override
+  String get transit_moon => 'Луна';
+
+  @override
+  String transit_gate(int number) {
+    return 'Ворота $number';
+  }
+
+  @override
+  String transit_newChannelsActivated(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count новых каналов активировано',
+      few: '$count новых канала активировано',
+      one: '1 новый канал активирован',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String transit_gatesHighlighted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ворот выделено',
+      few: '$count ворот выделено',
+      one: '1 ворота выделены',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get transit_noConnections => 'Нет прямых транзитных связей сегодня';
+
+  @override
   String get auth_signIn => 'Войти';
 
   @override
@@ -103,6 +225,70 @@ class AppLocalizationsRu extends AppLocalizations {
       'Регистрируясь, вы соглашаетесь с Условиями использования и Политикой конфиденциальности';
 
   @override
+  String get auth_welcomeBack => 'С возвращением';
+
+  @override
+  String get auth_signInSubtitle =>
+      'Войдите, чтобы продолжить путешествие по Дизайну Человека';
+
+  @override
+  String get auth_signUpSubtitle =>
+      'Начните своё путешествие по Дизайну Человека сегодня';
+
+  @override
+  String get auth_signUpWithApple => 'Регистрация через Apple';
+
+  @override
+  String get auth_signUpWithGoogle => 'Регистрация через Google';
+
+  @override
+  String get auth_enterName => 'Введите ваше имя';
+
+  @override
+  String get auth_nameRequired => 'Имя обязательно';
+
+  @override
+  String get auth_termsOfService => 'Условия использования';
+
+  @override
+  String get auth_privacyPolicy => 'Политика конфиденциальности';
+
+  @override
+  String get auth_acceptTerms =>
+      'Пожалуйста, примите Условия использования для продолжения';
+
+  @override
+  String get auth_resetPasswordTitle => 'Сброс пароля';
+
+  @override
+  String get auth_resetPasswordPrompt =>
+      'Введите email и мы отправим вам ссылку для сброса пароля.';
+
+  @override
+  String get auth_enterEmail => 'Введите email';
+
+  @override
+  String get auth_resetEmailSent => 'Письмо для сброса пароля отправлено!';
+
+  @override
+  String get auth_name => 'Имя';
+
+  @override
+  String get auth_createAccount => 'Создать аккаунт';
+
+  @override
+  String get auth_iAgreeTo => 'Я принимаю ';
+
+  @override
+  String get auth_and => ' и ';
+
+  @override
+  String get auth_birthInformation => 'Данные рождения';
+
+  @override
+  String get auth_calculateMyChart => 'Рассчитать мою карту';
+
+  @override
   String get onboarding_welcome => 'Добро пожаловать в Дизайн Человека';
 
   @override
@@ -136,6 +322,41 @@ class AppLocalizationsRu extends AppLocalizations {
       'Точное время рождения важно для точной карты';
 
   @override
+  String get onboarding_birthDataExplanation =>
+      'Ваши данные рождения используются для расчёта уникальной карты Дизайна Человека. Чем точнее информация, тем точнее будет карта.';
+
+  @override
+  String get onboarding_noTimeWarning =>
+      'Без точного времени рождения некоторые детали карты (восходящий знак и линии ворот) могут быть неточными. По умолчанию будет использоваться полдень.';
+
+  @override
+  String get onboarding_enterBirthTimeInstead => 'Ввести время рождения';
+
+  @override
+  String get onboarding_birthDataPrivacy =>
+      'Ваши данные рождения зашифрованы и хранятся безопасно. Вы можете обновить или удалить их в любое время в настройках профиля.';
+
+  @override
+  String get onboarding_saveFailed => 'Не удалось сохранить данные рождения';
+
+  @override
+  String get onboarding_fillAllFields =>
+      'Пожалуйста, заполните все обязательные поля';
+
+  @override
+  String get onboarding_selectLanguage => 'Выберите язык';
+
+  @override
+  String get onboarding_getStarted => 'Начать';
+
+  @override
+  String get onboarding_alreadyHaveAccount => 'У меня уже есть аккаунт';
+
+  @override
+  String get onboarding_liveInAlignment =>
+      'Откройте свой уникальный энергетический отпечаток и живите в гармонии со своей истинной природой.';
+
+  @override
   String get chart_myChart => 'Моя карта';
 
   @override
@@ -161,6 +382,99 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chart_details => 'Детали карты';
+
+  @override
+  String get chart_properties => 'Свойства';
+
+  @override
+  String get chart_gates => 'Ворота';
+
+  @override
+  String get chart_channels => 'Каналы';
+
+  @override
+  String get chart_noChartYet => 'Пока нет карты';
+
+  @override
+  String get chart_addBirthDataPrompt =>
+      'Добавьте данные рождения для создания вашей уникальной карты Дизайна Человека.';
+
+  @override
+  String get chart_addBirthData => 'Добавить данные рождения';
+
+  @override
+  String get chart_noActiveChannels => 'Нет активных каналов';
+
+  @override
+  String get chart_channelsFormedBothGates =>
+      'Каналы образуются, когда определены оба ворота.';
+
+  @override
+  String get chart_savedCharts => 'Сохранённые карты';
+
+  @override
+  String get chart_addChart => 'Добавить карту';
+
+  @override
+  String get chart_noSavedCharts => 'Нет сохранённых карт';
+
+  @override
+  String get chart_noSavedChartsMessage =>
+      'Создайте карты для себя и других, чтобы сохранить их здесь.';
+
+  @override
+  String get chart_loadFailed => 'Не удалось загрузить карты';
+
+  @override
+  String get chart_renameChart => 'Переименовать карту';
+
+  @override
+  String get chart_rename => 'Переименовать';
+
+  @override
+  String get chart_renameFailed => 'Не удалось переименовать карту';
+
+  @override
+  String get chart_deleteChart => 'Удалить карту';
+
+  @override
+  String chart_deleteConfirm(String name) {
+    return 'Вы уверены, что хотите удалить \"$name\"? Это действие нельзя отменить.';
+  }
+
+  @override
+  String get chart_deleteFailed => 'Не удалось удалить карту';
+
+  @override
+  String get chart_you => 'Вы';
+
+  @override
+  String get chart_personName => 'Имя';
+
+  @override
+  String get chart_enterPersonName => 'Введите имя человека';
+
+  @override
+  String get chart_addChartDescription =>
+      'Создайте карту для другого человека, введя его данные рождения.';
+
+  @override
+  String get chart_calculateAndSave => 'Рассчитать и сохранить карту';
+
+  @override
+  String get chart_saved => 'Карта успешно сохранена';
+
+  @override
+  String get chart_consciousGates => 'Сознательные ворота';
+
+  @override
+  String get chart_unconsciousGates => 'Бессознательные ворота';
+
+  @override
+  String get chart_personalitySide => 'Сторона личности - то, что вы осознаёте';
+
+  @override
+  String get chart_designSide => 'Сторона дизайна - то, что видят в вас другие';
 
   @override
   String get type_manifestor => 'Манифестор';
@@ -328,6 +642,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get section_unconscious => 'Бессознательное (Дизайн)';
 
   @override
+  String get social_title => 'Социальное';
+
+  @override
   String get social_friends => 'Друзья';
 
   @override
@@ -335,6 +652,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get social_addFriend => 'Добавить друга';
+
+  @override
+  String get social_sendRequest => 'Отправить запрос';
 
   @override
   String get social_createGroup => 'Создать группу';
@@ -370,6 +690,126 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get social_public => 'Публично';
+
+  @override
+  String get social_shared => 'Общие';
+
+  @override
+  String get social_noFriendsYet => 'Пока нет друзей';
+
+  @override
+  String get social_noFriendsMessage =>
+      'Добавьте друзей для сравнения карт и изучения ваших связей.';
+
+  @override
+  String get social_noGroupsYet => 'Пока нет групп';
+
+  @override
+  String get social_noGroupsMessage =>
+      'Создайте группы для анализа командной динамики с помощью Пента-анализа.';
+
+  @override
+  String get social_noSharedCharts => 'Нет общих карт';
+
+  @override
+  String get social_noSharedChartsMessage =>
+      'Здесь появятся карты, которыми поделились с вами друзья.';
+
+  @override
+  String get social_pendingRequests => 'Ожидающие запросы';
+
+  @override
+  String get social_friendRequests => 'Запросы в друзья';
+
+  @override
+  String get social_noPendingRequests => 'Нет ожидающих запросов';
+
+  @override
+  String get social_addFriendPrompt =>
+      'Введите email друга, чтобы отправить запрос.';
+
+  @override
+  String get social_emailLabel => 'Email';
+
+  @override
+  String get social_emailHint => 'friend@example.com';
+
+  @override
+  String get social_userNotFound => 'Пользователь с таким email не найден';
+
+  @override
+  String social_requestSent(String name) {
+    return 'Запрос дружбы отправлен $name!';
+  }
+
+  @override
+  String get social_createGroupPrompt =>
+      'Создайте группу для анализа командной динамики.';
+
+  @override
+  String get social_groupName => 'Название группы';
+
+  @override
+  String get social_groupNameHint => 'Семья, Команда и т.д.';
+
+  @override
+  String get social_groupDescription => 'Описание (необязательно)';
+
+  @override
+  String get social_groupDescriptionHint => 'Для чего эта группа?';
+
+  @override
+  String social_groupCreated(String name) {
+    return 'Группа \"$name\" создана!';
+  }
+
+  @override
+  String social_friendsSince(String date) {
+    return 'Друзья с $date';
+  }
+
+  @override
+  String get social_compareCharts => 'Сравнить карты';
+
+  @override
+  String get social_noDescription => 'Без описания';
+
+  @override
+  String get social_admin => 'Админ';
+
+  @override
+  String social_sharedBy(String name) {
+    return 'Поделился $name';
+  }
+
+  @override
+  String get social_loadFriendsFailed => 'Не удалось загрузить друзей';
+
+  @override
+  String get social_loadGroupsFailed => 'Не удалось загрузить группы';
+
+  @override
+  String get social_loadSharedFailed => 'Не удалось загрузить общие карты';
+
+  @override
+  String social_sentAgo(String time) {
+    return 'Отправлено $time';
+  }
+
+  @override
+  String time_minutesAgo(int minutes) {
+    return '$minutes мин. назад';
+  }
+
+  @override
+  String time_hoursAgo(int hours) {
+    return '$hours ч. назад';
+  }
+
+  @override
+  String time_daysAgo(int days) {
+    return '$days дн. назад';
+  }
 
   @override
   String get transit_title => 'Транзиты сегодня';
@@ -498,6 +938,35 @@ class AppLocalizationsRu extends AppLocalizations {
   String get penta_strengths => 'Сильные стороны группы';
 
   @override
+  String get penta_analysis => 'Анализ Пента';
+
+  @override
+  String get penta_clearAnalysis => 'Очистить анализ';
+
+  @override
+  String get penta_infoText =>
+      'Анализ Пента раскрывает естественные роли, возникающие в малых группах из 3-5 человек, показывая, как каждый участник влияет на динамику команды.';
+
+  @override
+  String get penta_calculating => 'Расчёт...';
+
+  @override
+  String get penta_calculate => 'Рассчитать Пента';
+
+  @override
+  String get penta_groupRoles => 'Роли в группе';
+
+  @override
+  String get penta_electromagneticConnections => 'Электромагнитные связи';
+
+  @override
+  String get penta_connectionsDescription =>
+      'Особые энергетические связи между участниками, создающие притяжение и химию.';
+
+  @override
+  String get penta_areasForAttention => 'Области для внимания';
+
+  @override
   String get premium_upgrade => 'Перейти на Premium';
 
   @override
@@ -544,10 +1013,67 @@ class AppLocalizationsRu extends AppLocalizations {
   String get premium_bestValue => 'Лучшее предложение';
 
   @override
+  String get settings_appearance => 'Внешний вид';
+
+  @override
   String get settings_language => 'Язык';
 
   @override
+  String get settings_selectLanguage => 'Выбор языка';
+
+  @override
   String get settings_theme => 'Тема';
+
+  @override
+  String get settings_selectTheme => 'Выбор темы';
+
+  @override
+  String get settings_chartDisplay => 'Отображение карты';
+
+  @override
+  String get settings_showGateNumbers => 'Показывать номера ворот';
+
+  @override
+  String get settings_showGateNumbersSubtitle =>
+      'Отображать номера ворот на бодиграфе';
+
+  @override
+  String get settings_use24HourTime => '24-часовой формат';
+
+  @override
+  String get settings_use24HourTimeSubtitle =>
+      'Отображать время в 24-часовом формате';
+
+  @override
+  String get settings_feedback => 'Обратная связь';
+
+  @override
+  String get settings_hapticFeedback => 'Тактильный отклик';
+
+  @override
+  String get settings_hapticFeedbackSubtitle => 'Вибрация при взаимодействии';
+
+  @override
+  String get settings_account => 'Аккаунт';
+
+  @override
+  String get settings_changePassword => 'Изменить пароль';
+
+  @override
+  String get settings_deleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get settings_deleteAccountConfirm =>
+      'Вы уверены, что хотите удалить аккаунт? Это действие необратимо, и все ваши данные будут удалены безвозвратно.';
+
+  @override
+  String get settings_appVersion => 'Версия приложения';
+
+  @override
+  String get settings_rateApp => 'Оценить приложение';
+
+  @override
+  String get settings_sendFeedback => 'Отправить отзыв';
 
   @override
   String get settings_themeLight => 'Светлая';
@@ -602,4 +1128,67 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get error_chartCalculation => 'Не удалось рассчитать карту';
+
+  @override
+  String get profile_editProfile => 'Редактировать профиль';
+
+  @override
+  String get profile_shareChart => 'Поделиться картой';
+
+  @override
+  String get profile_exportPdf => 'Экспорт в PDF';
+
+  @override
+  String get profile_upgradePremium => 'Перейти на Premium';
+
+  @override
+  String get profile_birthData => 'Данные рождения';
+
+  @override
+  String get profile_chartSummary => 'Сводка карты';
+
+  @override
+  String get profile_viewFullChart => 'Смотреть полную карту';
+
+  @override
+  String get profile_signOut => 'Выйти';
+
+  @override
+  String get profile_signOutConfirm => 'Вы уверены, что хотите выйти?';
+
+  @override
+  String get profile_addBirthDataPrompt =>
+      'Добавьте данные рождения для создания вашей карты Дизайна Человека.';
+
+  @override
+  String get profile_addBirthDataToShare =>
+      'Добавьте данные рождения, чтобы поделиться картой';
+
+  @override
+  String get profile_addBirthDataToExport =>
+      'Добавьте данные рождения для экспорта карты';
+
+  @override
+  String get profile_exportFailed => 'Не удалось экспортировать PDF';
+
+  @override
+  String get profile_signOutConfirmTitle => 'Выход';
+
+  @override
+  String get profile_loadFailed => 'Не удалось загрузить профиль';
+
+  @override
+  String get profile_defaultUserName => 'Пользователь Human Design';
+
+  @override
+  String get profile_birthDate => 'Дата';
+
+  @override
+  String get profile_birthTime => 'Время';
+
+  @override
+  String get profile_birthLocation => 'Место';
+
+  @override
+  String get profile_birthTimezone => 'Часовой пояс';
 }

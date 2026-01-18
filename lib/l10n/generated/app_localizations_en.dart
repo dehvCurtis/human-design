@@ -66,6 +66,126 @@ class AppLocalizationsEn extends AppLocalizations {
   String get common_profile => 'Profile';
 
   @override
+  String get common_type => 'Type';
+
+  @override
+  String get common_strategy => 'Strategy';
+
+  @override
+  String get common_authority => 'Authority';
+
+  @override
+  String get common_definition => 'Definition';
+
+  @override
+  String get common_create => 'Create';
+
+  @override
+  String get common_viewFull => 'View Full';
+
+  @override
+  String get common_send => 'Send';
+
+  @override
+  String get nav_home => 'Home';
+
+  @override
+  String get nav_chart => 'Chart';
+
+  @override
+  String get nav_today => 'Today';
+
+  @override
+  String get nav_social => 'Social';
+
+  @override
+  String get nav_profile => 'Profile';
+
+  @override
+  String get home_goodMorning => 'Good morning';
+
+  @override
+  String get home_goodAfternoon => 'Good afternoon';
+
+  @override
+  String get home_goodEvening => 'Good evening';
+
+  @override
+  String get home_yourDesign => 'Your Design';
+
+  @override
+  String get home_completeProfile => 'Complete Your Profile';
+
+  @override
+  String get home_enterBirthData => 'Enter Birth Data';
+
+  @override
+  String get home_myChart => 'My Chart';
+
+  @override
+  String get home_composite => 'Composite';
+
+  @override
+  String get home_penta => 'Penta';
+
+  @override
+  String get home_friends => 'Friends';
+
+  @override
+  String get home_myBodygraph => 'My Bodygraph';
+
+  @override
+  String get home_definedCenters => 'Defined Centers';
+
+  @override
+  String get home_activeChannels => 'Active Channels';
+
+  @override
+  String get home_activeGates => 'Active Gates';
+
+  @override
+  String get transit_today => 'Today\'s Transits';
+
+  @override
+  String get transit_sun => 'Sun';
+
+  @override
+  String get transit_earth => 'Earth';
+
+  @override
+  String get transit_moon => 'Moon';
+
+  @override
+  String transit_gate(int number) {
+    return 'Gate $number';
+  }
+
+  @override
+  String transit_newChannelsActivated(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count new channels activated',
+      one: '1 new channel activated',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String transit_gatesHighlighted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count gates highlighted',
+      one: '1 gate highlighted',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get transit_noConnections => 'No direct transit connections today';
+
+  @override
   String get auth_signIn => 'Sign In';
 
   @override
@@ -103,6 +223,69 @@ class AppLocalizationsEn extends AppLocalizations {
       'By signing up, you agree to our Terms of Service and Privacy Policy';
 
   @override
+  String get auth_welcomeBack => 'Welcome back';
+
+  @override
+  String get auth_signInSubtitle =>
+      'Sign in to continue your Human Design journey';
+
+  @override
+  String get auth_signUpSubtitle => 'Start your Human Design journey today';
+
+  @override
+  String get auth_signUpWithApple => 'Sign up with Apple';
+
+  @override
+  String get auth_signUpWithGoogle => 'Sign up with Google';
+
+  @override
+  String get auth_enterName => 'Enter your name';
+
+  @override
+  String get auth_nameRequired => 'Name is required';
+
+  @override
+  String get auth_termsOfService => 'Terms of Service';
+
+  @override
+  String get auth_privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get auth_acceptTerms =>
+      'Please accept the Terms of Service to continue';
+
+  @override
+  String get auth_resetPasswordTitle => 'Reset Password';
+
+  @override
+  String get auth_resetPasswordPrompt =>
+      'Enter your email address and we\'ll send you a link to reset your password.';
+
+  @override
+  String get auth_enterEmail => 'Enter your email';
+
+  @override
+  String get auth_resetEmailSent => 'Password reset email sent!';
+
+  @override
+  String get auth_name => 'Name';
+
+  @override
+  String get auth_createAccount => 'Create Account';
+
+  @override
+  String get auth_iAgreeTo => 'I agree to the ';
+
+  @override
+  String get auth_and => ' and ';
+
+  @override
+  String get auth_birthInformation => 'Birth Information';
+
+  @override
+  String get auth_calculateMyChart => 'Calculate My Chart';
+
+  @override
   String get onboarding_welcome => 'Welcome to Human Design';
 
   @override
@@ -136,6 +319,40 @@ class AppLocalizationsEn extends AppLocalizations {
       'Knowing your exact birth time is important for an accurate chart';
 
   @override
+  String get onboarding_birthDataExplanation =>
+      'Your birth data is used to calculate your unique Human Design chart. The more accurate the information, the more precise your chart will be.';
+
+  @override
+  String get onboarding_noTimeWarning =>
+      'Without an accurate birth time, some chart details (like your Rising sign and exact gate lines) may not be precise. We\'ll use noon as a default.';
+
+  @override
+  String get onboarding_enterBirthTimeInstead => 'Enter birth time instead';
+
+  @override
+  String get onboarding_birthDataPrivacy =>
+      'Your birth data is encrypted and stored securely. You can update or delete it anytime from your profile settings.';
+
+  @override
+  String get onboarding_saveFailed => 'Failed to save birth data';
+
+  @override
+  String get onboarding_fillAllFields => 'Please fill in all required fields';
+
+  @override
+  String get onboarding_selectLanguage => 'Select Language';
+
+  @override
+  String get onboarding_getStarted => 'Get Started';
+
+  @override
+  String get onboarding_alreadyHaveAccount => 'I already have an account';
+
+  @override
+  String get onboarding_liveInAlignment =>
+      'Discover your unique energetic blueprint and live in alignment with your true nature.';
+
+  @override
   String get chart_myChart => 'My Chart';
 
   @override
@@ -161,6 +378,100 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chart_details => 'Chart Details';
+
+  @override
+  String get chart_properties => 'Properties';
+
+  @override
+  String get chart_gates => 'Gates';
+
+  @override
+  String get chart_channels => 'Channels';
+
+  @override
+  String get chart_noChartYet => 'No Chart Yet';
+
+  @override
+  String get chart_addBirthDataPrompt =>
+      'Add your birth data to generate your unique Human Design chart.';
+
+  @override
+  String get chart_addBirthData => 'Add Birth Data';
+
+  @override
+  String get chart_noActiveChannels => 'No Active Channels';
+
+  @override
+  String get chart_channelsFormedBothGates =>
+      'Channels are formed when both gates are defined.';
+
+  @override
+  String get chart_savedCharts => 'Saved Charts';
+
+  @override
+  String get chart_addChart => 'Add Chart';
+
+  @override
+  String get chart_noSavedCharts => 'No Saved Charts';
+
+  @override
+  String get chart_noSavedChartsMessage =>
+      'Create charts for yourself and others to save them here.';
+
+  @override
+  String get chart_loadFailed => 'Failed to load charts';
+
+  @override
+  String get chart_renameChart => 'Rename Chart';
+
+  @override
+  String get chart_rename => 'Rename';
+
+  @override
+  String get chart_renameFailed => 'Failed to rename chart';
+
+  @override
+  String get chart_deleteChart => 'Delete Chart';
+
+  @override
+  String chart_deleteConfirm(String name) {
+    return 'Are you sure you want to delete \"$name\"? This action cannot be undone.';
+  }
+
+  @override
+  String get chart_deleteFailed => 'Failed to delete chart';
+
+  @override
+  String get chart_you => 'You';
+
+  @override
+  String get chart_personName => 'Name';
+
+  @override
+  String get chart_enterPersonName => 'Enter person\'s name';
+
+  @override
+  String get chart_addChartDescription =>
+      'Create a chart for someone else by entering their birth information.';
+
+  @override
+  String get chart_calculateAndSave => 'Calculate & Save Chart';
+
+  @override
+  String get chart_saved => 'Chart saved successfully';
+
+  @override
+  String get chart_consciousGates => 'Conscious Gates';
+
+  @override
+  String get chart_unconsciousGates => 'Unconscious Gates';
+
+  @override
+  String get chart_personalitySide =>
+      'Personality side - what you\'re aware of';
+
+  @override
+  String get chart_designSide => 'Design side - what others see in you';
 
   @override
   String get type_manifestor => 'Manifestor';
@@ -328,6 +639,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get section_unconscious => 'Unconscious (Design)';
 
   @override
+  String get social_title => 'Social';
+
+  @override
   String get social_friends => 'Friends';
 
   @override
@@ -335,6 +649,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get social_addFriend => 'Add Friend';
+
+  @override
+  String get social_sendRequest => 'Send Request';
 
   @override
   String get social_createGroup => 'Create Group';
@@ -370,6 +687,126 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get social_public => 'Public';
+
+  @override
+  String get social_shared => 'Shared';
+
+  @override
+  String get social_noFriendsYet => 'No Friends Yet';
+
+  @override
+  String get social_noFriendsMessage =>
+      'Add friends to compare charts and see how you connect.';
+
+  @override
+  String get social_noGroupsYet => 'No Groups Yet';
+
+  @override
+  String get social_noGroupsMessage =>
+      'Create groups to analyze team dynamics with Penta analysis.';
+
+  @override
+  String get social_noSharedCharts => 'No Shared Charts';
+
+  @override
+  String get social_noSharedChartsMessage =>
+      'Charts that friends share with you will appear here.';
+
+  @override
+  String get social_pendingRequests => 'Pending Requests';
+
+  @override
+  String get social_friendRequests => 'Friend Requests';
+
+  @override
+  String get social_noPendingRequests => 'No pending requests';
+
+  @override
+  String get social_addFriendPrompt =>
+      'Enter your friend\'s email address to send a request.';
+
+  @override
+  String get social_emailLabel => 'Email';
+
+  @override
+  String get social_emailHint => 'friend@example.com';
+
+  @override
+  String get social_userNotFound => 'No user found with that email';
+
+  @override
+  String social_requestSent(String name) {
+    return 'Friend request sent to $name!';
+  }
+
+  @override
+  String get social_createGroupPrompt =>
+      'Create a group to analyze team dynamics.';
+
+  @override
+  String get social_groupName => 'Group Name';
+
+  @override
+  String get social_groupNameHint => 'Family, Team, etc.';
+
+  @override
+  String get social_groupDescription => 'Description (optional)';
+
+  @override
+  String get social_groupDescriptionHint => 'What is this group for?';
+
+  @override
+  String social_groupCreated(String name) {
+    return 'Group \"$name\" created!';
+  }
+
+  @override
+  String social_friendsSince(String date) {
+    return 'Friends since $date';
+  }
+
+  @override
+  String get social_compareCharts => 'Compare Charts';
+
+  @override
+  String get social_noDescription => 'No description';
+
+  @override
+  String get social_admin => 'Admin';
+
+  @override
+  String social_sharedBy(String name) {
+    return 'Shared by $name';
+  }
+
+  @override
+  String get social_loadFriendsFailed => 'Failed to load friends';
+
+  @override
+  String get social_loadGroupsFailed => 'Failed to load groups';
+
+  @override
+  String get social_loadSharedFailed => 'Failed to load shared charts';
+
+  @override
+  String social_sentAgo(String time) {
+    return 'Sent $time';
+  }
+
+  @override
+  String time_minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String time_hoursAgo(int hours) {
+    return '${hours}h ago';
+  }
+
+  @override
+  String time_daysAgo(int days) {
+    return '${days}d ago';
+  }
 
   @override
   String get transit_title => 'Today\'s Transits';
@@ -498,6 +935,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get penta_strengths => 'Group Strengths';
 
   @override
+  String get penta_analysis => 'Penta Analysis';
+
+  @override
+  String get penta_clearAnalysis => 'Clear Analysis';
+
+  @override
+  String get penta_infoText =>
+      'Penta analysis reveals the natural roles that emerge in small groups of 3-5 people, showing how each member contributes to team dynamics.';
+
+  @override
+  String get penta_calculating => 'Calculating...';
+
+  @override
+  String get penta_calculate => 'Calculate Penta';
+
+  @override
+  String get penta_groupRoles => 'Group Roles';
+
+  @override
+  String get penta_electromagneticConnections => 'Electromagnetic Connections';
+
+  @override
+  String get penta_connectionsDescription =>
+      'Special energy connections between members that create attraction and chemistry.';
+
+  @override
+  String get penta_areasForAttention => 'Areas for Attention';
+
+  @override
   String get premium_upgrade => 'Upgrade to Premium';
 
   @override
@@ -543,10 +1009,66 @@ class AppLocalizationsEn extends AppLocalizations {
   String get premium_bestValue => 'Best Value';
 
   @override
+  String get settings_appearance => 'Appearance';
+
+  @override
   String get settings_language => 'Language';
 
   @override
+  String get settings_selectLanguage => 'Select Language';
+
+  @override
   String get settings_theme => 'Theme';
+
+  @override
+  String get settings_selectTheme => 'Select Theme';
+
+  @override
+  String get settings_chartDisplay => 'Chart Display';
+
+  @override
+  String get settings_showGateNumbers => 'Show Gate Numbers';
+
+  @override
+  String get settings_showGateNumbersSubtitle =>
+      'Display gate numbers on the bodygraph';
+
+  @override
+  String get settings_use24HourTime => 'Use 24-Hour Time';
+
+  @override
+  String get settings_use24HourTimeSubtitle => 'Display time in 24-hour format';
+
+  @override
+  String get settings_feedback => 'Feedback';
+
+  @override
+  String get settings_hapticFeedback => 'Haptic Feedback';
+
+  @override
+  String get settings_hapticFeedbackSubtitle => 'Vibration on interactions';
+
+  @override
+  String get settings_account => 'Account';
+
+  @override
+  String get settings_changePassword => 'Change Password';
+
+  @override
+  String get settings_deleteAccount => 'Delete Account';
+
+  @override
+  String get settings_deleteAccountConfirm =>
+      'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.';
+
+  @override
+  String get settings_appVersion => 'App Version';
+
+  @override
+  String get settings_rateApp => 'Rate the App';
+
+  @override
+  String get settings_sendFeedback => 'Send Feedback';
 
   @override
   String get settings_themeLight => 'Light';
@@ -601,4 +1123,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error_chartCalculation => 'Could not calculate your chart';
+
+  @override
+  String get profile_editProfile => 'Edit Profile';
+
+  @override
+  String get profile_shareChart => 'Share My Chart';
+
+  @override
+  String get profile_exportPdf => 'Export Chart PDF';
+
+  @override
+  String get profile_upgradePremium => 'Upgrade to Premium';
+
+  @override
+  String get profile_birthData => 'Birth Data';
+
+  @override
+  String get profile_chartSummary => 'Chart Summary';
+
+  @override
+  String get profile_viewFullChart => 'View Full Chart';
+
+  @override
+  String get profile_signOut => 'Sign Out';
+
+  @override
+  String get profile_signOutConfirm => 'Are you sure you want to sign out?';
+
+  @override
+  String get profile_addBirthDataPrompt =>
+      'Add your birth data to generate your Human Design chart.';
+
+  @override
+  String get profile_addBirthDataToShare =>
+      'Add birth data to share your chart';
+
+  @override
+  String get profile_addBirthDataToExport =>
+      'Add birth data to export your chart';
+
+  @override
+  String get profile_exportFailed => 'Failed to export PDF';
+
+  @override
+  String get profile_signOutConfirmTitle => 'Sign Out';
+
+  @override
+  String get profile_loadFailed => 'Failed to load profile';
+
+  @override
+  String get profile_defaultUserName => 'Human Design User';
+
+  @override
+  String get profile_birthDate => 'Date';
+
+  @override
+  String get profile_birthTime => 'Time';
+
+  @override
+  String get profile_birthLocation => 'Location';
+
+  @override
+  String get profile_birthTimezone => 'Timezone';
 }

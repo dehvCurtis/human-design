@@ -1,0 +1,305 @@
+import 'package:flutter/material.dart';
+
+import '../../../core/theme/app_colors.dart';
+
+/// OAuth provider types
+enum OAuthProvider { apple, google }
+
+/// OAuth sign-in button with provider branding
+class OAuthButton extends StatelessWidget {
+  const OAuthButton({
+    super.key,
+    required this.provider,
+    required this.onPressed,
+    this.isLoading = false,
+    this.enabled = true,
+    this.label,
+  });
+
+  final OAuthProvider provider;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool enabled;
+  final String? label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final effectiveOnPressed = (enabled && !isLoading) ? onPressed : null;
+
+    return SizedBox(
+      width: double.infinity,
+      height: 52,
+      child: ElevatedButton(
+        onPressed: effectiveOnPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _getBackgroundColor(isDark),
+          foregroundColor: _getForegroundColor(isDark),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+              width: 1,
+            ),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (isLoading)
+              SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    _getForegroundColor(isDark),
+                  ),
+                ),
+              )
+            else
+              _buildProviderIcon(isDark),
+            const SizedBox(width: 12),
+            Text(
+              label ?? _getDefaultLabel(),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProviderIcon(bool isDark) {
+    switch (provider) {
+      case OAuthProvider.apple:
+        return Icon(
+          Icons.apple,
+          size: 24,
+          color: _getForegroundColor(isDark),
+        );
+      case OAuthProvider.google:
+        return _GoogleLogo(size: 20);
+    }
+  }
+
+  Color _getBackgroundColor(bool isDark) {
+    switch (provider) {
+      case OAuthProvider.apple:
+        return isDark ? Colors.white : Colors.black;
+      case OAuthProvider.google:
+        return isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
+    }
+  }
+
+  Color _getForegroundColor(bool isDark) {
+    switch (provider) {
+      case OAuthProvider.apple:
+        return isDark ? Colors.black : Colors.white;
+      case OAuthProvider.google:
+        return isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    }
+  }
+
+  String _getDefaultLabel() {
+    switch (provider) {
+      case OAuthProvider.apple:
+        return 'Continue with Apple';
+      case OAuthProvider.google:
+        return 'Continue with Google';
+    }
+  }
+}
+
+/// Apple Sign In button
+class AppleSignInButton extends StatelessWidget {
+  const AppleSignInButton({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+    this.enabled = true,
+    this.label = 'Continue with Apple',
+  });
+
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool enabled;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return OAuthButton(
+      provider: OAuthProvider.apple,
+      onPressed: onPressed,
+      isLoading: isLoading,
+      enabled: enabled,
+      label: label,
+    );
+  }
+}
+
+/// Google Sign In button
+class GoogleSignInButton extends StatelessWidget {
+  const GoogleSignInButton({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+    this.enabled = true,
+    this.label = 'Continue with Google',
+  });
+
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool enabled;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return OAuthButton(
+      provider: OAuthProvider.google,
+      onPressed: onPressed,
+      isLoading: isLoading,
+      enabled: enabled,
+      label: label,
+    );
+  }
+}
+
+/// Custom Google logo widget (since Material Icons doesn't include it)
+class _GoogleLogo extends StatelessWidget {
+  const _GoogleLogo({this.size = 24});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: size,
+      height: size,
+      child: CustomPaint(
+        painter: _GoogleLogoPainter(),
+      ),
+    );
+  }
+}
+
+class _GoogleLogoPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.fill
+      ..isAntiAlias = true;
+
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width / 2;
+
+    // Blue section
+    paint.color = const Color(0xFF4285F4);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -0.5,
+      1.9,
+      true,
+      paint,
+    );
+
+    // Green section
+    paint.color = const Color(0xFF34A853);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      1.4,
+      1.2,
+      true,
+      paint,
+    );
+
+    // Yellow section
+    paint.color = const Color(0xFFFBBC05);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      2.6,
+      0.9,
+      true,
+      paint,
+    );
+
+    // Red section
+    paint.color = const Color(0xFFEA4335);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      3.5,
+      0.9,
+      true,
+      paint,
+    );
+
+    // White center
+    paint.color = Colors.white;
+    canvas.drawCircle(center, radius * 0.55, paint);
+
+    // Blue G shape
+    paint.color = const Color(0xFF4285F4);
+    final gPath = Path()
+      ..moveTo(size.width * 0.5, size.height * 0.3)
+      ..lineTo(size.width * 0.85, size.height * 0.3)
+      ..lineTo(size.width * 0.85, size.height * 0.55)
+      ..lineTo(size.width * 0.55, size.height * 0.55)
+      ..lineTo(size.width * 0.55, size.height * 0.45)
+      ..lineTo(size.width * 0.75, size.height * 0.45)
+      ..lineTo(size.width * 0.75, size.height * 0.4)
+      ..lineTo(size.width * 0.5, size.height * 0.4)
+      ..close();
+    canvas.drawPath(gPath, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+/// Divider with "or" text for separating OAuth buttons from email login
+class OAuthDivider extends StatelessWidget {
+  const OAuthDivider({
+    super.key,
+    this.text = 'or',
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final color =
+        isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: Row(
+        children: [
+          Expanded(
+            child: Divider(
+              color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              text,
+              style: theme.textTheme.bodyMedium?.copyWith(color: color),
+            ),
+          ),
+          Expanded(
+            child: Divider(
+              color: isDark ? AppColors.dividerDark : AppColors.dividerLight,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

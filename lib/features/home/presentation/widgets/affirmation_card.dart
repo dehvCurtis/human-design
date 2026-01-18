@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../lifestyle/domain/affirmation_service.dart';
 
 /// Card displaying the daily affirmation
@@ -27,8 +28,8 @@ class AffirmationCard extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              AppColors.premiumGradientStart.withOpacity(0.1),
-              AppColors.premiumGradientEnd.withOpacity(0.1),
+              AppColors.premiumGradientStart.withValues(alpha: 0.1),
+              AppColors.premiumGradientEnd.withValues(alpha: 0.1),
             ],
           ),
         ),
@@ -43,7 +44,7 @@ class AffirmationCard extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.1),
+                      color: AppColors.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Icon(
@@ -58,7 +59,7 @@ class AffirmationCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Daily Affirmation',
+                          AppLocalizations.of(context)!.affirmation_title,
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     fontWeight: FontWeight.bold,
@@ -71,7 +72,7 @@ class AffirmationCard extends StatelessWidget {
                                     color: Theme.of(context)
                                         .colorScheme
                                         .onSurface
-                                        .withOpacity(0.6),
+                                        .withValues(alpha: 0.6),
                                   ),
                         ),
                       ],
@@ -94,25 +95,25 @@ class AffirmationCard extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Actions
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Wrap(
+                alignment: WrapAlignment.end,
+                spacing: 4,
+                runSpacing: 4,
                 children: [
                   TextButton.icon(
                     onPressed: () => _shareAffirmation(context),
                     icon: const Icon(Icons.share, size: 18),
-                    label: const Text('Share'),
+                    label: Text(AppLocalizations.of(context)!.common_share),
                   ),
-                  const SizedBox(width: 8),
                   TextButton.icon(
                     onPressed: onSave,
                     icon: const Icon(Icons.bookmark_border, size: 18),
-                    label: const Text('Save'),
+                    label: Text(AppLocalizations.of(context)!.common_save),
                   ),
-                  const SizedBox(width: 8),
                   IconButton(
                     onPressed: onRefresh,
                     icon: const Icon(Icons.refresh),
-                    tooltip: 'New affirmation',
+                    tooltip: AppLocalizations.of(context)!.affirmation_refresh,
                   ),
                 ],
               ),
@@ -131,6 +132,6 @@ ${affirmation.sourceDescription}
 
 - Human Design App
 ''';
-    Share.share(text);
+    SharePlus.instance.share(ShareParams(text: text));
   }
 }

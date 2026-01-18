@@ -24,6 +24,64 @@
   "common_settings": "Settings",
   "common_logout": "Log Out",
   "common_profile": "Profile",
+  "common_type": "Type",
+  "common_strategy": "Strategy",
+  "common_authority": "Authority",
+  "common_definition": "Definition",
+  "common_create": "Create",
+  "common_viewFull": "View Full",
+  "common_send": "Send",
+
+  "nav_home": "Home",
+  "nav_chart": "Chart",
+  "nav_today": "Today",
+  "nav_social": "Social",
+  "nav_profile": "Profile",
+
+  "home_goodMorning": "Good morning",
+  "home_goodAfternoon": "Good afternoon",
+  "home_goodEvening": "Good evening",
+  "home_yourDesign": "Your Design",
+  "home_completeProfile": "Complete Your Profile",
+  "home_enterBirthData": "Enter Birth Data",
+  "home_myChart": "My Chart",
+  "home_composite": "Composite",
+  "home_penta": "Penta",
+  "home_friends": "Friends",
+  "home_myBodygraph": "My Bodygraph",
+  "home_definedCenters": "Defined Centers",
+  "home_activeChannels": "Active Channels",
+  "home_activeGates": "Active Gates",
+
+  "transit_today": "Today's Transits",
+  "transit_sun": "Sun",
+  "transit_earth": "Earth",
+  "transit_moon": "Moon",
+  "transit_gate": "Gate {number}",
+  "@transit_gate": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_newChannelsActivated": "{count, plural, =1{1 new channel activated} other{{count} new channels activated}}",
+  "@transit_newChannelsActivated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_gatesHighlighted": "{count, plural, =1{1 gate highlighted} other{{count} gates highlighted}}",
+  "@transit_gatesHighlighted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_noConnections": "No direct transit connections today",
 
   "auth_signIn": "Sign In",
   "auth_signUp": "Sign Up",
@@ -37,6 +95,26 @@
   "auth_noAccount": "Don't have an account?",
   "auth_hasAccount": "Already have an account?",
   "auth_termsAgree": "By signing up, you agree to our Terms of Service and Privacy Policy",
+  "auth_welcomeBack": "Welcome back",
+  "auth_signInSubtitle": "Sign in to continue your Human Design journey",
+  "auth_signUpSubtitle": "Start your Human Design journey today",
+  "auth_signUpWithApple": "Sign up with Apple",
+  "auth_signUpWithGoogle": "Sign up with Google",
+  "auth_enterName": "Enter your name",
+  "auth_nameRequired": "Name is required",
+  "auth_termsOfService": "Terms of Service",
+  "auth_privacyPolicy": "Privacy Policy",
+  "auth_acceptTerms": "Please accept the Terms of Service to continue",
+  "auth_resetPasswordTitle": "Reset Password",
+  "auth_resetPasswordPrompt": "Enter your email address and we'll send you a link to reset your password.",
+  "auth_enterEmail": "Enter your email",
+  "auth_resetEmailSent": "Password reset email sent!",
+  "auth_name": "Name",
+  "auth_createAccount": "Create Account",
+  "auth_iAgreeTo": "I agree to the ",
+  "auth_and": " and ",
+  "auth_birthInformation": "Birth Information",
+  "auth_calculateMyChart": "Calculate My Chart",
 
   "onboarding_welcome": "Welcome to Human Design",
   "onboarding_welcomeSubtitle": "Discover your unique energetic blueprint",
@@ -48,6 +126,16 @@
   "onboarding_searchLocation": "Search for a city...",
   "onboarding_unknownTime": "I don't know my birth time",
   "onboarding_timeImportance": "Knowing your exact birth time is important for an accurate chart",
+  "onboarding_birthDataExplanation": "Your birth data is used to calculate your unique Human Design chart. The more accurate the information, the more precise your chart will be.",
+  "onboarding_noTimeWarning": "Without an accurate birth time, some chart details (like your Rising sign and exact gate lines) may not be precise. We'll use noon as a default.",
+  "onboarding_enterBirthTimeInstead": "Enter birth time instead",
+  "onboarding_birthDataPrivacy": "Your birth data is encrypted and stored securely. You can update or delete it anytime from your profile settings.",
+  "onboarding_saveFailed": "Failed to save birth data",
+  "onboarding_fillAllFields": "Please fill in all required fields",
+  "onboarding_selectLanguage": "Select Language",
+  "onboarding_getStarted": "Get Started",
+  "onboarding_alreadyHaveAccount": "I already have an account",
+  "onboarding_liveInAlignment": "Discover your unique energetic blueprint and live in alignment with your true nature.",
 
   "chart_myChart": "My Chart",
   "chart_viewChart": "View Chart",
@@ -58,6 +146,42 @@
   "chart_transit": "Today's Transits",
   "chart_bodygraph": "Bodygraph",
   "chart_details": "Chart Details",
+  "chart_properties": "Properties",
+  "chart_gates": "Gates",
+  "chart_channels": "Channels",
+  "chart_noChartYet": "No Chart Yet",
+  "chart_addBirthDataPrompt": "Add your birth data to generate your unique Human Design chart.",
+  "chart_addBirthData": "Add Birth Data",
+  "chart_noActiveChannels": "No Active Channels",
+  "chart_channelsFormedBothGates": "Channels are formed when both gates are defined.",
+  "chart_savedCharts": "Saved Charts",
+  "chart_addChart": "Add Chart",
+  "chart_noSavedCharts": "No Saved Charts",
+  "chart_noSavedChartsMessage": "Create charts for yourself and others to save them here.",
+  "chart_loadFailed": "Failed to load charts",
+  "chart_renameChart": "Rename Chart",
+  "chart_rename": "Rename",
+  "chart_renameFailed": "Failed to rename chart",
+  "chart_deleteChart": "Delete Chart",
+  "chart_deleteConfirm": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
+  "@chart_deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chart_deleteFailed": "Failed to delete chart",
+  "chart_you": "You",
+  "chart_personName": "Name",
+  "chart_enterPersonName": "Enter person's name",
+  "chart_addChartDescription": "Create a chart for someone else by entering their birth information.",
+  "chart_calculateAndSave": "Calculate & Save Chart",
+  "chart_saved": "Chart saved successfully",
+  "chart_consciousGates": "Conscious Gates",
+  "chart_unconsciousGates": "Unconscious Gates",
+  "chart_personalitySide": "Personality side - what you're aware of",
+  "chart_designSide": "Design side - what others see in you",
 
   "type_manifestor": "Manifestor",
   "type_generator": "Generator",
@@ -121,9 +245,11 @@
   "section_conscious": "Conscious (Personality)",
   "section_unconscious": "Unconscious (Design)",
 
+  "social_title": "Social",
   "social_friends": "Friends",
   "social_groups": "Groups",
   "social_addFriend": "Add Friend",
+  "social_sendRequest": "Send Request",
   "social_createGroup": "Create Group",
   "social_invite": "Invite",
   "social_members": "Members",
@@ -142,6 +268,95 @@
   "social_private": "Private",
   "social_friendsOnly": "Friends Only",
   "social_public": "Public",
+  "social_shared": "Shared",
+  "social_noFriendsYet": "No Friends Yet",
+  "social_noFriendsMessage": "Add friends to compare charts and see how you connect.",
+  "social_noGroupsYet": "No Groups Yet",
+  "social_noGroupsMessage": "Create groups to analyze team dynamics with Penta analysis.",
+  "social_noSharedCharts": "No Shared Charts",
+  "social_noSharedChartsMessage": "Charts that friends share with you will appear here.",
+  "social_pendingRequests": "Pending Requests",
+  "social_friendRequests": "Friend Requests",
+  "social_noPendingRequests": "No pending requests",
+  "social_addFriendPrompt": "Enter your friend's email address to send a request.",
+  "social_emailLabel": "Email",
+  "social_emailHint": "friend@example.com",
+  "social_userNotFound": "No user found with that email",
+  "social_requestSent": "Friend request sent to {name}!",
+  "@social_requestSent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_createGroupPrompt": "Create a group to analyze team dynamics.",
+  "social_groupName": "Group Name",
+  "social_groupNameHint": "Family, Team, etc.",
+  "social_groupDescription": "Description (optional)",
+  "social_groupDescriptionHint": "What is this group for?",
+  "social_groupCreated": "Group \"{name}\" created!",
+  "@social_groupCreated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_friendsSince": "Friends since {date}",
+  "@social_friendsSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "social_compareCharts": "Compare Charts",
+  "social_noDescription": "No description",
+  "social_admin": "Admin",
+  "social_sharedBy": "Shared by {name}",
+  "@social_sharedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_loadFriendsFailed": "Failed to load friends",
+  "social_loadGroupsFailed": "Failed to load groups",
+  "social_loadSharedFailed": "Failed to load shared charts",
+  "social_sentAgo": "Sent {time}",
+  "@social_sentAgo": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "time_minutesAgo": "{minutes}m ago",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "{hours}h ago",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "{days}d ago",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
 
   "transit_title": "Today's Transits",
   "transit_currentEnergies": "Current Energies",
@@ -213,6 +428,15 @@
   "penta_groupDynamics": "Group Dynamics",
   "penta_missingRoles": "Missing Roles",
   "penta_strengths": "Group Strengths",
+  "penta_analysis": "Penta Analysis",
+  "penta_clearAnalysis": "Clear Analysis",
+  "penta_infoText": "Penta analysis reveals the natural roles that emerge in small groups of 3-5 people, showing how each member contributes to team dynamics.",
+  "penta_calculating": "Calculating...",
+  "penta_calculate": "Calculate Penta",
+  "penta_groupRoles": "Group Roles",
+  "penta_electromagneticConnections": "Electromagnetic Connections",
+  "penta_connectionsDescription": "Special energy connections between members that create attraction and chemistry.",
+  "penta_areasForAttention": "Areas for Attention",
 
   "premium_upgrade": "Upgrade to Premium",
   "premium_subscribe": "Subscribe",
@@ -230,8 +454,26 @@
   "premium_perYear": "/year",
   "premium_bestValue": "Best Value",
 
+  "settings_appearance": "Appearance",
   "settings_language": "Language",
+  "settings_selectLanguage": "Select Language",
   "settings_theme": "Theme",
+  "settings_selectTheme": "Select Theme",
+  "settings_chartDisplay": "Chart Display",
+  "settings_showGateNumbers": "Show Gate Numbers",
+  "settings_showGateNumbersSubtitle": "Display gate numbers on the bodygraph",
+  "settings_use24HourTime": "Use 24-Hour Time",
+  "settings_use24HourTimeSubtitle": "Display time in 24-hour format",
+  "settings_feedback": "Feedback",
+  "settings_hapticFeedback": "Haptic Feedback",
+  "settings_hapticFeedbackSubtitle": "Vibration on interactions",
+  "settings_account": "Account",
+  "settings_changePassword": "Change Password",
+  "settings_deleteAccount": "Delete Account",
+  "settings_deleteAccountConfirm": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.",
+  "settings_appVersion": "App Version",
+  "settings_rateApp": "Rate the App",
+  "settings_sendFeedback": "Send Feedback",
   "settings_themeLight": "Light",
   "settings_themeDark": "Dark",
   "settings_themeSystem": "System",
@@ -250,5 +492,26 @@
   "error_passwordMismatch": "Passwords do not match",
   "error_birthDataRequired": "Please enter your birth data",
   "error_locationRequired": "Please select your birth location",
-  "error_chartCalculation": "Could not calculate your chart"
+  "error_chartCalculation": "Could not calculate your chart",
+
+  "profile_editProfile": "Edit Profile",
+  "profile_shareChart": "Share My Chart",
+  "profile_exportPdf": "Export Chart PDF",
+  "profile_upgradePremium": "Upgrade to Premium",
+  "profile_birthData": "Birth Data",
+  "profile_chartSummary": "Chart Summary",
+  "profile_viewFullChart": "View Full Chart",
+  "profile_signOut": "Sign Out",
+  "profile_signOutConfirm": "Are you sure you want to sign out?",
+  "profile_addBirthDataPrompt": "Add your birth data to generate your Human Design chart.",
+  "profile_addBirthDataToShare": "Add birth data to share your chart",
+  "profile_addBirthDataToExport": "Add birth data to export your chart",
+  "profile_exportFailed": "Failed to export PDF",
+  "profile_signOutConfirmTitle": "Sign Out",
+  "profile_loadFailed": "Failed to load profile",
+  "profile_defaultUserName": "Human Design User",
+  "profile_birthDate": "Date",
+  "profile_birthTime": "Time",
+  "profile_birthLocation": "Location",
+  "profile_birthTimezone": "Timezone"
 }

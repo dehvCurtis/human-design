@@ -69,7 +69,6 @@ class CalculateChartUseCase {
     List<ChannelActivation> activeChannels,
   ) {
     final hasSacral = definedCenters.contains(HumanDesignCenter.sacral);
-    final hasThroat = definedCenters.contains(HumanDesignCenter.throat);
 
     // Check for motor-to-throat connection
     final hasMotorToThroat = _hasMotorToThroatConnection(

@@ -214,6 +214,210 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get common_profile;
 
+  /// No description provided for @common_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get common_type;
+
+  /// No description provided for @common_strategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Strategy'**
+  String get common_strategy;
+
+  /// No description provided for @common_authority.
+  ///
+  /// In en, this message translates to:
+  /// **'Authority'**
+  String get common_authority;
+
+  /// No description provided for @common_definition.
+  ///
+  /// In en, this message translates to:
+  /// **'Definition'**
+  String get common_definition;
+
+  /// No description provided for @common_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get common_create;
+
+  /// No description provided for @common_viewFull.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full'**
+  String get common_viewFull;
+
+  /// No description provided for @common_send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get common_send;
+
+  /// No description provided for @nav_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get nav_home;
+
+  /// No description provided for @nav_chart.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart'**
+  String get nav_chart;
+
+  /// No description provided for @nav_today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get nav_today;
+
+  /// No description provided for @nav_social.
+  ///
+  /// In en, this message translates to:
+  /// **'Social'**
+  String get nav_social;
+
+  /// No description provided for @nav_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get nav_profile;
+
+  /// No description provided for @home_goodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning'**
+  String get home_goodMorning;
+
+  /// No description provided for @home_goodAfternoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon'**
+  String get home_goodAfternoon;
+
+  /// No description provided for @home_goodEvening.
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening'**
+  String get home_goodEvening;
+
+  /// No description provided for @home_yourDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Design'**
+  String get home_yourDesign;
+
+  /// No description provided for @home_completeProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete Your Profile'**
+  String get home_completeProfile;
+
+  /// No description provided for @home_enterBirthData.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Birth Data'**
+  String get home_enterBirthData;
+
+  /// No description provided for @home_myChart.
+  ///
+  /// In en, this message translates to:
+  /// **'My Chart'**
+  String get home_myChart;
+
+  /// No description provided for @home_composite.
+  ///
+  /// In en, this message translates to:
+  /// **'Composite'**
+  String get home_composite;
+
+  /// No description provided for @home_penta.
+  ///
+  /// In en, this message translates to:
+  /// **'Penta'**
+  String get home_penta;
+
+  /// No description provided for @home_friends.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends'**
+  String get home_friends;
+
+  /// No description provided for @home_myBodygraph.
+  ///
+  /// In en, this message translates to:
+  /// **'My Bodygraph'**
+  String get home_myBodygraph;
+
+  /// No description provided for @home_definedCenters.
+  ///
+  /// In en, this message translates to:
+  /// **'Defined Centers'**
+  String get home_definedCenters;
+
+  /// No description provided for @home_activeChannels.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Channels'**
+  String get home_activeChannels;
+
+  /// No description provided for @home_activeGates.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Gates'**
+  String get home_activeGates;
+
+  /// No description provided for @transit_today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Transits'**
+  String get transit_today;
+
+  /// No description provided for @transit_sun.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get transit_sun;
+
+  /// No description provided for @transit_earth.
+  ///
+  /// In en, this message translates to:
+  /// **'Earth'**
+  String get transit_earth;
+
+  /// No description provided for @transit_moon.
+  ///
+  /// In en, this message translates to:
+  /// **'Moon'**
+  String get transit_moon;
+
+  /// No description provided for @transit_gate.
+  ///
+  /// In en, this message translates to:
+  /// **'Gate {number}'**
+  String transit_gate(int number);
+
+  /// No description provided for @transit_newChannelsActivated.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 new channel activated} other{{count} new channels activated}}'**
+  String transit_newChannelsActivated(int count);
+
+  /// No description provided for @transit_gatesHighlighted.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 gate highlighted} other{{count} gates highlighted}}'**
+  String transit_gatesHighlighted(int count);
+
+  /// No description provided for @transit_noConnections.
+  ///
+  /// In en, this message translates to:
+  /// **'No direct transit connections today'**
+  String get transit_noConnections;
+
   /// No description provided for @auth_signIn.
   ///
   /// In en, this message translates to:
@@ -286,6 +490,126 @@ abstract class AppLocalizations {
   /// **'By signing up, you agree to our Terms of Service and Privacy Policy'**
   String get auth_termsAgree;
 
+  /// No description provided for @auth_welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get auth_welcomeBack;
+
+  /// No description provided for @auth_signInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue your Human Design journey'**
+  String get auth_signInSubtitle;
+
+  /// No description provided for @auth_signUpSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your Human Design journey today'**
+  String get auth_signUpSubtitle;
+
+  /// No description provided for @auth_signUpWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Apple'**
+  String get auth_signUpWithApple;
+
+  /// No description provided for @auth_signUpWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Google'**
+  String get auth_signUpWithGoogle;
+
+  /// No description provided for @auth_enterName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get auth_enterName;
+
+  /// No description provided for @auth_nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get auth_nameRequired;
+
+  /// No description provided for @auth_termsOfService.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get auth_termsOfService;
+
+  /// No description provided for @auth_privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get auth_privacyPolicy;
+
+  /// No description provided for @auth_acceptTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Please accept the Terms of Service to continue'**
+  String get auth_acceptTerms;
+
+  /// No description provided for @auth_resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get auth_resetPasswordTitle;
+
+  /// No description provided for @auth_resetPasswordPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address and we\'ll send you a link to reset your password.'**
+  String get auth_resetPasswordPrompt;
+
+  /// No description provided for @auth_enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get auth_enterEmail;
+
+  /// No description provided for @auth_resetEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent!'**
+  String get auth_resetEmailSent;
+
+  /// No description provided for @auth_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get auth_name;
+
+  /// No description provided for @auth_createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get auth_createAccount;
+
+  /// No description provided for @auth_iAgreeTo.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the '**
+  String get auth_iAgreeTo;
+
+  /// No description provided for @auth_and.
+  ///
+  /// In en, this message translates to:
+  /// **' and '**
+  String get auth_and;
+
+  /// No description provided for @auth_birthInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Information'**
+  String get auth_birthInformation;
+
+  /// No description provided for @auth_calculateMyChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate My Chart'**
+  String get auth_calculateMyChart;
+
   /// No description provided for @onboarding_welcome.
   ///
   /// In en, this message translates to:
@@ -346,6 +670,66 @@ abstract class AppLocalizations {
   /// **'Knowing your exact birth time is important for an accurate chart'**
   String get onboarding_timeImportance;
 
+  /// No description provided for @onboarding_birthDataExplanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Your birth data is used to calculate your unique Human Design chart. The more accurate the information, the more precise your chart will be.'**
+  String get onboarding_birthDataExplanation;
+
+  /// No description provided for @onboarding_noTimeWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Without an accurate birth time, some chart details (like your Rising sign and exact gate lines) may not be precise. We\'ll use noon as a default.'**
+  String get onboarding_noTimeWarning;
+
+  /// No description provided for @onboarding_enterBirthTimeInstead.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter birth time instead'**
+  String get onboarding_enterBirthTimeInstead;
+
+  /// No description provided for @onboarding_birthDataPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Your birth data is encrypted and stored securely. You can update or delete it anytime from your profile settings.'**
+  String get onboarding_birthDataPrivacy;
+
+  /// No description provided for @onboarding_saveFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save birth data'**
+  String get onboarding_saveFailed;
+
+  /// No description provided for @onboarding_fillAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in all required fields'**
+  String get onboarding_fillAllFields;
+
+  /// No description provided for @onboarding_selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get onboarding_selectLanguage;
+
+  /// No description provided for @onboarding_getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onboarding_getStarted;
+
+  /// No description provided for @onboarding_alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'I already have an account'**
+  String get onboarding_alreadyHaveAccount;
+
+  /// No description provided for @onboarding_liveInAlignment.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover your unique energetic blueprint and live in alignment with your true nature.'**
+  String get onboarding_liveInAlignment;
+
   /// No description provided for @chart_myChart.
   ///
   /// In en, this message translates to:
@@ -399,6 +783,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chart Details'**
   String get chart_details;
+
+  /// No description provided for @chart_properties.
+  ///
+  /// In en, this message translates to:
+  /// **'Properties'**
+  String get chart_properties;
+
+  /// No description provided for @chart_gates.
+  ///
+  /// In en, this message translates to:
+  /// **'Gates'**
+  String get chart_gates;
+
+  /// No description provided for @chart_channels.
+  ///
+  /// In en, this message translates to:
+  /// **'Channels'**
+  String get chart_channels;
+
+  /// No description provided for @chart_noChartYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Chart Yet'**
+  String get chart_noChartYet;
+
+  /// No description provided for @chart_addBirthDataPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your birth data to generate your unique Human Design chart.'**
+  String get chart_addBirthDataPrompt;
+
+  /// No description provided for @chart_addBirthData.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Birth Data'**
+  String get chart_addBirthData;
+
+  /// No description provided for @chart_noActiveChannels.
+  ///
+  /// In en, this message translates to:
+  /// **'No Active Channels'**
+  String get chart_noActiveChannels;
+
+  /// No description provided for @chart_channelsFormedBothGates.
+  ///
+  /// In en, this message translates to:
+  /// **'Channels are formed when both gates are defined.'**
+  String get chart_channelsFormedBothGates;
+
+  /// No description provided for @chart_savedCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved Charts'**
+  String get chart_savedCharts;
+
+  /// No description provided for @chart_addChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Chart'**
+  String get chart_addChart;
+
+  /// No description provided for @chart_noSavedCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'No Saved Charts'**
+  String get chart_noSavedCharts;
+
+  /// No description provided for @chart_noSavedChartsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Create charts for yourself and others to save them here.'**
+  String get chart_noSavedChartsMessage;
+
+  /// No description provided for @chart_loadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load charts'**
+  String get chart_loadFailed;
+
+  /// No description provided for @chart_renameChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename Chart'**
+  String get chart_renameChart;
+
+  /// No description provided for @chart_rename.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get chart_rename;
+
+  /// No description provided for @chart_renameFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to rename chart'**
+  String get chart_renameFailed;
+
+  /// No description provided for @chart_deleteChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Chart'**
+  String get chart_deleteChart;
+
+  /// No description provided for @chart_deleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{name}\"? This action cannot be undone.'**
+  String chart_deleteConfirm(String name);
+
+  /// No description provided for @chart_deleteFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete chart'**
+  String get chart_deleteFailed;
+
+  /// No description provided for @chart_you.
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get chart_you;
+
+  /// No description provided for @chart_personName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get chart_personName;
+
+  /// No description provided for @chart_enterPersonName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter person\'s name'**
+  String get chart_enterPersonName;
+
+  /// No description provided for @chart_addChartDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a chart for someone else by entering their birth information.'**
+  String get chart_addChartDescription;
+
+  /// No description provided for @chart_calculateAndSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate & Save Chart'**
+  String get chart_calculateAndSave;
+
+  /// No description provided for @chart_saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart saved successfully'**
+  String get chart_saved;
+
+  /// No description provided for @chart_consciousGates.
+  ///
+  /// In en, this message translates to:
+  /// **'Conscious Gates'**
+  String get chart_consciousGates;
+
+  /// No description provided for @chart_unconsciousGates.
+  ///
+  /// In en, this message translates to:
+  /// **'Unconscious Gates'**
+  String get chart_unconsciousGates;
+
+  /// No description provided for @chart_personalitySide.
+  ///
+  /// In en, this message translates to:
+  /// **'Personality side - what you\'re aware of'**
+  String get chart_personalitySide;
+
+  /// No description provided for @chart_designSide.
+  ///
+  /// In en, this message translates to:
+  /// **'Design side - what others see in you'**
+  String get chart_designSide;
 
   /// No description provided for @type_manifestor.
   ///
@@ -730,6 +1288,12 @@ abstract class AppLocalizations {
   /// **'Unconscious (Design)'**
   String get section_unconscious;
 
+  /// No description provided for @social_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Social'**
+  String get social_title;
+
   /// No description provided for @social_friends.
   ///
   /// In en, this message translates to:
@@ -747,6 +1311,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add Friend'**
   String get social_addFriend;
+
+  /// No description provided for @social_sendRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Request'**
+  String get social_sendRequest;
 
   /// No description provided for @social_createGroup.
   ///
@@ -813,6 +1383,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Public'**
   String get social_public;
+
+  /// No description provided for @social_shared.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared'**
+  String get social_shared;
+
+  /// No description provided for @social_noFriendsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Friends Yet'**
+  String get social_noFriendsYet;
+
+  /// No description provided for @social_noFriendsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Add friends to compare charts and see how you connect.'**
+  String get social_noFriendsMessage;
+
+  /// No description provided for @social_noGroupsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No Groups Yet'**
+  String get social_noGroupsYet;
+
+  /// No description provided for @social_noGroupsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Create groups to analyze team dynamics with Penta analysis.'**
+  String get social_noGroupsMessage;
+
+  /// No description provided for @social_noSharedCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'No Shared Charts'**
+  String get social_noSharedCharts;
+
+  /// No description provided for @social_noSharedChartsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Charts that friends share with you will appear here.'**
+  String get social_noSharedChartsMessage;
+
+  /// No description provided for @social_pendingRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Requests'**
+  String get social_pendingRequests;
+
+  /// No description provided for @social_friendRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend Requests'**
+  String get social_friendRequests;
+
+  /// No description provided for @social_noPendingRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending requests'**
+  String get social_noPendingRequests;
+
+  /// No description provided for @social_addFriendPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your friend\'s email address to send a request.'**
+  String get social_addFriendPrompt;
+
+  /// No description provided for @social_emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get social_emailLabel;
+
+  /// No description provided for @social_emailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'friend@example.com'**
+  String get social_emailHint;
+
+  /// No description provided for @social_userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found with that email'**
+  String get social_userNotFound;
+
+  /// No description provided for @social_requestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend request sent to {name}!'**
+  String social_requestSent(String name);
+
+  /// No description provided for @social_createGroupPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a group to analyze team dynamics.'**
+  String get social_createGroupPrompt;
+
+  /// No description provided for @social_groupName.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Name'**
+  String get social_groupName;
+
+  /// No description provided for @social_groupNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Family, Team, etc.'**
+  String get social_groupNameHint;
+
+  /// No description provided for @social_groupDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get social_groupDescription;
+
+  /// No description provided for @social_groupDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What is this group for?'**
+  String get social_groupDescriptionHint;
+
+  /// No description provided for @social_groupCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Group \"{name}\" created!'**
+  String social_groupCreated(String name);
+
+  /// No description provided for @social_friendsSince.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends since {date}'**
+  String social_friendsSince(String date);
+
+  /// No description provided for @social_compareCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Compare Charts'**
+  String get social_compareCharts;
+
+  /// No description provided for @social_noDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'No description'**
+  String get social_noDescription;
+
+  /// No description provided for @social_admin.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get social_admin;
+
+  /// No description provided for @social_sharedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared by {name}'**
+  String social_sharedBy(String name);
+
+  /// No description provided for @social_loadFriendsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load friends'**
+  String get social_loadFriendsFailed;
+
+  /// No description provided for @social_loadGroupsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load groups'**
+  String get social_loadGroupsFailed;
+
+  /// No description provided for @social_loadSharedFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load shared charts'**
+  String get social_loadSharedFailed;
+
+  /// No description provided for @social_sentAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent {time}'**
+  String social_sentAgo(String time);
+
+  /// No description provided for @time_minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m ago'**
+  String time_minutesAgo(int minutes);
+
+  /// No description provided for @time_hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h ago'**
+  String time_hoursAgo(int hours);
+
+  /// No description provided for @time_daysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}d ago'**
+  String time_daysAgo(int days);
 
   /// No description provided for @transit_title.
   ///
@@ -1048,6 +1816,60 @@ abstract class AppLocalizations {
   /// **'Group Strengths'**
   String get penta_strengths;
 
+  /// No description provided for @penta_analysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Penta Analysis'**
+  String get penta_analysis;
+
+  /// No description provided for @penta_clearAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Analysis'**
+  String get penta_clearAnalysis;
+
+  /// No description provided for @penta_infoText.
+  ///
+  /// In en, this message translates to:
+  /// **'Penta analysis reveals the natural roles that emerge in small groups of 3-5 people, showing how each member contributes to team dynamics.'**
+  String get penta_infoText;
+
+  /// No description provided for @penta_calculating.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculating...'**
+  String get penta_calculating;
+
+  /// No description provided for @penta_calculate.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate Penta'**
+  String get penta_calculate;
+
+  /// No description provided for @penta_groupRoles.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Roles'**
+  String get penta_groupRoles;
+
+  /// No description provided for @penta_electromagneticConnections.
+  ///
+  /// In en, this message translates to:
+  /// **'Electromagnetic Connections'**
+  String get penta_electromagneticConnections;
+
+  /// No description provided for @penta_connectionsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Special energy connections between members that create attraction and chemistry.'**
+  String get penta_connectionsDescription;
+
+  /// No description provided for @penta_areasForAttention.
+  ///
+  /// In en, this message translates to:
+  /// **'Areas for Attention'**
+  String get penta_areasForAttention;
+
   /// No description provided for @premium_upgrade.
   ///
   /// In en, this message translates to:
@@ -1138,17 +1960,125 @@ abstract class AppLocalizations {
   /// **'Best Value'**
   String get premium_bestValue;
 
+  /// No description provided for @settings_appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settings_appearance;
+
   /// No description provided for @settings_language.
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get settings_language;
 
+  /// No description provided for @settings_selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get settings_selectLanguage;
+
   /// No description provided for @settings_theme.
   ///
   /// In en, this message translates to:
   /// **'Theme'**
   String get settings_theme;
+
+  /// No description provided for @settings_selectTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Theme'**
+  String get settings_selectTheme;
+
+  /// No description provided for @settings_chartDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart Display'**
+  String get settings_chartDisplay;
+
+  /// No description provided for @settings_showGateNumbers.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Gate Numbers'**
+  String get settings_showGateNumbers;
+
+  /// No description provided for @settings_showGateNumbersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Display gate numbers on the bodygraph'**
+  String get settings_showGateNumbersSubtitle;
+
+  /// No description provided for @settings_use24HourTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Use 24-Hour Time'**
+  String get settings_use24HourTime;
+
+  /// No description provided for @settings_use24HourTimeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Display time in 24-hour format'**
+  String get settings_use24HourTimeSubtitle;
+
+  /// No description provided for @settings_feedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get settings_feedback;
+
+  /// No description provided for @settings_hapticFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Haptic Feedback'**
+  String get settings_hapticFeedback;
+
+  /// No description provided for @settings_hapticFeedbackSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Vibration on interactions'**
+  String get settings_hapticFeedbackSubtitle;
+
+  /// No description provided for @settings_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get settings_account;
+
+  /// No description provided for @settings_changePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get settings_changePassword;
+
+  /// No description provided for @settings_deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get settings_deleteAccount;
+
+  /// No description provided for @settings_deleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.'**
+  String get settings_deleteAccountConfirm;
+
+  /// No description provided for @settings_appVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get settings_appVersion;
+
+  /// No description provided for @settings_rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate the App'**
+  String get settings_rateApp;
+
+  /// No description provided for @settings_sendFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Feedback'**
+  String get settings_sendFeedback;
 
   /// No description provided for @settings_themeLight.
   ///
@@ -1257,6 +2187,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not calculate your chart'**
   String get error_chartCalculation;
+
+  /// No description provided for @profile_editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get profile_editProfile;
+
+  /// No description provided for @profile_shareChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Share My Chart'**
+  String get profile_shareChart;
+
+  /// No description provided for @profile_exportPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Export Chart PDF'**
+  String get profile_exportPdf;
+
+  /// No description provided for @profile_upgradePremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Premium'**
+  String get profile_upgradePremium;
+
+  /// No description provided for @profile_birthData.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Data'**
+  String get profile_birthData;
+
+  /// No description provided for @profile_chartSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart Summary'**
+  String get profile_chartSummary;
+
+  /// No description provided for @profile_viewFullChart.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full Chart'**
+  String get profile_viewFullChart;
+
+  /// No description provided for @profile_signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get profile_signOut;
+
+  /// No description provided for @profile_signOutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to sign out?'**
+  String get profile_signOutConfirm;
+
+  /// No description provided for @profile_addBirthDataPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your birth data to generate your Human Design chart.'**
+  String get profile_addBirthDataPrompt;
+
+  /// No description provided for @profile_addBirthDataToShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Add birth data to share your chart'**
+  String get profile_addBirthDataToShare;
+
+  /// No description provided for @profile_addBirthDataToExport.
+  ///
+  /// In en, this message translates to:
+  /// **'Add birth data to export your chart'**
+  String get profile_addBirthDataToExport;
+
+  /// No description provided for @profile_exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to export PDF'**
+  String get profile_exportFailed;
+
+  /// No description provided for @profile_signOutConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get profile_signOutConfirmTitle;
+
+  /// No description provided for @profile_loadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile'**
+  String get profile_loadFailed;
+
+  /// No description provided for @profile_defaultUserName.
+  ///
+  /// In en, this message translates to:
+  /// **'Human Design User'**
+  String get profile_defaultUserName;
+
+  /// No description provided for @profile_birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get profile_birthDate;
+
+  /// No description provided for @profile_birthTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get profile_birthTime;
+
+  /// No description provided for @profile_birthLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get profile_birthLocation;
+
+  /// No description provided for @profile_birthTimezone.
+  ///
+  /// In en, this message translates to:
+  /// **'Timezone'**
+  String get profile_birthTimezone;
 }
 
 class _AppLocalizationsDelegate
