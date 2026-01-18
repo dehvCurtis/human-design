@@ -45,5 +45,34 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>io.humandesign.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>io.humandesign.app</string>
+				<string>humandesign</string>
+			</array>
+		</dict>
+	</array>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier will be used to personalize your experience and show relevant content.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is needed to take photos for your profile and posts.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo library access is needed to select images for your profile and posts.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location is used to determine your birth place timezone for accurate chart calculations.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

@@ -112,9 +112,13 @@ class HomeScreen extends ConsumerWidget {
                 // Quick Actions
                 QuickActionsRow(
                   onChartTap: () => context.go(AppRoutes.chart),
-                  onCompositeTap: () => context.go(AppRoutes.composite),
-                  onPentaTap: () => context.go(AppRoutes.penta),
+                  onCompositeTap: () => context.push(AppRoutes.composite),
+                  onPentaTap: () => context.push(AppRoutes.penta),
                   onSocialTap: () => context.go(AppRoutes.social),
+                  onDiscoverTap: () => context.push(AppRoutes.discover),
+                  onFeedTap: () => context.push(AppRoutes.feed),
+                  onLearningTap: () => context.push(AppRoutes.learning),
+                  onMessagesTap: () => context.push(AppRoutes.messages),
                 ),
 
                 const SizedBox(height: 24),

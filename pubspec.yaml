@@ -28,6 +28,7 @@ dependencies:
   # UI
   flutter_svg: ^2.0.9
   cupertino_icons: ^1.0.6
+  flutter_markdown: ^0.7.6
 
   # Local Storage
   drift: ^2.14.1

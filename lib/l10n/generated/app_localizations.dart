@@ -502,6 +502,18 @@ abstract class AppLocalizations {
   /// **'Sign in to continue your Human Design journey'**
   String get auth_signInSubtitle;
 
+  /// No description provided for @auth_signInRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In Required'**
+  String get auth_signInRequired;
+
+  /// No description provided for @auth_signInToCalculateChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in to calculate and save your Human Design chart.'**
+  String get auth_signInToCalculateChart;
+
   /// No description provided for @auth_signUpSubtitle.
   ///
   /// In en, this message translates to:
@@ -1977,6 +1989,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select Language'**
   String get settings_selectLanguage;
+
+  /// No description provided for @settings_changeLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Language'**
+  String get settings_changeLanguage;
 
   /// No description provided for @settings_theme.
   ///

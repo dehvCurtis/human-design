@@ -454,6 +454,7 @@
   "settings_appearance": "Внешний вид",
   "settings_language": "Язык",
   "settings_selectLanguage": "Выбор языка",
+  "settings_changeLanguage": "Изменить язык",
   "settings_theme": "Тема",
   "settings_selectTheme": "Выбор темы",
   "settings_chartDisplay": "Отображение карты",

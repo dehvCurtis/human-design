@@ -1,0 +1,209 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../shared/providers/supabase_provider.dart';
+import '../data/feed_repository.dart';
+import 'models/post.dart';
+
+/// Provider for the FeedRepository
+final feedRepositoryProvider = Provider<FeedRepository>((ref) {
+  return FeedRepository(supabaseClient: ref.watch(supabaseClientProvider));
+});
+
+/// Provider for the main feed
+final feedProvider = FutureProvider<List<Post>>((ref) async {
+  final repository = ref.watch(feedRepositoryProvider);
+  return repository.getFeed();
+});
+
+/// Provider for a user's posts
+final userPostsProvider = FutureProvider.family<List<Post>, String>((ref, userId) async {
+  final repository = ref.watch(feedRepositoryProvider);
+  return repository.getUserPosts(userId);
+});
+
+/// Provider for a single post
+final postProvider = FutureProvider.family<Post?, String>((ref, postId) async {
+  final repository = ref.watch(feedRepositoryProvider);
+  return repository.getPost(postId);
+});
+
+/// Provider for post comments
+final postCommentsProvider = FutureProvider.family<List<PostComment>, String>((ref, postId) async {
+  final repository = ref.watch(feedRepositoryProvider);
+  return repository.getPostComments(postId);
+});
+
+/// Provider for reaction counts on a post
+final reactionCountsProvider = FutureProvider.family<Map<ReactionType, int>, String>((ref, postId) async {
+  final repository = ref.watch(feedRepositoryProvider);
+  return repository.getReactionCounts(postId);
+});
+
+/// Notifier for managing feed state and actions
+class FeedNotifier extends Notifier<FeedState> {
+  @override
+  FeedState build() => const FeedState();
+
+  FeedRepository get _repository => ref.read(feedRepositoryProvider);
+
+  /// Create a new post
+  Future<Post> createPost({
+    required String content,
+    required PostType postType,
+    PostVisibility visibility = PostVisibility.public,
+    List<String>? mediaUrls,
+    String? chartId,
+    int? gateNumber,
+    String? channelId,
+    Map<String, dynamic>? transitData,
+    String? badgeId,
+  }) async {
+    state = state.copyWith(isCreatingPost: true);
+
+    try {
+      final post = await _repository.createPost(
+        content: content,
+        postType: postType,
+        visibility: visibility,
+        mediaUrls: mediaUrls,
+        chartId: chartId,
+        gateNumber: gateNumber,
+        channelId: channelId,
+        transitData: transitData,
+        badgeId: badgeId,
+      );
+
+      // Invalidate feed to show new post
+      ref.invalidate(feedProvider);
+
+      state = state.copyWith(isCreatingPost: false);
+      return post;
+    } catch (e) {
+      state = state.copyWith(isCreatingPost: false, error: e.toString());
+      rethrow;
+    }
+  }
+
+  /// Delete a post
+  Future<void> deletePost(String postId) async {
+    await _repository.deletePost(postId);
+    ref.invalidate(feedProvider);
+  }
+
+  /// Update a post
+  Future<void> updatePost({
+    required String postId,
+    String? content,
+    PostVisibility? visibility,
+    bool? isPinned,
+  }) async {
+    await _repository.updatePost(
+      postId: postId,
+      content: content,
+      visibility: visibility,
+      isPinned: isPinned,
+    );
+    ref.invalidate(feedProvider);
+    ref.invalidate(postProvider(postId));
+  }
+
+  /// React to a post
+  Future<void> reactToPost(String postId, ReactionType reactionType) async {
+    await _repository.addReaction(postId, reactionType);
+    ref.invalidate(postProvider(postId));
+    ref.invalidate(reactionCountsProvider(postId));
+  }
+
+  /// Remove reaction from a post
+  Future<void> removeReaction(String postId) async {
+    await _repository.removeReaction(postId);
+    ref.invalidate(postProvider(postId));
+    ref.invalidate(reactionCountsProvider(postId));
+  }
+
+  /// Add a comment to a post
+  Future<PostComment> addComment({
+    required String postId,
+    required String content,
+    String? parentId,
+  }) async {
+    final comment = await _repository.addComment(
+      postId: postId,
+      content: content,
+      parentId: parentId,
+    );
+    ref.invalidate(postCommentsProvider(postId));
+    ref.invalidate(postProvider(postId)); // Update comment count
+    return comment;
+  }
+
+  /// Delete a comment
+  Future<void> deleteComment(String postId, String commentId) async {
+    await _repository.deleteComment(commentId);
+    ref.invalidate(postCommentsProvider(postId));
+    ref.invalidate(postProvider(postId));
+  }
+
+  /// Refresh the feed
+  Future<void> refreshFeed() async {
+    ref.invalidate(feedProvider);
+  }
+
+  void clearError() {
+    state = state.copyWith(error: null);
+  }
+}
+
+final feedNotifierProvider = NotifierProvider<FeedNotifier, FeedState>(() {
+  return FeedNotifier();
+});
+
+/// State class for feed operations
+class FeedState {
+  const FeedState({
+    this.isCreatingPost = false,
+    this.error,
+  });
+
+  final bool isCreatingPost;
+  final String? error;
+
+  FeedState copyWith({
+    bool? isCreatingPost,
+    String? error,
+  }) {
+    return FeedState(
+      isCreatingPost: isCreatingPost ?? this.isCreatingPost,
+      error: error,
+    );
+  }
+}
+
+/// Notifier for managing reactions locally
+class ReactionNotifier extends Notifier<Map<String, ReactionType?>> {
+  @override
+  Map<String, ReactionType?> build() => {};
+
+  FeedRepository get _repository => ref.read(feedRepositoryProvider);
+
+  /// Toggle reaction on a post
+  Future<void> toggleReaction(String postId, ReactionType reactionType, ReactionType? currentReaction) async {
+    // Optimistic update
+    if (currentReaction == reactionType) {
+      state = {...state, postId: null};
+      await _repository.removeReaction(postId);
+    } else {
+      state = {...state, postId: reactionType};
+      await _repository.addReaction(postId, reactionType);
+    }
+
+    // Invalidate to get fresh data
+    ref.invalidate(postProvider(postId));
+  }
+
+  ReactionType? getReaction(String postId) => state[postId];
+}
+
+final reactionNotifierProvider = NotifierProvider<ReactionNotifier, Map<String, ReactionType?>>(() {
+  return ReactionNotifier();
+});

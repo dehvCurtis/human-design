@@ -126,8 +126,9 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
 
     // Check channels (check if tap is near any channel line)
     for (final channelActivation in widget.chart.activeChannels) {
-      final channelId = channelActivation.channel.id;
-      final path = channelPaths[channelId];
+      final channel = channelActivation.channel;
+      final channelId = channel.id;
+      final path = _getChannelPath(channel.gate1, channel.gate2);
       if (path == null) continue;
 
       if (_isNearPath(bodygraphX, bodygraphY, path, threshold: 10)) {
@@ -190,6 +191,19 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     final nearestY = y1 + t * dy;
 
     return _distance(px, py, nearestX, nearestY);
+  }
+
+  /// Get channel path by trying both gate orderings
+  List<Offset>? _getChannelPath(int gate1, int gate2) {
+    // Try the original order
+    final path1 = channelPaths['$gate1-$gate2'];
+    if (path1 != null) return path1;
+
+    // Try reversed order
+    final path2 = channelPaths['$gate2-$gate1'];
+    if (path2 != null) return path2;
+
+    return null;
   }
 
   /// Clear the current selection

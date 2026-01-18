@@ -43,14 +43,14 @@ class BodygraphPainter extends CustomPainter {
   }
 
   void _drawBodySilhouette(Canvas canvas) {
-    // Create a subtle gradient fill for the body
+    // Create a subtle gradient fill for the body - more visible but still subtle
     final bodyGradient = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.primary.withAlpha(8),
         AppColors.primary.withAlpha(15),
-        AppColors.primary.withAlpha(8),
+        AppColors.primary.withAlpha(25),
+        AppColors.primary.withAlpha(15),
       ],
       stops: const [0.0, 0.5, 1.0],
     );
@@ -63,10 +63,10 @@ class BodygraphPainter extends CustomPainter {
 
     final strokePaint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0
+      ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
-      ..color = AppColors.primary.withAlpha(40);
+      ..color = AppColors.primary.withAlpha(60);
 
     // Create a refined human body silhouette path
     final bodyPath = Path();
@@ -177,24 +177,45 @@ class BodygraphPainter extends CustomPainter {
     // Draw head with gradient
     final headFillPaint = Paint()
       ..style = PaintingStyle.fill
-      ..color = AppColors.primary.withAlpha(12);
+      ..color = AppColors.primary.withAlpha(20);
     canvas.drawOval(headRect, headFillPaint);
     canvas.drawOval(headRect, strokePaint);
 
     // Add subtle inner glow/highlight for depth
     final innerHighlight = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 15
-      ..color = AppColors.primary.withAlpha(5)
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
+      ..strokeWidth = 20
+      ..color = AppColors.primary.withAlpha(8)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
 
     canvas.drawPath(outlinePath, innerHighlight);
   }
 
   void _drawChannels(Canvas canvas) {
+    // Build set of active channel IDs for quick lookup
+    final activeChannelIds = chart.activeChannels.map((c) => c.channel.id).toSet();
+
+    // Draw ALL channels - inactive ones first (behind), then active ones on top
+    // First pass: Draw inactive channels
+    for (final channel in channels) {
+      if (activeChannelIds.contains(channel.id)) continue;
+
+      final path = _getChannelPath(channel.gate1, channel.gate2);
+      if (path == null || path.isEmpty) continue;
+
+      final paint = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.5
+        ..strokeCap = StrokeCap.round
+        ..color = AppColors.channelInactive.withValues(alpha: 0.35);
+
+      _drawChannelPath(canvas, path, paint);
+    }
+
+    // Second pass: Draw active channels on top
     for (final channelActivation in chart.activeChannels) {
-      final channelId = channelActivation.channel.id;
-      final path = channelPaths[channelId];
+      final channel = channelActivation.channel;
+      final path = _getChannelPath(channel.gate1, channel.gate2);
       if (path == null || path.isEmpty) continue;
 
       final paint = Paint()
@@ -216,30 +237,26 @@ class BodygraphPainter extends CustomPainter {
 
       // Check if selected
       if (selectedElement is ChannelElement &&
-          (selectedElement as ChannelElement).channelId == channelId) {
+          (selectedElement as ChannelElement).channelId == channel.id) {
         paint
           ..color = AppColors.primary
           ..strokeWidth = 6;
         _drawChannelPath(canvas, path, paint);
       }
     }
+  }
 
-    // Draw inactive channels with light color
-    for (final channel in channels) {
-      final isActive = chart.activeChannels.any((c) => c.channel.id == channel.id);
-      if (!isActive) {
-        final path = channelPaths[channel.id];
-        if (path == null || path.isEmpty) continue;
+  /// Get channel path by trying both gate orderings
+  List<Offset>? _getChannelPath(int gate1, int gate2) {
+    // Try the original order
+    final path1 = channelPaths['$gate1-$gate2'];
+    if (path1 != null) return path1;
 
-        final paint = Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..strokeCap = StrokeCap.round
-          ..color = AppColors.channelInactive.withValues(alpha: 0.3);
+    // Try reversed order
+    final path2 = channelPaths['$gate2-$gate1'];
+    if (path2 != null) return path2;
 
-        _drawChannelPath(canvas, path, paint);
-      }
-    }
+    return null;
   }
 
   void _drawChannelPath(Canvas canvas, List<Offset> points, Paint paint) {

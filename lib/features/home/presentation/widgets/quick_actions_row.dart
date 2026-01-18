@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../l10n/generated/app_localizations.dart';
 
-/// Row of quick action buttons for navigation
+/// Grid of quick action buttons for navigation
 class QuickActionsRow extends StatelessWidget {
   const QuickActionsRow({
     super.key,
@@ -11,53 +11,107 @@ class QuickActionsRow extends StatelessWidget {
     this.onCompositeTap,
     this.onPentaTap,
     this.onSocialTap,
+    this.onDiscoverTap,
+    this.onFeedTap,
+    this.onLearningTap,
+    this.onMessagesTap,
   });
 
   final VoidCallback? onChartTap;
   final VoidCallback? onCompositeTap;
   final VoidCallback? onPentaTap;
   final VoidCallback? onSocialTap;
+  final VoidCallback? onDiscoverTap;
+  final VoidCallback? onFeedTap;
+  final VoidCallback? onLearningTap;
+  final VoidCallback? onMessagesTap;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: _QuickActionButton(
-            icon: Icons.auto_graph,
-            label: l10n.home_myChart,
-            color: AppColors.primary,
-            onTap: onChartTap,
-          ),
+        // First row: Chart features
+        Row(
+          children: [
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.auto_graph,
+                label: l10n.home_myChart,
+                color: AppColors.primary,
+                onTap: onChartTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.favorite_border,
+                label: l10n.home_composite,
+                color: AppColors.person2,
+                onTap: onCompositeTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.groups_outlined,
+                label: l10n.home_penta,
+                color: AppColors.secondary,
+                onTap: onPentaTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.people_outline,
+                label: l10n.home_friends,
+                color: AppColors.success,
+                onTap: onSocialTap,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _QuickActionButton(
-            icon: Icons.favorite_border,
-            label: l10n.home_composite,
-            color: AppColors.person2,
-            onTap: onCompositeTap,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _QuickActionButton(
-            icon: Icons.groups_outlined,
-            label: l10n.home_penta,
-            color: AppColors.secondary,
-            onTap: onPentaTap,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _QuickActionButton(
-            icon: Icons.people_outline,
-            label: l10n.home_friends,
-            color: AppColors.success,
-            onTap: onSocialTap,
-          ),
+        const SizedBox(height: 12),
+        // Second row: Social & Learning features
+        Row(
+          children: [
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.explore_outlined,
+                label: 'Discover',
+                color: Colors.purple,
+                onTap: onDiscoverTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.dynamic_feed_outlined,
+                label: 'Feed',
+                color: Colors.orange,
+                onTap: onFeedTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.school_outlined,
+                label: 'Learning',
+                color: Colors.teal,
+                onTap: onLearningTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.chat_bubble_outline,
+                label: 'Messages',
+                color: Colors.blue,
+                onTap: onMessagesTap,
+              ),
+            ),
+          ],
         ),
       ],
     );

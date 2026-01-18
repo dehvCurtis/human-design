@@ -6,7 +6,7 @@ import '../data/auth_repository.dart';
 
 /// Set to true to bypass authentication during development
 /// WARNING: Set to false for production!
-const bool kBypassAuth = true;
+const bool kBypassAuth = false;
 
 /// Provider for the auth repository
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
@@ -27,7 +27,9 @@ final authStatusProvider = Provider<AuthStatus>((ref) {
     return AuthStatus.authenticated;
   }
 
+  final repository = ref.watch(authRepositoryProvider);
   final authState = ref.watch(authStateChangesProvider);
+
   return authState.when(
     data: (state) {
       if (state.session != null) {
@@ -35,7 +37,13 @@ final authStatusProvider = Provider<AuthStatus>((ref) {
       }
       return AuthStatus.unauthenticated;
     },
-    loading: () => AuthStatus.loading,
+    loading: () {
+      // Check current session while stream is loading
+      if (repository.isAuthenticated) {
+        return AuthStatus.authenticated;
+      }
+      return AuthStatus.unauthenticated;
+    },
     error: (_, _) => AuthStatus.error,
   );
 });

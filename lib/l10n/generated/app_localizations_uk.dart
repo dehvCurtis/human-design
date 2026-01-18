@@ -233,6 +233,13 @@ class AppLocalizationsUk extends AppLocalizations {
       'Увійдіть, щоб продовжити подорож Дизайном Людини';
 
   @override
+  String get auth_signInRequired => 'Sign In Required';
+
+  @override
+  String get auth_signInToCalculateChart =>
+      'Please sign in to calculate and save your Human Design chart.';
+
+  @override
   String get auth_signUpSubtitle =>
       'Розпочніть свою подорож Дизайном Людини сьогодні';
 
@@ -1022,6 +1029,9 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get settings_selectLanguage => 'Вибір мови';
+
+  @override
+  String get settings_changeLanguage => 'Змінити мову';
 
   @override
   String get settings_theme => 'Тема';

@@ -68,16 +68,24 @@ class ProfileScreen extends ConsumerWidget {
                 onTap: () => context.push(AppRoutes.editProfile),
               ),
               const SizedBox(height: 8),
+              _ActionButton(
+                icon: Icons.emoji_events_outlined,
+                label: 'Achievements',
+                onTap: () => context.push(AppRoutes.achievements),
+              ),
+              const SizedBox(height: 8),
+              _ActionButton(
+                icon: Icons.school_outlined,
+                label: 'Learning',
+                onTap: () => context.push(AppRoutes.learning),
+              ),
+              const SizedBox(height: 8),
               chartAsync.when(
                 data: (chart) => _ActionButton(
                   icon: Icons.share_outlined,
                   label: l10n.profile_shareChart,
                   onTap: chart != null
-                      ? () => ShareChartDialog.show(
-                            context,
-                            chartId: profile?.id ?? '',
-                            chartName: profile?.name ?? l10n.chart_myChart,
-                          )
+                      ? () => context.push(AppRoutes.share)
                       : () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -136,6 +144,12 @@ class ProfileScreen extends ConsumerWidget {
                   label: l10n.profile_exportPdf,
                   onTap: () {},
                 ),
+              ),
+              const SizedBox(height: 8),
+              _ActionButton(
+                icon: Icons.folder_outlined,
+                label: l10n.chart_savedCharts,
+                onTap: () => context.push(AppRoutes.savedCharts),
               ),
               const SizedBox(height: 8),
               _ActionButton(
