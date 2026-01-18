@@ -66,6 +66,129 @@ class AppLocalizationsUk extends AppLocalizations {
   String get common_profile => 'Профіль';
 
   @override
+  String get common_type => 'Тип';
+
+  @override
+  String get common_strategy => 'Стратегія';
+
+  @override
+  String get common_authority => 'Авторитет';
+
+  @override
+  String get common_definition => 'Визначеність';
+
+  @override
+  String get common_create => 'Створити';
+
+  @override
+  String get common_viewFull => 'Детальніше';
+
+  @override
+  String get common_send => 'Надіслати';
+
+  @override
+  String get nav_home => 'Головна';
+
+  @override
+  String get nav_chart => 'Карта';
+
+  @override
+  String get nav_today => 'Сьогодні';
+
+  @override
+  String get nav_social => 'Соціум';
+
+  @override
+  String get nav_profile => 'Профіль';
+
+  @override
+  String get home_goodMorning => 'Доброго ранку';
+
+  @override
+  String get home_goodAfternoon => 'Доброго дня';
+
+  @override
+  String get home_goodEvening => 'Доброго вечора';
+
+  @override
+  String get home_yourDesign => 'Ваш дизайн';
+
+  @override
+  String get home_completeProfile => 'Заповніть профіль';
+
+  @override
+  String get home_enterBirthData => 'Введіть дані народження';
+
+  @override
+  String get home_myChart => 'Моя карта';
+
+  @override
+  String get home_composite => 'Композит';
+
+  @override
+  String get home_penta => 'Пента';
+
+  @override
+  String get home_friends => 'Друзі';
+
+  @override
+  String get home_myBodygraph => 'Мій бодіграф';
+
+  @override
+  String get home_definedCenters => 'Визначені центри';
+
+  @override
+  String get home_activeChannels => 'Активні канали';
+
+  @override
+  String get home_activeGates => 'Активні ворота';
+
+  @override
+  String get transit_today => 'Транзити сьогодні';
+
+  @override
+  String get transit_sun => 'Сонце';
+
+  @override
+  String get transit_earth => 'Земля';
+
+  @override
+  String get transit_moon => 'Місяць';
+
+  @override
+  String transit_gate(int number) {
+    return 'Ворота $number';
+  }
+
+  @override
+  String transit_newChannelsActivated(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count нових каналів активовано',
+      few: '$count нових канали активовано',
+      one: '1 новий канал активовано',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String transit_gatesHighlighted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count воріт виділено',
+      few: '$count ворот виділено',
+      one: '1 ворота виділено',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get transit_noConnections =>
+      'Немає прямих транзитних зв\'язків сьогодні';
+
+  @override
   String get auth_signIn => 'Увійти';
 
   @override
@@ -103,6 +226,70 @@ class AppLocalizationsUk extends AppLocalizations {
       'Реєструючись, ви погоджуєтесь з Умовами використання та Політикою конфіденційності';
 
   @override
+  String get auth_welcomeBack => 'З поверненням';
+
+  @override
+  String get auth_signInSubtitle =>
+      'Увійдіть, щоб продовжити подорож Дизайном Людини';
+
+  @override
+  String get auth_signUpSubtitle =>
+      'Розпочніть свою подорож Дизайном Людини сьогодні';
+
+  @override
+  String get auth_signUpWithApple => 'Реєстрація через Apple';
+
+  @override
+  String get auth_signUpWithGoogle => 'Реєстрація через Google';
+
+  @override
+  String get auth_enterName => 'Введіть ваше ім\'я';
+
+  @override
+  String get auth_nameRequired => 'Ім\'я обов\'язкове';
+
+  @override
+  String get auth_termsOfService => 'Умови використання';
+
+  @override
+  String get auth_privacyPolicy => 'Політика конфіденційності';
+
+  @override
+  String get auth_acceptTerms =>
+      'Будь ласка, прийміть Умови використання для продовження';
+
+  @override
+  String get auth_resetPasswordTitle => 'Скидання пароля';
+
+  @override
+  String get auth_resetPasswordPrompt =>
+      'Введіть email і ми надішлемо вам посилання для скидання пароля.';
+
+  @override
+  String get auth_enterEmail => 'Введіть email';
+
+  @override
+  String get auth_resetEmailSent => 'Лист для скидання пароля надіслано!';
+
+  @override
+  String get auth_name => 'Ім\'я';
+
+  @override
+  String get auth_createAccount => 'Створити акаунт';
+
+  @override
+  String get auth_iAgreeTo => 'Я приймаю ';
+
+  @override
+  String get auth_and => ' та ';
+
+  @override
+  String get auth_birthInformation => 'Дані народження';
+
+  @override
+  String get auth_calculateMyChart => 'Розрахувати мою карту';
+
+  @override
   String get onboarding_welcome => 'Ласкаво просимо до Дизайну Людини';
 
   @override
@@ -136,6 +323,41 @@ class AppLocalizationsUk extends AppLocalizations {
       'Точний час народження важливий для точної карти';
 
   @override
+  String get onboarding_birthDataExplanation =>
+      'Ваші дані народження використовуються для розрахунку унікальної карти Дизайну Людини. Чим точніша інформація, тим точнішою буде карта.';
+
+  @override
+  String get onboarding_noTimeWarning =>
+      'Без точного часу народження деякі деталі карти (висхідний знак та лінії воріт) можуть бути неточними. За замовчуванням буде використано полудень.';
+
+  @override
+  String get onboarding_enterBirthTimeInstead => 'Ввести час народження';
+
+  @override
+  String get onboarding_birthDataPrivacy =>
+      'Ваші дані народження зашифровані та зберігаються безпечно. Ви можете оновити або видалити їх будь-коли в налаштуваннях профілю.';
+
+  @override
+  String get onboarding_saveFailed => 'Не вдалося зберегти дані народження';
+
+  @override
+  String get onboarding_fillAllFields =>
+      'Будь ласка, заповніть усі обов\'язкові поля';
+
+  @override
+  String get onboarding_selectLanguage => 'Оберіть мову';
+
+  @override
+  String get onboarding_getStarted => 'Почати';
+
+  @override
+  String get onboarding_alreadyHaveAccount => 'У мене вже є акаунт';
+
+  @override
+  String get onboarding_liveInAlignment =>
+      'Відкрийте свій унікальний енергетичний відбиток та живіть у гармонії зі своєю справжньою природою.';
+
+  @override
   String get chart_myChart => 'Моя карта';
 
   @override
@@ -161,6 +383,100 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get chart_details => 'Деталі карти';
+
+  @override
+  String get chart_properties => 'Властивості';
+
+  @override
+  String get chart_gates => 'Ворота';
+
+  @override
+  String get chart_channels => 'Канали';
+
+  @override
+  String get chart_noChartYet => 'Поки немає карти';
+
+  @override
+  String get chart_addBirthDataPrompt =>
+      'Додайте дані народження для створення вашої унікальної карти Дизайну Людини.';
+
+  @override
+  String get chart_addBirthData => 'Додати дані народження';
+
+  @override
+  String get chart_noActiveChannels => 'Немає активних каналів';
+
+  @override
+  String get chart_channelsFormedBothGates =>
+      'Канали утворюються, коли визначені обидва ворота.';
+
+  @override
+  String get chart_savedCharts => 'Збережені карти';
+
+  @override
+  String get chart_addChart => 'Додати карту';
+
+  @override
+  String get chart_noSavedCharts => 'Немає збережених карт';
+
+  @override
+  String get chart_noSavedChartsMessage =>
+      'Створіть карти для себе та інших, щоб зберегти їх тут.';
+
+  @override
+  String get chart_loadFailed => 'Не вдалося завантажити карти';
+
+  @override
+  String get chart_renameChart => 'Перейменувати карту';
+
+  @override
+  String get chart_rename => 'Перейменувати';
+
+  @override
+  String get chart_renameFailed => 'Не вдалося перейменувати карту';
+
+  @override
+  String get chart_deleteChart => 'Видалити карту';
+
+  @override
+  String chart_deleteConfirm(String name) {
+    return 'Ви впевнені, що хочете видалити \"$name\"? Цю дію не можна скасувати.';
+  }
+
+  @override
+  String get chart_deleteFailed => 'Не вдалося видалити карту';
+
+  @override
+  String get chart_you => 'Ви';
+
+  @override
+  String get chart_personName => 'Ім\'я';
+
+  @override
+  String get chart_enterPersonName => 'Введіть ім\'я людини';
+
+  @override
+  String get chart_addChartDescription =>
+      'Створіть карту для іншої людини, ввівши її дані народження.';
+
+  @override
+  String get chart_calculateAndSave => 'Розрахувати та зберегти карту';
+
+  @override
+  String get chart_saved => 'Карту успішно збережено';
+
+  @override
+  String get chart_consciousGates => 'Свідомі ворота';
+
+  @override
+  String get chart_unconsciousGates => 'Несвідомі ворота';
+
+  @override
+  String get chart_personalitySide =>
+      'Сторона особистості - те, що ви усвідомлюєте';
+
+  @override
+  String get chart_designSide => 'Сторона дизайну - те, що бачать у вас інші';
 
   @override
   String get type_manifestor => 'Маніфестор';
@@ -328,6 +644,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get section_unconscious => 'Несвідоме (Дизайн)';
 
   @override
+  String get social_title => 'Соціальне';
+
+  @override
   String get social_friends => 'Друзі';
 
   @override
@@ -335,6 +654,9 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get social_addFriend => 'Додати друга';
+
+  @override
+  String get social_sendRequest => 'Надіслати запит';
 
   @override
   String get social_createGroup => 'Створити групу';
@@ -370,6 +692,126 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get social_public => 'Публічно';
+
+  @override
+  String get social_shared => 'Спільні';
+
+  @override
+  String get social_noFriendsYet => 'Поки немає друзів';
+
+  @override
+  String get social_noFriendsMessage =>
+      'Додайте друзів для порівняння карт і вивчення ваших зв\'язків.';
+
+  @override
+  String get social_noGroupsYet => 'Поки немає груп';
+
+  @override
+  String get social_noGroupsMessage =>
+      'Створіть групи для аналізу командної динаміки з Пента-аналізом.';
+
+  @override
+  String get social_noSharedCharts => 'Немає спільних карт';
+
+  @override
+  String get social_noSharedChartsMessage =>
+      'Тут з\'являться карти, якими поділились з вами друзі.';
+
+  @override
+  String get social_pendingRequests => 'Очікуючі запити';
+
+  @override
+  String get social_friendRequests => 'Запити в друзі';
+
+  @override
+  String get social_noPendingRequests => 'Немає очікуючих запитів';
+
+  @override
+  String get social_addFriendPrompt =>
+      'Введіть email друга, щоб надіслати запит.';
+
+  @override
+  String get social_emailLabel => 'Email';
+
+  @override
+  String get social_emailHint => 'friend@example.com';
+
+  @override
+  String get social_userNotFound => 'Користувача з таким email не знайдено';
+
+  @override
+  String social_requestSent(String name) {
+    return 'Запит дружби надіслано $name!';
+  }
+
+  @override
+  String get social_createGroupPrompt =>
+      'Створіть групу для аналізу командної динаміки.';
+
+  @override
+  String get social_groupName => 'Назва групи';
+
+  @override
+  String get social_groupNameHint => 'Сім\'я, Команда тощо';
+
+  @override
+  String get social_groupDescription => 'Опис (необов\'язково)';
+
+  @override
+  String get social_groupDescriptionHint => 'Для чого ця група?';
+
+  @override
+  String social_groupCreated(String name) {
+    return 'Групу \"$name\" створено!';
+  }
+
+  @override
+  String social_friendsSince(String date) {
+    return 'Друзі з $date';
+  }
+
+  @override
+  String get social_compareCharts => 'Порівняти карти';
+
+  @override
+  String get social_noDescription => 'Без опису';
+
+  @override
+  String get social_admin => 'Адмін';
+
+  @override
+  String social_sharedBy(String name) {
+    return 'Поділився $name';
+  }
+
+  @override
+  String get social_loadFriendsFailed => 'Не вдалося завантажити друзів';
+
+  @override
+  String get social_loadGroupsFailed => 'Не вдалося завантажити групи';
+
+  @override
+  String get social_loadSharedFailed => 'Не вдалося завантажити спільні карти';
+
+  @override
+  String social_sentAgo(String time) {
+    return 'Надіслано $time';
+  }
+
+  @override
+  String time_minutesAgo(int minutes) {
+    return '$minutes хв. тому';
+  }
+
+  @override
+  String time_hoursAgo(int hours) {
+    return '$hours год. тому';
+  }
+
+  @override
+  String time_daysAgo(int days) {
+    return '$days дн. тому';
+  }
 
   @override
   String get transit_title => 'Транзити сьогодні';
@@ -499,6 +941,35 @@ class AppLocalizationsUk extends AppLocalizations {
   String get penta_strengths => 'Сильні сторони групи';
 
   @override
+  String get penta_analysis => 'Аналіз Пента';
+
+  @override
+  String get penta_clearAnalysis => 'Очистити аналіз';
+
+  @override
+  String get penta_infoText =>
+      'Аналіз Пента розкриває природні ролі, що виникають у малих групах з 3-5 осіб, показуючи, як кожен учасник впливає на динаміку команди.';
+
+  @override
+  String get penta_calculating => 'Розрахунок...';
+
+  @override
+  String get penta_calculate => 'Розрахувати Пента';
+
+  @override
+  String get penta_groupRoles => 'Ролі в групі';
+
+  @override
+  String get penta_electromagneticConnections => 'Електромагнітні зв\'язки';
+
+  @override
+  String get penta_connectionsDescription =>
+      'Особливі енергетичні зв\'язки між учасниками, що створюють притягання та хімію.';
+
+  @override
+  String get penta_areasForAttention => 'Області для уваги';
+
+  @override
   String get premium_upgrade => 'Перейти на Premium';
 
   @override
@@ -544,10 +1015,67 @@ class AppLocalizationsUk extends AppLocalizations {
   String get premium_bestValue => 'Найкраща пропозиція';
 
   @override
+  String get settings_appearance => 'Зовнішній вигляд';
+
+  @override
   String get settings_language => 'Мова';
 
   @override
+  String get settings_selectLanguage => 'Вибір мови';
+
+  @override
   String get settings_theme => 'Тема';
+
+  @override
+  String get settings_selectTheme => 'Вибір теми';
+
+  @override
+  String get settings_chartDisplay => 'Відображення карти';
+
+  @override
+  String get settings_showGateNumbers => 'Показувати номери воріт';
+
+  @override
+  String get settings_showGateNumbersSubtitle =>
+      'Відображати номери воріт на бодіграфі';
+
+  @override
+  String get settings_use24HourTime => '24-годинний формат';
+
+  @override
+  String get settings_use24HourTimeSubtitle =>
+      'Відображати час у 24-годинному форматі';
+
+  @override
+  String get settings_feedback => 'Зворотній зв\'язок';
+
+  @override
+  String get settings_hapticFeedback => 'Тактильний відгук';
+
+  @override
+  String get settings_hapticFeedbackSubtitle => 'Вібрація при взаємодії';
+
+  @override
+  String get settings_account => 'Акаунт';
+
+  @override
+  String get settings_changePassword => 'Змінити пароль';
+
+  @override
+  String get settings_deleteAccount => 'Видалити акаунт';
+
+  @override
+  String get settings_deleteAccountConfirm =>
+      'Ви впевнені, що хочете видалити акаунт? Цю дію неможливо скасувати, і всі ваші дані будуть видалені назавжди.';
+
+  @override
+  String get settings_appVersion => 'Версія додатку';
+
+  @override
+  String get settings_rateApp => 'Оцінити додаток';
+
+  @override
+  String get settings_sendFeedback => 'Надіслати відгук';
 
   @override
   String get settings_themeLight => 'Світла';
@@ -602,4 +1130,67 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get error_chartCalculation => 'Не вдалося розрахувати карту';
+
+  @override
+  String get profile_editProfile => 'Редагувати профіль';
+
+  @override
+  String get profile_shareChart => 'Поділитися картою';
+
+  @override
+  String get profile_exportPdf => 'Експорт у PDF';
+
+  @override
+  String get profile_upgradePremium => 'Перейти на Premium';
+
+  @override
+  String get profile_birthData => 'Дані народження';
+
+  @override
+  String get profile_chartSummary => 'Зведення карти';
+
+  @override
+  String get profile_viewFullChart => 'Переглянути повну карту';
+
+  @override
+  String get profile_signOut => 'Вийти';
+
+  @override
+  String get profile_signOutConfirm => 'Ви впевнені, що хочете вийти?';
+
+  @override
+  String get profile_addBirthDataPrompt =>
+      'Додайте дані народження для створення вашої карти Дизайну Людини.';
+
+  @override
+  String get profile_addBirthDataToShare =>
+      'Додайте дані народження, щоб поділитися картою';
+
+  @override
+  String get profile_addBirthDataToExport =>
+      'Додайте дані народження для експорту карти';
+
+  @override
+  String get profile_exportFailed => 'Не вдалося експортувати PDF';
+
+  @override
+  String get profile_signOutConfirmTitle => 'Вихід';
+
+  @override
+  String get profile_loadFailed => 'Не вдалося завантажити профіль';
+
+  @override
+  String get profile_defaultUserName => 'Користувач Human Design';
+
+  @override
+  String get profile_birthDate => 'Дата';
+
+  @override
+  String get profile_birthTime => 'Час';
+
+  @override
+  String get profile_birthLocation => 'Місце';
+
+  @override
+  String get profile_birthTimezone => 'Часовий пояс';
 }

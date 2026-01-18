@@ -21,6 +21,64 @@
   "common_settings": "Налаштування",
   "common_logout": "Вийти",
   "common_profile": "Профіль",
+  "common_type": "Тип",
+  "common_strategy": "Стратегія",
+  "common_authority": "Авторитет",
+  "common_definition": "Визначеність",
+  "common_create": "Створити",
+  "common_viewFull": "Детальніше",
+  "common_send": "Надіслати",
+
+  "nav_home": "Головна",
+  "nav_chart": "Карта",
+  "nav_today": "Сьогодні",
+  "nav_social": "Соціум",
+  "nav_profile": "Профіль",
+
+  "home_goodMorning": "Доброго ранку",
+  "home_goodAfternoon": "Доброго дня",
+  "home_goodEvening": "Доброго вечора",
+  "home_yourDesign": "Ваш дизайн",
+  "home_completeProfile": "Заповніть профіль",
+  "home_enterBirthData": "Введіть дані народження",
+  "home_myChart": "Моя карта",
+  "home_composite": "Композит",
+  "home_penta": "Пента",
+  "home_friends": "Друзі",
+  "home_myBodygraph": "Мій бодіграф",
+  "home_definedCenters": "Визначені центри",
+  "home_activeChannels": "Активні канали",
+  "home_activeGates": "Активні ворота",
+
+  "transit_today": "Транзити сьогодні",
+  "transit_sun": "Сонце",
+  "transit_earth": "Земля",
+  "transit_moon": "Місяць",
+  "transit_gate": "Ворота {number}",
+  "@transit_gate": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_newChannelsActivated": "{count, plural, =1{1 новий канал активовано} few{{count} нових канали активовано} other{{count} нових каналів активовано}}",
+  "@transit_newChannelsActivated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_gatesHighlighted": "{count, plural, =1{1 ворота виділено} few{{count} ворот виділено} other{{count} воріт виділено}}",
+  "@transit_gatesHighlighted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_noConnections": "Немає прямих транзитних зв'язків сьогодні",
 
   "auth_signIn": "Увійти",
   "auth_signUp": "Реєстрація",
@@ -34,6 +92,26 @@
   "auth_noAccount": "Немає акаунту?",
   "auth_hasAccount": "Вже є акаунт?",
   "auth_termsAgree": "Реєструючись, ви погоджуєтесь з Умовами використання та Політикою конфіденційності",
+  "auth_welcomeBack": "З поверненням",
+  "auth_signInSubtitle": "Увійдіть, щоб продовжити подорож Дизайном Людини",
+  "auth_signUpSubtitle": "Розпочніть свою подорож Дизайном Людини сьогодні",
+  "auth_signUpWithApple": "Реєстрація через Apple",
+  "auth_signUpWithGoogle": "Реєстрація через Google",
+  "auth_enterName": "Введіть ваше ім'я",
+  "auth_nameRequired": "Ім'я обов'язкове",
+  "auth_termsOfService": "Умови використання",
+  "auth_privacyPolicy": "Політика конфіденційності",
+  "auth_acceptTerms": "Будь ласка, прийміть Умови використання для продовження",
+  "auth_resetPasswordTitle": "Скидання пароля",
+  "auth_resetPasswordPrompt": "Введіть email і ми надішлемо вам посилання для скидання пароля.",
+  "auth_enterEmail": "Введіть email",
+  "auth_resetEmailSent": "Лист для скидання пароля надіслано!",
+  "auth_name": "Ім'я",
+  "auth_createAccount": "Створити акаунт",
+  "auth_iAgreeTo": "Я приймаю ",
+  "auth_and": " та ",
+  "auth_birthInformation": "Дані народження",
+  "auth_calculateMyChart": "Розрахувати мою карту",
 
   "onboarding_welcome": "Ласкаво просимо до Дизайну Людини",
   "onboarding_welcomeSubtitle": "Відкрийте свій унікальний енергетичний план",
@@ -45,6 +123,16 @@
   "onboarding_searchLocation": "Введіть назву міста...",
   "onboarding_unknownTime": "Я не знаю час народження",
   "onboarding_timeImportance": "Точний час народження важливий для точної карти",
+  "onboarding_birthDataExplanation": "Ваші дані народження використовуються для розрахунку унікальної карти Дизайну Людини. Чим точніша інформація, тим точнішою буде карта.",
+  "onboarding_noTimeWarning": "Без точного часу народження деякі деталі карти (висхідний знак та лінії воріт) можуть бути неточними. За замовчуванням буде використано полудень.",
+  "onboarding_enterBirthTimeInstead": "Ввести час народження",
+  "onboarding_birthDataPrivacy": "Ваші дані народження зашифровані та зберігаються безпечно. Ви можете оновити або видалити їх будь-коли в налаштуваннях профілю.",
+  "onboarding_saveFailed": "Не вдалося зберегти дані народження",
+  "onboarding_fillAllFields": "Будь ласка, заповніть усі обов'язкові поля",
+  "onboarding_selectLanguage": "Оберіть мову",
+  "onboarding_getStarted": "Почати",
+  "onboarding_alreadyHaveAccount": "У мене вже є акаунт",
+  "onboarding_liveInAlignment": "Відкрийте свій унікальний енергетичний відбиток та живіть у гармонії зі своєю справжньою природою.",
 
   "chart_myChart": "Моя карта",
   "chart_viewChart": "Переглянути карту",
@@ -55,6 +143,42 @@
   "chart_transit": "Транзити сьогодні",
   "chart_bodygraph": "Бодіграф",
   "chart_details": "Деталі карти",
+  "chart_properties": "Властивості",
+  "chart_gates": "Ворота",
+  "chart_channels": "Канали",
+  "chart_noChartYet": "Поки немає карти",
+  "chart_addBirthDataPrompt": "Додайте дані народження для створення вашої унікальної карти Дизайну Людини.",
+  "chart_addBirthData": "Додати дані народження",
+  "chart_noActiveChannels": "Немає активних каналів",
+  "chart_channelsFormedBothGates": "Канали утворюються, коли визначені обидва ворота.",
+  "chart_consciousGates": "Свідомі ворота",
+  "chart_unconsciousGates": "Несвідомі ворота",
+  "chart_personalitySide": "Сторона особистості - те, що ви усвідомлюєте",
+  "chart_designSide": "Сторона дизайну - те, що бачать у вас інші",
+  "chart_savedCharts": "Збережені карти",
+  "chart_addChart": "Додати карту",
+  "chart_noSavedCharts": "Немає збережених карт",
+  "chart_noSavedChartsMessage": "Створіть карти для себе та інших, щоб зберегти їх тут.",
+  "chart_loadFailed": "Не вдалося завантажити карти",
+  "chart_renameChart": "Перейменувати карту",
+  "chart_rename": "Перейменувати",
+  "chart_renameFailed": "Не вдалося перейменувати карту",
+  "chart_deleteChart": "Видалити карту",
+  "chart_deleteConfirm": "Ви впевнені, що хочете видалити \"{name}\"? Цю дію не можна скасувати.",
+  "@chart_deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chart_deleteFailed": "Не вдалося видалити карту",
+  "chart_you": "Ви",
+  "chart_personName": "Ім'я",
+  "chart_enterPersonName": "Введіть ім'я людини",
+  "chart_addChartDescription": "Створіть карту для іншої людини, ввівши її дані народження.",
+  "chart_calculateAndSave": "Розрахувати та зберегти карту",
+  "chart_saved": "Карту успішно збережено",
 
   "type_manifestor": "Маніфестор",
   "type_generator": "Генератор",
@@ -118,9 +242,11 @@
   "section_conscious": "Свідоме (Особистість)",
   "section_unconscious": "Несвідоме (Дизайн)",
 
+  "social_title": "Соціальне",
   "social_friends": "Друзі",
   "social_groups": "Групи",
   "social_addFriend": "Додати друга",
+  "social_sendRequest": "Надіслати запит",
   "social_createGroup": "Створити групу",
   "social_invite": "Запросити",
   "social_members": "Учасники",
@@ -139,6 +265,95 @@
   "social_private": "Приватно",
   "social_friendsOnly": "Тільки друзі",
   "social_public": "Публічно",
+  "social_shared": "Спільні",
+  "social_noFriendsYet": "Поки немає друзів",
+  "social_noFriendsMessage": "Додайте друзів для порівняння карт і вивчення ваших зв'язків.",
+  "social_noGroupsYet": "Поки немає груп",
+  "social_noGroupsMessage": "Створіть групи для аналізу командної динаміки з Пента-аналізом.",
+  "social_noSharedCharts": "Немає спільних карт",
+  "social_noSharedChartsMessage": "Тут з'являться карти, якими поділились з вами друзі.",
+  "social_pendingRequests": "Очікуючі запити",
+  "social_friendRequests": "Запити в друзі",
+  "social_noPendingRequests": "Немає очікуючих запитів",
+  "social_addFriendPrompt": "Введіть email друга, щоб надіслати запит.",
+  "social_emailLabel": "Email",
+  "social_emailHint": "friend@example.com",
+  "social_userNotFound": "Користувача з таким email не знайдено",
+  "social_requestSent": "Запит дружби надіслано {name}!",
+  "@social_requestSent": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_createGroupPrompt": "Створіть групу для аналізу командної динаміки.",
+  "social_groupName": "Назва групи",
+  "social_groupNameHint": "Сім'я, Команда тощо",
+  "social_groupDescription": "Опис (необов'язково)",
+  "social_groupDescriptionHint": "Для чого ця група?",
+  "social_groupCreated": "Групу \"{name}\" створено!",
+  "@social_groupCreated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_friendsSince": "Друзі з {date}",
+  "@social_friendsSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "social_compareCharts": "Порівняти карти",
+  "social_noDescription": "Без опису",
+  "social_admin": "Адмін",
+  "social_sharedBy": "Поділився {name}",
+  "@social_sharedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_loadFriendsFailed": "Не вдалося завантажити друзів",
+  "social_loadGroupsFailed": "Не вдалося завантажити групи",
+  "social_loadSharedFailed": "Не вдалося завантажити спільні карти",
+  "social_sentAgo": "Надіслано {time}",
+  "@social_sentAgo": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "time_minutesAgo": "{minutes} хв. тому",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "{hours} год. тому",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "{days} дн. тому",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
 
   "transit_title": "Транзити сьогодні",
   "transit_currentEnergies": "Поточні енергії",
@@ -210,6 +425,15 @@
   "penta_groupDynamics": "Групова динаміка",
   "penta_missingRoles": "Відсутні ролі",
   "penta_strengths": "Сильні сторони групи",
+  "penta_analysis": "Аналіз Пента",
+  "penta_clearAnalysis": "Очистити аналіз",
+  "penta_infoText": "Аналіз Пента розкриває природні ролі, що виникають у малих групах з 3-5 осіб, показуючи, як кожен учасник впливає на динаміку команди.",
+  "penta_calculating": "Розрахунок...",
+  "penta_calculate": "Розрахувати Пента",
+  "penta_groupRoles": "Ролі в групі",
+  "penta_electromagneticConnections": "Електромагнітні зв'язки",
+  "penta_connectionsDescription": "Особливі енергетичні зв'язки між учасниками, що створюють притягання та хімію.",
+  "penta_areasForAttention": "Області для уваги",
 
   "premium_upgrade": "Перейти на Premium",
   "premium_subscribe": "Підписатися",
@@ -228,8 +452,26 @@
   "premium_perYear": "/рік",
   "premium_bestValue": "Найкраща пропозиція",
 
+  "settings_appearance": "Зовнішній вигляд",
   "settings_language": "Мова",
+  "settings_selectLanguage": "Вибір мови",
   "settings_theme": "Тема",
+  "settings_selectTheme": "Вибір теми",
+  "settings_chartDisplay": "Відображення карти",
+  "settings_showGateNumbers": "Показувати номери воріт",
+  "settings_showGateNumbersSubtitle": "Відображати номери воріт на бодіграфі",
+  "settings_use24HourTime": "24-годинний формат",
+  "settings_use24HourTimeSubtitle": "Відображати час у 24-годинному форматі",
+  "settings_feedback": "Зворотній зв'язок",
+  "settings_hapticFeedback": "Тактильний відгук",
+  "settings_hapticFeedbackSubtitle": "Вібрація при взаємодії",
+  "settings_account": "Акаунт",
+  "settings_changePassword": "Змінити пароль",
+  "settings_deleteAccount": "Видалити акаунт",
+  "settings_deleteAccountConfirm": "Ви впевнені, що хочете видалити акаунт? Цю дію неможливо скасувати, і всі ваші дані будуть видалені назавжди.",
+  "settings_appVersion": "Версія додатку",
+  "settings_rateApp": "Оцінити додаток",
+  "settings_sendFeedback": "Надіслати відгук",
   "settings_themeLight": "Світла",
   "settings_themeDark": "Темна",
   "settings_themeSystem": "Системна",
@@ -248,5 +490,26 @@
   "error_passwordMismatch": "Паролі не співпадають",
   "error_birthDataRequired": "Введіть дані народження",
   "error_locationRequired": "Оберіть місце народження",
-  "error_chartCalculation": "Не вдалося розрахувати карту"
+  "error_chartCalculation": "Не вдалося розрахувати карту",
+
+  "profile_editProfile": "Редагувати профіль",
+  "profile_shareChart": "Поділитися картою",
+  "profile_exportPdf": "Експорт у PDF",
+  "profile_upgradePremium": "Перейти на Premium",
+  "profile_birthData": "Дані народження",
+  "profile_chartSummary": "Зведення карти",
+  "profile_viewFullChart": "Переглянути повну карту",
+  "profile_signOut": "Вийти",
+  "profile_signOutConfirm": "Ви впевнені, що хочете вийти?",
+  "profile_addBirthDataPrompt": "Додайте дані народження для створення вашої карти Дизайну Людини.",
+  "profile_addBirthDataToShare": "Додайте дані народження, щоб поділитися картою",
+  "profile_addBirthDataToExport": "Додайте дані народження для експорту карти",
+  "profile_exportFailed": "Не вдалося експортувати PDF",
+  "profile_signOutConfirmTitle": "Вихід",
+  "profile_loadFailed": "Не вдалося завантажити профіль",
+  "profile_defaultUserName": "Користувач Human Design",
+  "profile_birthDate": "Дата",
+  "profile_birthTime": "Час",
+  "profile_birthLocation": "Місце",
+  "profile_birthTimezone": "Часовий пояс"
 }
