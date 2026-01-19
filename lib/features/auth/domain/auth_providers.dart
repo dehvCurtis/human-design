@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
 import '../../../shared/providers/supabase_provider.dart';
 import '../data/auth_repository.dart';
+import 'auth_errors.dart';
 
 /// Set to true to bypass authentication during development
 /// WARNING: Set to false for production!
@@ -75,10 +76,10 @@ class AuthNotifier extends Notifier<AppAuthState> {
       if (response.user != null) {
         state = AppAuthState.authenticated(response.user!);
       } else {
-        state = AppAuthState.error('Sign in failed');
+        state = AppAuthState.error('Sign in failed. Please try again.');
       }
     } catch (e) {
-      state = AppAuthState.error(e.toString());
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }
 
@@ -95,12 +96,13 @@ class AuthNotifier extends Notifier<AppAuthState> {
         metadata: name != null ? {'name': name} : null,
       );
       if (response.user != null) {
+        // Note: User might need to confirm email before fully authenticated
         state = AppAuthState.authenticated(response.user!);
       } else {
-        state = AppAuthState.error('Sign up failed');
+        state = AppAuthState.error('Sign up failed. Please try again.');
       }
     } catch (e) {
-      state = AppAuthState.error(e.toString());
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }
 
@@ -110,7 +112,7 @@ class AuthNotifier extends Notifier<AppAuthState> {
       await _repository.signInWithApple();
       // OAuth flow will redirect, state will be updated by auth listener
     } catch (e) {
-      state = AppAuthState.error(e.toString());
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }
 
@@ -120,7 +122,7 @@ class AuthNotifier extends Notifier<AppAuthState> {
       await _repository.signInWithGoogle();
       // OAuth flow will redirect, state will be updated by auth listener
     } catch (e) {
-      state = AppAuthState.error(e.toString());
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }
 
@@ -130,7 +132,7 @@ class AuthNotifier extends Notifier<AppAuthState> {
       await _repository.signOut();
       state = AppAuthState.unauthenticated();
     } catch (e) {
-      state = AppAuthState.error(e.toString());
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }
 
@@ -138,7 +140,16 @@ class AuthNotifier extends Notifier<AppAuthState> {
     try {
       await _repository.sendPasswordResetEmail(email);
     } catch (e) {
-      state = AppAuthState.error(e.toString());
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
+    }
+  }
+
+  /// Resend confirmation email for unconfirmed accounts
+  Future<void> resendConfirmationEmail(String email) async {
+    try {
+      await _repository.resendConfirmationEmail(email);
+    } catch (e) {
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }
 

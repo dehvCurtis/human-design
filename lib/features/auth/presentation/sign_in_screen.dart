@@ -7,6 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../data/auth_repository.dart';
+import '../domain/auth_errors.dart';
 import '../domain/auth_providers.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -27,6 +28,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   bool _isGoogleLoading = false;
   bool _isAppleLoading = false;
   String? _errorMessage;
+  bool _showResendConfirmation = false;
 
   @override
   void dispose() {
@@ -43,6 +45,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     setState(() {
       _isLoading = true;
       _errorMessage = null;
+      _showResendConfirmation = false;
     });
 
     try {
@@ -55,16 +58,43 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       if (authState.status == AuthStatus.error && mounted) {
         setState(() {
           _errorMessage = authState.errorMessage;
+          _showResendConfirmation = authState.errorMessage?.contains('confirmation') ?? false;
           _isLoading = false;
         });
       }
     } catch (e) {
       if (mounted) {
+        final friendlyMessage = AuthErrorMessages.fromException(e);
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = friendlyMessage;
+          _showResendConfirmation = AuthErrorMessages.isEmailNotConfirmed(e);
           _isLoading = false;
         });
       }
+    }
+  }
+
+  Future<void> _resendConfirmationEmail() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) return;
+
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    try {
+      await ref.read(authNotifierProvider.notifier).resendConfirmationEmail(email);
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('Confirmation email sent! Please check your inbox.'),
+          backgroundColor: AppColors.success,
+        ),
+      );
+    } catch (e) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          content: Text(AuthErrorMessages.fromException(e)),
+          backgroundColor: AppColors.error,
+        ),
+      );
     }
   }
 
@@ -164,6 +194,17 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+          ),
+          onPressed: () => context.go(AppRoutes.home),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -172,7 +213,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 40),
+                const SizedBox(height: 16),
                 // Header
                 Text(
                   l10n.auth_welcomeBack,
@@ -198,19 +239,38 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: AppColors.error.withAlpha(128)),
                     ),
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline,
-                            color: AppColors.error, size: 20),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            _errorMessage!,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: AppColors.error,
+                        Row(
+                          children: [
+                            const Icon(Icons.error_outline,
+                                color: AppColors.error, size: 20),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                _errorMessage!,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: AppColors.error,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        if (_showResendConfirmation) ...[
+                          const SizedBox(height: 12),
+                          SizedBox(
+                            width: double.infinity,
+                            child: TextButton.icon(
+                              onPressed: _resendConfirmationEmail,
+                              icon: const Icon(Icons.email_outlined, size: 18),
+                              label: const Text('Resend Confirmation Email'),
+                              style: TextButton.styleFrom(
+                                foregroundColor: AppColors.primary,
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ],
                     ),
                   ),

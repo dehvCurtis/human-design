@@ -38,6 +38,7 @@ class AuthRepository {
       email: email,
       password: password,
       data: metadata,
+      emailRedirectTo: _getRedirectUrl(),
     );
   }
 
@@ -69,6 +70,15 @@ class AuthRepository {
     await _client.auth.resetPasswordForEmail(
       email,
       redirectTo: _getRedirectUrl(),
+    );
+  }
+
+  /// Resend confirmation email for unconfirmed accounts
+  Future<void> resendConfirmationEmail(String email) async {
+    await _client.auth.resend(
+      type: supabase.OtpType.signup,
+      email: email,
+      emailRedirectTo: _getRedirectUrl(),
     );
   }
 

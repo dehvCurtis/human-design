@@ -7,6 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../data/auth_repository.dart';
+import '../domain/auth_errors.dart';
 import '../domain/auth_providers.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -30,6 +31,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   bool _isAppleLoading = false;
   bool _acceptedTerms = false;
   String? _errorMessage;
+  bool _showConfirmationMessage = false;
 
   @override
   void dispose() {
@@ -55,6 +57,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     setState(() {
       _isLoading = true;
       _errorMessage = null;
+      _showConfirmationMessage = false;
     });
 
     try {
@@ -71,13 +74,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           _isLoading = false;
         });
       } else if (authState.status == AuthStatus.authenticated && mounted) {
-        // Navigate to birth data entry
-        context.go(AppRoutes.birthData);
+        // Show confirmation message - user needs to verify email
+        setState(() {
+          _showConfirmationMessage = true;
+          _isLoading = false;
+        });
       }
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = AuthErrorMessages.fromException(e);
           _isLoading = false;
         });
       }
@@ -95,7 +101,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = AuthErrorMessages.fromException(e);
           _isGoogleLoading = false;
         });
       }
@@ -113,7 +119,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = AuthErrorMessages.fromException(e);
           _isAppleLoading = false;
         });
       }
@@ -127,7 +133,93 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     final anyLoading = _isLoading || _isGoogleLoading || _isAppleLoading;
     final l10n = AppLocalizations.of(context)!;
 
+    // Show confirmation success screen
+    if (_showConfirmationMessage) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            ),
+            onPressed: () => context.go(AppRoutes.home),
+          ),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: AppColors.success.withAlpha(25),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.mark_email_read_outlined,
+                    size: 64,
+                    color: AppColors.success,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                Text(
+                  'Check Your Email',
+                  style: theme.textTheme.headlineMedium,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'We\'ve sent a confirmation link to:\n${_emailController.text.trim()}',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Please click the link in the email to activate your account.',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
+                PrimaryButton(
+                  onPressed: () => context.go(AppRoutes.signIn),
+                  label: 'Go to Sign In',
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () => context.go(AppRoutes.home),
+                  child: const Text('Return to Home'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+          ),
+          onPressed: () => context.go(AppRoutes.home),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -136,7 +228,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 40),
+                const SizedBox(height: 16),
                 // Header
                 Text(
                   l10n.auth_createAccount,
