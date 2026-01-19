@@ -23,11 +23,36 @@ class _BirthDataScreenState extends ConsumerState<BirthDataScreen> {
   bool _unknownBirthTime = false;
   bool _isLoading = false;
   String? _errorMessage;
+  bool _checkedExistingData = false;
 
   bool get _isValid {
     return _birthDate != null &&
         (_birthTime != null || _unknownBirthTime) &&
         _birthLocation != null;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if user already has birth data after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkExistingBirthData();
+    });
+  }
+
+  Future<void> _checkExistingBirthData() async {
+    if (_checkedExistingData) return;
+    _checkedExistingData = true;
+
+    try {
+      final profile = await ref.read(userProfileProvider.future);
+      if (profile?.hasBirthData == true && mounted) {
+        // User already has birth data, go to home
+        context.go(AppRoutes.home);
+      }
+    } catch (_) {
+      // Ignore errors, let user enter data
+    }
   }
 
   Future<void> _saveAndContinue() async {

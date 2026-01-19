@@ -147,6 +147,7 @@
   "chart_composite": "Composite Chart",
   "chart_transit": "Today's Transits",
   "chart_bodygraph": "Bodygraph",
+  "chart_planets": "Planets",
   "chart_details": "Chart Details",
   "chart_properties": "Properties",
   "chart_gates": "Gates",
@@ -516,5 +517,165 @@
   "profile_birthDate": "Date",
   "profile_birthTime": "Time",
   "profile_birthLocation": "Location",
-  "profile_birthTimezone": "Timezone"
+  "profile_birthTimezone": "Timezone",
+
+  "chart_chakras": "Chakras",
+  "chakra_title": "Chakra Energy",
+  "chakra_activated": "Activated",
+  "chakra_inactive": "Inactive",
+  "chakra_activatedCount": "{count} of 7 chakras activated",
+  "@chakra_activatedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chakra_hdMapping": "HD Center Mapping",
+  "chakra_element": "Element",
+  "chakra_location": "Location",
+
+  "chakra_root": "Root",
+  "chakra_root_sanskrit": "Muladhara",
+  "chakra_root_description": "Grounding, survival, and stability",
+
+  "chakra_sacral": "Sacral",
+  "chakra_sacral_sanskrit": "Svadhisthana",
+  "chakra_sacral_description": "Creativity, sexuality, and emotions",
+
+  "chakra_solarPlexus": "Solar Plexus",
+  "chakra_solarPlexus_sanskrit": "Manipura",
+  "chakra_solarPlexus_description": "Personal power, confidence, and will",
+
+  "chakra_heart": "Heart",
+  "chakra_heart_sanskrit": "Anahata",
+  "chakra_heart_description": "Love, compassion, and connection",
+
+  "chakra_throat": "Throat",
+  "chakra_throat_sanskrit": "Vishuddha",
+  "chakra_throat_description": "Communication, expression, and truth",
+
+  "chakra_thirdEye": "Third Eye",
+  "chakra_thirdEye_sanskrit": "Ajna",
+  "chakra_thirdEye_description": "Intuition, insight, and imagination",
+
+  "chakra_crown": "Crown",
+  "chakra_crown_sanskrit": "Sahasrara",
+  "chakra_crown_description": "Spiritual connection and consciousness",
+
+  "quiz_title": "Quizzes",
+  "quiz_yourProgress": "Your Progress",
+  "quiz_quizzesCompleted": "{count} quizzes completed",
+  "@quiz_quizzesCompleted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_accuracy": "Accuracy",
+  "quiz_streak": "Streak",
+  "quiz_all": "All",
+  "quiz_difficulty": "Difficulty",
+  "quiz_beginner": "Beginner",
+  "quiz_intermediate": "Intermediate",
+  "quiz_advanced": "Advanced",
+  "quiz_questions": "{count} questions",
+  "@quiz_questions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_points": "+{points} pts",
+  "@quiz_points": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_completed": "Completed",
+  "quiz_noQuizzes": "No quizzes available",
+  "quiz_checkBackLater": "Check back later for new content",
+  "quiz_startQuiz": "Start Quiz",
+  "quiz_tryAgain": "Try Again",
+  "quiz_backToQuizzes": "Back to Quizzes",
+  "quiz_shareResults": "Share Results",
+  "quiz_yourBest": "Your Best",
+  "quiz_perfectScore": "Perfect Score!",
+  "quiz_newBest": "New Best!",
+  "quiz_streakExtended": "Streak Extended!",
+  "quiz_questionOf": "Question {current} of {total}",
+  "@quiz_questionOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_correct": "{count} correct",
+  "@quiz_correct": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_submitAnswer": "Submit Answer",
+  "quiz_nextQuestion": "Next Question",
+  "quiz_seeResults": "See Results",
+  "quiz_exitQuiz": "Exit Quiz?",
+  "quiz_exitWarning": "Your progress will be lost if you exit now.",
+  "quiz_exit": "Exit",
+  "quiz_timesUp": "Time's Up!",
+  "quiz_timesUpMessage": "You've run out of time. Your progress will be submitted.",
+  "quiz_excellent": "Excellent!",
+  "quiz_goodJob": "Good Job!",
+  "quiz_keepLearning": "Keep Learning!",
+  "quiz_keepPracticing": "Keep Practicing!",
+  "quiz_masteredTopic": "You've mastered this topic!",
+  "quiz_strongUnderstanding": "You have a strong understanding.",
+  "quiz_onRightTrack": "You're on the right track.",
+  "quiz_reviewExplanations": "Review the explanations to improve.",
+  "quiz_studyMaterial": "Study the material and try again.",
+  "quiz_attemptHistory": "Attempt History",
+  "quiz_statistics": "Quiz Statistics",
+  "quiz_totalQuizzes": "Quizzes",
+  "quiz_totalQuestions": "Questions",
+  "quiz_bestStreak": "Best Streak",
+  "quiz_strongest": "Strongest: {category}",
+  "@quiz_strongest": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "quiz_needsWork": "Needs work: {category}",
+  "@quiz_needsWork": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "quiz_category_types": "Types",
+  "quiz_category_centers": "Centers",
+  "quiz_category_authorities": "Authorities",
+  "quiz_category_profiles": "Profiles",
+  "quiz_category_gates": "Gates",
+  "quiz_category_channels": "Channels",
+  "quiz_category_definitions": "Definitions",
+  "quiz_category_general": "General",
+  "quiz_explanation": "Explanation",
+
+  "planetary_personality": "Personality",
+  "planetary_design": "Design",
+  "planetary_consciousBirth": "Conscious \u00b7 Birth",
+  "planetary_unconsciousPrenatal": "Unconscious \u00b7 88\u00b0 Prenatal"
 }

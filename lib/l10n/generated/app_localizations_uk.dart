@@ -389,6 +389,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get chart_bodygraph => 'Бодіграф';
 
   @override
+  String get chart_planets => 'Planets';
+
+  @override
   String get chart_details => 'Деталі карти';
 
   @override
@@ -1203,4 +1206,298 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get profile_birthTimezone => 'Часовий пояс';
+
+  @override
+  String get chart_chakras => 'Chakras';
+
+  @override
+  String get chakra_title => 'Chakra Energy';
+
+  @override
+  String get chakra_activated => 'Activated';
+
+  @override
+  String get chakra_inactive => 'Inactive';
+
+  @override
+  String chakra_activatedCount(int count) {
+    return '$count of 7 chakras activated';
+  }
+
+  @override
+  String get chakra_hdMapping => 'HD Center Mapping';
+
+  @override
+  String get chakra_element => 'Element';
+
+  @override
+  String get chakra_location => 'Location';
+
+  @override
+  String get chakra_root => 'Root';
+
+  @override
+  String get chakra_root_sanskrit => 'Muladhara';
+
+  @override
+  String get chakra_root_description => 'Grounding, survival, and stability';
+
+  @override
+  String get chakra_sacral => 'Sacral';
+
+  @override
+  String get chakra_sacral_sanskrit => 'Svadhisthana';
+
+  @override
+  String get chakra_sacral_description => 'Creativity, sexuality, and emotions';
+
+  @override
+  String get chakra_solarPlexus => 'Solar Plexus';
+
+  @override
+  String get chakra_solarPlexus_sanskrit => 'Manipura';
+
+  @override
+  String get chakra_solarPlexus_description =>
+      'Personal power, confidence, and will';
+
+  @override
+  String get chakra_heart => 'Heart';
+
+  @override
+  String get chakra_heart_sanskrit => 'Anahata';
+
+  @override
+  String get chakra_heart_description => 'Love, compassion, and connection';
+
+  @override
+  String get chakra_throat => 'Throat';
+
+  @override
+  String get chakra_throat_sanskrit => 'Vishuddha';
+
+  @override
+  String get chakra_throat_description =>
+      'Communication, expression, and truth';
+
+  @override
+  String get chakra_thirdEye => 'Third Eye';
+
+  @override
+  String get chakra_thirdEye_sanskrit => 'Ajna';
+
+  @override
+  String get chakra_thirdEye_description =>
+      'Intuition, insight, and imagination';
+
+  @override
+  String get chakra_crown => 'Crown';
+
+  @override
+  String get chakra_crown_sanskrit => 'Sahasrara';
+
+  @override
+  String get chakra_crown_description =>
+      'Spiritual connection and consciousness';
+
+  @override
+  String get quiz_title => 'Quizzes';
+
+  @override
+  String get quiz_yourProgress => 'Your Progress';
+
+  @override
+  String quiz_quizzesCompleted(int count) {
+    return '$count quizzes completed';
+  }
+
+  @override
+  String get quiz_accuracy => 'Accuracy';
+
+  @override
+  String get quiz_streak => 'Streak';
+
+  @override
+  String get quiz_all => 'All';
+
+  @override
+  String get quiz_difficulty => 'Difficulty';
+
+  @override
+  String get quiz_beginner => 'Beginner';
+
+  @override
+  String get quiz_intermediate => 'Intermediate';
+
+  @override
+  String get quiz_advanced => 'Advanced';
+
+  @override
+  String quiz_questions(int count) {
+    return '$count questions';
+  }
+
+  @override
+  String quiz_points(int points) {
+    return '+$points pts';
+  }
+
+  @override
+  String get quiz_completed => 'Completed';
+
+  @override
+  String get quiz_noQuizzes => 'No quizzes available';
+
+  @override
+  String get quiz_checkBackLater => 'Check back later for new content';
+
+  @override
+  String get quiz_startQuiz => 'Start Quiz';
+
+  @override
+  String get quiz_tryAgain => 'Try Again';
+
+  @override
+  String get quiz_backToQuizzes => 'Back to Quizzes';
+
+  @override
+  String get quiz_shareResults => 'Share Results';
+
+  @override
+  String get quiz_yourBest => 'Your Best';
+
+  @override
+  String get quiz_perfectScore => 'Perfect Score!';
+
+  @override
+  String get quiz_newBest => 'New Best!';
+
+  @override
+  String get quiz_streakExtended => 'Streak Extended!';
+
+  @override
+  String quiz_questionOf(int current, int total) {
+    return 'Question $current of $total';
+  }
+
+  @override
+  String quiz_correct(int count) {
+    return '$count correct';
+  }
+
+  @override
+  String get quiz_submitAnswer => 'Submit Answer';
+
+  @override
+  String get quiz_nextQuestion => 'Next Question';
+
+  @override
+  String get quiz_seeResults => 'See Results';
+
+  @override
+  String get quiz_exitQuiz => 'Exit Quiz?';
+
+  @override
+  String get quiz_exitWarning => 'Your progress will be lost if you exit now.';
+
+  @override
+  String get quiz_exit => 'Exit';
+
+  @override
+  String get quiz_timesUp => 'Time\'s Up!';
+
+  @override
+  String get quiz_timesUpMessage =>
+      'You\'ve run out of time. Your progress will be submitted.';
+
+  @override
+  String get quiz_excellent => 'Excellent!';
+
+  @override
+  String get quiz_goodJob => 'Good Job!';
+
+  @override
+  String get quiz_keepLearning => 'Keep Learning!';
+
+  @override
+  String get quiz_keepPracticing => 'Keep Practicing!';
+
+  @override
+  String get quiz_masteredTopic => 'You\'ve mastered this topic!';
+
+  @override
+  String get quiz_strongUnderstanding => 'You have a strong understanding.';
+
+  @override
+  String get quiz_onRightTrack => 'You\'re on the right track.';
+
+  @override
+  String get quiz_reviewExplanations => 'Review the explanations to improve.';
+
+  @override
+  String get quiz_studyMaterial => 'Study the material and try again.';
+
+  @override
+  String get quiz_attemptHistory => 'Attempt History';
+
+  @override
+  String get quiz_statistics => 'Quiz Statistics';
+
+  @override
+  String get quiz_totalQuizzes => 'Quizzes';
+
+  @override
+  String get quiz_totalQuestions => 'Questions';
+
+  @override
+  String get quiz_bestStreak => 'Best Streak';
+
+  @override
+  String quiz_strongest(String category) {
+    return 'Strongest: $category';
+  }
+
+  @override
+  String quiz_needsWork(String category) {
+    return 'Needs work: $category';
+  }
+
+  @override
+  String get quiz_category_types => 'Types';
+
+  @override
+  String get quiz_category_centers => 'Centers';
+
+  @override
+  String get quiz_category_authorities => 'Authorities';
+
+  @override
+  String get quiz_category_profiles => 'Profiles';
+
+  @override
+  String get quiz_category_gates => 'Gates';
+
+  @override
+  String get quiz_category_channels => 'Channels';
+
+  @override
+  String get quiz_category_definitions => 'Definitions';
+
+  @override
+  String get quiz_category_general => 'General';
+
+  @override
+  String get quiz_explanation => 'Explanation';
+
+  @override
+  String get planetary_personality => 'Personality';
+
+  @override
+  String get planetary_design => 'Design';
+
+  @override
+  String get planetary_consciousBirth => 'Conscious · Birth';
+
+  @override
+  String get planetary_unconsciousPrenatal => 'Unconscious · 88° Prenatal';
 }

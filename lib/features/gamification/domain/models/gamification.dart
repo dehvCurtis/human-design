@@ -140,6 +140,11 @@ enum PointActionType {
   referral,
   firstChart,
   premiumBonus,
+  // Quiz-related actions
+  quizComplete,
+  quizPerfectScore,
+  quizStreak7,
+  quizCategoryMastery,
 }
 
 extension PointActionTypeExtension on PointActionType {
@@ -177,6 +182,14 @@ extension PointActionTypeExtension on PointActionType {
         return 'first_chart';
       case PointActionType.premiumBonus:
         return 'premium_bonus';
+      case PointActionType.quizComplete:
+        return 'quiz_complete';
+      case PointActionType.quizPerfectScore:
+        return 'quiz_perfect_score';
+      case PointActionType.quizStreak7:
+        return 'quiz_streak_7';
+      case PointActionType.quizCategoryMastery:
+        return 'quiz_category_mastery';
     }
   }
 
@@ -213,6 +226,14 @@ extension PointActionTypeExtension on PointActionType {
       case PointActionType.firstChart:
         return 50;
       case PointActionType.premiumBonus:
+        return 100;
+      case PointActionType.quizComplete:
+        return 25;
+      case PointActionType.quizPerfectScore:
+        return 50;
+      case PointActionType.quizStreak7:
+        return 75;
+      case PointActionType.quizCategoryMastery:
         return 100;
     }
   }

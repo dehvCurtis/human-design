@@ -12,3 +12,6 @@ export 'buttons/oauth_button.dart';
 // Dialogs
 export 'dialogs/loading_dialog.dart';
 export 'dialogs/detail_bottom_sheet.dart';
+
+// Misc
+export 'language_selector.dart';

@@ -33,6 +33,11 @@ import '../../features/learning/presentation/content_detail_screen.dart';
 import '../../features/learning/presentation/mentorship_screen.dart';
 import '../../features/learning/presentation/live_sessions_screen.dart';
 import '../../features/sharing/presentation/share_screen.dart';
+import '../../features/quiz/presentation/quiz_list_screen.dart';
+import '../../features/quiz/presentation/quiz_detail_screen.dart';
+import '../../features/quiz/presentation/quiz_taking_screen.dart';
+import '../../features/quiz/presentation/quiz_results_screen.dart';
+import '../../features/quiz/domain/models/quiz.dart';
 
 /// Route names
 class AppRoutes {
@@ -70,6 +75,12 @@ class AppRoutes {
   static const String mentorship = '/mentorship';
   static const String sessions = '/sessions';
   static const String share = '/share';
+
+  // Quiz routes
+  static const String quizzes = '/quizzes';
+  static const String quizDetail = '/quizzes/:id';
+  static const String quizTake = '/quizzes/:id/take';
+  static const String quizResults = '/quizzes/:id/results/:attemptId';
 }
 
 /// Provider for the router
@@ -92,6 +103,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         AppRoutes.onboarding,
         AppRoutes.signIn,
         AppRoutes.signUp,
+        AppRoutes.birthData, // Part of signup flow
       ];
 
       final isOnAuthRoute = authRoutes.contains(currentPath);
@@ -103,23 +115,32 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       // Not authenticated - redirect to appropriate auth screen
       if (!isAuthenticated) {
-        // Allow staying on auth screens (except splash which should redirect)
-        if (isOnAuthRoute && currentPath != AppRoutes.splash) return null;
+        // Allow staying on auth screens (except splash and birthData which need auth)
+        if (isOnAuthRoute &&
+            currentPath != AppRoutes.splash &&
+            currentPath != AppRoutes.birthData) {
+          return null;
+        }
         if (needsOnboarding) return AppRoutes.onboarding;
         return AppRoutes.signIn;
       }
 
-      // Authenticated - redirect away from auth routes
+      // Authenticated - redirect away from certain auth routes
       if (isAuthenticated && isOnAuthRoute) {
+        // Allow staying on birthData (part of signup flow)
+        if (currentPath == AppRoutes.birthData) {
+          return null;
+        }
         // If on splash or onboarding, go to home
         if (currentPath == AppRoutes.splash ||
             currentPath == AppRoutes.onboarding) {
           return AppRoutes.home;
         }
-        // If on sign-in/sign-up, go to home
+        // If on sign-in/sign-up, go to birthData to complete profile
+        // (router will redirect to home if profile already has birth data)
         if (currentPath == AppRoutes.signIn ||
             currentPath == AppRoutes.signUp) {
-          return AppRoutes.home;
+          return AppRoutes.birthData;
         }
       }
 
@@ -263,14 +284,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.learning,
             name: 'learning',
-            builder: (context, state) => const LearningScreen(),
+            builder: (context, state) => const QuizListScreen(),
             routes: [
               GoRoute(
                 path: ':id',
                 name: 'contentDetail',
                 builder: (context, state) {
                   final id = state.pathParameters['id']!;
-                  return ContentDetailScreen(contentId: id);
+                  return QuizDetailScreen(quizId: id);
                 },
               ),
             ],
@@ -289,6 +310,49 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.share,
             name: 'share',
             builder: (context, state) => const ShareScreen(),
+          ),
+          // Quiz routes
+          GoRoute(
+            path: AppRoutes.quizzes,
+            name: 'quizzes',
+            builder: (context, state) => const QuizListScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                name: 'quizDetail',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return QuizDetailScreen(quizId: id);
+                },
+                routes: [
+                  GoRoute(
+                    path: 'take',
+                    name: 'quizTake',
+                    builder: (context, state) {
+                      final id = state.pathParameters['id']!;
+                      return QuizTakingScreen(quizId: id);
+                    },
+                  ),
+                  GoRoute(
+                    path: 'results/:attemptId',
+                    name: 'quizResults',
+                    builder: (context, state) {
+                      final quizId = state.pathParameters['id']!;
+                      final attemptId = state.pathParameters['attemptId']!;
+                      final extra = state.extra as Map<String, dynamic>?;
+                      return QuizResultsScreen(
+                        quizId: quizId,
+                        attemptId: attemptId,
+                        attempt: extra?['attempt'] as QuizAttempt?,
+                        isNewBest: extra?['isNewBest'] as bool? ?? false,
+                        streakUpdated: extra?['streakUpdated'] as bool? ?? false,
+                        pointsEarned: extra?['pointsEarned'] as int? ?? 0,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
@@ -358,8 +422,6 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  bool _showLanguageSelector = true;
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -369,134 +431,80 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: _showLanguageSelector
-              ? _buildLanguageSelector(context, currentLocale)
-              : _buildWelcomeContent(context, l10n),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLanguageSelector(BuildContext context, AppLocale currentLocale) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return Column(
-      children: [
-        const Spacer(),
-        const Icon(
-          Icons.language,
-          size: 80,
-          color: Color(0xFF6366F1),
-        ),
-        const SizedBox(height: 32),
-        Text(
-          l10n.onboarding_selectLanguage,
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 32),
-        ...AppLocale.values.map((locale) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () async {
-                    await ref.read(settingsProvider.notifier).setLocale(locale);
-                    setState(() {
-                      _showLanguageSelector = false;
-                    });
-                  },
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    side: BorderSide(
-                      color: locale == currentLocale
-                          ? const Color(0xFF6366F1)
-                          : Colors.grey[300]!,
-                      width: locale == currentLocale ? 2 : 1,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
+          child: Column(
+            children: [
+              // Language flags at top right
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: AppLocale.values.map((locale) {
+                  final isSelected = locale == currentLocale;
+                  return GestureDetector(
+                    onTap: () {
+                      ref.read(settingsProvider.notifier).setLocale(locale);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      margin: const EdgeInsets.only(left: 4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: isSelected
+                            ? const Color(0xFF6366F1).withAlpha(25)
+                            : Colors.transparent,
+                        border: isSelected
+                            ? Border.all(color: const Color(0xFF6366F1), width: 2)
+                            : null,
+                      ),
+                      child: Text(
                         locale.flag,
                         style: const TextStyle(fontSize: 24),
                       ),
-                      const SizedBox(width: 12),
-                      Text(
-                        locale.displayName,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: locale == currentLocale
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                            ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const Spacer(),
+              const Icon(
+                Icons.auto_graph,
+                size: 80,
+                color: Color(0xFF6366F1),
+              ),
+              const SizedBox(height: 32),
+              Text(
+                l10n.onboarding_welcome,
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                l10n.onboarding_liveInAlignment,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Colors.grey[600],
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    ref.read(settingsProvider.notifier).completeOnboarding();
+                    context.go(AppRoutes.signUp);
+                  },
+                  child: Text(l10n.onboarding_getStarted),
                 ),
               ),
-            )),
-        const Spacer(),
-      ],
-    );
-  }
-
-  Widget _buildWelcomeContent(BuildContext context, AppLocalizations l10n) {
-    return Column(
-      children: [
-        // Change language button at top
-        Align(
-          alignment: Alignment.topLeft,
-          child: TextButton.icon(
-            onPressed: () {
-              setState(() {
-                _showLanguageSelector = true;
-              });
-            },
-            icon: const Icon(Icons.language, size: 18),
-            label: Text(l10n.settings_changeLanguage),
-          ),
-        ),
-        const Spacer(),
-        const Icon(
-          Icons.auto_graph,
-          size: 80,
-          color: Color(0xFF6366F1),
-        ),
-        const SizedBox(height: 32),
-        Text(
-          l10n.onboarding_welcome,
-          style: Theme.of(context).textTheme.headlineMedium,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          l10n.onboarding_liveInAlignment,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.grey[600],
+              const SizedBox(height: 12),
+              TextButton(
+                onPressed: () {
+                  ref.read(settingsProvider.notifier).completeOnboarding();
+                  context.go(AppRoutes.signIn);
+                },
+                child: Text(l10n.onboarding_alreadyHaveAccount),
               ),
-          textAlign: TextAlign.center,
-        ),
-        const Spacer(),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {
-              ref.read(settingsProvider.notifier).completeOnboarding();
-              context.go(AppRoutes.signUp);
-            },
-            child: Text(l10n.onboarding_getStarted),
+            ],
           ),
         ),
-        const SizedBox(height: 12),
-        TextButton(
-          onPressed: () {
-            ref.read(settingsProvider.notifier).completeOnboarding();
-            context.go(AppRoutes.signIn);
-          },
-          child: Text(l10n.onboarding_alreadyHaveAccount),
-        ),
-      ],
+      ),
     );
   }
 }

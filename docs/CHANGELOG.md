@@ -6,6 +6,47 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+#### Quiz System
+- **Comprehensive Question Generators** - 138+ factual Human Design questions
+  - `TypesQuestionGenerator` - 25+ questions (strategies, auras, population stats)
+  - `CentersQuestionGenerator` - 26+ questions (functions, biological correlations)
+  - `AuthoritiesQuestionGenerator` - 17+ questions (7 authorities, hierarchy)
+  - `ProfilesQuestionGenerator` - 26+ questions (12 profiles, 6 lines, harmonics)
+  - `DefinitionsQuestionGenerator` - 14+ questions (5 definition types)
+  - `GatesQuestionGenerator` - Dynamic questions from 64 gates
+  - `ChannelsQuestionGenerator` - Dynamic questions from 36 channels
+
+- **Pre-defined Quizzes** - 19 quizzes across all categories
+  - Types Basics, Types & Auras
+  - Centers Introduction, Centers Deep Dive
+  - Authority Basics, Know Your Authority, Authority Mastery
+  - Profile Introduction, Profile Mastery, Profile Deep Dive
+  - Definition Types, Definition Dynamics
+  - Gates Introduction, Gate Exploration
+  - Channel Connections, Channel Mastery
+  - Human Design Fundamentals, Intermediate, Advanced Synthesis
+
+#### Bodygraph Improvements
+- **Purple Color Scheme** - Style guide compliant colors
+  - Defined centers: Light purple fill (#DDD6FE) with dark purple border (#7C3AED)
+  - Undefined centers: White fill with light purple border (#C4B5FD)
+  - Conscious activations: Dark indigo (#3730A3)
+  - Unconscious activations: Pink/magenta (#DB2777)
+  - Inactive elements: Light purple tint (#E9D5FF)
+  - Transits: Cyan (#0891B2) for clear distinction
+
+- **Gate Position Fixes**
+  - Sacral bottom edge corrected: 42, 3, 9 (left to right)
+  - Root top edge aligned: 53, 60, 52 (matching Sacral)
+
+- **Planets Tab** - New tab showing Design and Personality planetary activations
+  - Design panel (unconscious/88° prenatal) on left in pink
+  - Personality panel (conscious/birth) on right in indigo
+  - All 13 planets displayed in HD standard order: Sun, Earth, Moon, North Node, South Node, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto
+  - Gate.Line notation (e.g., "41.3") for each planetary activation
+  - Tappable rows to view gate details
+  - Centered layout with responsive planet name display
+
 #### Social Platform Features
 - **Discovery & Matching** - Find users by HD type, profile, authority with compatibility scoring
   - HD compatibility algorithm (type, profile, channels, centers)
