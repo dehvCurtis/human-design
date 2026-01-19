@@ -496,6 +496,14 @@ class _ChallengeCard extends StatelessWidget {
         return Icons.auto_graph;
       case PointActionType.premiumBonus:
         return Icons.workspace_premium;
+      case PointActionType.quizComplete:
+        return Icons.quiz;
+      case PointActionType.quizPerfectScore:
+        return Icons.star;
+      case PointActionType.quizStreak7:
+        return Icons.local_fire_department;
+      case PointActionType.quizCategoryMastery:
+        return Icons.school;
     }
   }
 

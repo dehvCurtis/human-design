@@ -197,7 +197,7 @@ const List<ChannelData> channels = [
   ChannelData(gate1: 28, gate2: 38, name: 'Struggle', type: 'Individual'),
   ChannelData(gate1: 39, gate2: 55, name: 'Emoting', type: 'Individual'),
   ChannelData(gate1: 51, gate2: 25, name: 'Initiation', type: 'Individual'),
-  ChannelData(gate1: 57, gate2: 20, name: 'The Brain Wave', type: 'Individual'),
+  ChannelData(gate1: 24, gate2: 61, name: 'Awareness', type: 'Individual'),
 
   // Understanding Channels (Collective Sharing)
   ChannelData(gate1: 4, gate2: 63, name: 'Logic', type: 'Collective'),
@@ -213,6 +213,7 @@ const List<ChannelData> channels = [
   ChannelData(gate1: 30, gate2: 41, name: 'Recognition', type: 'Collective'),
   ChannelData(gate1: 35, gate2: 36, name: 'Transitoriness', type: 'Collective'),
   ChannelData(gate1: 47, gate2: 64, name: 'Abstraction', type: 'Collective'),
+  ChannelData(gate1: 42, gate2: 53, name: 'Maturation', type: 'Collective'),
 
   // Awareness Channels (Tribal)
   ChannelData(gate1: 6, gate2: 59, name: 'Intimacy', type: 'Tribal'),

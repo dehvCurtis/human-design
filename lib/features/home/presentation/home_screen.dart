@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../../shared/widgets/language_selector.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../lifestyle/domain/transit_service.dart';
 import '../domain/home_providers.dart';
@@ -58,6 +59,7 @@ class HomeScreen extends ConsumerWidget {
             floating: true,
             title: _buildGreeting(context, chart),
             actions: [
+              const LanguageSelector(compact: true),
               IconButton(
                 icon: const Icon(Icons.notifications_outlined),
                 onPressed: () {
