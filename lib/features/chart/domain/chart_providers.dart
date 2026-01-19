@@ -36,16 +36,15 @@ final userSavedChartsProvider = FutureProvider<List<ChartSummary>>((ref) async {
   final profile = await ref.watch(userProfileProvider.future);
   if (profile == null) return [];
 
-  // Get user's own chart first
-  final userChart = await ref.watch(userChartProvider.future);
   final charts = <ChartSummary>[];
 
-  if (userChart != null) {
+  // Add user's own chart if they have birth data
+  if (profile.hasBirthData) {
     charts.add(ChartSummary(
       id: 'user',
       name: profile.name ?? 'My Chart',
-      type: userChart.type,
-      profile: userChart.profile.notation,
+      type: HumanDesignType.generator, // Will be updated when viewed
+      profile: '',
       createdAt: profile.createdAt ?? DateTime.now(),
       isCurrentUser: true,
     ));
