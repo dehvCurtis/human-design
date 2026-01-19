@@ -123,6 +123,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get home_myChart => 'My Chart';
 
   @override
+  String get home_savedCharts => 'Saved';
+
+  @override
   String get home_composite => 'Composite';
 
   @override

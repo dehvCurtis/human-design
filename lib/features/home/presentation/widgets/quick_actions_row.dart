@@ -8,6 +8,7 @@ class QuickActionsRow extends StatelessWidget {
   const QuickActionsRow({
     super.key,
     this.onChartTap,
+    this.onSavedChartsTap,
     this.onCompositeTap,
     this.onPentaTap,
     this.onSocialTap,
@@ -18,6 +19,7 @@ class QuickActionsRow extends StatelessWidget {
   });
 
   final VoidCallback? onChartTap;
+  final VoidCallback? onSavedChartsTap;
   final VoidCallback? onCompositeTap;
   final VoidCallback? onPentaTap;
   final VoidCallback? onSocialTap;
@@ -46,6 +48,15 @@ class QuickActionsRow extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: _QuickActionButton(
+                icon: Icons.folder_outlined,
+                label: l10n.home_savedCharts,
+                color: AppColors.unconscious,
+                onTap: onSavedChartsTap,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
                 icon: Icons.favorite_border,
                 label: l10n.home_composite,
                 color: AppColors.person2,
@@ -61,7 +72,12 @@ class QuickActionsRow extends StatelessWidget {
                 onTap: onPentaTap,
               ),
             ),
-            const SizedBox(width: 12),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Second row: Social features
+        Row(
+          children: [
             Expanded(
               child: _QuickActionButton(
                 icon: Icons.people_outline,
@@ -70,12 +86,7 @@ class QuickActionsRow extends StatelessWidget {
                 onTap: onSocialTap,
               ),
             ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        // Second row: Social & Learning features
-        Row(
-          children: [
+            const SizedBox(width: 12),
             Expanded(
               child: _QuickActionButton(
                 icon: Icons.explore_outlined,
@@ -102,7 +113,12 @@ class QuickActionsRow extends StatelessWidget {
                 onTap: onLearningTap,
               ),
             ),
-            const SizedBox(width: 12),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Third row: Communication
+        Row(
+          children: [
             Expanded(
               child: _QuickActionButton(
                 icon: Icons.chat_bubble_outline,
@@ -111,6 +127,9 @@ class QuickActionsRow extends StatelessWidget {
                 onTap: onMessagesTap,
               ),
             ),
+            const Spacer(),
+            const Spacer(),
+            const Spacer(),
           ],
         ),
       ],

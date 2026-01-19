@@ -328,6 +328,12 @@ abstract class AppLocalizations {
   /// **'My Chart'**
   String get home_myChart;
 
+  /// No description provided for @home_savedCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get home_savedCharts;
+
   /// No description provided for @home_composite.
   ///
   /// In en, this message translates to:

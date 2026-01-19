@@ -315,6 +315,7 @@ class _PlanetsTab extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final showNames = constraints.maxWidth >= 500;
+        final panelWidth = showNames ? 160.0 : 120.0;
 
         return Center(
           child: SingleChildScrollView(
@@ -325,19 +326,25 @@ class _PlanetsTab extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Design Panel (LEFT) - Unconscious
-                PlanetaryPanel(
-                  isPersonality: false,
-                  activations: chart.unconsciousActivations,
-                  showNames: showNames,
-                  onGateTap: (gate) => _showGateDetail(context, gate),
+                SizedBox(
+                  width: panelWidth,
+                  child: PlanetaryPanel(
+                    isPersonality: false,
+                    activations: chart.unconsciousActivations,
+                    showNames: showNames,
+                    onGateTap: (gate) => _showGateDetail(context, gate),
+                  ),
                 ),
                 const SizedBox(width: 24),
                 // Personality Panel (RIGHT) - Conscious
-                PlanetaryPanel(
-                  isPersonality: true,
-                  activations: chart.consciousActivations,
-                  showNames: showNames,
-                  onGateTap: (gate) => _showGateDetail(context, gate),
+                SizedBox(
+                  width: panelWidth,
+                  child: PlanetaryPanel(
+                    isPersonality: true,
+                    activations: chart.consciousActivations,
+                    showNames: showNames,
+                    onGateTap: (gate) => _showGateDetail(context, gate),
+                  ),
                 ),
               ],
             ),

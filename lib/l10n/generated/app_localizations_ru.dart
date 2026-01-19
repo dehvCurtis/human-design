@@ -123,6 +123,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get home_myChart => 'Моя карта';
 
   @override
+  String get home_savedCharts => 'Saved';
+
+  @override
   String get home_composite => 'Композит';
 
   @override

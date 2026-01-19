@@ -114,6 +114,7 @@ class HomeScreen extends ConsumerWidget {
                 // Quick Actions
                 QuickActionsRow(
                   onChartTap: () => context.go(AppRoutes.chart),
+                  onSavedChartsTap: () => context.push(AppRoutes.savedCharts),
                   onCompositeTap: () => context.push(AppRoutes.composite),
                   onPentaTap: () => context.push(AppRoutes.penta),
                   onSocialTap: () => context.go(AppRoutes.social),
