@@ -72,24 +72,38 @@ assets/images/bodygraph_silhouette.svg (or .png)
 
 ## Task Checklist
 
-- [ ] Show all 36 channels in bodygraph (active and inactive)
-- [ ] Style inactive channels with faded/gray appearance
-- [ ] Style active channels with proper coloring (conscious/unconscious/both)
-- [ ] Create or obtain human silhouette asset
-- [ ] Add silhouette as background layer in bodygraph widget
-- [ ] Ensure silhouette scales correctly with chart
-- [ ] Test on various screen sizes
-- [ ] Verify chart accuracy against reference
+- [x] Show all 36 channels in bodygraph (active and inactive)
+- [x] Style inactive channels with faded/gray appearance
+- [x] Style active channels with proper coloring (conscious/unconscious/both)
+- [x] Create or obtain human silhouette asset
+- [x] Add silhouette as background layer in bodygraph widget
+- [x] Ensure silhouette scales correctly with chart
+- [x] Test on various screen sizes
+- [x] Verify chart accuracy against reference
+- [x] Update color scheme to match style guide (purple theme)
+- [x] Fix gate positions (Sacral bottom: 42, 3, 9)
+
+## Color Scheme (Style Guide - Purple Theme)
+
+| Element | Fill Color | Border Color | Hex Values |
+|---------|------------|--------------|------------|
+| Defined Centers | Light purple | Dark purple | #DDD6FE / #7C3AED |
+| Undefined Centers | White | Light purple | #FFFFFF / #C4B5FD |
+| Conscious Channels/Gates | Dark indigo | - | #3730A3 |
+| Unconscious Channels/Gates | Pink/magenta | - | #DB2777 |
+| Both (Conscious + Unconscious) | Violet | - | #7C3AED |
+| Inactive Channels/Gates | Light purple tint | - | #E9D5FF |
+| Transit Overlay | Cyan | - | #0891B2 |
 
 ## Channel Styling Guide
 
 | State | Description | Color/Style |
 |-------|-------------|-------------|
-| Inactive | Neither gate defined | Light gray, thin stroke |
-| Conscious only | Both gates from personality (black) | Black/dark solid |
-| Unconscious only | Both gates from design (red) | Red solid |
-| Mixed | One gate conscious, one unconscious | Striped or split color |
-| Full | Both gates have both conscious + unconscious | Bold, possibly outlined |
+| Inactive | Neither gate defined | Light purple tint (#E9D5FF), thin stroke |
+| Conscious only | Both gates from personality | Dark indigo (#3730A3) solid |
+| Unconscious only | Both gates from design | Pink/magenta (#DB2777) solid |
+| Mixed | One gate conscious, one unconscious | Striped (indigo + pink) |
+| Full | Both gates have both conscious + unconscious | Violet (#7C3AED) bold |
 
 ## Visual Hierarchy
 
@@ -104,3 +118,57 @@ assets/images/bodygraph_silhouette.svg (or .png)
 - The silhouette should be gender-neutral or offer options
 - Consider dark mode compatibility (silhouette may need inverted version)
 - Maintain current touch/tap interactions for gate/channel details
+
+---
+
+## Planets Tab (Completed)
+
+Added a new "Planets" tab in the Chart screen to display Design and Personality planetary activations.
+
+### Layout
+
+```
+┌──────────────────────┬──────────────────────┐
+│       DESIGN         │     PERSONALITY      │
+│    (Unconscious)     │     (Conscious)      │
+│                      │                      │
+│  ☉ Sun  19.2         │  ☉ Sun  41.3         │
+│  ⊕ Earth 33.1        │  ⊕ Earth 31.4        │
+│  ☽ Moon  6.5         │  ☽ Moon 28.2         │
+│  ☊ N.Node 44.2       │  ☊ N.Node 15.6       │
+│  ☋ S.Node 26.4       │  ☋ S.Node 10.1       │
+│  ☿ Mercury 47.3      │  ☿ Mercury 64.5      │
+│  ♀ Venus 12.1        │  ♀ Venus 47.2        │
+│  ♂ Mars 35.6         │  ♂ Mars 36.3         │
+│  ♃ Jupiter 22.4      │  ♃ Jupiter 59.1      │
+│  ♄ Saturn 57.2       │  ♄ Saturn 44.6       │
+│  ♅ Uranus 20.1       │  ♅ Uranus  3.4       │
+│  ♆ Neptune 55.3      │  ♆ Neptune 22.5      │
+│  ♇ Pluto 30.2        │  ♇ Pluto 41.1        │
+└──────────────────────┴──────────────────────┘
+       LEFT (Pink)           RIGHT (Indigo)
+```
+
+### Files Created
+
+| File | Purpose |
+|------|---------|
+| `lib/features/chart/presentation/widgets/bodygraph/planetary_panel.dart` | Panel widget with header and planet rows |
+| `lib/features/chart/presentation/widgets/bodygraph/planet_activation_row.dart` | Individual planet row (symbol, name, gate.line) |
+
+### Files Modified
+
+| File | Changes |
+|------|---------|
+| `lib/features/chart/presentation/chart_screen.dart` | Added Planets tab with `_PlanetsTab` widget |
+| `lib/l10n/app_en.arb` | Added `chart_planets`, `planetary_personality`, `planetary_design`, `planetary_consciousBirth`, `planetary_unconsciousPrenatal` |
+
+### Features
+
+- **Design Panel (Left)** - Shows unconscious/prenatal activations in pink (#DB2777)
+- **Personality Panel (Right)** - Shows conscious/birth activations in indigo (#3730A3)
+- **HD Standard Planet Order** - Sun, Earth, Moon, North/South Node, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto
+- **Gate.Line Notation** - Displays gate and line (e.g., "41.3") from `GateActivation.notation`
+- **Tappable Rows** - Tap any planet row to view gate details in bottom sheet
+- **Responsive** - Shows planet names when screen width >= 500px
+- **Centered Layout** - Panels are centered on screen
