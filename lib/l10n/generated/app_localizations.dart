@@ -790,6 +790,12 @@ abstract class AppLocalizations {
   /// **'Bodygraph'**
   String get chart_bodygraph;
 
+  /// No description provided for @chart_planets.
+  ///
+  /// In en, this message translates to:
+  /// **'Planets'**
+  String get chart_planets;
+
   /// No description provided for @chart_details.
   ///
   /// In en, this message translates to:
@@ -2325,6 +2331,552 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Timezone'**
   String get profile_birthTimezone;
+
+  /// No description provided for @chart_chakras.
+  ///
+  /// In en, this message translates to:
+  /// **'Chakras'**
+  String get chart_chakras;
+
+  /// No description provided for @chakra_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Chakra Energy'**
+  String get chakra_title;
+
+  /// No description provided for @chakra_activated.
+  ///
+  /// In en, this message translates to:
+  /// **'Activated'**
+  String get chakra_activated;
+
+  /// No description provided for @chakra_inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get chakra_inactive;
+
+  /// No description provided for @chakra_activatedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} of 7 chakras activated'**
+  String chakra_activatedCount(int count);
+
+  /// No description provided for @chakra_hdMapping.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Center Mapping'**
+  String get chakra_hdMapping;
+
+  /// No description provided for @chakra_element.
+  ///
+  /// In en, this message translates to:
+  /// **'Element'**
+  String get chakra_element;
+
+  /// No description provided for @chakra_location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get chakra_location;
+
+  /// No description provided for @chakra_root.
+  ///
+  /// In en, this message translates to:
+  /// **'Root'**
+  String get chakra_root;
+
+  /// No description provided for @chakra_root_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Muladhara'**
+  String get chakra_root_sanskrit;
+
+  /// No description provided for @chakra_root_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Grounding, survival, and stability'**
+  String get chakra_root_description;
+
+  /// No description provided for @chakra_sacral.
+  ///
+  /// In en, this message translates to:
+  /// **'Sacral'**
+  String get chakra_sacral;
+
+  /// No description provided for @chakra_sacral_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Svadhisthana'**
+  String get chakra_sacral_sanskrit;
+
+  /// No description provided for @chakra_sacral_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Creativity, sexuality, and emotions'**
+  String get chakra_sacral_description;
+
+  /// No description provided for @chakra_solarPlexus.
+  ///
+  /// In en, this message translates to:
+  /// **'Solar Plexus'**
+  String get chakra_solarPlexus;
+
+  /// No description provided for @chakra_solarPlexus_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Manipura'**
+  String get chakra_solarPlexus_sanskrit;
+
+  /// No description provided for @chakra_solarPlexus_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal power, confidence, and will'**
+  String get chakra_solarPlexus_description;
+
+  /// No description provided for @chakra_heart.
+  ///
+  /// In en, this message translates to:
+  /// **'Heart'**
+  String get chakra_heart;
+
+  /// No description provided for @chakra_heart_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Anahata'**
+  String get chakra_heart_sanskrit;
+
+  /// No description provided for @chakra_heart_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Love, compassion, and connection'**
+  String get chakra_heart_description;
+
+  /// No description provided for @chakra_throat.
+  ///
+  /// In en, this message translates to:
+  /// **'Throat'**
+  String get chakra_throat;
+
+  /// No description provided for @chakra_throat_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Vishuddha'**
+  String get chakra_throat_sanskrit;
+
+  /// No description provided for @chakra_throat_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Communication, expression, and truth'**
+  String get chakra_throat_description;
+
+  /// No description provided for @chakra_thirdEye.
+  ///
+  /// In en, this message translates to:
+  /// **'Third Eye'**
+  String get chakra_thirdEye;
+
+  /// No description provided for @chakra_thirdEye_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Ajna'**
+  String get chakra_thirdEye_sanskrit;
+
+  /// No description provided for @chakra_thirdEye_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Intuition, insight, and imagination'**
+  String get chakra_thirdEye_description;
+
+  /// No description provided for @chakra_crown.
+  ///
+  /// In en, this message translates to:
+  /// **'Crown'**
+  String get chakra_crown;
+
+  /// No description provided for @chakra_crown_sanskrit.
+  ///
+  /// In en, this message translates to:
+  /// **'Sahasrara'**
+  String get chakra_crown_sanskrit;
+
+  /// No description provided for @chakra_crown_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Spiritual connection and consciousness'**
+  String get chakra_crown_description;
+
+  /// No description provided for @quiz_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get quiz_title;
+
+  /// No description provided for @quiz_yourProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Progress'**
+  String get quiz_yourProgress;
+
+  /// No description provided for @quiz_quizzesCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} quizzes completed'**
+  String quiz_quizzesCompleted(int count);
+
+  /// No description provided for @quiz_accuracy.
+  ///
+  /// In en, this message translates to:
+  /// **'Accuracy'**
+  String get quiz_accuracy;
+
+  /// No description provided for @quiz_streak.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get quiz_streak;
+
+  /// No description provided for @quiz_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get quiz_all;
+
+  /// No description provided for @quiz_difficulty.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty'**
+  String get quiz_difficulty;
+
+  /// No description provided for @quiz_beginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get quiz_beginner;
+
+  /// No description provided for @quiz_intermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get quiz_intermediate;
+
+  /// No description provided for @quiz_advanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get quiz_advanced;
+
+  /// No description provided for @quiz_questions.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} questions'**
+  String quiz_questions(int count);
+
+  /// No description provided for @quiz_points.
+  ///
+  /// In en, this message translates to:
+  /// **'+{points} pts'**
+  String quiz_points(int points);
+
+  /// No description provided for @quiz_completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get quiz_completed;
+
+  /// No description provided for @quiz_noQuizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'No quizzes available'**
+  String get quiz_noQuizzes;
+
+  /// No description provided for @quiz_checkBackLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Check back later for new content'**
+  String get quiz_checkBackLater;
+
+  /// No description provided for @quiz_startQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Quiz'**
+  String get quiz_startQuiz;
+
+  /// No description provided for @quiz_tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get quiz_tryAgain;
+
+  /// No description provided for @quiz_backToQuizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Quizzes'**
+  String get quiz_backToQuizzes;
+
+  /// No description provided for @quiz_shareResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Results'**
+  String get quiz_shareResults;
+
+  /// No description provided for @quiz_yourBest.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Best'**
+  String get quiz_yourBest;
+
+  /// No description provided for @quiz_perfectScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Perfect Score!'**
+  String get quiz_perfectScore;
+
+  /// No description provided for @quiz_newBest.
+  ///
+  /// In en, this message translates to:
+  /// **'New Best!'**
+  String get quiz_newBest;
+
+  /// No description provided for @quiz_streakExtended.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak Extended!'**
+  String get quiz_streakExtended;
+
+  /// No description provided for @quiz_questionOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Question {current} of {total}'**
+  String quiz_questionOf(int current, int total);
+
+  /// No description provided for @quiz_correct.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} correct'**
+  String quiz_correct(int count);
+
+  /// No description provided for @quiz_submitAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Answer'**
+  String get quiz_submitAnswer;
+
+  /// No description provided for @quiz_nextQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Question'**
+  String get quiz_nextQuestion;
+
+  /// No description provided for @quiz_seeResults.
+  ///
+  /// In en, this message translates to:
+  /// **'See Results'**
+  String get quiz_seeResults;
+
+  /// No description provided for @quiz_exitQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit Quiz?'**
+  String get quiz_exitQuiz;
+
+  /// No description provided for @quiz_exitWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress will be lost if you exit now.'**
+  String get quiz_exitWarning;
+
+  /// No description provided for @quiz_exit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get quiz_exit;
+
+  /// No description provided for @quiz_timesUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Time\'s Up!'**
+  String get quiz_timesUp;
+
+  /// No description provided for @quiz_timesUpMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve run out of time. Your progress will be submitted.'**
+  String get quiz_timesUpMessage;
+
+  /// No description provided for @quiz_excellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent!'**
+  String get quiz_excellent;
+
+  /// No description provided for @quiz_goodJob.
+  ///
+  /// In en, this message translates to:
+  /// **'Good Job!'**
+  String get quiz_goodJob;
+
+  /// No description provided for @quiz_keepLearning.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Learning!'**
+  String get quiz_keepLearning;
+
+  /// No description provided for @quiz_keepPracticing.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep Practicing!'**
+  String get quiz_keepPracticing;
+
+  /// No description provided for @quiz_masteredTopic.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve mastered this topic!'**
+  String get quiz_masteredTopic;
+
+  /// No description provided for @quiz_strongUnderstanding.
+  ///
+  /// In en, this message translates to:
+  /// **'You have a strong understanding.'**
+  String get quiz_strongUnderstanding;
+
+  /// No description provided for @quiz_onRightTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re on the right track.'**
+  String get quiz_onRightTrack;
+
+  /// No description provided for @quiz_reviewExplanations.
+  ///
+  /// In en, this message translates to:
+  /// **'Review the explanations to improve.'**
+  String get quiz_reviewExplanations;
+
+  /// No description provided for @quiz_studyMaterial.
+  ///
+  /// In en, this message translates to:
+  /// **'Study the material and try again.'**
+  String get quiz_studyMaterial;
+
+  /// No description provided for @quiz_attemptHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt History'**
+  String get quiz_attemptHistory;
+
+  /// No description provided for @quiz_statistics.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Statistics'**
+  String get quiz_statistics;
+
+  /// No description provided for @quiz_totalQuizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get quiz_totalQuizzes;
+
+  /// No description provided for @quiz_totalQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions'**
+  String get quiz_totalQuestions;
+
+  /// No description provided for @quiz_bestStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Streak'**
+  String get quiz_bestStreak;
+
+  /// No description provided for @quiz_strongest.
+  ///
+  /// In en, this message translates to:
+  /// **'Strongest: {category}'**
+  String quiz_strongest(String category);
+
+  /// No description provided for @quiz_needsWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs work: {category}'**
+  String quiz_needsWork(String category);
+
+  /// No description provided for @quiz_category_types.
+  ///
+  /// In en, this message translates to:
+  /// **'Types'**
+  String get quiz_category_types;
+
+  /// No description provided for @quiz_category_centers.
+  ///
+  /// In en, this message translates to:
+  /// **'Centers'**
+  String get quiz_category_centers;
+
+  /// No description provided for @quiz_category_authorities.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorities'**
+  String get quiz_category_authorities;
+
+  /// No description provided for @quiz_category_profiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Profiles'**
+  String get quiz_category_profiles;
+
+  /// No description provided for @quiz_category_gates.
+  ///
+  /// In en, this message translates to:
+  /// **'Gates'**
+  String get quiz_category_gates;
+
+  /// No description provided for @quiz_category_channels.
+  ///
+  /// In en, this message translates to:
+  /// **'Channels'**
+  String get quiz_category_channels;
+
+  /// No description provided for @quiz_category_definitions.
+  ///
+  /// In en, this message translates to:
+  /// **'Definitions'**
+  String get quiz_category_definitions;
+
+  /// No description provided for @quiz_category_general.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get quiz_category_general;
+
+  /// No description provided for @quiz_explanation.
+  ///
+  /// In en, this message translates to:
+  /// **'Explanation'**
+  String get quiz_explanation;
+
+  /// No description provided for @planetary_personality.
+  ///
+  /// In en, this message translates to:
+  /// **'Personality'**
+  String get planetary_personality;
+
+  /// No description provided for @planetary_design.
+  ///
+  /// In en, this message translates to:
+  /// **'Design'**
+  String get planetary_design;
+
+  /// No description provided for @planetary_consciousBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'Conscious · Birth'**
+  String get planetary_consciousBirth;
+
+  /// No description provided for @planetary_unconsciousPrenatal.
+  ///
+  /// In en, this message translates to:
+  /// **'Unconscious · 88° Prenatal'**
+  String get planetary_unconsciousPrenatal;
 }
 
 class _AppLocalizationsDelegate

@@ -10,7 +10,11 @@ import '../../../shared/providers/supabase_provider.dart';
 import '../../../shared/widgets/dialogs/detail_bottom_sheet.dart';
 import '../../home/domain/home_providers.dart';
 import '../domain/models/human_design_chart.dart';
+import 'widgets/bodygraph/bodygraph_data.dart';
 import 'widgets/bodygraph/bodygraph_widget.dart';
+import 'widgets/bodygraph/planetary_panel.dart';
+import 'widgets/chakra/chakra_chart_widget.dart';
+import 'widgets/chakra/chakra_data.dart';
 
 class ChartScreen extends ConsumerStatefulWidget {
   const ChartScreen({super.key});
@@ -26,7 +30,7 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
   }
 
   @override
@@ -53,11 +57,14 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
         ],
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
           tabs: [
             Tab(text: l10n.chart_bodygraph),
+            Tab(text: l10n.chart_planets),
             Tab(text: l10n.chart_properties),
             Tab(text: l10n.chart_gates),
             Tab(text: l10n.chart_channels),
+            Tab(text: l10n.chart_chakras),
           ],
         ),
       ),
@@ -73,6 +80,9 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
               // Bodygraph Tab
               _BodygraphTab(chart: chart),
 
+              // Planets Tab (Design & Personality)
+              _PlanetsTab(chart: chart),
+
               // Properties Tab
               _PropertiesTab(chart: chart),
 
@@ -81,6 +91,9 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
 
               // Channels Tab
               _ChannelsTab(chart: chart),
+
+              // Chakras Tab
+              _ChakrasTab(chart: chart),
             ],
           );
         },
@@ -170,61 +183,26 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
   }
 }
 
-class _BodygraphTab extends StatelessWidget {
+class _BodygraphTab extends StatefulWidget {
   const _BodygraphTab({required this.chart});
 
   final HumanDesignChart chart;
 
   @override
+  State<_BodygraphTab> createState() => _BodygraphTabState();
+}
+
+class _BodygraphTabState extends State<_BodygraphTab> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: BodygraphWidget(
-        chart: chart,
+        chart: widget.chart,
+        layoutType: BodygraphLayoutType.standard,
         onCenterTap: (center) => _showCenterDetail(context, center),
         onGateTap: (gate) => _showGateDetail(context, gate),
         onChannelTap: (channel) => _showChannelDetail(context, channel),
-      ),
-    );
-  }
-
-  void _showCenterDetail(BuildContext context, HumanDesignCenter center) {
-    DetailBottomSheet.show(
-      context: context,
-      title: center.displayName,
-      subtitle: chart.isCenterDefined(center) ? 'Defined' : 'Undefined',
-      leading: Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: chart.isCenterDefined(center)
-              ? AppColors.centerDefined
-              : AppColors.centerUndefined,
-          shape: BoxShape.circle,
-          border: Border.all(
-            color: chart.isCenterDefined(center)
-                ? AppColors.centerDefinedBorder
-                : AppColors.centerUndefinedBorder,
-            width: 2,
-          ),
-        ),
-        child: const Icon(Icons.circle, size: 16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            center.description,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'The ${center.displayName} center relates to ${center.description.toLowerCase()}.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.textSecondaryLight,
-                ),
-          ),
-        ],
       ),
     );
   }
@@ -249,14 +227,43 @@ class _BodygraphTab extends StatelessWidget {
             label: 'Keynote',
             value: gateInfo.keynote,
           ),
+        ],
+      ),
+    );
+  }
+
+  void _showCenterDetail(BuildContext context, HumanDesignCenter center) {
+    DetailBottomSheet.show(
+      context: context,
+      title: center.displayName,
+      subtitle: widget.chart.isCenterDefined(center) ? 'Defined' : 'Undefined',
+      leading: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: widget.chart.isCenterDefined(center)
+              ? AppColors.centerDefined
+              : AppColors.centerUndefined,
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: widget.chart.isCenterDefined(center)
+                ? AppColors.centerDefinedBorder
+                : AppColors.centerUndefinedBorder,
+            width: 2,
+          ),
+        ),
+        child: const Icon(Icons.circle, size: 16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            center.description,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
           const SizedBox(height: 16),
           Text(
-            'Description',
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Gate $gateNumber is known as "${gateInfo.name}" and carries the energy of ${gateInfo.keynote.toLowerCase()}.',
+            'The ${center.displayName} center relates to ${center.description.toLowerCase()}.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.textSecondaryLight,
                 ),
@@ -292,6 +299,74 @@ class _BodygraphTab extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           _ChannelGateRow(gateNumber: gate2, gateInfo: gate2Info),
+        ],
+      ),
+    );
+  }
+}
+
+class _PlanetsTab extends StatelessWidget {
+  const _PlanetsTab({required this.chart});
+
+  final HumanDesignChart chart;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final showNames = constraints.maxWidth >= 500;
+
+        return Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Design Panel (LEFT) - Unconscious
+                PlanetaryPanel(
+                  isPersonality: false,
+                  activations: chart.unconsciousActivations,
+                  showNames: showNames,
+                  onGateTap: (gate) => _showGateDetail(context, gate),
+                ),
+                const SizedBox(width: 24),
+                // Personality Panel (RIGHT) - Conscious
+                PlanetaryPanel(
+                  isPersonality: true,
+                  activations: chart.consciousActivations,
+                  showNames: showNames,
+                  onGateTap: (gate) => _showGateDetail(context, gate),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _showGateDetail(BuildContext context, int gateNumber) {
+    final gateInfo = gates[gateNumber];
+    if (gateInfo == null) return;
+
+    DetailBottomSheet.show(
+      context: context,
+      title: 'Gate $gateNumber',
+      subtitle: gateInfo.name,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _DetailRow(
+            label: 'Center',
+            value: gateInfo.center.displayName,
+          ),
+          const Divider(),
+          _DetailRow(
+            label: 'Keynote',
+            value: gateInfo.keynote,
+          ),
         ],
       ),
     );
@@ -485,6 +560,242 @@ class _ChannelsTab extends StatelessWidget {
           hasUnconscious: channelActivation.hasUnconscious,
         );
       },
+    );
+  }
+}
+
+class _ChakrasTab extends StatelessWidget {
+  const _ChakrasTab({required this.chart});
+
+  final HumanDesignChart chart;
+
+  @override
+  Widget build(BuildContext context) {
+    final activatedCount = chakras
+        .where((c) => c.isActivated(chart.definedCenters))
+        .length;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Summary card
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.chakraCrown,
+                          AppColors.chakraThirdEye,
+                          AppColors.chakraThroat,
+                          AppColors.chakraHeart,
+                          AppColors.chakraSolarPlexus,
+                          AppColors.chakraSacral,
+                          AppColors.chakraRoot,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Chakra Energy',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '$activatedCount of 7 chakras activated',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: AppColors.textSecondaryLight,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Chakra visualization
+          SizedBox(
+            height: 500,
+            child: ChakraChartWidget(
+              chart: chart,
+              onChakraTap: (chakra) => _showChakraDetail(context, chakra),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Chakra list
+          Text(
+            'Chakra Details',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 12),
+          ...chakras.reversed.map((chakra) {
+            final isActivated = chakra.isActivated(chart.definedCenters);
+            return _ChakraListItem(
+              chakra: chakra,
+              isActivated: isActivated,
+              onTap: () => _showChakraDetail(context, chakra),
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  void _showChakraDetail(BuildContext context, Chakra chakra) {
+    final isActivated = chakra.isActivated(chart.definedCenters);
+
+    DetailBottomSheet.show(
+      context: context,
+      title: chakra.name,
+      subtitle: chakra.sanskritName,
+      leading: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: isActivated ? chakra.color : chakra.color.withValues(alpha: 0.3),
+          shape: BoxShape.circle,
+          boxShadow: isActivated
+              ? [
+                  BoxShadow(
+                    color: chakra.color.withValues(alpha: 0.4),
+                    blurRadius: 12,
+                    spreadRadius: 2,
+                  ),
+                ]
+              : null,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: isActivated
+                  ? AppColors.success.withValues(alpha: 0.1)
+                  : AppColors.textSecondaryLight.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              isActivated ? 'Activated' : 'Inactive',
+              style: TextStyle(
+                color: isActivated ? AppColors.success : AppColors.textSecondaryLight,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            chakra.description,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const Divider(height: 24),
+          _DetailRow(label: 'Element', value: chakra.element),
+          _DetailRow(label: 'Location', value: chakra.location),
+          _DetailRow(
+            label: 'HD Centers',
+            value: chakra.hdCenters.map((c) => c.displayName).join(', '),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ChakraListItem extends StatelessWidget {
+  const _ChakraListItem({
+    required this.chakra,
+    required this.isActivated,
+    this.onTap,
+  });
+
+  final Chakra chakra;
+  final bool isActivated;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: isActivated ? chakra.color : chakra.color.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isActivated ? chakra.color : AppColors.dividerLight,
+                    width: 2,
+                  ),
+                  boxShadow: isActivated
+                      ? [
+                          BoxShadow(
+                            color: chakra.color.withValues(alpha: 0.3),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ]
+                      : null,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      chakra.name,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: isActivated
+                                ? AppColors.textPrimaryLight
+                                : AppColors.textSecondaryLight,
+                          ),
+                    ),
+                    Text(
+                      chakra.hdCenters.map((c) => c.displayName).join(', '),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppColors.textSecondaryLight,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                isActivated ? Icons.check_circle : Icons.circle_outlined,
+                color: isActivated ? AppColors.success : AppColors.textSecondaryLight,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
