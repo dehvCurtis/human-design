@@ -8,23 +8,54 @@ import 'bodygraph_data.dart';
 import 'bodygraph_painter.dart';
 
 /// Interactive Human Design bodygraph widget
+///
+/// Supports two layout options:
+/// - Standard: Traditional mybodygraph.com style layout
+/// - Geometric: Clean modern layout with parallel lines
 class BodygraphWidget extends StatefulWidget {
   const BodygraphWidget({
     super.key,
     required this.chart,
+    this.layoutType = BodygraphLayoutType.standard,
     this.onCenterTap,
     this.onGateTap,
     this.onChannelTap,
     this.showGateNumbers = true,
+    this.showInactiveGates = true,
+    this.showInactiveChannels = true,
     this.interactive = true,
+    this.drawBody = false,
   });
 
+  /// The Human Design chart data to display
   final HumanDesignChart chart;
+
+  /// The layout type to use for rendering
+  final BodygraphLayoutType layoutType;
+
+  /// Callback when a center is tapped
   final void Function(HumanDesignCenter center)? onCenterTap;
+
+  /// Callback when a gate is tapped
   final void Function(int gateNumber)? onGateTap;
+
+  /// Callback when a channel is tapped
   final void Function(String channelId)? onChannelTap;
+
+  /// Whether to show gate numbers on active gates
   final bool showGateNumbers;
+
+  /// Whether to show inactive gates
+  final bool showInactiveGates;
+
+  /// Whether to show inactive channels
+  final bool showInactiveChannels;
+
+  /// Whether the widget responds to taps
   final bool interactive;
+
+  /// Whether to draw the body silhouette behind the bodygraph
+  final bool drawBody;
 
   @override
   State<BodygraphWidget> createState() => _BodygraphWidgetState();
@@ -35,6 +66,9 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
   BodygraphElement? _selectedElement;
   late AnimationController _animationController;
   late Animation<double> _animation;
+
+  /// Get the current layout based on layoutType
+  BodygraphLayout get _layout => getLayout(widget.layoutType);
 
   @override
   void initState() {
@@ -57,6 +91,16 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
   }
 
   @override
+  void didUpdateWidget(BodygraphWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Animate when chart changes
+    if (oldWidget.chart != widget.chart) {
+      _animationController.reset();
+      _animationController.forward();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -69,9 +113,13 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
                 size: Size(constraints.maxWidth, constraints.maxHeight),
                 painter: BodygraphPainter(
                   chart: widget.chart,
+                  layout: _layout,
                   selectedElement: _selectedElement,
                   showGateNumbers: widget.showGateNumbers,
+                  showInactiveGates: widget.showInactiveGates,
+                  showInactiveChannels: widget.showInactiveChannels,
                   animationValue: _animation.value,
+                  drawBody: widget.drawBody,
                 ),
               );
             },
@@ -87,21 +135,24 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     if (size == null) return;
 
     // Calculate scale factor used by painter
-    final scale = (size.width / 400).clamp(0.0, size.height / 600);
-    final offsetX = (size.width - 400 * scale) / 2;
-    final offsetY = (size.height - 600 * scale) / 2;
+    final scale = math.min(
+      size.width / bodygraphCanvasWidth,
+      size.height / bodygraphCanvasHeight,
+    );
+    final offsetX = (size.width - bodygraphCanvasWidth * scale) / 2;
+    final offsetY = (size.height - bodygraphCanvasHeight * scale) / 2;
 
     // Convert tap position to bodygraph coordinates
     final bodygraphX = (localPosition.dx - offsetX) / scale;
     final bodygraphY = (localPosition.dy - offsetY) / scale;
 
     // Check gates first (smallest hit targets)
-    for (final entry in gatePositions.entries) {
+    for (final entry in _layout.gatePositions.entries) {
       final gateNumber = entry.key;
       final position = entry.value;
       final distance = _distance(bodygraphX, bodygraphY, position.x, position.y);
 
-      if (distance <= 15) {
+      if (distance <= gateHitTestRadius) {
         setState(() {
           _selectedElement = GateElement(gateNumber);
         });
@@ -111,7 +162,7 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     }
 
     // Check centers
-    for (final entry in centerPositions.entries) {
+    for (final entry in _layout.centerPositions.entries) {
       final center = entry.key;
       final position = entry.value;
 
@@ -124,14 +175,14 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
       }
     }
 
-    // Check channels (check if tap is near any channel line)
+    // Check channels (check if tap is near any active channel line)
     for (final channelActivation in widget.chart.activeChannels) {
       final channel = channelActivation.channel;
       final channelId = channel.id;
-      final path = _getChannelPath(channel.gate1, channel.gate2);
-      if (path == null) continue;
+      final path = _layout.getChannelPath(channel.gate1, channel.gate2);
+      if (path.isEmpty) continue;
 
-      if (_isNearPath(bodygraphX, bodygraphY, path, threshold: 10)) {
+      if (_isNearPath(bodygraphX, bodygraphY, path, threshold: channelHitTestThreshold)) {
         setState(() {
           _selectedElement = ChannelElement(channelId);
         });
@@ -153,15 +204,14 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
   }
 
   bool _isInCenter(double x, double y, CenterPosition position) {
-    final halfWidth = position.width / 2 + 5; // Add padding
-    final halfHeight = position.height / 2 + 5;
+    final halfWidth = position.width / 2 + centerHitTestPadding;
+    final halfHeight = position.height / 2 + centerHitTestPadding;
 
     return (x - position.x).abs() <= halfWidth &&
         (y - position.y).abs() <= halfHeight;
   }
 
-  bool _isNearPath(double x, double y, List<Offset> path,
-      {double threshold = 8}) {
+  bool _isNearPath(double x, double y, List<Offset> path, {double threshold = 8}) {
     for (int i = 0; i < path.length - 1; i++) {
       final p1 = path[i];
       final p2 = path[i + 1];
@@ -175,7 +225,13 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
   }
 
   double _pointToLineDistance(
-      double px, double py, double x1, double y1, double x2, double y2) {
+    double px,
+    double py,
+    double x1,
+    double y1,
+    double x2,
+    double y2,
+  ) {
     final dx = x2 - x1;
     final dy = y2 - y1;
     final lengthSquared = dx * dx + dy * dy;
@@ -191,19 +247,6 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     final nearestY = y1 + t * dy;
 
     return _distance(px, py, nearestX, nearestY);
-  }
-
-  /// Get channel path by trying both gate orderings
-  List<Offset>? _getChannelPath(int gate1, int gate2) {
-    // Try the original order
-    final path1 = channelPaths['$gate1-$gate2'];
-    if (path1 != null) return path1;
-
-    // Try reversed order
-    final path2 = channelPaths['$gate2-$gate1'];
-    if (path2 != null) return path2;
-
-    return null;
   }
 
   /// Clear the current selection
@@ -232,5 +275,75 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     setState(() {
       _selectedElement = ChannelElement(channelId);
     });
+  }
+
+  /// Get the currently selected element
+  BodygraphElement? get selectedElement => _selectedElement;
+}
+
+/// Widget that displays a comparison between two bodygraph layouts
+class BodygraphLayoutComparison extends StatelessWidget {
+  const BodygraphLayoutComparison({
+    super.key,
+    required this.chart,
+    this.showLabels = true,
+  });
+
+  final HumanDesignChart chart;
+  final bool showLabels;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            children: [
+              if (showLabels)
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    'Standard Layout',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              Expanded(
+                child: BodygraphWidget(
+                  chart: chart,
+                  layoutType: BodygraphLayoutType.standard,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            children: [
+              if (showLabels)
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    'Geometric Layout',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              Expanded(
+                child: BodygraphWidget(
+                  chart: chart,
+                  layoutType: BodygraphLayoutType.geometric,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
