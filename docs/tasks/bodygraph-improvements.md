@@ -171,4 +171,9 @@ Added a new "Planets" tab in the Chart screen to display Design and Personality 
 - **Gate.Line Notation** - Displays gate and line (e.g., "41.3") from `GateActivation.notation`
 - **Tappable Rows** - Tap any planet row to view gate details in bottom sheet
 - **Responsive** - Shows planet names when screen width >= 500px
-- **Centered Layout** - Panels are centered on screen
+- **Centered Layout** - Panels are centered on screen with explicit width (120px compact, 160px with names)
+
+### Bug Fixes Applied
+
+1. **Blank Screen Fix** - Added explicit `SizedBox` width constraints to panels (was blank due to `Row` with `mainAxisSize: MainAxisSize.min` and no intrinsic width)
+2. **Panel Width** - Set panel width to 120px (compact) or 160px (with names) for consistent display

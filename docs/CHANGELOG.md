@@ -47,6 +47,15 @@ All notable changes to this project will be documented in this file.
   - Tappable rows to view gate details
   - Centered layout with responsive planet name display
 
+#### Home Screen Improvements
+- **Saved Charts Quick Action** - New "Saved" button on home screen for quick access
+  - Three-row quick action layout: Charts, Social, Communication
+  - Direct navigation to Saved Charts screen
+- **Quick Actions Reorganization**
+  - Row 1: My Chart, Saved, Composite, Penta
+  - Row 2: Friends, Discover, Feed, Learning
+  - Row 3: Messages
+
 #### Social Platform Features
 - **Discovery & Matching** - Find users by HD type, profile, authority with compatibility scoring
   - HD compatibility algorithm (type, profile, channels, centers)
@@ -139,6 +148,8 @@ All notable changes to this project will be documented in this file.
   - Saved charts screen
 
 ### Fixed
+- **Planets Tab Layout** - Fixed blank screen issue by adding explicit width constraints to panels
+- **Saved Charts Loading** - Removed dependency on full chart calculation to prevent infinite loading spinner
 - **Affirmation Card Overflow** - Action buttons now wrap to prevent overflow on smaller screens or with longer translations
 - **Type Safety Issues** - Fixed dynamic type usage in chart_screen.dart and profile_screen.dart
 - **Back Button Navigation** - Learning and other sub-screens now properly handle back navigation with canPop() check

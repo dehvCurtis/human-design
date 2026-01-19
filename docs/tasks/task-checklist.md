@@ -1,6 +1,6 @@
 # Frontend Integration - Task Checklist
 
-**Last Updated:** 2026-01-17
+**Last Updated:** 2026-01-18
 
 ## Phase 1: Add Routes for Ready Features
 - [x] Add route constants to `app_router.dart`
@@ -83,9 +83,33 @@
 | Phase 6: Sharing | 2 | 1 | In Progress |
 | Phase 7: Navigation | 3 | 3 | Complete |
 | Phase 8: Bodygraph | 7 | 7 | Complete |
+| Phase 9: Planets Tab | 5 | 5 | Complete |
+| Phase 10: Quiz System | 5 | 5 | Complete |
+| Phase 11: Home Screen | 3 | 3 | Complete |
 | Localization | 3 | 3 | Complete |
 | Verification | 7 | 6 | In Progress |
-| **Total** | **47** | **45** | **96%** |
+| **Total** | **60** | **58** | **97%** |
+
+---
+
+## Phase 9: Planets Tab
+- [x] Create `planetary_panel.dart` widget
+- [x] Create `planet_activation_row.dart` widget
+- [x] Add Planets tab to chart_screen.dart
+- [x] Fix blank screen (add explicit width constraints)
+- [x] Add localization strings
+
+## Phase 10: Quiz System
+- [x] Create quiz feature module structure
+- [x] Add question generators for all categories
+- [x] Create quiz list, detail, taking, and results screens
+- [x] Add database migrations
+- [x] Seed factual quizzes
+
+## Phase 11: Home Screen Improvements
+- [x] Add "Saved" quick action button
+- [x] Reorganize quick actions into 3 rows
+- [x] Fix Saved Charts loading (remove chart calculation dependency)
 
 ---
 
@@ -94,6 +118,11 @@
 ### Pending Items
 1. `my_shares_screen.dart` - Share history/management screen
 2. Full sharing flow verification
+3. Auth configuration (email confirmation settings)
+
+### Known Issues Fixed (2026-01-18)
+- Planets Tab blank screen (added width constraints)
+- Saved Charts infinite loading (removed chart calculation dependency)
 
 ### Known Issues Fixed (2026-01-17)
 - Back button navigation in Learn/other screens
