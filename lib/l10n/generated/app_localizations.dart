@@ -3213,6 +3213,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completed'**
   String get gamification_completed;
+
+  /// No description provided for @common_copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get common_copy;
+
+  /// No description provided for @share_myShares.
+  ///
+  /// In en, this message translates to:
+  /// **'My Shares'**
+  String get share_myShares;
+
+  /// No description provided for @share_createNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Create New'**
+  String get share_createNew;
+
+  /// No description provided for @share_newLink.
+  ///
+  /// In en, this message translates to:
+  /// **'New Link'**
+  String get share_newLink;
+
+  /// No description provided for @share_noShares.
+  ///
+  /// In en, this message translates to:
+  /// **'No Shared Links'**
+  String get share_noShares;
+
+  /// No description provided for @share_noSharesMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Create share links to let others view your chart without needing an account.'**
+  String get share_noSharesMessage;
+
+  /// No description provided for @share_createFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Your First Link'**
+  String get share_createFirst;
+
+  /// No description provided for @share_activeLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Active Links'**
+  String share_activeLinks(int count);
+
+  /// No description provided for @share_expiredLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Expired'**
+  String share_expiredLinks(int count);
+
+  /// No description provided for @share_clearExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get share_clearExpired;
+
+  /// No description provided for @share_clearExpiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Expired Links'**
+  String get share_clearExpiredTitle;
+
+  /// No description provided for @share_clearExpiredMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove {count} expired links from your history.'**
+  String share_clearExpiredMessage(int count);
+
+  /// No description provided for @share_clearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear All'**
+  String get share_clearAll;
+
+  /// No description provided for @share_expiredCleared.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired links cleared'**
+  String get share_expiredCleared;
+
+  /// No description provided for @share_linkCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Link copied to clipboard'**
+  String get share_linkCopied;
+
+  /// No description provided for @share_revokeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke Link'**
+  String get share_revokeTitle;
+
+  /// No description provided for @share_revokeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently disable this share link. Anyone with the link will no longer be able to view your chart.'**
+  String get share_revokeMessage;
+
+  /// No description provided for @share_revoke.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke'**
+  String get share_revoke;
+
+  /// No description provided for @share_linkRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Link revoked'**
+  String get share_linkRevoked;
+
+  /// No description provided for @share_totalLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get share_totalLinks;
+
+  /// No description provided for @share_active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get share_active;
+
+  /// No description provided for @share_totalViews.
+  ///
+  /// In en, this message translates to:
+  /// **'Views'**
+  String get share_totalViews;
+
+  /// No description provided for @share_chartLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart Share'**
+  String get share_chartLink;
+
+  /// No description provided for @share_transitLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Transit Share'**
+  String get share_transitLink;
+
+  /// No description provided for @share_compatibilityLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Compatibility Report'**
+  String get share_compatibilityLink;
+
+  /// No description provided for @share_link.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Link'**
+  String get share_link;
+
+  /// No description provided for @share_views.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} views'**
+  String share_views(int count);
+
+  /// No description provided for @share_expired.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired'**
+  String get share_expired;
+
+  /// No description provided for @share_activeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get share_activeLabel;
+
+  /// No description provided for @share_expiredOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Expired {date}'**
+  String share_expiredOn(String date);
+
+  /// No description provided for @share_expiresIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires in {time}'**
+  String share_expiresIn(String time);
+
+  /// No description provided for @auth_emailNotConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your email'**
+  String get auth_emailNotConfirmed;
+
+  /// No description provided for @auth_resendConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend Confirmation Email'**
+  String get auth_resendConfirmation;
+
+  /// No description provided for @auth_confirmationSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmation email sent'**
+  String get auth_confirmationSent;
+
+  /// No description provided for @auth_checkEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your email for the confirmation link'**
+  String get auth_checkEmail;
 }
 
 class _AppLocalizationsDelegate

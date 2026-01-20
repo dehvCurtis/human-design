@@ -1686,4 +1686,123 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get gamification_completed => 'Виконано';
+
+  @override
+  String get common_copy => 'Копіювати';
+
+  @override
+  String get share_myShares => 'Мої посилання';
+
+  @override
+  String get share_createNew => 'Створити';
+
+  @override
+  String get share_newLink => 'Нове посилання';
+
+  @override
+  String get share_noShares => 'Немає посилань';
+
+  @override
+  String get share_noSharesMessage =>
+      'Створіть посилання, щоб інші могли переглядати вашу карту без реєстрації.';
+
+  @override
+  String get share_createFirst => 'Створити перше посилання';
+
+  @override
+  String share_activeLinks(int count) {
+    return '$count активних';
+  }
+
+  @override
+  String share_expiredLinks(int count) {
+    return '$count прострочених';
+  }
+
+  @override
+  String get share_clearExpired => 'Очистити';
+
+  @override
+  String get share_clearExpiredTitle => 'Видалити прострочені посилання';
+
+  @override
+  String share_clearExpiredMessage(int count) {
+    return 'Буде видалено $count прострочених посилань з історії.';
+  }
+
+  @override
+  String get share_clearAll => 'Видалити все';
+
+  @override
+  String get share_expiredCleared => 'Прострочені посилання видалено';
+
+  @override
+  String get share_linkCopied => 'Посилання скопійовано';
+
+  @override
+  String get share_revokeTitle => 'Відкликати посилання';
+
+  @override
+  String get share_revokeMessage =>
+      'Посилання буде деактивовано. Ті, хто має це посилання, більше не зможуть переглядати вашу карту.';
+
+  @override
+  String get share_revoke => 'Відкликати';
+
+  @override
+  String get share_linkRevoked => 'Посилання відкликано';
+
+  @override
+  String get share_totalLinks => 'Всього';
+
+  @override
+  String get share_active => 'Активні';
+
+  @override
+  String get share_totalViews => 'Перегляди';
+
+  @override
+  String get share_chartLink => 'Посилання на карту';
+
+  @override
+  String get share_transitLink => 'Посилання на транзит';
+
+  @override
+  String get share_compatibilityLink => 'Звіт сумісності';
+
+  @override
+  String get share_link => 'Посилання';
+
+  @override
+  String share_views(int count) {
+    return '$count перегл.';
+  }
+
+  @override
+  String get share_expired => 'Прострочено';
+
+  @override
+  String get share_activeLabel => 'Активне';
+
+  @override
+  String share_expiredOn(String date) {
+    return 'Прострочено $date';
+  }
+
+  @override
+  String share_expiresIn(String time) {
+    return 'Закінчується через $time';
+  }
+
+  @override
+  String get auth_emailNotConfirmed => 'Підтвердіть email';
+
+  @override
+  String get auth_resendConfirmation => 'Надіслати повторно';
+
+  @override
+  String get auth_confirmationSent => 'Лист надіслано';
+
+  @override
+  String get auth_checkEmail => 'Перевірте пошту для підтвердження';
 }

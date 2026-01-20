@@ -1679,4 +1679,123 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gamification_completed => 'Completed';
+
+  @override
+  String get common_copy => 'Copy';
+
+  @override
+  String get share_myShares => 'My Shares';
+
+  @override
+  String get share_createNew => 'Create New';
+
+  @override
+  String get share_newLink => 'New Link';
+
+  @override
+  String get share_noShares => 'No Shared Links';
+
+  @override
+  String get share_noSharesMessage =>
+      'Create share links to let others view your chart without needing an account.';
+
+  @override
+  String get share_createFirst => 'Create Your First Link';
+
+  @override
+  String share_activeLinks(int count) {
+    return '$count Active Links';
+  }
+
+  @override
+  String share_expiredLinks(int count) {
+    return '$count Expired';
+  }
+
+  @override
+  String get share_clearExpired => 'Clear';
+
+  @override
+  String get share_clearExpiredTitle => 'Clear Expired Links';
+
+  @override
+  String share_clearExpiredMessage(int count) {
+    return 'This will remove $count expired links from your history.';
+  }
+
+  @override
+  String get share_clearAll => 'Clear All';
+
+  @override
+  String get share_expiredCleared => 'Expired links cleared';
+
+  @override
+  String get share_linkCopied => 'Link copied to clipboard';
+
+  @override
+  String get share_revokeTitle => 'Revoke Link';
+
+  @override
+  String get share_revokeMessage =>
+      'This will permanently disable this share link. Anyone with the link will no longer be able to view your chart.';
+
+  @override
+  String get share_revoke => 'Revoke';
+
+  @override
+  String get share_linkRevoked => 'Link revoked';
+
+  @override
+  String get share_totalLinks => 'Total';
+
+  @override
+  String get share_active => 'Active';
+
+  @override
+  String get share_totalViews => 'Views';
+
+  @override
+  String get share_chartLink => 'Chart Share';
+
+  @override
+  String get share_transitLink => 'Transit Share';
+
+  @override
+  String get share_compatibilityLink => 'Compatibility Report';
+
+  @override
+  String get share_link => 'Share Link';
+
+  @override
+  String share_views(int count) {
+    return '$count views';
+  }
+
+  @override
+  String get share_expired => 'Expired';
+
+  @override
+  String get share_activeLabel => 'Active';
+
+  @override
+  String share_expiredOn(String date) {
+    return 'Expired $date';
+  }
+
+  @override
+  String share_expiresIn(String time) {
+    return 'Expires in $time';
+  }
+
+  @override
+  String get auth_emailNotConfirmed => 'Please confirm your email';
+
+  @override
+  String get auth_resendConfirmation => 'Resend Confirmation Email';
+
+  @override
+  String get auth_confirmationSent => 'Confirmation email sent';
+
+  @override
+  String get auth_checkEmail => 'Check your email for the confirmation link';
 }
