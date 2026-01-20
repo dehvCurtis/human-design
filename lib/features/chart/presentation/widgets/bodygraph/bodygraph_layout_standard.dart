@@ -93,13 +93,13 @@ class StandardBodygraphLayout extends BodygraphLayout {
       shape: CenterShape.heart,
     ),
     // HEART/EGO - Triangle pointing UP, positioned between G and Solar Plexus
-    // 30% smaller than previous size (53x42 * 0.7 = 37x29)
+    // Moved up 10px, 10% bigger than previous (37x29 * 1.1 = 41x32)
     HumanDesignCenter.heart: CenterPosition(
       center: HumanDesignCenter.heart,
       x: 255,
-      y: 355,
-      width: 37,  // 30% smaller
-      height: 29, // 30% smaller
+      y: 345,
+      width: 41,  // 10% bigger
+      height: 32, // 10% bigger
       shape: CenterShape.triangle,
     ),
     // SPLEEN - Equilateral triangle pointing RIGHT
@@ -206,13 +206,13 @@ class StandardBodygraphLayout extends BodygraphLayout {
 
     // ============================================
     // HEART/EGO CENTER GATES (4 gates)
-    // Heart at (255, 355), triangle pointing UP, width 37, height 29
-    // 51 at top tip (to G), 21 right side (to Throat), 26 bottom-left (to Spleen), 40 bottom-right (to Solar Plexus)
+    // Heart at (255, 345), triangle pointing UP, width 41, height 32
+    // 51 on LEFT side middle (to G), 21 RIGHT side middle (to Throat), 26 bottom-left (to Spleen), 40 bottom-right (to Solar Plexus)
     // ============================================
-    51: GatePosition(gate: 51, center: HumanDesignCenter.heart, x: 255, y: 341), // to 25 (G) - TOP TIP
-    21: GatePosition(gate: 21, center: HumanDesignCenter.heart, x: 264, y: 355), // to 45 (Throat) - RIGHT side (between 51 and 40)
-    26: GatePosition(gate: 26, center: HumanDesignCenter.heart, x: 237, y: 370), // to 44 (Spleen) - BOTTOM LEFT corner
-    40: GatePosition(gate: 40, center: HumanDesignCenter.heart, x: 273, y: 370), // to 37 (Solar Plexus) - BOTTOM RIGHT corner
+    51: GatePosition(gate: 51, center: HumanDesignCenter.heart, x: 245, y: 345), // to 25 (G) - LEFT side middle
+    21: GatePosition(gate: 21, center: HumanDesignCenter.heart, x: 266, y: 345), // to 45 (Throat) - RIGHT side middle
+    26: GatePosition(gate: 26, center: HumanDesignCenter.heart, x: 235, y: 361), // to 44 (Spleen) - BOTTOM LEFT corner
+    40: GatePosition(gate: 40, center: HumanDesignCenter.heart, x: 276, y: 361), // to 37 (Solar Plexus) - BOTTOM RIGHT corner
 
     // ============================================
     // SPLEEN CENTER GATES (7 gates on triangle edges)
@@ -311,64 +311,66 @@ class StandardBodygraphLayout extends BodygraphLayout {
       Offset(338, 368),  // Gate 36 on Solar Plexus (top right corner)
     ],
 
-    // Integration channels (10-20-34-57) - vertical spine on left side
-    // These channels all connect through a common pathway
+    // Integration channels (10-20-34-57)
+    // 20-57 is the diagonal backbone from Throat to Spleen
+    // Gate 10 connects at junction J1 (140, 265) - upper part of diagonal
+    // Gate 34 connects at junction J2 (105, 330) - lower part of diagonal
     '10-20': [
-      Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(167, 260),  // Waypoint
       Offset(165, 310),  // Gate 10 on G (left side)
+      Offset(140, 265),  // Junction J1 (where 10 meets the diagonal)
+      Offset(170, 210),  // Gate 20 on Throat (left edge)
     ],
     '10-34': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(167, 365),  // Waypoint
+      Offset(140, 265),  // Junction J1
+      Offset(105, 330),  // Junction J2 (where 34 meets the diagonal)
       Offset(170, 420),  // Gate 34 on Sacral (left edge)
     ],
     '10-57': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(122, 345),  // Waypoint
+      Offset(140, 265),  // Junction J1
       Offset(80, 379),   // Gate 57 on Spleen
     ],
     '20-34': [
       Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(167, 315),  // Waypoint through G area
+      Offset(105, 330),  // Junction J2 (where 34 meets the diagonal)
       Offset(170, 420),  // Gate 34 on Sacral (left edge)
     ],
     '20-57': [
       Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(125, 295),  // Waypoint
-      Offset(80, 379),   // Gate 57 on Spleen
+      Offset(80, 379),   // Gate 57 on Spleen (direct diagonal)
     ],
     '34-57': [
       Offset(170, 420),  // Gate 34 on Sacral (left edge)
-      Offset(125, 400),  // Waypoint
+      Offset(105, 330),  // Junction J2 (where 34 meets the diagonal)
       Offset(80, 379),   // Gate 57 on Spleen
     ],
 
-    // G to Heart - short connection with new Heart position
+    // G to Heart - connection to left side of Heart
     '25-51': [
       Offset(235, 310),  // Gate 25 on G (right side)
-      Offset(245, 325),  // Waypoint
-      Offset(255, 341),  // Gate 51 on Heart (TOP TIP)
+      Offset(240, 328),  // Waypoint
+      Offset(245, 345),  // Gate 51 on Heart (LEFT side middle)
     ],
 
-    // Throat to Heart - routes down-right to new Heart position
+    // Throat to Heart - routes down-right to Heart
     '21-45': [
       Offset(230, 240),  // Gate 45 on Throat (bottom right)
-      Offset(247, 297),  // Waypoint
-      Offset(264, 355),  // Gate 21 on Heart (RIGHT side)
+      Offset(248, 292),  // Waypoint
+      Offset(266, 345),  // Gate 21 on Heart (RIGHT side middle)
     ],
 
     // Heart to Spleen - from bottom-left corner
     '26-44': [
-      Offset(237, 370),  // Gate 26 on Heart (BOTTOM LEFT corner)
-      Offset(168, 380),  // Waypoint below G
+      Offset(235, 361),  // Gate 26 on Heart (BOTTOM LEFT corner)
+      Offset(167, 375),  // Waypoint below G
       Offset(99, 389),   // Gate 44 on Spleen
     ],
 
     // Heart to Solar Plexus - short diagonal
     '37-40': [
-      Offset(273, 370),  // Gate 40 on Heart (BOTTOM RIGHT corner)
-      Offset(287, 380),  // Waypoint
+      Offset(276, 361),  // Gate 40 on Heart (BOTTOM RIGHT corner)
+      Offset(288, 375),  // Waypoint
       Offset(301, 389),  // Gate 37 on Solar Plexus (top edge 2/3)
     ],
   };
