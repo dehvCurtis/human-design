@@ -159,6 +159,12 @@ All notable changes to this project will be documented in this file.
 - **Navigation Stack** - Sub-routes now use push() instead of go() for proper back navigation
 
 ### Changed
+- **Unified Chart Display** - All charts now use the same full-featured `ChartScreen` component
+  - `/chart` (My Chart) and `/chart/:id` (saved charts) now display identically
+  - Saved charts get full 6-tab view (Bodygraph, Planets, Properties, Gates, Channels, Chakras)
+  - Removed redundant `ChartDetailScreen` class (was showing simplified 400px view)
+  - `ChartScreen` now accepts optional `chartId` parameter for loading specific charts
+  - Dynamic AppBar: back button for saved charts, composite/penta buttons for user's chart
 - Onboarding screen now shows language selector before welcome content
 - Saved charts FAB now navigates to new chart entry screen
 - Chart providers now fetch saved charts from Supabase database

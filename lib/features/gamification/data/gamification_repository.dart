@@ -420,6 +420,54 @@ class GamificationRepository {
           description: '30-day streak bonus!',
         );
       }
+
+      // Auto-assign daily challenges
+      await autoAssignDailyChallenges();
     }
+  }
+
+  /// Auto-assign daily challenges if not already assigned today
+  Future<void> autoAssignDailyChallenges() async {
+    final userId = _currentUserId;
+    if (userId == null) return;
+
+    final today = DateTime.now();
+    final todayStart = DateTime(today.year, today.month, today.day);
+
+    // Check if daily challenges already assigned today
+    final existingToday = await _client
+        .from('user_challenges')
+        .select('challenge_id')
+        .eq('user_id', userId)
+        .gte('assigned_date', todayStart.toIso8601String());
+
+    final assignedChallengeIds = (existingToday as List)
+        .map((e) => e['challenge_id'] as String)
+        .toSet();
+
+    // Get active daily challenges
+    final dailyChallenges = await getActiveChallenges(type: ChallengeType.daily);
+
+    // Assign any not yet assigned for today
+    for (final challenge in dailyChallenges) {
+      if (!assignedChallengeIds.contains(challenge.id)) {
+        try {
+          await assignChallenge(challenge.id);
+        } catch (_) {
+          // Ignore if already assigned (race condition)
+        }
+      }
+    }
+  }
+
+  /// Initialize gamification for user (call on app start)
+  Future<void> initializeForUser() async {
+    if (_currentUserId == null) return;
+
+    // Ensure user_points record exists
+    await getUserPoints();
+
+    // Record daily login and auto-assign challenges
+    await recordDailyLogin();
   }
 }

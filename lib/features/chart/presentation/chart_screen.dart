@@ -9,6 +9,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../../../shared/widgets/dialogs/detail_bottom_sheet.dart';
 import '../../home/domain/home_providers.dart';
+import '../domain/chart_providers.dart';
 import '../domain/models/human_design_chart.dart';
 import 'widgets/bodygraph/bodygraph_data.dart';
 import 'widgets/bodygraph/bodygraph_widget.dart';
@@ -17,7 +18,10 @@ import 'widgets/chakra/chakra_chart_widget.dart';
 import 'widgets/chakra/chakra_data.dart';
 
 class ChartScreen extends ConsumerStatefulWidget {
-  const ChartScreen({super.key});
+  const ChartScreen({super.key, this.chartId});
+
+  /// Optional chart ID - when provided, loads that chart instead of user's chart
+  final String? chartId;
 
   @override
   ConsumerState<ChartScreen> createState() => _ChartScreenState();
@@ -41,13 +45,62 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
 
   @override
   Widget build(BuildContext context) {
-    final chartAsync = ref.watch(userChartProvider);
+    // Load chart based on chartId or fall back to user chart
+    final chartAsync = widget.chartId != null
+        ? ref.watch(chartByIdProvider(widget.chartId!))
+        : ref.watch(userChartProvider);
     final l10n = AppLocalizations.of(context)!;
+    final isViewingSavedChart = widget.chartId != null;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.chart_myChart),
+        leadingWidth: isViewingSavedChart ? null : 96,
+        leading: isViewingSavedChart
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => context.pop(),
+              )
+            : Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.favorite_border),
+                    tooltip: l10n.chart_composite,
+                    onPressed: () {
+                      context.push(AppRoutes.composite);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.hub_outlined),
+                    tooltip: l10n.penta_analysis,
+                    onPressed: () {
+                      context.push(AppRoutes.penta);
+                    },
+                  ),
+                ],
+              ),
+        title: isViewingSavedChart
+            ? chartAsync.whenOrNull(
+                  data: (chart) => Text(chart?.name ?? l10n.chart_myChart),
+                ) ??
+                Text(l10n.chart_myChart)
+            : Text(l10n.chart_myChart),
         actions: [
+          if (!isViewingSavedChart) ...[
+            IconButton(
+              icon: const Icon(Icons.bookmark_border),
+              tooltip: l10n.chart_savedCharts,
+              onPressed: () {
+                context.push(AppRoutes.savedCharts);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.add),
+              tooltip: l10n.chart_addChart,
+              onPressed: () {
+                context.push(AppRoutes.addChart);
+              },
+            ),
+          ],
           IconButton(
             icon: const Icon(Icons.share_outlined),
             onPressed: () {
@@ -107,7 +160,13 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
               Text('${l10n.error_chartCalculation}: $error'),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () => ref.invalidate(userChartProvider),
+                onPressed: () {
+                  if (widget.chartId != null) {
+                    ref.invalidate(chartByIdProvider(widget.chartId!));
+                  } else {
+                    ref.invalidate(userChartProvider);
+                  }
+                },
                 child: Text(l10n.common_retry),
               ),
             ],

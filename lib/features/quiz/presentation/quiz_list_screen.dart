@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/models/quiz.dart';
 import '../domain/models/quiz_progress.dart';
 import '../domain/quiz_providers.dart';
@@ -374,7 +376,9 @@ class _QuizStatsSheet extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final statsAsync = ref.watch(quizStatsProvider);
+    final progressAsync = ref.watch(quizProgressProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.all(24),
@@ -383,11 +387,21 @@ class _QuizStatsSheet extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Quiz Statistics',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  l10n.quiz_statistics,
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.share),
+                  onPressed: () => _shareProgress(context, stats, progressAsync.value),
+                  tooltip: l10n.quiz_shareProgress,
+                ),
+              ],
             ),
             const SizedBox(height: 24),
             Row(
@@ -396,7 +410,7 @@ class _QuizStatsSheet extends ConsumerWidget {
                   child: _StatCard(
                     icon: Icons.quiz,
                     value: '${stats.totalQuizzes}',
-                    label: 'Quizzes',
+                    label: l10n.quiz_quizzes,
                     color: AppColors.primary,
                   ),
                 ),
@@ -405,7 +419,7 @@ class _QuizStatsSheet extends ConsumerWidget {
                   child: _StatCard(
                     icon: Icons.help_outline,
                     value: '${stats.totalQuestions}',
-                    label: 'Questions',
+                    label: l10n.quiz_questionsLabel,
                     color: AppColors.secondary,
                   ),
                 ),
@@ -418,7 +432,7 @@ class _QuizStatsSheet extends ConsumerWidget {
                   child: _StatCard(
                     icon: Icons.percent,
                     value: '${(stats.overallAccuracy * 100).toInt()}%',
-                    label: 'Accuracy',
+                    label: l10n.quiz_accuracy,
                     color: AppColors.success,
                   ),
                 ),
@@ -427,7 +441,7 @@ class _QuizStatsSheet extends ConsumerWidget {
                   child: _StatCard(
                     icon: Icons.local_fire_department,
                     value: '${stats.longestStreak}',
-                    label: 'Best Streak',
+                    label: l10n.quiz_bestStreak,
                     color: AppColors.accent,
                   ),
                 ),
@@ -436,7 +450,7 @@ class _QuizStatsSheet extends ConsumerWidget {
             if (stats.strongestCategory != null) ...[
               const SizedBox(height: 24),
               Text(
-                'Strongest: ${stats.strongestCategory!.displayName}',
+                l10n.quiz_strongest(stats.strongestCategory!.displayName),
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: AppColors.success,
                 ),
@@ -445,17 +459,72 @@ class _QuizStatsSheet extends ConsumerWidget {
             if (stats.weakestCategory != null) ...[
               const SizedBox(height: 8),
               Text(
-                'Needs work: ${stats.weakestCategory!.displayName}',
+                l10n.quiz_needsWork(stats.weakestCategory!.displayName),
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: AppColors.warning,
                 ),
               ),
             ],
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton.icon(
+                onPressed: () => _shareProgress(context, stats, progressAsync.value),
+                icon: const Icon(Icons.share),
+                label: Text(l10n.quiz_shareProgress),
+              ),
+            ),
             const SizedBox(height: 16),
           ],
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) => const Text('Failed to load stats'),
+        error: (_, _) => Text(l10n.quiz_failedToLoadStats),
+      ),
+    );
+  }
+
+  Future<void> _shareProgress(BuildContext context, QuizStats stats, QuizProgress? progress) async {
+    final l10n = AppLocalizations.of(context)!;
+    final accuracyPercent = (stats.overallAccuracy * 100).toInt();
+
+    final emoji = accuracyPercent >= 90
+        ? '🏆'
+        : accuracyPercent >= 70
+            ? '🌟'
+            : accuracyPercent >= 50
+                ? '✨'
+                : '📚';
+
+    final streakEmoji = stats.currentStreak >= 7
+        ? '🔥🔥🔥'
+        : stats.currentStreak >= 3
+            ? '🔥🔥'
+            : stats.currentStreak >= 1
+                ? '🔥'
+                : '';
+
+    final strongestText = stats.strongestCategory != null
+        ? '\nStrongest area: ${stats.strongestCategory!.displayName}'
+        : '';
+
+    final text = '''
+$emoji My Human Design Learning Progress $emoji
+
+📊 Quiz Stats:
+• Quizzes completed: ${stats.totalQuizzes}
+• Questions answered: ${stats.totalQuestions}
+• Overall accuracy: $accuracyPercent%
+• Current streak: ${stats.currentStreak} $streakEmoji
+• Best streak: ${stats.longestStreak}$strongestText
+
+Learn about your Human Design at humandesign.app
+#HumanDesign #Learning #SelfDiscovery
+''';
+
+    await SharePlus.instance.share(
+      ShareParams(
+        text: text,
+        subject: l10n.quiz_shareProgressSubject,
       ),
     );
   }

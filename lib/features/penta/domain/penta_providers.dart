@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
+import '../../chart/domain/chart_providers.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../home/domain/home_providers.dart';
 import '../../profile/data/profile_repository.dart';
@@ -121,25 +122,59 @@ class PentaNotifier extends Notifier<PentaState> {
     return const PentaState();
   }
 
+  void setUseIndividualCharts(bool value) {
+    state = state.copyWith(
+      useIndividualCharts: value,
+      selectedGroupId: value ? null : state.selectedGroupId,
+      selectedChartIds: value ? state.selectedChartIds : const {},
+      penta: null,
+    );
+    if (!value) {
+      ref.read(selectedPentaGroupIdProvider.notifier).state = null;
+    }
+  }
+
+  void toggleChartSelection(String chartId) {
+    final newSelection = Set<String>.from(state.selectedChartIds);
+    if (newSelection.contains(chartId)) {
+      newSelection.remove(chartId);
+    } else if (newSelection.length < 5) {
+      // Penta supports 3-5 members
+      newSelection.add(chartId);
+    }
+    state = state.copyWith(selectedChartIds: newSelection, penta: null);
+  }
+
   void selectGroup(String? groupId) {
     ref.read(selectedPentaGroupIdProvider.notifier).state = groupId;
-    state = state.copyWith(selectedGroupId: groupId, isCalculating: false);
+    state = state.copyWith(selectedGroupId: groupId, isCalculating: false, penta: null);
   }
 
   Future<void> calculatePenta() async {
-    final selectedGroupId = state.selectedGroupId;
-    if (selectedGroupId == null) return;
+    final selectedIds = state.selectedChartIds;
+    if (selectedIds.length < 3) {
+      state = state.copyWith(
+        errorMessage: 'Select at least 3 charts for Penta analysis',
+      );
+      return;
+    }
 
     state = state.copyWith(isCalculating: true, errorMessage: null);
 
     try {
-      final charts =
-          await ref.read(pentaGroupChartsProvider(selectedGroupId).future);
+      final charts = <HumanDesignChart>[];
+
+      for (final chartId in selectedIds) {
+        final chart = await ref.read(chartByIdProvider(chartId).future);
+        if (chart != null) {
+          charts.add(chart);
+        }
+      }
 
       if (charts.length < 3) {
         state = state.copyWith(
           isCalculating: false,
-          errorMessage: 'Penta requires at least 3 members with chart data',
+          errorMessage: 'Could not load enough charts for Penta analysis',
         );
         return;
       }
@@ -174,27 +209,35 @@ final pentaNotifierProvider = NotifierProvider<PentaNotifier, PentaState>(() {
 class PentaState {
   const PentaState({
     this.selectedGroupId,
+    this.selectedChartIds = const {},
     this.penta,
     this.isCalculating = false,
     this.errorMessage,
+    this.useIndividualCharts = false,
   });
 
   final String? selectedGroupId;
+  final Set<String> selectedChartIds;
   final Penta? penta;
   final bool isCalculating;
   final String? errorMessage;
+  final bool useIndividualCharts;
 
   PentaState copyWith({
     String? selectedGroupId,
+    Set<String>? selectedChartIds,
     Penta? penta,
     bool? isCalculating,
     String? errorMessage,
+    bool? useIndividualCharts,
   }) {
     return PentaState(
       selectedGroupId: selectedGroupId ?? this.selectedGroupId,
+      selectedChartIds: selectedChartIds ?? this.selectedChartIds,
       penta: penta ?? this.penta,
       isCalculating: isCalculating ?? this.isCalculating,
       errorMessage: errorMessage,
+      useIndividualCharts: useIndividualCharts ?? this.useIndividualCharts,
     );
   }
 }

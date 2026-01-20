@@ -378,6 +378,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chart_share => 'Share Chart';
 
   @override
+  String get chart_createChart => 'Create Chart';
+
+  @override
   String get chart_composite => 'Composite Chart';
 
   @override
@@ -977,6 +980,111 @@ class AppLocalizationsEn extends AppLocalizations {
   String get penta_areasForAttention => 'Areas for Attention';
 
   @override
+  String get composite_title => 'Composite Chart';
+
+  @override
+  String get composite_infoText =>
+      'A composite chart shows the relationship dynamics between two people, revealing how your charts interact and complement each other.';
+
+  @override
+  String get composite_selectTwoCharts => 'Select 2 Charts';
+
+  @override
+  String get composite_calculate => 'Analyze Connection';
+
+  @override
+  String get composite_calculating => 'Analyzing...';
+
+  @override
+  String get composite_clearAnalysis => 'Clear Analysis';
+
+  @override
+  String get composite_connectionTheme => 'Connection Theme';
+
+  @override
+  String get composite_definedCenters => 'Defined';
+
+  @override
+  String get composite_undefinedCenters => 'Open';
+
+  @override
+  String get composite_score => 'Score';
+
+  @override
+  String get composite_themeVeryBonded =>
+      'Very bonded connection - you may feel deeply intertwined, which can be intense';
+
+  @override
+  String get composite_themeBonded =>
+      'Bonded connection - strong sense of togetherness and shared energy';
+
+  @override
+  String get composite_themeBalanced =>
+      'Balanced connection - healthy mix of togetherness and independence';
+
+  @override
+  String get composite_themeIndependent =>
+      'Independent connection - more space for individual growth';
+
+  @override
+  String get composite_themeVeryIndependent =>
+      'Very independent connection - intentional connection time helps strengthen bond';
+
+  @override
+  String get composite_electromagnetic => 'Electromagnetic Channels';
+
+  @override
+  String get composite_electromagneticDesc =>
+      'Intense attraction - you complete each other';
+
+  @override
+  String get composite_companionship => 'Companionship Channels';
+
+  @override
+  String get composite_companionshipDesc =>
+      'Comfort and stability - shared understanding';
+
+  @override
+  String get composite_dominance => 'Dominance Channels';
+
+  @override
+  String get composite_dominanceDesc => 'One teaches/conditions the other';
+
+  @override
+  String get composite_compromise => 'Compromise Channels';
+
+  @override
+  String get composite_compromiseDesc => 'Natural tension - requires awareness';
+
+  @override
+  String get composite_noConnections => 'No Channel Connections';
+
+  @override
+  String get composite_noConnectionsDesc =>
+      'These charts don\'t form any direct channel connections, but there may still be interesting gate interactions.';
+
+  @override
+  String get composite_noChartsTitle => 'No Charts Available';
+
+  @override
+  String get composite_noChartsDesc =>
+      'Create charts for yourself and others to compare your relationship dynamics.';
+
+  @override
+  String get composite_needMoreCharts => 'Need More Charts';
+
+  @override
+  String get composite_needMoreChartsDesc =>
+      'You need at least 2 charts to analyze a relationship. Add another chart to continue.';
+
+  @override
+  String get composite_selectTwoHint =>
+      'Select 2 charts to analyze their connection';
+
+  @override
+  String get composite_selectOneMore => 'Select 1 more chart';
+
+  @override
   String get premium_upgrade => 'Upgrade to Premium';
 
   @override
@@ -1486,6 +1594,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quiz_explanation => 'Explanation';
 
   @override
+  String get quiz_quizzes => 'Quizzes';
+
+  @override
+  String get quiz_questionsLabel => 'Questions';
+
+  @override
+  String get quiz_shareProgress => 'Share Progress';
+
+  @override
+  String get quiz_shareProgressSubject => 'My Human Design Learning Progress';
+
+  @override
+  String get quiz_sharePerfect =>
+      'I achieved a perfect score! I\'m mastering Human Design.';
+
+  @override
+  String get quiz_shareExcellent =>
+      'I\'m doing great on my Human Design learning journey!';
+
+  @override
+  String get quiz_shareGoodJob =>
+      'I\'m learning about Human Design. Every quiz helps me grow!';
+
+  @override
+  String quiz_shareSubject(String quizTitle, int score) {
+    return 'I scored $score% on \"$quizTitle\" - Human Design Quiz';
+  }
+
+  @override
+  String get quiz_failedToLoadStats => 'Failed to load stats';
+
+  @override
   String get planetary_personality => 'Personality';
 
   @override
@@ -1496,4 +1636,47 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get planetary_unconsciousPrenatal => 'Unconscious · 88° Prenatal';
+
+  @override
+  String get gamification_yourProgress => 'Your Progress';
+
+  @override
+  String get gamification_level => 'Level';
+
+  @override
+  String get gamification_points => 'pts';
+
+  @override
+  String get gamification_viewAll => 'View All';
+
+  @override
+  String get gamification_allChallengesComplete =>
+      'All daily challenges complete!';
+
+  @override
+  String get gamification_dailyChallenge => 'Daily Challenge';
+
+  @override
+  String get gamification_achievements => 'Achievements';
+
+  @override
+  String get gamification_challenges => 'Challenges';
+
+  @override
+  String get gamification_leaderboard => 'Leaderboard';
+
+  @override
+  String get gamification_streak => 'Streak';
+
+  @override
+  String get gamification_badges => 'Badges';
+
+  @override
+  String get gamification_earnedBadge => 'You earned a badge!';
+
+  @override
+  String get gamification_claimReward => 'Claim Reward';
+
+  @override
+  String get gamification_completed => 'Completed';
 }

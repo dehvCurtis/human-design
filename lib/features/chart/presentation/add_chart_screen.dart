@@ -7,6 +7,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../home/domain/home_providers.dart';
+import '../domain/chart_providers.dart';
 import '../domain/models/human_design_chart.dart';
 
 /// Screen for adding a chart for someone else
@@ -69,8 +70,11 @@ class _AddChartScreenState extends ConsumerState<AddChartScreen> {
         longitude: _birthLocation!.longitude,
       );
 
-      // Calculate the chart
-      final userId = ref.read(supabaseClientProvider).auth.currentUser?.id ?? '';
+      // Get current user ID - must be authenticated to save charts
+      final userId = ref.read(supabaseClientProvider).auth.currentUser?.id;
+      if (userId == null || userId.isEmpty) {
+        throw Exception('You must be signed in to save charts');
+      }
       final calculateChart = ref.read(calculateChartUseCaseProvider);
       final chart = await calculateChart.execute(
         userId: userId,
@@ -83,6 +87,9 @@ class _AddChartScreenState extends ConsumerState<AddChartScreen> {
       // Save the chart
       final profileRepo = ref.read(profileRepositoryProvider);
       await profileRepo.saveChart(chart);
+
+      // Invalidate the saved charts provider to refresh the list
+      ref.invalidate(userSavedChartsProvider);
 
       if (mounted) {
         // Show success message and navigate back

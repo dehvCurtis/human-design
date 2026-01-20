@@ -7,10 +7,13 @@ import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/widgets/language_selector.dart';
 import '../../chart/domain/models/human_design_chart.dart';
+import '../../gamification/domain/gamification_providers.dart';
 import '../../lifestyle/domain/transit_service.dart';
+import '../../notifications/domain/notification_providers.dart';
 import '../domain/home_providers.dart';
 import 'widgets/affirmation_card.dart';
 import 'widgets/chart_preview_card.dart';
+import 'widgets/gamification_summary_card.dart';
 import 'widgets/transit_summary_card.dart';
 import 'widgets/quick_actions_row.dart';
 
@@ -22,6 +25,12 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final userChartAsync = ref.watch(userChartProvider);
     final transits = ref.watch(todayTransitsProvider);
+
+    // Initialize gamification (daily login, challenges) on home screen load
+    ref.watch(gamificationInitProvider);
+
+    // Initialize push notifications
+    ref.watch(notificationInitProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -78,22 +87,6 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                // Daily Affirmation Card
-                affirmationAsync.when(
-                  data: (affirmation) => affirmation != null
-                      ? AffirmationCard(
-                          affirmation: affirmation,
-                          onRefresh: () {
-                            ref.refreshAffirmation(chart.id);
-                          },
-                        )
-                      : const SizedBox.shrink(),
-                  loading: () => const _LoadingCard(),
-                  error: (_, _) => const SizedBox.shrink(),
-                ),
-
-                const SizedBox(height: 16),
-
                 // Today's Transit Summary
                 transitImpactAsync.when(
                   data: (impact) => TransitSummaryCard(
@@ -111,6 +104,11 @@ class HomeScreen extends ConsumerWidget {
 
                 const SizedBox(height: 16),
 
+                // Gamification Progress
+                const GamificationSummaryCard(),
+
+                const SizedBox(height: 16),
+
                 // Quick Actions
                 QuickActionsRow(
                   onChartTap: () => context.go(AppRoutes.chart),
@@ -122,6 +120,22 @@ class HomeScreen extends ConsumerWidget {
                   onFeedTap: () => context.push(AppRoutes.feed),
                   onLearningTap: () => context.push(AppRoutes.learning),
                   onMessagesTap: () => context.push(AppRoutes.messages),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Daily Affirmation Card (moved below Quick Actions)
+                affirmationAsync.when(
+                  data: (affirmation) => affirmation != null
+                      ? AffirmationCard(
+                          affirmation: affirmation,
+                          onRefresh: () {
+                            ref.refreshAffirmation(chart.id);
+                          },
+                        )
+                      : const SizedBox.shrink(),
+                  loading: () => const _LoadingCard(),
+                  error: (_, _) => const SizedBox.shrink(),
                 ),
 
                 const SizedBox(height: 24),

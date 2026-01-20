@@ -54,23 +54,28 @@ class ProfileRepository {
 
   /// Save a chart to the database
   Future<void> saveChart(HumanDesignChart chart) async {
-    await _client.from('charts').upsert({
-      'id': chart.id,
-      'user_id': chart.userId,
-      'name': chart.name,
-      'birth_datetime': chart.birthDateTime.toIso8601String(),
-      'birth_location': chart.birthLocation.toJson(),
-      'timezone': chart.timezone,
-      'type': chart.type.name,
-      'authority': chart.authority.name,
-      'profile': chart.profile.notation,
-      'definition': chart.definition.name,
-      'defined_centers': chart.definedCenters.map((c) => c.name).toList(),
-      'conscious_gates': chart.consciousGates.toList(),
-      'unconscious_gates': chart.unconsciousGates.toList(),
-      'created_at': chart.createdAt.toIso8601String(),
-      'updated_at': DateTime.now().toIso8601String(),
-    });
+    try {
+      await _client.from('charts').upsert({
+        'id': chart.id,
+        'user_id': chart.userId,
+        'name': chart.name,
+        'birth_datetime': chart.birthDateTime.toIso8601String(),
+        'birth_location': chart.birthLocation.toJson(),
+        'timezone': chart.timezone,
+        'type': chart.type.name,
+        'authority': chart.authority.name,
+        'profile': chart.profile.notation,
+        'definition': chart.definition.name,
+        'defined_centers': chart.definedCenters.map((c) => c.name).toList(),
+        'conscious_gates': chart.consciousGates.toList(),
+        'unconscious_gates': chart.unconsciousGates.toList(),
+        'created_at': chart.createdAt.toIso8601String(),
+        'updated_at': DateTime.now().toIso8601String(),
+      });
+    } catch (e) {
+      // Re-throw with more context
+      throw Exception('Failed to save chart: $e');
+    }
   }
 
   /// Get user's charts
@@ -78,15 +83,20 @@ class ProfileRepository {
     final userId = _client.auth.currentUser?.id;
     if (userId == null) return [];
 
-    final response = await _client
-        .from('charts')
-        .select('id, name, type, created_at')
-        .eq('user_id', userId)
-        .order('created_at', ascending: false);
+    try {
+      final response = await _client
+          .from('charts')
+          .select('id, name, type, created_at')
+          .eq('user_id', userId)
+          .order('created_at', ascending: false);
 
-    return (response as List)
-        .map((json) => ChartSummary.fromJson(json))
-        .toList();
+      return (response as List)
+          .map((json) => ChartSummary.fromJson(json))
+          .toList();
+    } catch (e) {
+      // Return empty list if charts table doesn't exist or query fails
+      return [];
+    }
   }
 
   /// Get a specific chart by ID
