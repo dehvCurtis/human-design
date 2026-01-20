@@ -6,24 +6,23 @@ import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../chart/domain/chart_providers.dart';
-import '../domain/penta_calculator.dart';
-import '../domain/penta_providers.dart';
-import 'widgets/connection_card.dart';
-import 'widgets/health_score_meter.dart';
-import 'widgets/penta_role_card.dart';
+import '../domain/composite_calculator.dart';
+import '../domain/composite_providers.dart';
+import 'widgets/channel_connection_card.dart';
+import 'widgets/connection_theme_card.dart';
 
-/// Screen for Penta (small group dynamics) analysis
-class PentaScreen extends ConsumerWidget {
-  const PentaScreen({super.key});
+/// Screen for Composite (relationship analysis) between two people
+class CompositeScreen extends ConsumerWidget {
+  const CompositeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pentaState = ref.watch(pentaNotifierProvider);
+    final compositeState = ref.watch(compositeNotifierProvider);
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.penta_analysis),
+        title: Text(l10n.composite_title),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
@@ -32,13 +31,13 @@ class PentaScreen extends ConsumerWidget {
             },
             tooltip: l10n.chart_addChart,
           ),
-          if (pentaState.penta != null)
+          if (compositeState.result != null)
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () {
-                ref.read(pentaNotifierProvider.notifier).clearAnalysis();
+                ref.read(compositeNotifierProvider.notifier).clearAnalysis();
               },
-              tooltip: l10n.penta_clearAnalysis,
+              tooltip: l10n.composite_clearAnalysis,
             ),
         ],
       ),
@@ -51,36 +50,36 @@ class PentaScreen extends ConsumerWidget {
             _buildInfoCard(context),
             const SizedBox(height: 16),
 
-            // Chart selector - select from saved charts, friends, following
+            // Chart selector - select exactly 2 charts
             _ChartSelector(
-              selectedChartIds: pentaState.selectedChartIds,
+              selectedChartIds: compositeState.selectedChartIds,
               onToggleChart: (chartId) {
-                ref.read(pentaNotifierProvider.notifier).toggleChartSelection(chartId);
+                ref.read(compositeNotifierProvider.notifier).toggleChartSelection(chartId);
               },
             ),
             const SizedBox(height: 16),
 
-            // Calculate button - always visible but disabled if < 3 charts selected
-            if (pentaState.penta == null)
+            // Calculate button
+            if (compositeState.result == null)
               ElevatedButton.icon(
-                onPressed: (pentaState.isCalculating || pentaState.selectedChartIds.length < 3)
+                onPressed: (compositeState.isCalculating || compositeState.selectedChartIds.length != 2)
                     ? null
                     : () {
-                        ref.read(pentaNotifierProvider.notifier).calculatePenta();
+                        ref.read(compositeNotifierProvider.notifier).calculateComposite();
                       },
-                icon: pentaState.isCalculating
+                icon: compositeState.isCalculating
                     ? const SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Icon(Icons.hub_outlined),
+                    : const Icon(Icons.favorite_outline),
                 label: Text(
-                  pentaState.isCalculating
-                      ? l10n.penta_calculating
-                      : pentaState.selectedChartIds.length < 3
-                          ? 'Select ${3 - pentaState.selectedChartIds.length} more chart(s)'
-                          : l10n.penta_calculate,
+                  compositeState.isCalculating
+                      ? l10n.composite_calculating
+                      : compositeState.selectedChartIds.length != 2
+                          ? l10n.composite_selectTwoCharts
+                          : l10n.composite_calculate,
                 ),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(16),
@@ -88,15 +87,15 @@ class PentaScreen extends ConsumerWidget {
               ),
 
             // Error message
-            if (pentaState.errorMessage != null) ...[
+            if (compositeState.errorMessage != null) ...[
               const SizedBox(height: 16),
-              _buildErrorCard(context, pentaState.errorMessage!),
+              _buildErrorCard(context, compositeState.errorMessage!),
             ],
 
             // Results
-            if (pentaState.penta != null) ...[
+            if (compositeState.result != null) ...[
               const SizedBox(height: 24),
-              _buildPentaResults(context, pentaState.penta!, l10n),
+              _buildCompositeResults(context, compositeState.result!, l10n),
             ],
           ],
         ),
@@ -118,7 +117,7 @@ class PentaScreen extends ConsumerWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                l10n.penta_infoText,
+                l10n.composite_infoText,
                 style: theme.textTheme.bodyMedium,
               ),
             ),
@@ -153,139 +152,111 @@ class PentaScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPentaResults(BuildContext context, Penta penta, AppLocalizations l10n) {
+  Widget _buildCompositeResults(BuildContext context, CompositeResult result, AppLocalizations l10n) {
     final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Health Score
-        Center(
-          child: HealthScoreMeter(score: penta.healthScore),
+        // Connection Theme Card
+        ConnectionThemeCard(
+          definedCount: result.definedCentersCount,
+          undefinedCount: result.undefinedCentersCount,
+          compatibilityScore: result.compatibilityScore,
         ),
         const SizedBox(height: 24),
 
-        // Roles Section
-        Text(
-          l10n.penta_groupRoles,
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 12),
-        ...PentaRole.values.map((role) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: PentaRoleCard(
-              role: role,
-              roleInfo: penta.filledRoles[role],
-            ),
-          );
-        }),
-        const SizedBox(height: 24),
-
-        // Electromagnetic Connections
-        if (penta.electromagneticConnections.isNotEmpty) ...[
-          Text(
-            l10n.penta_electromagneticConnections,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+        // Electromagnetic Channels
+        if (result.electromagneticChannels.isNotEmpty) ...[
+          _buildSectionHeader(
+            context,
+            l10n.composite_electromagnetic,
+            l10n.composite_electromagneticDesc,
+            Icons.electric_bolt,
+            AppColors.accent,
           ),
           const SizedBox(height: 8),
-          Text(
-            l10n.penta_connectionsDescription,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondaryLight,
-            ),
-          ),
-          const SizedBox(height: 12),
-          ...penta.electromagneticConnections.map((connection) {
-            return ConnectionCard(connection: connection);
+          ...result.electromagneticChannels.map((connection) {
+            return ChannelConnectionCard(connection: connection);
           }),
-          const SizedBox(height: 24),
+          const SizedBox(height: 20),
         ],
 
-        // Strengths
-        if (penta.strengths.isNotEmpty) ...[
-          Text(
-            l10n.penta_strengths,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+        // Companionship Channels
+        if (result.companionshipChannels.isNotEmpty) ...[
+          _buildSectionHeader(
+            context,
+            l10n.composite_companionship,
+            l10n.composite_companionshipDesc,
+            Icons.favorite,
+            AppColors.success,
           ),
-          const SizedBox(height: 12),
-          Card(
-            color: AppColors.success.withAlpha(25),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: penta.strengths.map((strength) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.check_circle,
-                          color: AppColors.success,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            strength,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 8),
+          ...result.companionshipChannels.map((connection) {
+            return ChannelConnectionCard(connection: connection);
+          }),
+          const SizedBox(height: 20),
         ],
 
-        // Challenges
-        if (penta.challenges.isNotEmpty) ...[
-          Text(
-            l10n.penta_areasForAttention,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+        // Dominance Channels
+        if (result.dominanceChannels.isNotEmpty) ...[
+          _buildSectionHeader(
+            context,
+            l10n.composite_dominance,
+            l10n.composite_dominanceDesc,
+            Icons.school,
+            AppColors.warning,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
+          ...result.dominanceChannels.map((connection) {
+            return ChannelConnectionCard(connection: connection);
+          }),
+          const SizedBox(height: 20),
+        ],
+
+        // Compromise Channels
+        if (result.compromiseChannels.isNotEmpty) ...[
+          _buildSectionHeader(
+            context,
+            l10n.composite_compromise,
+            l10n.composite_compromiseDesc,
+            Icons.balance,
+            AppColors.info,
+          ),
+          const SizedBox(height: 8),
+          ...result.compromiseChannels.map((connection) {
+            return ChannelConnectionCard(connection: connection);
+          }),
+          const SizedBox(height: 20),
+        ],
+
+        // No connections message
+        if (!result.hasConnections) ...[
           Card(
-            color: AppColors.warning.withAlpha(25),
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(24),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: penta.challenges.map((challenge) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.warning_amber,
-                          color: AppColors.warning,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            challenge,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ),
-                      ],
+                children: [
+                  const Icon(
+                    Icons.link_off,
+                    size: 48,
+                    color: AppColors.textSecondaryLight,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.composite_noConnections,
+                    style: theme.textTheme.titleMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    l10n.composite_noConnectionsDesc,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textSecondaryLight,
                     ),
-                  );
-                }).toList(),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
           ),
@@ -296,10 +267,44 @@ class PentaScreen extends ConsumerWidget {
     );
   }
 
+  Widget _buildSectionHeader(
+    BuildContext context,
+    String title,
+    String description,
+    IconData icon,
+    Color color,
+  ) {
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, color: color, size: 24),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          description,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: AppColors.textSecondaryLight,
+          ),
+        ),
+      ],
+    );
+  }
 }
 
-/// Widget for selecting charts for Penta analysis
-/// Shows saved charts, friends, and following
+/// Widget for selecting charts for Composite analysis
+/// Shows saved charts - user must select exactly 2
 class _ChartSelector extends ConsumerWidget {
   const _ChartSelector({
     required this.selectedChartIds,
@@ -313,6 +318,7 @@ class _ChartSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final chartsAsync = ref.watch(userSavedChartsProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return chartsAsync.when(
       data: (charts) {
@@ -329,12 +335,42 @@ class _ChartSelector extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No Charts Available',
+                    l10n.composite_noChartsTitle,
                     style: theme.textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Create charts for family or friends to use them in Penta analysis.',
+                    l10n.composite_noChartsDesc,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textSecondaryLight,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        if (charts.length < 2) {
+          return Card(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                children: [
+                  const Icon(
+                    Icons.person_add,
+                    size: 48,
+                    color: AppColors.textSecondaryLight,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.composite_needMoreCharts,
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    l10n.composite_needMoreChartsDesc,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: AppColors.textSecondaryLight,
                     ),
@@ -356,7 +392,7 @@ class _ChartSelector extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Select 3-5 Charts',
+                        l10n.composite_selectTwoCharts,
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -365,16 +401,16 @@ class _ChartSelector extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: selectedChartIds.length >= 3
+                        color: selectedChartIds.length == 2
                             ? AppColors.success.withAlpha(25)
                             : AppColors.warning.withAlpha(25),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        '${selectedChartIds.length}/5',
+                        '${selectedChartIds.length}/2',
                         style: theme.textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: selectedChartIds.length >= 3
+                          color: selectedChartIds.length == 2
                               ? AppColors.success
                               : AppColors.warning,
                         ),
@@ -385,26 +421,43 @@ class _ChartSelector extends ConsumerWidget {
                 const SizedBox(height: 12),
                 ...charts.map((chart) {
                   final isSelected = selectedChartIds.contains(chart.id);
+                  final canSelect = isSelected || selectedChartIds.length < 2;
                   return CheckboxListTile(
                     value: isSelected,
-                    onChanged: (_) => onToggleChart(chart.id),
-                    title: Text(chart.name),
+                    onChanged: canSelect ? (_) => onToggleChart(chart.id) : null,
+                    title: Text(
+                      chart.name,
+                      style: TextStyle(
+                        color: canSelect ? null : AppColors.textSecondaryLight,
+                      ),
+                    ),
                     subtitle: Text(
                       '${chart.type.displayName}${chart.isCurrentUser ? ' • You' : ''}',
+                      style: TextStyle(
+                        color: canSelect
+                            ? AppColors.textSecondaryLight
+                            : AppColors.textSecondaryLight.withAlpha(100),
+                      ),
                     ),
                     secondary: CircleAvatar(
                       backgroundColor: isSelected
                           ? AppColors.primary
-                          : AppColors.textSecondaryLight.withAlpha(50),
+                          : canSelect
+                              ? AppColors.textSecondaryLight.withAlpha(50)
+                              : AppColors.textSecondaryLight.withAlpha(25),
                       child: chart.isCurrentUser
                           ? Icon(
                               Icons.person,
-                              color: isSelected ? Colors.white : AppColors.textSecondaryLight,
+                              color: isSelected
+                                  ? Colors.white
+                                  : AppColors.textSecondaryLight,
                             )
                           : Text(
                               chart.name.isNotEmpty ? chart.name[0].toUpperCase() : '?',
                               style: TextStyle(
-                                color: isSelected ? Colors.white : AppColors.textSecondaryLight,
+                                color: isSelected
+                                    ? Colors.white
+                                    : AppColors.textSecondaryLight,
                               ),
                             ),
                     ),
@@ -414,7 +467,7 @@ class _ChartSelector extends ConsumerWidget {
                     ),
                   );
                 }),
-                if (selectedChartIds.length < 3) ...[
+                if (selectedChartIds.length < 2 && charts.length >= 2) ...[
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -428,7 +481,9 @@ class _ChartSelector extends ConsumerWidget {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'Select at least ${3 - selectedChartIds.length} more chart(s)',
+                            selectedChartIds.isEmpty
+                                ? l10n.composite_selectTwoHint
+                                : l10n.composite_selectOneMore,
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: AppColors.info,
                             ),

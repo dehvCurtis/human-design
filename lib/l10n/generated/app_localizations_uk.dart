@@ -383,6 +383,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get chart_share => 'Поділитися картою';
 
   @override
+  String get chart_createChart => 'Створити карту';
+
+  @override
   String get chart_composite => 'Композитна карта';
 
   @override
@@ -983,6 +986,111 @@ class AppLocalizationsUk extends AppLocalizations {
   String get penta_areasForAttention => 'Області для уваги';
 
   @override
+  String get composite_title => 'Композитна карта';
+
+  @override
+  String get composite_infoText =>
+      'Композитна карта показує динаміку відносин між двома людьми, розкриваючи, як ваші карти взаємодіють та доповнюють одна одну.';
+
+  @override
+  String get composite_selectTwoCharts => 'Виберіть 2 карти';
+
+  @override
+  String get composite_calculate => 'Аналізувати зв\'язок';
+
+  @override
+  String get composite_calculating => 'Аналізуємо...';
+
+  @override
+  String get composite_clearAnalysis => 'Очистити аналіз';
+
+  @override
+  String get composite_connectionTheme => 'Тема зв\'язку';
+
+  @override
+  String get composite_definedCenters => 'Визначено';
+
+  @override
+  String get composite_undefinedCenters => 'Відкрито';
+
+  @override
+  String get composite_score => 'Оцінка';
+
+  @override
+  String get composite_themeVeryBonded =>
+      'Дуже пов\'язані відносини - ви можете відчувати глибоку переплетеність';
+
+  @override
+  String get composite_themeBonded =>
+      'Пов\'язані відносини - сильне відчуття єдності та спільної енергії';
+
+  @override
+  String get composite_themeBalanced =>
+      'Збалансовані відносини - здорове поєднання єдності та незалежності';
+
+  @override
+  String get composite_themeIndependent =>
+      'Незалежні відносини - більше простору для особистого зростання';
+
+  @override
+  String get composite_themeVeryIndependent =>
+      'Дуже незалежні відносини - усвідомлений час разом зміцнює зв\'язок';
+
+  @override
+  String get composite_electromagnetic => 'Електромагнітні канали';
+
+  @override
+  String get composite_electromagneticDesc =>
+      'Інтенсивне притягання - ви доповнюєте одне одного';
+
+  @override
+  String get composite_companionship => 'Канали товариства';
+
+  @override
+  String get composite_companionshipDesc =>
+      'Комфорт і стабільність - спільне розуміння';
+
+  @override
+  String get composite_dominance => 'Канали домінування';
+
+  @override
+  String get composite_dominanceDesc => 'Один вчить/впливає на іншого';
+
+  @override
+  String get composite_compromise => 'Канали компромісу';
+
+  @override
+  String get composite_compromiseDesc =>
+      'Природне напруження - потребує усвідомленості';
+
+  @override
+  String get composite_noConnections => 'Немає зв\'язків каналів';
+
+  @override
+  String get composite_noConnectionsDesc =>
+      'Ці карти не утворюють прямих зв\'язків каналів, але можуть бути цікаві взаємодії воріт.';
+
+  @override
+  String get composite_noChartsTitle => 'Немає доступних карт';
+
+  @override
+  String get composite_noChartsDesc =>
+      'Створіть карти для себе та інших, щоб порівняти динаміку відносин.';
+
+  @override
+  String get composite_needMoreCharts => 'Потрібно більше карт';
+
+  @override
+  String get composite_needMoreChartsDesc =>
+      'Для аналізу відносин потрібні мінімум 2 карти. Додайте ще одну карту.';
+
+  @override
+  String get composite_selectTwoHint => 'Виберіть 2 карти для аналізу зв\'язку';
+
+  @override
+  String get composite_selectOneMore => 'Виберіть ще 1 карту';
+
+  @override
   String get premium_upgrade => 'Перейти на Premium';
 
   @override
@@ -1493,6 +1601,38 @@ class AppLocalizationsUk extends AppLocalizations {
   String get quiz_explanation => 'Explanation';
 
   @override
+  String get quiz_quizzes => 'Quizzes';
+
+  @override
+  String get quiz_questionsLabel => 'Questions';
+
+  @override
+  String get quiz_shareProgress => 'Share Progress';
+
+  @override
+  String get quiz_shareProgressSubject => 'My Human Design Learning Progress';
+
+  @override
+  String get quiz_sharePerfect =>
+      'I achieved a perfect score! I\'m mastering Human Design.';
+
+  @override
+  String get quiz_shareExcellent =>
+      'I\'m doing great on my Human Design learning journey!';
+
+  @override
+  String get quiz_shareGoodJob =>
+      'I\'m learning about Human Design. Every quiz helps me grow!';
+
+  @override
+  String quiz_shareSubject(String quizTitle, int score) {
+    return 'I scored $score% on \"$quizTitle\" - Human Design Quiz';
+  }
+
+  @override
+  String get quiz_failedToLoadStats => 'Failed to load stats';
+
+  @override
   String get planetary_personality => 'Personality';
 
   @override
@@ -1503,4 +1643,47 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get planetary_unconsciousPrenatal => 'Unconscious · 88° Prenatal';
+
+  @override
+  String get gamification_yourProgress => 'Ваш прогрес';
+
+  @override
+  String get gamification_level => 'Рівень';
+
+  @override
+  String get gamification_points => 'очків';
+
+  @override
+  String get gamification_viewAll => 'Переглянути все';
+
+  @override
+  String get gamification_allChallengesComplete =>
+      'Всі щоденні завдання виконано!';
+
+  @override
+  String get gamification_dailyChallenge => 'Щоденне завдання';
+
+  @override
+  String get gamification_achievements => 'Досягнення';
+
+  @override
+  String get gamification_challenges => 'Завдання';
+
+  @override
+  String get gamification_leaderboard => 'Рейтинг';
+
+  @override
+  String get gamification_streak => 'Серія';
+
+  @override
+  String get gamification_badges => 'Значки';
+
+  @override
+  String get gamification_earnedBadge => 'Ви отримали значок!';
+
+  @override
+  String get gamification_claimReward => 'Отримати нагороду';
+
+  @override
+  String get gamification_completed => 'Виконано';
 }

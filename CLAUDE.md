@@ -32,16 +32,24 @@ lib/
 │   │   ├── domain/models/human_design_chart.dart
 │   │   ├── domain/usecases/calculate_chart.dart
 │   │   └── presentation/widgets/bodygraph/
+│   ├── discovery/               # User discovery & matching
 │   ├── ephemeris/               # Swiss Ephemeris integration
 │   │   ├── data/ephemeris_service.dart
 │   │   └── mappers/degree_to_gate_mapper.dart
+│   ├── feed/                    # Social content feed
+│   ├── gamification/            # Points, badges, challenges, leaderboards
 │   ├── home/                    # Home screen
+│   ├── learning/                # Content library & mentorship
 │   ├── lifestyle/               # Affirmations, transits
+│   ├── messaging/               # Direct messages
+│   ├── notifications/           # Push notifications (FCM)
 │   ├── penta/                   # Group chart calculations
 │   ├── profile/                 # User profile
-│   ├── social/                  # Friends, groups, sharing
-│   ├── gamification/            # Points, badges, streaks (WIP)
-│   └── subscription/            # Premium features (WIP)
+│   ├── quiz/                    # HD knowledge quizzes
+│   ├── sharing/                 # Chart export & sharing
+│   ├── social/                  # Friends, groups
+│   ├── stories/                 # 24h ephemeral content
+│   └── subscription/            # Premium features (RevenueCat)
 ├── shared/
 │   ├── providers/supabase_provider.dart
 │   └── widgets/                 # Reusable UI components
@@ -121,27 +129,56 @@ flutter build apk
 
 ## Current Implementation Status
 
-### Completed
+### Core Features ✅
 - ✅ Supabase auth (email, Apple, Google)
 - ✅ Swiss Ephemeris planetary calculations
-- ✅ Bodygraph visualization widget
-- ✅ Home screen with affirmations & transits
-- ✅ Profile & social repositories
-- ✅ Localization infrastructure
+- ✅ Bodygraph visualization widget with all 9 centers, gates, channels
+- ✅ Chart screen with 6 tabs (Bodygraph, Planets, Properties, Gates, Channels, Chakras)
+- ✅ Home screen with affirmations, transits, gamification progress
+- ✅ Saved charts management (create, rename, delete)
+- ✅ Profile screen with birth data editing
+- ✅ Settings screen with theme and language selection
+- ✅ Full localization (EN, RU, UK)
 
-### In Progress / Placeholder
-- ⚠️ Auth screens (SignIn, SignUp, BirthData)
-- ⚠️ Chart screen with full interactivity
-- ⚠️ Transits screen
-- ⚠️ Profile screen
-- ⚠️ Social screen
-- ⚠️ Settings screen
+### Social Platform ✅
+- ✅ Discovery screen with HD compatibility matching
+- ✅ Content feed with posts and reactions
+- ✅ Stories (24h ephemeral content)
+- ✅ Direct messaging with real-time delivery
+- ✅ Chart sharing with friends/groups
+
+### Gamification ✅
+- ✅ Points system with level progression
+- ✅ Daily login streaks with bonuses
+- ✅ Badge system with 5 categories
+- ✅ Daily/weekly/monthly challenges
+- ✅ Leaderboards (weekly, monthly, all-time)
+- ✅ Auto-assignment of daily challenges on login
+- ✅ Home screen gamification summary card
+
+### Learning & Quiz ✅
+- ✅ Quiz system with 138+ HD questions
+- ✅ Multiple quiz categories (Types, Centers, Authorities, etc.)
+- ✅ Quiz progress tracking and scoring
+- ✅ Content library for learning materials
+
+### Subscription/Premium ✅
+- ✅ Subscription models and repository
+- ✅ Premium screen with paywall UI
+- ✅ Subscription providers with purchase/restore
+- ✅ Share limit enforcement for free users
+- ⚠️ RevenueCat integration (scaffolded, needs App Store/Play Store setup)
+
+### Push Notifications ✅
+- ✅ Firebase Cloud Messaging integration
+- ✅ Notification service with local notifications
+- ✅ Topic subscriptions (transits, affirmations, challenges)
+- ✅ Notification preferences provider
+- ⚠️ Requires `flutterfire configure` for full setup
 
 ### Not Started
-- ❌ Gamification features
-- ❌ Subscription/premium features
-- ❌ Offline support (Drift)
-- ❌ Push notifications
+- ❌ Offline support (Drift local database)
+- ❌ App Store / Play Store submission
 
 ## Code Style Guidelines
 

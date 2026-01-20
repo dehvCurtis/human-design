@@ -404,7 +404,7 @@ class BodygraphPainter extends CustomPainter {
       case HumanDesignCenter.spleen:
         return _TriangleOrientation.right;
       case HumanDesignCenter.heart:
-        return _TriangleOrientation.up;
+        return _TriangleOrientation.up;  // Triangle pointing UP (tip on top)
       case HumanDesignCenter.solarPlexus:
         return _TriangleOrientation.left;
       default:

@@ -12,6 +12,7 @@ import '../../features/chart/presentation/add_chart_screen.dart';
 import '../../features/chart/presentation/chart_screen.dart';
 import '../../features/chart/presentation/saved_charts_screen.dart';
 import '../../features/home/presentation/home_screen.dart' as home;
+import '../../features/composite/presentation/composite_screen.dart';
 import '../../features/penta/presentation/penta_screen.dart';
 import '../../features/profile/presentation/edit_profile_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
@@ -33,6 +34,7 @@ import '../../features/learning/presentation/content_detail_screen.dart';
 import '../../features/learning/presentation/mentorship_screen.dart';
 import '../../features/learning/presentation/live_sessions_screen.dart';
 import '../../features/sharing/presentation/share_screen.dart';
+import '../../features/subscription/presentation/premium_screen.dart';
 import '../../features/quiz/presentation/quiz_list_screen.dart';
 import '../../features/quiz/presentation/quiz_detail_screen.dart';
 import '../../features/quiz/presentation/quiz_taking_screen.dart';
@@ -190,7 +192,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                 name: 'chartDetail',
                 builder: (context, state) {
                   final id = state.pathParameters['id']!;
-                  return ChartDetailScreen(chartId: id);
+                  return ChartScreen(chartId: id);
                 },
               ),
             ],
@@ -463,10 +465,33 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 }).toList(),
               ),
               const Spacer(),
-              const Icon(
-                Icons.auto_graph,
-                size: 80,
-                color: Color(0xFF6366F1),
+              // Crystal ball icon
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFFE0E7FF),
+                      const Color(0xFF818CF8),
+                      const Color(0xFF6366F1),
+                    ],
+                    stops: const [0.0, 0.6, 1.0],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF6366F1).withValues(alpha: 0.4),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.auto_awesome,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(height: 32),
               Text(
@@ -591,26 +616,6 @@ class MainShell extends StatelessWidget {
   }
 }
 
-class ChartDetailScreen extends StatelessWidget {
-  const ChartDetailScreen({super.key, required this.chartId});
-
-  final String chartId;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chart Detail'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-        ),
-      ),
-      body: Center(child: Text('Chart Detail: $chartId')),
-    );
-  }
-}
-
 class AffirmationsScreen extends StatelessWidget {
   const AffirmationsScreen({super.key});
 
@@ -623,37 +628,9 @@ class AffirmationsScreen extends StatelessWidget {
   }
 }
 
-class CompositeScreen extends StatelessWidget {
-  const CompositeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Composite Charts')),
-      body: const Center(child: Text('Relationship Analysis')),
-    );
-  }
-}
+// CompositeScreen moved to lib/features/composite/presentation/composite_screen.dart
 
 // PentaScreen moved to lib/features/penta/presentation/penta_screen.dart
-
-class PremiumScreen extends StatelessWidget {
-  const PremiumScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Premium'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-        ),
-      ),
-      body: const Center(child: Text('Upgrade to Premium')),
-    );
-  }
-}
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({super.key, this.error});

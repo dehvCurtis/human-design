@@ -51,24 +51,30 @@ final userSavedChartsProvider = FutureProvider<List<ChartSummary>>((ref) async {
   }
 
   // Fetch additional saved charts from repository
-  final repository = ref.watch(profileRepositoryProvider);
-  final savedCharts = await repository.getUserCharts();
+  // Wrapped in try-catch to handle case where charts table doesn't exist yet
+  try {
+    final repository = ref.watch(profileRepositoryProvider);
+    final savedCharts = await repository.getUserCharts();
 
-  for (final savedChart in savedCharts) {
-    // Parse the type from the string
-    final type = HumanDesignType.values.firstWhere(
-      (t) => t.name == savedChart.type,
-      orElse: () => HumanDesignType.generator,
-    );
+    for (final savedChart in savedCharts) {
+      // Parse the type from the string
+      final type = HumanDesignType.values.firstWhere(
+        (t) => t.name == savedChart.type,
+        orElse: () => HumanDesignType.generator,
+      );
 
-    charts.add(ChartSummary(
-      id: savedChart.id,
-      name: savedChart.name,
-      type: type,
-      profile: '', // Not stored in summary
-      createdAt: savedChart.createdAt,
-      isCurrentUser: false,
-    ));
+      charts.add(ChartSummary(
+        id: savedChart.id,
+        name: savedChart.name,
+        type: type,
+        profile: '', // Not stored in summary
+        createdAt: savedChart.createdAt,
+        isCurrentUser: false,
+      ));
+    }
+  } catch (e) {
+    // If charts table doesn't exist or query fails, just return user's chart
+    // This allows the feature to degrade gracefully
   }
 
   return charts;
@@ -124,6 +130,47 @@ HumanDesignChart _parseChartFromJson(Map<String, dynamic> json) {
 
   final undefinedCenters = HumanDesignCenter.values.toSet().difference(definedCenters);
 
+  // Parse gates from JSON
+  final consciousGatesList = (json['conscious_gates'] as List?)?.cast<int>() ?? [];
+  final unconsciousGatesList = (json['unconscious_gates'] as List?)?.cast<int>() ?? [];
+
+  final consciousGates = consciousGatesList.toSet();
+  final unconsciousGates = unconsciousGatesList.toSet();
+
+  // Create gate activations (we don't have full planet data, so use placeholder activations)
+  final consciousActivations = <HumanDesignPlanet, GateActivation>{};
+  final unconsciousActivations = <HumanDesignPlanet, GateActivation>{};
+
+  // Map gates to placeholder planets for visualization purposes
+  final consciousGateList = consciousGates.toList();
+  final unconsciousGateList = unconsciousGates.toList();
+  final planets = HumanDesignPlanet.values;
+
+  for (var i = 0; i < consciousGateList.length && i < planets.length; i++) {
+    consciousActivations[planets[i]] = GateActivation(
+      gate: consciousGateList[i],
+      line: 1, // Placeholder line
+      color: 1,
+      tone: 1,
+      base: 1,
+      degree: 0.0,
+    );
+  }
+
+  for (var i = 0; i < unconsciousGateList.length && i < planets.length; i++) {
+    unconsciousActivations[planets[i]] = GateActivation(
+      gate: unconsciousGateList[i],
+      line: 1, // Placeholder line
+      color: 1,
+      tone: 1,
+      base: 1,
+      degree: 0.0,
+    );
+  }
+
+  // Calculate active channels from gates
+  final activeChannels = DegreeToGateMapper.findActiveChannels(consciousGates, unconsciousGates);
+
   return HumanDesignChart(
     id: json['id'] as String,
     userId: json['user_id'] as String,
@@ -138,9 +185,9 @@ HumanDesignChart _parseChartFromJson(Map<String, dynamic> json) {
     definition: definition,
     definedCenters: definedCenters,
     undefinedCenters: undefinedCenters,
-    activeChannels: <ChannelActivation>[], // Would need to recalculate from gates
-    consciousActivations: <HumanDesignPlanet, GateActivation>{},
-    unconsciousActivations: <HumanDesignPlanet, GateActivation>{},
+    activeChannels: activeChannels,
+    consciousActivations: consciousActivations,
+    unconsciousActivations: unconsciousActivations,
     createdAt: DateTime.parse(json['created_at'] as String),
   );
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/models/quiz.dart';
 import '../domain/quiz_providers.dart';
 
@@ -283,12 +285,42 @@ class QuizResultsScreen extends ConsumerWidget {
     }
   }
 
-  void _shareResults(BuildContext context, Quiz quiz, QuizAttempt attempt) {
-    final text = 'I scored ${attempt.score}% on "${quiz.title}" in Human Design!';
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Share: $text')),
+  Future<void> _shareResults(BuildContext context, Quiz quiz, QuizAttempt attempt) async {
+    final l10n = AppLocalizations.of(context)!;
+
+    final emoji = attempt.score == 100
+        ? '🏆'
+        : attempt.score >= 80
+            ? '🌟'
+            : attempt.score >= 60
+                ? '✨'
+                : '📚';
+
+    final resultText = attempt.score == 100
+        ? l10n.quiz_sharePerfect
+        : attempt.score >= 80
+            ? l10n.quiz_shareExcellent
+            : l10n.quiz_shareGoodJob;
+
+    final text = '''
+$emoji Human Design Quiz Results $emoji
+
+Quiz: ${quiz.title}
+Score: ${attempt.score}%
+Correct: ${attempt.correctCount}/${attempt.totalQuestions}
+
+$resultText
+
+Learn more about your Human Design at humandesign.app
+#HumanDesign #Quiz #Learning
+''';
+
+    await SharePlus.instance.share(
+      ShareParams(
+        text: text,
+        subject: l10n.quiz_shareSubject(quiz.title, attempt.score),
+      ),
     );
-    // TODO: Implement actual sharing
   }
 }
 

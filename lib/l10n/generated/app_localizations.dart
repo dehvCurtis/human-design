@@ -778,6 +778,12 @@ abstract class AppLocalizations {
   /// **'Share Chart'**
   String get chart_share;
 
+  /// No description provided for @chart_createChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Chart'**
+  String get chart_createChart;
+
   /// No description provided for @chart_composite.
   ///
   /// In en, this message translates to:
@@ -1894,6 +1900,192 @@ abstract class AppLocalizations {
   /// **'Areas for Attention'**
   String get penta_areasForAttention;
 
+  /// No description provided for @composite_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Composite Chart'**
+  String get composite_title;
+
+  /// No description provided for @composite_infoText.
+  ///
+  /// In en, this message translates to:
+  /// **'A composite chart shows the relationship dynamics between two people, revealing how your charts interact and complement each other.'**
+  String get composite_infoText;
+
+  /// No description provided for @composite_selectTwoCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Select 2 Charts'**
+  String get composite_selectTwoCharts;
+
+  /// No description provided for @composite_calculate.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze Connection'**
+  String get composite_calculate;
+
+  /// No description provided for @composite_calculating.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing...'**
+  String get composite_calculating;
+
+  /// No description provided for @composite_clearAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Analysis'**
+  String get composite_clearAnalysis;
+
+  /// No description provided for @composite_connectionTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection Theme'**
+  String get composite_connectionTheme;
+
+  /// No description provided for @composite_definedCenters.
+  ///
+  /// In en, this message translates to:
+  /// **'Defined'**
+  String get composite_definedCenters;
+
+  /// No description provided for @composite_undefinedCenters.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get composite_undefinedCenters;
+
+  /// No description provided for @composite_score.
+  ///
+  /// In en, this message translates to:
+  /// **'Score'**
+  String get composite_score;
+
+  /// No description provided for @composite_themeVeryBonded.
+  ///
+  /// In en, this message translates to:
+  /// **'Very bonded connection - you may feel deeply intertwined, which can be intense'**
+  String get composite_themeVeryBonded;
+
+  /// No description provided for @composite_themeBonded.
+  ///
+  /// In en, this message translates to:
+  /// **'Bonded connection - strong sense of togetherness and shared energy'**
+  String get composite_themeBonded;
+
+  /// No description provided for @composite_themeBalanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced connection - healthy mix of togetherness and independence'**
+  String get composite_themeBalanced;
+
+  /// No description provided for @composite_themeIndependent.
+  ///
+  /// In en, this message translates to:
+  /// **'Independent connection - more space for individual growth'**
+  String get composite_themeIndependent;
+
+  /// No description provided for @composite_themeVeryIndependent.
+  ///
+  /// In en, this message translates to:
+  /// **'Very independent connection - intentional connection time helps strengthen bond'**
+  String get composite_themeVeryIndependent;
+
+  /// No description provided for @composite_electromagnetic.
+  ///
+  /// In en, this message translates to:
+  /// **'Electromagnetic Channels'**
+  String get composite_electromagnetic;
+
+  /// No description provided for @composite_electromagneticDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Intense attraction - you complete each other'**
+  String get composite_electromagneticDesc;
+
+  /// No description provided for @composite_companionship.
+  ///
+  /// In en, this message translates to:
+  /// **'Companionship Channels'**
+  String get composite_companionship;
+
+  /// No description provided for @composite_companionshipDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Comfort and stability - shared understanding'**
+  String get composite_companionshipDesc;
+
+  /// No description provided for @composite_dominance.
+  ///
+  /// In en, this message translates to:
+  /// **'Dominance Channels'**
+  String get composite_dominance;
+
+  /// No description provided for @composite_dominanceDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'One teaches/conditions the other'**
+  String get composite_dominanceDesc;
+
+  /// No description provided for @composite_compromise.
+  ///
+  /// In en, this message translates to:
+  /// **'Compromise Channels'**
+  String get composite_compromise;
+
+  /// No description provided for @composite_compromiseDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Natural tension - requires awareness'**
+  String get composite_compromiseDesc;
+
+  /// No description provided for @composite_noConnections.
+  ///
+  /// In en, this message translates to:
+  /// **'No Channel Connections'**
+  String get composite_noConnections;
+
+  /// No description provided for @composite_noConnectionsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'These charts don\'t form any direct channel connections, but there may still be interesting gate interactions.'**
+  String get composite_noConnectionsDesc;
+
+  /// No description provided for @composite_noChartsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Charts Available'**
+  String get composite_noChartsTitle;
+
+  /// No description provided for @composite_noChartsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Create charts for yourself and others to compare your relationship dynamics.'**
+  String get composite_noChartsDesc;
+
+  /// No description provided for @composite_needMoreCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Need More Charts'**
+  String get composite_needMoreCharts;
+
+  /// No description provided for @composite_needMoreChartsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'You need at least 2 charts to analyze a relationship. Add another chart to continue.'**
+  String get composite_needMoreChartsDesc;
+
+  /// No description provided for @composite_selectTwoHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select 2 charts to analyze their connection'**
+  String get composite_selectTwoHint;
+
+  /// No description provided for @composite_selectOneMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Select 1 more chart'**
+  String get composite_selectOneMore;
+
   /// No description provided for @premium_upgrade.
   ///
   /// In en, this message translates to:
@@ -2860,6 +3052,60 @@ abstract class AppLocalizations {
   /// **'Explanation'**
   String get quiz_explanation;
 
+  /// No description provided for @quiz_quizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get quiz_quizzes;
+
+  /// No description provided for @quiz_questionsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Questions'**
+  String get quiz_questionsLabel;
+
+  /// No description provided for @quiz_shareProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Progress'**
+  String get quiz_shareProgress;
+
+  /// No description provided for @quiz_shareProgressSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'My Human Design Learning Progress'**
+  String get quiz_shareProgressSubject;
+
+  /// No description provided for @quiz_sharePerfect.
+  ///
+  /// In en, this message translates to:
+  /// **'I achieved a perfect score! I\'m mastering Human Design.'**
+  String get quiz_sharePerfect;
+
+  /// No description provided for @quiz_shareExcellent.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m doing great on my Human Design learning journey!'**
+  String get quiz_shareExcellent;
+
+  /// No description provided for @quiz_shareGoodJob.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m learning about Human Design. Every quiz helps me grow!'**
+  String get quiz_shareGoodJob;
+
+  /// No description provided for @quiz_shareSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'I scored {score}% on \"{quizTitle}\" - Human Design Quiz'**
+  String quiz_shareSubject(String quizTitle, int score);
+
+  /// No description provided for @quiz_failedToLoadStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load stats'**
+  String get quiz_failedToLoadStats;
+
   /// No description provided for @planetary_personality.
   ///
   /// In en, this message translates to:
@@ -2883,6 +3129,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unconscious · 88° Prenatal'**
   String get planetary_unconsciousPrenatal;
+
+  /// No description provided for @gamification_yourProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Progress'**
+  String get gamification_yourProgress;
+
+  /// No description provided for @gamification_level.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get gamification_level;
+
+  /// No description provided for @gamification_points.
+  ///
+  /// In en, this message translates to:
+  /// **'pts'**
+  String get gamification_points;
+
+  /// No description provided for @gamification_viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get gamification_viewAll;
+
+  /// No description provided for @gamification_allChallengesComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'All daily challenges complete!'**
+  String get gamification_allChallengesComplete;
+
+  /// No description provided for @gamification_dailyChallenge.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Challenge'**
+  String get gamification_dailyChallenge;
+
+  /// No description provided for @gamification_achievements.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get gamification_achievements;
+
+  /// No description provided for @gamification_challenges.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenges'**
+  String get gamification_challenges;
+
+  /// No description provided for @gamification_leaderboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get gamification_leaderboard;
+
+  /// No description provided for @gamification_streak.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get gamification_streak;
+
+  /// No description provided for @gamification_badges.
+  ///
+  /// In en, this message translates to:
+  /// **'Badges'**
+  String get gamification_badges;
+
+  /// No description provided for @gamification_earnedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'You earned a badge!'**
+  String get gamification_earnedBadge;
+
+  /// No description provided for @gamification_claimReward.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim Reward'**
+  String get gamification_claimReward;
+
+  /// No description provided for @gamification_completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get gamification_completed;
 }
 
 class _AppLocalizationsDelegate

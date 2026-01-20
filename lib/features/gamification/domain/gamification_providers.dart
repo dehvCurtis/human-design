@@ -197,6 +197,12 @@ final gamificationNotifierProvider = NotifierProvider<GamificationNotifier, Gami
   return GamificationNotifier();
 });
 
+/// Provider that initializes gamification on app start (call once when user authenticated)
+final gamificationInitProvider = FutureProvider<void>((ref) async {
+  final repository = ref.watch(gamificationRepositoryProvider);
+  await repository.initializeForUser();
+});
+
 /// State class for gamification UI
 class GamificationState {
   const GamificationState({
