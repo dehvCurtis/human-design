@@ -1684,4 +1684,123 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get gamification_completed => 'Выполнено';
+
+  @override
+  String get common_copy => 'Копировать';
+
+  @override
+  String get share_myShares => 'Мои ссылки';
+
+  @override
+  String get share_createNew => 'Создать';
+
+  @override
+  String get share_newLink => 'Новая ссылка';
+
+  @override
+  String get share_noShares => 'Нет ссылок';
+
+  @override
+  String get share_noSharesMessage =>
+      'Создайте ссылки, чтобы другие могли просматривать вашу карту без регистрации.';
+
+  @override
+  String get share_createFirst => 'Создать первую ссылку';
+
+  @override
+  String share_activeLinks(int count) {
+    return '$count активных';
+  }
+
+  @override
+  String share_expiredLinks(int count) {
+    return '$count истекших';
+  }
+
+  @override
+  String get share_clearExpired => 'Очистить';
+
+  @override
+  String get share_clearExpiredTitle => 'Удалить истекшие ссылки';
+
+  @override
+  String share_clearExpiredMessage(int count) {
+    return 'Будет удалено $count истекших ссылок из истории.';
+  }
+
+  @override
+  String get share_clearAll => 'Удалить все';
+
+  @override
+  String get share_expiredCleared => 'Истекшие ссылки удалены';
+
+  @override
+  String get share_linkCopied => 'Ссылка скопирована';
+
+  @override
+  String get share_revokeTitle => 'Отозвать ссылку';
+
+  @override
+  String get share_revokeMessage =>
+      'Ссылка будет деактивирована. Те, у кого есть эта ссылка, больше не смогут просматривать вашу карту.';
+
+  @override
+  String get share_revoke => 'Отозвать';
+
+  @override
+  String get share_linkRevoked => 'Ссылка отозвана';
+
+  @override
+  String get share_totalLinks => 'Всего';
+
+  @override
+  String get share_active => 'Активные';
+
+  @override
+  String get share_totalViews => 'Просмотры';
+
+  @override
+  String get share_chartLink => 'Ссылка на карту';
+
+  @override
+  String get share_transitLink => 'Ссылка на транзит';
+
+  @override
+  String get share_compatibilityLink => 'Отчёт совместимости';
+
+  @override
+  String get share_link => 'Ссылка';
+
+  @override
+  String share_views(int count) {
+    return '$count просм.';
+  }
+
+  @override
+  String get share_expired => 'Истекла';
+
+  @override
+  String get share_activeLabel => 'Активна';
+
+  @override
+  String share_expiredOn(String date) {
+    return 'Истекла $date';
+  }
+
+  @override
+  String share_expiresIn(String time) {
+    return 'Истекает через $time';
+  }
+
+  @override
+  String get auth_emailNotConfirmed => 'Подтвердите email';
+
+  @override
+  String get auth_resendConfirmation => 'Отправить повторно';
+
+  @override
+  String get auth_confirmationSent => 'Письмо отправлено';
+
+  @override
+  String get auth_checkEmail => 'Проверьте почту для подтверждения';
 }

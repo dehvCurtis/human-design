@@ -313,7 +313,7 @@ class _ChartCard extends ConsumerWidget {
           child: BodygraphWidget(
             chart: chart,
             interactive: true,
-            showGateNumbers: false,
+            showGateNumbers: true,
             onGateTap: (gate) => _showGateDetail(context, gate),
             onChannelTap: (channel) => _showChannelDetail(context, channel),
             onCenterTap: (center) => _showCenterDetail(context, center, chart),

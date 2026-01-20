@@ -2,9 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.2.1] - 2026-01-20
+
+### Fixed
+
+#### Integration Channel Layout
+- **Redesigned Integration channels (10-20-34-57)** - Fixed visual layout to match standard Human Design bodygraph
+  - Channel 20-57 now forms the diagonal backbone from Throat to Spleen
+  - Gate 10 connects to the diagonal at junction J1 (140, 265)
+  - Gate 34 connects to the diagonal at junction J2 (105, 330)
+  - Channels now form proper perpendicular intersections
+  - All 6 Integration channels (10-20, 10-34, 10-57, 20-34, 20-57, 34-57) properly routed
+
+#### Heart/Ego Center Adjustments
+- **Repositioned Heart/Ego center** - Moved up 10px (y: 355→345) for better visual balance
+- **Resized Heart/Ego center** - Made 10% larger (37x29 → 41x32)
+- **Gate 51 repositioned** - Now on LEFT side middle of triangle (was at top tip)
+- **Gate 21 repositioned** - Now on RIGHT side middle of triangle
+- **Gates 26 & 40** - Adjusted to new bottom corners
+- **Channel paths updated** - 25-51, 21-45, 26-44, 37-40 routes recalculated
+
+#### Saved Charts Screen
+- **Gate numbers now visible** - Changed `showGateNumbers: false` to `true` in BodygraphWidget
+
+### Changed
+- Updated bodygraph layout documentation and comments
+- Integration channel comments now document junction points and routing logic
+
+## [0.2.0] - 2026-01-19
 
 ### Added
+
+#### Sharing Feature
+- **My Shares Screen** - Dedicated screen for managing share history
+  - View all active and expired share links
+  - Statistics dashboard (total links, active, views)
+  - Copy, revoke, and clear expired links
+  - Full localization support (EN, RU, UK)
+
+#### Semantic Versioning
+- Implemented semantic versioning (MAJOR.MINOR.PATCH+BUILD)
+- Added versioning documentation to `docs/STANDARDS.md`
+- Version history tracking
 
 #### Quiz System
 - **Comprehensive Question Generators** - 138+ factual Human Design questions

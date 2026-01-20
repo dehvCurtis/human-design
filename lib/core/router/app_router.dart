@@ -34,6 +34,7 @@ import '../../features/learning/presentation/content_detail_screen.dart';
 import '../../features/learning/presentation/mentorship_screen.dart';
 import '../../features/learning/presentation/live_sessions_screen.dart';
 import '../../features/sharing/presentation/share_screen.dart';
+import '../../features/sharing/presentation/my_shares_screen.dart';
 import '../../features/subscription/presentation/premium_screen.dart';
 import '../../features/quiz/presentation/quiz_list_screen.dart';
 import '../../features/quiz/presentation/quiz_detail_screen.dart';
@@ -77,6 +78,7 @@ class AppRoutes {
   static const String mentorship = '/mentorship';
   static const String sessions = '/sessions';
   static const String share = '/share';
+  static const String myShares = '/my-shares';
 
   // Quiz routes
   static const String quizzes = '/quizzes';
@@ -312,6 +314,11 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.share,
             name: 'share',
             builder: (context, state) => const ShareScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.myShares,
+            name: 'myShares',
+            builder: (context, state) => const MySharesScreen(),
           ),
           // Quiz routes
           GoRoute(

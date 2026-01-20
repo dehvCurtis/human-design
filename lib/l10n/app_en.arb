@@ -741,5 +741,73 @@
   "gamification_badges": "Badges",
   "gamification_earnedBadge": "You earned a badge!",
   "gamification_claimReward": "Claim Reward",
-  "gamification_completed": "Completed"
+  "gamification_completed": "Completed",
+
+  "common_copy": "Copy",
+
+  "share_myShares": "My Shares",
+  "share_createNew": "Create New",
+  "share_newLink": "New Link",
+  "share_noShares": "No Shared Links",
+  "share_noSharesMessage": "Create share links to let others view your chart without needing an account.",
+  "share_createFirst": "Create Your First Link",
+  "share_activeLinks": "{count} Active Links",
+  "@share_activeLinks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_expiredLinks": "{count} Expired",
+  "@share_expiredLinks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_clearExpired": "Clear",
+  "share_clearExpiredTitle": "Clear Expired Links",
+  "share_clearExpiredMessage": "This will remove {count} expired links from your history.",
+  "@share_clearExpiredMessage": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_clearAll": "Clear All",
+  "share_expiredCleared": "Expired links cleared",
+  "share_linkCopied": "Link copied to clipboard",
+  "share_revokeTitle": "Revoke Link",
+  "share_revokeMessage": "This will permanently disable this share link. Anyone with the link will no longer be able to view your chart.",
+  "share_revoke": "Revoke",
+  "share_linkRevoked": "Link revoked",
+  "share_totalLinks": "Total",
+  "share_active": "Active",
+  "share_totalViews": "Views",
+  "share_chartLink": "Chart Share",
+  "share_transitLink": "Transit Share",
+  "share_compatibilityLink": "Compatibility Report",
+  "share_link": "Share Link",
+  "share_views": "{count} views",
+  "@share_views": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_expired": "Expired",
+  "share_activeLabel": "Active",
+  "share_expiredOn": "Expired {date}",
+  "@share_expiredOn": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "share_expiresIn": "Expires in {time}",
+  "@share_expiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+
+  "auth_emailNotConfirmed": "Please confirm your email",
+  "auth_resendConfirmation": "Resend Confirmation Email",
+  "auth_confirmationSent": "Confirmation email sent",
+  "auth_checkEmail": "Check your email for the confirmation link"
 }

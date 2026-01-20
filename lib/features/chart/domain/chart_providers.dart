@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
@@ -99,6 +100,11 @@ final chartByIdProvider =
 
 /// Parse chart data from JSON
 HumanDesignChart _parseChartFromJson(Map<String, dynamic> json) {
+  // Debug: Log raw gate data from JSON
+  debugPrint('Parsing chart: ${json['name']}');
+  debugPrint('Raw conscious_gates: ${json['conscious_gates']}');
+  debugPrint('Raw unconscious_gates: ${json['unconscious_gates']}');
+
   final type = HumanDesignType.values.firstWhere(
     (t) => t.name == json['type'],
     orElse: () => HumanDesignType.generator,
@@ -170,6 +176,12 @@ HumanDesignChart _parseChartFromJson(Map<String, dynamic> json) {
 
   // Calculate active channels from gates
   final activeChannels = DegreeToGateMapper.findActiveChannels(consciousGates, unconsciousGates);
+
+  // Debug: Log parsed activations
+  debugPrint('Parsed conscious activations: ${consciousActivations.length} entries');
+  debugPrint('Parsed unconscious activations: ${unconsciousActivations.length} entries');
+  debugPrint('Conscious gates from activations: ${consciousActivations.values.map((a) => a.gate).toSet()}');
+  debugPrint('Unconscious gates from activations: ${unconsciousActivations.values.map((a) => a.gate).toSet()}');
 
   return HumanDesignChart(
     id: json['id'] as String,

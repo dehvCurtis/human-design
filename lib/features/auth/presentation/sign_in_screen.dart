@@ -79,12 +79,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     if (email.isEmpty) return;
 
     final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     try {
       await ref.read(authNotifierProvider.notifier).resendConfirmationEmail(email);
       scaffoldMessenger.showSnackBar(
-        const SnackBar(
-          content: Text('Confirmation email sent! Please check your inbox.'),
+        SnackBar(
+          content: Text(l10n.auth_confirmationSent),
           backgroundColor: AppColors.success,
         ),
       );
@@ -264,7 +265,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                             child: TextButton.icon(
                               onPressed: _resendConfirmationEmail,
                               icon: const Icon(Icons.email_outlined, size: 18),
-                              label: const Text('Resend Confirmation Email'),
+                              label: Text(l10n.auth_resendConfirmation),
                               style: TextButton.styleFrom(
                                 foregroundColor: AppColors.primary,
                               ),
