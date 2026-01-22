@@ -227,30 +227,69 @@ class _PlanetPositionCard extends StatelessWidget {
 
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: _getPlanetColor(planet).withAlpha(25),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(
-            _getPlanetIcon(planet),
-            color: _getPlanetColor(planet),
-            size: 20,
-          ),
-        ),
-        title: Text(planet.displayName),
-        subtitle: Text(
-          'Gate ${activation.gate}.${activation.line} - ${gateInfo?.name ?? 'Unknown'}',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppColors.textSecondaryLight,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: _getPlanetColor(planet).withAlpha(25),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    _getPlanetIcon(planet),
+                    color: _getPlanetColor(planet),
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        planet.displayName,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      Text(
+                        'Gate ${activation.gate}.${activation.line} - ${gateInfo?.name ?? 'Unknown'}',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppColors.textSecondaryLight,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                Text(
+                  '${activation.degree.toStringAsFixed(1)}°',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
+            ),
+            if (gateInfo != null) ...[
+              const SizedBox(height: 8),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: _getPlanetColor(planet).withAlpha(15),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  gateInfo.keynote,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontStyle: FontStyle.italic,
+                        color: AppColors.textSecondaryLight,
+                      ),
+                ),
               ),
-        ),
-        trailing: Text(
-          '${activation.degree.toStringAsFixed(1)}°',
-          style: Theme.of(context).textTheme.bodySmall,
+            ],
+          ],
         ),
       ),
     );

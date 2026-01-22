@@ -51,7 +51,7 @@ class SavedChartsScreen extends ConsumerWidget {
                     ? null
                     : () => _showDeleteDialog(context, ref, chart),
                 onShare: () {
-                  // TODO: Implement share
+                  context.push(AppRoutes.share);
                 },
               );
             },

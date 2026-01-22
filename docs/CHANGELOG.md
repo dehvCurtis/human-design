@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2026-01-22
+
+### Added
+
+#### Chart Screen Enhancements
+- **Sun Gate Quick Access** - Sun gate.line notation displayed in top-left of Chart screen app bar
+  - Tappable chip linking directly to Today's Transits screen
+  - Shows user's conscious Sun activation (e.g., "14.2")
+  - Styled with conscious (indigo) theme color
+
+#### Transit Screen Improvements
+- **Gate Keynotes in Planet Cards** - Each planet position now displays the gate keynote
+  - Colored box below planet info showing the I Ching keynote
+  - Planet-themed background colors for visual distinction
+  - Provides immediate insight into transit meanings
+
+### Changed
+
+#### Chart Screen App Bar Reorganization
+- **Left side**: Sun gate chip, Composite button, Penta button
+- **Right side**: Saved Charts, Add Chart, Share buttons
+- Improved leadingWidth to accommodate additional buttons
+
 ## [0.2.1] - 2026-01-20
 
 ### Fixed

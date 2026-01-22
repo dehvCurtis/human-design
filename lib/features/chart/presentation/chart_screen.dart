@@ -52,9 +52,14 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
     final l10n = AppLocalizations.of(context)!;
     final isViewingSavedChart = widget.chartId != null;
 
+    // Get Sun activation for display in app bar
+    final sunActivation = chartAsync.whenOrNull(
+      data: (chart) => chart?.consciousActivations[HumanDesignPlanet.sun],
+    );
+
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: isViewingSavedChart ? null : 96,
+        leadingWidth: isViewingSavedChart ? null : 184,
         leading: isViewingSavedChart
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
@@ -62,6 +67,28 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
               )
             : Row(
                 children: [
+                  // Sun gate button - navigates to Transits screen
+                  if (sunActivation != null)
+                    InkWell(
+                      onTap: () => context.go(AppRoutes.transits),
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        margin: const EdgeInsets.only(left: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.conscious.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          sunActivation.notation,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.conscious,
+                          ),
+                        ),
+                      ),
+                    ),
                   IconButton(
                     icon: const Icon(Icons.favorite_border),
                     tooltip: l10n.chart_composite,
