@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
@@ -10,7 +11,6 @@ import '../../auth/domain/auth_providers.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../chart/domain/pdf_export_service.dart';
 import '../../home/domain/home_providers.dart';
-import '../../social/presentation/widgets/share_chart_dialog.dart';
 import '../data/profile_repository.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -238,10 +238,25 @@ class _BirthDataCard extends StatelessWidget {
 
   final UserProfile? profile;
 
+  /// Convert UTC birth datetime to local time using the stored timezone
+  DateTime _getLocalBirthDateTime() {
+    if (profile?.birthDate == null) return DateTime.now();
+    if (profile?.timezone == null) return profile!.birthDate!;
+
+    try {
+      final location = tz.getLocation(profile!.timezone!);
+      return tz.TZDateTime.from(profile!.birthDate!, location);
+    } catch (e) {
+      // Fallback to UTC if timezone lookup fails
+      return profile!.birthDate!;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final hasBirthData = profile?.birthDate != null;
     final l10n = AppLocalizations.of(context)!;
+    final localBirthDateTime = _getLocalBirthDateTime();
 
     return Card(
       child: Padding(
@@ -258,7 +273,11 @@ class _BirthDataCard extends StatelessWidget {
                 ),
                 TextButton.icon(
                   onPressed: () {
-                    context.push(AppRoutes.birthData);
+                    // Use edit=true when user already has birth data
+                    final route = hasBirthData
+                        ? '${AppRoutes.birthData}?edit=true'
+                        : AppRoutes.birthData;
+                    context.push(route);
                   },
                   icon: Icon(hasBirthData ? Icons.edit : Icons.add, size: 16),
                   label: Text(hasBirthData ? l10n.common_edit : l10n.common_create),
@@ -270,12 +289,12 @@ class _BirthDataCard extends StatelessWidget {
               _DataRow(
                 icon: Icons.calendar_today,
                 label: l10n.profile_birthDate,
-                value: DateFormat.yMMMMd().format(profile!.birthDate!),
+                value: DateFormat.yMMMMd().format(localBirthDateTime),
               ),
               _DataRow(
                 icon: Icons.access_time,
                 label: l10n.profile_birthTime,
-                value: DateFormat.jm().format(profile!.birthDate!),
+                value: DateFormat.jm().format(localBirthDateTime),
               ),
               if (profile!.birthLocation != null)
                 _DataRow(

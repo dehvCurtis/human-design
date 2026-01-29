@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -278,7 +279,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   _SectionHeader(
                     title: l10n.profile_birthData,
                     action: TextButton(
-                      onPressed: () => context.push('/birth-data'),
+                      onPressed: () => context.push('/birth-data?edit=true'),
                       child: Text(profile.hasBirthData ? l10n.common_edit : 'Add'),
                     ),
                   ),
@@ -289,12 +290,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         _InfoRow(
                           icon: Icons.calendar_today,
                           label: 'Date',
-                          value: _formatDate(profile.birthDate!),
+                          value: _formatDate(profile.birthDate!, profile.timezone),
                         ),
                         _InfoRow(
                           icon: Icons.access_time,
                           label: 'Time',
-                          value: _formatTime(profile.birthDate!),
+                          value: _formatTime(profile.birthDate!, profile.timezone),
                         ),
                         if (profile.birthLocation != null)
                           _InfoRow(
@@ -379,14 +380,29 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     return '${parts[0][0]}${parts.last[0]}'.toUpperCase();
   }
 
-  String _formatDate(DateTime date) {
-    return '${date.month}/${date.day}/${date.year}';
+  /// Convert UTC birth datetime to local time using the stored timezone
+  DateTime _getLocalBirthDateTime(DateTime utcDate, String? timezone) {
+    if (timezone == null) return utcDate;
+
+    try {
+      final location = tz.getLocation(timezone);
+      return tz.TZDateTime.from(utcDate, location);
+    } catch (e) {
+      // Fallback to UTC if timezone lookup fails
+      return utcDate;
+    }
   }
 
-  String _formatTime(DateTime date) {
-    final hour = date.hour > 12 ? date.hour - 12 : date.hour;
-    final period = date.hour >= 12 ? 'PM' : 'AM';
-    return '${hour == 0 ? 12 : hour}:${date.minute.toString().padLeft(2, '0')} $period';
+  String _formatDate(DateTime date, String? timezone) {
+    final localDate = _getLocalBirthDateTime(date, timezone);
+    return '${localDate.month}/${localDate.day}/${localDate.year}';
+  }
+
+  String _formatTime(DateTime date, String? timezone) {
+    final localDate = _getLocalBirthDateTime(date, timezone);
+    final hour = localDate.hour > 12 ? localDate.hour - 12 : localDate.hour;
+    final period = localDate.hour >= 12 ? 'PM' : 'AM';
+    return '${hour == 0 ? 12 : hour}:${localDate.minute.toString().padLeft(2, '0')} $period';
   }
 
   String _getLanguageName(String code) {
