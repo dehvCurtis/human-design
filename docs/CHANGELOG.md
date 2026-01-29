@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.3] - 2026-01-29
+
+### Fixed
+
+#### Critical Chart Calculation Bug
+- **HD Wheel Offset** - Fixed missing 58° offset in gate mapping
+  - The Human Design wheel is offset from the tropical zodiac by 58°
+  - Gate 41 starts at 2° Aquarius (302° tropical), not 0° Aries
+  - Previously all gate calculations were off by ~10 gates
+  - Charts now match reference sites (humdes.com, Jovian Archive)
+  - Affects: Type, Profile, Authority, Definition, Channels, Gates - everything!
+
+#### Birth Time Display Bug
+- **Profile Screen** - Birth time now displays in local timezone instead of UTC
+  - Previously showed UTC time (e.g., "5:24 PM" instead of "10:24 AM")
+  - Added timezone conversion using stored IANA timezone string
+  - Fixed in both ProfileScreen and EditProfileScreen
+
+### Added
+
+#### Diagnostic Logging
+- **Chart Calculation Debug Output** - Enhanced logging for chart verification
+  - Displays Julian Day values, planetary longitudes, and gate mappings
+  - Shows key values (Sun, Earth gates) for easy comparison with reference charts
+  - Helps verify chart accuracy against humdes.com
+
+#### Test Coverage
+- **Gate Wheel Offset Tests** - New test file `test/gate_wheel_offset_test.dart`
+  - Verifies 0° Aries maps to Gate 25 (not Gate 41)
+  - Confirms all 64 gates are reachable
+  - Validates Incarnation Cross calculation
+  - Tests gate↔degree round-trip conversion
+
+### Technical Details
+
+The fix adds a constant offset in `DegreeToGateMapper`:
+```dart
+/// HD wheel offset from tropical zodiac.
+/// Gate 41 starts at 302° tropical (2° Aquarius), so we add 58° to align.
+static const double _hdWheelOffset = 58.0;
+```
+
 ## [0.2.2] - 2026-01-22
 
 ### Added

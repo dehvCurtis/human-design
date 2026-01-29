@@ -67,15 +67,23 @@ lib/
 - **12 Profiles**: 1/3, 1/4, 2/4, 2/5, 3/5, 3/6, 4/6, 4/1, 5/1, 5/2, 6/2, 6/3
 
 ### Chart Calculation Flow
-1. Convert birth datetime to Julian Day
-2. Calculate planetary positions (Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto, North Node, South Node)
+1. Convert birth datetime to Julian Day (UTC)
+2. Calculate planetary positions using Swiss Ephemeris (tropical zodiac longitude)
 3. Calculate **conscious activations** (at birth)
 4. Find prenatal date (88° before birth Sun position)
 5. Calculate **unconscious activations** (at prenatal)
-6. Map degrees → gates → lines
-7. Determine active channels (both gates defined)
-8. Determine defined centers (from active channels)
-9. Calculate Type, Authority, Profile, Definition
+6. **Apply 58° HD wheel offset** to convert tropical longitude to HD gate position
+7. Map HD wheel position → gates → lines (5.625° per gate, 0.9375° per line)
+8. Determine active channels (both gates defined)
+9. Determine defined centers (from active channels)
+10. Calculate Type, Authority, Profile, Definition
+
+### Critical: HD Wheel Offset
+The Human Design mandala is offset from the tropical zodiac by **58°**:
+- Gate 41 starts at 2° Aquarius (302° tropical), NOT 0° Aries
+- 0° Aries (Spring Equinox) = Gate 25, not Gate 41
+- Implementation: `hdWheelPosition = (tropicalLongitude + 58.0) % 360`
+- Without this offset, all gates will be wrong by ~10 positions
 
 ### Key Files for Chart Logic
 - `lib/features/ephemeris/data/ephemeris_service.dart` - Swiss Ephemeris calculations
@@ -193,9 +201,14 @@ flutter build apk
 ## Testing Strategy
 
 - **Unit tests**: Chart calculations, mappers, services
+  - `test/gate_wheel_offset_test.dart` - Verifies 58° HD wheel offset
+  - `test/timezone_fix_test.dart` - Verifies timezone conversions
 - **Widget tests**: Bodygraph rendering, form validation
 - **Integration tests**: Auth flows, chart generation
 - **Manual verification**: Chart accuracy against humdes.com
+  - Compare Conscious/Design Sun gates
+  - Verify Type, Profile, Authority
+  - Check Incarnation Cross (Sun/Earth gates)
 
 ## Common Tasks
 
@@ -213,5 +226,8 @@ flutter build apk
 ### Modifying chart calculations
 1. Review `ephemeris_service.dart` for planetary position changes
 2. Review `degree_to_gate_mapper.dart` for gate mapping changes
+   - **Important**: The 58° HD wheel offset is applied here
+   - Do NOT remove `_hdWheelOffset` constant
 3. Review `calculate_chart.dart` for type/authority logic changes
-4. Test against known charts for accuracy
+4. Run `flutter test test/gate_wheel_offset_test.dart` to verify accuracy
+5. Test against humdes.com with known birth data
