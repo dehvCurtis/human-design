@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sweph/sweph.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/constants/human_design_constants.dart';
 import '../mappers/degree_to_gate_mapper.dart';
@@ -139,20 +140,64 @@ class EphemerisService {
   }
 
   /// Convert a DateTime to Julian Day Number
-  double dateTimeToJulianDay(DateTime dateTime) {
-    // Convert to UTC for calculation
-    final utc = dateTime.toUtc();
+  ///
+  /// [dateTime] - A DateTime representing the LOCAL birth time (naive, no timezone info)
+  /// [timezone] - IANA timezone string (e.g., 'America/Denver') for the birth location
+  ///
+  /// If timezone is provided, the dateTime is interpreted as local time in that
+  /// timezone and converted to UTC. If not provided, falls back to device timezone.
+  double dateTimeToJulianDay(DateTime dateTime, {String? timezone}) {
+    DateTime utcDateTime;
+
+    // DEBUG: Log input values
+    print('DEBUG dateTimeToJulianDay:');
+    print('  Input dateTime: $dateTime (isUtc: ${dateTime.isUtc})');
+    print('  Input timezone: $timezone');
+
+    if (timezone != null && !dateTime.isUtc) {
+      // Only convert if the DateTime is NOT already UTC
+      // If it's UTC, the timezone offset was already applied when storing
+      try {
+        // Convert local birth time to UTC using the birth location's timezone
+        final location = tz.getLocation(timezone);
+        final localTime = tz.TZDateTime(
+          location,
+          dateTime.year,
+          dateTime.month,
+          dateTime.day,
+          dateTime.hour,
+          dateTime.minute,
+          dateTime.second,
+          dateTime.millisecond,
+        );
+        utcDateTime = localTime.toUtc();
+        print('  TZDateTime local: $localTime');
+        print('  Converted to UTC: $utcDateTime');
+      } catch (e) {
+        // Fallback to device timezone if timezone lookup fails
+        print('  ERROR: Timezone lookup failed: $e');
+        utcDateTime = dateTime.toUtc();
+      }
+    } else if (dateTime.isUtc) {
+      // Already UTC - the time was properly converted at storage time
+      print('  Already UTC, using as-is (correct path for stored birth data)');
+      utcDateTime = dateTime;
+    } else {
+      // No timezone provided and not UTC - assume device timezone (legacy behavior)
+      print('  No timezone provided, using device timezone');
+      utcDateTime = dateTime.toUtc();
+    }
 
     // Calculate decimal hours
-    final hours = utc.hour +
-        (utc.minute / 60.0) +
-        (utc.second / 3600.0) +
-        (utc.millisecond / 3600000.0);
+    final hours = utcDateTime.hour +
+        (utcDateTime.minute / 60.0) +
+        (utcDateTime.second / 3600.0) +
+        (utcDateTime.millisecond / 3600000.0);
 
     return Sweph.swe_julday(
-      utc.year,
-      utc.month,
-      utc.day,
+      utcDateTime.year,
+      utcDateTime.month,
+      utcDateTime.day,
       hours,
       CalendarType.SE_GREG_CAL,
     );
@@ -196,10 +241,16 @@ class EphemerisService {
 
   /// Calculate complete gate activations for a birth chart
   ///
+  /// [birthDateTime] - Local birth time (naive DateTime)
+  /// [timezone] - IANA timezone string for the birth location
+  ///
   /// Returns both conscious (birth) and unconscious (88° prenatal) activations
-  ChartActivations calculateChartActivations(DateTime birthDateTime) {
-    // Convert birth time to Julian Day
-    final birthJd = dateTimeToJulianDay(birthDateTime);
+  ChartActivations calculateChartActivations(
+    DateTime birthDateTime, {
+    String? timezone,
+  }) {
+    // Convert birth time to Julian Day using the birth location's timezone
+    final birthJd = dateTimeToJulianDay(birthDateTime, timezone: timezone);
 
     // Calculate conscious (birth) positions
     final consciousPositions = calculatePlanetaryPositions(birthJd);
@@ -224,6 +275,57 @@ class EphemerisService {
         );
       }
     }
+
+    // DEBUG: Enhanced diagnostic logging for chart verification
+    print('');
+    print('═══════════════════════════════════════════════════════════════');
+    print('DEBUG CHART CALCULATION - Compare with humdes.com reference');
+    print('═══════════════════════════════════════════════════════════════');
+    print('Input birth datetime: $birthDateTime (isUtc: ${birthDateTime.isUtc})');
+    print('Input timezone: $timezone');
+    print('');
+    print('JULIAN DAYS:');
+    print('  Birth JD:    $birthJd');
+    print('  Prenatal JD: $prenatalJd');
+    print('  Days before birth: ${birthJd - prenatalJd}');
+    print('');
+    print('CONSCIOUS (Personality) - Planetary Longitudes:');
+    for (final planet in [
+      HumanDesignPlanet.sun,
+      HumanDesignPlanet.earth,
+      HumanDesignPlanet.moon,
+      HumanDesignPlanet.northNode,
+      HumanDesignPlanet.southNode,
+    ]) {
+      if (consciousPositions.containsKey(planet)) {
+        final longitude = consciousPositions[planet]!;
+        final activation = consciousActivations[planet]!;
+        print('  ${planet.name.padRight(10)}: ${longitude.toStringAsFixed(4)}° → Gate ${activation.notation}');
+      }
+    }
+    print('');
+    print('UNCONSCIOUS (Design) - Planetary Longitudes:');
+    for (final planet in [
+      HumanDesignPlanet.sun,
+      HumanDesignPlanet.earth,
+      HumanDesignPlanet.moon,
+      HumanDesignPlanet.northNode,
+      HumanDesignPlanet.southNode,
+    ]) {
+      if (unconsciousPositions.containsKey(planet)) {
+        final longitude = unconsciousPositions[planet]!;
+        final activation = unconsciousActivations[planet]!;
+        print('  ${planet.name.padRight(10)}: ${longitude.toStringAsFixed(4)}° → Gate ${activation.notation}');
+      }
+    }
+    print('');
+    print('KEY VALUES TO COMPARE WITH humdes.com:');
+    print('  Conscious Sun:   ${consciousActivations[HumanDesignPlanet.sun]?.notation}');
+    print('  Conscious Earth: ${consciousActivations[HumanDesignPlanet.earth]?.notation}');
+    print('  Design Sun:      ${unconsciousActivations[HumanDesignPlanet.sun]?.notation}');
+    print('  Design Earth:    ${unconsciousActivations[HumanDesignPlanet.earth]?.notation}');
+    print('═══════════════════════════════════════════════════════════════');
+    print('');
 
     return ChartActivations(
       birthDateTime: birthDateTime,
