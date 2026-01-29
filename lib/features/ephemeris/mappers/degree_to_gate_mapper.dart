@@ -4,6 +4,10 @@ import 'package:human_design/core/constants/human_design_constants.dart';
 ///
 /// The Human Design wheel maps the 360° zodiac to 64 gates,
 /// with each gate spanning 5.625° and containing 6 lines.
+///
+/// IMPORTANT: The HD wheel is offset from the tropical zodiac.
+/// Gate 41 starts at 2°00' Aquarius (302° tropical), not 0° Aries.
+/// We apply a 58° offset to convert tropical longitude to HD wheel position.
 class DegreeToGateMapper {
   DegreeToGateMapper._();
 
@@ -13,14 +17,24 @@ class DegreeToGateMapper {
   /// Degrees per line (5.625° / 6 lines)
   static const double _degreesPerLine = 0.9375;
 
+  /// HD wheel offset from tropical zodiac.
+  /// Gate 41 starts at 302° tropical (2° Aquarius), so we add 58° to align.
+  static const double _hdWheelOffset = 58.0;
+
+  /// Enable verbose debug logging for gate mapping
+  static bool debugLogging = false;
+
   /// Maps a zodiac degree to a gate and line.
   ///
-  /// [degree] should be a value from 0-360, where:
-  /// - 0° = 0° Aries
+  /// [degree] should be a tropical zodiac value from 0-360, where:
+  /// - 0° = 0° Aries (Spring Equinox)
   /// - 30° = 0° Taurus
   /// - 90° = 0° Cancer
   /// - 180° = 0° Libra
   /// - 270° = 0° Capricorn
+  ///
+  /// The HD wheel is offset so that Gate 41 begins at 2° Aquarius (302° tropical).
+  /// This means 0° Aries maps to Gate 25 (not Gate 41).
   ///
   /// Returns a [GateActivation] containing the gate number (1-64) and line (1-6).
   static GateActivation mapDegreeToGate(double degree) {
@@ -30,14 +44,22 @@ class DegreeToGateMapper {
       normalizedDegree += 360;
     }
 
+    // Apply HD wheel offset: Gate 41 starts at 302° tropical, not 0°
+    // Adding 58° shifts the wheel so 0° tropical → Gate 25 (correct)
+    double hdWheelPosition = (normalizedDegree + _hdWheelOffset) % 360;
+
     // Calculate which gate index (0-63) based on position in wheel
-    final int gateIndex = (normalizedDegree / _degreesPerGate).floor();
+    final int gateIndex = (hdWheelPosition / _degreesPerGate).floor();
 
     // Get the gate number from the wheel sequence
     final int gateNumber = gateWheelSequence[gateIndex];
 
+    if (debugLogging) {
+      print('  DEBUG mapDegreeToGate: ${degree.toStringAsFixed(4)}° tropical → ${hdWheelPosition.toStringAsFixed(4)}° HD wheel → index $gateIndex → Gate $gateNumber');
+    }
+
     // Calculate position within the gate for line determination
-    final double positionInGate = normalizedDegree % _degreesPerGate;
+    final double positionInGate = hdWheelPosition % _degreesPerGate;
 
     // Calculate line number (1-6)
     int lineNumber = (positionInGate / _degreesPerLine).floor() + 1;
@@ -69,13 +91,17 @@ class DegreeToGateMapper {
     );
   }
 
-  /// Converts a gate number to its starting degree on the wheel.
+  /// Converts a gate number to its starting degree in tropical zodiac.
+  ///
+  /// Returns the tropical longitude where this gate begins.
   static double gateToDegree(int gateNumber) {
     final index = gateWheelSequence.indexOf(gateNumber);
     if (index == -1) {
       throw ArgumentError('Invalid gate number: $gateNumber');
     }
-    return index * _degreesPerGate;
+    // Convert HD wheel position back to tropical longitude
+    final hdWheelPosition = index * _degreesPerGate;
+    return (hdWheelPosition - _hdWheelOffset + 360) % 360;
   }
 
   /// Gets the center associated with a gate.

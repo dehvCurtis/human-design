@@ -130,7 +130,7 @@ lib/
 
 ## Human Design Calculations
 
-The app calculates:
+The app calculates accurate Human Design charts verified against reference sites (humdes.com).
 
 | Component | Description |
 |-----------|-------------|
@@ -144,6 +144,13 @@ The app calculates:
 | **Channels** | 36 channels connecting centers |
 | **Gates** | 64 gates mapped from I Ching hexagrams |
 
+### Calculation Details
+
+- **Swiss Ephemeris** - High-precision planetary positions
+- **58° HD Wheel Offset** - Proper alignment with the Human Design mandala (Gate 41 at 2° Aquarius)
+- **Timezone Support** - Birth time stored and displayed in local timezone
+- **88° Prenatal** - Binary search algorithm for accurate Design calculation
+
 ### Planetary Bodies Tracked
 Sun, Earth, Moon, North Node, South Node, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto
 
@@ -154,6 +161,7 @@ Sun, Earth, Moon, North Node, South Node, Mercury, Venus, Mars, Jupiter, Saturn,
 - [Changelog](docs/CHANGELOG.md) - Version history and updates
 - [Development Guide](docs/DEVELOPMENT.md) - Setup and contribution guidelines
 - [Standards](docs/STANDARDS.md) - Code style and conventions
+- [Test Users](docs/TEST_USERS.md) - Test accounts for social feature development
 
 ## Key Commands
 
@@ -176,6 +184,23 @@ flutter build ios
 # Build for Android
 flutter build apk
 ```
+
+## Testing
+
+### Test Accounts
+
+For testing social features, use these pre-configured test accounts:
+
+| Account | Email | Password |
+|---------|-------|----------|
+| Main | `test@humandesign.app` | *(your password)* |
+| Alice (Manifestor) | `alice@test.hd` | `TestPass123` |
+| Bob (Generator) | `bob@test.hd` | `TestPass123` |
+| Carol (MG) | `carol@test.hd` | `TestPass123` |
+| David (Projector) | `david@test.hd` | `TestPass123` |
+| Emma (Reflector) | `emma@test.hd` | `TestPass123` |
+
+See [Test Users](docs/TEST_USERS.md) for complete documentation including pre-configured friendships, follows, and posts.
 
 ## License
 

@@ -26,16 +26,94 @@ Head, Ajna, Throat, G/Identity, Heart/Ego, Sacral, Solar Plexus, Spleen, Root
 
 ## Chart Calculation
 
+### Overview
+
 1. Convert birth datetime to UTC
-2. Calculate planetary positions (conscious)
-3. Find 88° prenatal date (unconscious)
-4. Map degrees → gates → lines
-5. Determine channels (both gates active)
-6. Determine defined centers
-7. Calculate Type, Authority, Profile, Definition
+2. Calculate Julian Day number
+3. Calculate planetary positions using Swiss Ephemeris (conscious)
+4. Find 88° prenatal date (unconscious/Design)
+5. **Apply 58° HD wheel offset** to convert tropical longitude to HD gate position
+6. Map degrees → gates → lines
+7. Determine channels (both gates active)
+8. Determine defined centers
+9. Calculate Type, Authority, Profile, Definition
+
+### HD Wheel Offset (Critical)
+
+The Human Design wheel is **NOT** aligned with 0° Aries. The HD mandala has a 58° offset from the tropical zodiac:
+
+| Reference Point | Tropical Longitude | HD Gate |
+|----------------|-------------------|---------|
+| 0° Aries (Spring Equinox) | 0° | Gate 25 |
+| Gate 41 start | 302° (2° Aquarius) | Gate 41 |
+
+**Implementation:**
+```dart
+// Add 58° to tropical longitude before looking up gate
+double hdWheelPosition = (tropicalLongitude + 58.0) % 360;
+int gateIndex = (hdWheelPosition / 5.625).floor();
+int gateNumber = gateWheelSequence[gateIndex];
+```
+
+Without this offset, all gates will be wrong by approximately 10 positions.
+
+### Gate Mapping
+
+- 360° ÷ 64 gates = **5.625° per gate**
+- 5.625° ÷ 6 lines = **0.9375° per line**
+- Gates follow a specific sequence around the wheel (not 1, 2, 3...)
+- The sequence starts with Gate 41 at 0° of the HD wheel (302° tropical)
+
+### Planetary Bodies (13)
+
+| Planet | Symbol | Notes |
+|--------|--------|-------|
+| Sun | ☉ | Primary, determines Incarnation Cross |
+| Earth | ⊕ | Always opposite Sun (180°) |
+| Moon | ☽ | Emotional/intuitive |
+| North Node | ☊ | Life direction |
+| South Node | ☋ | Always opposite North Node |
+| Mercury | ☿ | Communication |
+| Venus | ♀ | Values/relationships |
+| Mars | ♂ | Action/drive |
+| Jupiter | ♃ | Expansion |
+| Saturn | ♄ | Structure/discipline |
+| Uranus | ♅ | Innovation |
+| Neptune | ♆ | Spirituality |
+| Pluto | ♇ | Transformation |
+
+### Conscious vs Unconscious
+
+- **Conscious (Personality)**: Calculated at birth moment
+- **Unconscious (Design)**: Calculated when Sun was 88° earlier (~88 days before birth)
+
+### Profile Calculation
+
+Profile comes from the **line numbers** of the Conscious and Unconscious Sun:
+- Conscious Sun Line / Unconscious Sun Line
+- Example: Sun in Gate 25.**2** / Design Sun in Gate 10.**5** = Profile **2/5**
+
+### Incarnation Cross
+
+Formed by the Sun/Earth gates at both conscious and unconscious positions:
+- Format: Conscious Sun/Conscious Earth | Design Sun/Design Earth
+- Example: 25/46 | 10/15 = "Right Angle Cross of the Vessel of Love"
 
 ## Gates & Channels
 
 - 64 gates (mapped to I Ching hexagrams)
 - 36 channels (connect 2 centers)
-- Each gate has 6 lines
+- Each gate has 6 lines (plus color, tone, base for advanced analysis)
+- A channel is "defined" when both of its gates are activated (either conscious or unconscious)
+
+## Verifying Chart Accuracy
+
+To verify calculations match reference sites:
+
+1. Go to https://www.humdes.com/en/ravechart/
+2. Enter the same birth data
+3. Compare key values:
+   - Conscious Sun gate.line
+   - Design Sun gate.line
+   - Type, Profile, Authority
+   - Incarnation Cross
