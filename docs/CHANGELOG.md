@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2026-01-29
+
+### Added
+
+#### Hanging Gates (Half-Channel) Visualization
+- **Bodygraph Painter** - Gates that don't form complete channels now display as half-lines
+  - Full channel (both gates active) = Full line between centers
+  - Hanging gate (one gate active) = Half line from center to midpoint
+  - Matches humdes.com and standard Human Design chart rendering
+  - Colors indicate activation type: black (conscious), red (unconscious), striped (both)
+
+### Technical Details
+
+Added `_drawHangingGates()` method in `bodygraph_painter.dart`:
+- Identifies activated gates not part of complete channels
+- Calculates path from gate position to channel midpoint using path interpolation
+- Renders with appropriate color based on conscious/unconscious activation
+- New rendering layer inserted between inactive channels and active channels
+
+---
+
 ## [0.2.3] - 2026-01-29
 
 ### Fixed

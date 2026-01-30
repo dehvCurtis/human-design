@@ -7,6 +7,9 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 ### Core Features
 - **Personal Chart Generation** - Calculate your Human Design chart using Swiss Ephemeris
 - **Interactive Bodygraph** - Visual representation of 9 centers, 36 channels, and 64 gates
+  - Full channels displayed when both gates are active
+  - Hanging gates (half-lines) for single-gate activations
+  - Color-coded: black (conscious), red (unconscious), striped (both)
 - **6-Tab Chart View** - Bodygraph, Planets, Properties, Gates, Channels, Chakras
 - **Saved Charts** - Create and manage charts for family, friends, and clients
 - **Transit Tracking** - Current planetary transits and their impact on your chart

@@ -106,6 +106,24 @@ Formed by the Sun/Earth gates at both conscious and unconscious positions:
 - Each gate has 6 lines (plus color, tone, base for advanced analysis)
 - A channel is "defined" when both of its gates are activated (either conscious or unconscious)
 
+### Channel Activation States
+
+| State | Visual | Description |
+|-------|--------|-------------|
+| **Full Channel** | Full line | Both gates active (channel is defined) |
+| **Hanging Gate** | Half line | Only one gate active (channel not defined) |
+| **Inactive** | Gray line | Neither gate active |
+
+### Hanging Gates
+
+When only one gate of a channel is activated, it creates a "hanging gate" or "open gate":
+- Displayed as a half-line extending from the center to the channel midpoint
+- Represents potential for connection if the other gate becomes activated (through transit or relationship)
+- Color indicates activation type:
+  - **Black** - Conscious (Personality) activation
+  - **Red** - Unconscious (Design) activation
+  - **Striped** - Both conscious and unconscious
+
 ## Verifying Chart Accuracy
 
 To verify calculations match reference sites:
