@@ -40,6 +40,7 @@ enum CenterShape {
   square,
   diamond,
   heart,
+  circle,
 }
 
 /// Position data for a gate

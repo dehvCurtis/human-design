@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.5] - 2026-01-30
+
+### Changed
+
+#### Bodygraph Display Improvements
+- **Larger Chart Scale** - Increased bodygraph scale multiplier from 1.0 to 1.25x
+  - Chart now fills more of the available screen area
+  - Compensates for internal padding in the 400x600 canvas
+  - More prominent display on home screen and chart views
+- **Ego/Heart Center Shape** - Changed from triangle to circle
+  - Ego center now renders as a circle instead of an upward-pointing triangle
+  - Added `circle` to `CenterShape` enum
+  - Added `_drawCircleCenter()` method in bodygraph painter
+
+### Technical Details
+
+Files modified:
+- `bodygraph_painter.dart` - Added 1.25x scale multiplier, added circle drawing method
+- `bodygraph_layout.dart` - Added `circle` to CenterShape enum
+- `bodygraph_layout_standard.dart` - Changed heart center shape to circle
+
+---
+
 ## [0.2.4] - 2026-01-29
 
 ### Added

@@ -83,6 +83,29 @@ assets/images/bodygraph_silhouette.svg (or .png)
 - [x] Update color scheme to match style guide (purple theme)
 - [x] Fix gate positions (Sacral bottom: 42, 3, 9)
 
+## Center Shapes
+
+| Center | Shape | Notes |
+|--------|-------|-------|
+| Head | Triangle (pointing up) | Top of chart |
+| Ajna | Triangle (pointing down) | Below Head |
+| Throat | Square | Communication center |
+| G/Self | Heart shape | Identity center |
+| Heart/Ego | Circle | Willpower center |
+| Sacral | Square | Life force/Generator center |
+| Solar Plexus | Triangle (pointing left) | Emotional center |
+| Spleen | Triangle (pointing right) | Intuition center |
+| Root | Square | Pressure center |
+
+## Chart Scaling
+
+The bodygraph uses a **1.25x scale multiplier** to fill more of the available screen space. This compensates for internal padding in the 400x600 base canvas.
+
+```dart
+final baseScale = math.min(size.width / 400, size.height / 600);
+final scale = baseScale * 1.25;
+```
+
 ## Color Scheme (Style Guide - Purple Theme)
 
 | Element | Fill Color | Border Color | Hex Values |
