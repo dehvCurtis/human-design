@@ -12,12 +12,13 @@ import 'bodygraph_data.dart';
 /// Implements layered rendering:
 /// 1. Background (optional body silhouette)
 /// 2. Inactive channels (all 36 channels in gray)
-/// 3. Inactive gates (all 64 gates, faded)
+/// 3. Hanging gates (half-channels for gates without a complete channel)
 /// 4. Active channels (user's defined channels with color)
-/// 5. Active gates (user's defined gates with color)
-/// 6. Centers (9 centers with defined/undefined styling)
-/// 7. Gate numbers (on active gates)
-/// 8. Selection highlight
+/// 5. Centers (9 centers with defined/undefined styling)
+/// 6. Inactive gates (all 64 gates, faded)
+/// 7. Active gates (user's defined gates with color)
+/// 8. Gate numbers (on active gates)
+/// 9. Selection highlight
 class BodygraphPainter extends CustomPainter {
   BodygraphPainter({
     required this.chart,
@@ -64,26 +65,29 @@ class BodygraphPainter extends CustomPainter {
       _drawInactiveChannels(canvas);
     }
 
-    // Layer 2: Active channels
+    // Layer 2: Hanging gates (half-channels for gates without a complete channel)
+    _drawHangingGates(canvas);
+
+    // Layer 3: Active channels
     _drawActiveChannels(canvas);
 
-    // Layer 3: Centers (between channels and gates for visual layering)
+    // Layer 4: Centers (between channels and gates for visual layering)
     _drawCenters(canvas);
 
-    // Layer 4: All inactive gates
+    // Layer 5: All inactive gates
     if (showInactiveGates) {
       _drawInactiveGates(canvas);
     }
 
-    // Layer 5: Active gates
+    // Layer 6: Active gates
     _drawActiveGates(canvas);
 
-    // Layer 6: Gate numbers (on active gates)
+    // Layer 7: Gate numbers (on active gates)
     if (showGateNumbers) {
       _drawGateNumbers(canvas);
     }
 
-    // Layer 7: Selection highlight
+    // Layer 8: Selection highlight
     _drawSelectionHighlight(canvas);
 
     canvas.restore();
@@ -109,6 +113,147 @@ class BodygraphPainter extends CustomPainter {
 
       _drawChannelPath(canvas, path, paint);
     }
+  }
+
+  /// Draw hanging gates (half-channels for gates that don't complete a channel)
+  ///
+  /// In Human Design, when only one gate of a channel is activated,
+  /// it shows as a "half-line" extending from the center toward the midpoint.
+  void _drawHangingGates(Canvas canvas) {
+    // Get all gates that are part of complete channels
+    final Set<int> gatesInCompleteChannels = {};
+    for (final channelActivation in chart.activeChannels) {
+      gatesInCompleteChannels.add(channelActivation.channel.gate1);
+      gatesInCompleteChannels.add(channelActivation.channel.gate2);
+    }
+
+    // Find all activated gates that are NOT part of a complete channel
+    final allActivatedGates = {...chart.consciousGates, ...chart.unconsciousGates};
+    final hangingGates = allActivatedGates.difference(gatesInCompleteChannels);
+
+    // For each hanging gate, find its channel and draw a half-line
+    for (final gateNumber in hangingGates) {
+      // Find which channel this gate belongs to
+      for (final channel in channels) {
+        int? otherGate;
+        if (channel.gate1 == gateNumber) {
+          otherGate = channel.gate2;
+        } else if (channel.gate2 == gateNumber) {
+          otherGate = channel.gate1;
+        }
+
+        if (otherGate != null) {
+          // Get the full channel path
+          final fullPath = _layout.getChannelPath(channel.gate1, channel.gate2);
+          if (fullPath.length < 2) continue;
+
+          // Determine which end of the path corresponds to our gate
+          final gatePos = _layout.gatePositions[gateNumber]?.position;
+          if (gatePos == null) continue;
+
+          // Find if our gate is closer to the start or end of the path
+          final distToStart = (fullPath.first - gatePos).distance;
+          final distToEnd = (fullPath.last - gatePos).distance;
+
+          // Create half-path from the gate's end to the midpoint
+          List<Offset> halfPath;
+          if (distToStart < distToEnd) {
+            // Gate is at the start, draw first half
+            halfPath = _getFirstHalfOfPath(fullPath);
+          } else {
+            // Gate is at the end, draw second half
+            halfPath = _getSecondHalfOfPath(fullPath);
+          }
+
+          if (halfPath.length < 2) continue;
+
+          // Determine color based on activation type
+          final isConscious = chart.consciousGates.contains(gateNumber);
+          final isUnconscious = chart.unconsciousGates.contains(gateNumber);
+
+          final paint = Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = channelStrokeWidthActive
+            ..strokeCap = StrokeCap.round;
+
+          if (isConscious && isUnconscious) {
+            // Both: draw striped
+            _drawStripedChannel(canvas, halfPath);
+          } else if (isConscious) {
+            paint.color = AppColors.channelConscious;
+            _drawChannelPath(canvas, halfPath, paint);
+          } else {
+            paint.color = AppColors.channelUnconscious;
+            _drawChannelPath(canvas, halfPath, paint);
+          }
+        }
+      }
+    }
+  }
+
+  /// Get the first half of a path (from start to midpoint)
+  List<Offset> _getFirstHalfOfPath(List<Offset> fullPath) {
+    if (fullPath.length < 2) return fullPath;
+
+    // Calculate total path length
+    double totalLength = 0;
+    for (int i = 1; i < fullPath.length; i++) {
+      totalLength += (fullPath[i] - fullPath[i - 1]).distance;
+    }
+
+    // Find midpoint
+    final halfLength = totalLength / 2;
+    double currentLength = 0;
+    final halfPath = <Offset>[fullPath.first];
+
+    for (int i = 1; i < fullPath.length; i++) {
+      final segmentLength = (fullPath[i] - fullPath[i - 1]).distance;
+      if (currentLength + segmentLength >= halfLength) {
+        // Interpolate to exact midpoint
+        final remaining = halfLength - currentLength;
+        final t = remaining / segmentLength;
+        final midpoint = Offset.lerp(fullPath[i - 1], fullPath[i], t)!;
+        halfPath.add(midpoint);
+        break;
+      }
+      halfPath.add(fullPath[i]);
+      currentLength += segmentLength;
+    }
+
+    return halfPath;
+  }
+
+  /// Get the second half of a path (from midpoint to end)
+  List<Offset> _getSecondHalfOfPath(List<Offset> fullPath) {
+    if (fullPath.length < 2) return fullPath;
+
+    // Calculate total path length
+    double totalLength = 0;
+    for (int i = 1; i < fullPath.length; i++) {
+      totalLength += (fullPath[i] - fullPath[i - 1]).distance;
+    }
+
+    // Find midpoint
+    final halfLength = totalLength / 2;
+    double currentLength = 0;
+    final halfPath = <Offset>[];
+
+    for (int i = 1; i < fullPath.length; i++) {
+      final segmentLength = (fullPath[i] - fullPath[i - 1]).distance;
+      if (currentLength + segmentLength >= halfLength && halfPath.isEmpty) {
+        // Interpolate to exact midpoint
+        final remaining = halfLength - currentLength;
+        final t = remaining / segmentLength;
+        final midpoint = Offset.lerp(fullPath[i - 1], fullPath[i], t)!;
+        halfPath.add(midpoint);
+      }
+      if (halfPath.isNotEmpty) {
+        halfPath.add(fullPath[i]);
+      }
+      currentLength += segmentLength;
+    }
+
+    return halfPath;
   }
 
   /// Draw active channels with appropriate colors
