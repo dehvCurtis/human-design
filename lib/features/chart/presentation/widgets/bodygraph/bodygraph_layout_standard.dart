@@ -92,14 +92,14 @@ class StandardBodygraphLayout extends BodygraphLayout {
       height: 70,
       shape: CenterShape.heart,
     ),
-    // HEART/EGO - Triangle pointing UP, positioned between G and Solar Plexus
+    // HEART/EGO - Circle, positioned between G and Solar Plexus
     HumanDesignCenter.heart: CenterPosition(
       center: HumanDesignCenter.heart,
       x: 255,
       y: 345,
-      width: 41,
-      height: 38, // taller
-      shape: CenterShape.triangle,
+      width: 40,
+      height: 40,
+      shape: CenterShape.circle,
     ),
     // SPLEEN - Equilateral triangle pointing RIGHT
     HumanDesignCenter.spleen: CenterPosition(

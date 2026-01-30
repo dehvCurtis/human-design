@@ -46,7 +46,9 @@ class BodygraphPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // Calculate scale to fit the bodygraph in the available space
-    final scale = math.min(size.width / bodygraphCanvasWidth, size.height / bodygraphCanvasHeight);
+    // Use 1.25x multiplier to compensate for internal padding in the canvas
+    final baseScale = math.min(size.width / bodygraphCanvasWidth, size.height / bodygraphCanvasHeight);
+    final scale = baseScale * 1.25;
     canvas.save();
 
     // Center the bodygraph
@@ -318,6 +320,9 @@ class BodygraphPainter extends CustomPainter {
           break;
         case CenterShape.heart:
           _drawHeart(canvas, position, fillPaint, strokePaint);
+          break;
+        case CenterShape.circle:
+          _drawCircleCenter(canvas, position, fillPaint, strokePaint);
           break;
       }
     }
@@ -649,6 +654,17 @@ class BodygraphPainter extends CustomPainter {
 
     canvas.drawPath(path, fillPaint);
     canvas.drawPath(path, strokePaint);
+  }
+
+  void _drawCircleCenter(
+    Canvas canvas,
+    CenterPosition position,
+    Paint fillPaint,
+    Paint strokePaint,
+  ) {
+    final radius = math.min(position.width, position.height) / 2;
+    canvas.drawCircle(Offset(position.x, position.y), radius, fillPaint);
+    canvas.drawCircle(Offset(position.x, position.y), radius, strokePaint);
   }
 
   void _drawBodySilhouette(Canvas canvas) {

@@ -24,6 +24,20 @@
 
 Head, Ajna, Throat, G/Identity, Heart/Ego, Sacral, Solar Plexus, Spleen, Root
 
+### Center Shapes (Bodygraph Visualization)
+
+| Center | Shape | Position |
+|--------|-------|----------|
+| Head | Triangle (up) | Top |
+| Ajna | Triangle (down) | Below Head |
+| Throat | Square | Center-top |
+| G/Identity | Heart | Center |
+| Heart/Ego | Circle | Right of G |
+| Sacral | Square | Center-bottom |
+| Solar Plexus | Triangle (left) | Lower right |
+| Spleen | Triangle (right) | Lower left |
+| Root | Square | Bottom |
+
 ## Chart Calculation
 
 ### Overview
