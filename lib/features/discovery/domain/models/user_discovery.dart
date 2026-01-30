@@ -1,5 +1,24 @@
 /// Models for user discovery and matching
 
+/// Chart visibility levels for discovered users
+enum DiscoveredUserChartVisibility {
+  private,
+  friends,
+  public;
+
+  static DiscoveredUserChartVisibility fromString(String? value) {
+    switch (value) {
+      case 'public':
+        return DiscoveredUserChartVisibility.public;
+      case 'friends':
+        return DiscoveredUserChartVisibility.friends;
+      case 'private':
+      default:
+        return DiscoveredUserChartVisibility.private;
+    }
+  }
+}
+
 class DiscoveredUser {
   const DiscoveredUser({
     required this.id,
@@ -11,6 +30,7 @@ class DiscoveredUser {
     this.hdAuthority,
     this.isPublic = true,
     this.showChartPublicly = false,
+    this.chartVisibility = DiscoveredUserChartVisibility.private,
     this.followerCount = 0,
     this.followingCount = 0,
     this.isFollowing = false,
@@ -28,6 +48,7 @@ class DiscoveredUser {
   final String? hdAuthority;
   final bool isPublic;
   final bool showChartPublicly;
+  final DiscoveredUserChartVisibility chartVisibility;
   final int followerCount;
   final int followingCount;
   final bool isFollowing;
@@ -53,6 +74,7 @@ class DiscoveredUser {
       hdAuthority: json['hd_authority'] as String?,
       isPublic: json['is_public'] as bool? ?? true,
       showChartPublicly: json['show_chart_publicly'] as bool? ?? false,
+      chartVisibility: DiscoveredUserChartVisibility.fromString(json['chart_visibility'] as String?),
       followerCount: json['follower_count'] as int? ?? 0,
       followingCount: json['following_count'] as int? ?? 0,
       isFollowing: isFollowing ?? false,
@@ -72,6 +94,7 @@ class DiscoveredUser {
     String? hdAuthority,
     bool? isPublic,
     bool? showChartPublicly,
+    DiscoveredUserChartVisibility? chartVisibility,
     int? followerCount,
     int? followingCount,
     bool? isFollowing,
@@ -89,6 +112,7 @@ class DiscoveredUser {
       hdAuthority: hdAuthority ?? this.hdAuthority,
       isPublic: isPublic ?? this.isPublic,
       showChartPublicly: showChartPublicly ?? this.showChartPublicly,
+      chartVisibility: chartVisibility ?? this.chartVisibility,
       followerCount: followerCount ?? this.followerCount,
       followingCount: followingCount ?? this.followingCount,
       isFollowing: isFollowing ?? this.isFollowing,

@@ -73,7 +73,7 @@ class CompositeScreen extends ConsumerWidget {
                         height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Icon(Icons.favorite_outline),
+                    : const Icon(Icons.compare_arrows),
                 label: Text(
                   compositeState.isCalculating
                       ? l10n.composite_calculating
@@ -188,7 +188,7 @@ class CompositeScreen extends ConsumerWidget {
             context,
             l10n.composite_companionship,
             l10n.composite_companionshipDesc,
-            Icons.favorite,
+            Icons.compare_arrows,
             AppColors.success,
           ),
           const SizedBox(height: 8),

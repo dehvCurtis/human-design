@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/domain/auth_providers.dart';
+import '../../home/domain/home_providers.dart';
+import '../../profile/data/profile_repository.dart';
 import '../domain/settings_providers.dart';
 import '../domain/settings_state.dart';
 
@@ -110,6 +112,11 @@ class SettingsScreen extends ConsumerWidget {
                   .toggleNotification('achievements', value);
             },
           ),
+          const Divider(),
+
+          // Privacy Section
+          _SectionHeader(title: l10n.settings_privacy),
+          _ChartVisibilityTile(),
           const Divider(),
 
           // Feedback Section
@@ -363,6 +370,160 @@ class _SwitchTile extends StatelessWidget {
       subtitle: subtitle != null ? Text(subtitle!) : null,
       value: value,
       onChanged: onChanged,
+    );
+  }
+}
+
+class _ChartVisibilityTile extends ConsumerWidget {
+  const _ChartVisibilityTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final profileAsync = ref.watch(userProfileProvider);
+
+    return profileAsync.when(
+      data: (profile) {
+        final visibility = profile?.chartVisibility ?? ChartVisibility.private;
+        return _SettingsTile(
+          icon: Icons.visibility_outlined,
+          title: l10n.settings_chartVisibility,
+          subtitle: _getVisibilityLabel(context, visibility),
+          onTap: () => _showVisibilitySelector(context, ref, visibility),
+        );
+      },
+      loading: () => const ListTile(
+        leading: Icon(Icons.visibility_outlined),
+        title: Text('Chart Visibility'),
+        trailing: SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+      ),
+      error: (_, __) => const SizedBox.shrink(),
+    );
+  }
+
+  String _getVisibilityLabel(BuildContext context, ChartVisibility visibility) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (visibility) {
+      case ChartVisibility.private:
+        return l10n.settings_chartPrivate;
+      case ChartVisibility.friends:
+        return l10n.settings_chartFriends;
+      case ChartVisibility.public:
+        return l10n.settings_chartPublic;
+    }
+  }
+
+  void _showVisibilitySelector(
+    BuildContext context,
+    WidgetRef ref,
+    ChartVisibility currentVisibility,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                l10n.settings_chartVisibility,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            const Divider(height: 1),
+            _VisibilityOption(
+              icon: Icons.lock_outlined,
+              title: l10n.settings_chartPrivate,
+              description: l10n.settings_chartPrivateDesc,
+              isSelected: currentVisibility == ChartVisibility.private,
+              onTap: () {
+                _setVisibility(context, ref, ChartVisibility.private);
+              },
+            ),
+            _VisibilityOption(
+              icon: Icons.people_outlined,
+              title: l10n.settings_chartFriends,
+              description: l10n.settings_chartFriendsDesc,
+              isSelected: currentVisibility == ChartVisibility.friends,
+              onTap: () {
+                _setVisibility(context, ref, ChartVisibility.friends);
+              },
+            ),
+            _VisibilityOption(
+              icon: Icons.public_outlined,
+              title: l10n.settings_chartPublic,
+              description: l10n.settings_chartPublicDesc,
+              isSelected: currentVisibility == ChartVisibility.public,
+              onTap: () {
+                _setVisibility(context, ref, ChartVisibility.public);
+              },
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _setVisibility(
+    BuildContext context,
+    WidgetRef ref,
+    ChartVisibility visibility,
+  ) async {
+    Navigator.pop(context);
+    try {
+      await ref.read(profileRepositoryProvider).setChartVisibility(visibility);
+      ref.invalidate(userProfileProvider);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to update visibility: $e')),
+        );
+      }
+    }
+  }
+}
+
+class _VisibilityOption extends StatelessWidget {
+  const _VisibilityOption({
+    required this.icon,
+    required this.title,
+    required this.description,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final String description;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        color: isSelected ? AppColors.primary : null,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          color: isSelected ? AppColors.primary : null,
+        ),
+      ),
+      subtitle: Text(description),
+      trailing: isSelected
+          ? const Icon(Icons.check, color: AppColors.primary)
+          : null,
+      onTap: onTap,
     );
   }
 }

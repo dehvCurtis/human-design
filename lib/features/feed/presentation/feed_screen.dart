@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../l10n/generated/app_localizations.dart';
+import '../../../shared/providers/supabase_provider.dart';
 import '../domain/feed_providers.dart';
 import '../domain/models/post.dart';
 import 'widgets/post_card.dart';
 import 'widgets/create_post_sheet.dart';
+import 'widgets/regenerate_dialog.dart';
 
 class FeedScreen extends ConsumerStatefulWidget {
   const FeedScreen({super.key});
@@ -24,11 +28,13 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final feedAsync = ref.watch(feedProvider);
+    final currentUserId = ref.watch(supabaseClientProvider).auth.currentUser?.id;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feed'),
+        title: Text(l10n.thought_feedTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
@@ -53,13 +59,21 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
               padding: const EdgeInsets.only(bottom: 80),
               itemCount: posts.length,
               itemBuilder: (context, index) {
+                final post = posts[index];
+                final isOwnPost = post.userId == currentUserId;
+
                 return PostCard(
-                  post: posts[index],
-                  onTap: () => _navigateToPost(context, posts[index]),
-                  onReaction: (type) => _handleReaction(posts[index], type),
-                  onComment: () => _navigateToPost(context, posts[index]),
-                  onShare: () => _sharePost(posts[index]),
-                  onUserTap: () => _navigateToUserProfile(posts[index].userId),
+                  post: post,
+                  onTap: () => _navigateToPost(context, post),
+                  onReaction: (type) => _handleReaction(post, type),
+                  onComment: () => _navigateToPost(context, post),
+                  onShare: () => _sharePost(post),
+                  onUserTap: () => _navigateToUserProfile(post.userId),
+                  onRegenerate: isOwnPost ? null : () => _handleRegenerate(context, post),
+                  onOriginalUserTap: post.originalPost != null
+                      ? () => _navigateToUserProfile(post.originalPost!.userId)
+                      : null,
+                  canRegenerate: !isOwnPost,
                 );
               },
             ),
@@ -73,6 +87,7 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showCreatePostSheet(context),
+        tooltip: l10n.thought_createNew,
         child: const Icon(Icons.edit),
       ),
     );
@@ -87,13 +102,7 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   }
 
   void _navigateToPost(BuildContext context, Post post) {
-    // Navigate to post detail screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PostDetailScreen(postId: post.id),
-      ),
-    );
+    context.push('/feed/post/${post.id}');
   }
 
   void _handleReaction(Post post, ReactionType type) {
@@ -105,7 +114,51 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   }
 
   void _navigateToUserProfile(String userId) {
-    // TODO: Navigate to user profile
+    context.push('/user/$userId');
+  }
+
+  void _handleRegenerate(BuildContext context, Post post) {
+    // Check if this is the user's own post (they can't regenerate their own)
+    final currentUserId = ref.read(supabaseClientProvider).auth.currentUser?.id;
+    if (post.userId == currentUserId) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.thought_cannotRegenerateOwn),
+        ),
+      );
+      return;
+    }
+
+    showRegenerateDialog(
+      context: context,
+      originalPost: post,
+      onConfirm: ({String? comment, PostVisibility visibility = PostVisibility.public}) async {
+        try {
+          await ref.read(feedNotifierProvider.notifier).regeneratePost(
+            originalPostId: post.id,
+            additionalComment: comment,
+            visibility: visibility,
+          );
+
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(AppLocalizations.of(context)!.thought_regenerateSuccess),
+              ),
+            );
+          }
+        } catch (e) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        }
+      },
+    );
   }
 }
 
@@ -116,18 +169,22 @@ class PostDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final postAsync = ref.watch(postProvider(postId));
     final commentsAsync = ref.watch(postCommentsProvider(postId));
+    final currentUserId = ref.watch(supabaseClientProvider).auth.currentUser?.id;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post'),
+        title: Text(l10n.thought_postDetail),
       ),
       body: postAsync.when(
         data: (post) {
           if (post == null) {
             return const Center(child: Text('Post not found'));
           }
+
+          final isOwnPost = post.userId == currentUserId;
 
           return Column(
             children: [
@@ -145,7 +202,12 @@ class PostDetailScreen extends ConsumerWidget {
                         },
                         onComment: () {},
                         onShare: () {},
-                        onUserTap: () {},
+                        onUserTap: () => context.push('/user/${post.userId}'),
+                        onRegenerate: isOwnPost ? null : () => _handleRegenerate(context, ref, post),
+                        onOriginalUserTap: post.originalPost != null
+                            ? () => context.push('/user/${post.originalPost!.userId}')
+                            : null,
+                        canRegenerate: !isOwnPost,
                       ),
                       const Divider(),
                       commentsAsync.when(
@@ -173,6 +235,47 @@ class PostDetailScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(child: Text('Error: $error')),
       ),
+    );
+  }
+
+  void _handleRegenerate(BuildContext context, WidgetRef ref, Post post) {
+    final l10n = AppLocalizations.of(context)!;
+    final currentUserId = ref.read(supabaseClientProvider).auth.currentUser?.id;
+
+    if (post.userId == currentUserId) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.thought_cannotRegenerateOwn)),
+      );
+      return;
+    }
+
+    showRegenerateDialog(
+      context: context,
+      originalPost: post,
+      onConfirm: ({String? comment, PostVisibility visibility = PostVisibility.public}) async {
+        try {
+          await ref.read(feedNotifierProvider.notifier).regeneratePost(
+            originalPostId: post.id,
+            additionalComment: comment,
+            visibility: visibility,
+          );
+
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.thought_regenerateSuccess)),
+            );
+          }
+        } catch (e) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        }
+      },
     );
   }
 }
@@ -396,6 +499,7 @@ class _EmptyFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Center(
       child: Padding(
@@ -410,12 +514,12 @@ class _EmptyFeed extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Your feed is empty',
+              l10n.thought_emptyFeed,
               style: theme.textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
             Text(
-              'Follow people or create a post to get started',
+              l10n.thought_emptyFeedMessage,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               ),
@@ -425,7 +529,7 @@ class _EmptyFeed extends StatelessWidget {
             FilledButton.icon(
               onPressed: onCreatePost,
               icon: const Icon(Icons.edit),
-              label: const Text('Create Post'),
+              label: Text(l10n.thought_createNew),
             ),
           ],
         ),

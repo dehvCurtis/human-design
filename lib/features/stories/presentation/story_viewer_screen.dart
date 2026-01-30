@@ -108,7 +108,6 @@ class _StoryViewerScreenState extends ConsumerState<StoryViewerScreen>
   @override
   Widget build(BuildContext context) {
     final story = widget.userStories.stories[_currentIndex];
-    final theme = Theme.of(context);
 
     return Scaffold(
       backgroundColor: Colors.black,

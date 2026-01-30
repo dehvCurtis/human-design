@@ -7,6 +7,7 @@ enum PostType {
   chartShare,
   question,
   achievement,
+  regenerate,
 }
 
 enum PostVisibility {
@@ -51,6 +52,10 @@ class Post {
     this.updatedAt,
     this.userReaction,
     this.reactions,
+    this.originalPostId,
+    this.isRegenerate = false,
+    this.regenerateCount = 0,
+    this.originalPost,
   });
 
   final String id;
@@ -75,12 +80,23 @@ class Post {
   final DateTime? updatedAt;
   final ReactionType? userReaction;
   final Map<ReactionType, int>? reactions;
+  // Regenerate (repost) fields
+  final String? originalPostId;
+  final bool isRegenerate;
+  final int regenerateCount;
+  final Post? originalPost;
 
   factory Post.fromJson(Map<String, dynamic> json, {
     ReactionType? userReaction,
     Map<ReactionType, int>? reactions,
   }) {
     final user = json['user'] as Map<String, dynamic>?;
+
+    // Parse original post if this is a regenerate
+    Post? originalPost;
+    if (json['original_post'] != null) {
+      originalPost = Post.fromJson(json['original_post'] as Map<String, dynamic>);
+    }
 
     return Post(
       id: json['id'] as String,
@@ -107,13 +123,17 @@ class Post {
           : null,
       userReaction: userReaction,
       reactions: reactions,
+      originalPostId: json['original_post_id'] as String?,
+      isRegenerate: json['is_regenerate'] as bool? ?? false,
+      regenerateCount: json['regenerate_count'] as int? ?? 0,
+      originalPost: originalPost,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'content': content,
-      'post_type': postType.name,
+      'post_type': postType.dbValue,
       'visibility': visibility.name,
       'media_urls': mediaUrls,
       'chart_id': chartId,
@@ -122,6 +142,8 @@ class Post {
       'transit_data': transitData,
       'badge_id': badgeId,
       'is_pinned': isPinned,
+      'original_post_id': originalPostId,
+      'is_regenerate': isRegenerate,
     };
   }
 
@@ -148,6 +170,10 @@ class Post {
     DateTime? updatedAt,
     ReactionType? userReaction,
     Map<ReactionType, int>? reactions,
+    String? originalPostId,
+    bool? isRegenerate,
+    int? regenerateCount,
+    Post? originalPost,
   }) {
     return Post(
       id: id ?? this.id,
@@ -172,6 +198,10 @@ class Post {
       updatedAt: updatedAt ?? this.updatedAt,
       userReaction: userReaction ?? this.userReaction,
       reactions: reactions ?? this.reactions,
+      originalPostId: originalPostId ?? this.originalPostId,
+      isRegenerate: isRegenerate ?? this.isRegenerate,
+      regenerateCount: regenerateCount ?? this.regenerateCount,
+      originalPost: originalPost ?? this.originalPost,
     );
   }
 
@@ -189,6 +219,8 @@ class Post {
         return PostType.question;
       case 'achievement':
         return PostType.achievement;
+      case 'regenerate':
+        return PostType.regenerate;
       default:
         return PostType.insight;
     }
@@ -425,6 +457,8 @@ extension PostTypeExtension on PostType {
         return 'question';
       case PostType.achievement:
         return 'achievement';
+      case PostType.regenerate:
+        return 'regenerate';
     }
   }
 }

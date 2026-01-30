@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
@@ -15,6 +16,9 @@ import 'shared/providers/supabase_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize timezone database for birth location timezone conversion
+  tz.initializeTimeZones();
 
   // Set preferred orientations
   await SystemChrome.setPreferredOrientations([

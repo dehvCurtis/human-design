@@ -90,7 +90,7 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
                       ),
                     ),
                   IconButton(
-                    icon: const Icon(Icons.favorite_border),
+                    icon: const Icon(Icons.compare_arrows),
                     tooltip: l10n.chart_composite,
                     onPressed: () {
                       context.push(AppRoutes.composite);

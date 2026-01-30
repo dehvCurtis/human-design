@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../../../shared/providers/supabase_provider.dart';
+import '../../chart/domain/models/human_design_chart.dart';
 import '../data/discovery_repository.dart';
 import 'models/user_discovery.dart';
 import 'matching_service.dart';
@@ -181,3 +182,24 @@ class SuggestedUsersParams {
   @override
   int get hashCode => Object.hash(userType, userProfile);
 }
+
+/// Provider to check if current user can view another user's chart
+final canViewChartProvider = FutureProvider.family<bool, String>((ref, userId) async {
+  final repository = ref.watch(discoveryRepositoryProvider);
+  return repository.canViewUserChart(userId);
+});
+
+/// Provider to fetch another user's chart (with access control)
+final userPublicChartProvider = FutureProvider.family<HumanDesignChart?, String>((ref, userId) async {
+  final canView = await ref.watch(canViewChartProvider(userId).future);
+  if (!canView) return null;
+
+  final repository = ref.watch(discoveryRepositoryProvider);
+  return repository.getUserChart(userId);
+});
+
+/// Provider for popular public charts
+final popularChartsProvider = FutureProvider<List<DiscoveredUser>>((ref) async {
+  final repository = ref.watch(discoveryRepositoryProvider);
+  return repository.getPopularCharts();
+});

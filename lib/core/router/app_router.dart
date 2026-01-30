@@ -22,15 +22,15 @@ import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/social/presentation/social_screen.dart';
 import '../../features/transits/presentation/transits_screen.dart';
 import '../../features/discovery/presentation/discovery_screen.dart';
+import '../../features/discovery/presentation/user_profile_screen.dart';
 import '../../features/feed/presentation/feed_screen.dart';
 import '../../features/gamification/presentation/achievements_screen.dart';
 import '../../features/gamification/presentation/challenges_screen.dart';
 import '../../features/gamification/presentation/leaderboard_screen.dart';
 import '../../features/messaging/presentation/conversations_screen.dart';
 import '../../features/messaging/presentation/message_detail_screen.dart';
+import '../../features/messaging/presentation/message_with_user_screen.dart';
 import '../../features/stories/presentation/stories_screen.dart';
-import '../../features/learning/presentation/learning_screen.dart';
-import '../../features/learning/presentation/content_detail_screen.dart';
 import '../../features/learning/presentation/mentorship_screen.dart';
 import '../../features/learning/presentation/live_sessions_screen.dart';
 import '../../features/sharing/presentation/share_screen.dart';
@@ -41,6 +41,22 @@ import '../../features/quiz/presentation/quiz_detail_screen.dart';
 import '../../features/quiz/presentation/quiz_taking_screen.dart';
 import '../../features/quiz/presentation/quiz_results_screen.dart';
 import '../../features/quiz/domain/models/quiz.dart';
+import '../../features/hashtags/presentation/hashtag_feed_screen.dart';
+import '../../features/hashtags/presentation/trending_hashtags_screen.dart';
+import '../../features/feed/presentation/gate_feed_screen.dart';
+import '../../features/transits/presentation/transit_events_screen.dart';
+import '../../features/transits/presentation/transit_event_detail_screen.dart';
+import '../../features/activity/presentation/activity_feed_screen.dart';
+import '../../features/gamification/presentation/group_challenges_screen.dart';
+import '../../features/gamification/presentation/team_detail_screen.dart';
+import '../../features/gamification/presentation/group_challenge_detail_screen.dart';
+import '../../features/circles/presentation/circles_screen.dart';
+import '../../features/circles/presentation/circle_detail_screen.dart';
+import '../../features/experts/presentation/experts_screen.dart';
+import '../../features/experts/presentation/expert_detail_screen.dart';
+import '../../features/learning_paths/presentation/learning_paths_screen.dart';
+import '../../features/learning_paths/presentation/learning_path_detail_screen.dart';
+import '../../features/discovery/presentation/popular_charts_screen.dart';
 
 /// Route names
 class AppRoutes {
@@ -66,13 +82,17 @@ class AppRoutes {
 
   // Social platform routes
   static const String discover = '/discover';
+  static const String userProfile = '/user/:id';
   static const String feed = '/feed';
+  static const String postDetail = '/feed/post/:id';
   static const String achievements = '/achievements';
   static const String challenges = '/challenges';
   static const String leaderboard = '/leaderboard';
   static const String messages = '/messages';
   static const String messageDetail = '/messages/:id';
+  static const String messageWithUser = '/messages/user/:userId';
   static const String stories = '/stories';
+  static const String storyViewer = '/stories/view';
   static const String learning = '/learning';
   static const String contentDetail = '/learning/:id';
   static const String mentorship = '/mentorship';
@@ -85,6 +105,41 @@ class AppRoutes {
   static const String quizDetail = '/quizzes/:id';
   static const String quizTake = '/quizzes/:id/take';
   static const String quizResults = '/quizzes/:id/results/:attemptId';
+
+  // Hashtag routes
+  static const String hashtags = '/hashtags';
+  static const String hashtagFeed = '/hashtag/:tag';
+
+  // Gate feed route
+  static const String gateFeed = '/gate/:number';
+
+  // Transit event routes
+  static const String transitEvents = '/transit-events';
+  static const String transitEventDetail = '/transit-event/:id';
+
+  // Activity feed route
+  static const String activityFeed = '/activity';
+
+  // Group challenges routes
+  static const String groupChallenges = '/group-challenges';
+  static const String groupChallengeDetail = '/group-challenge/:id';
+  static const String teamDetail = '/team/:id';
+
+  // Compatibility circles routes
+  static const String circles = '/circles';
+  static const String circleDetail = '/circle/:id';
+
+  // Expert routes
+  static const String experts = '/experts';
+  static const String expertDetail = '/expert/:id';
+  static const String becomeExpert = '/become-expert';
+
+  // Learning paths routes
+  static const String learningPaths = '/learning-paths';
+  static const String learningPathDetail = '/learning-path/:id';
+
+  // Popular charts route
+  static const String popularCharts = '/popular-charts';
 }
 
 /// Provider for the router
@@ -174,7 +229,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.birthData,
         name: 'birthData',
-        builder: (context, state) => const BirthDataScreen(),
+        builder: (context, state) {
+          final isEditMode = state.uri.queryParameters['edit'] == 'true';
+          print('DEBUG Router: birthData route, uri=${state.uri}, isEditMode=$isEditMode');
+          return BirthDataScreen(isEditMode: isEditMode);
+        },
       ),
       ShellRoute(
         builder: (context, state, child) => MainShell(child: child),
@@ -246,9 +305,130 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const DiscoveryScreen(),
           ),
           GoRoute(
+            path: AppRoutes.popularCharts,
+            name: 'popularCharts',
+            builder: (context, state) => const PopularChartsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.userProfile,
+            name: 'userProfile',
+            builder: (context, state) => UserProfileScreen(
+              userId: state.pathParameters['id']!,
+            ),
+          ),
+          GoRoute(
             path: AppRoutes.feed,
             name: 'feed',
             builder: (context, state) => const FeedScreen(),
+            routes: [
+              GoRoute(
+                path: 'post/:id',
+                name: 'postDetail',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return PostDetailScreen(postId: id);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.hashtags,
+            name: 'hashtags',
+            builder: (context, state) => const TrendingHashtagsScreen(),
+          ),
+          GoRoute(
+            path: '/hashtag/:tag',
+            name: 'hashtagFeed',
+            builder: (context, state) {
+              final tag = state.pathParameters['tag']!;
+              return HashtagFeedScreen(hashtag: tag);
+            },
+          ),
+          GoRoute(
+            path: '/gate/:number',
+            name: 'gateFeed',
+            builder: (context, state) {
+              final number = int.parse(state.pathParameters['number']!);
+              return GateFeedScreen(gateNumber: number);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.transitEvents,
+            name: 'transitEvents',
+            builder: (context, state) => const TransitEventsScreen(),
+          ),
+          GoRoute(
+            path: '/transit-event/:id',
+            name: 'transitEventDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return TransitEventDetailScreen(eventId: id);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.activityFeed,
+            name: 'activityFeed',
+            builder: (context, state) => const ActivityFeedScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.groupChallenges,
+            name: 'groupChallenges',
+            builder: (context, state) => const GroupChallengesScreen(),
+          ),
+          GoRoute(
+            path: '/group-challenge/:id',
+            name: 'groupChallengeDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return GroupChallengeDetailScreen(challengeId: id);
+            },
+          ),
+          GoRoute(
+            path: '/team/:id',
+            name: 'teamDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return TeamDetailScreen(teamId: id);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.circles,
+            name: 'circles',
+            builder: (context, state) => const CirclesScreen(),
+          ),
+          GoRoute(
+            path: '/circle/:id',
+            name: 'circleDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return CircleDetailScreen(circleId: id);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.experts,
+            name: 'experts',
+            builder: (context, state) => const ExpertsScreen(),
+          ),
+          GoRoute(
+            path: '/expert/:id',
+            name: 'expertDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return ExpertDetailScreen(expertId: id);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.learningPaths,
+            name: 'learningPaths',
+            builder: (context, state) => const LearningPathsScreen(),
+          ),
+          GoRoute(
+            path: '/learning-path/:id',
+            name: 'learningPathDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return LearningPathDetailScreen(pathId: id);
+            },
           ),
           GoRoute(
             path: AppRoutes.achievements,
@@ -270,6 +450,14 @@ final routerProvider = Provider<GoRouter>((ref) {
             name: 'messages',
             builder: (context, state) => const ConversationsScreen(),
             routes: [
+              GoRoute(
+                path: 'user/:userId',
+                name: 'messageWithUser',
+                builder: (context, state) {
+                  final userId = state.pathParameters['userId']!;
+                  return MessageWithUserScreen(userId: userId);
+                },
+              ),
               GoRoute(
                 path: ':id',
                 name: 'messageDetail',

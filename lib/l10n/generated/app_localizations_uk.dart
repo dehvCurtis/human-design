@@ -810,6 +810,64 @@ class AppLocalizationsUk extends AppLocalizations {
   String get social_loadSharedFailed => 'Не вдалося завантажити спільні карти';
 
   @override
+  String get discovery_userNotFound => 'User not found';
+
+  @override
+  String get discovery_following => 'Following';
+
+  @override
+  String get discovery_follow => 'Follow';
+
+  @override
+  String get discovery_sendMessage => 'Send Message';
+
+  @override
+  String get discovery_about => 'About';
+
+  @override
+  String get discovery_humanDesign => 'Human Design';
+
+  @override
+  String get discovery_type => 'Type';
+
+  @override
+  String get discovery_profile => 'Profile';
+
+  @override
+  String get discovery_authority => 'Authority';
+
+  @override
+  String get discovery_compatibility => 'Compatibility';
+
+  @override
+  String get discovery_compatible => 'compatible';
+
+  @override
+  String get discovery_followers => 'Followers';
+
+  @override
+  String get discovery_followingLabel => 'Following';
+
+  @override
+  String get userProfile_viewChart => 'Bodygraph';
+
+  @override
+  String get userProfile_chartPrivate => 'This chart is private';
+
+  @override
+  String get userProfile_chartFriendsOnly =>
+      'Become mutual followers to view this chart';
+
+  @override
+  String get userProfile_chartFollowToView => 'Follow to view this chart';
+
+  @override
+  String get popularCharts_title => 'Popular Charts';
+
+  @override
+  String get popularCharts_subtitle => 'Most followed public charts';
+
+  @override
   String social_sentAgo(String time) {
     return 'Надіслано $time';
   }
@@ -1215,6 +1273,32 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get settings_privacy => 'Конфіденційність';
+
+  @override
+  String get settings_chartVisibility => 'Chart Visibility';
+
+  @override
+  String get settings_chartVisibilitySubtitle =>
+      'Control who can view your Human Design chart';
+
+  @override
+  String get settings_chartPrivate => 'Private';
+
+  @override
+  String get settings_chartPrivateDesc => 'Only you can see your chart';
+
+  @override
+  String get settings_chartFriends => 'Friends';
+
+  @override
+  String get settings_chartFriendsDesc =>
+      'Mutual followers can view your chart';
+
+  @override
+  String get settings_chartPublic => 'Public';
+
+  @override
+  String get settings_chartPublicDesc => 'Your followers can view your chart';
 
   @override
   String get settings_about => 'Про додаток';
@@ -1805,4 +1889,798 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get auth_checkEmail => 'Перевірте пошту для підтвердження';
+
+  @override
+  String get hashtags_explore => 'Explore Hashtags';
+
+  @override
+  String get hashtags_trending => 'Trending';
+
+  @override
+  String get hashtags_popular => 'Popular';
+
+  @override
+  String get hashtags_hdTopics => 'HD Topics';
+
+  @override
+  String get hashtags_noTrending => 'No trending hashtags yet';
+
+  @override
+  String get hashtags_noPopular => 'No popular hashtags yet';
+
+  @override
+  String get hashtags_noHdTopics => 'No HD topics yet';
+
+  @override
+  String get hashtag_noPosts => 'No posts yet';
+
+  @override
+  String get hashtag_beFirst => 'Be the first to post with this hashtag!';
+
+  @override
+  String hashtag_postCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count posts',
+      one: '1 post',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String hashtag_recentPosts(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count posts today',
+      one: '1 post today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get feed_forYou => 'For You';
+
+  @override
+  String get feed_trending => 'Trending';
+
+  @override
+  String get feed_hdTopics => 'HD Topics';
+
+  @override
+  String feed_gateTitle(int number) {
+    return 'Gate $number';
+  }
+
+  @override
+  String feed_gatePosts(int number) {
+    return 'Posts about Gate $number';
+  }
+
+  @override
+  String get transit_events_title => 'Transit Events';
+
+  @override
+  String get transit_events_happening => 'Happening Now';
+
+  @override
+  String get transit_events_upcoming => 'Upcoming';
+
+  @override
+  String get transit_events_past => 'Past Events';
+
+  @override
+  String get transit_events_noCurrentEvents => 'No events happening right now';
+
+  @override
+  String get transit_events_noUpcomingEvents => 'No upcoming events scheduled';
+
+  @override
+  String get transit_events_noPastEvents => 'No past events';
+
+  @override
+  String get transit_events_live => 'LIVE';
+
+  @override
+  String get transit_events_join => 'Join';
+
+  @override
+  String get transit_events_joined => 'Joined';
+
+  @override
+  String get transit_events_leave => 'Leave';
+
+  @override
+  String get transit_events_participating => 'participating';
+
+  @override
+  String get transit_events_posts => 'posts';
+
+  @override
+  String get transit_events_viewInsights => 'View Insights';
+
+  @override
+  String transit_events_endsIn(String time) {
+    return 'Ends in $time';
+  }
+
+  @override
+  String transit_events_startsIn(String time) {
+    return 'Starts in $time';
+  }
+
+  @override
+  String get transit_events_notFound => 'Event not found';
+
+  @override
+  String get transit_events_communityPosts => 'Community Posts';
+
+  @override
+  String get transit_events_noPosts => 'No posts yet for this event';
+
+  @override
+  String get transit_events_shareExperience => 'Share Experience';
+
+  @override
+  String get transit_events_participants => 'Participants';
+
+  @override
+  String get transit_events_duration => 'Duration';
+
+  @override
+  String get transit_events_eventEnded => 'This event has ended';
+
+  @override
+  String get transit_events_youreParticipating => 'You\'re participating!';
+
+  @override
+  String transit_events_experiencingWith(int count) {
+    return 'Experiencing this transit with $count others';
+  }
+
+  @override
+  String get transit_events_joinCommunity => 'Join the Community';
+
+  @override
+  String get transit_events_shareYourExperience =>
+      'Share your experience and connect with others';
+
+  @override
+  String get activity_title => 'Friend Activity';
+
+  @override
+  String get activity_noActivities => 'No friend activity yet';
+
+  @override
+  String get activity_followFriends =>
+      'Follow friends to see their achievements and milestones here!';
+
+  @override
+  String get activity_findFriends => 'Find Friends';
+
+  @override
+  String get activity_celebrate => 'Celebrate';
+
+  @override
+  String get activity_celebrated => 'Celebrated';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get groupChallenges_title => 'Group Challenges';
+
+  @override
+  String get groupChallenges_myTeams => 'My Teams';
+
+  @override
+  String get groupChallenges_challenges => 'Challenges';
+
+  @override
+  String get groupChallenges_leaderboard => 'Leaderboard';
+
+  @override
+  String get groupChallenges_createTeam => 'Create Team';
+
+  @override
+  String get groupChallenges_teamName => 'Team Name';
+
+  @override
+  String get groupChallenges_teamNameHint => 'Enter a team name';
+
+  @override
+  String get groupChallenges_teamDescription => 'Description';
+
+  @override
+  String get groupChallenges_teamDescriptionHint => 'What is your team about?';
+
+  @override
+  String get groupChallenges_teamCreated => 'Team created successfully!';
+
+  @override
+  String get groupChallenges_noTeams => 'No Teams Yet';
+
+  @override
+  String get groupChallenges_noTeamsDescription =>
+      'Create or join a team to compete in group challenges!';
+
+  @override
+  String groupChallenges_memberCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count members',
+      one: '1 member',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String groupChallenges_points(int points) {
+    return '$points pts';
+  }
+
+  @override
+  String get groupChallenges_noChallenges => 'No Active Challenges';
+
+  @override
+  String get groupChallenges_active => 'Active';
+
+  @override
+  String get groupChallenges_upcoming => 'Upcoming';
+
+  @override
+  String groupChallenges_reward(int points) {
+    return '$points pts reward';
+  }
+
+  @override
+  String groupChallenges_teamsEnrolled(String count) {
+    return '$count teams';
+  }
+
+  @override
+  String groupChallenges_participants(String count) {
+    return '$count participants';
+  }
+
+  @override
+  String groupChallenges_endsIn(String time) {
+    return 'Ends in $time';
+  }
+
+  @override
+  String get groupChallenges_weekly => 'Weekly';
+
+  @override
+  String get groupChallenges_monthly => 'Monthly';
+
+  @override
+  String get groupChallenges_allTime => 'All Time';
+
+  @override
+  String get groupChallenges_noTeamsOnLeaderboard =>
+      'No teams on leaderboard yet';
+
+  @override
+  String get groupChallenges_pts => 'pts';
+
+  @override
+  String get groupChallenges_teamNotFound => 'Team not found';
+
+  @override
+  String get groupChallenges_members => 'Members';
+
+  @override
+  String get groupChallenges_totalPoints => 'Total Points';
+
+  @override
+  String get groupChallenges_joined => 'Joined';
+
+  @override
+  String get groupChallenges_join => 'Join';
+
+  @override
+  String get groupChallenges_status => 'Status';
+
+  @override
+  String get groupChallenges_about => 'About';
+
+  @override
+  String get groupChallenges_noMembers => 'No members yet';
+
+  @override
+  String get groupChallenges_admin => 'Admin';
+
+  @override
+  String groupChallenges_contributed(int points) {
+    return '$points pts contributed';
+  }
+
+  @override
+  String get groupChallenges_joinedTeam => 'Successfully joined the team!';
+
+  @override
+  String get groupChallenges_leaveTeam => 'Leave Team';
+
+  @override
+  String get groupChallenges_leaveConfirmation =>
+      'Are you sure you want to leave this team? Your contributed points will remain with the team.';
+
+  @override
+  String get groupChallenges_leave => 'Leave';
+
+  @override
+  String get groupChallenges_leftTeam => 'You have left the team';
+
+  @override
+  String get groupChallenges_challengeDetails => 'Challenge Details';
+
+  @override
+  String get groupChallenges_challengeNotFound => 'Challenge not found';
+
+  @override
+  String get groupChallenges_target => 'Target';
+
+  @override
+  String get groupChallenges_starts => 'Starts';
+
+  @override
+  String get groupChallenges_ends => 'Ends';
+
+  @override
+  String get groupChallenges_hdTypes => 'HD Types';
+
+  @override
+  String get groupChallenges_noTeamsToEnroll => 'No Teams to Enroll';
+
+  @override
+  String get groupChallenges_createTeamToJoin =>
+      'Create a team first to enroll in challenges';
+
+  @override
+  String get groupChallenges_enrollTeam => 'Enroll a Team';
+
+  @override
+  String get groupChallenges_enrolled => 'Enrolled';
+
+  @override
+  String get groupChallenges_enroll => 'Enroll';
+
+  @override
+  String get groupChallenges_teamEnrolled => 'Team enrolled successfully!';
+
+  @override
+  String get groupChallenges_noTeamsEnrolled => 'No teams enrolled yet';
+
+  @override
+  String get circles_title => 'Compatibility Circles';
+
+  @override
+  String get circles_myCircles => 'My Circles';
+
+  @override
+  String get circles_invitations => 'Invitations';
+
+  @override
+  String get circles_create => 'Create Circle';
+
+  @override
+  String get circles_selectIcon => 'Select an icon';
+
+  @override
+  String get circles_name => 'Circle Name';
+
+  @override
+  String get circles_nameHint => 'Family, Team, Friends...';
+
+  @override
+  String get circles_description => 'Description';
+
+  @override
+  String get circles_descriptionHint => 'What is this circle for?';
+
+  @override
+  String get circles_created => 'Circle created successfully!';
+
+  @override
+  String get circles_noCircles => 'No Circles Yet';
+
+  @override
+  String get circles_noCirclesDescription =>
+      'Create a circle to analyze compatibility with friends, family, or team members.';
+
+  @override
+  String get circles_suggestions => 'Quick Start';
+
+  @override
+  String circles_memberCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count members',
+      one: '1 member',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get circles_private => 'Private';
+
+  @override
+  String get circles_noInvitations => 'No Invitations';
+
+  @override
+  String get circles_noInvitationsDescription =>
+      'Circle invitations you receive will appear here.';
+
+  @override
+  String circles_invitedBy(String name) {
+    return 'Invited by $name';
+  }
+
+  @override
+  String get circles_decline => 'Decline';
+
+  @override
+  String get circles_accept => 'Accept';
+
+  @override
+  String get circles_invitationDeclined => 'Invitation declined';
+
+  @override
+  String get circles_invitationAccepted => 'You\'ve joined the circle!';
+
+  @override
+  String get circles_notFound => 'Circle not found';
+
+  @override
+  String get circles_invite => 'Invite Member';
+
+  @override
+  String get circles_members => 'Members';
+
+  @override
+  String get circles_analysis => 'Analysis';
+
+  @override
+  String get circles_feed => 'Feed';
+
+  @override
+  String get circles_inviteMember => 'Invite Member';
+
+  @override
+  String get circles_sendInvite => 'Send Invite';
+
+  @override
+  String get circles_invitationSent => 'Invitation sent!';
+
+  @override
+  String get circles_invitationFailed => 'Failed to send invitation';
+
+  @override
+  String get circles_deleteTitle => 'Delete Circle';
+
+  @override
+  String circles_deleteConfirmation(String name) {
+    return 'Are you sure you want to delete \"$name\"? This action cannot be undone.';
+  }
+
+  @override
+  String get circles_deleted => 'Circle deleted';
+
+  @override
+  String get circles_noMembers => 'No members yet';
+
+  @override
+  String get circles_noAnalysis => 'No Analysis Yet';
+
+  @override
+  String get circles_runAnalysis =>
+      'Run a compatibility analysis to see how your circle members interact.';
+
+  @override
+  String get circles_needMoreMembers =>
+      'Add at least 2 members to run an analysis.';
+
+  @override
+  String get circles_analyzeCompatibility => 'Analyze Compatibility';
+
+  @override
+  String get circles_harmonyScore => 'Harmony Score';
+
+  @override
+  String get circles_typeDistribution => 'Type Distribution';
+
+  @override
+  String get circles_electromagneticConnections =>
+      'Electromagnetic Connections';
+
+  @override
+  String get circles_electromagneticDesc =>
+      'Intense attraction - you complete each other';
+
+  @override
+  String get circles_companionshipConnections => 'Companionship Connections';
+
+  @override
+  String get circles_companionshipDesc =>
+      'Comfort and stability - shared understanding';
+
+  @override
+  String get circles_groupStrengths => 'Group Strengths';
+
+  @override
+  String get circles_areasForGrowth => 'Areas for Growth';
+
+  @override
+  String get circles_writePost => 'Share something with your circle...';
+
+  @override
+  String get circles_noPosts => 'No Posts Yet';
+
+  @override
+  String get circles_beFirstToPost =>
+      'Be the first to share something with your circle!';
+
+  @override
+  String get experts_title => 'HD Experts';
+
+  @override
+  String get experts_becomeExpert => 'Become an Expert';
+
+  @override
+  String get experts_filterBySpecialization => 'Filter by Specialization';
+
+  @override
+  String get experts_allExperts => 'All Experts';
+
+  @override
+  String get experts_experts => 'Experts';
+
+  @override
+  String get experts_noExperts => 'No experts found';
+
+  @override
+  String get experts_featured => 'Featured Experts';
+
+  @override
+  String experts_followers(int count) {
+    return '$count followers';
+  }
+
+  @override
+  String get experts_notFound => 'Expert not found';
+
+  @override
+  String get experts_following => 'Following';
+
+  @override
+  String get experts_follow => 'Follow';
+
+  @override
+  String get experts_about => 'About';
+
+  @override
+  String get experts_specializations => 'Specializations';
+
+  @override
+  String get experts_credentials => 'Credentials';
+
+  @override
+  String get experts_reviews => 'Reviews';
+
+  @override
+  String get experts_writeReview => 'Write Review';
+
+  @override
+  String get experts_reviewContent => 'Your Review';
+
+  @override
+  String get experts_reviewHint =>
+      'Share your experience working with this expert...';
+
+  @override
+  String get experts_submitReview => 'Submit Review';
+
+  @override
+  String get experts_reviewSubmitted => 'Review submitted successfully!';
+
+  @override
+  String get experts_noReviews => 'No reviews yet';
+
+  @override
+  String get experts_followersLabel => 'Followers';
+
+  @override
+  String get experts_rating => 'Rating';
+
+  @override
+  String get experts_years => 'Years';
+
+  @override
+  String get learningPaths_title => 'Learning Paths';
+
+  @override
+  String get learningPaths_explore => 'Explore';
+
+  @override
+  String get learningPaths_inProgress => 'In Progress';
+
+  @override
+  String get learningPaths_completed => 'Completed';
+
+  @override
+  String get learningPaths_featured => 'Featured Paths';
+
+  @override
+  String get learningPaths_allPaths => 'All Paths';
+
+  @override
+  String get learningPaths_noPathsExplore => 'No learning paths available';
+
+  @override
+  String get learningPaths_noPathsInProgress => 'No Paths In Progress';
+
+  @override
+  String get learningPaths_noPathsInProgressDescription =>
+      'Enroll in a learning path to start your journey!';
+
+  @override
+  String get learningPaths_browsePaths => 'Browse Paths';
+
+  @override
+  String get learningPaths_noPathsCompleted => 'No Completed Paths';
+
+  @override
+  String get learningPaths_noPathsCompletedDescription =>
+      'Complete learning paths to see them here!';
+
+  @override
+  String learningPaths_enrolled(int count) {
+    return '$count enrolled';
+  }
+
+  @override
+  String learningPaths_stepsCount(int count) {
+    return '$count steps';
+  }
+
+  @override
+  String learningPaths_progress(int completed, int total) {
+    return '$completed of $total steps';
+  }
+
+  @override
+  String get learningPaths_resume => 'Resume';
+
+  @override
+  String learningPaths_completedOn(String date) {
+    return 'Completed on $date';
+  }
+
+  @override
+  String get learningPathNotFound => 'Learning path not found';
+
+  @override
+  String learningPathMinutes(int minutes) {
+    return '$minutes min';
+  }
+
+  @override
+  String learningPathSteps(int count) {
+    return '$count steps';
+  }
+
+  @override
+  String learningPathBy(String author) {
+    return 'By $author';
+  }
+
+  @override
+  String learningPathEnrolled(int count) {
+    return '$count enrolled';
+  }
+
+  @override
+  String learningPathCompleted(int count) {
+    return '$count completed';
+  }
+
+  @override
+  String get learningPathEnroll => 'Start Learning';
+
+  @override
+  String get learningPathYourProgress => 'Your Progress';
+
+  @override
+  String get learningPathCompletedBadge => 'Completed';
+
+  @override
+  String learningPathProgressText(int completed, int total) {
+    return '$completed of $total steps completed';
+  }
+
+  @override
+  String get learningPathStepsTitle => 'Learning Steps';
+
+  @override
+  String get learningPathEnrollTitle => 'Start This Path?';
+
+  @override
+  String learningPathEnrollMessage(String title) {
+    return 'You\'ll be enrolled in \"$title\" and can track your progress as you complete each step.';
+  }
+
+  @override
+  String get learningPathViewContent => 'View Content';
+
+  @override
+  String get learningPathMarkComplete => 'Mark as Complete';
+
+  @override
+  String get learningPathStepCompleted => 'Step completed!';
+
+  @override
+  String get thought_title => 'Thoughts';
+
+  @override
+  String get thought_feedTitle => 'Thoughts';
+
+  @override
+  String get thought_createNew => 'Share a Thought';
+
+  @override
+  String get thought_emptyFeed => 'Your thoughts feed is empty';
+
+  @override
+  String get thought_emptyFeedMessage =>
+      'Follow people or share a thought to get started';
+
+  @override
+  String get thought_regenerate => 'Regenerate';
+
+  @override
+  String thought_regeneratedFrom(String username) {
+    return 'Regenerated from @$username';
+  }
+
+  @override
+  String get thought_regenerateSuccess => 'Thought regenerated to your wall!';
+
+  @override
+  String get thought_regenerateConfirm => 'Regenerate this thought?';
+
+  @override
+  String get thought_regenerateDescription =>
+      'This will share this thought to your wall, crediting the original author.';
+
+  @override
+  String get thought_addComment => 'Add a comment (optional)';
+
+  @override
+  String thought_regenerateCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count regenerates',
+      one: '1 regenerate',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get thought_cannotRegenerateOwn =>
+      'You cannot regenerate your own thought';
+
+  @override
+  String get thought_alreadyRegenerated =>
+      'You have already regenerated this thought';
+
+  @override
+  String get thought_postDetail => 'Thought';
 }

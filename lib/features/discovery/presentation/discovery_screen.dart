@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../domain/discovery_providers.dart';
 import '../domain/models/user_discovery.dart';
@@ -66,6 +67,11 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen>
                 }
               });
             },
+          ),
+          IconButton(
+            icon: const Icon(Icons.star_outlined),
+            tooltip: 'Popular Charts',
+            onPressed: () => context.push('/popular-charts'),
           ),
           IconButton(
             icon: const Icon(Icons.filter_list),
@@ -165,8 +171,7 @@ class _DiscoverTab extends ConsumerWidget {
   }
 
   void _navigateToProfile(BuildContext context, DiscoveredUser user) {
-    // Navigate to user profile
-    // TODO: Implement navigation to user profile screen
+    context.push('/user/${user.id}');
   }
 }
 
@@ -197,7 +202,7 @@ class _FollowingTab extends ConsumerWidget {
             itemBuilder: (context, index) {
               return UserCard(
                 user: users[index],
-                onTap: () {},
+                onTap: () => context.push('/user/${users[index].id}'),
               );
             },
           ),
@@ -240,7 +245,7 @@ class _FollowersTab extends ConsumerWidget {
               return UserCard(
                 user: users[index],
                 showFollowBack: !users[index].isFollowing,
-                onTap: () {},
+                onTap: () => context.push('/user/${users[index].id}'),
               );
             },
           ),
@@ -280,7 +285,7 @@ class _SearchResultsView extends ConsumerWidget {
           itemBuilder: (context, index) {
             return UserCard(
               user: users[index],
-              onTap: () {},
+              onTap: () => context.push('/user/${users[index].id}'),
             );
           },
         );

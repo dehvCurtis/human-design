@@ -67,7 +67,7 @@ class CompatibilityReportCard extends StatelessWidget {
     return Row(
       children: [
         Icon(
-          Icons.favorite,
+          Icons.compare_arrows,
           color: theme.colorScheme.primary,
           size: 28,
         ),

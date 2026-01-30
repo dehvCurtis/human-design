@@ -1588,6 +1588,120 @@ abstract class AppLocalizations {
   /// **'Failed to load shared charts'**
   String get social_loadSharedFailed;
 
+  /// No description provided for @discovery_userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get discovery_userNotFound;
+
+  /// No description provided for @discovery_following.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get discovery_following;
+
+  /// No description provided for @discovery_follow.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get discovery_follow;
+
+  /// No description provided for @discovery_sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Message'**
+  String get discovery_sendMessage;
+
+  /// No description provided for @discovery_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get discovery_about;
+
+  /// No description provided for @discovery_humanDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Human Design'**
+  String get discovery_humanDesign;
+
+  /// No description provided for @discovery_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get discovery_type;
+
+  /// No description provided for @discovery_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get discovery_profile;
+
+  /// No description provided for @discovery_authority.
+  ///
+  /// In en, this message translates to:
+  /// **'Authority'**
+  String get discovery_authority;
+
+  /// No description provided for @discovery_compatibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Compatibility'**
+  String get discovery_compatibility;
+
+  /// No description provided for @discovery_compatible.
+  ///
+  /// In en, this message translates to:
+  /// **'compatible'**
+  String get discovery_compatible;
+
+  /// No description provided for @discovery_followers.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get discovery_followers;
+
+  /// No description provided for @discovery_followingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get discovery_followingLabel;
+
+  /// No description provided for @userProfile_viewChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Bodygraph'**
+  String get userProfile_viewChart;
+
+  /// No description provided for @userProfile_chartPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'This chart is private'**
+  String get userProfile_chartPrivate;
+
+  /// No description provided for @userProfile_chartFriendsOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Become mutual followers to view this chart'**
+  String get userProfile_chartFriendsOnly;
+
+  /// No description provided for @userProfile_chartFollowToView.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow to view this chart'**
+  String get userProfile_chartFollowToView;
+
+  /// No description provided for @popularCharts_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular Charts'**
+  String get popularCharts_title;
+
+  /// No description provided for @popularCharts_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Most followed public charts'**
+  String get popularCharts_subtitle;
+
   /// No description provided for @social_sentAgo.
   ///
   /// In en, this message translates to:
@@ -2331,6 +2445,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Privacy'**
   String get settings_privacy;
+
+  /// No description provided for @settings_chartVisibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart Visibility'**
+  String get settings_chartVisibility;
+
+  /// No description provided for @settings_chartVisibilitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Control who can view your Human Design chart'**
+  String get settings_chartVisibilitySubtitle;
+
+  /// No description provided for @settings_chartPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Private'**
+  String get settings_chartPrivate;
+
+  /// No description provided for @settings_chartPrivateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can see your chart'**
+  String get settings_chartPrivateDesc;
+
+  /// No description provided for @settings_chartFriends.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends'**
+  String get settings_chartFriends;
+
+  /// No description provided for @settings_chartFriendsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Mutual followers can view your chart'**
+  String get settings_chartFriendsDesc;
+
+  /// No description provided for @settings_chartPublic.
+  ///
+  /// In en, this message translates to:
+  /// **'Public'**
+  String get settings_chartPublic;
+
+  /// No description provided for @settings_chartPublicDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your followers can view your chart'**
+  String get settings_chartPublicDesc;
 
   /// No description provided for @settings_about.
   ///
@@ -3423,6 +3585,1368 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check your email for the confirmation link'**
   String get auth_checkEmail;
+
+  /// No description provided for @hashtags_explore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Hashtags'**
+  String get hashtags_explore;
+
+  /// No description provided for @hashtags_trending.
+  ///
+  /// In en, this message translates to:
+  /// **'Trending'**
+  String get hashtags_trending;
+
+  /// No description provided for @hashtags_popular.
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get hashtags_popular;
+
+  /// No description provided for @hashtags_hdTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Topics'**
+  String get hashtags_hdTopics;
+
+  /// No description provided for @hashtags_noTrending.
+  ///
+  /// In en, this message translates to:
+  /// **'No trending hashtags yet'**
+  String get hashtags_noTrending;
+
+  /// No description provided for @hashtags_noPopular.
+  ///
+  /// In en, this message translates to:
+  /// **'No popular hashtags yet'**
+  String get hashtags_noPopular;
+
+  /// No description provided for @hashtags_noHdTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'No HD topics yet'**
+  String get hashtags_noHdTopics;
+
+  /// No description provided for @hashtag_noPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts yet'**
+  String get hashtag_noPosts;
+
+  /// No description provided for @hashtag_beFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Be the first to post with this hashtag!'**
+  String get hashtag_beFirst;
+
+  /// No description provided for @hashtag_postCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 post} other{{count} posts}}'**
+  String hashtag_postCount(int count);
+
+  /// No description provided for @hashtag_recentPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 post today} other{{count} posts today}}'**
+  String hashtag_recentPosts(int count);
+
+  /// No description provided for @feed_forYou.
+  ///
+  /// In en, this message translates to:
+  /// **'For You'**
+  String get feed_forYou;
+
+  /// No description provided for @feed_trending.
+  ///
+  /// In en, this message translates to:
+  /// **'Trending'**
+  String get feed_trending;
+
+  /// No description provided for @feed_hdTopics.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Topics'**
+  String get feed_hdTopics;
+
+  /// No description provided for @feed_gateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gate {number}'**
+  String feed_gateTitle(int number);
+
+  /// No description provided for @feed_gatePosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts about Gate {number}'**
+  String feed_gatePosts(int number);
+
+  /// No description provided for @transit_events_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Transit Events'**
+  String get transit_events_title;
+
+  /// No description provided for @transit_events_happening.
+  ///
+  /// In en, this message translates to:
+  /// **'Happening Now'**
+  String get transit_events_happening;
+
+  /// No description provided for @transit_events_upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get transit_events_upcoming;
+
+  /// No description provided for @transit_events_past.
+  ///
+  /// In en, this message translates to:
+  /// **'Past Events'**
+  String get transit_events_past;
+
+  /// No description provided for @transit_events_noCurrentEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'No events happening right now'**
+  String get transit_events_noCurrentEvents;
+
+  /// No description provided for @transit_events_noUpcomingEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming events scheduled'**
+  String get transit_events_noUpcomingEvents;
+
+  /// No description provided for @transit_events_noPastEvents.
+  ///
+  /// In en, this message translates to:
+  /// **'No past events'**
+  String get transit_events_noPastEvents;
+
+  /// No description provided for @transit_events_live.
+  ///
+  /// In en, this message translates to:
+  /// **'LIVE'**
+  String get transit_events_live;
+
+  /// No description provided for @transit_events_join.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get transit_events_join;
+
+  /// No description provided for @transit_events_joined.
+  ///
+  /// In en, this message translates to:
+  /// **'Joined'**
+  String get transit_events_joined;
+
+  /// No description provided for @transit_events_leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get transit_events_leave;
+
+  /// No description provided for @transit_events_participating.
+  ///
+  /// In en, this message translates to:
+  /// **'participating'**
+  String get transit_events_participating;
+
+  /// No description provided for @transit_events_posts.
+  ///
+  /// In en, this message translates to:
+  /// **'posts'**
+  String get transit_events_posts;
+
+  /// No description provided for @transit_events_viewInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'View Insights'**
+  String get transit_events_viewInsights;
+
+  /// No description provided for @transit_events_endsIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Ends in {time}'**
+  String transit_events_endsIn(String time);
+
+  /// No description provided for @transit_events_startsIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Starts in {time}'**
+  String transit_events_startsIn(String time);
+
+  /// No description provided for @transit_events_notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Event not found'**
+  String get transit_events_notFound;
+
+  /// No description provided for @transit_events_communityPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Community Posts'**
+  String get transit_events_communityPosts;
+
+  /// No description provided for @transit_events_noPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No posts yet for this event'**
+  String get transit_events_noPosts;
+
+  /// No description provided for @transit_events_shareExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Experience'**
+  String get transit_events_shareExperience;
+
+  /// No description provided for @transit_events_participants.
+  ///
+  /// In en, this message translates to:
+  /// **'Participants'**
+  String get transit_events_participants;
+
+  /// No description provided for @transit_events_duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get transit_events_duration;
+
+  /// No description provided for @transit_events_eventEnded.
+  ///
+  /// In en, this message translates to:
+  /// **'This event has ended'**
+  String get transit_events_eventEnded;
+
+  /// No description provided for @transit_events_youreParticipating.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re participating!'**
+  String get transit_events_youreParticipating;
+
+  /// No description provided for @transit_events_experiencingWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Experiencing this transit with {count} others'**
+  String transit_events_experiencingWith(int count);
+
+  /// No description provided for @transit_events_joinCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the Community'**
+  String get transit_events_joinCommunity;
+
+  /// No description provided for @transit_events_shareYourExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your experience and connect with others'**
+  String get transit_events_shareYourExperience;
+
+  /// No description provided for @activity_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend Activity'**
+  String get activity_title;
+
+  /// No description provided for @activity_noActivities.
+  ///
+  /// In en, this message translates to:
+  /// **'No friend activity yet'**
+  String get activity_noActivities;
+
+  /// No description provided for @activity_followFriends.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow friends to see their achievements and milestones here!'**
+  String get activity_followFriends;
+
+  /// No description provided for @activity_findFriends.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Friends'**
+  String get activity_findFriends;
+
+  /// No description provided for @activity_celebrate.
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrate'**
+  String get activity_celebrate;
+
+  /// No description provided for @activity_celebrated.
+  ///
+  /// In en, this message translates to:
+  /// **'Celebrated'**
+  String get activity_celebrated;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
+
+  /// No description provided for @groupChallenges_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Challenges'**
+  String get groupChallenges_title;
+
+  /// No description provided for @groupChallenges_myTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'My Teams'**
+  String get groupChallenges_myTeams;
+
+  /// No description provided for @groupChallenges_challenges.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenges'**
+  String get groupChallenges_challenges;
+
+  /// No description provided for @groupChallenges_leaderboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get groupChallenges_leaderboard;
+
+  /// No description provided for @groupChallenges_createTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Team'**
+  String get groupChallenges_createTeam;
+
+  /// No description provided for @groupChallenges_teamName.
+  ///
+  /// In en, this message translates to:
+  /// **'Team Name'**
+  String get groupChallenges_teamName;
+
+  /// No description provided for @groupChallenges_teamNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a team name'**
+  String get groupChallenges_teamNameHint;
+
+  /// No description provided for @groupChallenges_teamDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get groupChallenges_teamDescription;
+
+  /// No description provided for @groupChallenges_teamDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What is your team about?'**
+  String get groupChallenges_teamDescriptionHint;
+
+  /// No description provided for @groupChallenges_teamCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Team created successfully!'**
+  String get groupChallenges_teamCreated;
+
+  /// No description provided for @groupChallenges_noTeams.
+  ///
+  /// In en, this message translates to:
+  /// **'No Teams Yet'**
+  String get groupChallenges_noTeams;
+
+  /// No description provided for @groupChallenges_noTeamsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Create or join a team to compete in group challenges!'**
+  String get groupChallenges_noTeamsDescription;
+
+  /// No description provided for @groupChallenges_memberCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 member} other{{count} members}}'**
+  String groupChallenges_memberCount(int count);
+
+  /// No description provided for @groupChallenges_points.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts'**
+  String groupChallenges_points(int points);
+
+  /// No description provided for @groupChallenges_noChallenges.
+  ///
+  /// In en, this message translates to:
+  /// **'No Active Challenges'**
+  String get groupChallenges_noChallenges;
+
+  /// No description provided for @groupChallenges_active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get groupChallenges_active;
+
+  /// No description provided for @groupChallenges_upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get groupChallenges_upcoming;
+
+  /// No description provided for @groupChallenges_reward.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts reward'**
+  String groupChallenges_reward(int points);
+
+  /// No description provided for @groupChallenges_teamsEnrolled.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} teams'**
+  String groupChallenges_teamsEnrolled(String count);
+
+  /// No description provided for @groupChallenges_participants.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} participants'**
+  String groupChallenges_participants(String count);
+
+  /// No description provided for @groupChallenges_endsIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Ends in {time}'**
+  String groupChallenges_endsIn(String time);
+
+  /// No description provided for @groupChallenges_weekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get groupChallenges_weekly;
+
+  /// No description provided for @groupChallenges_monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get groupChallenges_monthly;
+
+  /// No description provided for @groupChallenges_allTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All Time'**
+  String get groupChallenges_allTime;
+
+  /// No description provided for @groupChallenges_noTeamsOnLeaderboard.
+  ///
+  /// In en, this message translates to:
+  /// **'No teams on leaderboard yet'**
+  String get groupChallenges_noTeamsOnLeaderboard;
+
+  /// No description provided for @groupChallenges_pts.
+  ///
+  /// In en, this message translates to:
+  /// **'pts'**
+  String get groupChallenges_pts;
+
+  /// No description provided for @groupChallenges_teamNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Team not found'**
+  String get groupChallenges_teamNotFound;
+
+  /// No description provided for @groupChallenges_members.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get groupChallenges_members;
+
+  /// No description provided for @groupChallenges_totalPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get groupChallenges_totalPoints;
+
+  /// No description provided for @groupChallenges_joined.
+  ///
+  /// In en, this message translates to:
+  /// **'Joined'**
+  String get groupChallenges_joined;
+
+  /// No description provided for @groupChallenges_join.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get groupChallenges_join;
+
+  /// No description provided for @groupChallenges_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get groupChallenges_status;
+
+  /// No description provided for @groupChallenges_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get groupChallenges_about;
+
+  /// No description provided for @groupChallenges_noMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'No members yet'**
+  String get groupChallenges_noMembers;
+
+  /// No description provided for @groupChallenges_admin.
+  ///
+  /// In en, this message translates to:
+  /// **'Admin'**
+  String get groupChallenges_admin;
+
+  /// No description provided for @groupChallenges_contributed.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts contributed'**
+  String groupChallenges_contributed(int points);
+
+  /// No description provided for @groupChallenges_joinedTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully joined the team!'**
+  String get groupChallenges_joinedTeam;
+
+  /// No description provided for @groupChallenges_leaveTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Team'**
+  String get groupChallenges_leaveTeam;
+
+  /// No description provided for @groupChallenges_leaveConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to leave this team? Your contributed points will remain with the team.'**
+  String get groupChallenges_leaveConfirmation;
+
+  /// No description provided for @groupChallenges_leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get groupChallenges_leave;
+
+  /// No description provided for @groupChallenges_leftTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'You have left the team'**
+  String get groupChallenges_leftTeam;
+
+  /// No description provided for @groupChallenges_challengeDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge Details'**
+  String get groupChallenges_challengeDetails;
+
+  /// No description provided for @groupChallenges_challengeNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenge not found'**
+  String get groupChallenges_challengeNotFound;
+
+  /// No description provided for @groupChallenges_target.
+  ///
+  /// In en, this message translates to:
+  /// **'Target'**
+  String get groupChallenges_target;
+
+  /// No description provided for @groupChallenges_starts.
+  ///
+  /// In en, this message translates to:
+  /// **'Starts'**
+  String get groupChallenges_starts;
+
+  /// No description provided for @groupChallenges_ends.
+  ///
+  /// In en, this message translates to:
+  /// **'Ends'**
+  String get groupChallenges_ends;
+
+  /// No description provided for @groupChallenges_hdTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Types'**
+  String get groupChallenges_hdTypes;
+
+  /// No description provided for @groupChallenges_noTeamsToEnroll.
+  ///
+  /// In en, this message translates to:
+  /// **'No Teams to Enroll'**
+  String get groupChallenges_noTeamsToEnroll;
+
+  /// No description provided for @groupChallenges_createTeamToJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a team first to enroll in challenges'**
+  String get groupChallenges_createTeamToJoin;
+
+  /// No description provided for @groupChallenges_enrollTeam.
+  ///
+  /// In en, this message translates to:
+  /// **'Enroll a Team'**
+  String get groupChallenges_enrollTeam;
+
+  /// No description provided for @groupChallenges_enrolled.
+  ///
+  /// In en, this message translates to:
+  /// **'Enrolled'**
+  String get groupChallenges_enrolled;
+
+  /// No description provided for @groupChallenges_enroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Enroll'**
+  String get groupChallenges_enroll;
+
+  /// No description provided for @groupChallenges_teamEnrolled.
+  ///
+  /// In en, this message translates to:
+  /// **'Team enrolled successfully!'**
+  String get groupChallenges_teamEnrolled;
+
+  /// No description provided for @groupChallenges_noTeamsEnrolled.
+  ///
+  /// In en, this message translates to:
+  /// **'No teams enrolled yet'**
+  String get groupChallenges_noTeamsEnrolled;
+
+  /// No description provided for @circles_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Compatibility Circles'**
+  String get circles_title;
+
+  /// No description provided for @circles_myCircles.
+  ///
+  /// In en, this message translates to:
+  /// **'My Circles'**
+  String get circles_myCircles;
+
+  /// No description provided for @circles_invitations.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitations'**
+  String get circles_invitations;
+
+  /// No description provided for @circles_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Circle'**
+  String get circles_create;
+
+  /// No description provided for @circles_selectIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Select an icon'**
+  String get circles_selectIcon;
+
+  /// No description provided for @circles_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle Name'**
+  String get circles_name;
+
+  /// No description provided for @circles_nameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Family, Team, Friends...'**
+  String get circles_nameHint;
+
+  /// No description provided for @circles_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get circles_description;
+
+  /// No description provided for @circles_descriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What is this circle for?'**
+  String get circles_descriptionHint;
+
+  /// No description provided for @circles_created.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle created successfully!'**
+  String get circles_created;
+
+  /// No description provided for @circles_noCircles.
+  ///
+  /// In en, this message translates to:
+  /// **'No Circles Yet'**
+  String get circles_noCircles;
+
+  /// No description provided for @circles_noCirclesDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a circle to analyze compatibility with friends, family, or team members.'**
+  String get circles_noCirclesDescription;
+
+  /// No description provided for @circles_suggestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Start'**
+  String get circles_suggestions;
+
+  /// No description provided for @circles_memberCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 member} other{{count} members}}'**
+  String circles_memberCount(int count);
+
+  /// No description provided for @circles_private.
+  ///
+  /// In en, this message translates to:
+  /// **'Private'**
+  String get circles_private;
+
+  /// No description provided for @circles_noInvitations.
+  ///
+  /// In en, this message translates to:
+  /// **'No Invitations'**
+  String get circles_noInvitations;
+
+  /// No description provided for @circles_noInvitationsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle invitations you receive will appear here.'**
+  String get circles_noInvitationsDescription;
+
+  /// No description provided for @circles_invitedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Invited by {name}'**
+  String circles_invitedBy(String name);
+
+  /// No description provided for @circles_decline.
+  ///
+  /// In en, this message translates to:
+  /// **'Decline'**
+  String get circles_decline;
+
+  /// No description provided for @circles_accept.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept'**
+  String get circles_accept;
+
+  /// No description provided for @circles_invitationDeclined.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation declined'**
+  String get circles_invitationDeclined;
+
+  /// No description provided for @circles_invitationAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve joined the circle!'**
+  String get circles_invitationAccepted;
+
+  /// No description provided for @circles_notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle not found'**
+  String get circles_notFound;
+
+  /// No description provided for @circles_invite.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Member'**
+  String get circles_invite;
+
+  /// No description provided for @circles_members.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get circles_members;
+
+  /// No description provided for @circles_analysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Analysis'**
+  String get circles_analysis;
+
+  /// No description provided for @circles_feed.
+  ///
+  /// In en, this message translates to:
+  /// **'Feed'**
+  String get circles_feed;
+
+  /// No description provided for @circles_inviteMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Member'**
+  String get circles_inviteMember;
+
+  /// No description provided for @circles_sendInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Invite'**
+  String get circles_sendInvite;
+
+  /// No description provided for @circles_invitationSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Invitation sent!'**
+  String get circles_invitationSent;
+
+  /// No description provided for @circles_invitationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send invitation'**
+  String get circles_invitationFailed;
+
+  /// No description provided for @circles_deleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Circle'**
+  String get circles_deleteTitle;
+
+  /// No description provided for @circles_deleteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{name}\"? This action cannot be undone.'**
+  String circles_deleteConfirmation(String name);
+
+  /// No description provided for @circles_deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Circle deleted'**
+  String get circles_deleted;
+
+  /// No description provided for @circles_noMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'No members yet'**
+  String get circles_noMembers;
+
+  /// No description provided for @circles_noAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'No Analysis Yet'**
+  String get circles_noAnalysis;
+
+  /// No description provided for @circles_runAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Run a compatibility analysis to see how your circle members interact.'**
+  String get circles_runAnalysis;
+
+  /// No description provided for @circles_needMoreMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Add at least 2 members to run an analysis.'**
+  String get circles_needMoreMembers;
+
+  /// No description provided for @circles_analyzeCompatibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyze Compatibility'**
+  String get circles_analyzeCompatibility;
+
+  /// No description provided for @circles_harmonyScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Harmony Score'**
+  String get circles_harmonyScore;
+
+  /// No description provided for @circles_typeDistribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Type Distribution'**
+  String get circles_typeDistribution;
+
+  /// No description provided for @circles_electromagneticConnections.
+  ///
+  /// In en, this message translates to:
+  /// **'Electromagnetic Connections'**
+  String get circles_electromagneticConnections;
+
+  /// No description provided for @circles_electromagneticDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Intense attraction - you complete each other'**
+  String get circles_electromagneticDesc;
+
+  /// No description provided for @circles_companionshipConnections.
+  ///
+  /// In en, this message translates to:
+  /// **'Companionship Connections'**
+  String get circles_companionshipConnections;
+
+  /// No description provided for @circles_companionshipDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Comfort and stability - shared understanding'**
+  String get circles_companionshipDesc;
+
+  /// No description provided for @circles_groupStrengths.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Strengths'**
+  String get circles_groupStrengths;
+
+  /// No description provided for @circles_areasForGrowth.
+  ///
+  /// In en, this message translates to:
+  /// **'Areas for Growth'**
+  String get circles_areasForGrowth;
+
+  /// No description provided for @circles_writePost.
+  ///
+  /// In en, this message translates to:
+  /// **'Share something with your circle...'**
+  String get circles_writePost;
+
+  /// No description provided for @circles_noPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No Posts Yet'**
+  String get circles_noPosts;
+
+  /// No description provided for @circles_beFirstToPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Be the first to share something with your circle!'**
+  String get circles_beFirstToPost;
+
+  /// No description provided for @experts_title.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Experts'**
+  String get experts_title;
+
+  /// No description provided for @experts_becomeExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'Become an Expert'**
+  String get experts_becomeExpert;
+
+  /// No description provided for @experts_filterBySpecialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter by Specialization'**
+  String get experts_filterBySpecialization;
+
+  /// No description provided for @experts_allExperts.
+  ///
+  /// In en, this message translates to:
+  /// **'All Experts'**
+  String get experts_allExperts;
+
+  /// No description provided for @experts_experts.
+  ///
+  /// In en, this message translates to:
+  /// **'Experts'**
+  String get experts_experts;
+
+  /// No description provided for @experts_noExperts.
+  ///
+  /// In en, this message translates to:
+  /// **'No experts found'**
+  String get experts_noExperts;
+
+  /// No description provided for @experts_featured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured Experts'**
+  String get experts_featured;
+
+  /// No description provided for @experts_followers.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} followers'**
+  String experts_followers(int count);
+
+  /// No description provided for @experts_notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Expert not found'**
+  String get experts_notFound;
+
+  /// No description provided for @experts_following.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get experts_following;
+
+  /// No description provided for @experts_follow.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get experts_follow;
+
+  /// No description provided for @experts_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get experts_about;
+
+  /// No description provided for @experts_specializations.
+  ///
+  /// In en, this message translates to:
+  /// **'Specializations'**
+  String get experts_specializations;
+
+  /// No description provided for @experts_credentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Credentials'**
+  String get experts_credentials;
+
+  /// No description provided for @experts_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get experts_reviews;
+
+  /// No description provided for @experts_writeReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Write Review'**
+  String get experts_writeReview;
+
+  /// No description provided for @experts_reviewContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Review'**
+  String get experts_reviewContent;
+
+  /// No description provided for @experts_reviewHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your experience working with this expert...'**
+  String get experts_reviewHint;
+
+  /// No description provided for @experts_submitReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Review'**
+  String get experts_submitReview;
+
+  /// No description provided for @experts_reviewSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Review submitted successfully!'**
+  String get experts_reviewSubmitted;
+
+  /// No description provided for @experts_noReviews.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews yet'**
+  String get experts_noReviews;
+
+  /// No description provided for @experts_followersLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get experts_followersLabel;
+
+  /// No description provided for @experts_rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get experts_rating;
+
+  /// No description provided for @experts_years.
+  ///
+  /// In en, this message translates to:
+  /// **'Years'**
+  String get experts_years;
+
+  /// No description provided for @learningPaths_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Paths'**
+  String get learningPaths_title;
+
+  /// No description provided for @learningPaths_explore.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore'**
+  String get learningPaths_explore;
+
+  /// No description provided for @learningPaths_inProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get learningPaths_inProgress;
+
+  /// No description provided for @learningPaths_completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get learningPaths_completed;
+
+  /// No description provided for @learningPaths_featured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured Paths'**
+  String get learningPaths_featured;
+
+  /// No description provided for @learningPaths_allPaths.
+  ///
+  /// In en, this message translates to:
+  /// **'All Paths'**
+  String get learningPaths_allPaths;
+
+  /// No description provided for @learningPaths_noPathsExplore.
+  ///
+  /// In en, this message translates to:
+  /// **'No learning paths available'**
+  String get learningPaths_noPathsExplore;
+
+  /// No description provided for @learningPaths_noPathsInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'No Paths In Progress'**
+  String get learningPaths_noPathsInProgress;
+
+  /// No description provided for @learningPaths_noPathsInProgressDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enroll in a learning path to start your journey!'**
+  String get learningPaths_noPathsInProgressDescription;
+
+  /// No description provided for @learningPaths_browsePaths.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse Paths'**
+  String get learningPaths_browsePaths;
+
+  /// No description provided for @learningPaths_noPathsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'No Completed Paths'**
+  String get learningPaths_noPathsCompleted;
+
+  /// No description provided for @learningPaths_noPathsCompletedDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete learning paths to see them here!'**
+  String get learningPaths_noPathsCompletedDescription;
+
+  /// No description provided for @learningPaths_enrolled.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} enrolled'**
+  String learningPaths_enrolled(int count);
+
+  /// No description provided for @learningPaths_stepsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} steps'**
+  String learningPaths_stepsCount(int count);
+
+  /// No description provided for @learningPaths_progress.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} of {total} steps'**
+  String learningPaths_progress(int completed, int total);
+
+  /// No description provided for @learningPaths_resume.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get learningPaths_resume;
+
+  /// No description provided for @learningPaths_completedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed on {date}'**
+  String learningPaths_completedOn(String date);
+
+  /// No description provided for @learningPathNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning path not found'**
+  String get learningPathNotFound;
+
+  /// No description provided for @learningPathMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String learningPathMinutes(int minutes);
+
+  /// No description provided for @learningPathSteps.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} steps'**
+  String learningPathSteps(int count);
+
+  /// No description provided for @learningPathBy.
+  ///
+  /// In en, this message translates to:
+  /// **'By {author}'**
+  String learningPathBy(String author);
+
+  /// No description provided for @learningPathEnrolled.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} enrolled'**
+  String learningPathEnrolled(int count);
+
+  /// No description provided for @learningPathCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} completed'**
+  String learningPathCompleted(int count);
+
+  /// No description provided for @learningPathEnroll.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Learning'**
+  String get learningPathEnroll;
+
+  /// No description provided for @learningPathYourProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Progress'**
+  String get learningPathYourProgress;
+
+  /// No description provided for @learningPathCompletedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get learningPathCompletedBadge;
+
+  /// No description provided for @learningPathProgressText.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} of {total} steps completed'**
+  String learningPathProgressText(int completed, int total);
+
+  /// No description provided for @learningPathStepsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Steps'**
+  String get learningPathStepsTitle;
+
+  /// No description provided for @learningPathEnrollTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start This Path?'**
+  String get learningPathEnrollTitle;
+
+  /// No description provided for @learningPathEnrollMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll be enrolled in \"{title}\" and can track your progress as you complete each step.'**
+  String learningPathEnrollMessage(String title);
+
+  /// No description provided for @learningPathViewContent.
+  ///
+  /// In en, this message translates to:
+  /// **'View Content'**
+  String get learningPathViewContent;
+
+  /// No description provided for @learningPathMarkComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as Complete'**
+  String get learningPathMarkComplete;
+
+  /// No description provided for @learningPathStepCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Step completed!'**
+  String get learningPathStepCompleted;
+
+  /// No description provided for @thought_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get thought_title;
+
+  /// No description provided for @thought_feedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get thought_feedTitle;
+
+  /// No description provided for @thought_createNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Share a Thought'**
+  String get thought_createNew;
+
+  /// No description provided for @thought_emptyFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your thoughts feed is empty'**
+  String get thought_emptyFeed;
+
+  /// No description provided for @thought_emptyFeedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow people or share a thought to get started'**
+  String get thought_emptyFeedMessage;
+
+  /// No description provided for @thought_regenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate'**
+  String get thought_regenerate;
+
+  /// No description provided for @thought_regeneratedFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerated from @{username}'**
+  String thought_regeneratedFrom(String username);
+
+  /// No description provided for @thought_regenerateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Thought regenerated to your wall!'**
+  String get thought_regenerateSuccess;
+
+  /// No description provided for @thought_regenerateConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate this thought?'**
+  String get thought_regenerateConfirm;
+
+  /// No description provided for @thought_regenerateDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will share this thought to your wall, crediting the original author.'**
+  String get thought_regenerateDescription;
+
+  /// No description provided for @thought_addComment.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a comment (optional)'**
+  String get thought_addComment;
+
+  /// No description provided for @thought_regenerateCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 regenerate} other{{count} regenerates}}'**
+  String thought_regenerateCount(int count);
+
+  /// No description provided for @thought_cannotRegenerateOwn.
+  ///
+  /// In en, this message translates to:
+  /// **'You cannot regenerate your own thought'**
+  String get thought_cannotRegenerateOwn;
+
+  /// No description provided for @thought_alreadyRegenerated.
+  ///
+  /// In en, this message translates to:
+  /// **'You have already regenerated this thought'**
+  String get thought_alreadyRegenerated;
+
+  /// No description provided for @thought_postDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Thought'**
+  String get thought_postDetail;
 }
 
 class _AppLocalizationsDelegate

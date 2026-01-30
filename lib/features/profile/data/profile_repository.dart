@@ -1,6 +1,30 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../chart/domain/models/human_design_chart.dart';
+
+/// Chart visibility levels for user profiles
+enum ChartVisibility {
+  /// Only the owner can see their chart
+  private,
+  /// Mutual followers can view the chart
+  friends,
+  /// Anyone can view the chart
+  public;
+
+  /// Parse from string (for database values)
+  static ChartVisibility fromString(String? value) {
+    switch (value) {
+      case 'public':
+        return ChartVisibility.public;
+      case 'friends':
+        return ChartVisibility.friends;
+      case 'private':
+      default:
+        return ChartVisibility.private;
+    }
+  }
+}
 
 /// Repository for user profile operations
 class ProfileRepository {
@@ -36,6 +60,9 @@ class ProfileRepository {
   }
 
   /// Update profile birth data
+  ///
+  /// [birthDateTime] is the local birth time (naive DateTime, not UTC)
+  /// [timezone] is the IANA timezone string for the birth location
   Future<void> updateBirthData({
     required DateTime birthDateTime,
     required BirthLocation birthLocation,
@@ -44,8 +71,30 @@ class ProfileRepository {
     final userId = _client.auth.currentUser?.id;
     if (userId == null) throw StateError('User not authenticated');
 
+    // Convert local birth time to UTC using the birth location's timezone
+    // This ensures the stored UTC time is correct regardless of device timezone
+    DateTime utcBirthDateTime;
+    try {
+      final location = tz.getLocation(timezone);
+      final localTime = tz.TZDateTime(
+        location,
+        birthDateTime.year,
+        birthDateTime.month,
+        birthDateTime.day,
+        birthDateTime.hour,
+        birthDateTime.minute,
+        birthDateTime.second,
+      );
+      utcBirthDateTime = localTime.toUtc();
+      print('DEBUG updateBirthData: Converting $birthDateTime in $timezone to UTC: $utcBirthDateTime');
+    } catch (e) {
+      // Fallback to device timezone if timezone lookup fails
+      print('DEBUG updateBirthData: Timezone lookup failed for $timezone, using device timezone');
+      utcBirthDateTime = birthDateTime.toUtc();
+    }
+
     await _client.from('profiles').update({
-      'birth_date': birthDateTime.toIso8601String(),
+      'birth_date': utcBirthDateTime.toIso8601String(),
       'birth_location': birthLocation.toJson(),
       'timezone': timezone,
       'updated_at': DateTime.now().toIso8601String(),
@@ -55,11 +104,34 @@ class ProfileRepository {
   /// Save a chart to the database
   Future<void> saveChart(HumanDesignChart chart) async {
     try {
+      // Ensure birth datetime is stored as UTC
+      DateTime utcBirthDateTime;
+      if (chart.birthDateTime.isUtc) {
+        utcBirthDateTime = chart.birthDateTime;
+      } else {
+        // Convert local time to UTC using chart's timezone
+        try {
+          final location = tz.getLocation(chart.timezone);
+          final localTime = tz.TZDateTime(
+            location,
+            chart.birthDateTime.year,
+            chart.birthDateTime.month,
+            chart.birthDateTime.day,
+            chart.birthDateTime.hour,
+            chart.birthDateTime.minute,
+            chart.birthDateTime.second,
+          );
+          utcBirthDateTime = localTime.toUtc();
+        } catch (e) {
+          utcBirthDateTime = chart.birthDateTime.toUtc();
+        }
+      }
+
       await _client.from('charts').upsert({
         'id': chart.id,
         'user_id': chart.userId,
         'name': chart.name,
-        'birth_datetime': chart.birthDateTime.toIso8601String(),
+        'birth_datetime': utcBirthDateTime.toIso8601String(),
         'birth_location': chart.birthLocation.toJson(),
         'timezone': chart.timezone,
         'type': chart.type.name,
@@ -164,6 +236,17 @@ class ProfileRepository {
     }).eq('id', userId);
   }
 
+  /// Update chart visibility setting
+  Future<void> setChartVisibility(ChartVisibility visibility) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client.from('profiles').update({
+      'chart_visibility': visibility.name,
+      'updated_at': DateTime.now().toIso8601String(),
+    }).eq('id', userId);
+  }
+
   /// Get share count for current month
   Future<int> getMonthlyShareCount() async {
     final userId = _client.auth.currentUser?.id;
@@ -215,6 +298,7 @@ class UserProfile {
     this.timezone,
     this.isPremium = false,
     this.preferredLanguage = 'en',
+    this.chartVisibility = ChartVisibility.private,
     this.createdAt,
     this.updatedAt,
   });
@@ -228,6 +312,7 @@ class UserProfile {
   final String? timezone;
   final bool isPremium;
   final String preferredLanguage;
+  final ChartVisibility chartVisibility;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -249,6 +334,7 @@ class UserProfile {
       timezone: json['timezone'] as String?,
       isPremium: json['is_premium'] as bool? ?? false,
       preferredLanguage: json['preferred_language'] as String? ?? 'en',
+      chartVisibility: ChartVisibility.fromString(json['chart_visibility'] as String?),
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'] as String)
           : null,
@@ -269,6 +355,7 @@ class UserProfile {
       'timezone': timezone,
       'is_premium': isPremium,
       'preferred_language': preferredLanguage,
+      'chart_visibility': chartVisibility.name,
       'updated_at': DateTime.now().toIso8601String(),
     };
   }
@@ -283,6 +370,7 @@ class UserProfile {
     String? timezone,
     bool? isPremium,
     String? preferredLanguage,
+    ChartVisibility? chartVisibility,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -296,6 +384,7 @@ class UserProfile {
       timezone: timezone ?? this.timezone,
       isPremium: isPremium ?? this.isPremium,
       preferredLanguage: preferredLanguage ?? this.preferredLanguage,
+      chartVisibility: chartVisibility ?? this.chartVisibility,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );

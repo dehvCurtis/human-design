@@ -14,15 +14,21 @@ class FeedRepository {
   // ==================== Posts ====================
 
   /// Get the main feed (posts from followed users + public posts)
+  /// Includes original post data for regenerated posts
   Future<List<Post>> getFeed({int limit = 20, int offset = 0}) async {
     final userId = _currentUserId;
 
     // Get posts from followed users and public posts
+    // Include original_post join for regenerated posts
     final response = await _client
         .from('posts')
         .select('''
           *,
-          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
+          original_post:posts!posts_original_post_id_fkey(
+            *,
+            user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          )
         ''')
         .or('visibility.eq.public${userId != null ? ',user_id.in.(select following_id from user_follows where follower_id=eq.$userId)' : ''}')
         .order('created_at', ascending: false)
@@ -46,6 +52,7 @@ class FeedRepository {
   }
 
   /// Get posts by a specific user
+  /// Includes original post data for regenerated posts
   Future<List<Post>> getUserPosts(String userId, {int limit = 20, int offset = 0}) async {
     final currentUserId = _currentUserId;
     final isOwnProfile = currentUserId == userId;
@@ -54,7 +61,11 @@ class FeedRepository {
         .from('posts')
         .select('''
           *,
-          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
+          original_post:posts!posts_original_post_id_fkey(
+            *,
+            user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          )
         ''')
         .eq('user_id', userId);
 
@@ -71,12 +82,17 @@ class FeedRepository {
   }
 
   /// Get a single post by ID
+  /// Includes original post data for regenerated posts
   Future<Post?> getPost(String postId) async {
     final response = await _client
         .from('posts')
         .select('''
           *,
-          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
+          original_post:posts!posts_original_post_id_fkey(
+            *,
+            user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          )
         ''')
         .eq('id', postId)
         .maybeSingle();
@@ -304,6 +320,116 @@ class FeedRepository {
   /// Delete a comment
   Future<void> deleteComment(String commentId) async {
     await _client.from('post_comments').delete().eq('id', commentId);
+  }
+
+  // ==================== Regenerate (Repost) ====================
+
+  /// Regenerate (repost) a thought to your wall
+  /// Creates a new post that references the original post
+  Future<Post> regeneratePost({
+    required String originalPostId,
+    String? additionalComment,
+    PostVisibility visibility = PostVisibility.public,
+  }) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Get the original post to verify it exists and is public/accessible
+    final originalPost = await getPost(originalPostId);
+    if (originalPost == null) {
+      throw StateError('Original post not found');
+    }
+
+    // Can't regenerate your own post
+    if (originalPost.userId == userId) {
+      throw StateError('Cannot regenerate your own post');
+    }
+
+    // Create the regenerate post
+    final response = await _client.from('posts').insert({
+      'user_id': userId,
+      'content': additionalComment ?? '',
+      'post_type': PostType.regenerate.dbValue,
+      'visibility': visibility.name,
+      'original_post_id': originalPostId,
+      'is_regenerate': true,
+    }).select('''
+      *,
+      user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
+      original_post:posts!posts_original_post_id_fkey(
+        *,
+        user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+      )
+    ''').single();
+
+    return Post.fromJson(response);
+  }
+
+  /// Get user's wall (their thoughts + regenerated thoughts)
+  /// Shows both original posts and regenerated posts
+  Future<List<Post>> getUserWall(String userId, {int limit = 20, int offset = 0}) async {
+    final currentUserId = _currentUserId;
+    final isOwnProfile = currentUserId == userId;
+
+    var query = _client
+        .from('posts')
+        .select('''
+          *,
+          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
+          original_post:posts!posts_original_post_id_fkey(
+            *,
+            user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+          )
+        ''')
+        .eq('user_id', userId);
+
+    // Only show public posts if not own profile
+    if (!isOwnProfile) {
+      query = query.eq('visibility', 'public');
+    }
+
+    final response = await query
+        .order('created_at', ascending: false)
+        .range(offset, offset + limit - 1);
+
+    final posts = (response as List).map((json) => Post.fromJson(json)).toList();
+
+    // Get user's reactions for these posts
+    if (currentUserId != null && posts.isNotEmpty) {
+      final postIds = posts.map((p) => p.id).toList();
+      final reactions = await _getUserReactionsForPosts(postIds);
+
+      return posts.map((post) {
+        return post.copyWith(userReaction: reactions[post.id]);
+      }).toList();
+    }
+
+    return posts;
+  }
+
+  /// Check if the current user can regenerate a post
+  /// Returns false if: post doesn't exist, user owns the post, or user already regenerated it
+  Future<bool> canRegeneratePost(String postId) async {
+    final userId = _currentUserId;
+    if (userId == null) return false;
+
+    // Get the post
+    final post = await getPost(postId);
+    if (post == null) return false;
+
+    // Can't regenerate own post
+    if (post.userId == userId) return false;
+
+    // Check if user already regenerated this post
+    final existingRegenerate = await _client
+        .from('posts')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('original_post_id', postId)
+        .eq('is_regenerate', true)
+        .maybeSingle();
+
+    return existingRegenerate == null;
   }
 
   // ==================== Realtime ====================

@@ -360,40 +360,6 @@ class BodygraphPainter extends CustomPainter {
     }
   }
 
-  /// Draw a half-and-half circle for gates with both conscious and unconscious activation
-  void _drawHalfCircle(
-    Canvas canvas,
-    Offset center,
-    double radius,
-    Color color1,
-    Color color2,
-  ) {
-    final paint1 = Paint()
-      ..style = PaintingStyle.fill
-      ..color = color1;
-    final paint2 = Paint()
-      ..style = PaintingStyle.fill
-      ..color = color2;
-
-    // Left half (conscious/black)
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      math.pi / 2,
-      math.pi,
-      true,
-      paint1,
-    );
-
-    // Right half (unconscious/red)
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      -math.pi / 2,
-      math.pi,
-      true,
-      paint2,
-    );
-  }
-
   /// Get the correct triangle orientation for each center
   _TriangleOrientation _getTriangleOrientation(HumanDesignCenter center) {
     switch (center) {

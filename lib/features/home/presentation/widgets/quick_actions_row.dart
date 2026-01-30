@@ -57,7 +57,7 @@ class QuickActionsRow extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: _QuickActionButton(
-                icon: Icons.favorite_border,
+                icon: Icons.compare_arrows,
                 label: l10n.home_composite,
                 color: AppColors.person2,
                 onTap: onCompositeTap,

@@ -1,5 +1,8 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../chart/domain/models/human_design_chart.dart';
+import '../../chart/domain/usecases/calculate_chart.dart';
+import '../../ephemeris/data/ephemeris_service.dart';
 import '../domain/models/user_discovery.dart';
 import '../domain/matching_service.dart';
 
@@ -82,7 +85,7 @@ class DiscoveryRepository {
         .select('''
           following:profiles!user_follows_following_id_fkey(
             id, name, avatar_url, bio, hd_type, hd_profile, hd_authority,
-            is_public, show_chart_publicly, follower_count, following_count
+            is_public, show_chart_publicly, chart_visibility, follower_count, following_count
           )
         ''')
         .eq('follower_id', currentUserId)
@@ -107,7 +110,7 @@ class DiscoveryRepository {
         .select('''
           follower:profiles!user_follows_follower_id_fkey(
             id, name, avatar_url, bio, hd_type, hd_profile, hd_authority,
-            is_public, show_chart_publicly, follower_count, following_count
+            is_public, show_chart_publicly, chart_visibility, follower_count, following_count
           )
         ''')
         .eq('following_id', currentUserId)
@@ -142,6 +145,74 @@ class DiscoveryRepository {
     return (
       followers: response['follower_count'] as int? ?? 0,
       following: response['following_count'] as int? ?? 0,
+    );
+  }
+
+  /// Get a specific user's profile
+  Future<DiscoveredUser?> getUserProfile(String userId) async {
+    final currentUserId = _currentUserId;
+
+    final response = await _client
+        .from('profiles')
+        .select('''
+          id, name, avatar_url, bio, hd_type, hd_profile, hd_authority,
+          is_public, show_chart_publicly, chart_visibility, follower_count, following_count
+        ''')
+        .eq('id', userId)
+        .maybeSingle();
+
+    if (response == null) return null;
+
+    // Check if current user follows this user
+    bool isFollowing = false;
+    bool isFollowedBy = false;
+    int? compatibilityScore;
+
+    if (currentUserId != null && currentUserId != userId) {
+      final followCheck = await _client
+          .from('user_follows')
+          .select('follower_id, following_id')
+          .or('and(follower_id.eq.$currentUserId,following_id.eq.$userId),and(follower_id.eq.$userId,following_id.eq.$currentUserId)');
+
+      for (final row in followCheck) {
+        if (row['follower_id'] == currentUserId && row['following_id'] == userId) {
+          isFollowing = true;
+        }
+        if (row['follower_id'] == userId && row['following_id'] == currentUserId) {
+          isFollowedBy = true;
+        }
+      }
+
+      // Calculate basic compatibility if both users have HD type
+      final currentUserProfile = await _client
+          .from('profiles')
+          .select('hd_type, hd_profile, hd_authority')
+          .eq('id', currentUserId)
+          .maybeSingle();
+
+      if (currentUserProfile != null &&
+          currentUserProfile['hd_type'] != null &&
+          response['hd_type'] != null) {
+        // Calculate basic compatibility using matching service
+        final details = _matchingService.calculateCompatibility(
+          userType: currentUserProfile['hd_type'] as String?,
+          userProfile: currentUserProfile['hd_profile'] as String?,
+          userGates: null, // Gates not available in basic profile query
+          userDefinedCenters: null,
+          otherType: response['hd_type'] as String?,
+          otherProfile: response['hd_profile'] as String?,
+          otherGates: null,
+          otherDefinedCenters: null,
+        );
+        compatibilityScore = details.totalScore;
+      }
+    }
+
+    return DiscoveredUser.fromJson(
+      response,
+      isFollowing: isFollowing,
+      isFollowedBy: isFollowedBy,
+      compatibilityScore: compatibilityScore,
     );
   }
 
@@ -497,5 +568,150 @@ class DiscoveryRepository {
     return (response as List)
         .map((json) => json['follower_id'] as String)
         .toSet();
+  }
+
+  // ==================== Chart Visibility ====================
+
+  /// Check if two users are mutual followers
+  Future<bool> areMutualFollowers(String userId) async {
+    final currentUserId = _currentUserId;
+    if (currentUserId == null) return false;
+    if (currentUserId == userId) return true; // User can always see their own chart
+
+    // Check if current user follows the target user
+    final followingResponse = await _client
+        .from('user_follows')
+        .select('id')
+        .eq('follower_id', currentUserId)
+        .eq('following_id', userId)
+        .maybeSingle();
+
+    if (followingResponse == null) return false;
+
+    // Check if target user follows current user
+    final followedByResponse = await _client
+        .from('user_follows')
+        .select('id')
+        .eq('follower_id', userId)
+        .eq('following_id', currentUserId)
+        .maybeSingle();
+
+    return followedByResponse != null;
+  }
+
+  /// Check if current user can view another user's chart
+  /// Facebook-like model:
+  /// - Private: Only owner can see
+  /// - Friends: Mutual followers can see
+  /// - Public: Anyone who follows them can see
+  Future<bool> canViewUserChart(String userId) async {
+    final currentUserId = _currentUserId;
+
+    // User can always view their own chart
+    if (currentUserId == userId) return true;
+
+    // Get the target user's profile to check visibility setting
+    final response = await _client
+        .from('profiles')
+        .select('chart_visibility')
+        .eq('id', userId)
+        .maybeSingle();
+
+    if (response == null) return false;
+
+    final visibility = DiscoveredUserChartVisibility.fromString(
+      response['chart_visibility'] as String?,
+    );
+
+    switch (visibility) {
+      case DiscoveredUserChartVisibility.public:
+        // Public: followers can see the chart
+        return await isFollowing(userId);
+      case DiscoveredUserChartVisibility.friends:
+        // Friends: mutual followers can see
+        return await areMutualFollowers(userId);
+      case DiscoveredUserChartVisibility.private:
+        // Private: only owner can see
+        return false;
+    }
+  }
+
+  /// Get another user's chart (if allowed)
+  Future<HumanDesignChart?> getUserChart(String userId) async {
+    // First check if we can view the chart
+    final canView = await canViewUserChart(userId);
+    if (!canView) return null;
+
+    // Get user's birth data
+    final response = await _client
+        .from('profiles')
+        .select('id, name, birth_date, birth_location, timezone')
+        .eq('id', userId)
+        .maybeSingle();
+
+    if (response == null) return null;
+
+    final birthDateStr = response['birth_date'] as String?;
+    final birthLocationJson = response['birth_location'] as Map<String, dynamic>?;
+    final timezone = response['timezone'] as String?;
+
+    if (birthDateStr == null || birthLocationJson == null || timezone == null) {
+      return null;
+    }
+
+    final birthDateTime = DateTime.parse(birthDateStr);
+    final birthLocation = BirthLocation.fromJson(birthLocationJson);
+
+    // Calculate the chart
+    final ephemerisService = EphemerisService.instance;
+    final calculateChart = CalculateChartUseCase(ephemerisService: ephemerisService);
+
+    return calculateChart.execute(
+      userId: userId,
+      name: response['name'] as String? ?? 'Unknown',
+      birthDateTime: birthDateTime,
+      birthLocation: birthLocation,
+      timezone: timezone,
+    );
+  }
+
+  /// Get popular public charts sorted by follower count
+  Future<List<DiscoveredUser>> getPopularCharts({int limit = 20}) async {
+    final currentUserId = _currentUserId;
+
+    var query = _client
+        .from('profiles')
+        .select('''
+          id, name, avatar_url, bio, hd_type, hd_profile, hd_authority,
+          is_public, show_chart_publicly, chart_visibility, follower_count, following_count
+        ''')
+        .eq('chart_visibility', 'public')
+        .not('hd_type', 'is', null); // Only users with calculated charts
+
+    // Exclude current user
+    if (currentUserId != null) {
+      query = query.neq('id', currentUserId);
+    }
+
+    final response = await query
+        .order('follower_count', ascending: false)
+        .limit(limit);
+
+    // Get follow relationships
+    final userIds = (response as List)
+        .map((json) => json['id'] as String)
+        .toList();
+
+    final followingSet = currentUserId != null
+        ? await _getFollowingSet(userIds)
+        : <String>{};
+
+    return response.map((json) {
+      final userId = json['id'] as String;
+      return DiscoveredUser.fromJson(
+        json,
+        isFollowing: followingSet.contains(userId),
+      );
+    }).toList();
   }
 }

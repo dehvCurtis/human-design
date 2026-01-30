@@ -48,6 +48,11 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
         title: Text(l10n.social_title),
         actions: [
           IconButton(
+            icon: const Icon(Icons.dynamic_feed_outlined),
+            onPressed: () => context.push(AppRoutes.feed),
+            tooltip: 'Feed',
+          ),
+          IconButton(
             icon: const Icon(Icons.explore_outlined),
             onPressed: () => context.push(AppRoutes.discover),
             tooltip: 'Discover',
@@ -443,8 +448,8 @@ class _FriendsTab extends ConsumerWidget {
               return _FriendCard(
                 friend: friend,
                 onTap: () {
-                  // Navigate to view friend's chart
-                  context.push('${AppRoutes.chart}/${friend.friendId}');
+                  // Navigate to friend's profile
+                  context.push('/user/${friend.friendId}');
                 },
                 onCompare: () {
                   // Navigate to composite chart

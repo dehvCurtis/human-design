@@ -191,6 +191,190 @@ class StoriesRepository {
         .subscribe();
   }
 
+  // ==================== Reactions ====================
+
+  /// React to a story
+  Future<void> reactToStory(String storyId, StoryReactionType reactionType) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Upsert reaction (one per user per story)
+    await _client.from('story_reactions').upsert({
+      'story_id': storyId,
+      'user_id': userId,
+      'reaction_type': reactionType.dbValue,
+    }, onConflict: 'story_id,user_id');
+  }
+
+  /// Remove reaction from a story
+  Future<void> removeStoryReaction(String storyId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('story_reactions')
+        .delete()
+        .eq('story_id', storyId)
+        .eq('user_id', userId);
+  }
+
+  /// Get reactions for a story
+  Future<List<StoryReaction>> getStoryReactions(String storyId) async {
+    final response = await _client
+        .from('story_reactions')
+        .select('''
+          *,
+          user:profiles!story_reactions_user_id_fkey(id, name, avatar_url)
+        ''')
+        .eq('story_id', storyId)
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .map((json) => StoryReaction.fromJson(json))
+        .toList();
+  }
+
+  /// Get user's reaction to a story
+  Future<StoryReactionType?> getUserReaction(String storyId) async {
+    final userId = _currentUserId;
+    if (userId == null) return null;
+
+    final response = await _client
+        .from('story_reactions')
+        .select('reaction_type')
+        .eq('story_id', storyId)
+        .eq('user_id', userId)
+        .maybeSingle();
+
+    if (response == null) return null;
+    return StoryReactionTypeExtension.fromDbValue(response['reaction_type'] as String);
+  }
+
+  // ==================== Replies ====================
+
+  /// Reply to a story (creates a DM thread)
+  Future<StoryReply> replyToStory(String storyId, String content) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    final response = await _client.from('story_replies').insert({
+      'story_id': storyId,
+      'user_id': userId,
+      'content': content,
+    }).select('''
+          *,
+          user:profiles!story_replies_user_id_fkey(id, name, avatar_url)
+        ''').single();
+
+    return StoryReply.fromJson(response);
+  }
+
+  /// Get replies for a story (for story owner)
+  Future<List<StoryReply>> getStoryReplies(String storyId) async {
+    final response = await _client
+        .from('story_replies')
+        .select('''
+          *,
+          user:profiles!story_replies_user_id_fkey(id, name, avatar_url)
+        ''')
+        .eq('story_id', storyId)
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .map((json) => StoryReply.fromJson(json))
+        .toList();
+  }
+
+  // ==================== Polls ====================
+
+  /// Create a poll for a story
+  Future<StoryPoll> createPoll({
+    required String storyId,
+    required String question,
+    required List<String> options,
+  }) async {
+    // Create poll
+    final pollResponse = await _client.from('story_polls').insert({
+      'story_id': storyId,
+      'question': question,
+    }).select().single();
+
+    final pollId = pollResponse['id'] as String;
+
+    // Create options
+    final optionInserts = options.map((text) => {
+      'poll_id': pollId,
+      'text': text,
+    }).toList();
+
+    await _client.from('poll_options').insert(optionInserts);
+
+    // Fetch complete poll with options
+    return getPoll(pollId);
+  }
+
+  /// Get a poll by ID
+  Future<StoryPoll> getPoll(String pollId) async {
+    final pollResponse = await _client
+        .from('story_polls')
+        .select()
+        .eq('id', pollId)
+        .single();
+
+    final optionsResponse = await _client
+        .from('poll_options')
+        .select()
+        .eq('poll_id', pollId);
+
+    // Check if user has voted
+    final userId = _currentUserId;
+    String? userVote;
+    if (userId != null) {
+      final voteResponse = await _client
+          .from('poll_votes')
+          .select('option_id')
+          .eq('poll_id', pollId)
+          .eq('user_id', userId)
+          .maybeSingle();
+      userVote = voteResponse?['option_id'] as String?;
+    }
+
+    return StoryPoll.fromJson({
+      ...pollResponse,
+      'options': optionsResponse,
+    }, userVote: userVote);
+  }
+
+  /// Get poll for a story
+  Future<StoryPoll?> getStoryPoll(String storyId) async {
+    final response = await _client
+        .from('story_polls')
+        .select()
+        .eq('story_id', storyId)
+        .maybeSingle();
+
+    if (response == null) return null;
+    return getPoll(response['id'] as String);
+  }
+
+  /// Vote on a poll
+  Future<void> voteOnPoll(String pollId, String optionId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Upsert vote (one per user per poll)
+    await _client.from('poll_votes').upsert({
+      'poll_id': pollId,
+      'option_id': optionId,
+      'user_id': userId,
+    }, onConflict: 'poll_id,user_id');
+
+    // Update vote count
+    await _client.rpc('increment_poll_option_count', params: {
+      'option_id': optionId,
+    });
+  }
+
   // ==================== Helper Methods ====================
 
   Future<Set<String>> _getViewedStoryIds() async {

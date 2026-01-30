@@ -22,8 +22,11 @@ class CalculateChartUseCase {
     required BirthLocation birthLocation,
     required String timezone,
   }) async {
-    // Calculate planetary activations
-    final activations = _ephemerisService.calculateChartActivations(birthDateTime);
+    // Calculate planetary activations using birth location timezone
+    final activations = _ephemerisService.calculateChartActivations(
+      birthDateTime,
+      timezone: timezone,
+    );
 
     // Get active channels and defined centers
     final activeChannels = activations.activeChannels;

@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 
 import '../domain/stories_providers.dart';
 import '../domain/models/story.dart';
-import '../../auth/domain/auth_providers.dart';
-import 'widgets/stories_bar.dart';
 import 'story_viewer_screen.dart';
 import 'widgets/create_story_sheet.dart';
 

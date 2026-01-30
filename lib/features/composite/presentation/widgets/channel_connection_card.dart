@@ -30,7 +30,7 @@ class ChannelConnectionCard extends StatelessWidget {
       case ChannelConnectionType.electromagnetic:
         return Icons.electric_bolt;
       case ChannelConnectionType.companionship:
-        return Icons.favorite;
+        return Icons.compare_arrows;
       case ChannelConnectionType.dominance:
         return Icons.school;
       case ChannelConnectionType.compromise:

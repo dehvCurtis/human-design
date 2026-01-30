@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
@@ -10,7 +11,10 @@ import '../../chart/domain/models/human_design_chart.dart';
 import '../../home/domain/home_providers.dart';
 
 class BirthDataScreen extends ConsumerStatefulWidget {
-  const BirthDataScreen({super.key});
+  const BirthDataScreen({super.key, this.isEditMode = false});
+
+  /// When true, skip the redirect check and allow editing existing data
+  final bool isEditMode;
 
   @override
   ConsumerState<BirthDataScreen> createState() => _BirthDataScreenState();
@@ -44,11 +48,52 @@ class _BirthDataScreenState extends ConsumerState<BirthDataScreen> {
     if (_checkedExistingData) return;
     _checkedExistingData = true;
 
+    print('DEBUG BirthDataScreen: isEditMode = ${widget.isEditMode}');
+
     try {
       final profile = await ref.read(userProfileProvider.future);
       if (profile?.hasBirthData == true && mounted) {
-        // User already has birth data, go to home
-        context.go(AppRoutes.home);
+        if (widget.isEditMode) {
+          // In edit mode, pre-populate the form with existing data
+          setState(() {
+            if (profile!.birthDate != null && profile.timezone != null) {
+              // Convert UTC back to local time in birth timezone for display
+              final location = tz.getLocation(profile.timezone!);
+              final utcDateTime = profile.birthDate!;
+              final localDateTime = tz.TZDateTime.from(utcDateTime, location);
+
+              _birthDate = DateTime(
+                localDateTime.year,
+                localDateTime.month,
+                localDateTime.day,
+              );
+              _birthTime = TimeOfDay(
+                hour: localDateTime.hour,
+                minute: localDateTime.minute,
+              );
+            } else if (profile.birthDate != null) {
+              // Fallback if no timezone (shouldn't happen normally)
+              _birthDate = profile.birthDate;
+              _birthTime = TimeOfDay(
+                hour: profile.birthDate!.hour,
+                minute: profile.birthDate!.minute,
+              );
+            }
+            if (profile.birthLocation != null) {
+              _birthLocation = LocationResult(
+                name: profile.birthLocation!.city,
+                displayName: profile.birthLocation!.displayName,
+                latitude: profile.birthLocation!.latitude,
+                longitude: profile.birthLocation!.longitude,
+                country: profile.birthLocation!.country,
+                timezone: profile.timezone,
+              );
+            }
+          });
+        } else {
+          // Not in edit mode, go to home
+          context.go(AppRoutes.home);
+        }
       }
     } catch (_) {
       // Ignore errors, let user enter data
@@ -95,9 +140,17 @@ class _BirthDataScreenState extends ConsumerState<BirthDataScreen> {
 
       // Invalidate the user profile provider to reload
       ref.invalidate(userProfileProvider);
+      // Also invalidate the chart provider to recalculate with new data
+      ref.invalidate(userChartProvider);
 
       if (mounted) {
-        context.go(AppRoutes.home);
+        if (widget.isEditMode) {
+          // In edit mode, go back to previous screen
+          context.pop();
+        } else {
+          // In onboarding, go to home
+          context.go(AppRoutes.home);
+        }
       }
     } catch (e) {
       if (mounted) {

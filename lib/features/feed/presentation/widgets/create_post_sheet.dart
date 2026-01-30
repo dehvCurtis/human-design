@@ -237,6 +237,8 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         return 'Ask the community a question...';
       case PostType.achievement:
         return 'Celebrate your achievement!';
+      case PostType.regenerate:
+        return ''; // Regenerate type not used in create sheet
     }
   }
 
@@ -294,7 +296,6 @@ class _PostTypeChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final (icon, label, color) = _getPostTypeInfo(type);
 
     return FilterChip(
@@ -326,6 +327,8 @@ class _PostTypeChip extends StatelessWidget {
         return (Icons.help_outline, 'Question', Colors.teal);
       case PostType.achievement:
         return (Icons.emoji_events_outlined, 'Achievement', Colors.orange);
+      case PostType.regenerate:
+        return (Icons.repeat, 'Regenerate', Colors.green);
     }
   }
 }

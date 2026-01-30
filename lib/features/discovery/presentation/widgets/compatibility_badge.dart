@@ -16,7 +16,6 @@ class CompatibilityBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final color = _getScoreColor(score);
     final label = _getScoreLabel(score);
 
