@@ -99,11 +99,33 @@ assets/images/bodygraph_silhouette.svg (or .png)
 
 ## Chart Scaling
 
-The bodygraph uses a **1.25x scale multiplier** to fill more of the available screen space. This compensates for internal padding in the 400x600 base canvas.
+The bodygraph uses a **1.05x scale multiplier** to slightly fill more of the available screen space while preventing overflow under the app bar.
 
 ```dart
 final baseScale = math.min(size.width / 400, size.height / 600);
-final scale = baseScale * 1.25;
+final scale = baseScale * 1.05;
+```
+
+## Zoom & Pan
+
+The bodygraph supports interactive zoom and pan:
+
+| Feature | Description |
+|---------|-------------|
+| Pinch-to-zoom | Two-finger gesture to zoom in/out |
+| Pan/drag | Click and drag to move around when zoomed |
+| Zoom buttons | +/- buttons on right side of chart screen |
+| Reset button | Returns to default 1x view |
+| Min scale | 0.5x (zoom out to 50%) |
+| Max scale | 4.0x (zoom in to 400%) |
+
+Enable with widget parameters:
+```dart
+BodygraphWidget(
+  chart: chart,
+  enableZoom: true,      // Enable pinch-zoom and pan
+  showZoomControls: true, // Show +/- buttons
+)
 ```
 
 ## Color Scheme (Style Guide - Purple Theme)

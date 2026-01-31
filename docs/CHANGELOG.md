@@ -4,24 +4,59 @@ All notable changes to this project will be documented in this file.
 
 ## [0.2.5] - 2026-01-30
 
+### Added
+
+#### Bodygraph Zoom & Pan
+- **Pinch-to-Zoom** - Use two fingers to zoom in/out on the bodygraph
+- **Zoom Controls** - +/- buttons on chart screen for zoom control
+  - Plus button to zoom in
+  - Minus button to zoom out
+  - Reset button to restore default view
+- **Pan/Drag** - Click and drag to pan around when zoomed
+- Zoom range: 0.5x to 4.0x scale
+- New widget parameters: `enableZoom`, `showZoomControls`
+
 ### Changed
 
 #### Bodygraph Display Improvements
-- **Larger Chart Scale** - Increased bodygraph scale multiplier from 1.0 to 1.25x
-  - Chart now fills more of the available screen area
+- **Chart Scale** - Added 1.05x scale multiplier for better fit
   - Compensates for internal padding in the 400x600 canvas
-  - More prominent display on home screen and chart views
+  - Prevents chart from overflowing under app bar
 - **Ego/Heart Center Shape** - Changed from triangle to circle
   - Ego center now renders as a circle instead of an upward-pointing triangle
   - Added `circle` to `CenterShape` enum
   - Added `_drawCircleCenter()` method in bodygraph painter
+- **Ego Gate Positions** - Repositioned gates in grid pattern
+  - Gates 51 & 21: top row, horizontally aligned
+  - Gates 26 & 40: bottom row, horizontally aligned
+  - Gates 51 & 26: left column, vertically aligned
+  - Gates 21 & 40: right column, vertically aligned
+
+### Fixed
+
+#### User Flow Issues
+- **Sign In/Up Back Button** - Fixed navigation loop where back button went to home (which requires auth)
+  - Now uses `context.pop()` if possible, otherwise goes to onboarding
+- **Chart Share Button** - Implemented share button to navigate to share screen
+- **Social Routes Bottom Nav** - Added feed, discover, messages, stories, circles routes to social tab mapping
+- **Auth Validation on Create Post** - Added auth check before opening create post sheet with sign-in prompt
+- **Auth Validation on Share Screen** - Added auth check with sign-in prompt for unauthenticated users
+- **Auth Validation on New Message** - Added auth check before opening new conversation sheet
 
 ### Technical Details
 
 Files modified:
-- `bodygraph_painter.dart` - Added 1.25x scale multiplier, added circle drawing method
+- `bodygraph_widget.dart` - Added InteractiveViewer for zoom/pan, zoom control buttons
+- `bodygraph_painter.dart` - Added 1.05x scale multiplier, added circle drawing method
 - `bodygraph_layout.dart` - Added `circle` to CenterShape enum
-- `bodygraph_layout_standard.dart` - Changed heart center shape to circle
+- `bodygraph_layout_standard.dart` - Changed heart center shape to circle, repositioned ego gates
+- `chart_screen.dart` - Enabled zoom controls on bodygraph tab, implemented share button
+- `sign_in_screen.dart` - Fixed back button navigation
+- `sign_up_screen.dart` - Fixed back button navigation
+- `app_router.dart` - Added social routes to bottom nav mapping
+- `feed_screen.dart` - Added auth check for create post
+- `share_screen.dart` - Added auth check and sign-in prompt
+- `conversations_screen.dart` - Added auth check for new message
 
 ---
 
