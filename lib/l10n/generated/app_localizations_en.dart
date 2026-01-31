@@ -240,6 +240,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please sign in to calculate and save your Human Design chart.';
 
   @override
+  String get auth_signInToCreateStory =>
+      'Please sign in to share stories with the community.';
+
+  @override
   String get auth_signUpSubtitle => 'Start your Human Design journey today';
 
   @override
@@ -1307,6 +1311,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings_version => 'Version';
+
+  @override
+  String get settings_dailyTransits => 'Daily Transits';
+
+  @override
+  String get settings_dailyTransitsSubtitle => 'Receive daily transit updates';
+
+  @override
+  String get settings_gateChanges => 'Gate Changes';
+
+  @override
+  String get settings_gateChangesSubtitle => 'Notify when Sun changes gates';
+
+  @override
+  String get settings_socialActivity => 'Social Activity';
+
+  @override
+  String get settings_socialActivitySubtitle =>
+      'Friend requests and shared charts';
+
+  @override
+  String get settings_achievements => 'Achievements';
+
+  @override
+  String get settings_achievementsSubtitle => 'Badge unlocks and milestones';
+
+  @override
+  String get settings_deleteAccountWarning =>
+      'This will permanently delete all your data including charts, posts, and messages.';
+
+  @override
+  String get settings_deleteAccountFailed =>
+      'Failed to delete account. Please try again.';
+
+  @override
+  String get settings_passwordChanged => 'Password changed successfully';
+
+  @override
+  String get settings_passwordChangeFailed =>
+      'Failed to change password. Please try again.';
+
+  @override
+  String get settings_feedbackSubject => 'Human Design App Feedback';
+
+  @override
+  String get settings_feedbackBody =>
+      'Hi,\n\nI would like to share the following feedback about the Human Design app:\n\n';
+
+  @override
+  String get auth_newPassword => 'New Password';
+
+  @override
+  String get auth_passwordRequired => 'Password is required';
+
+  @override
+  String get auth_passwordTooShort => 'Password must be at least 8 characters';
+
+  @override
+  String get auth_passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get settings_exportData => 'Export My Data';
+
+  @override
+  String get settings_exportDataSubtitle =>
+      'Download a copy of all your data (GDPR)';
+
+  @override
+  String get settings_exportingData => 'Preparing your data export...';
+
+  @override
+  String get settings_exportDataSubject => 'Human Design App - My Data Export';
+
+  @override
+  String get settings_exportDataFailed =>
+      'Failed to export data. Please try again.';
 
   @override
   String get error_generic => 'Something went wrong';

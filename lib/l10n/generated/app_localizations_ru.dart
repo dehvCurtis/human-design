@@ -235,11 +235,15 @@ class AppLocalizationsRu extends AppLocalizations {
       'Войдите, чтобы продолжить путешествие по Дизайну Человека';
 
   @override
-  String get auth_signInRequired => 'Sign In Required';
+  String get auth_signInRequired => 'Требуется авторизация';
 
   @override
   String get auth_signInToCalculateChart =>
-      'Please sign in to calculate and save your Human Design chart.';
+      'Войдите, чтобы рассчитать и сохранить вашу карту Дизайна Человека.';
+
+  @override
+  String get auth_signInToCreateStory =>
+      'Войдите, чтобы делиться историями с сообществом.';
 
   @override
   String get auth_signUpSubtitle =>
@@ -1273,30 +1277,30 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settings_privacy => 'Конфиденциальность';
 
   @override
-  String get settings_chartVisibility => 'Chart Visibility';
+  String get settings_chartVisibility => 'Видимость карты';
 
   @override
-  String get settings_chartVisibilitySubtitle =>
-      'Control who can view your Human Design chart';
+  String get settings_chartVisibilitySubtitle => 'Кто может видеть вашу карту';
 
   @override
-  String get settings_chartPrivate => 'Private';
+  String get settings_chartPrivate => 'Приватная';
 
   @override
-  String get settings_chartPrivateDesc => 'Only you can see your chart';
+  String get settings_chartPrivateDesc => 'Только вы видите свою карту';
 
   @override
-  String get settings_chartFriends => 'Friends';
+  String get settings_chartFriends => 'Друзья';
 
   @override
   String get settings_chartFriendsDesc =>
-      'Mutual followers can view your chart';
+      'Взаимные подписчики могут видеть вашу карту';
 
   @override
-  String get settings_chartPublic => 'Public';
+  String get settings_chartPublic => 'Публичная';
 
   @override
-  String get settings_chartPublicDesc => 'Your followers can view your chart';
+  String get settings_chartPublicDesc =>
+      'Ваши подписчики могут видеть вашу карту';
 
   @override
   String get settings_about => 'О приложении';
@@ -1312,6 +1316,84 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settings_version => 'Версия';
+
+  @override
+  String get settings_dailyTransits => 'Ежедневные транзиты';
+
+  @override
+  String get settings_dailyTransitsSubtitle =>
+      'Получать ежедневные обновления транзитов';
+
+  @override
+  String get settings_gateChanges => 'Смена ворот';
+
+  @override
+  String get settings_gateChangesSubtitle =>
+      'Уведомлять при смене ворот Солнца';
+
+  @override
+  String get settings_socialActivity => 'Социальная активность';
+
+  @override
+  String get settings_socialActivitySubtitle => 'Запросы в друзья и публикации';
+
+  @override
+  String get settings_achievements => 'Достижения';
+
+  @override
+  String get settings_achievementsSubtitle => 'Новые значки и награды';
+
+  @override
+  String get settings_deleteAccountWarning =>
+      'Все ваши данные, включая карты, посты и сообщения, будут безвозвратно удалены.';
+
+  @override
+  String get settings_deleteAccountFailed =>
+      'Не удалось удалить аккаунт. Попробуйте ещё раз.';
+
+  @override
+  String get settings_passwordChanged => 'Пароль успешно изменён';
+
+  @override
+  String get settings_passwordChangeFailed =>
+      'Не удалось изменить пароль. Попробуйте ещё раз.';
+
+  @override
+  String get settings_feedbackSubject => 'Отзыв о приложении Human Design';
+
+  @override
+  String get settings_feedbackBody =>
+      'Здравствуйте,\n\nХочу поделиться отзывом о приложении Human Design:\n\n';
+
+  @override
+  String get auth_newPassword => 'Новый пароль';
+
+  @override
+  String get auth_passwordRequired => 'Введите пароль';
+
+  @override
+  String get auth_passwordTooShort => 'Пароль должен быть не менее 8 символов';
+
+  @override
+  String get auth_passwordsDoNotMatch => 'Пароли не совпадают';
+
+  @override
+  String get settings_exportData => 'Экспорт моих данных';
+
+  @override
+  String get settings_exportDataSubtitle =>
+      'Скачать копию всех ваших данных (GDPR)';
+
+  @override
+  String get settings_exportingData => 'Подготовка экспорта данных...';
+
+  @override
+  String get settings_exportDataSubject =>
+      'Приложение Human Design - Экспорт данных';
+
+  @override
+  String get settings_exportDataFailed =>
+      'Не удалось экспортировать данные. Попробуйте ещё раз.';
 
   @override
   String get error_generic => 'Что-то пошло не так';

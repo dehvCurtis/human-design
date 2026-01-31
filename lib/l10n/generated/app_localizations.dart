@@ -520,6 +520,12 @@ abstract class AppLocalizations {
   /// **'Please sign in to calculate and save your Human Design chart.'**
   String get auth_signInToCalculateChart;
 
+  /// No description provided for @auth_signInToCreateStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in to share stories with the community.'**
+  String get auth_signInToCreateStory;
+
   /// No description provided for @auth_signUpSubtitle.
   ///
   /// In en, this message translates to:
@@ -2523,6 +2529,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Version'**
   String get settings_version;
+
+  /// No description provided for @settings_dailyTransits.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Transits'**
+  String get settings_dailyTransits;
+
+  /// No description provided for @settings_dailyTransitsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive daily transit updates'**
+  String get settings_dailyTransitsSubtitle;
+
+  /// No description provided for @settings_gateChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Gate Changes'**
+  String get settings_gateChanges;
+
+  /// No description provided for @settings_gateChangesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notify when Sun changes gates'**
+  String get settings_gateChangesSubtitle;
+
+  /// No description provided for @settings_socialActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Social Activity'**
+  String get settings_socialActivity;
+
+  /// No description provided for @settings_socialActivitySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend requests and shared charts'**
+  String get settings_socialActivitySubtitle;
+
+  /// No description provided for @settings_achievements.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements'**
+  String get settings_achievements;
+
+  /// No description provided for @settings_achievementsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Badge unlocks and milestones'**
+  String get settings_achievementsSubtitle;
+
+  /// No description provided for @settings_deleteAccountWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all your data including charts, posts, and messages.'**
+  String get settings_deleteAccountWarning;
+
+  /// No description provided for @settings_deleteAccountFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete account. Please try again.'**
+  String get settings_deleteAccountFailed;
+
+  /// No description provided for @settings_passwordChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed successfully'**
+  String get settings_passwordChanged;
+
+  /// No description provided for @settings_passwordChangeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to change password. Please try again.'**
+  String get settings_passwordChangeFailed;
+
+  /// No description provided for @settings_feedbackSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Human Design App Feedback'**
+  String get settings_feedbackSubject;
+
+  /// No description provided for @settings_feedbackBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi,\n\nI would like to share the following feedback about the Human Design app:\n\n'**
+  String get settings_feedbackBody;
+
+  /// No description provided for @auth_newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get auth_newPassword;
+
+  /// No description provided for @auth_passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get auth_passwordRequired;
+
+  /// No description provided for @auth_passwordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get auth_passwordTooShort;
+
+  /// No description provided for @auth_passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get auth_passwordsDoNotMatch;
+
+  /// No description provided for @settings_exportData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export My Data'**
+  String get settings_exportData;
+
+  /// No description provided for @settings_exportDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Download a copy of all your data (GDPR)'**
+  String get settings_exportDataSubtitle;
+
+  /// No description provided for @settings_exportingData.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing your data export...'**
+  String get settings_exportingData;
+
+  /// No description provided for @settings_exportDataSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Human Design App - My Data Export'**
+  String get settings_exportDataSubject;
+
+  /// No description provided for @settings_exportDataFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to export data. Please try again.'**
+  String get settings_exportDataFailed;
 
   /// No description provided for @error_generic.
   ///
