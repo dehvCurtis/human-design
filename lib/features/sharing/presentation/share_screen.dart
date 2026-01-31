@@ -3,8 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
+import '../../../shared/providers/supabase_provider.dart';
+import '../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
+import '../../home/domain/home_providers.dart';
 import '../domain/sharing_providers.dart';
 import '../domain/models/sharing.dart';
+import '../services/chart_export_service.dart';
 
 class ShareScreen extends ConsumerStatefulWidget {
   const ShareScreen({super.key});
@@ -15,6 +20,8 @@ class ShareScreen extends ConsumerStatefulWidget {
 
 class _ShareScreenState extends ConsumerState<ShareScreen> {
   Duration? _selectedExpiry;
+  bool _isExporting = false;
+  final GlobalKey _bodygraphKey = GlobalKey();
 
   static const List<({String label, Duration? duration})> _expiryOptions = [
     (label: 'Never expires', duration: null),
@@ -27,8 +34,58 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final currentUser = ref.watch(supabaseClientProvider).auth.currentUser;
     final sharingState = ref.watch(sharingNotifierProvider);
     final myLinksAsync = ref.watch(myShareLinksProvider);
+    final userChartAsync = ref.watch(userChartProvider);
+
+    // Auth check - redirect to sign in if not authenticated
+    if (currentUser == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Share Chart'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => context.pop(),
+          ),
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.lock_outline,
+                  size: 64,
+                  color: theme.colorScheme.primary.withValues(alpha: 0.5),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Sign in to share your chart',
+                  style: theme.textTheme.titleMedium,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Create shareable links to your Human Design chart',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                FilledButton.icon(
+                  onPressed: () => context.go(AppRoutes.signIn),
+                  icon: const Icon(Icons.login),
+                  label: const Text('Sign In'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +131,8 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                           label: 'Image',
                           description: 'Export as PNG',
                           isSelected: false,
-                          onTap: () => _exportAsImage(context),
+                          isLoading: _isExporting,
+                          onTap: _isExporting ? () {} : () => _exportAsImage(context),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -84,7 +142,8 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                           label: 'PDF',
                           description: 'Full report',
                           isSelected: false,
-                          onTap: () => _exportAsPdf(context),
+                          isLoading: _isExporting,
+                          onTap: _isExporting ? () {} : () => _exportAsPdf(context),
                         ),
                       ),
                     ],
@@ -185,6 +244,115 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                       ),
                     ),
                   ],
+                ],
+              ),
+            ),
+          ),
+
+          // Chart preview for export
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Chart Preview',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  userChartAsync.when(
+                    data: (chart) {
+                      if (chart == null) {
+                        return Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.person_outline,
+                                  size: 48,
+                                  color: theme.colorScheme.outline,
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'No chart available',
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: theme.colorScheme.outline,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Add your birth data in Profile',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.outline,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+
+                      return Container(
+                        height: 300,
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surface,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: theme.colorScheme.outlineVariant,
+                          ),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: RepaintBoundary(
+                            key: _bodygraphKey,
+                            child: Container(
+                              color: theme.colorScheme.surface,
+                              padding: const EdgeInsets.all(16),
+                              child: BodygraphWidget(
+                                chart: chart,
+                                interactive: false,
+                                showGateNumbers: true,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    loading: () => Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                    error: (e, _) => Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.errorContainer,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Error loading chart',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.colorScheme.error,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -332,18 +500,74 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     }
   }
 
-  void _exportAsImage(BuildContext context) {
-    // TODO: Implement image export
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Image export coming soon')),
-    );
+  Future<void> _exportAsImage(BuildContext context) async {
+    final userChartAsync = ref.read(userChartProvider);
+    final chart = userChartAsync.hasValue ? userChartAsync.value : null;
+    if (chart == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No chart available to export')),
+      );
+      return;
+    }
+
+    if (_isExporting) return;
+    setState(() => _isExporting = true);
+
+    try {
+      await ChartExportService.exportAsImage(
+        repaintBoundaryKey: _bodygraphKey,
+        chartName: chart.name,
+        context: context,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Export failed: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isExporting = false);
+      }
+    }
   }
 
-  void _exportAsPdf(BuildContext context) {
-    // TODO: Implement PDF export
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('PDF export coming soon')),
-    );
+  Future<void> _exportAsPdf(BuildContext context) async {
+    final userChartAsync = ref.read(userChartProvider);
+    final chart = userChartAsync.hasValue ? userChartAsync.value : null;
+    if (chart == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No chart available to export')),
+      );
+      return;
+    }
+
+    if (_isExporting) return;
+    setState(() => _isExporting = true);
+
+    try {
+      await ChartExportService.exportAsPdf(
+        chart: chart,
+        bodygraphKey: _bodygraphKey,
+        context: context,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('PDF export failed: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isExporting = false);
+      }
+    }
   }
 }
 
@@ -354,6 +578,7 @@ class _ShareOptionCard extends StatelessWidget {
     required this.description,
     required this.isSelected,
     required this.onTap,
+    this.isLoading = false,
   });
 
   final IconData icon;
@@ -361,6 +586,7 @@ class _ShareOptionCard extends StatelessWidget {
   final String description;
   final bool isSelected;
   final VoidCallback onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -371,19 +597,29 @@ class _ShareOptionCard extends StatelessWidget {
           ? theme.colorScheme.primaryContainer
           : theme.colorScheme.surfaceContainerHighest,
       child: InkWell(
-        onTap: onTap,
+        onTap: isLoading ? null : onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Icon(
-                icon,
-                size: 32,
-                color: isSelected
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.onSurfaceVariant,
-              ),
+              if (isLoading)
+                SizedBox(
+                  width: 32,
+                  height: 32,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: theme.colorScheme.primary,
+                  ),
+                )
+              else
+                Icon(
+                  icon,
+                  size: 32,
+                  color: isSelected
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.onSurfaceVariant,
+                ),
               const SizedBox(height: 8),
               Text(
                 label,

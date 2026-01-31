@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
+import '../../../core/config/app_config.dart';
+import '../../../core/router/app_router.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../domain/feed_providers.dart';
@@ -94,6 +97,19 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   }
 
   void _showCreatePostSheet(BuildContext context) {
+    final currentUser = ref.read(supabaseClientProvider).auth.currentUser;
+    if (currentUser == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please sign in to create posts'),
+          action: SnackBarAction(
+            label: 'Sign In',
+            onPressed: () => context.go(AppRoutes.signIn),
+          ),
+        ),
+      );
+      return;
+    }
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -102,19 +118,48 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   }
 
   void _navigateToPost(BuildContext context, Post post) {
-    context.push('/feed/post/${post.id}');
+    context.pushNamed('postDetail', pathParameters: {'id': post.id});
   }
 
   void _handleReaction(Post post, ReactionType type) {
     ref.read(feedNotifierProvider.notifier).reactToPost(post.id, type);
   }
 
-  void _sharePost(Post post) {
-    // TODO: Implement share functionality
+  void _sharePost(Post post) async {
+    // Generate a deep link to the post
+    // Format: humandesign://post/{postId} or https://app.humandesign.com/post/{postId}
+    final deepLink = '${AppConfig.appUrl}/post/${post.id}';
+
+    // Create share text with post preview
+    final shareText = '''
+${post.userName} shared on Human Design App:
+
+"${post.content.length > 200 ? '${post.content.substring(0, 200)}...' : post.content}"
+
+View the full post: $deepLink
+''';
+
+    try {
+      await SharePlus.instance.share(
+        ShareParams(
+          text: shareText,
+          subject: 'Human Design Post by ${post.userName}',
+        ),
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to share: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
   }
 
   void _navigateToUserProfile(String userId) {
-    context.push('/user/$userId');
+    context.pushNamed('userProfile', pathParameters: {'id': userId});
   }
 
   void _handleRegenerate(BuildContext context, Post post) {
@@ -202,10 +247,10 @@ class PostDetailScreen extends ConsumerWidget {
                         },
                         onComment: () {},
                         onShare: () {},
-                        onUserTap: () => context.push('/user/${post.userId}'),
+                        onUserTap: () => context.pushNamed('userProfile', pathParameters: {'id': post.userId}),
                         onRegenerate: isOwnPost ? null : () => _handleRegenerate(context, ref, post),
                         onOriginalUserTap: post.originalPost != null
-                            ? () => context.push('/user/${post.originalPost!.userId}')
+                            ? () => context.pushNamed('userProfile', pathParameters: {'id': post.originalPost!.userId})
                             : null,
                         canRegenerate: !isOwnPost,
                       ),

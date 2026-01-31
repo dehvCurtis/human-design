@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:human_design/core/constants/human_design_constants.dart';
 
 /// Maps zodiac degrees to Human Design gates and lines.
@@ -54,8 +55,8 @@ class DegreeToGateMapper {
     // Get the gate number from the wheel sequence
     final int gateNumber = gateWheelSequence[gateIndex];
 
-    if (debugLogging) {
-      print('  DEBUG mapDegreeToGate: ${degree.toStringAsFixed(4)}° tropical → ${hdWheelPosition.toStringAsFixed(4)}° HD wheel → index $gateIndex → Gate $gateNumber');
+    if (debugLogging && kDebugMode) {
+      debugPrint('  DEBUG mapDegreeToGate: ${degree.toStringAsFixed(4)}° tropical → ${hdWheelPosition.toStringAsFixed(4)}° HD wheel → index $gateIndex → Gate $gateNumber');
     }
 
     // Calculate position within the gate for line determination

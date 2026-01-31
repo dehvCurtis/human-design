@@ -71,9 +71,7 @@ class HomeScreen extends ConsumerWidget {
               const LanguageSelector(compact: true),
               IconButton(
                 icon: const Icon(Icons.notifications_outlined),
-                onPressed: () {
-                  // TODO: Show notifications
-                },
+                onPressed: () => context.push(AppRoutes.activityFeed),
               ),
               IconButton(
                 icon: const Icon(Icons.settings_outlined),
@@ -82,7 +80,7 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
 
-          // Content
+          // Content with padding
           SliverPadding(
             padding: const EdgeInsets.all(16),
             sliver: SliverList(
@@ -137,20 +135,24 @@ class HomeScreen extends ConsumerWidget {
                   loading: () => const _LoadingCard(),
                   error: (_, _) => const SizedBox.shrink(),
                 ),
+              ]),
+            ),
+          ),
 
-                const SizedBox(height: 24),
+          // Chart Preview - full width, no padding
+          SliverToBoxAdapter(
+            child: ChartPreviewCard(
+              chart: chart,
+              onTap: () => context.go(AppRoutes.chart),
+            ),
+          ),
 
-                // Chart Preview
-                ChartPreviewCard(
-                  chart: chart,
-                  onTap: () => context.go(AppRoutes.chart),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Chart Summary
+          // Chart Summary with padding
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
                 _buildChartSummary(context, chart),
-
                 const SizedBox(height: 32),
               ]),
             ),

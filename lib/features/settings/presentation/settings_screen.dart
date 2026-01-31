@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/config/app_config.dart';
+import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/domain/auth_providers.dart';
@@ -70,8 +77,8 @@ class SettingsScreen extends ConsumerWidget {
           _SectionHeader(title: l10n.settings_notifications),
           _SwitchTile(
             icon: Icons.wb_sunny_outlined,
-            title: 'Daily Transits',
-            subtitle: 'Receive daily transit updates',
+            title: l10n.settings_dailyTransits,
+            subtitle: l10n.settings_dailyTransitsSubtitle,
             value: settings.notifications.dailyTransits,
             onChanged: (value) {
               ref
@@ -81,8 +88,8 @@ class SettingsScreen extends ConsumerWidget {
           ),
           _SwitchTile(
             icon: Icons.swap_horiz_outlined,
-            title: 'Gate Changes',
-            subtitle: 'Notify when Sun changes gates',
+            title: l10n.settings_gateChanges,
+            subtitle: l10n.settings_gateChangesSubtitle,
             value: settings.notifications.gateChanges,
             onChanged: (value) {
               ref
@@ -92,8 +99,8 @@ class SettingsScreen extends ConsumerWidget {
           ),
           _SwitchTile(
             icon: Icons.people_outlined,
-            title: 'Social Activity',
-            subtitle: 'Friend requests and shared charts',
+            title: l10n.settings_socialActivity,
+            subtitle: l10n.settings_socialActivitySubtitle,
             value: settings.notifications.socialActivity,
             onChanged: (value) {
               ref
@@ -103,8 +110,8 @@ class SettingsScreen extends ConsumerWidget {
           ),
           _SwitchTile(
             icon: Icons.emoji_events_outlined,
-            title: 'Achievements',
-            subtitle: 'Badge unlocks and milestones',
+            title: l10n.settings_achievements,
+            subtitle: l10n.settings_achievementsSubtitle,
             value: settings.notifications.achievements,
             onChanged: (value) {
               ref
@@ -137,23 +144,23 @@ class SettingsScreen extends ConsumerWidget {
           _SettingsTile(
             icon: Icons.lock_outlined,
             title: l10n.settings_changePassword,
-            onTap: () {
-              // TODO: Navigate to change password
-            },
+            onTap: () => _showChangePasswordDialog(context, ref),
           ),
           _SettingsTile(
             icon: Icons.privacy_tip_outlined,
             title: l10n.settings_privacyPolicy,
-            onTap: () {
-              // TODO: Open privacy policy
-            },
+            onTap: () => _openUrl('${AppConfig.appUrl}/privacy'),
           ),
           _SettingsTile(
             icon: Icons.description_outlined,
             title: l10n.settings_terms,
-            onTap: () {
-              // TODO: Open terms
-            },
+            onTap: () => _openUrl('${AppConfig.appUrl}/terms'),
+          ),
+          _SettingsTile(
+            icon: Icons.download_outlined,
+            title: l10n.settings_exportData,
+            subtitle: l10n.settings_exportDataSubtitle,
+            onTap: () => _exportUserData(context, ref),
           ),
           _SettingsTile(
             icon: Icons.delete_outline,
@@ -173,16 +180,12 @@ class SettingsScreen extends ConsumerWidget {
           _SettingsTile(
             icon: Icons.star_outline,
             title: l10n.settings_rateApp,
-            onTap: () {
-              // TODO: Open app store
-            },
+            onTap: () => _rateApp(context),
           ),
           _SettingsTile(
             icon: Icons.feedback_outlined,
             title: l10n.settings_sendFeedback,
-            onTap: () {
-              // TODO: Open feedback form
-            },
+            onTap: () => _sendFeedback(context),
           ),
 
           const SizedBox(height: 32),
@@ -268,31 +271,315 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
+  Future<void> _openUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  void _showChangePasswordDialog(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    showDialog(
+      context: context,
+      builder: (context) => _ChangePasswordDialog(l10n: l10n),
+    );
+  }
+
+  Future<void> _rateApp(BuildContext context) async {
+    // App Store / Play Store URLs
+    const iosAppId = 'com.humandesign.app'; // Replace with actual App Store ID
+    const androidPackage = 'com.humandesign.app';
+
+    final uri = Theme.of(context).platform == TargetPlatform.iOS
+        ? Uri.parse('https://apps.apple.com/app/id$iosAppId')
+        : Uri.parse('https://play.google.com/store/apps/details?id=$androidPackage');
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _sendFeedback(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
+    final uri = Uri(
+      scheme: 'mailto',
+      path: 'support@humandesign.app',
+      query: 'subject=${Uri.encodeComponent(l10n.settings_feedbackSubject)}'
+          '&body=${Uri.encodeComponent(l10n.settings_feedbackBody)}',
+    );
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  Future<void> _exportUserData(BuildContext context, WidgetRef ref) async {
+    final l10n = AppLocalizations.of(context)!;
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    // Show loading dialog
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        content: Row(
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(width: 16),
+            Expanded(child: Text(l10n.settings_exportingData)),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      final authRepository = ref.read(authRepositoryProvider);
+      final jsonData = await authRepository.exportUserData();
+
+      // Save to temp file
+      final directory = await getTemporaryDirectory();
+      final timestamp = DateTime.now().toIso8601String().replaceAll(':', '-');
+      final file = File('${directory.path}/human_design_data_$timestamp.json');
+      await file.writeAsString(jsonData);
+
+      if (context.mounted) {
+        Navigator.pop(context); // Close loading dialog
+      }
+
+      // Share file
+      await Share.shareXFiles(
+        [XFile(file.path)],
+        subject: l10n.settings_exportDataSubject,
+      );
+    } catch (e) {
+      if (context.mounted) {
+        Navigator.pop(context); // Close loading dialog
+        scaffoldMessenger.showSnackBar(
+          SnackBar(content: Text(l10n.settings_exportDataFailed)),
+        );
+      }
+    }
+  }
+
   void _showDeleteAccountDialog(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.settings_deleteAccount),
-        content: Text(l10n.settings_deleteAccountConfirm),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.common_cancel),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              Navigator.pop(context);
-              // TODO: Implement account deletion
-              await ref.read(authNotifierProvider.notifier).signOut();
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.error,
+      builder: (context) => _DeleteAccountDialog(l10n: l10n),
+    );
+  }
+}
+
+class _DeleteAccountDialog extends ConsumerStatefulWidget {
+  const _DeleteAccountDialog({required this.l10n});
+
+  final AppLocalizations l10n;
+
+  @override
+  ConsumerState<_DeleteAccountDialog> createState() => _DeleteAccountDialogState();
+}
+
+class _DeleteAccountDialogState extends ConsumerState<_DeleteAccountDialog> {
+  bool _isDeleting = false;
+  String? _errorMessage;
+
+  Future<void> _deleteAccount() async {
+    setState(() {
+      _isDeleting = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final authRepository = ref.read(authRepositoryProvider);
+      await authRepository.deleteAccount();
+      if (mounted) {
+        Navigator.pop(context);
+        // Navigate to sign in screen after successful deletion
+        context.go(AppRoutes.signIn);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isDeleting = false;
+          _errorMessage = widget.l10n.settings_deleteAccountFailed;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(widget.l10n.settings_deleteAccount),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(widget.l10n.settings_deleteAccountConfirm),
+          const SizedBox(height: 12),
+          Text(
+            widget.l10n.settings_deleteAccountWarning,
+            style: TextStyle(
+              color: AppColors.error,
+              fontWeight: FontWeight.w500,
             ),
-            child: Text(l10n.common_delete),
           ),
+          if (_errorMessage != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              _errorMessage!,
+              style: TextStyle(color: AppColors.error),
+            ),
+          ],
         ],
       ),
+      actions: [
+        TextButton(
+          onPressed: _isDeleting ? null : () => Navigator.pop(context),
+          child: Text(widget.l10n.common_cancel),
+        ),
+        ElevatedButton(
+          onPressed: _isDeleting ? null : _deleteAccount,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.error,
+          ),
+          child: _isDeleting
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                )
+              : Text(widget.l10n.common_delete),
+        ),
+      ],
+    );
+  }
+}
+
+class _ChangePasswordDialog extends ConsumerStatefulWidget {
+  const _ChangePasswordDialog({required this.l10n});
+
+  final AppLocalizations l10n;
+
+  @override
+  ConsumerState<_ChangePasswordDialog> createState() => _ChangePasswordDialogState();
+}
+
+class _ChangePasswordDialogState extends ConsumerState<_ChangePasswordDialog> {
+  final _formKey = GlobalKey<FormState>();
+  final _passwordController = TextEditingController();
+  final _confirmController = TextEditingController();
+  bool _isLoading = false;
+  bool _obscurePassword = true;
+  String? _errorMessage;
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _changePassword() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      final authRepository = ref.read(authRepositoryProvider);
+      await authRepository.updatePassword(_passwordController.text);
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(widget.l10n.settings_passwordChanged)),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = widget.l10n.settings_passwordChangeFailed;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(widget.l10n.settings_changePassword),
+      content: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              controller: _passwordController,
+              obscureText: _obscurePassword,
+              decoration: InputDecoration(
+                labelText: widget.l10n.auth_newPassword,
+                suffixIcon: IconButton(
+                  icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
+                  onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return widget.l10n.auth_passwordRequired;
+                }
+                if (value.length < 8) {
+                  return widget.l10n.auth_passwordTooShort;
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _confirmController,
+              obscureText: _obscurePassword,
+              decoration: InputDecoration(
+                labelText: widget.l10n.auth_confirmPassword,
+              ),
+              validator: (value) {
+                if (value != _passwordController.text) {
+                  return widget.l10n.auth_passwordsDoNotMatch;
+                }
+                return null;
+              },
+            ),
+            if (_errorMessage != null) ...[
+              const SizedBox(height: 12),
+              Text(
+                _errorMessage!,
+                style: TextStyle(color: AppColors.error),
+              ),
+            ],
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: _isLoading ? null : () => Navigator.pop(context),
+          child: Text(widget.l10n.common_cancel),
+        ),
+        ElevatedButton(
+          onPressed: _isLoading ? null : _changePassword,
+          child: _isLoading
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : Text(widget.l10n.common_save),
+        ),
+      ],
     );
   }
 }
@@ -392,10 +679,10 @@ class _ChartVisibilityTile extends ConsumerWidget {
           onTap: () => _showVisibilitySelector(context, ref, visibility),
         );
       },
-      loading: () => const ListTile(
-        leading: Icon(Icons.visibility_outlined),
-        title: Text('Chart Visibility'),
-        trailing: SizedBox(
+      loading: () => ListTile(
+        leading: const Icon(Icons.visibility_outlined),
+        title: Text(l10n.settings_chartVisibility),
+        trailing: const SizedBox(
           width: 20,
           height: 20,
           child: CircularProgressIndicator(strokeWidth: 2),

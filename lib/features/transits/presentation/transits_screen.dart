@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/constants/human_design_constants.dart';
@@ -8,36 +9,62 @@ import '../../ephemeris/mappers/degree_to_gate_mapper.dart';
 import '../../home/domain/home_providers.dart';
 import '../../lifestyle/domain/transit_service.dart';
 
+/// Provider for the selected transit date
+final _selectedTransitDateProvider = StateProvider<DateTime>((ref) => DateTime.now());
+
+/// Provider for transits on the selected date
+final _transitsForDateProvider = Provider<TransitChart>((ref) {
+  final date = ref.watch(_selectedTransitDateProvider);
+  final transitService = ref.watch(transitServiceProvider);
+  return transitService.calculateTransitsForDate(date);
+});
+
+/// Provider for transit impact on the selected date
+final _transitImpactForDateProvider = FutureProvider<TransitImpact?>((ref) async {
+  final chart = await ref.watch(userChartProvider.future);
+  if (chart == null) return null;
+
+  final transitService = ref.watch(transitServiceProvider);
+  final transits = ref.watch(_transitsForDateProvider);
+
+  return transitService.analyzeTransitImpact(chart, transits);
+});
+
 class TransitsScreen extends ConsumerWidget {
   const TransitsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final transits = ref.watch(todayTransitsProvider);
-    final impactAsync = ref.watch(transitImpactProvider);
+    final selectedDate = ref.watch(_selectedTransitDateProvider);
+    final transits = ref.watch(_transitsForDateProvider);
+    final impactAsync = ref.watch(_transitImpactForDateProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Today's Transits"),
+        title: Text(_isToday(selectedDate) ? "Today's Transits" : 'Transits'),
         actions: [
           IconButton(
             icon: const Icon(Icons.calendar_today),
-            onPressed: () {
-              // TODO: Allow date selection
-            },
+            tooltip: 'Select Date',
+            onPressed: () => _selectDate(context, ref, selectedDate),
           ),
         ],
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          ref.invalidate(todayTransitsProvider);
-          ref.invalidate(transitImpactProvider);
+          ref.invalidate(_transitsForDateProvider);
+          ref.invalidate(_transitImpactForDateProvider);
         },
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            // Date header
-            _DateHeader(date: transits.dateTime),
+            // Date header with navigation
+            _DateHeader(
+              date: transits.dateTime,
+              onPreviousDay: () => _changeDate(ref, selectedDate.subtract(const Duration(days: 1))),
+              onNextDay: () => _changeDate(ref, selectedDate.add(const Duration(days: 1))),
+              onToday: _isToday(selectedDate) ? null : () => _changeDate(ref, DateTime.now()),
+            ),
             const SizedBox(height: 24),
 
             // Transit impact summary
@@ -108,32 +135,91 @@ class TransitsScreen extends ConsumerWidget {
       ),
     );
   }
+
+  bool _isToday(DateTime date) {
+    final now = DateTime.now();
+    return date.year == now.year && date.month == now.month && date.day == now.day;
+  }
+
+  void _changeDate(WidgetRef ref, DateTime newDate) {
+    ref.read(_selectedTransitDateProvider.notifier).state = newDate;
+  }
+
+  Future<void> _selectDate(BuildContext context, WidgetRef ref, DateTime currentDate) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: currentDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      _changeDate(ref, picked);
+    }
+  }
 }
 
 class _DateHeader extends StatelessWidget {
-  const _DateHeader({required this.date});
+  const _DateHeader({
+    required this.date,
+    required this.onPreviousDay,
+    required this.onNextDay,
+    this.onToday,
+  });
 
   final DateTime date;
+  final VoidCallback onPreviousDay;
+  final VoidCallback onNextDay;
+  final VoidCallback? onToday;
 
   @override
   Widget build(BuildContext context) {
     final dayFormat = DateFormat('EEEE');
     final dateFormat = DateFormat('MMMM d, y');
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
-        Text(
-          dayFormat.format(date),
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: AppColors.primary,
-              ),
+        IconButton(
+          icon: const Icon(Icons.chevron_left),
+          onPressed: onPreviousDay,
+          tooltip: 'Previous Day',
         ),
-        Text(
-          dateFormat.format(date),
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: AppColors.textSecondaryLight,
+        Expanded(
+          child: Column(
+            children: [
+              Text(
+                dayFormat.format(date),
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: AppColors.primary,
+                    ),
+                textAlign: TextAlign.center,
               ),
+              Text(
+                dateFormat.format(date),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.textSecondaryLight,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              if (onToday != null) ...[
+                const SizedBox(height: 4),
+                TextButton.icon(
+                  onPressed: onToday,
+                  icon: const Icon(Icons.today, size: 16),
+                  label: const Text('Back to Today'),
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
+            ],
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.chevron_right),
+          onPressed: onNextDay,
+          tooltip: 'Next Day',
         ),
       ],
     );

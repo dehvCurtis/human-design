@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show FileOptions;
+import 'package:uuid/uuid.dart';
 
+import '../../../../shared/providers/supabase_provider.dart';
 import '../../domain/feed_providers.dart';
 import '../../domain/models/post.dart';
+import 'gate_channel_picker_sheet.dart';
 
 class CreatePostSheet extends ConsumerStatefulWidget {
   const CreatePostSheet({
@@ -26,9 +33,13 @@ class CreatePostSheet extends ConsumerStatefulWidget {
 
 class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
   final _contentController = TextEditingController();
+  final _imagePicker = ImagePicker();
   late PostType _selectedType;
   PostVisibility _visibility = PostVisibility.public;
   bool _isSubmitting = false;
+  final List<XFile> _selectedImages = [];
+  int? _selectedGate;
+  String? _selectedChannelId;
 
   @override
   void initState() {
@@ -37,6 +48,8 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     if (widget.prefillContent != null) {
       _contentController.text = widget.prefillContent!;
     }
+    _selectedGate = widget.gateNumber;
+    _selectedChannelId = widget.channelId;
   }
 
   @override
@@ -149,22 +162,71 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                 textCapitalization: TextCapitalization.sentences,
               ),
 
+              // Selected images preview
+              if (_selectedImages.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                SizedBox(
+                  height: 100,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _selectedImages.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.file(
+                                File(_selectedImages[index].path),
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              top: 4,
+                              right: 4,
+                              child: GestureDetector(
+                                onTap: () => _removeImage(index),
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: theme.colorScheme.error,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.close,
+                                    size: 14,
+                                    color: theme.colorScheme.onError,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+
               // Gate/Channel tags
-              if (widget.gateNumber != null || widget.channelId != null) ...[
+              if (_selectedGate != null || _selectedChannelId != null) ...[
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
                   children: [
-                    if (widget.gateNumber != null)
+                    if (_selectedGate != null)
                       Chip(
-                        label: Text('Gate ${widget.gateNumber}'),
-                        onDeleted: () {},
+                        label: Text('Gate $_selectedGate'),
+                        onDeleted: () => setState(() => _selectedGate = null),
                         deleteIcon: const Icon(Icons.close, size: 16),
                       ),
-                    if (widget.channelId != null)
+                    if (_selectedChannelId != null)
                       Chip(
-                        label: Text('Channel ${widget.channelId}'),
-                        onDeleted: () {},
+                        label: Text('Channel $_selectedChannelId'),
+                        onDeleted: () => setState(() => _selectedChannelId = null),
                         deleteIcon: const Icon(Icons.close, size: 16),
                       ),
                   ],
@@ -193,23 +255,24 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.image_outlined),
-                    onPressed: () {
-                      // TODO: Add image picker
-                    },
+                    onPressed: _pickImage,
                     tooltip: 'Add image',
                   ),
                   IconButton(
                     icon: const Icon(Icons.pie_chart_outline),
                     onPressed: () {
-                      // TODO: Attach chart
+                      setState(() {
+                        _selectedType = PostType.chartShare;
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Post type set to Chart Share')),
+                      );
                     },
                     tooltip: 'Attach chart',
                   ),
                   IconButton(
                     icon: const Icon(Icons.tag),
-                    onPressed: () {
-                      // TODO: Add gate/channel tag
-                    },
+                    onPressed: _showGateChannelPicker,
                     tooltip: 'Tag gate or channel',
                   ),
                 ],
@@ -221,6 +284,99 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         ),
       ),
     );
+  }
+
+  Future<void> _pickImage() async {
+    try {
+      final pickedFiles = await _imagePicker.pickMultiImage(
+        maxWidth: 1920,
+        maxHeight: 1920,
+        imageQuality: 85,
+      );
+
+      if (pickedFiles.isNotEmpty) {
+        setState(() {
+          // Limit to 4 images total
+          final remaining = 4 - _selectedImages.length;
+          _selectedImages.addAll(pickedFiles.take(remaining));
+        });
+
+        if (pickedFiles.length > 4 - _selectedImages.length) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Maximum 4 images allowed')),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to pick image: $e')),
+        );
+      }
+    }
+  }
+
+  void _removeImage(int index) {
+    setState(() {
+      _selectedImages.removeAt(index);
+    });
+  }
+
+  void _showGateChannelPicker() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => GateChannelPickerSheet(
+        initialGate: _selectedGate,
+        initialChannel: _selectedChannelId,
+        onGateSelected: (gate) {
+          setState(() {
+            _selectedGate = gate;
+          });
+          Navigator.pop(context);
+        },
+        onChannelSelected: (channel) {
+          setState(() {
+            _selectedChannelId = channel;
+          });
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  Future<List<String>> _uploadImages() async {
+    if (_selectedImages.isEmpty) return [];
+
+    final client = ref.read(supabaseClientProvider);
+    final userId = client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    final uploadedUrls = <String>[];
+    const uuid = Uuid();
+
+    for (final image in _selectedImages) {
+      final bytes = await image.readAsBytes();
+      final extension = image.path.split('.').last.toLowerCase();
+      final fileName = '${uuid.v4()}.$extension';
+      final filePath = '$userId/posts/$fileName';
+
+      await client.storage.from('post-images').uploadBinary(
+        filePath,
+        bytes,
+        fileOptions: FileOptions(
+          contentType: 'image/$extension',
+          upsert: true,
+        ),
+      );
+
+      final publicUrl = client.storage.from('post-images').getPublicUrl(filePath);
+      uploadedUrls.add(publicUrl);
+    }
+
+    return uploadedUrls;
   }
 
   String _getHintText(PostType type) {
@@ -244,9 +400,9 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
 
   Future<void> _submitPost() async {
     final content = _contentController.text.trim();
-    if (content.isEmpty) {
+    if (content.isEmpty && _selectedImages.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter some content')),
+        const SnackBar(content: Text('Please enter some content or add an image')),
       );
       return;
     }
@@ -254,12 +410,19 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     setState(() => _isSubmitting = true);
 
     try {
+      // Upload images first
+      List<String>? mediaUrls;
+      if (_selectedImages.isNotEmpty) {
+        mediaUrls = await _uploadImages();
+      }
+
       await ref.read(feedNotifierProvider.notifier).createPost(
             content: content,
             postType: _selectedType,
             visibility: _visibility,
-            gateNumber: widget.gateNumber,
-            channelId: widget.channelId,
+            mediaUrls: mediaUrls,
+            gateNumber: _selectedGate,
+            channelId: _selectedChannelId,
             transitData: widget.transitData,
           );
 

@@ -8,28 +8,100 @@ import '../domain/models/message.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import 'widgets/new_conversation_sheet.dart';
 
-class ConversationsScreen extends ConsumerWidget {
+class ConversationsScreen extends ConsumerStatefulWidget {
   const ConversationsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConversationsScreen> createState() => _ConversationsScreenState();
+}
+
+class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
+  bool _isSearching = false;
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<Conversation> _filterConversations(List<Conversation> conversations, String currentUserId) {
+    if (_searchQuery.isEmpty) return conversations;
+
+    final query = _searchQuery.toLowerCase();
+    return conversations.where((conversation) {
+      final otherParticipant = conversation.getOtherParticipant(currentUserId);
+      final name = (otherParticipant?.name ?? '').toLowerCase();
+      final preview = (conversation.lastMessagePreview ?? '').toLowerCase();
+      final hdType = (otherParticipant?.hdType ?? '').toLowerCase();
+
+      return name.contains(query) || preview.contains(query) || hdType.contains(query);
+    }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final conversationsAsync = ref.watch(conversationsProvider);
     final currentUserId = ref.watch(currentUserIdProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Messages'),
+        title: _isSearching
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: 'Search conversations...',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                  ),
+                ),
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _searchQuery = value;
+                  });
+                },
+              )
+            : const Text('Messages'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          icon: Icon(_isSearching ? Icons.close : Icons.arrow_back),
+          onPressed: () {
+            if (_isSearching) {
+              setState(() {
+                _isSearching = false;
+                _searchQuery = '';
+                _searchController.clear();
+              });
+            } else {
+              context.pop();
+            }
+          },
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              // TODO: Implement search
-            },
-          ),
+          if (!_isSearching)
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                setState(() {
+                  _isSearching = true;
+                });
+              },
+            ),
+          if (_isSearching && _searchQuery.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                setState(() {
+                  _searchQuery = '';
+                  _searchController.clear();
+                });
+              },
+            ),
         ],
       ),
       body: RefreshIndicator(
@@ -38,6 +110,11 @@ class ConversationsScreen extends ConsumerWidget {
         },
         child: conversationsAsync.when(
           data: (conversations) {
+            final filteredConversations = _filterConversations(
+              conversations,
+              currentUserId ?? '',
+            );
+
             if (conversations.isEmpty) {
               return Center(
                 child: Column(
@@ -62,15 +139,50 @@ class ConversationsScreen extends ConsumerWidget {
                             color: Theme.of(context).colorScheme.outline,
                           ),
                     ),
+                    const SizedBox(height: 24),
+                    FilledButton.icon(
+                      onPressed: () => _showNewConversationSheet(context),
+                      icon: const Icon(Icons.edit),
+                      label: const Text('New Message'),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            if (filteredConversations.isEmpty && _searchQuery.isNotEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.search_off,
+                      size: 64,
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'No results found',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Try a different search term',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                    ),
                   ],
                 ),
               );
             }
 
             return ListView.builder(
-              itemCount: conversations.length,
+              itemCount: filteredConversations.length,
               itemBuilder: (context, index) {
-                final conversation = conversations[index];
+                final conversation = filteredConversations[index];
                 return _ConversationTile(
                   conversation: conversation,
                   currentUserId: currentUserId ?? '',
@@ -104,13 +216,26 @@ class ConversationsScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showNewConversationSheet(context, ref),
+        onPressed: () => _showNewConversationSheet(context),
         child: const Icon(Icons.edit),
       ),
     );
   }
 
-  void _showNewConversationSheet(BuildContext context, WidgetRef ref) {
+  void _showNewConversationSheet(BuildContext context) {
+    final currentUser = ref.read(supabaseClientProvider).auth.currentUser;
+    if (currentUser == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Please sign in to send messages'),
+          action: SnackBarAction(
+            label: 'Sign In',
+            onPressed: () => context.go(AppRoutes.signIn),
+          ),
+        ),
+      );
+      return;
+    }
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
