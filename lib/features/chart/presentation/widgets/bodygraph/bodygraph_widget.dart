@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/human_design_constants.dart';
+import '../../../../../core/theme/app_colors.dart';
 import '../../../domain/models/human_design_chart.dart';
 import 'bodygraph_data.dart';
 import 'bodygraph_painter.dart';
@@ -25,6 +26,8 @@ class BodygraphWidget extends StatefulWidget {
     this.showInactiveChannels = true,
     this.interactive = true,
     this.drawBody = false,
+    this.enableZoom = false,
+    this.showZoomControls = false,
   });
 
   /// The Human Design chart data to display
@@ -57,6 +60,12 @@ class BodygraphWidget extends StatefulWidget {
   /// Whether to draw the body silhouette behind the bodygraph
   final bool drawBody;
 
+  /// Whether to enable pinch-to-zoom and pan gestures
+  final bool enableZoom;
+
+  /// Whether to show +/- zoom control buttons
+  final bool showZoomControls;
+
   @override
   State<BodygraphWidget> createState() => _BodygraphWidgetState();
 }
@@ -66,6 +75,11 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
   BodygraphElement? _selectedElement;
   late AnimationController _animationController;
   late Animation<double> _animation;
+  late TransformationController _transformationController;
+
+  static const double _minScale = 0.5;
+  static const double _maxScale = 4.0;
+  static const double _zoomStep = 0.5;
 
   /// Get the current layout based on layoutType
   BodygraphLayout get _layout => getLayout(widget.layoutType);
@@ -82,11 +96,13 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
       curve: Curves.easeInOut,
     );
     _animationController.forward();
+    _transformationController = TransformationController();
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _transformationController.dispose();
     super.dispose();
   }
 
@@ -100,11 +116,31 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     }
   }
 
+  void _zoomIn() {
+    final currentScale = _transformationController.value.getMaxScaleOnAxis();
+    final newScale = (currentScale + _zoomStep).clamp(_minScale, _maxScale);
+    _setScale(newScale);
+  }
+
+  void _zoomOut() {
+    final currentScale = _transformationController.value.getMaxScaleOnAxis();
+    final newScale = (currentScale - _zoomStep).clamp(_minScale, _maxScale);
+    _setScale(newScale);
+  }
+
+  void _resetZoom() {
+    _transformationController.value = Matrix4.identity();
+  }
+
+  void _setScale(double scale) {
+    _transformationController.value = Matrix4.identity()..scale(scale);
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return GestureDetector(
+        final bodygraphContent = GestureDetector(
           onTapDown: widget.interactive ? _handleTap : null,
           child: AnimatedBuilder(
             animation: _animation,
@@ -125,6 +161,59 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
             },
           ),
         );
+
+        Widget content;
+        if (widget.enableZoom) {
+          content = InteractiveViewer(
+            transformationController: _transformationController,
+            minScale: _minScale,
+            maxScale: _maxScale,
+            panEnabled: true,
+            scaleEnabled: true,
+            boundaryMargin: const EdgeInsets.all(200),
+            constrained: false,
+            child: SizedBox(
+              width: constraints.maxWidth,
+              height: constraints.maxHeight,
+              child: bodygraphContent,
+            ),
+          );
+        } else {
+          content = bodygraphContent;
+        }
+
+        if (widget.showZoomControls) {
+          return Stack(
+            children: [
+              content,
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Column(
+                  children: [
+                    _ZoomButton(
+                      icon: Icons.add,
+                      onPressed: _zoomIn,
+                    ),
+                    const SizedBox(height: 4),
+                    _ZoomButton(
+                      icon: Icons.remove,
+                      onPressed: _zoomOut,
+                    ),
+                    const SizedBox(height: 4),
+                    _ZoomButton(
+                      icon: Icons.refresh,
+                      onPressed: _resetZoom,
+                      size: 32,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }
+
+        return content;
       },
     );
   }
@@ -279,6 +368,41 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
 
   /// Get the currently selected element
   BodygraphElement? get selectedElement => _selectedElement;
+}
+
+/// Zoom control button widget
+class _ZoomButton extends StatelessWidget {
+  const _ZoomButton({
+    required this.icon,
+    required this.onPressed,
+    this.size = 36,
+  });
+
+  final IconData icon;
+  final VoidCallback onPressed;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 2,
+      borderRadius: BorderRadius.circular(8),
+      color: Theme.of(context).colorScheme.surface,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(8),
+        child: SizedBox(
+          width: size,
+          height: size,
+          child: Icon(
+            icon,
+            size: size * 0.5,
+            color: AppColors.primary,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 /// Widget that displays a comparison between two bodygraph layouts
