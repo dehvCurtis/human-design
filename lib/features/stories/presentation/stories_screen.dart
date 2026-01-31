@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
+import '../../../l10n/generated/app_localizations.dart';
+import '../../../shared/providers/supabase_provider.dart';
 import '../domain/stories_providers.dart';
 import '../domain/models/story.dart';
 import 'story_viewer_screen.dart';
@@ -26,7 +29,7 @@ class StoriesScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.add_circle_outline),
-            onPressed: () => _showCreateStorySheet(context),
+            onPressed: () => _showCreateStorySheet(context, ref),
           ),
         ],
       ),
@@ -42,7 +45,7 @@ class StoriesScreen extends ConsumerWidget {
               child: myStoriesAsync.when(
                 data: (myStories) => _MyStoriesSection(
                   stories: myStories,
-                  onAddStory: () => _showCreateStorySheet(context),
+                  onAddStory: () => _showCreateStorySheet(context, ref),
                   onViewStories: () {
                     if (myStories.isNotEmpty) {
                       Navigator.of(context).push(
@@ -168,7 +171,34 @@ class StoriesScreen extends ConsumerWidget {
     );
   }
 
-  void _showCreateStorySheet(BuildContext context) {
+  void _showCreateStorySheet(BuildContext context, WidgetRef ref) {
+    // Check if user is authenticated
+    final client = ref.read(supabaseClientProvider);
+    if (client.auth.currentUser == null) {
+      final l10n = AppLocalizations.of(context)!;
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(l10n.auth_signInRequired),
+          content: Text(l10n.auth_signInToCreateStory),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.common_cancel),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.pop(context);
+                context.go(AppRoutes.signIn);
+              },
+              child: Text(l10n.auth_signIn),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

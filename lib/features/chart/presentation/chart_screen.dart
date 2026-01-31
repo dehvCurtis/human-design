@@ -131,7 +131,7 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
           IconButton(
             icon: const Icon(Icons.share_outlined),
             onPressed: () {
-              // TODO: Implement share
+              context.push(AppRoutes.share);
             },
           ),
         ],
@@ -289,6 +289,8 @@ class _BodygraphTabState extends State<_BodygraphTab> {
         onCenterTap: (center) => _showCenterDetail(context, center),
         onGateTap: (gate) => _showGateDetail(context, gate),
         onChannelTap: (channel) => _showChannelDetail(context, channel),
+        enableZoom: true,
+        showZoomControls: true,
       ),
     );
   }

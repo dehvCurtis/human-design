@@ -48,8 +48,6 @@ class _BirthDataScreenState extends ConsumerState<BirthDataScreen> {
     if (_checkedExistingData) return;
     _checkedExistingData = true;
 
-    print('DEBUG BirthDataScreen: isEditMode = ${widget.isEditMode}');
-
     try {
       final profile = await ref.read(userProfileProvider.future);
       if (profile?.hasBirthData == true && mounted) {

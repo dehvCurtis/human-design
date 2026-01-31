@@ -79,7 +79,9 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                       child: const Icon(Icons.bookmark_outline, color: Colors.white),
                     ),
                     onPressed: () {
-                      // TODO: Implement bookmark
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Bookmark feature coming soon')),
+                      );
                     },
                   ),
                   IconButton(
@@ -92,7 +94,9 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                       child: const Icon(Icons.share, color: Colors.white),
                     ),
                     onPressed: () {
-                      // TODO: Implement share
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Share feature coming soon')),
+                      );
                     },
                   ),
                 ],
@@ -394,7 +398,9 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                   Expanded(
                     child: OutlinedButton.icon(
                       onPressed: () {
-                        // TODO: Implement like
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Like feature coming soon')),
+                        );
                       },
                       icon: const Icon(Icons.thumb_up_outlined),
                       label: Text('Like (${content.likeCount})'),

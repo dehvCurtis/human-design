@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
 import '../domain/discovery_providers.dart';
 import '../domain/models/user_discovery.dart';
 import 'widgets/user_card.dart';
@@ -71,7 +72,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen>
           IconButton(
             icon: const Icon(Icons.star_outlined),
             tooltip: 'Popular Charts',
-            onPressed: () => context.push('/popular-charts'),
+            onPressed: () => context.push(AppRoutes.popularCharts),
           ),
           IconButton(
             icon: const Icon(Icons.filter_list),
@@ -171,7 +172,7 @@ class _DiscoverTab extends ConsumerWidget {
   }
 
   void _navigateToProfile(BuildContext context, DiscoveredUser user) {
-    context.push('/user/${user.id}');
+    context.pushNamed('userProfile', pathParameters: {'id': user.id});
   }
 }
 
@@ -202,7 +203,7 @@ class _FollowingTab extends ConsumerWidget {
             itemBuilder: (context, index) {
               return UserCard(
                 user: users[index],
-                onTap: () => context.push('/user/${users[index].id}'),
+                onTap: () => context.pushNamed('userProfile', pathParameters: {'id': users[index].id}),
               );
             },
           ),
@@ -245,7 +246,7 @@ class _FollowersTab extends ConsumerWidget {
               return UserCard(
                 user: users[index],
                 showFollowBack: !users[index].isFollowing,
-                onTap: () => context.push('/user/${users[index].id}'),
+                onTap: () => context.pushNamed('userProfile', pathParameters: {'id': users[index].id}),
               );
             },
           ),
@@ -285,7 +286,7 @@ class _SearchResultsView extends ConsumerWidget {
           itemBuilder: (context, index) {
             return UserCard(
               user: users[index],
-              onTap: () => context.push('/user/${users[index].id}'),
+              onTap: () => context.pushNamed('userProfile', pathParameters: {'id': users[index].id}),
             );
           },
         );

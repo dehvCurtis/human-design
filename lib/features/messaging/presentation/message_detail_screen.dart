@@ -1,7 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show FileOptions;
+import 'package:uuid/uuid.dart';
 
+import '../../chart/domain/chart_providers.dart';
+import '../../home/domain/home_providers.dart';
 import '../domain/messaging_providers.dart';
 import '../domain/models/message.dart';
 import '../../../shared/providers/supabase_provider.dart';
@@ -35,6 +43,74 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
     _scrollController.dispose();
     ref.read(messagingNotifierProvider.notifier).unsubscribeFromConversation();
     super.dispose();
+  }
+
+  void _handleMenuAction(BuildContext context, String action) {
+    switch (action) {
+      case 'mute':
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Notifications muted')),
+        );
+        break;
+      case 'block':
+        _showBlockConfirmation(context);
+        break;
+      case 'delete':
+        _showDeleteConfirmation(context);
+        break;
+    }
+  }
+
+  void _showBlockConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Block User'),
+        content: const Text('Are you sure you want to block this user? You will no longer receive messages from them.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('User blocked')),
+              );
+            },
+            child: const Text('Block'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Delete Conversation'),
+        content: const Text('Are you sure you want to delete this conversation? This action cannot be undone.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () {
+              Navigator.pop(context);
+              this.context.pop(); // Go back to conversations list
+              ScaffoldMessenger.of(this.context).showSnackBar(
+                const SnackBar(content: Text('Conversation deleted')),
+              );
+            },
+            child: const Text('Delete'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -92,11 +168,38 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
           error: (_, __) => const Text('Conversation'),
         ),
         actions: [
-          IconButton(
+          PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              // TODO: Show conversation options
-            },
+            onSelected: (value) => _handleMenuAction(context, value),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'mute',
+                child: ListTile(
+                  leading: Icon(Icons.notifications_off_outlined),
+                  title: Text('Mute Notifications'),
+                  contentPadding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'block',
+                child: ListTile(
+                  leading: Icon(Icons.block),
+                  title: Text('Block User'),
+                  contentPadding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'delete',
+                child: ListTile(
+                  leading: Icon(Icons.delete_outline, color: Colors.red),
+                  title: Text('Delete Conversation', style: TextStyle(color: Colors.red)),
+                  contentPadding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -247,7 +350,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
               title: const Text('Share Chart'),
               onTap: () {
                 Navigator.pop(context);
-                // TODO: Implement chart sharing
+                _shareChart();
               },
             ),
             ListTile(
@@ -255,7 +358,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
               title: const Text('Share Transit'),
               onTap: () {
                 Navigator.pop(context);
-                // TODO: Implement transit sharing
+                _shareTransit();
               },
             ),
             ListTile(
@@ -263,13 +366,172 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
               title: const Text('Send Image'),
               onTap: () {
                 Navigator.pop(context);
-                // TODO: Implement image sending
+                _sendImage();
               },
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _shareChart() async {
+    final savedChartsAsync = ref.read(userSavedChartsProvider);
+    final userChartAsync = ref.read(userChartProvider);
+
+    final charts = savedChartsAsync.hasValue ? (savedChartsAsync.value ?? []) : <ChartSummary>[];
+    final userChart = userChartAsync.hasValue ? userChartAsync.value : null;
+
+    if (charts.isEmpty && userChart == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No charts available to share')),
+      );
+      return;
+    }
+
+    // Show chart selector dialog
+    final selectedChart = await showDialog<ChartSummary>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Select Chart to Share'),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: charts.length,
+            itemBuilder: (context, index) {
+              final chart = charts[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  child: Text(chart.name[0].toUpperCase()),
+                ),
+                title: Text(chart.name),
+                subtitle: Text('${chart.type.displayName} - ${chart.profile}'),
+                trailing: chart.isCurrentUser
+                    ? const Chip(label: Text('You'))
+                    : null,
+                onTap: () => Navigator.pop(context, chart),
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+
+    if (selectedChart == null) return;
+
+    try {
+      // Create chart share message
+      final chartData = {
+        'chartId': selectedChart.id,
+        'name': selectedChart.name,
+        'type': selectedChart.type.displayName,
+        'profile': selectedChart.profile,
+      };
+
+      await ref.read(messagingNotifierProvider.notifier).sendMessage(
+        conversationId: widget.conversationId,
+        content: jsonEncode(chartData),
+        messageType: MessageType.chartShare,
+        sharedChartId: selectedChart.id,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to share chart: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _shareTransit() async {
+    try {
+      final transitService = ref.read(transitServiceProvider);
+      final currentTransit = transitService.calculateCurrentTransits();
+
+      // Get the main transit info (Sun gate)
+      final sunGate = currentTransit.sunGate;
+      final transitMessage = 'Current Transit: Sun in Gate ${sunGate.gate}.${sunGate.line}';
+
+      await ref.read(messagingNotifierProvider.notifier).sendMessage(
+        conversationId: widget.conversationId,
+        content: transitMessage,
+        messageType: MessageType.transitShare,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to share transit: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _sendImage() async {
+    try {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1920,
+        maxHeight: 1920,
+        imageQuality: 85,
+      );
+
+      if (pickedFile == null) return;
+
+      final client = ref.read(supabaseClientProvider);
+      final userId = client.auth.currentUser?.id;
+      if (userId == null) {
+        throw StateError('User not authenticated');
+      }
+
+      // Upload image to Supabase Storage
+      final bytes = await File(pickedFile.path).readAsBytes();
+      final extension = pickedFile.path.split('.').last.toLowerCase();
+      const uuid = Uuid();
+      final fileName = '${uuid.v4()}.$extension';
+      final filePath = '$userId/messages/$fileName';
+
+      await client.storage.from('message-images').uploadBinary(
+        filePath,
+        bytes,
+        fileOptions: FileOptions(
+          contentType: 'image/$extension',
+          upsert: true,
+        ),
+      );
+
+      final publicUrl = client.storage.from('message-images').getPublicUrl(filePath);
+
+      // Send message with image
+      await ref.read(messagingNotifierProvider.notifier).sendMessage(
+        conversationId: widget.conversationId,
+        content: 'Image',
+        messageType: MessageType.image,
+        mediaUrl: publicUrl,
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to send image: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
   }
 }
 

@@ -86,10 +86,8 @@ class ProfileRepository {
         birthDateTime.second,
       );
       utcBirthDateTime = localTime.toUtc();
-      print('DEBUG updateBirthData: Converting $birthDateTime in $timezone to UTC: $utcBirthDateTime');
     } catch (e) {
       // Fallback to device timezone if timezone lookup fails
-      print('DEBUG updateBirthData: Timezone lookup failed for $timezone, using device timezone');
       utcBirthDateTime = birthDateTime.toUtc();
     }
 

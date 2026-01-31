@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// Application configuration constants
 class AppConfig {
   AppConfig._();
@@ -8,15 +10,40 @@ class AppConfig {
   /// App version (should match pubspec.yaml)
   static const String appVersion = '1.0.0';
 
+  /// App URL for deep links and sharing
+  static const String appUrl = 'https://app.humandesign.com';
+
   /// Supabase configuration
-  static const String supabaseUrl = String.fromEnvironment(
+  static const String _supabaseUrl = String.fromEnvironment(
     'SUPABASE_URL',
     defaultValue: '',
   );
-  static const String supabaseAnonKey = String.fromEnvironment(
+  static const String _supabaseAnonKey = String.fromEnvironment(
     'SUPABASE_ANON_KEY',
     defaultValue: '',
   );
+
+  /// Get Supabase URL with validation
+  static String get supabaseUrl {
+    if (_supabaseUrl.isEmpty && !kDebugMode) {
+      throw StateError(
+        'SUPABASE_URL environment variable is not set. '
+        'Pass it with: --dart-define=SUPABASE_URL=your_url',
+      );
+    }
+    return _supabaseUrl;
+  }
+
+  /// Get Supabase Anon Key with validation
+  static String get supabaseAnonKey {
+    if (_supabaseAnonKey.isEmpty && !kDebugMode) {
+      throw StateError(
+        'SUPABASE_ANON_KEY environment variable is not set. '
+        'Pass it with: --dart-define=SUPABASE_ANON_KEY=your_key',
+      );
+    }
+    return _supabaseAnonKey;
+  }
 
   /// RevenueCat API keys
   static const String revenueCatAppleApiKey = String.fromEnvironment(
@@ -27,6 +54,26 @@ class AppConfig {
     'REVENUECAT_GOOGLE_API_KEY',
     defaultValue: '',
   );
+
+  /// Validate all required environment variables for release builds
+  /// Call this at app startup to fail fast if configuration is missing
+  static void validateConfiguration() {
+    if (kReleaseMode) {
+      final errors = <String>[];
+      if (_supabaseUrl.isEmpty) {
+        errors.add('SUPABASE_URL is not set');
+      }
+      if (_supabaseAnonKey.isEmpty) {
+        errors.add('SUPABASE_ANON_KEY is not set');
+      }
+      if (errors.isNotEmpty) {
+        throw StateError(
+          'Missing required environment variables:\n${errors.join('\n')}\n\n'
+          'Pass them with: flutter build --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=...',
+        );
+      }
+    }
+  }
 
   /// Free tier limits
   static const int freeSharesPerMonth = 3;

@@ -46,9 +46,9 @@ class BodygraphPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     // Calculate scale to fit the bodygraph in the available space
-    // Use 1.25x multiplier to compensate for internal padding in the canvas
+    // Use 1.05x multiplier to compensate for internal padding in the canvas
     final baseScale = math.min(size.width / bodygraphCanvasWidth, size.height / bodygraphCanvasHeight);
-    final scale = baseScale * 1.25;
+    final scale = baseScale * 1.05;
     canvas.save();
 
     // Center the bodygraph

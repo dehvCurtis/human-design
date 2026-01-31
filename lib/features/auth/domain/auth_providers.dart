@@ -5,10 +5,6 @@ import '../../../shared/providers/supabase_provider.dart';
 import '../data/auth_repository.dart';
 import 'auth_errors.dart';
 
-/// Set to true to bypass authentication during development
-/// WARNING: Set to false for production!
-const bool kBypassAuth = false;
-
 /// Provider for the auth repository
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final client = ref.watch(supabaseClientProvider);
@@ -23,11 +19,6 @@ final authStateChangesProvider = StreamProvider<supabase.AuthState>((ref) {
 
 /// Provider for current auth status
 final authStatusProvider = Provider<AuthStatus>((ref) {
-  // Bypass auth for development
-  if (kBypassAuth) {
-    return AuthStatus.authenticated;
-  }
-
   final repository = ref.watch(authRepositoryProvider);
   final authState = ref.watch(authStateChangesProvider);
 

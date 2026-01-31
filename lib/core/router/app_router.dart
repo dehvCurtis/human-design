@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -149,7 +150,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   return GoRouter(
     initialLocation: AppRoutes.splash,
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: kDebugMode,
     refreshListenable: _RouterRefreshStream(ref),
     redirect: (context, state) {
       final isLoading = authStatus == AuthStatus.loading;
@@ -231,7 +232,6 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'birthData',
         builder: (context, state) {
           final isEditMode = state.uri.queryParameters['edit'] == 'true';
-          print('DEBUG Router: birthData route, uri=${state.uri}, isEditMode=$isEditMode');
           return BirthDataScreen(isEditMode: isEditMode);
         },
       ),
@@ -783,7 +783,12 @@ class MainShell extends StatelessWidget {
     }
     if (location.startsWith(AppRoutes.social) ||
         location.startsWith(AppRoutes.composite) ||
-        location.startsWith(AppRoutes.penta)) {
+        location.startsWith(AppRoutes.penta) ||
+        location.startsWith(AppRoutes.feed) ||
+        location.startsWith(AppRoutes.discover) ||
+        location.startsWith(AppRoutes.messages) ||
+        location.startsWith(AppRoutes.stories) ||
+        location.startsWith(AppRoutes.circles)) {
       return 3;
     }
     if (location.startsWith(AppRoutes.profile)) return 4;

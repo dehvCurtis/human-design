@@ -10,6 +10,8 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
   - Full channels displayed when both gates are active
   - Hanging gates (half-lines) for single-gate activations
   - Color-coded: black (conscious), red (unconscious), striped (both)
+  - Pinch-to-zoom and pan gestures for detailed viewing
+  - Zoom controls (+/-) for precise adjustment
 - **6-Tab Chart View** - Bodygraph, Planets, Properties, Gates, Channels, Chakras
 - **Saved Charts** - Create and manage charts for family, friends, and clients
 - **Transit Tracking** - Current planetary transits and their impact on your chart

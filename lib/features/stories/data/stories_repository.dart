@@ -375,6 +375,110 @@ class StoriesRepository {
     });
   }
 
+  // ==================== Cleanup ====================
+
+  /// Clean up expired stories
+  /// Deletes stories that have passed their expiration time
+  /// Returns the number of stories deleted
+  Future<int> cleanupExpiredStories() async {
+    // Get expired story IDs first for counting
+    final expiredResponse = await _client
+        .from('stories')
+        .select('id')
+        .lt('expires_at', DateTime.now().toIso8601String());
+
+    final expiredIds = (expiredResponse as List)
+        .map((json) => json['id'] as String)
+        .toList();
+
+    if (expiredIds.isEmpty) return 0;
+
+    // Delete related data first (cascade may not be set up)
+    // Delete views
+    await _client
+        .from('story_views')
+        .delete()
+        .inFilter('story_id', expiredIds);
+
+    // Delete reactions
+    await _client
+        .from('story_reactions')
+        .delete()
+        .inFilter('story_id', expiredIds);
+
+    // Delete replies
+    await _client
+        .from('story_replies')
+        .delete()
+        .inFilter('story_id', expiredIds);
+
+    // Delete polls and their data
+    final pollsResponse = await _client
+        .from('story_polls')
+        .select('id')
+        .inFilter('story_id', expiredIds);
+
+    final pollIds = (pollsResponse as List)
+        .map((json) => json['id'] as String)
+        .toList();
+
+    if (pollIds.isNotEmpty) {
+      // Delete poll votes
+      await _client
+          .from('poll_votes')
+          .delete()
+          .inFilter('poll_id', pollIds);
+
+      // Delete poll options
+      await _client
+          .from('poll_options')
+          .delete()
+          .inFilter('poll_id', pollIds);
+
+      // Delete polls
+      await _client
+          .from('story_polls')
+          .delete()
+          .inFilter('story_id', expiredIds);
+    }
+
+    // Finally delete the stories
+    await _client
+        .from('stories')
+        .delete()
+        .inFilter('id', expiredIds);
+
+    return expiredIds.length;
+  }
+
+  /// Clean up expired stories for current user only
+  /// More efficient for on-demand cleanup
+  Future<int> cleanupMyExpiredStories() async {
+    final userId = _currentUserId;
+    if (userId == null) return 0;
+
+    final expiredResponse = await _client
+        .from('stories')
+        .select('id')
+        .eq('user_id', userId)
+        .lt('expires_at', DateTime.now().toIso8601String());
+
+    final expiredIds = (expiredResponse as List)
+        .map((json) => json['id'] as String)
+        .toList();
+
+    if (expiredIds.isEmpty) return 0;
+
+    // Delete the user's expired stories
+    // Related data will be cleaned up by cascade or left orphaned
+    await _client
+        .from('stories')
+        .delete()
+        .inFilter('id', expiredIds);
+
+    return expiredIds.length;
+  }
+
   // ==================== Helper Methods ====================
 
   Future<Set<String>> _getViewedStoryIds() async {
