@@ -217,7 +217,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             Icons.arrow_back,
             color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
           ),
-          onPressed: () => context.go(AppRoutes.home),
+          onPressed: () => context.canPop() ? context.pop() : context.go(AppRoutes.onboarding),
         ),
       ),
       body: SafeArea(
