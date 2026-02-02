@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../core/config/app_config.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../domain/feed_providers.dart';
@@ -84,7 +85,7 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => _ErrorView(
-          error: error.toString(),
+          error: ErrorHandler.getUserMessage(error, context: 'load feed'),
           onRetry: () => ref.invalidate(feedProvider),
         ),
       ),
@@ -150,7 +151,7 @@ View the full post: $deepLink
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to share: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'share')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -174,6 +175,7 @@ View the full post: $deepLink
       return;
     }
 
+    final l10n = AppLocalizations.of(context)!;
     showRegenerateDialog(
       context: context,
       originalPost: post,
@@ -185,18 +187,18 @@ View the full post: $deepLink
             visibility: visibility,
           );
 
-          if (mounted) {
+          if (mounted && context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(AppLocalizations.of(context)!.thought_regenerateSuccess),
+                content: Text(l10n.thought_regenerateSuccess),
               ),
             );
           }
         } catch (e) {
-          if (mounted) {
+          if (mounted && context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(e.toString()),
+                content: Text(ErrorHandler.getUserMessage(e)),
                 backgroundColor: Colors.red,
               ),
             );
@@ -266,7 +268,7 @@ class PostDetailScreen extends ConsumerWidget {
                         ),
                         error: (e, _) => Padding(
                           padding: const EdgeInsets.all(16),
-                          child: Text('Error loading comments: $e'),
+                          child: Text(ErrorHandler.getUserMessage(e, context: 'load comments')),
                         ),
                       ),
                     ],
@@ -278,7 +280,7 @@ class PostDetailScreen extends ConsumerWidget {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('Error: $error')),
+        error: (error, _) => Center(child: Text(ErrorHandler.getUserMessage(error))),
       ),
     );
   }
@@ -314,7 +316,7 @@ class PostDetailScreen extends ConsumerWidget {
           if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(e.toString()),
+                content: Text(ErrorHandler.getUserMessage(e)),
                 backgroundColor: Colors.red,
               ),
             );

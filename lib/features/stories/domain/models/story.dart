@@ -1,4 +1,4 @@
-/// Models for the Stories feature (24h ephemeral content)
+// Models for the Stories feature (24h ephemeral content)
 
 enum StoryVisibility {
   public,

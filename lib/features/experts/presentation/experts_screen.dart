@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/expert_providers.dart';
 import '../domain/models/expert.dart';
@@ -41,7 +42,7 @@ class _ExpertsScreenState extends ConsumerState<ExpertsScreen> {
           SliverToBoxAdapter(
             child: featuredAsync.when(
               loading: () => const SizedBox.shrink(),
-              error: (_, __) => const SizedBox.shrink(),
+              error: (_, _) => const SizedBox.shrink(),
               data: (featured) {
                 if (featured.isEmpty) return const SizedBox.shrink();
                 return _FeaturedExpertsSection(experts: featured);
@@ -119,7 +120,7 @@ class _ExpertsScreenState extends ConsumerState<ExpertsScreen> {
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (e, _) => SliverFillRemaining(
-              child: Center(child: Text('Error: $e')),
+              child: Center(child: Text(ErrorHandler.getUserMessage(e))),
             ),
             data: (experts) {
               if (experts.isEmpty) {

@@ -1,5 +1,5 @@
-/// Models for Compatibility Circles feature
-/// Allows group compatibility analysis for 3-5 people
+// Models for Compatibility Circles feature
+// Allows group compatibility analysis for 3-5 people
 
 /// Represents a compatibility circle (small group)
 class CompatibilityCircle {

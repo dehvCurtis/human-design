@@ -42,7 +42,7 @@ class StoriesBar extends ConsumerWidget {
                 onAdd: () => _showCreateStorySheet(context),
               ),
               loading: () => _LoadingCircle(),
-              error: (_, __) => _AddStoryCircle(
+              error: (_, _) => _AddStoryCircle(
                 onTap: () => _showCreateStorySheet(context),
               ),
             ),
@@ -97,7 +97,7 @@ class StoriesBar extends ConsumerWidget {
                 itemCount: 5,
                 itemBuilder: (context, index) => _LoadingCircle(),
               ),
-              error: (_, __) => const SizedBox.shrink(),
+              error: (_, _) => const SizedBox.shrink(),
             ),
           ),
         ],

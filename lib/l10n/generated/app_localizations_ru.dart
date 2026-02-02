@@ -1971,6 +1971,23 @@ class AppLocalizationsRu extends AppLocalizations {
   String get auth_checkEmail => 'Проверьте почту для подтверждения';
 
   @override
+  String get auth_checkYourEmail => 'Проверьте почту';
+
+  @override
+  String get auth_confirmationLinkSent =>
+      'Мы отправили ссылку для подтверждения на:';
+
+  @override
+  String get auth_clickLinkToActivate =>
+      'Пожалуйста, нажмите на ссылку в письме для активации аккаунта.';
+
+  @override
+  String get auth_goToSignIn => 'Перейти к входу';
+
+  @override
+  String get auth_returnToHome => 'Вернуться на главную';
+
+  @override
   String get hashtags_explore => 'Explore Hashtags';
 
   @override

@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mime/mime.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' show FileOptions;
 import 'package:uuid/uuid.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../chart/domain/chart_providers.dart';
 import '../../home/domain/home_providers.dart';
 import '../domain/messaging_providers.dart';
@@ -26,14 +28,17 @@ class MessageDetailScreen extends ConsumerStatefulWidget {
 class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  MessagingNotifier? _messagingNotifier;
 
   @override
   void initState() {
     super.initState();
     // Mark messages as read when entering
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(messagingNotifierProvider.notifier).markAsRead(widget.conversationId);
-      ref.read(messagingNotifierProvider.notifier).subscribeToConversation(widget.conversationId);
+      if (!mounted) return;
+      _messagingNotifier = ref.read(messagingNotifierProvider.notifier);
+      _messagingNotifier?.markAsRead(widget.conversationId);
+      _messagingNotifier?.subscribeToConversation(widget.conversationId);
     });
   }
 
@@ -41,7 +46,8 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
   void dispose() {
     _messageController.dispose();
     _scrollController.dispose();
-    ref.read(messagingNotifierProvider.notifier).unsubscribeFromConversation();
+    // Use stored reference to safely unsubscribe
+    _messagingNotifier?.unsubscribeFromConversation();
     super.dispose();
   }
 
@@ -125,7 +131,13 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go('/messages');
+            }
+          },
         ),
         title: conversationAsync.when(
           data: (conversation) {
@@ -165,7 +177,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
             );
           },
           loading: () => const Text('Loading...'),
-          error: (_, __) => const Text('Conversation'),
+          error: (_, _) => const Text('Conversation'),
         ),
         actions: [
           PopupMenuButton<String>(
@@ -330,7 +342,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to send message: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'send message')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -424,7 +436,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
       ),
     );
 
-    if (selectedChart == null) return;
+    if (selectedChart == null || !mounted) return;
 
     try {
       // Create chart share message
@@ -445,7 +457,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to share chart: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'share chart')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -471,13 +483,21 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to share transit: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'share transit')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
       }
     }
   }
+
+  /// Allowed MIME types for image uploads
+  static const _allowedImageMimes = [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+  ];
 
   Future<void> _sendImage() async {
     try {
@@ -499,7 +519,18 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
 
       // Upload image to Supabase Storage
       final bytes = await File(pickedFile.path).readAsBytes();
-      final extension = pickedFile.path.split('.').last.toLowerCase();
+
+      // Validate MIME type using header bytes (prevents extension spoofing)
+      final mimeType = lookupMimeType(
+        pickedFile.path,
+        headerBytes: bytes.length >= 12 ? bytes.sublist(0, 12) : bytes,
+      );
+
+      if (mimeType == null || !_allowedImageMimes.contains(mimeType)) {
+        throw StateError('Invalid image type. Allowed: JPEG, PNG, GIF, WebP');
+      }
+
+      final extension = mimeType.split('/').last;
       const uuid = Uuid();
       final fileName = '${uuid.v4()}.$extension';
       final filePath = '$userId/messages/$fileName';
@@ -508,7 +539,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
         filePath,
         bytes,
         fileOptions: FileOptions(
-          contentType: 'image/$extension',
+          contentType: mimeType,
           upsert: true,
         ),
       );
@@ -526,7 +557,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to send image: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'send image')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -691,7 +722,7 @@ class _MessageBubble extends StatelessWidget {
               message.mediaUrl!,
               width: 200,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => const Icon(Icons.broken_image),
+              errorBuilder: (_, _, _) => const Icon(Icons.broken_image),
             ),
           );
         }

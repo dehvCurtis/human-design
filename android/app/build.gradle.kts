@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.human_design"
+    namespace = "com.humandesign.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,21 +20,48 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.human_design"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        applicationId = "com.humandesign.app"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            // Release signing configuration
+            // Before release, create a keystore and configure these properties
+            // in ~/.gradle/gradle.properties or as environment variables:
+            //   HUMAN_DESIGN_KEYSTORE_FILE=/path/to/keystore.jks
+            //   HUMAN_DESIGN_KEYSTORE_PASSWORD=your_password
+            //   HUMAN_DESIGN_KEY_ALIAS=your_alias
+            //   HUMAN_DESIGN_KEY_PASSWORD=your_key_password
+            val keystoreFile = System.getenv("HUMAN_DESIGN_KEYSTORE_FILE")
+            if (keystoreFile != null && file(keystoreFile).exists()) {
+                storeFile = file(keystoreFile)
+                storePassword = System.getenv("HUMAN_DESIGN_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("HUMAN_DESIGN_KEY_ALIAS")
+                keyPassword = System.getenv("HUMAN_DESIGN_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            // Use release signing if configured, otherwise fall back to debug for development
+            val releaseConfig = signingConfigs.findByName("release")
+            signingConfig = if (releaseConfig?.storeFile != null) {
+                releaseConfig
+            } else {
+                // Warning: Using debug keys - not suitable for production
+                signingConfigs.getByName("debug")
+            }
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 }

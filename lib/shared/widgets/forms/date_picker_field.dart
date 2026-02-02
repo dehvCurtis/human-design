@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// A date picker field widget
-class DatePickerField extends StatelessWidget {
+class DatePickerField extends StatefulWidget {
   const DatePickerField({
     super.key,
     required this.value,
@@ -31,18 +31,23 @@ class DatePickerField extends StatelessWidget {
   final DateFormat? dateFormat;
 
   @override
+  State<DatePickerField> createState() => _DatePickerFieldState();
+}
+
+class _DatePickerFieldState extends State<DatePickerField> {
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final formatter = dateFormat ?? DateFormat.yMMMMd();
+    final formatter = widget.dateFormat ?? DateFormat.yMMMMd();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (label != null) ...[
+        if (widget.label != null) ...[
           Text(
-            label!,
+            widget.label!,
             style: theme.textTheme.titleSmall?.copyWith(
               color: isDark
                   ? AppColors.textSecondaryDark
@@ -52,21 +57,21 @@ class DatePickerField extends StatelessWidget {
           const SizedBox(height: 8),
         ],
         InkWell(
-          onTap: enabled ? () => _showDatePicker(context) : null,
+          onTap: widget.enabled ? _showDatePicker : null,
           borderRadius: BorderRadius.circular(12),
           child: InputDecorator(
             decoration: InputDecoration(
-              hintText: hint,
-              errorText: errorText,
-              helperText: helperText,
+              hintText: widget.hint,
+              errorText: widget.errorText,
+              helperText: widget.helperText,
               prefixIcon: const Icon(Icons.calendar_today_outlined),
               suffixIcon: const Icon(Icons.arrow_drop_down),
-              enabled: enabled,
+              enabled: widget.enabled,
             ),
             child: Text(
-              value != null ? formatter.format(value!) : hint,
+              widget.value != null ? formatter.format(widget.value!) : widget.hint,
               style: theme.textTheme.bodyLarge?.copyWith(
-                color: value != null
+                color: widget.value != null
                     ? null
                     : (isDark
                         ? AppColors.textSecondaryDark
@@ -79,14 +84,14 @@ class DatePickerField extends StatelessWidget {
     );
   }
 
-  Future<void> _showDatePicker(BuildContext context) async {
+  Future<void> _showDatePicker() async {
     final now = DateTime.now();
-    final first = firstDate ?? DateTime(1900);
-    final last = lastDate ?? now;
+    final first = widget.firstDate ?? DateTime(1900);
+    final last = widget.lastDate ?? now;
 
     final picked = await showDatePicker(
       context: context,
-      initialDate: value ?? DateTime(1990, 1, 1),
+      initialDate: widget.value ?? DateTime(1990, 1, 1),
       firstDate: first,
       lastDate: last,
       builder: (context, child) {
@@ -101,8 +106,8 @@ class DatePickerField extends StatelessWidget {
       },
     );
 
-    if (picked != null) {
-      onChanged(picked);
+    if (picked != null && mounted) {
+      widget.onChanged(picked);
     }
   }
 }

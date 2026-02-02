@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
 import '../domain/discovery_providers.dart';
@@ -39,7 +40,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       ),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
-        body: Center(child: Text('Error: $e')),
+        body: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (user) {
         if (user == null) {
@@ -248,7 +249,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       setState(() => _isLoading = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to follow: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'follow'))),
         );
       }
     }
@@ -270,7 +271,7 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
       setState(() => _isLoading = false);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to unfollow: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'unfollow'))),
         );
       }
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/learning_path_providers.dart';
 import '../domain/models/learning_path.dart';
@@ -32,7 +33,7 @@ class _LearningPathDetailScreenState
       body: pathAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(
-          child: Text('Error: $error'),
+          child: Text(ErrorHandler.getUserMessage(error)),
         ),
         data: (path) {
           if (path == null) {

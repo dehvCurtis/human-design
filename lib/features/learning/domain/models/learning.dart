@@ -1,4 +1,4 @@
-/// Models for the Learning feature (content library, study groups)
+// Models for the Learning feature (content library, study groups)
 
 enum ContentType {
   article,

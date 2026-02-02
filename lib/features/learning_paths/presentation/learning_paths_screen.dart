@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/learning_path_providers.dart';
 import '../domain/models/learning_path.dart';
@@ -50,7 +51,7 @@ class _ExploreTab extends ConsumerWidget {
         // Featured section
         featuredAsync.when(
           loading: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
-          error: (_, __) => const SliverToBoxAdapter(child: SizedBox.shrink()),
+          error: (_, _) => const SliverToBoxAdapter(child: SizedBox.shrink()),
           data: (featured) {
             if (featured.isEmpty) return const SliverToBoxAdapter(child: SizedBox.shrink());
             return SliverToBoxAdapter(
@@ -111,7 +112,7 @@ class _ExploreTab extends ConsumerWidget {
             child: Center(child: CircularProgressIndicator()),
           ),
           error: (e, _) => SliverFillRemaining(
-            child: Center(child: Text('Error: $e')),
+            child: Center(child: Text(ErrorHandler.getUserMessage(e))),
           ),
           data: (paths) {
             if (paths.isEmpty) {
@@ -431,7 +432,7 @@ class _InProgressTab extends ConsumerWidget {
 
     return enrolledAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (paths) {
         if (paths.isEmpty) {
           return Center(
@@ -573,7 +574,7 @@ class _CompletedTab extends ConsumerWidget {
 
     return completedAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (paths) {
         if (paths.isEmpty) {
           return Center(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../chart/domain/chart_providers.dart';
 import '../domain/composite_calculator.dart';
@@ -511,7 +512,7 @@ class _ChartSelector extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, color: AppColors.error),
               const SizedBox(height: 8),
-              Text('Failed to load charts: $error'),
+              Text(ErrorHandler.getUserMessage(error, context: 'load charts')),
             ],
           ),
         ),

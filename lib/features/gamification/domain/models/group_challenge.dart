@@ -1,4 +1,4 @@
-/// Models for group challenges and team leaderboards
+// Models for group challenges and team leaderboards
 
 /// Represents a group/team that competes together
 class ChallengeTeam {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../hashtags/domain/hashtag_providers.dart';
 import '../../hashtags/domain/models/hashtag.dart';
@@ -120,7 +121,7 @@ class _ForYouTab extends ConsumerWidget {
                       ? _TrendingHashtagsBar(trending: trending)
                       : const SizedBox.shrink(),
                   loading: () => const SizedBox.shrink(),
-                  error: (_, __) => const SizedBox.shrink(),
+                  error: (_, _) => const SizedBox.shrink(),
                 ),
               ),
 
@@ -302,7 +303,7 @@ class _TrendingHashtagsBar extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: trending.take(5).length,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
+              separatorBuilder: (_, _) => const SizedBox(width: 8),
               itemBuilder: (context, index) {
                 final item = trending[index];
                 return ActionChip(
@@ -605,7 +606,7 @@ class _SearchSheetState extends ConsumerState<_SearchSheet> {
                           );
                         },
                         loading: () => const Center(child: CircularProgressIndicator()),
-                        error: (e, _) => Center(child: Text('Error: $e')),
+                        error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
                       ),
               ),
             ],
@@ -718,7 +719,7 @@ class _ErrorState extends StatelessWidget {
         children: [
           const Icon(Icons.error_outline, size: 48, color: Colors.red),
           const SizedBox(height: 16),
-          Text('Error: $error'),
+          Text(ErrorHandler.getUserMessage(error)),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: onRetry,

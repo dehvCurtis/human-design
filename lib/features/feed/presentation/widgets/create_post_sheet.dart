@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mime/mime.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' show FileOptions;
 import 'package:uuid/uuid.dart';
 
+import '../../../../core/utils/error_handler.dart';
 import '../../../../shared/providers/supabase_provider.dart';
 import '../../domain/feed_providers.dart';
 import '../../domain/models/post.dart';
@@ -312,7 +315,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to pick image: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'pick image'))),
         );
       }
     }
@@ -347,6 +350,28 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     );
   }
 
+  /// Allowed MIME types for image uploads
+  static const _allowedImageMimes = [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+    'image/webp',
+  ];
+
+  /// Validate MIME type by checking file header bytes
+  String? _validateImageMimeType(Uint8List bytes, String filename) {
+    // Check MIME type using file header bytes (magic numbers)
+    final mimeType = lookupMimeType(
+      filename,
+      headerBytes: bytes.length >= 12 ? bytes.sublist(0, 12) : bytes,
+    );
+
+    if (mimeType == null || !_allowedImageMimes.contains(mimeType)) {
+      return 'Invalid image type. Allowed: JPEG, PNG, GIF, WebP';
+    }
+    return null;
+  }
+
   Future<List<String>> _uploadImages() async {
     if (_selectedImages.isEmpty) return [];
 
@@ -359,7 +384,19 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
 
     for (final image in _selectedImages) {
       final bytes = await image.readAsBytes();
-      final extension = image.path.split('.').last.toLowerCase();
+
+      // Validate MIME type using header bytes (prevents extension spoofing)
+      final validationError = _validateImageMimeType(bytes, image.path);
+      if (validationError != null) {
+        throw StateError(validationError);
+      }
+
+      // Get actual MIME type from header
+      final mimeType = lookupMimeType(
+        image.path,
+        headerBytes: bytes.length >= 12 ? bytes.sublist(0, 12) : bytes,
+      );
+      final extension = mimeType?.split('/').last ?? 'jpg';
       final fileName = '${uuid.v4()}.$extension';
       final filePath = '$userId/posts/$fileName';
 
@@ -367,7 +404,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         filePath,
         bytes,
         fileOptions: FileOptions(
-          contentType: 'image/$extension',
+          contentType: mimeType ?? 'image/jpeg',
           upsert: true,
         ),
       );
@@ -435,7 +472,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to create post: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'create post'))),
         );
       }
     } finally {

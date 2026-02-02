@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../domain/messaging_providers.dart';
 
 /// Screen that creates or gets an existing conversation with a user
@@ -35,7 +36,7 @@ class _MessageWithUserScreenState extends ConsumerState<MessageWithUserScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to start conversation: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'start conversation'))),
         );
         context.pop();
       }

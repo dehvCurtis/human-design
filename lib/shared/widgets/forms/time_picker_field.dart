@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// A time picker field widget
-class TimePickerField extends StatelessWidget {
+class TimePickerField extends StatefulWidget {
   const TimePickerField({
     super.key,
     required this.value,
@@ -31,8 +31,13 @@ class TimePickerField extends StatelessWidget {
   final VoidCallback? onUnknownSelected;
   final bool isUnknown;
 
+  @override
+  State<TimePickerField> createState() => _TimePickerFieldState();
+}
+
+class _TimePickerFieldState extends State<TimePickerField> {
   String _formatTime(TimeOfDay time) {
-    if (use24HourFormat) {
+    if (widget.use24HourFormat) {
       final hour = time.hour.toString().padLeft(2, '0');
       final minute = time.minute.toString().padLeft(2, '0');
       return '$hour:$minute';
@@ -53,9 +58,9 @@ class TimePickerField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (label != null) ...[
+        if (widget.label != null) ...[
           Text(
-            label!,
+            widget.label!,
             style: theme.textTheme.titleSmall?.copyWith(
               color: isDark
                   ? AppColors.textSecondaryDark
@@ -65,36 +70,36 @@ class TimePickerField extends StatelessWidget {
           const SizedBox(height: 8),
         ],
         InkWell(
-          onTap: enabled ? () => _showTimePicker(context) : null,
+          onTap: widget.enabled ? _showTimePicker : null,
           borderRadius: BorderRadius.circular(12),
           child: InputDecorator(
             decoration: InputDecoration(
-              hintText: hint,
-              errorText: errorText,
-              helperText: helperText,
+              hintText: widget.hint,
+              errorText: widget.errorText,
+              helperText: widget.helperText,
               prefixIcon: const Icon(Icons.access_time_outlined),
               suffixIcon: const Icon(Icons.arrow_drop_down),
-              enabled: enabled,
+              enabled: widget.enabled,
             ),
             child: Text(
-              isUnknown
+              widget.isUnknown
                   ? "I don't know"
-                  : (value != null ? _formatTime(value!) : hint),
+                  : (widget.value != null ? _formatTime(widget.value!) : widget.hint),
               style: theme.textTheme.bodyLarge?.copyWith(
-                color: (value != null || isUnknown)
-                    ? (isUnknown ? AppColors.textSecondaryLight : null)
+                color: (widget.value != null || widget.isUnknown)
+                    ? (widget.isUnknown ? AppColors.textSecondaryLight : null)
                     : (isDark
                         ? AppColors.textSecondaryDark
                         : AppColors.textSecondaryLight),
-                fontStyle: isUnknown ? FontStyle.italic : null,
+                fontStyle: widget.isUnknown ? FontStyle.italic : null,
               ),
             ),
           ),
         ),
-        if (showUnknownOption && !isUnknown) ...[
+        if (widget.showUnknownOption && !widget.isUnknown) ...[
           const SizedBox(height: 8),
           TextButton.icon(
-            onPressed: onUnknownSelected,
+            onPressed: widget.onUnknownSelected,
             icon: const Icon(Icons.help_outline, size: 18),
             label: const Text("I don't know my birth time"),
             style: TextButton.styleFrom(
@@ -107,10 +112,10 @@ class TimePickerField extends StatelessWidget {
     );
   }
 
-  Future<void> _showTimePicker(BuildContext context) async {
+  Future<void> _showTimePicker() async {
     final picked = await showTimePicker(
       context: context,
-      initialTime: value ?? const TimeOfDay(hour: 12, minute: 0),
+      initialTime: widget.value ?? const TimeOfDay(hour: 12, minute: 0),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -120,7 +125,7 @@ class TimePickerField extends StatelessWidget {
           ),
           child: MediaQuery(
             data: MediaQuery.of(context).copyWith(
-              alwaysUse24HourFormat: use24HourFormat,
+              alwaysUse24HourFormat: widget.use24HourFormat,
             ),
             child: child!,
           ),
@@ -128,8 +133,8 @@ class TimePickerField extends StatelessWidget {
       },
     );
 
-    if (picked != null) {
-      onChanged(picked);
+    if (picked != null && mounted) {
+      widget.onChanged(picked);
     }
   }
 }

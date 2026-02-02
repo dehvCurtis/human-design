@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:human_design/features/ephemeris/mappers/degree_to_gate_mapper.dart';
 
-/// Test the 58° HD wheel offset fix
-///
-/// The Human Design wheel is offset from the tropical zodiac:
-/// - Gate 41 starts at 2° Aquarius (302° tropical), not 0° Aries
-/// - This means 0° Aries (spring equinox) maps to Gate 25, not Gate 41
+// Test the 58° HD wheel offset fix
+//
+// The Human Design wheel is offset from the tropical zodiac:
+// - Gate 41 starts at 2° Aquarius (302° tropical), not 0° Aries
+// - This means 0° Aries (spring equinox) maps to Gate 25, not Gate 41
 void main() {
   group('HD Wheel Offset Tests', () {
     test('0° Aries (Spring Equinox) should map to Gate 25', () {
@@ -13,7 +13,6 @@ void main() {
       // Should map to Gate 25, NOT Gate 41
       final activation = DegreeToGateMapper.mapDegreeToGate(0.0);
 
-      print('0° tropical → Gate ${activation.gate}.${activation.line}');
       expect(activation.gate, 25, reason: '0° Aries should be Gate 25 (Vessel of Love)');
     });
 
@@ -21,7 +20,6 @@ void main() {
       // Gate 41 starts at 302° tropical (2° Aquarius)
       final activation = DegreeToGateMapper.mapDegreeToGate(302.0);
 
-      print('302° tropical → Gate ${activation.gate}.${activation.line}');
       expect(activation.gate, 41, reason: '302° (2° Aquarius) should be Gate 41');
     });
 
@@ -30,7 +28,6 @@ void main() {
       // Should be opposite of Gate 25 = Gate 46
       final activation = DegreeToGateMapper.mapDegreeToGate(180.0);
 
-      print('180° tropical → Gate ${activation.gate}.${activation.line}');
       expect(activation.gate, 46, reason: '180° should be Gate 46');
     });
 
@@ -39,7 +36,6 @@ void main() {
       // From our debug output: 0.0485°
       final activation = DegreeToGateMapper.mapDegreeToGate(0.0485);
 
-      print('Sun at 0.0485° → Gate ${activation.gate}.${activation.line}');
       expect(activation.gate, 25, reason: 'Conscious Sun should be Gate 25');
       expect(activation.line, 2, reason: 'Line should be 2 for profile 2/5');
     });
@@ -49,7 +45,6 @@ void main() {
       // Our debug showed 272.0485°
       final activation = DegreeToGateMapper.mapDegreeToGate(272.0485);
 
-      print('Design Sun at 272.0485° → Gate ${activation.gate}.${activation.line}');
       expect(activation.gate, 10, reason: 'Design Sun should be Gate 10');
       expect(activation.line, 5, reason: 'Line should be 5 for profile 2/5');
     });
@@ -63,8 +58,6 @@ void main() {
       // Unconscious Earth (opposite Design Sun) = Gate 15
       final unconsciousEarth = DegreeToGateMapper.mapDegreeToGate(92.0485);
       expect(unconsciousEarth.gate, 15, reason: 'Unconscious Earth should be Gate 15');
-
-      print('Incarnation Cross verified: 25/46 | 10/15');
     });
 
     test('Gate 1 position check', () {
@@ -73,9 +66,8 @@ void main() {
       // HD position 51 * 5.625 = 286.875°
       // Tropical = 286.875 - 58 = 228.875° (roughly 18° Scorpio)
 
-      // Let's verify by finding where Gate 1 maps from
+      // Verify by finding where Gate 1 maps from
       final gate1Start = DegreeToGateMapper.gateToDegree(1);
-      print('Gate 1 starts at $gate1Start° tropical');
 
       // Now verify that degree maps back to Gate 1
       final activation = DegreeToGateMapper.mapDegreeToGate(gate1Start);

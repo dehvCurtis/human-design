@@ -1,4 +1,4 @@
-/// Models for Sharing & Export features
+// Models for Sharing & Export features
 
 enum ShareFormat {
   png,

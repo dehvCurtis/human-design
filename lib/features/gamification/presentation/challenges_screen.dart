@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
 import '../domain/gamification_providers.dart';
 import '../domain/models/gamification.dart';
 
@@ -39,7 +40,13 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
         title: const Text('Challenges'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -58,7 +65,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                 ? _PointsSummary(points: points)
                 : const SizedBox.shrink(),
             loading: () => const SizedBox.shrink(),
-            error: (_, __) => const SizedBox.shrink(),
+            error: (_, _) => const SizedBox.shrink(),
           ),
 
           // Challenges tabs

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
+import '../../../core/utils/error_handler.dart';
 import '../domain/gamification_providers.dart';
 import '../domain/models/gamification.dart';
 
@@ -35,7 +37,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         title: const Text('Leaderboard'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -99,7 +107,7 @@ class _LeaderboardTab extends ConsumerWidget {
                   ? _YourRankCard(rank: rank, type: type)
                   : const SizedBox.shrink(),
               loading: () => const SizedBox.shrink(),
-              error: (_, __) => const SizedBox.shrink(),
+              error: (_, _) => const SizedBox.shrink(),
             ),
 
             // Rest of the list
@@ -123,7 +131,7 @@ class _LeaderboardTab extends ConsumerWidget {
           children: [
             const Icon(Icons.error_outline, size: 48),
             const SizedBox(height: 16),
-            Text('Error: $e'),
+            Text(ErrorHandler.getUserMessage(e)),
             const SizedBox(height: 8),
             TextButton(
               onPressed: () => ref.invalidate(leaderboardProvider(type)),
@@ -456,7 +464,7 @@ class _RankingTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '${_formatPoints(entry.points)}',
+              _formatPoints(entry.points),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),

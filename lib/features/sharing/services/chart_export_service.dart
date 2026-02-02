@@ -56,9 +56,11 @@ class ChartExportService {
     await file.writeAsBytes(bytes);
 
     // Share the file
-    await Share.shareXFiles(
-      [XFile(file.path)],
-      subject: '$chartName - Human Design Bodygraph',
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(file.path)],
+        subject: '$chartName - Human Design Bodygraph',
+      ),
     );
   }
 
@@ -232,9 +234,11 @@ class ChartExportService {
     final file = File('${tempDir.path}/${sanitizedName}_chart.pdf');
     await file.writeAsBytes(bytes);
 
-    await Share.shareXFiles(
-      [XFile(file.path)],
-      subject: '${chart.name} - Human Design Chart Report',
+    await SharePlus.instance.share(
+      ShareParams(
+        files: [XFile(file.path)],
+        subject: '${chart.name} - Human Design Chart Report',
+      ),
     );
   }
 

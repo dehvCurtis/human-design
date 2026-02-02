@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../l10n/generated/app_localizations.dart';
 import '../../../core/constants/human_design_constants.dart';
+import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/feed_providers.dart';
 import '../domain/models/post.dart';
 import 'widgets/post_card.dart';
@@ -84,7 +85,7 @@ class GateFeedScreen extends ConsumerWidget {
                   children: [
                     const Icon(Icons.error_outline, size: 48, color: Colors.red),
                     const SizedBox(height: 16),
-                    Text('Error: $error'),
+                    Text(ErrorHandler.getUserMessage(error)),
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () => ref.invalidate(gatePostsProvider(gateNumber)),

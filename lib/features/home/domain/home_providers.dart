@@ -47,16 +47,26 @@ final userProfileProvider = FutureProvider<UserProfile?>((ref) async {
 /// Provider for the user's personal chart
 final userChartProvider = FutureProvider<HumanDesignChart?>((ref) async {
   final profile = await ref.watch(userProfileProvider.future);
-  if (profile == null || !profile.hasBirthData) return null;
+  if (profile == null) return null;
+
+  // Validate all required birth data fields are present
+  final birthDate = profile.birthDate;
+  final birthLocation = profile.birthLocation;
+  final timezone = profile.timezone;
+
+  if (birthDate == null || birthLocation == null || timezone == null) {
+    // User hasn't completed birth data entry yet
+    return null;
+  }
 
   final calculateChart = ref.watch(calculateChartUseCaseProvider);
 
   return calculateChart.execute(
     userId: profile.id,
     name: profile.name ?? 'My Chart',
-    birthDateTime: profile.birthDate!,
-    birthLocation: profile.birthLocation!,
-    timezone: profile.timezone!,
+    birthDateTime: birthDate,
+    birthLocation: birthLocation,
+    timezone: timezone,
   );
 });
 

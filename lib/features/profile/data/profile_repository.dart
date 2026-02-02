@@ -263,9 +263,17 @@ class ProfileRepository {
   }
 
   /// Find a user by email address
-  /// Returns null if not found or if it's the current user
+  ///
+  /// Requires authentication to prevent email enumeration attacks.
+  /// Returns null if not found or if it's the current user.
   Future<UserSearchResult?> findUserByEmail(String email) async {
     final currentUserId = _client.auth.currentUser?.id;
+
+    // Require authentication to prevent email enumeration
+    if (currentUserId == null) {
+      throw StateError('Authentication required');
+    }
+
     final normalizedEmail = email.trim().toLowerCase();
 
     final response = await _client

@@ -190,6 +190,6 @@ final combinedMessagesProvider = Provider.family<List<DirectMessage>, String>((r
       return combined;
     },
     loading: () => localMessages,
-    error: (_, __) => localMessages,
+    error: (_, _) => localMessages,
   );
 });

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
 import '../../home/domain/home_providers.dart';
@@ -421,7 +422,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (e, _) => SliverToBoxAdapter(
-              child: Center(child: Text('Error: $e')),
+              child: Center(child: Text(ErrorHandler.getUserMessage(e))),
             ),
           ),
 
@@ -434,17 +435,18 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
   Future<void> _createShareLink(BuildContext context) async {
     // For now, we'll use a placeholder chart ID
     // In real implementation, this would come from the user's chart
+    final errorColor = Theme.of(context).colorScheme.error;
     try {
       await ref.read(sharingNotifierProvider.notifier).createChartShareLink(
             chartId: 'current-user-chart',
             expiresIn: _selectedExpiry,
           );
     } catch (e) {
-      if (mounted) {
+      if (mounted && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: $e'),
-            backgroundColor: Theme.of(context).colorScheme.error,
+            content: Text(ErrorHandler.getUserMessage(e)),
+            backgroundColor: errorColor,
           ),
         );
       }
@@ -459,6 +461,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
   }
 
   Future<void> _revokeLink(BuildContext context, String shareId) async {
+    final errorColor = Theme.of(context).colorScheme.error;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -479,21 +482,21 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
       ),
     );
 
-    if (confirmed != true) return;
+    if (confirmed != true || !mounted) return;
 
     try {
       await ref.read(sharingNotifierProvider.notifier).revokeShareLink(shareId);
-      if (mounted) {
+      if (mounted && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Link revoked')),
         );
       }
     } catch (e) {
-      if (mounted) {
+      if (mounted && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: $e'),
-            backgroundColor: Theme.of(context).colorScheme.error,
+            content: Text(ErrorHandler.getUserMessage(e)),
+            backgroundColor: errorColor,
           ),
         );
       }
@@ -513,6 +516,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     if (_isExporting) return;
     setState(() => _isExporting = true);
 
+    final errorColor = Theme.of(context).colorScheme.error;
     try {
       await ChartExportService.exportAsImage(
         repaintBoundaryKey: _bodygraphKey,
@@ -520,11 +524,11 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
         context: context,
       );
     } catch (e) {
-      if (mounted) {
+      if (mounted && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Export failed: $e'),
-            backgroundColor: Theme.of(context).colorScheme.error,
+            content: Text(ErrorHandler.getUserMessage(e, context: 'export')),
+            backgroundColor: errorColor,
           ),
         );
       }
@@ -548,6 +552,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     if (_isExporting) return;
     setState(() => _isExporting = true);
 
+    final errorColor = Theme.of(context).colorScheme.error;
     try {
       await ChartExportService.exportAsPdf(
         chart: chart,
@@ -555,11 +560,11 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
         context: context,
       );
     } catch (e) {
-      if (mounted) {
+      if (mounted && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('PDF export failed: $e'),
-            backgroundColor: Theme.of(context).colorScheme.error,
+            content: Text(ErrorHandler.getUserMessage(e, context: 'PDF export')),
+            backgroundColor: errorColor,
           ),
         );
       }

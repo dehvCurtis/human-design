@@ -132,8 +132,8 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
     _transformationController.value = Matrix4.identity();
   }
 
-  void _setScale(double scale) {
-    _transformationController.value = Matrix4.identity()..scale(scale);
+  void _setScale(double scaleFactor) {
+    _transformationController.value = Matrix4.diagonal3Values(scaleFactor, scaleFactor, 1.0);
   }
 
   @override

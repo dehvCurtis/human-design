@@ -24,7 +24,13 @@ class StoriesScreen extends ConsumerWidget {
         title: const Text('Stories'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
         actions: [
           IconButton(
@@ -63,7 +69,7 @@ class StoriesScreen extends ConsumerWidget {
                   padding: EdgeInsets.all(16),
                   child: Center(child: CircularProgressIndicator()),
                 ),
-                error: (_, __) => const SizedBox.shrink(),
+                error: (_, _) => const SizedBox.shrink(),
               ),
             ),
 
@@ -340,7 +346,7 @@ class _MyStoriesSection extends StatelessWidget {
         child: Image.network(
           story.mediaUrl!,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _buildTextPreview(story, theme),
+          errorBuilder: (_, _, _) => _buildTextPreview(story, theme),
         ),
       );
     }

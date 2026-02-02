@@ -78,7 +78,11 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
                 _searchController.clear();
               });
             } else {
-              context.pop();
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.go(AppRoutes.home);
+              }
             }
           },
         ),

@@ -632,5 +632,10 @@
   "auth_emailNotConfirmed": "Підтвердіть email",
   "auth_resendConfirmation": "Надіслати повторно",
   "auth_confirmationSent": "Лист надіслано",
-  "auth_checkEmail": "Перевірте пошту для підтвердження"
+  "auth_checkEmail": "Перевірте пошту для підтвердження",
+  "auth_checkYourEmail": "Перевірте пошту",
+  "auth_confirmationLinkSent": "Ми надіслали посилання для підтвердження на:",
+  "auth_clickLinkToActivate": "Будь ласка, натисніть на посилання в листі для активації акаунту.",
+  "auth_goToSignIn": "Перейти до входу",
+  "auth_returnToHome": "Повернутися на головну"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/url_validator.dart';
 import '../../../hashtags/presentation/widgets/hashtag_text.dart';
 import '../../domain/models/post.dart';
 import 'reaction_bar.dart';
@@ -430,14 +431,22 @@ class _PostMedia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (mediaUrls.length == 1) {
+    // Filter URLs to only allow trusted domains (SSRF prevention)
+    final validUrls = mediaUrls.where((url) => UrlValidator.isAllowedImageUrl(url)).toList();
+
+    if (validUrls.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    if (validUrls.length == 1) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Image.network(
-          mediaUrls.first,
+          validUrls.first,
           fit: BoxFit.cover,
           height: 200,
           width: double.infinity,
+          errorBuilder: (_, _, _) => _buildErrorPlaceholder(context),
         ),
       );
     }
@@ -446,18 +455,31 @@ class _PostMedia extends StatelessWidget {
       height: 200,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: mediaUrls.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemCount: validUrls.length,
+        separatorBuilder: (_, _) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              mediaUrls[index],
+              validUrls[index],
               fit: BoxFit.cover,
               width: 200,
+              errorBuilder: (_, _, _) => _buildErrorPlaceholder(context),
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildErrorPlaceholder(BuildContext context) {
+    return Container(
+      width: 200,
+      height: 200,
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      child: Icon(
+        Icons.broken_image,
+        color: Theme.of(context).colorScheme.outline,
       ),
     );
   }

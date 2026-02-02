@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/models/quiz.dart';
 import '../domain/quiz_providers.dart';
@@ -48,7 +49,7 @@ class QuizResultsScreen extends ConsumerWidget {
           return _buildResults(context, ref, quiz, effectiveAttempt);
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('Error: $error')),
+        error: (error, _) => Center(child: Text(ErrorHandler.getUserMessage(error))),
       ),
     );
   }
@@ -270,7 +271,7 @@ class QuizResultsScreen extends ConsumerWidget {
     return 'Study the material and try again.';
   }
 
-  void _tryAgain(BuildContext context, WidgetRef ref) async {
+  Future<void> _tryAgain(BuildContext context, WidgetRef ref) async {
     try {
       await ref.read(quizSessionProvider.notifier).startQuiz(quizId);
       if (context.mounted) {
@@ -279,7 +280,7 @@ class QuizResultsScreen extends ConsumerWidget {
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to start quiz: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'start quiz'))),
         );
       }
     }

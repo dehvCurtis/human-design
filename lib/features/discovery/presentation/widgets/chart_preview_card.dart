@@ -72,7 +72,7 @@ class ChartPreviewCard extends ConsumerWidget {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   ),
                 ),
-                error: (_, __) => Center(
+                error: (_, _) => Center(
                   child: Icon(
                     Icons.auto_graph_outlined,
                     size: 40,

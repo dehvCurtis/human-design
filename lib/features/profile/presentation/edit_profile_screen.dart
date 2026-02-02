@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../home/domain/home_providers.dart';
 
@@ -82,7 +83,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = 'Failed to update profile: ${e.toString()}';
+          _errorMessage = ErrorHandler.getUserMessage(e, context: 'update profile');
           _isLoading = false;
         });
       }
@@ -360,7 +361,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
             children: [
               const Icon(Icons.error_outline, size: 48, color: AppColors.error),
               const SizedBox(height: 16),
-              Text('Failed to load profile: $error'),
+              Text(ErrorHandler.getUserMessage(error, context: 'load profile')),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => ref.invalidate(userProfileProvider),

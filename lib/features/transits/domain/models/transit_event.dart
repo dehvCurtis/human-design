@@ -1,4 +1,4 @@
-/// Models for the transit event community feature
+// Models for the transit event community feature
 
 /// Represents a major transit event that the community can experience together
 class TransitEvent {

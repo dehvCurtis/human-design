@@ -9,6 +9,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../home/domain/home_providers.dart';
+import '../../location/domain/location_providers.dart';
 
 class BirthDataScreen extends ConsumerStatefulWidget {
   const BirthDataScreen({super.key, this.isEditMode = false});
@@ -338,6 +339,7 @@ class _BirthDataScreenState extends ConsumerState<BirthDataScreen> {
                 });
               },
               enabled: !_isLoading,
+              searchProvider: ref.watch(locationSearchProviderProvider),
             ),
             const SizedBox(height: 32),
 

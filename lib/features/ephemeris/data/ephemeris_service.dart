@@ -75,10 +75,20 @@ class EphemerisService {
     }
   }
 
+  /// Check if the service has been initialized
+  bool get isInitialized => _initialized;
+
   /// Calculate planetary positions for a given Julian Day Number
   ///
   /// Returns a map of planet to longitude in degrees (0-360)
+  /// Throws [StateError] if called before [initialize].
   Map<HumanDesignPlanet, double> calculatePlanetaryPositions(double julianDay) {
+    if (!_initialized) {
+      throw StateError(
+        'EphemerisService.calculatePlanetaryPositions called before initialize(). '
+        'Call await EphemerisService.instance.initialize() first.',
+      );
+    }
     final positions = <HumanDesignPlanet, double>{};
 
     // Map sweph HeavenlyBody to Human Design planets

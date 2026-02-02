@@ -119,7 +119,7 @@ class ProfileScreen extends ConsumerWidget {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('${l10n.profile_exportFailed}: $e'),
+                                  content: Text(l10n.profile_exportFailed),
                                   backgroundColor: AppColors.error,
                                 ),
                               );
@@ -172,7 +172,7 @@ class ProfileScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 48, color: AppColors.error),
               const SizedBox(height: 16),
-              Text('${l10n.profile_loadFailed}: $error'),
+              Text(l10n.profile_loadFailed),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => ref.invalidate(userProfileProvider),
@@ -515,7 +515,7 @@ class _SignOutButton extends ConsumerWidget {
           ),
         );
 
-        if (confirmed == true) {
+        if (confirmed == true && context.mounted) {
           await ref.read(authNotifierProvider.notifier).signOut();
         }
       },

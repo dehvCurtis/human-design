@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/compatibility_circle_providers.dart';
 import '../domain/models/compatibility_circle.dart';
@@ -160,7 +161,7 @@ class _MyCirclesTab extends ConsumerWidget {
 
     return circlesAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (circles) {
         if (circles.isEmpty) {
           return Center(
@@ -334,7 +335,7 @@ class _InvitationsTab extends ConsumerWidget {
 
     return invitationsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (invitations) {
         if (invitations.isEmpty) {
           return Center(

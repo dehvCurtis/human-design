@@ -1,4 +1,4 @@
-/// Models for the hashtag system
+// Models for the hashtag system
 
 /// Represents a hashtag in the system
 class Hashtag {

@@ -348,7 +348,14 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: '/gate/:number',
             name: 'gateFeed',
             builder: (context, state) {
-              final number = int.parse(state.pathParameters['number']!);
+              final numberParam = state.pathParameters['number'];
+              final number = int.tryParse(numberParam ?? '');
+              if (number == null || number < 1 || number > 64) {
+                // Invalid gate number - redirect to error screen
+                return ErrorScreen(
+                  error: Exception('Invalid gate number: $numberParam'),
+                );
+              }
               return GateFeedScreen(gateNumber: number);
             },
           ),

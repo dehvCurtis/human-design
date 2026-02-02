@@ -1972,6 +1972,23 @@ class AppLocalizationsUk extends AppLocalizations {
   String get auth_checkEmail => 'Перевірте пошту для підтвердження';
 
   @override
+  String get auth_checkYourEmail => 'Перевірте пошту';
+
+  @override
+  String get auth_confirmationLinkSent =>
+      'Ми надіслали посилання для підтвердження на:';
+
+  @override
+  String get auth_clickLinkToActivate =>
+      'Будь ласка, натисніть на посилання в листі для активації акаунту.';
+
+  @override
+  String get auth_goToSignIn => 'Перейти до входу';
+
+  @override
+  String get auth_returnToHome => 'Повернутися на головну';
+
+  @override
   String get hashtags_explore => 'Explore Hashtags';
 
   @override

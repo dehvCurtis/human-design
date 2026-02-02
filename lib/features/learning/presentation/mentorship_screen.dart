@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
+import '../../../core/utils/error_handler.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -20,7 +22,13 @@ class MentorshipScreen extends ConsumerWidget {
         title: const Text('Mentorship'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
       ),
       body: RefreshIndicator(
@@ -46,7 +54,7 @@ class MentorshipScreen extends ConsumerWidget {
                   padding: EdgeInsets.all(16),
                   child: Center(child: CircularProgressIndicator()),
                 ),
-                error: (_, __) => const SizedBox.shrink(),
+                error: (_, _) => const SizedBox.shrink(),
               ),
             ),
 
@@ -75,7 +83,7 @@ class MentorshipScreen extends ConsumerWidget {
                 );
               },
               loading: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
-              error: (_, __) => const SliverToBoxAdapter(child: SizedBox.shrink()),
+              error: (_, _) => const SliverToBoxAdapter(child: SizedBox.shrink()),
             ),
 
             // Available mentors
@@ -136,7 +144,7 @@ class MentorshipScreen extends ConsumerWidget {
                 child: Center(child: CircularProgressIndicator()),
               ),
               error: (e, _) => SliverFillRemaining(
-                child: Center(child: Text('Error: $e')),
+                child: Center(child: Text(ErrorHandler.getUserMessage(e, context: 'load mentors'))),
               ),
             ),
           ],
@@ -202,7 +210,7 @@ class MentorshipScreen extends ConsumerWidget {
               } catch (e) {
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Error: $e')),
+                    SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'send request'))),
                   );
                 }
               }

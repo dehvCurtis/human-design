@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
@@ -19,6 +20,8 @@ class SharingRepository {
   // ==================== Share Links ====================
 
   /// Create a shareable link for a chart
+  ///
+  /// Verifies the user owns the chart before allowing sharing.
   Future<SharedLink> createChartShareLink({
     required String chartId,
     Duration? expiresIn,
@@ -26,7 +29,21 @@ class SharingRepository {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
 
-    final token = _generateToken();
+    // Verify ownership before sharing
+    final chart = await _client
+        .from('charts')
+        .select('user_id')
+        .eq('id', chartId)
+        .maybeSingle();
+
+    if (chart == null) {
+      throw StateError('Chart not found');
+    }
+    if (chart['user_id'] != userId) {
+      throw StateError('Not authorized to share this chart');
+    }
+
+    final token = _generateSecureToken();
     final expiresAt = expiresIn != null
         ? DateTime.now().add(expiresIn).toIso8601String()
         : null;
@@ -177,14 +194,14 @@ class SharingRepository {
 
   // ==================== Helper Methods ====================
 
-  String _generateToken() {
+  /// Generate a cryptographically secure token for share links
+  ///
+  /// Uses [Random.secure] which is backed by the OS random number generator.
+  /// Generates 32 characters for sufficient entropy (approx. 190 bits).
+  String _generateSecureToken() {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    final random = DateTime.now().millisecondsSinceEpoch;
-    var token = '';
-    for (var i = 0; i < 12; i++) {
-      token += chars[(random + i * 7) % chars.length];
-    }
-    return token;
+    final random = Random.secure();
+    return List.generate(32, (_) => chars[random.nextInt(chars.length)]).join();
   }
 
   TypeCompatibilitySection _calculateTypeCompatibility(String type1, String type2) {

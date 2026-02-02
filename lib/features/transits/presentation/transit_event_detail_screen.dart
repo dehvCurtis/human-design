@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../feed/domain/feed_providers.dart';
 import '../../feed/presentation/widgets/post_card.dart';
@@ -134,7 +135,7 @@ class TransitEventDetailScreen extends ConsumerWidget {
                           isParticipating: isParticipating,
                         ),
                         loading: () => const SizedBox.shrink(),
-                        error: (_, __) => const SizedBox.shrink(),
+                        error: (_, _) => const SizedBox.shrink(),
                       ),
 
                       const SizedBox(height: 24),
@@ -213,7 +214,7 @@ class TransitEventDetailScreen extends ConsumerWidget {
                 error: (error, _) => SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(32),
-                    child: Center(child: Text('Error: $error')),
+                    child: Center(child: Text(ErrorHandler.getUserMessage(error))),
                   ),
                 ),
               ),
@@ -231,7 +232,7 @@ class TransitEventDetailScreen extends ConsumerWidget {
               return null;
             },
             loading: () => null,
-            error: (_, __) => null,
+            error: (_, _) => null,
           ),
         );
       },
@@ -240,7 +241,7 @@ class TransitEventDetailScreen extends ConsumerWidget {
       ),
       error: (error, _) => Scaffold(
         appBar: AppBar(title: Text(l10n.transit_events_title)),
-        body: Center(child: Text('Error: $error')),
+        body: Center(child: Text(ErrorHandler.getUserMessage(error))),
       ),
     );
   }

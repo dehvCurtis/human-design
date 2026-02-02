@@ -1,4 +1,4 @@
-/// Models for the content feed feature
+// Models for the content feed feature
 
 enum PostType {
   insight,

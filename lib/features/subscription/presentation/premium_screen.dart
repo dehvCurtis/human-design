@@ -436,7 +436,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         .read(subscriptionNotifierProvider.notifier)
         .purchase(_selectedTier);
 
-    if (success && mounted) {
+    if (success && mounted && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Welcome to Premium!')),
       );
@@ -449,7 +449,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         .read(subscriptionNotifierProvider.notifier)
         .restorePurchases();
 
-    if (mounted) {
+    if (mounted && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(

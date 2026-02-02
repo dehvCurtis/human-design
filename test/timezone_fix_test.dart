@@ -31,12 +31,6 @@ void main() {
       );
       final utcDateTime = localTime.toUtc();
 
-      print('Input local time: $birthDateTime');
-      print('Timezone: $timezone');
-      print('TZDateTime in $timezone: $localTime');
-      print('Converted to UTC: $utcDateTime');
-      print('UTC offset applied: ${localTime.timeZoneOffset}');
-
       // Expected: 10:24 AM MST (UTC-7) = 17:24 UTC
       expect(utcDateTime.hour, 17, reason: '10:24 AM MST should be 17:24 UTC');
       expect(utcDateTime.minute, 24);
@@ -62,12 +56,6 @@ void main() {
       );
       final utcDateTime = localTime.toUtc();
 
-      print('\nNew York Summer (DST):');
-      print('Input local time: $birthDateTime');
-      print('TZDateTime: $localTime');
-      print('Converted to UTC: $utcDateTime');
-      print('UTC offset: ${localTime.timeZoneOffset}');
-
       // EDT (Eastern Daylight Time) is UTC-4
       // 14:30 EDT = 18:30 UTC
       expect(utcDateTime.hour, 18, reason: '14:30 EDT should be 18:30 UTC');
@@ -89,10 +77,6 @@ void main() {
       );
       final utcDateTime = localTime.toUtc();
 
-      print('\nLondon Winter:');
-      print('Input local time: $birthDateTime');
-      print('Converted to UTC: $utcDateTime');
-
       // London in January is GMT (UTC+0)
       expect(utcDateTime.hour, 5, reason: 'London winter time should be same as UTC');
     });
@@ -112,11 +96,6 @@ void main() {
         birthDateTime.second,
       );
       final utcDateTime = localTime.toUtc();
-
-      print('\nSydney:');
-      print('Input local time: $birthDateTime');
-      print('Converted to UTC: $utcDateTime');
-      print('UTC offset: ${localTime.timeZoneOffset}');
 
       // Sydney in September (winter/spring) is AEST (UTC+10)
       // 11:20 AEST = 01:20 UTC
@@ -138,10 +117,6 @@ void main() {
         birthDateTime.second,
       );
       final utcDateTime = localTime.toUtc();
-
-      print('\nSeoul:');
-      print('Input local time: $birthDateTime');
-      print('Converted to UTC: $utcDateTime');
 
       // Seoul is KST (UTC+9)
       // 9:30 KST = 00:30 UTC

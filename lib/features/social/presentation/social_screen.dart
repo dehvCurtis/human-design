@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../home/domain/home_providers.dart';
@@ -317,7 +318,7 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
                     },
                     loading: () =>
                         const Center(child: CircularProgressIndicator()),
-                    error: (e, _) => Center(child: Text('Error: $e')),
+                    error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
                   ),
                 ),
               ],
@@ -467,7 +468,7 @@ class _FriendsTab extends ConsumerWidget {
           children: [
             const Icon(Icons.error_outline, size: 48, color: AppColors.error),
             const SizedBox(height: 16),
-            Text('${l10n.social_loadFriendsFailed}: $error'),
+            Text(l10n.social_loadFriendsFailed),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => ref.invalidate(friendsProvider),
@@ -529,7 +530,7 @@ class _GroupsTab extends ConsumerWidget {
           children: [
             const Icon(Icons.error_outline, size: 48, color: AppColors.error),
             const SizedBox(height: 16),
-            Text('${l10n.social_loadGroupsFailed}: $error'),
+            Text(l10n.social_loadGroupsFailed),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => ref.invalidate(groupsProvider),
@@ -589,7 +590,7 @@ class _SharedTab extends ConsumerWidget {
           children: [
             const Icon(Icons.error_outline, size: 48, color: AppColors.error),
             const SizedBox(height: 16),
-            Text('${l10n.social_loadSharedFailed}: $error'),
+            Text(l10n.social_loadSharedFailed),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => ref.invalidate(sharedChartsProvider),

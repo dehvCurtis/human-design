@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../domain/quiz_providers.dart';
 import 'widgets/question_card.dart';
 import 'widgets/quiz_progress_bar.dart';
@@ -298,7 +299,7 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to complete quiz: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'complete quiz'))),
         );
       }
     }

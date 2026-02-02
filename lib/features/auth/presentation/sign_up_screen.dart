@@ -102,6 +102,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       if (mounted) {
         setState(() {
           _errorMessage = AuthErrorMessages.fromException(e);
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
           _isGoogleLoading = false;
         });
       }
@@ -120,6 +125,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       if (mounted) {
         setState(() {
           _errorMessage = AuthErrorMessages.fromException(e);
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
           _isAppleLoading = false;
         });
       }
@@ -167,13 +177,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  'Check Your Email',
+                  l10n.auth_checkYourEmail,
                   style: theme.textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'We\'ve sent a confirmation link to:\n${_emailController.text.trim()}',
+                  '${l10n.auth_confirmationLinkSent}\n${_emailController.text.trim()}',
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: isDark
                         ? AppColors.textSecondaryDark
@@ -183,7 +193,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Please click the link in the email to activate your account.',
+                  l10n.auth_clickLinkToActivate,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: isDark
                         ? AppColors.textSecondaryDark
@@ -194,12 +204,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 const SizedBox(height: 32),
                 PrimaryButton(
                   onPressed: () => context.go(AppRoutes.signIn),
-                  label: 'Go to Sign In',
+                  label: l10n.auth_goToSignIn,
                 ),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () => context.go(AppRoutes.home),
-                  child: const Text('Return to Home'),
+                  child: Text(l10n.auth_returnToHome),
                 ),
               ],
             ),

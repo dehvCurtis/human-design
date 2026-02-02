@@ -3730,6 +3730,36 @@ abstract class AppLocalizations {
   /// **'Check your email for the confirmation link'**
   String get auth_checkEmail;
 
+  /// No description provided for @auth_checkYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Your Email'**
+  String get auth_checkYourEmail;
+
+  /// No description provided for @auth_confirmationLinkSent.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ve sent a confirmation link to:'**
+  String get auth_confirmationLinkSent;
+
+  /// No description provided for @auth_clickLinkToActivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please click the link in the email to activate your account.'**
+  String get auth_clickLinkToActivate;
+
+  /// No description provided for @auth_goToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Sign In'**
+  String get auth_goToSignIn;
+
+  /// No description provided for @auth_returnToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to Home'**
+  String get auth_returnToHome;
+
   /// No description provided for @hashtags_explore.
   ///
   /// In en, this message translates to:

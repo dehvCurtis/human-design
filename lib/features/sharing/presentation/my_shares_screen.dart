@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/models/sharing.dart';
 import '../domain/sharing_providers.dart';
@@ -23,7 +25,13 @@ class MySharesScreen extends ConsumerWidget {
         title: Text(l10n.share_myShares),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
         actions: [
           IconButton(
@@ -145,7 +153,7 @@ class MySharesScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 48, color: AppColors.error),
               const SizedBox(height: 16),
-              Text('${l10n.common_error}: $error'),
+              Text(ErrorHandler.getUserMessage(error)),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => ref.invalidate(myShareLinksProvider),
@@ -248,7 +256,7 @@ class MySharesScreen extends ConsumerWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${l10n.common_error}: $e'),
+            content: Text(ErrorHandler.getUserMessage(e)),
             backgroundColor: AppColors.error,
           ),
         );
@@ -295,7 +303,7 @@ class MySharesScreen extends ConsumerWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${l10n.common_error}: $e'),
+            content: Text(ErrorHandler.getUserMessage(e)),
             backgroundColor: AppColors.error,
           ),
         );

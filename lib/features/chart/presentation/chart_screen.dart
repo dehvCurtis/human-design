@@ -184,7 +184,7 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
             children: [
               const Icon(Icons.error_outline, size: 48, color: AppColors.error),
               const SizedBox(height: 16),
-              Text('${l10n.error_chartCalculation}: $error'),
+              Text(l10n.error_chartCalculation),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {

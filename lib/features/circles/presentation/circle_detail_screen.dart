@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/compatibility_circle_providers.dart';
 import '../domain/models/compatibility_circle.dart';
@@ -22,7 +23,7 @@ class CircleDetailScreen extends ConsumerWidget {
       ),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
-        body: Center(child: Text('Error: $e')),
+        body: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (circle) {
         if (circle == null) {
@@ -199,7 +200,7 @@ class _MembersTab extends ConsumerWidget {
 
     return membersAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (members) {
         if (members.isEmpty) {
           return Center(
@@ -326,12 +327,12 @@ class _AnalysisTab extends ConsumerWidget {
 
     return analysisAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (analysis) {
         if (analysis == null) {
           return membersAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, _) => Center(child: Text('Error: $e')),
+            error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
             data: (members) {
               final canAnalyze = members.length >= 2;
 
@@ -776,7 +777,7 @@ class _FeedTabState extends ConsumerState<_FeedTab> {
         Expanded(
           child: postsAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, _) => Center(child: Text('Error: $e')),
+            error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
             data: (posts) {
               if (posts.isEmpty) {
                 return Center(

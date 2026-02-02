@@ -1964,6 +1964,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_checkEmail => 'Check your email for the confirmation link';
 
   @override
+  String get auth_checkYourEmail => 'Check Your Email';
+
+  @override
+  String get auth_confirmationLinkSent => 'We\'ve sent a confirmation link to:';
+
+  @override
+  String get auth_clickLinkToActivate =>
+      'Please click the link in the email to activate your account.';
+
+  @override
+  String get auth_goToSignIn => 'Go to Sign In';
+
+  @override
+  String get auth_returnToHome => 'Return to Home';
+
+  @override
   String get hashtags_explore => 'Explore Hashtags';
 
   @override

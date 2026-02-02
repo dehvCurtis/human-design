@@ -9,6 +9,9 @@ class MessagingRepository {
 
   final SupabaseClient _client;
 
+  /// Maximum allowed message content length
+  static const int maxMessageLength = 2000;
+
   String? get _currentUserId => _client.auth.currentUser?.id;
 
   // ==================== Conversations ====================
@@ -148,6 +151,8 @@ class MessagingRepository {
   }
 
   /// Send a message
+  ///
+  /// Enforces content length limits to prevent abuse.
   Future<DirectMessage> sendMessage({
     required String conversationId,
     required String content,
@@ -157,6 +162,11 @@ class MessagingRepository {
   }) async {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
+
+    // Enforce content length limit
+    if (content.length > maxMessageLength) {
+      throw ArgumentError('Message exceeds $maxMessageLength characters');
+    }
 
     final response = await _client.from('direct_messages').insert({
       'conversation_id': conversationId,

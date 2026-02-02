@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/group_challenge_providers.dart';
 import '../domain/models/group_challenge.dart';
@@ -23,7 +24,7 @@ class TeamDetailScreen extends ConsumerWidget {
       ),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
-        body: Center(child: Text('Error: $e')),
+        body: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (team) {
         if (team == null) {
@@ -90,7 +91,7 @@ class TeamDetailScreen extends ConsumerWidget {
                       ),
                       isMemberAsync.when(
                         loading: () => const SizedBox.shrink(),
-                        error: (_, __) => const SizedBox.shrink(),
+                        error: (_, _) => const SizedBox.shrink(),
                         data: (isMember) => _StatItem(
                           icon: isMember ? Icons.check_circle : Icons.add_circle_outline,
                           value: isMember ? l10n.groupChallenges_joined : l10n.groupChallenges_join,
@@ -148,7 +149,7 @@ class TeamDetailScreen extends ConsumerWidget {
               // Leave team button (if member)
               isMemberAsync.when(
                 loading: () => const SliverToBoxAdapter(child: SizedBox.shrink()),
-                error: (_, __) => const SliverToBoxAdapter(child: SizedBox.shrink()),
+                error: (_, _) => const SliverToBoxAdapter(child: SizedBox.shrink()),
                 data: (isMember) {
                   if (!isMember) return const SliverToBoxAdapter(child: SizedBox.shrink());
 
@@ -295,7 +296,7 @@ class _TeamMembersList extends ConsumerWidget {
         child: Center(child: CircularProgressIndicator()),
       ),
       error: (e, _) => SliverToBoxAdapter(
-        child: Center(child: Text('Error: $e')),
+        child: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (members) {
         if (members.isEmpty) {

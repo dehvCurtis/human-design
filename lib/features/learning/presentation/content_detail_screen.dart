@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -105,7 +106,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                       ? Image.network(
                           content.mediaUrl!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => _buildDefaultHeader(content, theme),
+                          errorBuilder: (_, _, _) => _buildDefaultHeader(content, theme),
                         )
                       : _buildDefaultHeader(content, theme),
                 ),
@@ -377,7 +378,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
             children: [
               Icon(Icons.error_outline, size: 64, color: theme.colorScheme.error),
               const SizedBox(height: 16),
-              Text('Error: $e'),
+              Text(ErrorHandler.getUserMessage(e)),
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () => ref.invalidate(contentDetailProvider(widget.contentId)),
@@ -428,7 +429,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
           );
         },
         loading: () => const SizedBox.shrink(),
-        error: (_, __) => const SizedBox.shrink(),
+        error: (_, _) => const SizedBox.shrink(),
       ),
     );
   }

@@ -1,5 +1,5 @@
-/// Models for Learning Paths feature
-/// Curated content journeys with progress tracking
+// Models for Learning Paths feature
+// Curated content journeys with progress tracking
 
 /// Represents a learning path
 class LearningPath {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/group_challenge_providers.dart';
 import '../domain/models/group_challenge.dart';
@@ -117,7 +118,7 @@ class _MyTeamsTab extends ConsumerWidget {
 
     return teamsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (teams) {
         if (teams.isEmpty) {
           return Center(
@@ -258,7 +259,7 @@ class _ChallengesTab extends ConsumerWidget {
 
     return challengesAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('Error: $e')),
+      error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
       data: (challenges) {
         if (challenges.isEmpty) {
           return Center(
@@ -477,7 +478,7 @@ class _LeaderboardTabState extends ConsumerState<_LeaderboardTab> {
         Expanded(
           child: leaderboardAsync.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, _) => Center(child: Text('Error: $e')),
+            error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
             data: (entries) {
               if (entries.isEmpty) {
                 return Center(

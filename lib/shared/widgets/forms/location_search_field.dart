@@ -495,7 +495,7 @@ class LocationSearchField extends StatefulWidget {
     this.errorText,
     this.helperText,
     this.searchProvider,
-    this.debounceMs = 300,
+    this.debounceMs = 500,
   });
 
   final LocationResult? value;
@@ -520,6 +520,8 @@ class _LocationSearchFieldState extends State<LocationSearchField> {
   List<LocationResult> _suggestions = [];
   bool _isLoading = false;
   bool _showSuggestions = false;
+  bool _hasSearched = false;
+  String? _searchError;
   Timer? _debounceTimer;
 
   @override
@@ -571,26 +573,38 @@ class _LocationSearchFieldState extends State<LocationSearchField> {
       setState(() {
         _suggestions = [];
         _showSuggestions = false;
+        _hasSearched = false;
+        _searchError = null;
       });
       return;
     }
 
-    setState(() => _isLoading = true);
+    setState(() {
+      _isLoading = true;
+      _searchError = null;
+    });
 
     try {
       final results = await _searchProvider.search(query);
       if (mounted) {
         setState(() {
           _suggestions = results;
-          _showSuggestions = results.isNotEmpty;
+          _showSuggestions = true;
+          _hasSearched = true;
           _isLoading = false;
+          _searchError = null;
         });
       }
     } catch (e) {
       if (mounted) {
         setState(() {
           _suggestions = [];
+          _showSuggestions = true;
+          _hasSearched = true;
           _isLoading = false;
+          _searchError = e.toString().contains('Network')
+              ? 'Network error. Check your connection.'
+              : 'Search failed. Please try again.';
         });
       }
     }
@@ -671,28 +685,80 @@ class _LocationSearchFieldState extends State<LocationSearchField> {
                 ),
               ],
             ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              itemCount: _suggestions.length,
-              itemBuilder: (context, index) {
-                final location = _suggestions[index];
-                return ListTile(
-                  dense: true,
-                  leading: const Icon(Icons.location_city, size: 20),
-                  title: Text(location.name),
-                  subtitle: Text(
-                    location.country ?? '',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
+            child: _searchError != null
+                ? Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.error_outline,
+                          size: 20,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            _searchError!,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  onTap: () => _selectLocation(location),
-                );
-              },
-            ),
+                  )
+                : _suggestions.isEmpty && _hasSearched
+                    ? Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              size: 20,
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                'No cities found. Try a different search.',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: isDark
+                                      ? AppColors.textSecondaryDark
+                                      : AppColors.textSecondaryLight,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        itemCount: _suggestions.length,
+                        itemBuilder: (context, index) {
+                          final location = _suggestions[index];
+                          return ListTile(
+                            dense: true,
+                            leading: const Icon(Icons.location_city, size: 20),
+                            title: Text(location.name),
+                            subtitle: Text(
+                              location.country ?? '',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondaryLight,
+                              ),
+                            ),
+                            onTap: () => _selectLocation(location),
+                          );
+                        },
+                      ),
           ),
         ],
       ],
@@ -710,6 +776,7 @@ class BirthLocationField extends StatelessWidget {
     this.hint = 'Search for your birth city',
     this.enabled = true,
     this.errorText,
+    this.searchProvider,
   });
 
   final LocationResult? value;
@@ -718,6 +785,7 @@ class BirthLocationField extends StatelessWidget {
   final String hint;
   final bool enabled;
   final String? errorText;
+  final LocationSearchProvider? searchProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -733,6 +801,7 @@ class BirthLocationField extends StatelessWidget {
           enabled: enabled,
           errorText: errorText,
           helperText: 'Your timezone will be detected automatically',
+          searchProvider: searchProvider,
         ),
         if (value != null && value!.timezone != null) ...[
           const SizedBox(height: 8),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/models/transit_event.dart';
 import '../domain/transit_event_providers.dart';
@@ -329,7 +330,7 @@ class _TransitEventCard extends ConsumerWidget {
                           height: 24,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         ),
-                        error: (_, __) => const SizedBox.shrink(),
+                        error: (_, _) => const SizedBox.shrink(),
                       ),
                     ],
                   ),
@@ -543,7 +544,7 @@ class _ErrorState extends StatelessWidget {
         children: [
           const Icon(Icons.error_outline, size: 48, color: Colors.red),
           const SizedBox(height: 16),
-          Text('Error: $error'),
+          Text(ErrorHandler.getUserMessage(error)),
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: onRetry,

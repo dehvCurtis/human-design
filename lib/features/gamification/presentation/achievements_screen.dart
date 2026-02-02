@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../domain/gamification_providers.dart';
 import '../domain/models/gamification.dart';
 
@@ -25,7 +26,7 @@ class AchievementsScreen extends ConsumerWidget {
                   ? _StatsHeader(points: points)
                   : const SizedBox.shrink(),
               loading: () => const _LoadingHeader(),
-              error: (_, __) => const SizedBox.shrink(),
+              error: (_, _) => const SizedBox.shrink(),
             ),
           ),
 
@@ -48,7 +49,7 @@ class AchievementsScreen extends ConsumerWidget {
               child: Center(child: CircularProgressIndicator()),
             ),
             error: (e, _) => SliverToBoxAdapter(
-              child: Center(child: Text('Error: $e')),
+              child: Center(child: Text(ErrorHandler.getUserMessage(e))),
             ),
           ),
 

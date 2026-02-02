@@ -1,4 +1,4 @@
-/// Models for user discovery and matching
+// Models for user discovery and matching
 
 /// Chart visibility levels for discovered users
 enum DiscoveredUserChartVisibility {

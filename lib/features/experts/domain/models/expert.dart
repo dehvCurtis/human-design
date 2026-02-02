@@ -1,5 +1,5 @@
-/// Models for the Verified Expert System
-/// Allows HD teachers and practitioners to be verified and highlighted
+// Models for the Verified Expert System
+// Allows HD teachers and practitioners to be verified and highlighted
 
 /// Represents a verified expert profile
 class Expert {

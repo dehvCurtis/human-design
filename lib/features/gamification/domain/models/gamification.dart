@@ -1,4 +1,4 @@
-/// Models for the Gamification system (points, badges, challenges, leaderboards)
+// Models for the Gamification system (points, badges, challenges, leaderboards)
 
 // ==================== Points ====================
 

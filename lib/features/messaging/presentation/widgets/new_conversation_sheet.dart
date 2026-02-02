@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
+import '../../../../core/utils/error_handler.dart';
 import '../../../social/domain/social_providers.dart';
 import '../../../social/data/social_repository.dart';
 import '../../domain/messaging_providers.dart';
@@ -151,7 +152,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                   },
                   loading: () => const Center(child: CircularProgressIndicator()),
                   error: (e, _) => Center(
-                    child: Text('Error loading friends: $e'),
+                    child: Text(ErrorHandler.getUserMessage(e, context: 'load friends')),
                   ),
                 ),
               ),
@@ -180,7 +181,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to start conversation: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'start conversation')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

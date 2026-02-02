@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/router/app_router.dart';
+import '../../../core/utils/error_handler.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -35,7 +37,13 @@ class _LiveSessionsScreenState extends ConsumerState<LiveSessionsScreen>
         title: const Text('Live Sessions'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
         bottom: TabBar(
           controller: _tabController,
@@ -146,7 +154,7 @@ class _UpcomingSessionsTab extends ConsumerWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'session')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -266,7 +274,7 @@ class _MySessionsTab extends ConsumerWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'session')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/group_challenge_providers.dart';
 import '../domain/models/group_challenge.dart';
@@ -24,7 +25,7 @@ class GroupChallengeDetailScreen extends ConsumerWidget {
       ),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
-        body: Center(child: Text('Error: $e')),
+        body: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (challenge) {
         if (challenge == null) {
@@ -54,7 +55,7 @@ class GroupChallengeDetailScreen extends ConsumerWidget {
                 // Enroll team section
                 myTeamsAsync.when(
                   loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (e, _) => Text('Error: $e'),
+                  error: (e, _) => Text(ErrorHandler.getUserMessage(e)),
                   data: (teams) {
                     if (teams.isEmpty) {
                       return _NoTeamsCard();
@@ -406,7 +407,7 @@ class _TeamEnrollTile extends ConsumerWidget {
           height: 24,
           child: CircularProgressIndicator(strokeWidth: 2),
         ),
-        error: (_, __) => const Icon(Icons.error_outline),
+        error: (_, _) => const Icon(Icons.error_outline),
         data: (progress) {
           if (progress != null) {
             return Chip(
@@ -424,7 +425,7 @@ class _TeamEnrollTile extends ConsumerWidget {
     );
   }
 
-  void _enrollTeam(BuildContext context, WidgetRef ref) async {
+  Future<void> _enrollTeam(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context)!;
     final notifier = ref.read(groupChallengeNotifierProvider.notifier);
     final success = await notifier.enrollTeamInChallenge(team.id, challengeId);
@@ -449,7 +450,7 @@ class _ChallengeLeaderboard extends ConsumerWidget {
 
     return leaderboardAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Text('Error: $e'),
+      error: (e, _) => Text(ErrorHandler.getUserMessage(e)),
       data: (entries) {
         if (entries.isEmpty) {
           return Card(

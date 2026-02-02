@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/error_handler.dart';
 import '../../../social/data/social_repository.dart';
 import '../../../social/domain/social_providers.dart';
 
@@ -88,7 +89,7 @@ class GroupSelector extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, color: AppColors.error),
               const SizedBox(height: 8),
-              Text('Failed to load groups: $error'),
+              Text(ErrorHandler.getUserMessage(error, context: 'load groups')),
             ],
           ),
         ),

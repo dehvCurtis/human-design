@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../domain/expert_providers.dart';
 import '../domain/models/expert.dart';
@@ -24,7 +25,7 @@ class ExpertDetailScreen extends ConsumerWidget {
       ),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
-        body: Center(child: Text('Error: $e')),
+        body: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (expert) {
         if (expert == null) {
@@ -52,7 +53,7 @@ class ExpertDetailScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(16),
                   child: isFollowingAsync.when(
                     loading: () => const Center(child: CircularProgressIndicator()),
-                    error: (_, __) => const SizedBox.shrink(),
+                    error: (_, _) => const SizedBox.shrink(),
                     data: (isFollowing) => Row(
                       children: [
                         Expanded(
@@ -468,7 +469,7 @@ class _ReviewsList extends ConsumerWidget {
         child: Center(child: CircularProgressIndicator()),
       ),
       error: (e, _) => SliverToBoxAdapter(
-        child: Center(child: Text('Error: $e')),
+        child: Center(child: Text(ErrorHandler.getUserMessage(e))),
       ),
       data: (reviews) {
         if (reviews.isEmpty) {

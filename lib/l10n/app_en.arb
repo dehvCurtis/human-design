@@ -865,6 +865,11 @@
   "auth_resendConfirmation": "Resend Confirmation Email",
   "auth_confirmationSent": "Confirmation email sent",
   "auth_checkEmail": "Check your email for the confirmation link",
+  "auth_checkYourEmail": "Check Your Email",
+  "auth_confirmationLinkSent": "We've sent a confirmation link to:",
+  "auth_clickLinkToActivate": "Please click the link in the email to activate your account.",
+  "auth_goToSignIn": "Go to Sign In",
+  "auth_returnToHome": "Return to Home",
 
   "hashtags_explore": "Explore Hashtags",
   "hashtags_trending": "Trending",

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/error_handler.dart';
 import '../../domain/social_providers.dart';
 
 /// Dialog for sharing a chart with friends or groups
@@ -84,7 +85,7 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog>
       if (mounted) {
         setState(() {
           _isSharing = false;
-          _errorMessage = 'Failed to share: ${e.toString()}';
+          _errorMessage = ErrorHandler.getUserMessage(e, context: 'share chart');
         });
       }
     }
@@ -119,7 +120,7 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog>
       if (mounted) {
         setState(() {
           _isSharing = false;
-          _errorMessage = 'Failed to share: ${e.toString()}';
+          _errorMessage = ErrorHandler.getUserMessage(e, context: 'share chart');
         });
       }
     }
@@ -340,7 +341,7 @@ class _FriendsTab extends ConsumerWidget {
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) => Center(
-        child: Text('Failed to load friends: $error'),
+        child: Text(ErrorHandler.getUserMessage(error, context: 'load friends')),
       ),
     );
   }
@@ -423,7 +424,7 @@ class _GroupsTab extends ConsumerWidget {
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) => Center(
-        child: Text('Failed to load groups: $error'),
+        child: Text(ErrorHandler.getUserMessage(error, context: 'load groups')),
       ),
     );
   }

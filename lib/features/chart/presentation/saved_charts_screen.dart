@@ -26,7 +26,13 @@ class SavedChartsScreen extends ConsumerWidget {
         title: Text(l10n.chart_savedCharts),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
         ),
       ),
       body: chartsAsync.when(
@@ -64,7 +70,7 @@ class SavedChartsScreen extends ConsumerWidget {
             children: [
               const Icon(Icons.error_outline, size: 48, color: AppColors.error),
               const SizedBox(height: 16),
-              Text('${l10n.chart_loadFailed}: $error'),
+              Text(l10n.chart_loadFailed),
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => ref.invalidate(userSavedChartsProvider),

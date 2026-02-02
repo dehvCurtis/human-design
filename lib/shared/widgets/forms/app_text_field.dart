@@ -239,8 +239,8 @@ class PasswordTextField extends StatelessWidget {
     if (value == null || value.isEmpty) {
       return 'Password is required';
     }
-    if (value.length < 8) {
-      return 'Password must be at least 8 characters';
+    if (value.length < 12) {
+      return 'Password must be at least 12 characters';
     }
     if (!value.contains(RegExp(r'[A-Z]'))) {
       return 'Password must contain an uppercase letter';
@@ -250,6 +250,9 @@ class PasswordTextField extends StatelessWidget {
     }
     if (!value.contains(RegExp(r'[0-9]'))) {
       return 'Password must contain a number';
+    }
+    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return 'Password must contain a special character';
     }
     return null;
   }

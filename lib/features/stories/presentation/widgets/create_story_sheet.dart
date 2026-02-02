@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/error_handler.dart';
 import '../../domain/stories_providers.dart';
 import '../../domain/models/story.dart';
 
@@ -200,7 +201,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                           itemCount: _backgroundColors.length,
                           itemBuilder: (context, index) {
                             final color = _backgroundColors[index];
-                            final isSelected = color.value == _backgroundColor.value;
+                            final isSelected = color == _backgroundColor;
 
                             return GestureDetector(
                               onTap: () {
@@ -326,8 +327,8 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
       await ref.read(storiesNotifierProvider.notifier).createStory(
             content: content.isNotEmpty ? content : null,
             backgroundColor:
-                '#${_backgroundColor.value.toRadixString(16).substring(2)}',
-            textColor: '#${_textColor.value.toRadixString(16).substring(2)}',
+                '#${_backgroundColor.toARGB32().toRadixString(16).substring(2)}',
+            textColor: '#${_textColor.toARGB32().toRadixString(16).substring(2)}',
             transitGate: _selectedTransitGate,
             affirmationText: _affirmationText,
             visibility: _visibility,
@@ -343,7 +344,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to create story: $e'),
+            content: Text(ErrorHandler.getUserMessage(e, context: 'create story')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

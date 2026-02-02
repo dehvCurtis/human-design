@@ -9,6 +9,12 @@ class FeedRepository {
 
   final SupabaseClient _client;
 
+  /// Maximum allowed post content length
+  static const int maxPostLength = 5000;
+
+  /// Maximum allowed comment length
+  static const int maxCommentLength = 2000;
+
   String? get _currentUserId => _client.auth.currentUser?.id;
 
   // ==================== Posts ====================
@@ -112,6 +118,8 @@ class FeedRepository {
   }
 
   /// Create a new post
+  ///
+  /// Enforces content length limits to prevent abuse.
   Future<Post> createPost({
     required String content,
     required PostType postType,
@@ -125,6 +133,11 @@ class FeedRepository {
   }) async {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
+
+    // Enforce content length limit
+    if (content.length > maxPostLength) {
+      throw ArgumentError('Post content exceeds $maxPostLength characters');
+    }
 
     final response = await _client.from('posts').insert({
       'user_id': userId,
@@ -278,6 +291,8 @@ class FeedRepository {
   }
 
   /// Add a comment to a post
+  ///
+  /// Enforces content length limits to prevent abuse.
   Future<PostComment> addComment({
     required String postId,
     required String content,
@@ -285,6 +300,11 @@ class FeedRepository {
   }) async {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
+
+    // Enforce content length limit
+    if (content.length > maxCommentLength) {
+      throw ArgumentError('Comment exceeds $maxCommentLength characters');
+    }
 
     final response = await _client.from('post_comments').insert({
       'post_id': postId,

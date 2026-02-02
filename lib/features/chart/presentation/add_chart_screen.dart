@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../home/domain/home_providers.dart';
+import '../../location/domain/location_providers.dart';
 import '../domain/chart_providers.dart';
 import '../domain/models/human_design_chart.dart';
 
@@ -70,6 +72,15 @@ class _AddChartScreenState extends ConsumerState<AddChartScreen> {
         longitude: _birthLocation!.longitude,
       );
 
+      // Validate timezone is available
+      final timezone = _birthLocation!.timezone;
+      if (timezone == null || timezone.isEmpty) {
+        throw Exception(
+          'Unable to determine timezone for this location. '
+          'Please try selecting a different city or enter the timezone manually.',
+        );
+      }
+
       // Get current user ID - must be authenticated to save charts
       final userId = ref.read(supabaseClientProvider).auth.currentUser?.id;
       if (userId == null || userId.isEmpty) {
@@ -81,7 +92,7 @@ class _AddChartScreenState extends ConsumerState<AddChartScreen> {
         name: _nameController.text.trim(),
         birthDateTime: birthDateTime,
         birthLocation: birthLocation,
-        timezone: _birthLocation!.timezone ?? 'UTC',
+        timezone: timezone,
       );
 
       // Save the chart
@@ -104,7 +115,7 @@ class _AddChartScreenState extends ConsumerState<AddChartScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = ErrorHandler.getUserMessage(e, context: 'save chart');
           _isLoading = false;
         });
       }
@@ -299,6 +310,7 @@ class _AddChartScreenState extends ConsumerState<AddChartScreen> {
                 });
               },
               enabled: !_isLoading,
+              searchProvider: ref.watch(locationSearchProviderProvider),
             ),
             const SizedBox(height: 32),
 

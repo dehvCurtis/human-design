@@ -1,4 +1,4 @@
-/// Models for the friend activity feed feature
+// Models for the friend activity feed feature
 
 /// Represents a user activity that can appear in the friend activity feed
 class Activity {

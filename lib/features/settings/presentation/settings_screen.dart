@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../auth/domain/auth_providers.dart';
 import '../../home/domain/home_providers.dart';
@@ -316,7 +317,6 @@ class SettingsScreen extends ConsumerWidget {
 
   Future<void> _exportUserData(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context)!;
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
 
     // Show loading dialog
     showDialog(
@@ -348,14 +348,16 @@ class SettingsScreen extends ConsumerWidget {
       }
 
       // Share file
-      await Share.shareXFiles(
-        [XFile(file.path)],
-        subject: l10n.settings_exportDataSubject,
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(file.path)],
+          subject: l10n.settings_exportDataSubject,
+        ),
       );
     } catch (e) {
       if (context.mounted) {
         Navigator.pop(context); // Close loading dialog
-        scaffoldMessenger.showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.settings_exportDataFailed)),
         );
       }
@@ -688,7 +690,7 @@ class _ChartVisibilityTile extends ConsumerWidget {
           child: CircularProgressIndicator(strokeWidth: 2),
         ),
       ),
-      error: (_, __) => const SizedBox.shrink(),
+      error: (_, _) => const SizedBox.shrink(),
     );
   }
 
@@ -770,7 +772,7 @@ class _ChartVisibilityTile extends ConsumerWidget {
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to update visibility: $e')),
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'update visibility'))),
         );
       }
     }

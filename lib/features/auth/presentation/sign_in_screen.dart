@@ -78,24 +78,27 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final email = _emailController.text.trim();
     if (email.isEmpty) return;
 
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
     final l10n = AppLocalizations.of(context)!;
 
     try {
       await ref.read(authNotifierProvider.notifier).resendConfirmationEmail(email);
-      scaffoldMessenger.showSnackBar(
-        SnackBar(
-          content: Text(l10n.auth_confirmationSent),
-          backgroundColor: AppColors.success,
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.auth_confirmationSent),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
     } catch (e) {
-      scaffoldMessenger.showSnackBar(
-        SnackBar(
-          content: Text(AuthErrorMessages.fromException(e)),
-          backgroundColor: AppColors.error,
-        ),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AuthErrorMessages.fromException(e)),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
     }
   }
 
@@ -110,7 +113,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = AuthErrorMessages.fromException(e);
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
           _isGoogleLoading = false;
         });
       }
@@ -128,7 +136,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = e.toString();
+          _errorMessage = AuthErrorMessages.fromException(e);
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
           _isAppleLoading = false;
         });
       }
@@ -166,13 +179,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           ElevatedButton(
             onPressed: () async {
               if (emailController.text.isNotEmpty) {
-                final scaffoldMessenger = ScaffoldMessenger.of(context);
                 await ref
                     .read(authNotifierProvider.notifier)
                     .sendPasswordReset(emailController.text.trim());
                 if (dialogContext.mounted) {
                   Navigator.pop(dialogContext);
-                  scaffoldMessenger.showSnackBar(
+                  ScaffoldMessenger.of(dialogContext).showSnackBar(
                     SnackBar(
                       content: Text(l10n.auth_resetEmailSent),
                     ),

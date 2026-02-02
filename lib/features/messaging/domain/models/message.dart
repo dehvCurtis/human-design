@@ -1,4 +1,4 @@
-/// Models for Direct Messaging feature
+// Models for Direct Messaging feature
 
 enum MessageType {
   text,

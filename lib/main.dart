@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/config/app_config.dart';
@@ -43,6 +44,9 @@ void main() async {
   // Initialize Supabase
   await initializeSupabase();
 
+  // Validate and refresh session if needed
+  await _validateSession();
+
   // Initialize Swiss Ephemeris
   await EphemerisService.instance.initialize();
 
@@ -54,6 +58,32 @@ void main() async {
       child: const HumanDesignApp(),
     ),
   );
+}
+
+/// Validate current session and refresh if expiring soon
+///
+/// Proactively refreshes tokens within 5 minutes of expiry to prevent
+/// auth errors during app usage.
+Future<void> _validateSession() async {
+  try {
+    final session = Supabase.instance.client.auth.currentSession;
+    if (session == null) return;
+
+    final expiresAt = session.expiresAt;
+    if (expiresAt == null) return;
+
+    final expiryTime = DateTime.fromMillisecondsSinceEpoch(expiresAt * 1000);
+    final refreshThreshold = DateTime.now().add(const Duration(minutes: 5));
+
+    // If session expires within 5 minutes, refresh proactively
+    if (expiryTime.isBefore(refreshThreshold)) {
+      debugPrint('Session expiring soon, refreshing...');
+      await Supabase.instance.client.auth.refreshSession();
+    }
+  } catch (e) {
+    // Log but don't fail app startup - user will be redirected to login if needed
+    debugPrint('Session validation failed: $e');
+  }
 }
 
 /// The main application widget

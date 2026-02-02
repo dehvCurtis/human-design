@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../feed/presentation/widgets/post_card.dart';
 import '../../feed/domain/feed_providers.dart';
@@ -63,7 +64,7 @@ class HashtagFeedScreen extends ConsumerWidget {
               return const SizedBox.shrink();
             },
             loading: () => const SizedBox.shrink(),
-            error: (_, __) => const SizedBox.shrink(),
+            error: (_, _) => const SizedBox.shrink(),
           ),
         ],
       ),
@@ -76,7 +77,7 @@ class HashtagFeedScreen extends ConsumerWidget {
               return _HashtagHeader(hashtag: data);
             },
             loading: () => const LinearProgressIndicator(),
-            error: (_, __) => const SizedBox.shrink(),
+            error: (_, _) => const SizedBox.shrink(),
           ),
 
           // Posts
@@ -150,7 +151,7 @@ class HashtagFeedScreen extends ConsumerWidget {
                   children: [
                     const Icon(Icons.error_outline, size: 48, color: Colors.red),
                     const SizedBox(height: 16),
-                    Text('Error: $error'),
+                    Text(ErrorHandler.getUserMessage(error)),
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () {

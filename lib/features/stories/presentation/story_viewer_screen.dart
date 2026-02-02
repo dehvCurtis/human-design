@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/utils/error_handler.dart';
 import '../domain/stories_providers.dart';
 import '../domain/models/story.dart';
 
@@ -402,7 +403,7 @@ class _StoryViewerScreenState extends ConsumerState<StoryViewerScreen>
                   );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (e, _) => Center(child: Text('Error: $e')),
+                error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
               );
             },
           );
@@ -431,7 +432,7 @@ class _StoryContent extends StatelessWidget {
       return Image.network(
         story.mediaUrl!,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => _buildTextContent(context),
+        errorBuilder: (_, _, _) => _buildTextContent(context),
       );
     }
 
