@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.6] - 2026-02-02
+
+### Fixed
+
+#### Integration Channel Backbone Rendering
+- **Duplicate Lines Fixed** - Integration channels (10-20, 10-34, 10-57, 20-34, 20-57, 34-57) no longer show duplicate/bent lines when multiple channels share the same backbone segments
+- **Straight Backbone** - The 20-57 diagonal backbone now renders as a clean straight line from Gate 20 (Throat) to Gate 57 (Spleen)
+- **Parallel Branch Connections** - Gate 10→J1 and Gate 34→J2 branches now connect at parallel angles for visual symmetry
+- **Hanging Gates Fix** - Gates belonging to multiple channels now draw only one half-line instead of overlapping lines
+
+### Technical Details
+
+The integration channels form a complex network where Gates 10, 20, 34, and 57 connect through shared junction points:
+- **Backbone**: Gate 20 (Throat) → J1 (136, 274) → J2 (102, 337) → Gate 57 (Spleen)
+- **Branches**: Gate 10 connects at J1, Gate 34 connects at J2
+
+**Problem solved**: Previously each channel was drawn independently, causing overlapping segments to appear doubled or bent. Now shared segments are drawn once with merged color information.
+
+Files modified:
+- `bodygraph_painter.dart` - Added `_drawIntegrationChannels()` method with segment-based rendering, fixed hanging gates to use first channel only
+- `bodygraph_layout_standard.dart` - Updated junction coordinates for straight backbone and parallel branches
+
+---
+
 ## [0.2.5] - 2026-01-30
 
 ### Added
