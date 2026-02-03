@@ -311,38 +311,42 @@ class StandardBodygraphLayout extends BodygraphLayout {
     ],
 
     // Integration channels (10-20-34-57)
-    // 20-57 is the diagonal backbone from Throat to Spleen
-    // Gate 10 connects at junction J1 (140, 265) - upper part of diagonal
-    // Gate 34 connects at junction J2 (105, 330) - lower part of diagonal
+    // 20-57 is the diagonal backbone from Throat to Spleen (straight line)
+    // J1 (136, 274) and J2 (102, 337) are on the line from Gate 20 to Gate 57
+    // Gate 10→J1 is parallel to Gate 34→J2
     '10-20': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(140, 265),  // Junction J1 (where 10 meets the diagonal)
+      Offset(136, 274),  // Junction J1 (on 20-57 line, parallel to 34-J2)
       Offset(170, 210),  // Gate 20 on Throat (left edge)
-    ],
-    '10-34': [
-      Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(140, 265),  // Junction J1
-      Offset(105, 330),  // Junction J2 (where 34 meets the diagonal)
-      Offset(170, 400),  // Gate 34 on Sacral (left edge)
     ],
     '10-57': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(140, 265),  // Junction J1
+      Offset(136, 274),  // Junction J1
+      Offset(102, 337),  // Junction J2
       Offset(80, 379),   // Gate 57 on Spleen
     ],
     '20-34': [
       Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(105, 330),  // Junction J2 (where 34 meets the diagonal)
-      Offset(170, 400),  // Gate 34 on Sacral (left edge)
+      Offset(136, 274),  // Junction J1
+      Offset(102, 337),  // Junction J2
+      Offset(170, 420),  // Gate 34 on Sacral (left edge)
     ],
     '20-57': [
       Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(80, 379),   // Gate 57 on Spleen (direct diagonal)
+      Offset(136, 274),  // Junction J1 (where 10 connects)
+      Offset(102, 337),  // Junction J2 (where 34 connects)
+      Offset(80, 379),   // Gate 57 on Spleen
     ],
     '34-57': [
-      Offset(170, 400),  // Gate 34 on Sacral (left edge)
-      Offset(105, 330),  // Junction J2 (where 34 meets the diagonal)
+      Offset(170, 420),  // Gate 34 on Sacral (left edge)
+      Offset(102, 337),  // Junction J2
       Offset(80, 379),   // Gate 57 on Spleen
+    ],
+    '10-34': [
+      Offset(165, 310),  // Gate 10 on G (left side)
+      Offset(136, 274),  // Junction J1
+      Offset(102, 337),  // Junction J2
+      Offset(170, 420),  // Gate 34 on Sacral (left edge)
     ],
 
     // G to Heart - connection to top-left of Heart

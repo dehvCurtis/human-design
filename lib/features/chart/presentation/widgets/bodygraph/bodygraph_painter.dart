@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/constants/human_design_constants.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../ephemeris/mappers/degree_to_gate_mapper.dart';
 import '../../../domain/models/human_design_chart.dart';
 import 'bodygraph_data.dart';
 
@@ -134,8 +135,9 @@ class BodygraphPainter extends CustomPainter {
     final hangingGates = allActivatedGates.difference(gatesInCompleteChannels);
 
     // For each hanging gate, find its channel and draw a half-line
+    // Only draw ONE half-line per gate (use the first channel found)
     for (final gateNumber in hangingGates) {
-      // Find which channel this gate belongs to
+      // Find which channel this gate belongs to (use first match only)
       for (final channel in channels) {
         int? otherGate;
         if (channel.gate1 == gateNumber) {
@@ -188,6 +190,10 @@ class BodygraphPainter extends CustomPainter {
             paint.color = AppColors.channelUnconscious;
             _drawChannelPath(canvas, halfPath, paint);
           }
+
+          // Break after drawing one half-line for this gate
+          // (prevents multiple overlapping lines for gates in multiple channels)
+          break;
         }
       }
     }
@@ -258,9 +264,26 @@ class BodygraphPainter extends CustomPainter {
     return halfPath;
   }
 
+  /// Integration channel IDs - these share backbone segments
+  static const _integrationChannelIds = {'10-20', '10-34', '10-57', '20-34', '20-57', '34-57'};
+
   /// Draw active channels with appropriate colors
   void _drawActiveChannels(Canvas canvas) {
+    // Separate integration channels from regular channels
+    final regularChannels = <ChannelActivation>[];
+    final integrationChannels = <ChannelActivation>[];
+
     for (final channelActivation in chart.activeChannels) {
+      final id = channelActivation.channel.id;
+      if (_integrationChannelIds.contains(id)) {
+        integrationChannels.add(channelActivation);
+      } else {
+        regularChannels.add(channelActivation);
+      }
+    }
+
+    // Draw regular channels normally
+    for (final channelActivation in regularChannels) {
       final channel = channelActivation.channel;
       final path = _layout.getChannelPath(channel.gate1, channel.gate2);
       if (path.isEmpty) continue;
@@ -281,6 +304,138 @@ class BodygraphPainter extends CustomPainter {
         paint.color = AppColors.channelUnconscious;
         _drawChannelPath(canvas, path, paint);
       }
+    }
+
+    // Draw integration channels with shared backbone handling
+    _drawIntegrationChannels(canvas, integrationChannels);
+  }
+
+  /// Draw integration channels (10-20, 10-34, 10-57, 20-34, 20-57, 34-57) with shared backbone
+  ///
+  /// The integration channels share a backbone path from Gate 20 to Gate 57:
+  /// Gate 20 (170, 210) → J1 (130, 293) → J2 (95, 337) → Gate 57 (80, 379)
+  ///
+  /// Gate 10 connects at J1, Gate 34 connects at J2.
+  /// To avoid duplicate/bent lines, we draw shared segments only once.
+  void _drawIntegrationChannels(Canvas canvas, List<ChannelActivation> channels) {
+    if (channels.isEmpty) return;
+
+    // Define backbone points (20-57 path is the main diagonal - straight line)
+    // These coordinates match the custom channel paths in bodygraph_layout_standard.dart
+    // Gate 10→J1 is parallel to Gate 34→J2
+    const gate20 = Offset(170, 210);
+    const j1 = Offset(136, 274);  // Junction where Gate 10 connects (on 20-57 line)
+    const j2 = Offset(102, 337);  // Junction where Gate 34 connects (on 20-57 line)
+    const gate57 = Offset(80, 379);
+    const gate10 = Offset(165, 310);
+    const gate34 = Offset(170, 420);
+
+    // Determine which gates are involved in active channels
+    final activeChannelIds = channels.map((c) => c.channel.id).toSet();
+
+    // Check which segments need to be drawn
+    final needsGate20ToJ1 = activeChannelIds.any((id) =>
+        ['10-20', '20-34', '20-57'].contains(id));
+    final needsJ1ToJ2 = activeChannelIds.any((id) =>
+        ['10-34', '10-57', '20-34', '20-57', '34-57'].contains(id));
+    final needsJ2ToGate57 = activeChannelIds.any((id) =>
+        ['10-57', '20-57', '34-57'].contains(id));
+    final needsGate10ToJ1 = activeChannelIds.any((id) =>
+        ['10-20', '10-34', '10-57'].contains(id));
+    final needsGate34ToJ2 = activeChannelIds.any((id) =>
+        ['10-34', '20-34', '34-57'].contains(id));
+
+    // Determine colors for each segment based on activations
+    // We need to find the "dominant" color for shared segments
+    final segmentColors = <String, _ChannelColorInfo>{};
+
+    // Helper to merge color info
+    void updateSegmentColor(String segment, ChannelActivation activation) {
+      final existing = segmentColors[segment];
+      if (existing == null) {
+        segmentColors[segment] = _ChannelColorInfo(
+          hasConscious: activation.hasConscious,
+          hasUnconscious: activation.hasUnconscious,
+        );
+      } else {
+        segmentColors[segment] = _ChannelColorInfo(
+          hasConscious: existing.hasConscious || activation.hasConscious,
+          hasUnconscious: existing.hasUnconscious || activation.hasUnconscious,
+        );
+      }
+    }
+
+    // Map each channel to its segments and collect color info
+    for (final activation in channels) {
+      final id = activation.channel.id;
+      switch (id) {
+        case '10-20':
+          updateSegmentColor('gate10-j1', activation);
+          updateSegmentColor('j1-gate20', activation);
+          break;
+        case '10-34':
+          updateSegmentColor('gate10-j1', activation);
+          updateSegmentColor('j1-j2', activation);
+          updateSegmentColor('j2-gate34', activation);
+          break;
+        case '10-57':
+          updateSegmentColor('gate10-j1', activation);
+          updateSegmentColor('j1-j2', activation);
+          updateSegmentColor('j2-gate57', activation);
+          break;
+        case '20-34':
+          updateSegmentColor('j1-gate20', activation);
+          updateSegmentColor('j1-j2', activation);
+          updateSegmentColor('j2-gate34', activation);
+          break;
+        case '20-57':
+          updateSegmentColor('j1-gate20', activation);
+          updateSegmentColor('j1-j2', activation);
+          updateSegmentColor('j2-gate57', activation);
+          break;
+        case '34-57':
+          updateSegmentColor('j2-gate34', activation);
+          updateSegmentColor('j2-gate57', activation);
+          break;
+      }
+    }
+
+    // Draw each segment once with the combined color
+    void drawSegment(String segmentId, List<Offset> path) {
+      final colorInfo = segmentColors[segmentId];
+      if (colorInfo == null || path.isEmpty) return;
+
+      if (colorInfo.hasBoth) {
+        _drawStripedChannel(canvas, path);
+      } else {
+        final paint = Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = channelStrokeWidthActive
+          ..strokeCap = StrokeCap.round
+          ..color = colorInfo.hasConscious
+              ? AppColors.channelConscious
+              : AppColors.channelUnconscious;
+        _drawChannelPath(canvas, path, paint);
+      }
+    }
+
+    // Draw backbone segments (in order from Gate 20 to Gate 57)
+    if (needsGate20ToJ1) {
+      drawSegment('j1-gate20', [j1, gate20]);
+    }
+    if (needsJ1ToJ2) {
+      drawSegment('j1-j2', [j1, j2]);
+    }
+    if (needsJ2ToGate57) {
+      drawSegment('j2-gate57', [j2, gate57]);
+    }
+
+    // Draw branch segments
+    if (needsGate10ToJ1) {
+      drawSegment('gate10-j1', [gate10, j1]);
+    }
+    if (needsGate34ToJ2) {
+      drawSegment('j2-gate34', [j2, gate34]);
     }
   }
 
@@ -819,4 +974,17 @@ class ChannelElement extends BodygraphElement {
 
   @override
   int get hashCode => channelId.hashCode;
+}
+
+/// Helper class to track channel color information for integration channels
+class _ChannelColorInfo {
+  const _ChannelColorInfo({
+    required this.hasConscious,
+    required this.hasUnconscious,
+  });
+
+  final bool hasConscious;
+  final bool hasUnconscious;
+
+  bool get hasBoth => hasConscious && hasUnconscious;
 }
