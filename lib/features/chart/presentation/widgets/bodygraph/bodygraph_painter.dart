@@ -135,10 +135,36 @@ class BodygraphPainter extends CustomPainter {
     final hangingGates = allActivatedGates.difference(gatesInCompleteChannels);
 
     // For each hanging gate, find its channel and draw a half-line
-    // Only draw ONE half-line per gate (use the first channel found)
+    // Only draw ONE half-line per gate
     for (final gateNumber in hangingGates) {
-      // Find which channel this gate belongs to (use first match only)
+      // For integration gates (10, 20, 34), prefer the channel toward 57 (backbone direction)
+      ChannelData? preferredChannel;
+
+      if (gateNumber == 10) {
+        // Gate 10 should go toward 57 (down), not toward 20 (up)
+        preferredChannel = channels.firstWhere(
+          (c) => c.id == '10-57',
+          orElse: () => channels.firstWhere((c) => c.gate1 == 10 || c.gate2 == 10),
+        );
+      } else if (gateNumber == 20) {
+        // Gate 20 should go toward 57 (down)
+        preferredChannel = channels.firstWhere(
+          (c) => c.id == '20-57',
+          orElse: () => channels.firstWhere((c) => c.gate1 == 20 || c.gate2 == 20),
+        );
+      } else if (gateNumber == 34) {
+        // Gate 34 should go toward 57 (down)
+        preferredChannel = channels.firstWhere(
+          (c) => c.id == '34-57',
+          orElse: () => channels.firstWhere((c) => c.gate1 == 34 || c.gate2 == 34),
+        );
+      }
+
+      // Find which channel this gate belongs to
       for (final channel in channels) {
+        // If we have a preferred channel for integration gates, skip others
+        if (preferredChannel != null && channel.id != preferredChannel.id) continue;
+
         int? otherGate;
         if (channel.gate1 == gateNumber) {
           otherGate = channel.gate2;
