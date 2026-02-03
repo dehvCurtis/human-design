@@ -95,8 +95,8 @@ class StandardBodygraphLayout extends BodygraphLayout {
     // HEART/EGO - Circle, positioned between G and Solar Plexus
     HumanDesignCenter.heart: CenterPosition(
       center: HumanDesignCenter.heart,
-      x: 255,
-      y: 345,
+      x: 262,
+      y: 352,
       width: 40,
       height: 40,
       shape: CenterShape.circle,
@@ -205,13 +205,13 @@ class StandardBodygraphLayout extends BodygraphLayout {
 
     // ============================================
     // HEART/EGO CENTER GATES (4 gates)
-    // Heart at (255, 345), circle with width/height 40
+    // Heart at (262, 352), circle with width/height 40
     // Gates positioned at corners: 51/21 top, 26/40 bottom, aligned in grid
     // ============================================
-    51: GatePosition(gate: 51, center: HumanDesignCenter.heart, x: 241, y: 331), // to 25 (G) - TOP LEFT
-    21: GatePosition(gate: 21, center: HumanDesignCenter.heart, x: 269, y: 331), // to 45 (Throat) - TOP RIGHT
-    26: GatePosition(gate: 26, center: HumanDesignCenter.heart, x: 241, y: 359), // to 44 (Spleen) - BOTTOM LEFT
-    40: GatePosition(gate: 40, center: HumanDesignCenter.heart, x: 269, y: 359), // to 37 (Solar Plexus) - BOTTOM RIGHT
+    51: GatePosition(gate: 51, center: HumanDesignCenter.heart, x: 248, y: 338), // to 25 (G) - TOP LEFT
+    21: GatePosition(gate: 21, center: HumanDesignCenter.heart, x: 276, y: 338), // to 45 (Throat) - TOP RIGHT
+    26: GatePosition(gate: 26, center: HumanDesignCenter.heart, x: 248, y: 366), // to 44 (Spleen) - BOTTOM LEFT
+    40: GatePosition(gate: 40, center: HumanDesignCenter.heart, x: 276, y: 366), // to 37 (Solar Plexus) - BOTTOM RIGHT
 
     // ============================================
     // SPLEEN CENTER GATES (7 gates on triangle edges)
@@ -352,28 +352,28 @@ class StandardBodygraphLayout extends BodygraphLayout {
     // G to Heart - connection to top-left of Heart
     '25-51': [
       Offset(235, 310),  // Gate 25 on G (right side)
-      Offset(238, 320),  // Waypoint
-      Offset(241, 331),  // Gate 51 on Heart (TOP LEFT)
+      Offset(242, 324),  // Waypoint
+      Offset(248, 338),  // Gate 51 on Heart (TOP LEFT)
     ],
 
     // Throat to Heart - routes down-right to Heart
     '21-45': [
       Offset(230, 240),  // Gate 45 on Throat (bottom right)
-      Offset(250, 286),  // Waypoint
-      Offset(269, 331),  // Gate 21 on Heart (TOP RIGHT)
+      Offset(253, 289),  // Waypoint
+      Offset(276, 338),  // Gate 21 on Heart (TOP RIGHT)
     ],
 
     // Heart to Spleen - from bottom-left corner
     '26-44': [
-      Offset(241, 359),  // Gate 26 on Heart (BOTTOM LEFT)
-      Offset(170, 374),  // Waypoint below G
+      Offset(248, 366),  // Gate 26 on Heart (BOTTOM LEFT)
+      Offset(174, 378),  // Waypoint below G
       Offset(99, 389),   // Gate 44 on Spleen
     ],
 
     // Heart to Solar Plexus - short diagonal
     '37-40': [
-      Offset(269, 359),  // Gate 40 on Heart (BOTTOM RIGHT)
-      Offset(285, 374),  // Waypoint
+      Offset(276, 366),  // Gate 40 on Heart (BOTTOM RIGHT)
+      Offset(289, 378),  // Waypoint
       Offset(301, 389),  // Gate 37 on Solar Plexus (top edge 2/3)
     ],
   };
