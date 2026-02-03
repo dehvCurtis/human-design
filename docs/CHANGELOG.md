@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+#### Heart/Ego Center Position
+- Moved Heart center down and to the right for better visual balance
+- Updated all Heart gate positions (51, 21, 26, 40) to match new center location
+- Adjusted channel path waypoints for Heart connections
+
+#### Gate 10 Hanging Line Direction
+- Fixed Gate 10 hanging line to point downward toward Gate 57 (backbone direction)
+- Integration gates (10, 20, 34) now consistently draw toward Gate 57 when hanging
+- Improves visual consistency with the integration channel backbone
+
 #### Integration Channel Backbone Rendering
 - **Duplicate Lines Fixed** - Integration channels (10-20, 10-34, 10-57, 20-34, 20-57, 34-57) no longer show duplicate/bent lines when multiple channels share the same backbone segments
 - **Straight Backbone** - The 20-57 diagonal backbone now renders as a clean straight line from Gate 20 (Throat) to Gate 57 (Spleen)
