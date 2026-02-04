@@ -18,6 +18,9 @@ import 'shared/providers/supabase_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Load environment variables from .env file
+  await AppConfig.load();
+
   // Validate required environment variables for release builds
   AppConfig.validateConfiguration();
 

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Application configuration constants
 class AppConfig {
@@ -13,63 +14,65 @@ class AppConfig {
   /// App URL for deep links and sharing
   static const String appUrl = 'https://app.humandesign.com';
 
-  /// Supabase configuration
-  static const String _supabaseUrl = String.fromEnvironment(
-    'SUPABASE_URL',
-    defaultValue: '',
-  );
-  static const String _supabaseAnonKey = String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-    defaultValue: '',
-  );
-
-  /// Get Supabase URL with validation
-  static String get supabaseUrl {
-    if (_supabaseUrl.isEmpty && !kDebugMode) {
-      throw StateError(
-        'SUPABASE_URL environment variable is not set. '
-        'Pass it with: --dart-define=SUPABASE_URL=your_url',
-      );
+  /// Load environment variables from .env file
+  /// Call this before accessing any environment-dependent config
+  static Future<void> load() async {
+    try {
+      await dotenv.load(fileName: '.env');
+    } catch (e) {
+      debugPrint('Warning: Could not load .env file: $e');
+      // Continue without .env - will use defaults or fail on access
     }
-    return _supabaseUrl;
   }
 
-  /// Get Supabase Anon Key with validation
-  static String get supabaseAnonKey {
-    if (_supabaseAnonKey.isEmpty && !kDebugMode) {
+  /// Check if environment is loaded
+  static bool get isLoaded => dotenv.isInitialized;
+
+  /// Get Supabase URL from environment
+  static String get supabaseUrl {
+    final url = dotenv.env['SUPABASE_URL'] ?? '';
+    if (url.isEmpty && !kDebugMode) {
       throw StateError(
-        'SUPABASE_ANON_KEY environment variable is not set. '
-        'Pass it with: --dart-define=SUPABASE_ANON_KEY=your_key',
+        'SUPABASE_URL is not set in .env file',
       );
     }
-    return _supabaseAnonKey;
+    return url;
+  }
+
+  /// Get Supabase Anon Key from environment
+  static String get supabaseAnonKey {
+    final key = dotenv.env['SUPABASE_ANON_KEY'] ?? '';
+    if (key.isEmpty && !kDebugMode) {
+      throw StateError(
+        'SUPABASE_ANON_KEY is not set in .env file',
+      );
+    }
+    return key;
   }
 
   /// RevenueCat API keys
-  static const String revenueCatAppleApiKey = String.fromEnvironment(
-    'REVENUECAT_APPLE_API_KEY',
-    defaultValue: '',
-  );
-  static const String revenueCatGoogleApiKey = String.fromEnvironment(
-    'REVENUECAT_GOOGLE_API_KEY',
-    defaultValue: '',
-  );
+  static String get revenueCatAppleApiKey {
+    return dotenv.env['REVENUECAT_APPLE_API_KEY'] ?? '';
+  }
+
+  static String get revenueCatGoogleApiKey {
+    return dotenv.env['REVENUECAT_GOOGLE_API_KEY'] ?? '';
+  }
 
   /// Validate all required environment variables for release builds
   /// Call this at app startup to fail fast if configuration is missing
   static void validateConfiguration() {
     if (kReleaseMode) {
       final errors = <String>[];
-      if (_supabaseUrl.isEmpty) {
+      if (supabaseUrl.isEmpty) {
         errors.add('SUPABASE_URL is not set');
       }
-      if (_supabaseAnonKey.isEmpty) {
+      if (supabaseAnonKey.isEmpty) {
         errors.add('SUPABASE_ANON_KEY is not set');
       }
       if (errors.isNotEmpty) {
         throw StateError(
-          'Missing required environment variables:\n${errors.join('\n')}\n\n'
-          'Pass them with: flutter build --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=...',
+          'Missing required environment variables in .env:\n${errors.join('\n')}',
         );
       }
     }

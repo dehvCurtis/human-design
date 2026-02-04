@@ -636,5 +636,575 @@
   "auth_confirmationLinkSent": "Мы отправили ссылку для подтверждения на:",
   "auth_clickLinkToActivate": "Пожалуйста, нажмите на ссылку в письме для активации аккаунта.",
   "auth_goToSignIn": "Перейти к входу",
-  "auth_returnToHome": "Вернуться на главную"
+  "auth_returnToHome": "Вернуться на главную",
+
+  "home_savedCharts": "Сохранённые",
+
+  "chart_planets": "Планеты",
+  "chart_chakras": "Чакры",
+
+  "discovery_userNotFound": "Пользователь не найден",
+  "discovery_following": "Подписан",
+  "discovery_follow": "Подписаться",
+  "discovery_sendMessage": "Написать",
+  "discovery_about": "О себе",
+  "discovery_humanDesign": "Дизайн Человека",
+  "discovery_type": "Тип",
+  "discovery_profile": "Профиль",
+  "discovery_authority": "Авторитет",
+  "discovery_compatibility": "Совместимость",
+  "discovery_compatible": "совместимы",
+  "discovery_followers": "Подписчики",
+  "discovery_followingLabel": "Подписки",
+
+  "userProfile_viewChart": "Бодиграф",
+  "userProfile_chartPrivate": "Эта карта приватная",
+  "userProfile_chartFriendsOnly": "Станьте взаимными подписчиками, чтобы увидеть эту карту",
+  "userProfile_chartFollowToView": "Подпишитесь, чтобы увидеть эту карту",
+
+  "popularCharts_title": "Популярные карты",
+  "popularCharts_subtitle": "Самые популярные публичные карты",
+
+  "hashtags_explore": "Хэштеги",
+  "hashtags_trending": "В тренде",
+  "hashtags_popular": "Популярные",
+  "hashtags_hdTopics": "Темы HD",
+  "hashtags_noTrending": "Пока нет трендовых хэштегов",
+  "hashtags_noPopular": "Пока нет популярных хэштегов",
+  "hashtags_noHdTopics": "Пока нет тем HD",
+  "hashtag_noPosts": "Пока нет постов",
+  "hashtag_beFirst": "Будьте первым, кто напишет с этим хэштегом!",
+  "hashtag_postCount": "{count, plural, =1{1 пост} few{{count} поста} other{{count} постов}}",
+  "@hashtag_postCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hashtag_recentPosts": "{count, plural, =1{1 пост сегодня} few{{count} поста сегодня} other{{count} постов сегодня}}",
+  "@hashtag_recentPosts": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "feed_forYou": "Для вас",
+  "feed_trending": "В тренде",
+  "feed_hdTopics": "Темы HD",
+  "feed_gateTitle": "Ворота {number}",
+  "@feed_gateTitle": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "feed_gatePosts": "Посты о воротах {number}",
+  "@feed_gatePosts": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+
+  "transit_events_title": "События транзитов",
+  "transit_events_happening": "Сейчас",
+  "transit_events_upcoming": "Предстоящие",
+  "transit_events_past": "Прошедшие",
+  "transit_events_noCurrentEvents": "Сейчас нет активных событий",
+  "transit_events_noUpcomingEvents": "Нет запланированных событий",
+  "transit_events_noPastEvents": "Нет прошедших событий",
+  "transit_events_live": "LIVE",
+  "transit_events_join": "Участвовать",
+  "transit_events_joined": "Участвую",
+  "transit_events_leave": "Покинуть",
+  "transit_events_participating": "участвуют",
+  "transit_events_posts": "постов",
+  "transit_events_viewInsights": "Смотреть инсайты",
+  "transit_events_endsIn": "Заканчивается через {time}",
+  "@transit_events_endsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "transit_events_startsIn": "Начнётся через {time}",
+  "@transit_events_startsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "transit_events_notFound": "Событие не найдено",
+  "transit_events_communityPosts": "Посты сообщества",
+  "transit_events_noPosts": "Пока нет постов для этого события",
+  "transit_events_shareExperience": "Поделиться опытом",
+  "transit_events_participants": "Участники",
+  "transit_events_duration": "Длительность",
+  "transit_events_eventEnded": "Событие завершилось",
+  "transit_events_youreParticipating": "Вы участвуете!",
+  "transit_events_experiencingWith": "Переживают этот транзит с {count} другими",
+  "@transit_events_experiencingWith": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "transit_events_joinCommunity": "Присоединиться к сообществу",
+  "transit_events_shareYourExperience": "Поделитесь опытом и свяжитесь с другими",
+
+  "activity_title": "Активность друзей",
+  "activity_noActivities": "Пока нет активности друзей",
+  "activity_followFriends": "Подпишитесь на друзей, чтобы видеть их достижения здесь!",
+  "activity_findFriends": "Найти друзей",
+  "activity_celebrate": "Поздравить",
+  "activity_celebrated": "Поздравили",
+
+  "cancel": "Отмена",
+  "create": "Создать",
+
+  "groupChallenges_title": "Групповые челленджи",
+  "groupChallenges_myTeams": "Мои команды",
+  "groupChallenges_challenges": "Челленджи",
+  "groupChallenges_leaderboard": "Рейтинг",
+  "groupChallenges_createTeam": "Создать команду",
+  "groupChallenges_teamName": "Название команды",
+  "groupChallenges_teamNameHint": "Введите название команды",
+  "groupChallenges_teamDescription": "Описание",
+  "groupChallenges_teamDescriptionHint": "О чём ваша команда?",
+  "groupChallenges_teamCreated": "Команда создана!",
+  "groupChallenges_noTeams": "Пока нет команд",
+  "groupChallenges_noTeamsDescription": "Создайте или присоединитесь к команде для участия в групповых челленджах!",
+  "groupChallenges_memberCount": "{count, plural, =1{1 участник} few{{count} участника} other{{count} участников}}",
+  "@groupChallenges_memberCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "groupChallenges_points": "{points} очк.",
+  "@groupChallenges_points": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_noChallenges": "Нет активных челленджей",
+  "groupChallenges_active": "Активные",
+  "groupChallenges_upcoming": "Предстоящие",
+  "groupChallenges_reward": "{points} очк. награда",
+  "@groupChallenges_reward": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_teamsEnrolled": "{count} команд",
+  "@groupChallenges_teamsEnrolled": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "groupChallenges_participants": "{count} участников",
+  "@groupChallenges_participants": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "groupChallenges_endsIn": "Заканчивается через {time}",
+  "@groupChallenges_endsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "groupChallenges_weekly": "Неделя",
+  "groupChallenges_monthly": "Месяц",
+  "groupChallenges_allTime": "Всё время",
+  "groupChallenges_noTeamsOnLeaderboard": "Пока нет команд в рейтинге",
+  "groupChallenges_pts": "очк.",
+  "groupChallenges_teamNotFound": "Команда не найдена",
+  "groupChallenges_members": "Участники",
+  "groupChallenges_totalPoints": "Всего очков",
+  "groupChallenges_joined": "Участвую",
+  "groupChallenges_join": "Вступить",
+  "groupChallenges_status": "Статус",
+  "groupChallenges_about": "О команде",
+  "groupChallenges_noMembers": "Пока нет участников",
+  "groupChallenges_admin": "Админ",
+  "groupChallenges_contributed": "{points} очк. внесено",
+  "@groupChallenges_contributed": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_joinedTeam": "Вы вступили в команду!",
+  "groupChallenges_leaveTeam": "Покинуть команду",
+  "groupChallenges_leaveConfirmation": "Вы уверены, что хотите покинуть команду? Ваши очки останутся с командой.",
+  "groupChallenges_leave": "Покинуть",
+  "groupChallenges_leftTeam": "Вы покинули команду",
+  "groupChallenges_challengeDetails": "Детали челленджа",
+  "groupChallenges_challengeNotFound": "Челлендж не найден",
+  "groupChallenges_target": "Цель",
+  "groupChallenges_starts": "Начало",
+  "groupChallenges_ends": "Конец",
+  "groupChallenges_hdTypes": "Типы HD",
+  "groupChallenges_noTeamsToEnroll": "Нет команд для записи",
+  "groupChallenges_createTeamToJoin": "Сначала создайте команду для участия в челленджах",
+  "groupChallenges_enrollTeam": "Записать команду",
+  "groupChallenges_enrolled": "Записаны",
+  "groupChallenges_enroll": "Записать",
+  "groupChallenges_teamEnrolled": "Команда успешно записана!",
+  "groupChallenges_noTeamsEnrolled": "Пока нет записанных команд",
+
+  "circles_title": "Круги совместимости",
+  "circles_myCircles": "Мои круги",
+  "circles_invitations": "Приглашения",
+  "circles_create": "Создать круг",
+  "circles_selectIcon": "Выберите иконку",
+  "circles_name": "Название круга",
+  "circles_nameHint": "Семья, Команда, Друзья...",
+  "circles_description": "Описание",
+  "circles_descriptionHint": "Для чего этот круг?",
+  "circles_created": "Круг успешно создан!",
+  "circles_noCircles": "Пока нет кругов",
+  "circles_noCirclesDescription": "Создайте круг для анализа совместимости с друзьями, семьёй или коллегами.",
+  "circles_suggestions": "Быстрый старт",
+  "circles_memberCount": "{count, plural, =1{1 участник} few{{count} участника} other{{count} участников}}",
+  "@circles_memberCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "circles_private": "Приватный",
+  "circles_noInvitations": "Нет приглашений",
+  "circles_noInvitationsDescription": "Здесь появятся приглашения в круги.",
+  "circles_invitedBy": "Пригласил {name}",
+  "@circles_invitedBy": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "circles_decline": "Отклонить",
+  "circles_accept": "Принять",
+  "circles_invitationDeclined": "Приглашение отклонено",
+  "circles_invitationAccepted": "Вы присоединились к кругу!",
+  "circles_notFound": "Круг не найден",
+  "circles_invite": "Пригласить",
+  "circles_members": "Участники",
+  "circles_analysis": "Анализ",
+  "circles_feed": "Лента",
+  "circles_inviteMember": "Пригласить участника",
+  "circles_sendInvite": "Отправить приглашение",
+  "circles_invitationSent": "Приглашение отправлено!",
+  "circles_invitationFailed": "Не удалось отправить приглашение",
+  "circles_deleteTitle": "Удалить круг",
+  "circles_deleteConfirmation": "Вы уверены, что хотите удалить \"{name}\"? Это действие нельзя отменить.",
+  "@circles_deleteConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "circles_deleted": "Круг удалён",
+  "circles_noMembers": "Пока нет участников",
+  "circles_noAnalysis": "Пока нет анализа",
+  "circles_runAnalysis": "Запустите анализ совместимости, чтобы увидеть, как взаимодействуют участники круга.",
+  "circles_needMoreMembers": "Добавьте минимум 2 участников для анализа.",
+  "circles_analyzeCompatibility": "Анализировать совместимость",
+  "circles_harmonyScore": "Оценка гармонии",
+  "circles_typeDistribution": "Распределение типов",
+  "circles_electromagneticConnections": "Электромагнитные связи",
+  "circles_electromagneticDesc": "Интенсивное притяжение - вы дополняете друг друга",
+  "circles_companionshipConnections": "Связи товарищества",
+  "circles_companionshipDesc": "Комфорт и стабильность - общее понимание",
+  "circles_groupStrengths": "Сильные стороны группы",
+  "circles_areasForGrowth": "Области для роста",
+  "circles_writePost": "Поделитесь чем-то с вашим кругом...",
+  "circles_noPosts": "Пока нет постов",
+  "circles_beFirstToPost": "Будьте первым, кто поделится чем-то с вашим кругом!",
+
+  "experts_title": "Эксперты HD",
+  "experts_becomeExpert": "Стать экспертом",
+  "experts_filterBySpecialization": "Фильтр по специализации",
+  "experts_allExperts": "Все эксперты",
+  "experts_experts": "Эксперты",
+  "experts_noExperts": "Эксперты не найдены",
+  "experts_featured": "Рекомендуемые эксперты",
+  "experts_followers": "{count} подписчиков",
+  "@experts_followers": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "experts_notFound": "Эксперт не найден",
+  "experts_following": "Подписан",
+  "experts_follow": "Подписаться",
+  "experts_about": "О себе",
+  "experts_specializations": "Специализации",
+  "experts_credentials": "Квалификации",
+  "experts_reviews": "Отзывы",
+  "experts_writeReview": "Написать отзыв",
+  "experts_reviewContent": "Ваш отзыв",
+  "experts_reviewHint": "Поделитесь опытом работы с этим экспертом...",
+  "experts_submitReview": "Отправить отзыв",
+  "experts_reviewSubmitted": "Отзыв успешно отправлен!",
+  "experts_noReviews": "Пока нет отзывов",
+  "experts_followersLabel": "Подписчики",
+  "experts_rating": "Рейтинг",
+  "experts_years": "Лет",
+
+  "learningPaths_title": "Учебные пути",
+  "learningPaths_explore": "Обзор",
+  "learningPaths_inProgress": "В процессе",
+  "learningPaths_completed": "Завершённые",
+  "learningPaths_featured": "Рекомендуемые пути",
+  "learningPaths_allPaths": "Все пути",
+  "learningPaths_noPathsExplore": "Нет доступных учебных путей",
+  "learningPaths_noPathsInProgress": "Нет путей в процессе",
+  "learningPaths_noPathsInProgressDescription": "Запишитесь на учебный путь, чтобы начать!",
+  "learningPaths_browsePaths": "Обзор путей",
+  "learningPaths_noPathsCompleted": "Нет завершённых путей",
+  "learningPaths_noPathsCompletedDescription": "Завершённые учебные пути появятся здесь!",
+  "learningPaths_enrolled": "{count} записано",
+  "@learningPaths_enrolled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPaths_stepsCount": "{count} шагов",
+  "@learningPaths_stepsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPaths_progress": "{completed} из {total} шагов",
+  "@learningPaths_progress": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "learningPaths_resume": "Продолжить",
+  "learningPaths_completedOn": "Завершён {date}",
+  "@learningPaths_completedOn": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "learningPathNotFound": "Учебный путь не найден",
+  "learningPathMinutes": "{minutes} мин",
+  "@learningPathMinutes": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "learningPathSteps": "{count} шагов",
+  "@learningPathSteps": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathBy": "От {author}",
+  "@learningPathBy": {
+    "placeholders": {
+      "author": {"type": "String"}
+    }
+  },
+  "learningPathEnrolled": "{count} записано",
+  "@learningPathEnrolled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathCompleted": "{count} завершено",
+  "@learningPathCompleted": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathEnroll": "Начать обучение",
+  "learningPathYourProgress": "Ваш прогресс",
+  "learningPathCompletedBadge": "Завершён",
+  "learningPathProgressText": "{completed} из {total} шагов завершено",
+  "@learningPathProgressText": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "learningPathStepsTitle": "Шаги обучения",
+  "learningPathEnrollTitle": "Начать этот путь?",
+  "learningPathEnrollMessage": "Вы будете записаны на \"{title}\" и сможете отслеживать прогресс.",
+  "@learningPathEnrollMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "learningPathViewContent": "Просмотреть контент",
+  "learningPathMarkComplete": "Отметить как завершённое",
+  "learningPathStepCompleted": "Шаг завершён!",
+
+  "thought_title": "Мысли",
+  "thought_feedTitle": "Мысли",
+  "thought_createNew": "Поделиться мыслью",
+  "thought_emptyFeed": "Лента мыслей пуста",
+  "thought_emptyFeedMessage": "Подпишитесь на людей или поделитесь мыслью",
+  "thought_regenerate": "Репост",
+  "thought_regeneratedFrom": "Репост от @{username}",
+  "@thought_regeneratedFrom": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_regenerateSuccess": "Мысль добавлена на вашу стену!",
+  "thought_regenerateConfirm": "Сделать репост?",
+  "thought_regenerateDescription": "Мысль появится на вашей стене со ссылкой на автора.",
+  "thought_addComment": "Добавить комментарий (необязательно)",
+  "thought_regenerateCount": "{count, plural, =1{1 репост} few{{count} репоста} other{{count} репостов}}",
+  "@thought_regenerateCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "thought_cannotRegenerateOwn": "Нельзя сделать репост своей мысли",
+  "thought_alreadyRegenerated": "Вы уже сделали репост этой мысли",
+  "thought_postDetail": "Мысль",
+
+  "chakra_title": "Энергия чакр",
+  "chakra_activated": "Активирована",
+  "chakra_inactive": "Неактивна",
+  "chakra_activatedCount": "{count} из 7 чакр активировано",
+  "@chakra_activatedCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "chakra_hdMapping": "Соответствие центрам HD",
+  "chakra_element": "Элемент",
+  "chakra_location": "Расположение",
+  "chakra_root": "Муладхара",
+  "chakra_root_sanskrit": "Muladhara",
+  "chakra_root_description": "Заземление, выживание и стабильность",
+  "chakra_sacral": "Свадхистхана",
+  "chakra_sacral_sanskrit": "Svadhisthana",
+  "chakra_sacral_description": "Творчество, сексуальность и эмоции",
+  "chakra_solarPlexus": "Манипура",
+  "chakra_solarPlexus_sanskrit": "Manipura",
+  "chakra_solarPlexus_description": "Личная сила, уверенность и воля",
+  "chakra_heart": "Анахата",
+  "chakra_heart_sanskrit": "Anahata",
+  "chakra_heart_description": "Любовь, сострадание и связь",
+  "chakra_throat": "Вишуддха",
+  "chakra_throat_sanskrit": "Vishuddha",
+  "chakra_throat_description": "Общение, выражение и правда",
+  "chakra_thirdEye": "Аджна",
+  "chakra_thirdEye_sanskrit": "Ajna",
+  "chakra_thirdEye_description": "Интуиция, прозрение и воображение",
+  "chakra_crown": "Сахасрара",
+  "chakra_crown_sanskrit": "Sahasrara",
+  "chakra_crown_description": "Духовная связь и сознание",
+
+  "quiz_title": "Тесты",
+  "quiz_yourProgress": "Ваш прогресс",
+  "quiz_quizzesCompleted": "{count} тестов завершено",
+  "@quiz_quizzesCompleted": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "quiz_accuracy": "Точность",
+  "quiz_streak": "Серия",
+  "quiz_all": "Все",
+  "quiz_difficulty": "Сложность",
+  "quiz_beginner": "Начинающий",
+  "quiz_intermediate": "Средний",
+  "quiz_advanced": "Продвинутый",
+  "quiz_questions": "{count} вопросов",
+  "@quiz_questions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "quiz_points": "+{points} очк.",
+  "@quiz_points": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "quiz_completed": "Завершён",
+  "quiz_noQuizzes": "Нет доступных тестов",
+  "quiz_checkBackLater": "Загляните позже за новым контентом",
+  "quiz_startQuiz": "Начать тест",
+  "quiz_tryAgain": "Попробовать снова",
+  "quiz_backToQuizzes": "К тестам",
+  "quiz_shareResults": "Поделиться результатами",
+  "quiz_yourBest": "Ваш лучший",
+  "quiz_perfectScore": "Идеальный результат!",
+  "quiz_newBest": "Новый рекорд!",
+  "quiz_streakExtended": "Серия продлена!",
+  "quiz_questionOf": "Вопрос {current} из {total}",
+  "@quiz_questionOf": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quiz_correct": "{count} правильно",
+  "@quiz_correct": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "quiz_submitAnswer": "Ответить",
+  "quiz_nextQuestion": "Следующий вопрос",
+  "quiz_seeResults": "Результаты",
+  "quiz_exitQuiz": "Выйти из теста?",
+  "quiz_exitWarning": "Ваш прогресс будет потерян.",
+  "quiz_exit": "Выйти",
+  "quiz_timesUp": "Время вышло!",
+  "quiz_timesUpMessage": "Время закончилось. Ваш прогресс будет сохранён.",
+  "quiz_excellent": "Отлично!",
+  "quiz_goodJob": "Хорошая работа!",
+  "quiz_keepLearning": "Продолжайте учиться!",
+  "quiz_keepPracticing": "Продолжайте практиковаться!",
+  "quiz_masteredTopic": "Вы освоили эту тему!",
+  "quiz_strongUnderstanding": "У вас хорошее понимание.",
+  "quiz_onRightTrack": "Вы на правильном пути.",
+  "quiz_reviewExplanations": "Изучите объяснения для улучшения.",
+  "quiz_studyMaterial": "Изучите материал и попробуйте снова.",
+  "quiz_attemptHistory": "История попыток",
+  "quiz_statistics": "Статистика тестов",
+  "quiz_totalQuizzes": "Тестов",
+  "quiz_totalQuestions": "Вопросов",
+  "quiz_bestStreak": "Лучшая серия",
+  "quiz_strongest": "Сильнейшая: {category}",
+  "@quiz_strongest": {
+    "placeholders": {
+      "category": {"type": "String"}
+    }
+  },
+  "quiz_needsWork": "Требует работы: {category}",
+  "@quiz_needsWork": {
+    "placeholders": {
+      "category": {"type": "String"}
+    }
+  },
+  "quiz_category_types": "Типы",
+  "quiz_category_centers": "Центры",
+  "quiz_category_authorities": "Авторитеты",
+  "quiz_category_profiles": "Профили",
+  "quiz_category_gates": "Ворота",
+  "quiz_category_channels": "Каналы",
+  "quiz_category_definitions": "Определённости",
+  "quiz_category_general": "Общее",
+  "quiz_explanation": "Объяснение",
+  "quiz_quizzes": "Тесты",
+  "quiz_questionsLabel": "Вопросы",
+  "quiz_shareProgress": "Поделиться прогрессом",
+  "quiz_shareProgressSubject": "Мой прогресс в изучении Дизайна Человека",
+  "quiz_sharePerfect": "Я достиг идеального результата! Осваиваю Дизайн Человека.",
+  "quiz_shareExcellent": "Отлично продвигаюсь в изучении Дизайна Человека!",
+  "quiz_shareGoodJob": "Изучаю Дизайн Человека. Каждый тест помогает расти!",
+  "quiz_shareSubject": "Мой результат {score}% в \"{quizTitle}\" - Тест Дизайна Человека",
+  "@quiz_shareSubject": {
+    "placeholders": {
+      "quizTitle": {"type": "String"},
+      "score": {"type": "int"}
+    }
+  },
+  "quiz_failedToLoadStats": "Не удалось загрузить статистику",
+
+  "planetary_personality": "Личность",
+  "planetary_design": "Дизайн",
+  "planetary_consciousBirth": "Сознательное · Рождение",
+  "planetary_unconsciousPrenatal": "Бессознательное · 88° Пренатально"
 }

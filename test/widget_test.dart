@@ -9,7 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:human_design/main.dart';
+import 'package:human_design/core/config/app_config.dart';
 import 'package:human_design/core/constants/human_design_constants.dart';
+import 'package:human_design/shared/providers/supabase_provider.dart';
 import 'package:human_design/features/ephemeris/mappers/degree_to_gate_mapper.dart';
 import 'package:human_design/features/home/domain/home_providers.dart';
 import 'package:human_design/features/lifestyle/domain/transit_service.dart';
@@ -143,6 +145,17 @@ DailyAffirmation _createMockAffirmation() {
 }
 
 void main() {
+  setUpAll(() async {
+    // Set up mock SharedPreferences before any initialization
+    SharedPreferences.setMockInitialValues({});
+
+    // Load environment variables from .env file
+    await AppConfig.load();
+
+    // Initialize Supabase with loaded config
+    await initializeSupabase();
+  });
+
   testWidgets('HumanDesignApp smoke test', (WidgetTester tester) async {
     // Set up mock SharedPreferences
     SharedPreferences.setMockInitialValues({});

@@ -55,6 +55,9 @@ dependencies:
   http: ^1.2.0
   lat_lng_to_timezone: ^0.2.0
 
+  # Environment
+  flutter_dotenv: ^5.1.0
+
   # Utilities
   mime: ^2.0.0
   intl: ^0.20.2
@@ -94,6 +97,7 @@ flutter:
   generate: true
 
   assets:
+    - .env
     - assets/images/
     - assets/svg/
     - assets/ephe/

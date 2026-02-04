@@ -38,16 +38,18 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
     await _enforceRateLimit();
 
     try {
+      // Search for populated places (cities, towns, villages)
+      // Using 'place' class which includes capitals and major cities
       final uri = Uri.https(
         'nominatim.openstreetmap.org',
         '/search',
         {
           'q': query,
           'format': 'json',
-          'limit': '10',
+          'limit': '15', // Get more results for better deduplication
           'addressdetails': '1',
-          // Filter to populated places for better city results
-          'featuretype': 'city',
+          // Filter to place types (cities, towns, capitals)
+          'featuretype': 'settlement',
         },
       );
 
@@ -71,7 +73,15 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
         return _searchBroad(query);
       }
 
-      return _parseResults(data);
+      final results = _parseResults(data);
+
+      // If we got results, return them (limited to 8 for cleaner UI)
+      if (results.isNotEmpty) {
+        return results.take(8).toList();
+      }
+
+      // Otherwise try broader search
+      return _searchBroad(query);
     } on http.ClientException catch (e) {
       throw NominatimException('Network error: ${e.message}');
     } on TimeoutException {
@@ -81,7 +91,7 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
     }
   }
 
-  /// Broader search without city filter when initial search returns empty
+  /// Broader search without settlement filter for places not categorized as settlements
   Future<List<LocationResult>> _searchBroad(String query) async {
     await _enforceRateLimit();
 
@@ -92,7 +102,7 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
         {
           'q': query,
           'format': 'json',
-          'limit': '10',
+          'limit': '15',
           'addressdetails': '1',
         },
       );
@@ -111,7 +121,8 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
       }
 
       final List<dynamic> data = json.decode(response.body);
-      return _parseResults(data);
+      final results = _parseResults(data);
+      return results.take(8).toList();
     } on http.ClientException catch (e) {
       throw NominatimException('Network error: ${e.message}');
     } on TimeoutException {
@@ -123,6 +134,7 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
 
   List<LocationResult> _parseResults(List<dynamic> data) {
     final results = <LocationResult>[];
+    final seen = <String>{};
 
     for (final item in data) {
       try {
@@ -146,12 +158,35 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
         // Extract country
         final country = address['country'] ?? '';
 
-        // Build display name
-        final displayName = item['display_name'] ?? '$cityName, $country';
+        // Extract state/region for disambiguation
+        final state = address['state'] ?? address['region'] ?? '';
+
+        // Skip if no valid city name
+        if (cityName.toString().isEmpty) continue;
+
+        // Create deduplication key (city + country + approximate coordinates)
+        // Round coordinates to ~11km precision to catch same-city duplicates
+        final dedupKey =
+            '${cityName.toString().toLowerCase()}_${country.toString().toLowerCase()}_${(lat * 10).round()}_${(lon * 10).round()}';
+
+        // Skip duplicates
+        if (seen.contains(dedupKey)) continue;
+        seen.add(dedupKey);
+
+        // Build cleaner display name: "City, State, Country" or "City, Country"
+        final displayParts = <String>[cityName.toString()];
+        if (state.toString().isNotEmpty &&
+            state.toString() != cityName.toString()) {
+          displayParts.add(state.toString());
+        }
+        if (country.toString().isNotEmpty) {
+          displayParts.add(country.toString());
+        }
+        final displayName = displayParts.join(', ');
 
         results.add(LocationResult(
           name: cityName.toString(),
-          displayName: displayName.toString(),
+          displayName: displayName,
           latitude: lat,
           longitude: lon,
           country: country.toString(),

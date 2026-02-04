@@ -250,7 +250,7 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     '7-31': [Offset(168, 215), Offset(200, 240), Offset(235, 280)],
     '1-8': [Offset(192, 218), Offset(180, 252)],
     '13-33': [Offset(218, 218), Offset(205, 248)],
-    '10-20': [Offset(148, 190), Offset(148, 235), Offset(165, 280)],
+    '10-20': [Offset(165, 280), Offset(74, 319), Offset(148, 190)],  // Gate 10 connects at 27-50 angle
 
     // ============================================
     // THROAT TO HEART (long diagonal to far right)
@@ -271,7 +271,7 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     // ============================================
     // THROAT TO SACRAL (integration - down center)
     // ============================================
-    '20-34': [Offset(148, 190), Offset(148, 290), Offset(152, 395)],
+    '20-34': [Offset(148, 190), Offset(74, 319), Offset(60, 355), Offset(152, 395)],  // Via both junctions
 
     // ============================================
     // G CENTER TO HEART (diagonal to far right)
@@ -281,14 +281,14 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     // ============================================
     // G CENTER TO SPLEEN (diagonal to far left)
     // ============================================
-    '10-57': [Offset(162, 285), Offset(100, 330), Offset(40, 378)],
+    '10-57': [Offset(165, 280), Offset(74, 319), Offset(40, 378)],  // Gate 10 connects at 27-50 angle
 
     // ============================================
     // G CENTER TO SACRAL (4 channels down center)
     // ============================================
     '2-14': [Offset(235, 310), Offset(212, 340), Offset(185, 372)],
     '5-15': [Offset(165, 310), Offset(166, 342), Offset(168, 375)],
-    '10-34': [Offset(162, 285), Offset(155, 340), Offset(152, 395)],
+    '10-34': [Offset(165, 280), Offset(74, 319), Offset(60, 355), Offset(152, 395)],  // Gate 10 at 27-50 angle, then to 34
     '29-46': [Offset(200, 320), Offset(208, 345), Offset(215, 372)],
 
     // ============================================
@@ -305,7 +305,7 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     // SPLEEN TO SACRAL (left to center)
     // ============================================
     '27-50': [Offset(102, 388), Offset(118, 395), Offset(130, 400)],
-    '34-57': [Offset(150, 398), Offset(95, 388), Offset(42, 380)],
+    '34-57': [Offset(152, 395), Offset(60, 355), Offset(40, 378)],  // Gate 34 at 27-50 angle
 
     // ============================================
     // SPLEEN TO ROOT (left side diagonals)
@@ -317,7 +317,7 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     // ============================================
     // SPLEEN TO THROAT (integration - left diagonal)
     // ============================================
-    '20-57': [Offset(148, 190), Offset(92, 285), Offset(40, 378)],
+    '20-57': [Offset(148, 190), Offset(74, 319), Offset(60, 355), Offset(40, 378)],  // Through both junctions
 
     // ============================================
     // SACRAL TO SOLAR PLEXUS (center to right)

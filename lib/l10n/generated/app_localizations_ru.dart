@@ -123,7 +123,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get home_myChart => 'Моя карта';
 
   @override
-  String get home_savedCharts => 'Saved';
+  String get home_savedCharts => 'Сохранённые';
 
   @override
   String get home_composite => 'Композит';
@@ -398,7 +398,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get chart_bodygraph => 'Бодиграф';
 
   @override
-  String get chart_planets => 'Planets';
+  String get chart_planets => 'Планеты';
 
   @override
   String get chart_details => 'Детали карты';
@@ -812,62 +812,63 @@ class AppLocalizationsRu extends AppLocalizations {
   String get social_loadSharedFailed => 'Не удалось загрузить общие карты';
 
   @override
-  String get discovery_userNotFound => 'User not found';
+  String get discovery_userNotFound => 'Пользователь не найден';
 
   @override
-  String get discovery_following => 'Following';
+  String get discovery_following => 'Подписан';
 
   @override
-  String get discovery_follow => 'Follow';
+  String get discovery_follow => 'Подписаться';
 
   @override
-  String get discovery_sendMessage => 'Send Message';
+  String get discovery_sendMessage => 'Написать';
 
   @override
-  String get discovery_about => 'About';
+  String get discovery_about => 'О себе';
 
   @override
-  String get discovery_humanDesign => 'Human Design';
+  String get discovery_humanDesign => 'Дизайн Человека';
 
   @override
-  String get discovery_type => 'Type';
+  String get discovery_type => 'Тип';
 
   @override
-  String get discovery_profile => 'Profile';
+  String get discovery_profile => 'Профиль';
 
   @override
-  String get discovery_authority => 'Authority';
+  String get discovery_authority => 'Авторитет';
 
   @override
-  String get discovery_compatibility => 'Compatibility';
+  String get discovery_compatibility => 'Совместимость';
 
   @override
-  String get discovery_compatible => 'compatible';
+  String get discovery_compatible => 'совместимы';
 
   @override
-  String get discovery_followers => 'Followers';
+  String get discovery_followers => 'Подписчики';
 
   @override
-  String get discovery_followingLabel => 'Following';
+  String get discovery_followingLabel => 'Подписки';
 
   @override
-  String get userProfile_viewChart => 'Bodygraph';
+  String get userProfile_viewChart => 'Бодиграф';
 
   @override
-  String get userProfile_chartPrivate => 'This chart is private';
+  String get userProfile_chartPrivate => 'Эта карта приватная';
 
   @override
   String get userProfile_chartFriendsOnly =>
-      'Become mutual followers to view this chart';
+      'Станьте взаимными подписчиками, чтобы увидеть эту карту';
 
   @override
-  String get userProfile_chartFollowToView => 'Follow to view this chart';
+  String get userProfile_chartFollowToView =>
+      'Подпишитесь, чтобы увидеть эту карту';
 
   @override
-  String get popularCharts_title => 'Popular Charts';
+  String get popularCharts_title => 'Популярные карты';
 
   @override
-  String get popularCharts_subtitle => 'Most followed public charts';
+  String get popularCharts_subtitle => 'Самые популярные публичные карты';
 
   @override
   String social_sentAgo(String time) {
@@ -1483,330 +1484,329 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_birthTimezone => 'Часовой пояс';
 
   @override
-  String get chart_chakras => 'Chakras';
+  String get chart_chakras => 'Чакры';
 
   @override
-  String get chakra_title => 'Chakra Energy';
+  String get chakra_title => 'Энергия чакр';
 
   @override
-  String get chakra_activated => 'Activated';
+  String get chakra_activated => 'Активирована';
 
   @override
-  String get chakra_inactive => 'Inactive';
+  String get chakra_inactive => 'Неактивна';
 
   @override
   String chakra_activatedCount(int count) {
-    return '$count of 7 chakras activated';
+    return '$count из 7 чакр активировано';
   }
 
   @override
-  String get chakra_hdMapping => 'HD Center Mapping';
+  String get chakra_hdMapping => 'Соответствие центрам HD';
 
   @override
-  String get chakra_element => 'Element';
+  String get chakra_element => 'Элемент';
 
   @override
-  String get chakra_location => 'Location';
+  String get chakra_location => 'Расположение';
 
   @override
-  String get chakra_root => 'Root';
+  String get chakra_root => 'Муладхара';
 
   @override
   String get chakra_root_sanskrit => 'Muladhara';
 
   @override
-  String get chakra_root_description => 'Grounding, survival, and stability';
+  String get chakra_root_description => 'Заземление, выживание и стабильность';
 
   @override
-  String get chakra_sacral => 'Sacral';
+  String get chakra_sacral => 'Свадхистхана';
 
   @override
   String get chakra_sacral_sanskrit => 'Svadhisthana';
 
   @override
-  String get chakra_sacral_description => 'Creativity, sexuality, and emotions';
+  String get chakra_sacral_description => 'Творчество, сексуальность и эмоции';
 
   @override
-  String get chakra_solarPlexus => 'Solar Plexus';
+  String get chakra_solarPlexus => 'Манипура';
 
   @override
   String get chakra_solarPlexus_sanskrit => 'Manipura';
 
   @override
   String get chakra_solarPlexus_description =>
-      'Personal power, confidence, and will';
+      'Личная сила, уверенность и воля';
 
   @override
-  String get chakra_heart => 'Heart';
+  String get chakra_heart => 'Анахата';
 
   @override
   String get chakra_heart_sanskrit => 'Anahata';
 
   @override
-  String get chakra_heart_description => 'Love, compassion, and connection';
+  String get chakra_heart_description => 'Любовь, сострадание и связь';
 
   @override
-  String get chakra_throat => 'Throat';
+  String get chakra_throat => 'Вишуддха';
 
   @override
   String get chakra_throat_sanskrit => 'Vishuddha';
 
   @override
-  String get chakra_throat_description =>
-      'Communication, expression, and truth';
+  String get chakra_throat_description => 'Общение, выражение и правда';
 
   @override
-  String get chakra_thirdEye => 'Third Eye';
+  String get chakra_thirdEye => 'Аджна';
 
   @override
   String get chakra_thirdEye_sanskrit => 'Ajna';
 
   @override
-  String get chakra_thirdEye_description =>
-      'Intuition, insight, and imagination';
+  String get chakra_thirdEye_description => 'Интуиция, прозрение и воображение';
 
   @override
-  String get chakra_crown => 'Crown';
+  String get chakra_crown => 'Сахасрара';
 
   @override
   String get chakra_crown_sanskrit => 'Sahasrara';
 
   @override
-  String get chakra_crown_description =>
-      'Spiritual connection and consciousness';
+  String get chakra_crown_description => 'Духовная связь и сознание';
 
   @override
-  String get quiz_title => 'Quizzes';
+  String get quiz_title => 'Тесты';
 
   @override
-  String get quiz_yourProgress => 'Your Progress';
+  String get quiz_yourProgress => 'Ваш прогресс';
 
   @override
   String quiz_quizzesCompleted(int count) {
-    return '$count quizzes completed';
+    return '$count тестов завершено';
   }
 
   @override
-  String get quiz_accuracy => 'Accuracy';
+  String get quiz_accuracy => 'Точность';
 
   @override
-  String get quiz_streak => 'Streak';
+  String get quiz_streak => 'Серия';
 
   @override
-  String get quiz_all => 'All';
+  String get quiz_all => 'Все';
 
   @override
-  String get quiz_difficulty => 'Difficulty';
+  String get quiz_difficulty => 'Сложность';
 
   @override
-  String get quiz_beginner => 'Beginner';
+  String get quiz_beginner => 'Начинающий';
 
   @override
-  String get quiz_intermediate => 'Intermediate';
+  String get quiz_intermediate => 'Средний';
 
   @override
-  String get quiz_advanced => 'Advanced';
+  String get quiz_advanced => 'Продвинутый';
 
   @override
   String quiz_questions(int count) {
-    return '$count questions';
+    return '$count вопросов';
   }
 
   @override
   String quiz_points(int points) {
-    return '+$points pts';
+    return '+$points очк.';
   }
 
   @override
-  String get quiz_completed => 'Completed';
+  String get quiz_completed => 'Завершён';
 
   @override
-  String get quiz_noQuizzes => 'No quizzes available';
+  String get quiz_noQuizzes => 'Нет доступных тестов';
 
   @override
-  String get quiz_checkBackLater => 'Check back later for new content';
+  String get quiz_checkBackLater => 'Загляните позже за новым контентом';
 
   @override
-  String get quiz_startQuiz => 'Start Quiz';
+  String get quiz_startQuiz => 'Начать тест';
 
   @override
-  String get quiz_tryAgain => 'Try Again';
+  String get quiz_tryAgain => 'Попробовать снова';
 
   @override
-  String get quiz_backToQuizzes => 'Back to Quizzes';
+  String get quiz_backToQuizzes => 'К тестам';
 
   @override
-  String get quiz_shareResults => 'Share Results';
+  String get quiz_shareResults => 'Поделиться результатами';
 
   @override
-  String get quiz_yourBest => 'Your Best';
+  String get quiz_yourBest => 'Ваш лучший';
 
   @override
-  String get quiz_perfectScore => 'Perfect Score!';
+  String get quiz_perfectScore => 'Идеальный результат!';
 
   @override
-  String get quiz_newBest => 'New Best!';
+  String get quiz_newBest => 'Новый рекорд!';
 
   @override
-  String get quiz_streakExtended => 'Streak Extended!';
+  String get quiz_streakExtended => 'Серия продлена!';
 
   @override
   String quiz_questionOf(int current, int total) {
-    return 'Question $current of $total';
+    return 'Вопрос $current из $total';
   }
 
   @override
   String quiz_correct(int count) {
-    return '$count correct';
+    return '$count правильно';
   }
 
   @override
-  String get quiz_submitAnswer => 'Submit Answer';
+  String get quiz_submitAnswer => 'Ответить';
 
   @override
-  String get quiz_nextQuestion => 'Next Question';
+  String get quiz_nextQuestion => 'Следующий вопрос';
 
   @override
-  String get quiz_seeResults => 'See Results';
+  String get quiz_seeResults => 'Результаты';
 
   @override
-  String get quiz_exitQuiz => 'Exit Quiz?';
+  String get quiz_exitQuiz => 'Выйти из теста?';
 
   @override
-  String get quiz_exitWarning => 'Your progress will be lost if you exit now.';
+  String get quiz_exitWarning => 'Ваш прогресс будет потерян.';
 
   @override
-  String get quiz_exit => 'Exit';
+  String get quiz_exit => 'Выйти';
 
   @override
-  String get quiz_timesUp => 'Time\'s Up!';
+  String get quiz_timesUp => 'Время вышло!';
 
   @override
   String get quiz_timesUpMessage =>
-      'You\'ve run out of time. Your progress will be submitted.';
+      'Время закончилось. Ваш прогресс будет сохранён.';
 
   @override
-  String get quiz_excellent => 'Excellent!';
+  String get quiz_excellent => 'Отлично!';
 
   @override
-  String get quiz_goodJob => 'Good Job!';
+  String get quiz_goodJob => 'Хорошая работа!';
 
   @override
-  String get quiz_keepLearning => 'Keep Learning!';
+  String get quiz_keepLearning => 'Продолжайте учиться!';
 
   @override
-  String get quiz_keepPracticing => 'Keep Practicing!';
+  String get quiz_keepPracticing => 'Продолжайте практиковаться!';
 
   @override
-  String get quiz_masteredTopic => 'You\'ve mastered this topic!';
+  String get quiz_masteredTopic => 'Вы освоили эту тему!';
 
   @override
-  String get quiz_strongUnderstanding => 'You have a strong understanding.';
+  String get quiz_strongUnderstanding => 'У вас хорошее понимание.';
 
   @override
-  String get quiz_onRightTrack => 'You\'re on the right track.';
+  String get quiz_onRightTrack => 'Вы на правильном пути.';
 
   @override
-  String get quiz_reviewExplanations => 'Review the explanations to improve.';
+  String get quiz_reviewExplanations => 'Изучите объяснения для улучшения.';
 
   @override
-  String get quiz_studyMaterial => 'Study the material and try again.';
+  String get quiz_studyMaterial => 'Изучите материал и попробуйте снова.';
 
   @override
-  String get quiz_attemptHistory => 'Attempt History';
+  String get quiz_attemptHistory => 'История попыток';
 
   @override
-  String get quiz_statistics => 'Quiz Statistics';
+  String get quiz_statistics => 'Статистика тестов';
 
   @override
-  String get quiz_totalQuizzes => 'Quizzes';
+  String get quiz_totalQuizzes => 'Тестов';
 
   @override
-  String get quiz_totalQuestions => 'Questions';
+  String get quiz_totalQuestions => 'Вопросов';
 
   @override
-  String get quiz_bestStreak => 'Best Streak';
+  String get quiz_bestStreak => 'Лучшая серия';
 
   @override
   String quiz_strongest(String category) {
-    return 'Strongest: $category';
+    return 'Сильнейшая: $category';
   }
 
   @override
   String quiz_needsWork(String category) {
-    return 'Needs work: $category';
+    return 'Требует работы: $category';
   }
 
   @override
-  String get quiz_category_types => 'Types';
+  String get quiz_category_types => 'Типы';
 
   @override
-  String get quiz_category_centers => 'Centers';
+  String get quiz_category_centers => 'Центры';
 
   @override
-  String get quiz_category_authorities => 'Authorities';
+  String get quiz_category_authorities => 'Авторитеты';
 
   @override
-  String get quiz_category_profiles => 'Profiles';
+  String get quiz_category_profiles => 'Профили';
 
   @override
-  String get quiz_category_gates => 'Gates';
+  String get quiz_category_gates => 'Ворота';
 
   @override
-  String get quiz_category_channels => 'Channels';
+  String get quiz_category_channels => 'Каналы';
 
   @override
-  String get quiz_category_definitions => 'Definitions';
+  String get quiz_category_definitions => 'Определённости';
 
   @override
-  String get quiz_category_general => 'General';
+  String get quiz_category_general => 'Общее';
 
   @override
-  String get quiz_explanation => 'Explanation';
+  String get quiz_explanation => 'Объяснение';
 
   @override
-  String get quiz_quizzes => 'Quizzes';
+  String get quiz_quizzes => 'Тесты';
 
   @override
-  String get quiz_questionsLabel => 'Questions';
+  String get quiz_questionsLabel => 'Вопросы';
 
   @override
-  String get quiz_shareProgress => 'Share Progress';
+  String get quiz_shareProgress => 'Поделиться прогрессом';
 
   @override
-  String get quiz_shareProgressSubject => 'My Human Design Learning Progress';
+  String get quiz_shareProgressSubject =>
+      'Мой прогресс в изучении Дизайна Человека';
 
   @override
   String get quiz_sharePerfect =>
-      'I achieved a perfect score! I\'m mastering Human Design.';
+      'Я достиг идеального результата! Осваиваю Дизайн Человека.';
 
   @override
   String get quiz_shareExcellent =>
-      'I\'m doing great on my Human Design learning journey!';
+      'Отлично продвигаюсь в изучении Дизайна Человека!';
 
   @override
   String get quiz_shareGoodJob =>
-      'I\'m learning about Human Design. Every quiz helps me grow!';
+      'Изучаю Дизайн Человека. Каждый тест помогает расти!';
 
   @override
   String quiz_shareSubject(String quizTitle, int score) {
-    return 'I scored $score% on \"$quizTitle\" - Human Design Quiz';
+    return 'Мой результат $score% в \"$quizTitle\" - Тест Дизайна Человека';
   }
 
   @override
-  String get quiz_failedToLoadStats => 'Failed to load stats';
+  String get quiz_failedToLoadStats => 'Не удалось загрузить статистику';
 
   @override
-  String get planetary_personality => 'Personality';
+  String get planetary_personality => 'Личность';
 
   @override
-  String get planetary_design => 'Design';
+  String get planetary_design => 'Дизайн';
 
   @override
-  String get planetary_consciousBirth => 'Conscious · Birth';
+  String get planetary_consciousBirth => 'Сознательное · Рождение';
 
   @override
-  String get planetary_unconsciousPrenatal => 'Unconscious · 88° Prenatal';
+  String get planetary_unconsciousPrenatal =>
+      'Бессознательное · 88° Пренатально';
 
   @override
   String get gamification_yourProgress => 'Ваш прогресс';
@@ -1988,39 +1988,40 @@ class AppLocalizationsRu extends AppLocalizations {
   String get auth_returnToHome => 'Вернуться на главную';
 
   @override
-  String get hashtags_explore => 'Explore Hashtags';
+  String get hashtags_explore => 'Хэштеги';
 
   @override
-  String get hashtags_trending => 'Trending';
+  String get hashtags_trending => 'В тренде';
 
   @override
-  String get hashtags_popular => 'Popular';
+  String get hashtags_popular => 'Популярные';
 
   @override
-  String get hashtags_hdTopics => 'HD Topics';
+  String get hashtags_hdTopics => 'Темы HD';
 
   @override
-  String get hashtags_noTrending => 'No trending hashtags yet';
+  String get hashtags_noTrending => 'Пока нет трендовых хэштегов';
 
   @override
-  String get hashtags_noPopular => 'No popular hashtags yet';
+  String get hashtags_noPopular => 'Пока нет популярных хэштегов';
 
   @override
-  String get hashtags_noHdTopics => 'No HD topics yet';
+  String get hashtags_noHdTopics => 'Пока нет тем HD';
 
   @override
-  String get hashtag_noPosts => 'No posts yet';
+  String get hashtag_noPosts => 'Пока нет постов';
 
   @override
-  String get hashtag_beFirst => 'Be the first to post with this hashtag!';
+  String get hashtag_beFirst => 'Будьте первым, кто напишет с этим хэштегом!';
 
   @override
   String hashtag_postCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count posts',
-      one: '1 post',
+      other: '$count постов',
+      few: '$count поста',
+      one: '1 пост',
     );
     return '$_temp0';
   }
@@ -2030,754 +2031,755 @@ class AppLocalizationsRu extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count posts today',
-      one: '1 post today',
+      other: '$count постов сегодня',
+      few: '$count поста сегодня',
+      one: '1 пост сегодня',
     );
     return '$_temp0';
   }
 
   @override
-  String get feed_forYou => 'For You';
+  String get feed_forYou => 'Для вас';
 
   @override
-  String get feed_trending => 'Trending';
+  String get feed_trending => 'В тренде';
 
   @override
-  String get feed_hdTopics => 'HD Topics';
+  String get feed_hdTopics => 'Темы HD';
 
   @override
   String feed_gateTitle(int number) {
-    return 'Gate $number';
+    return 'Ворота $number';
   }
 
   @override
   String feed_gatePosts(int number) {
-    return 'Posts about Gate $number';
+    return 'Посты о воротах $number';
   }
 
   @override
-  String get transit_events_title => 'Transit Events';
+  String get transit_events_title => 'События транзитов';
 
   @override
-  String get transit_events_happening => 'Happening Now';
+  String get transit_events_happening => 'Сейчас';
 
   @override
-  String get transit_events_upcoming => 'Upcoming';
+  String get transit_events_upcoming => 'Предстоящие';
 
   @override
-  String get transit_events_past => 'Past Events';
+  String get transit_events_past => 'Прошедшие';
 
   @override
-  String get transit_events_noCurrentEvents => 'No events happening right now';
+  String get transit_events_noCurrentEvents => 'Сейчас нет активных событий';
 
   @override
-  String get transit_events_noUpcomingEvents => 'No upcoming events scheduled';
+  String get transit_events_noUpcomingEvents => 'Нет запланированных событий';
 
   @override
-  String get transit_events_noPastEvents => 'No past events';
+  String get transit_events_noPastEvents => 'Нет прошедших событий';
 
   @override
   String get transit_events_live => 'LIVE';
 
   @override
-  String get transit_events_join => 'Join';
+  String get transit_events_join => 'Участвовать';
 
   @override
-  String get transit_events_joined => 'Joined';
+  String get transit_events_joined => 'Участвую';
 
   @override
-  String get transit_events_leave => 'Leave';
+  String get transit_events_leave => 'Покинуть';
 
   @override
-  String get transit_events_participating => 'participating';
+  String get transit_events_participating => 'участвуют';
 
   @override
-  String get transit_events_posts => 'posts';
+  String get transit_events_posts => 'постов';
 
   @override
-  String get transit_events_viewInsights => 'View Insights';
+  String get transit_events_viewInsights => 'Смотреть инсайты';
 
   @override
   String transit_events_endsIn(String time) {
-    return 'Ends in $time';
+    return 'Заканчивается через $time';
   }
 
   @override
   String transit_events_startsIn(String time) {
-    return 'Starts in $time';
+    return 'Начнётся через $time';
   }
 
   @override
-  String get transit_events_notFound => 'Event not found';
+  String get transit_events_notFound => 'Событие не найдено';
 
   @override
-  String get transit_events_communityPosts => 'Community Posts';
+  String get transit_events_communityPosts => 'Посты сообщества';
 
   @override
-  String get transit_events_noPosts => 'No posts yet for this event';
+  String get transit_events_noPosts => 'Пока нет постов для этого события';
 
   @override
-  String get transit_events_shareExperience => 'Share Experience';
+  String get transit_events_shareExperience => 'Поделиться опытом';
 
   @override
-  String get transit_events_participants => 'Participants';
+  String get transit_events_participants => 'Участники';
 
   @override
-  String get transit_events_duration => 'Duration';
+  String get transit_events_duration => 'Длительность';
 
   @override
-  String get transit_events_eventEnded => 'This event has ended';
+  String get transit_events_eventEnded => 'Событие завершилось';
 
   @override
-  String get transit_events_youreParticipating => 'You\'re participating!';
+  String get transit_events_youreParticipating => 'Вы участвуете!';
 
   @override
   String transit_events_experiencingWith(int count) {
-    return 'Experiencing this transit with $count others';
+    return 'Переживают этот транзит с $count другими';
   }
 
   @override
-  String get transit_events_joinCommunity => 'Join the Community';
+  String get transit_events_joinCommunity => 'Присоединиться к сообществу';
 
   @override
   String get transit_events_shareYourExperience =>
-      'Share your experience and connect with others';
+      'Поделитесь опытом и свяжитесь с другими';
 
   @override
-  String get activity_title => 'Friend Activity';
+  String get activity_title => 'Активность друзей';
 
   @override
-  String get activity_noActivities => 'No friend activity yet';
+  String get activity_noActivities => 'Пока нет активности друзей';
 
   @override
   String get activity_followFriends =>
-      'Follow friends to see their achievements and milestones here!';
+      'Подпишитесь на друзей, чтобы видеть их достижения здесь!';
 
   @override
-  String get activity_findFriends => 'Find Friends';
+  String get activity_findFriends => 'Найти друзей';
 
   @override
-  String get activity_celebrate => 'Celebrate';
+  String get activity_celebrate => 'Поздравить';
 
   @override
-  String get activity_celebrated => 'Celebrated';
+  String get activity_celebrated => 'Поздравили';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Отмена';
 
   @override
-  String get create => 'Create';
+  String get create => 'Создать';
 
   @override
-  String get groupChallenges_title => 'Group Challenges';
+  String get groupChallenges_title => 'Групповые челленджи';
 
   @override
-  String get groupChallenges_myTeams => 'My Teams';
+  String get groupChallenges_myTeams => 'Мои команды';
 
   @override
-  String get groupChallenges_challenges => 'Challenges';
+  String get groupChallenges_challenges => 'Челленджи';
 
   @override
-  String get groupChallenges_leaderboard => 'Leaderboard';
+  String get groupChallenges_leaderboard => 'Рейтинг';
 
   @override
-  String get groupChallenges_createTeam => 'Create Team';
+  String get groupChallenges_createTeam => 'Создать команду';
 
   @override
-  String get groupChallenges_teamName => 'Team Name';
+  String get groupChallenges_teamName => 'Название команды';
 
   @override
-  String get groupChallenges_teamNameHint => 'Enter a team name';
+  String get groupChallenges_teamNameHint => 'Введите название команды';
 
   @override
-  String get groupChallenges_teamDescription => 'Description';
+  String get groupChallenges_teamDescription => 'Описание';
 
   @override
-  String get groupChallenges_teamDescriptionHint => 'What is your team about?';
+  String get groupChallenges_teamDescriptionHint => 'О чём ваша команда?';
 
   @override
-  String get groupChallenges_teamCreated => 'Team created successfully!';
+  String get groupChallenges_teamCreated => 'Команда создана!';
 
   @override
-  String get groupChallenges_noTeams => 'No Teams Yet';
+  String get groupChallenges_noTeams => 'Пока нет команд';
 
   @override
   String get groupChallenges_noTeamsDescription =>
-      'Create or join a team to compete in group challenges!';
+      'Создайте или присоединитесь к команде для участия в групповых челленджах!';
 
   @override
   String groupChallenges_memberCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count members',
-      one: '1 member',
+      other: '$count участников',
+      few: '$count участника',
+      one: '1 участник',
     );
     return '$_temp0';
   }
 
   @override
   String groupChallenges_points(int points) {
-    return '$points pts';
+    return '$points очк.';
   }
 
   @override
-  String get groupChallenges_noChallenges => 'No Active Challenges';
+  String get groupChallenges_noChallenges => 'Нет активных челленджей';
 
   @override
-  String get groupChallenges_active => 'Active';
+  String get groupChallenges_active => 'Активные';
 
   @override
-  String get groupChallenges_upcoming => 'Upcoming';
+  String get groupChallenges_upcoming => 'Предстоящие';
 
   @override
   String groupChallenges_reward(int points) {
-    return '$points pts reward';
+    return '$points очк. награда';
   }
 
   @override
   String groupChallenges_teamsEnrolled(String count) {
-    return '$count teams';
+    return '$count команд';
   }
 
   @override
   String groupChallenges_participants(String count) {
-    return '$count participants';
+    return '$count участников';
   }
 
   @override
   String groupChallenges_endsIn(String time) {
-    return 'Ends in $time';
+    return 'Заканчивается через $time';
   }
 
   @override
-  String get groupChallenges_weekly => 'Weekly';
+  String get groupChallenges_weekly => 'Неделя';
 
   @override
-  String get groupChallenges_monthly => 'Monthly';
+  String get groupChallenges_monthly => 'Месяц';
 
   @override
-  String get groupChallenges_allTime => 'All Time';
+  String get groupChallenges_allTime => 'Всё время';
 
   @override
   String get groupChallenges_noTeamsOnLeaderboard =>
-      'No teams on leaderboard yet';
+      'Пока нет команд в рейтинге';
 
   @override
-  String get groupChallenges_pts => 'pts';
+  String get groupChallenges_pts => 'очк.';
 
   @override
-  String get groupChallenges_teamNotFound => 'Team not found';
+  String get groupChallenges_teamNotFound => 'Команда не найдена';
 
   @override
-  String get groupChallenges_members => 'Members';
+  String get groupChallenges_members => 'Участники';
 
   @override
-  String get groupChallenges_totalPoints => 'Total Points';
+  String get groupChallenges_totalPoints => 'Всего очков';
 
   @override
-  String get groupChallenges_joined => 'Joined';
+  String get groupChallenges_joined => 'Участвую';
 
   @override
-  String get groupChallenges_join => 'Join';
+  String get groupChallenges_join => 'Вступить';
 
   @override
-  String get groupChallenges_status => 'Status';
+  String get groupChallenges_status => 'Статус';
 
   @override
-  String get groupChallenges_about => 'About';
+  String get groupChallenges_about => 'О команде';
 
   @override
-  String get groupChallenges_noMembers => 'No members yet';
+  String get groupChallenges_noMembers => 'Пока нет участников';
 
   @override
-  String get groupChallenges_admin => 'Admin';
+  String get groupChallenges_admin => 'Админ';
 
   @override
   String groupChallenges_contributed(int points) {
-    return '$points pts contributed';
+    return '$points очк. внесено';
   }
 
   @override
-  String get groupChallenges_joinedTeam => 'Successfully joined the team!';
+  String get groupChallenges_joinedTeam => 'Вы вступили в команду!';
 
   @override
-  String get groupChallenges_leaveTeam => 'Leave Team';
+  String get groupChallenges_leaveTeam => 'Покинуть команду';
 
   @override
   String get groupChallenges_leaveConfirmation =>
-      'Are you sure you want to leave this team? Your contributed points will remain with the team.';
+      'Вы уверены, что хотите покинуть команду? Ваши очки останутся с командой.';
 
   @override
-  String get groupChallenges_leave => 'Leave';
+  String get groupChallenges_leave => 'Покинуть';
 
   @override
-  String get groupChallenges_leftTeam => 'You have left the team';
+  String get groupChallenges_leftTeam => 'Вы покинули команду';
 
   @override
-  String get groupChallenges_challengeDetails => 'Challenge Details';
+  String get groupChallenges_challengeDetails => 'Детали челленджа';
 
   @override
-  String get groupChallenges_challengeNotFound => 'Challenge not found';
+  String get groupChallenges_challengeNotFound => 'Челлендж не найден';
 
   @override
-  String get groupChallenges_target => 'Target';
+  String get groupChallenges_target => 'Цель';
 
   @override
-  String get groupChallenges_starts => 'Starts';
+  String get groupChallenges_starts => 'Начало';
 
   @override
-  String get groupChallenges_ends => 'Ends';
+  String get groupChallenges_ends => 'Конец';
 
   @override
-  String get groupChallenges_hdTypes => 'HD Types';
+  String get groupChallenges_hdTypes => 'Типы HD';
 
   @override
-  String get groupChallenges_noTeamsToEnroll => 'No Teams to Enroll';
+  String get groupChallenges_noTeamsToEnroll => 'Нет команд для записи';
 
   @override
   String get groupChallenges_createTeamToJoin =>
-      'Create a team first to enroll in challenges';
+      'Сначала создайте команду для участия в челленджах';
 
   @override
-  String get groupChallenges_enrollTeam => 'Enroll a Team';
+  String get groupChallenges_enrollTeam => 'Записать команду';
 
   @override
-  String get groupChallenges_enrolled => 'Enrolled';
+  String get groupChallenges_enrolled => 'Записаны';
 
   @override
-  String get groupChallenges_enroll => 'Enroll';
+  String get groupChallenges_enroll => 'Записать';
 
   @override
-  String get groupChallenges_teamEnrolled => 'Team enrolled successfully!';
+  String get groupChallenges_teamEnrolled => 'Команда успешно записана!';
 
   @override
-  String get groupChallenges_noTeamsEnrolled => 'No teams enrolled yet';
+  String get groupChallenges_noTeamsEnrolled => 'Пока нет записанных команд';
 
   @override
-  String get circles_title => 'Compatibility Circles';
+  String get circles_title => 'Круги совместимости';
 
   @override
-  String get circles_myCircles => 'My Circles';
+  String get circles_myCircles => 'Мои круги';
 
   @override
-  String get circles_invitations => 'Invitations';
+  String get circles_invitations => 'Приглашения';
 
   @override
-  String get circles_create => 'Create Circle';
+  String get circles_create => 'Создать круг';
 
   @override
-  String get circles_selectIcon => 'Select an icon';
+  String get circles_selectIcon => 'Выберите иконку';
 
   @override
-  String get circles_name => 'Circle Name';
+  String get circles_name => 'Название круга';
 
   @override
-  String get circles_nameHint => 'Family, Team, Friends...';
+  String get circles_nameHint => 'Семья, Команда, Друзья...';
 
   @override
-  String get circles_description => 'Description';
+  String get circles_description => 'Описание';
 
   @override
-  String get circles_descriptionHint => 'What is this circle for?';
+  String get circles_descriptionHint => 'Для чего этот круг?';
 
   @override
-  String get circles_created => 'Circle created successfully!';
+  String get circles_created => 'Круг успешно создан!';
 
   @override
-  String get circles_noCircles => 'No Circles Yet';
+  String get circles_noCircles => 'Пока нет кругов';
 
   @override
   String get circles_noCirclesDescription =>
-      'Create a circle to analyze compatibility with friends, family, or team members.';
+      'Создайте круг для анализа совместимости с друзьями, семьёй или коллегами.';
 
   @override
-  String get circles_suggestions => 'Quick Start';
+  String get circles_suggestions => 'Быстрый старт';
 
   @override
   String circles_memberCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count members',
-      one: '1 member',
+      other: '$count участников',
+      few: '$count участника',
+      one: '1 участник',
     );
     return '$_temp0';
   }
 
   @override
-  String get circles_private => 'Private';
+  String get circles_private => 'Приватный';
 
   @override
-  String get circles_noInvitations => 'No Invitations';
+  String get circles_noInvitations => 'Нет приглашений';
 
   @override
   String get circles_noInvitationsDescription =>
-      'Circle invitations you receive will appear here.';
+      'Здесь появятся приглашения в круги.';
 
   @override
   String circles_invitedBy(String name) {
-    return 'Invited by $name';
+    return 'Пригласил $name';
   }
 
   @override
-  String get circles_decline => 'Decline';
+  String get circles_decline => 'Отклонить';
 
   @override
-  String get circles_accept => 'Accept';
+  String get circles_accept => 'Принять';
 
   @override
-  String get circles_invitationDeclined => 'Invitation declined';
+  String get circles_invitationDeclined => 'Приглашение отклонено';
 
   @override
-  String get circles_invitationAccepted => 'You\'ve joined the circle!';
+  String get circles_invitationAccepted => 'Вы присоединились к кругу!';
 
   @override
-  String get circles_notFound => 'Circle not found';
+  String get circles_notFound => 'Круг не найден';
 
   @override
-  String get circles_invite => 'Invite Member';
+  String get circles_invite => 'Пригласить';
 
   @override
-  String get circles_members => 'Members';
+  String get circles_members => 'Участники';
 
   @override
-  String get circles_analysis => 'Analysis';
+  String get circles_analysis => 'Анализ';
 
   @override
-  String get circles_feed => 'Feed';
+  String get circles_feed => 'Лента';
 
   @override
-  String get circles_inviteMember => 'Invite Member';
+  String get circles_inviteMember => 'Пригласить участника';
 
   @override
-  String get circles_sendInvite => 'Send Invite';
+  String get circles_sendInvite => 'Отправить приглашение';
 
   @override
-  String get circles_invitationSent => 'Invitation sent!';
+  String get circles_invitationSent => 'Приглашение отправлено!';
 
   @override
-  String get circles_invitationFailed => 'Failed to send invitation';
+  String get circles_invitationFailed => 'Не удалось отправить приглашение';
 
   @override
-  String get circles_deleteTitle => 'Delete Circle';
+  String get circles_deleteTitle => 'Удалить круг';
 
   @override
   String circles_deleteConfirmation(String name) {
-    return 'Are you sure you want to delete \"$name\"? This action cannot be undone.';
+    return 'Вы уверены, что хотите удалить \"$name\"? Это действие нельзя отменить.';
   }
 
   @override
-  String get circles_deleted => 'Circle deleted';
+  String get circles_deleted => 'Круг удалён';
 
   @override
-  String get circles_noMembers => 'No members yet';
+  String get circles_noMembers => 'Пока нет участников';
 
   @override
-  String get circles_noAnalysis => 'No Analysis Yet';
+  String get circles_noAnalysis => 'Пока нет анализа';
 
   @override
   String get circles_runAnalysis =>
-      'Run a compatibility analysis to see how your circle members interact.';
+      'Запустите анализ совместимости, чтобы увидеть, как взаимодействуют участники круга.';
 
   @override
   String get circles_needMoreMembers =>
-      'Add at least 2 members to run an analysis.';
+      'Добавьте минимум 2 участников для анализа.';
 
   @override
-  String get circles_analyzeCompatibility => 'Analyze Compatibility';
+  String get circles_analyzeCompatibility => 'Анализировать совместимость';
 
   @override
-  String get circles_harmonyScore => 'Harmony Score';
+  String get circles_harmonyScore => 'Оценка гармонии';
 
   @override
-  String get circles_typeDistribution => 'Type Distribution';
+  String get circles_typeDistribution => 'Распределение типов';
 
   @override
-  String get circles_electromagneticConnections =>
-      'Electromagnetic Connections';
+  String get circles_electromagneticConnections => 'Электромагнитные связи';
 
   @override
   String get circles_electromagneticDesc =>
-      'Intense attraction - you complete each other';
+      'Интенсивное притяжение - вы дополняете друг друга';
 
   @override
-  String get circles_companionshipConnections => 'Companionship Connections';
+  String get circles_companionshipConnections => 'Связи товарищества';
 
   @override
   String get circles_companionshipDesc =>
-      'Comfort and stability - shared understanding';
+      'Комфорт и стабильность - общее понимание';
 
   @override
-  String get circles_groupStrengths => 'Group Strengths';
+  String get circles_groupStrengths => 'Сильные стороны группы';
 
   @override
-  String get circles_areasForGrowth => 'Areas for Growth';
+  String get circles_areasForGrowth => 'Области для роста';
 
   @override
-  String get circles_writePost => 'Share something with your circle...';
+  String get circles_writePost => 'Поделитесь чем-то с вашим кругом...';
 
   @override
-  String get circles_noPosts => 'No Posts Yet';
+  String get circles_noPosts => 'Пока нет постов';
 
   @override
   String get circles_beFirstToPost =>
-      'Be the first to share something with your circle!';
+      'Будьте первым, кто поделится чем-то с вашим кругом!';
 
   @override
-  String get experts_title => 'HD Experts';
+  String get experts_title => 'Эксперты HD';
 
   @override
-  String get experts_becomeExpert => 'Become an Expert';
+  String get experts_becomeExpert => 'Стать экспертом';
 
   @override
-  String get experts_filterBySpecialization => 'Filter by Specialization';
+  String get experts_filterBySpecialization => 'Фильтр по специализации';
 
   @override
-  String get experts_allExperts => 'All Experts';
+  String get experts_allExperts => 'Все эксперты';
 
   @override
-  String get experts_experts => 'Experts';
+  String get experts_experts => 'Эксперты';
 
   @override
-  String get experts_noExperts => 'No experts found';
+  String get experts_noExperts => 'Эксперты не найдены';
 
   @override
-  String get experts_featured => 'Featured Experts';
+  String get experts_featured => 'Рекомендуемые эксперты';
 
   @override
   String experts_followers(int count) {
-    return '$count followers';
+    return '$count подписчиков';
   }
 
   @override
-  String get experts_notFound => 'Expert not found';
+  String get experts_notFound => 'Эксперт не найден';
 
   @override
-  String get experts_following => 'Following';
+  String get experts_following => 'Подписан';
 
   @override
-  String get experts_follow => 'Follow';
+  String get experts_follow => 'Подписаться';
 
   @override
-  String get experts_about => 'About';
+  String get experts_about => 'О себе';
 
   @override
-  String get experts_specializations => 'Specializations';
+  String get experts_specializations => 'Специализации';
 
   @override
-  String get experts_credentials => 'Credentials';
+  String get experts_credentials => 'Квалификации';
 
   @override
-  String get experts_reviews => 'Reviews';
+  String get experts_reviews => 'Отзывы';
 
   @override
-  String get experts_writeReview => 'Write Review';
+  String get experts_writeReview => 'Написать отзыв';
 
   @override
-  String get experts_reviewContent => 'Your Review';
+  String get experts_reviewContent => 'Ваш отзыв';
 
   @override
   String get experts_reviewHint =>
-      'Share your experience working with this expert...';
+      'Поделитесь опытом работы с этим экспертом...';
 
   @override
-  String get experts_submitReview => 'Submit Review';
+  String get experts_submitReview => 'Отправить отзыв';
 
   @override
-  String get experts_reviewSubmitted => 'Review submitted successfully!';
+  String get experts_reviewSubmitted => 'Отзыв успешно отправлен!';
 
   @override
-  String get experts_noReviews => 'No reviews yet';
+  String get experts_noReviews => 'Пока нет отзывов';
 
   @override
-  String get experts_followersLabel => 'Followers';
+  String get experts_followersLabel => 'Подписчики';
 
   @override
-  String get experts_rating => 'Rating';
+  String get experts_rating => 'Рейтинг';
 
   @override
-  String get experts_years => 'Years';
+  String get experts_years => 'Лет';
 
   @override
-  String get learningPaths_title => 'Learning Paths';
+  String get learningPaths_title => 'Учебные пути';
 
   @override
-  String get learningPaths_explore => 'Explore';
+  String get learningPaths_explore => 'Обзор';
 
   @override
-  String get learningPaths_inProgress => 'In Progress';
+  String get learningPaths_inProgress => 'В процессе';
 
   @override
-  String get learningPaths_completed => 'Completed';
+  String get learningPaths_completed => 'Завершённые';
 
   @override
-  String get learningPaths_featured => 'Featured Paths';
+  String get learningPaths_featured => 'Рекомендуемые пути';
 
   @override
-  String get learningPaths_allPaths => 'All Paths';
+  String get learningPaths_allPaths => 'Все пути';
 
   @override
-  String get learningPaths_noPathsExplore => 'No learning paths available';
+  String get learningPaths_noPathsExplore => 'Нет доступных учебных путей';
 
   @override
-  String get learningPaths_noPathsInProgress => 'No Paths In Progress';
+  String get learningPaths_noPathsInProgress => 'Нет путей в процессе';
 
   @override
   String get learningPaths_noPathsInProgressDescription =>
-      'Enroll in a learning path to start your journey!';
+      'Запишитесь на учебный путь, чтобы начать!';
 
   @override
-  String get learningPaths_browsePaths => 'Browse Paths';
+  String get learningPaths_browsePaths => 'Обзор путей';
 
   @override
-  String get learningPaths_noPathsCompleted => 'No Completed Paths';
+  String get learningPaths_noPathsCompleted => 'Нет завершённых путей';
 
   @override
   String get learningPaths_noPathsCompletedDescription =>
-      'Complete learning paths to see them here!';
+      'Завершённые учебные пути появятся здесь!';
 
   @override
   String learningPaths_enrolled(int count) {
-    return '$count enrolled';
+    return '$count записано';
   }
 
   @override
   String learningPaths_stepsCount(int count) {
-    return '$count steps';
+    return '$count шагов';
   }
 
   @override
   String learningPaths_progress(int completed, int total) {
-    return '$completed of $total steps';
+    return '$completed из $total шагов';
   }
 
   @override
-  String get learningPaths_resume => 'Resume';
+  String get learningPaths_resume => 'Продолжить';
 
   @override
   String learningPaths_completedOn(String date) {
-    return 'Completed on $date';
+    return 'Завершён $date';
   }
 
   @override
-  String get learningPathNotFound => 'Learning path not found';
+  String get learningPathNotFound => 'Учебный путь не найден';
 
   @override
   String learningPathMinutes(int minutes) {
-    return '$minutes min';
+    return '$minutes мин';
   }
 
   @override
   String learningPathSteps(int count) {
-    return '$count steps';
+    return '$count шагов';
   }
 
   @override
   String learningPathBy(String author) {
-    return 'By $author';
+    return 'От $author';
   }
 
   @override
   String learningPathEnrolled(int count) {
-    return '$count enrolled';
+    return '$count записано';
   }
 
   @override
   String learningPathCompleted(int count) {
-    return '$count completed';
+    return '$count завершено';
   }
 
   @override
-  String get learningPathEnroll => 'Start Learning';
+  String get learningPathEnroll => 'Начать обучение';
 
   @override
-  String get learningPathYourProgress => 'Your Progress';
+  String get learningPathYourProgress => 'Ваш прогресс';
 
   @override
-  String get learningPathCompletedBadge => 'Completed';
+  String get learningPathCompletedBadge => 'Завершён';
 
   @override
   String learningPathProgressText(int completed, int total) {
-    return '$completed of $total steps completed';
+    return '$completed из $total шагов завершено';
   }
 
   @override
-  String get learningPathStepsTitle => 'Learning Steps';
+  String get learningPathStepsTitle => 'Шаги обучения';
 
   @override
-  String get learningPathEnrollTitle => 'Start This Path?';
+  String get learningPathEnrollTitle => 'Начать этот путь?';
 
   @override
   String learningPathEnrollMessage(String title) {
-    return 'You\'ll be enrolled in \"$title\" and can track your progress as you complete each step.';
+    return 'Вы будете записаны на \"$title\" и сможете отслеживать прогресс.';
   }
 
   @override
-  String get learningPathViewContent => 'View Content';
+  String get learningPathViewContent => 'Просмотреть контент';
 
   @override
-  String get learningPathMarkComplete => 'Mark as Complete';
+  String get learningPathMarkComplete => 'Отметить как завершённое';
 
   @override
-  String get learningPathStepCompleted => 'Step completed!';
+  String get learningPathStepCompleted => 'Шаг завершён!';
 
   @override
-  String get thought_title => 'Thoughts';
+  String get thought_title => 'Мысли';
 
   @override
-  String get thought_feedTitle => 'Thoughts';
+  String get thought_feedTitle => 'Мысли';
 
   @override
-  String get thought_createNew => 'Share a Thought';
+  String get thought_createNew => 'Поделиться мыслью';
 
   @override
-  String get thought_emptyFeed => 'Your thoughts feed is empty';
+  String get thought_emptyFeed => 'Лента мыслей пуста';
 
   @override
   String get thought_emptyFeedMessage =>
-      'Follow people or share a thought to get started';
+      'Подпишитесь на людей или поделитесь мыслью';
 
   @override
-  String get thought_regenerate => 'Regenerate';
+  String get thought_regenerate => 'Репост';
 
   @override
   String thought_regeneratedFrom(String username) {
-    return 'Regenerated from @$username';
+    return 'Репост от @$username';
   }
 
   @override
-  String get thought_regenerateSuccess => 'Thought regenerated to your wall!';
+  String get thought_regenerateSuccess => 'Мысль добавлена на вашу стену!';
 
   @override
-  String get thought_regenerateConfirm => 'Regenerate this thought?';
+  String get thought_regenerateConfirm => 'Сделать репост?';
 
   @override
   String get thought_regenerateDescription =>
-      'This will share this thought to your wall, crediting the original author.';
+      'Мысль появится на вашей стене со ссылкой на автора.';
 
   @override
-  String get thought_addComment => 'Add a comment (optional)';
+  String get thought_addComment => 'Добавить комментарий (необязательно)';
 
   @override
   String thought_regenerateCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count regenerates',
-      one: '1 regenerate',
+      other: '$count репостов',
+      few: '$count репоста',
+      one: '1 репост',
     );
     return '$_temp0';
   }
 
   @override
-  String get thought_cannotRegenerateOwn =>
-      'You cannot regenerate your own thought';
+  String get thought_cannotRegenerateOwn => 'Нельзя сделать репост своей мысли';
 
   @override
-  String get thought_alreadyRegenerated =>
-      'You have already regenerated this thought';
+  String get thought_alreadyRegenerated => 'Вы уже сделали репост этой мысли';
 
   @override
-  String get thought_postDetail => 'Thought';
+  String get thought_postDetail => 'Мысль';
 }
