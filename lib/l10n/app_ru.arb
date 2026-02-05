@@ -258,14 +258,11 @@
   "social_title": "Социальное",
   "social_thoughts": "Мысли",
   "social_discover": "Поиск",
-  "social_friends": "Друзья",
   "social_groups": "Группы",
   "social_invite": "Пригласить",
-  "social_addFriend": "Добавить друга",
   "social_createPost": "Поделитесь мыслью...",
   "social_noThoughtsYet": "Пока нет записей",
   "social_noThoughtsMessage": "Будьте первым, кто поделится своими открытиями о Дизайне Человека!",
-  "social_sendRequest": "Отправить запрос",
   "social_createGroup": "Создать группу",
   "social_invite": "Пригласить",
   "social_members": "Участники",
@@ -285,27 +282,10 @@
   "social_friendsOnly": "Только друзья",
   "social_public": "Публично",
   "social_shared": "Общие",
-  "social_noFriendsYet": "Пока нет друзей",
-  "social_noFriendsMessage": "Добавьте друзей для сравнения карт и изучения ваших связей.",
   "social_noGroupsYet": "Пока нет групп",
   "social_noGroupsMessage": "Создайте группы для анализа командной динамики с помощью Пента-анализа.",
   "social_noSharedCharts": "Нет общих карт",
-  "social_noSharedChartsMessage": "Здесь появятся карты, которыми поделились с вами друзья.",
-  "social_pendingRequests": "Ожидающие запросы",
-  "social_friendRequests": "Запросы в друзья",
-  "social_noPendingRequests": "Нет ожидающих запросов",
-  "social_addFriendPrompt": "Введите email друга, чтобы отправить запрос.",
-  "social_emailLabel": "Email",
-  "social_emailHint": "friend@example.com",
-  "social_userNotFound": "Пользователь с таким email не найден",
-  "social_requestSent": "Запрос дружбы отправлен {name}!",
-  "@social_requestSent": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
+  "social_noSharedChartsMessage": "Здесь появятся карты, которыми с вами поделились.",
   "social_createGroupPrompt": "Создайте группу для анализа командной динамики.",
   "social_groupName": "Название группы",
   "social_groupNameHint": "Семья, Команда и т.д.",
@@ -321,15 +301,6 @@
   },
   "social_groupNameRequired": "Пожалуйста, введите название группы",
   "social_createGroupFailed": "Не удалось создать группу. Попробуйте снова.",
-  "social_friendsSince": "Друзья с {date}",
-  "@social_friendsSince": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
-  "social_compareCharts": "Сравнить карты",
   "social_noDescription": "Без описания",
   "social_admin": "Админ",
   "social_sharedBy": "Поделился {name}",
@@ -340,17 +311,9 @@
       }
     }
   },
-  "social_loadFriendsFailed": "Не удалось загрузить друзей",
   "social_loadGroupsFailed": "Не удалось загрузить группы",
   "social_loadSharedFailed": "Не удалось загрузить общие карты",
-  "social_sentAgo": "Отправлено {time}",
-  "@social_sentAgo": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
+  "social_userNotFound": "Пользователь не найден",
   "time_minutesAgo": "{minutes} мин. назад",
   "@time_minutesAgo": {
     "placeholders": {

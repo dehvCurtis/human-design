@@ -62,17 +62,13 @@ class _ReactionButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (hasReaction)
-              Text(
-                currentReaction!.emoji,
-                style: const TextStyle(fontSize: 18),
-              )
-            else
-              Icon(
-                Icons.thumb_up_outlined,
-                size: 20,
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-              ),
+            Icon(
+              hasReaction ? Icons.favorite : Icons.favorite_border,
+              size: 20,
+              color: hasReaction
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
             const SizedBox(width: 6),
             Text(
               hasReaction ? currentReaction!.label : 'React',

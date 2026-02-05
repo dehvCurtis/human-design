@@ -17,8 +17,12 @@ class PostCard extends StatelessWidget {
     this.onHashtagTap,
     this.onRegenerate,
     this.onOriginalUserTap,
+    this.onEdit,
+    this.onDelete,
+    this.onReport,
     this.showFullContent = false,
     this.canRegenerate = true,
+    this.isOwnPost = false,
   });
 
   final Post post;
@@ -30,8 +34,12 @@ class PostCard extends StatelessWidget {
   final void Function(String hashtag)? onHashtagTap;
   final VoidCallback? onRegenerate;
   final VoidCallback? onOriginalUserTap;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final VoidCallback? onReport;
   final bool showFullContent;
   final bool canRegenerate;
+  final bool isOwnPost;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +73,11 @@ class PostCard extends StatelessWidget {
                 postType: post.postType,
                 createdAt: post.createdAt,
                 onUserTap: onUserTap,
+                onShare: onShare,
+                onEdit: onEdit,
+                onDelete: onDelete,
+                onReport: onReport,
+                isOwnPost: isOwnPost,
               ),
 
               const SizedBox(height: 12),
@@ -148,9 +161,8 @@ class PostCard extends StatelessWidget {
                 currentReaction: post.userReaction,
                 onReaction: onReaction,
                 onComment: onComment,
-                onShare: onShare,
                 onRegenerate: onRegenerate,
-                canRegenerate: canRegenerate,
+                canRegenerate: canRegenerate && !isOwnPost,
                 isRegenerate: post.isRegenerate,
               ),
             ],
@@ -169,6 +181,11 @@ class _PostHeader extends StatelessWidget {
     required this.postType,
     required this.createdAt,
     required this.onUserTap,
+    required this.onShare,
+    this.onEdit,
+    this.onDelete,
+    this.onReport,
+    this.isOwnPost = false,
   });
 
   final String userName;
@@ -177,6 +194,11 @@ class _PostHeader extends StatelessWidget {
   final PostType postType;
   final DateTime createdAt;
   final VoidCallback onUserTap;
+  final VoidCallback onShare;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+  final VoidCallback? onReport;
+  final bool isOwnPost;
 
   @override
   Widget build(BuildContext context) {
@@ -251,11 +273,65 @@ class _PostHeader extends StatelessWidget {
         ),
 
         // Menu
-        IconButton(
+        PopupMenuButton<String>(
           icon: const Icon(Icons.more_vert, size: 20),
-          onPressed: () {
-            // Show post menu
+          onSelected: (value) {
+            switch (value) {
+              case 'share':
+                onShare();
+              case 'edit':
+                onEdit?.call();
+              case 'delete':
+                onDelete?.call();
+              case 'report':
+                onReport?.call();
+            }
           },
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 'share',
+              child: Row(
+                children: [
+                  Icon(Icons.share_outlined, size: 20),
+                  SizedBox(width: 12),
+                  Text('Share'),
+                ],
+              ),
+            ),
+            if (isOwnPost && onEdit != null)
+              const PopupMenuItem(
+                value: 'edit',
+                child: Row(
+                  children: [
+                    Icon(Icons.edit_outlined, size: 20),
+                    SizedBox(width: 12),
+                    Text('Edit'),
+                  ],
+                ),
+              ),
+            if (isOwnPost && onDelete != null)
+              const PopupMenuItem(
+                value: 'delete',
+                child: Row(
+                  children: [
+                    Icon(Icons.delete_outline, size: 20, color: Colors.red),
+                    SizedBox(width: 12),
+                    Text('Delete', style: TextStyle(color: Colors.red)),
+                  ],
+                ),
+              ),
+            if (!isOwnPost && onReport != null)
+              const PopupMenuItem(
+                value: 'report',
+                child: Row(
+                  children: [
+                    Icon(Icons.flag_outlined, size: 20),
+                    SizedBox(width: 12),
+                    Text('Report'),
+                  ],
+                ),
+              ),
+          ],
         ),
       ],
     );
@@ -721,7 +797,6 @@ class _PostActionBar extends StatelessWidget {
     this.currentReaction,
     required this.onReaction,
     required this.onComment,
-    required this.onShare,
     this.onRegenerate,
     this.canRegenerate = true,
     this.isRegenerate = false,
@@ -730,7 +805,6 @@ class _PostActionBar extends StatelessWidget {
   final ReactionType? currentReaction;
   final void Function(ReactionType) onReaction;
   final VoidCallback onComment;
-  final VoidCallback onShare;
   final VoidCallback? onRegenerate;
   final bool canRegenerate;
   final bool isRegenerate;
@@ -740,7 +814,7 @@ class _PostActionBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        // Reaction button from ReactionBar
+        // Reaction button
         Expanded(
           child: _ReactionButtonCompact(
             currentReaction: currentReaction,
@@ -749,29 +823,18 @@ class _PostActionBar extends StatelessWidget {
         ),
         // Comment button
         Expanded(
-          child: _ActionButtonCompact(
+          child: _ActionIconButton(
             icon: Icons.chat_bubble_outline,
-            label: 'Comment',
             onTap: onComment,
           ),
         ),
-        // Regenerate button (only show if handler provided and can regenerate)
-        if (onRegenerate != null)
-          Expanded(
-            child: _ActionButtonCompact(
-              icon: Icons.repeat,
-              label: 'Regenerate',
-              onTap: canRegenerate ? onRegenerate! : null,
-              isDisabled: !canRegenerate,
-              isActive: isRegenerate,
-            ),
-          ),
-        // Share button
+        // Regenerate button (repost functionality)
         Expanded(
-          child: _ActionButtonCompact(
-            icon: Icons.share_outlined,
-            label: 'Share',
-            onTap: onShare,
+          child: _ActionIconButton(
+            icon: Icons.repeat,
+            onTap: canRegenerate ? onRegenerate : null,
+            isDisabled: !canRegenerate || onRegenerate == null,
+            isActive: isRegenerate,
           ),
         ),
       ],
@@ -798,36 +861,14 @@ class _ReactionButtonCompact extends StatelessWidget {
       onLongPress: () => _showReactionPicker(context),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (hasReaction)
-              Text(
-                currentReaction!.emoji,
-                style: const TextStyle(fontSize: 16),
-              )
-            else
-              Icon(
-                Icons.thumb_up_outlined,
-                size: 18,
-                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-              ),
-            const SizedBox(width: 4),
-            Flexible(
-              child: Text(
-                hasReaction ? currentReaction!.label : 'React',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: hasReaction
-                      ? theme.colorScheme.primary
-                      : theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                  fontWeight: hasReaction ? FontWeight.w600 : FontWeight.normal,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+        child: Center(
+          child: Icon(
+            hasReaction ? Icons.favorite : Icons.favorite_border,
+            size: 22,
+            color: hasReaction
+                ? theme.colorScheme.primary
+                : theme.colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
         ),
       ),
     );
@@ -847,17 +888,15 @@ class _ReactionButtonCompact extends StatelessWidget {
   }
 }
 
-class _ActionButtonCompact extends StatelessWidget {
-  const _ActionButtonCompact({
+class _ActionIconButton extends StatelessWidget {
+  const _ActionIconButton({
     required this.icon,
-    required this.label,
     required this.onTap,
     this.isDisabled = false,
     this.isActive = false,
   });
 
   final IconData icon;
-  final String label;
   final VoidCallback? onTap;
   final bool isDisabled;
   final bool isActive;
@@ -876,24 +915,8 @@ class _ActionButtonCompact extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 18, color: color),
-            const SizedBox(width: 4),
-            Flexible(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: color,
-                  fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
+        child: Center(
+          child: Icon(icon, size: 22, color: color),
         ),
       ),
     );

@@ -263,14 +263,11 @@
   "social_title": "Social",
   "social_thoughts": "Thoughts",
   "social_discover": "Discover",
-  "social_friends": "Friends",
   "social_groups": "Groups",
   "social_invite": "Invite",
-  "social_addFriend": "Add Friend",
   "social_createPost": "Share a thought...",
   "social_noThoughtsYet": "No thoughts yet",
   "social_noThoughtsMessage": "Be the first to share your Human Design insights!",
-  "social_sendRequest": "Send Request",
   "social_createGroup": "Create Group",
   "social_invite": "Invite",
   "social_members": "Members",
@@ -290,27 +287,10 @@
   "social_friendsOnly": "Friends Only",
   "social_public": "Public",
   "social_shared": "Shared",
-  "social_noFriendsYet": "No Friends Yet",
-  "social_noFriendsMessage": "Add friends to compare charts and see how you connect.",
   "social_noGroupsYet": "No Groups Yet",
   "social_noGroupsMessage": "Create groups to analyze team dynamics with Penta analysis.",
   "social_noSharedCharts": "No Shared Charts",
-  "social_noSharedChartsMessage": "Charts that friends share with you will appear here.",
-  "social_pendingRequests": "Pending Requests",
-  "social_friendRequests": "Friend Requests",
-  "social_noPendingRequests": "No pending requests",
-  "social_addFriendPrompt": "Enter your friend's email address to send a request.",
-  "social_emailLabel": "Email",
-  "social_emailHint": "friend@example.com",
-  "social_userNotFound": "No user found with that email",
-  "social_requestSent": "Friend request sent to {name}!",
-  "@social_requestSent": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
+  "social_noSharedChartsMessage": "Charts shared with you will appear here.",
   "social_createGroupPrompt": "Create a group to analyze team dynamics.",
   "social_groupName": "Group Name",
   "social_groupNameHint": "Family, Team, etc.",
@@ -326,15 +306,6 @@
   },
   "social_groupNameRequired": "Please enter a group name",
   "social_createGroupFailed": "Failed to create group. Please try again.",
-  "social_friendsSince": "Friends since {date}",
-  "@social_friendsSince": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
-  "social_compareCharts": "Compare Charts",
   "social_noDescription": "No description",
   "social_admin": "Admin",
   "social_sharedBy": "Shared by {name}",
@@ -345,9 +316,9 @@
       }
     }
   },
-  "social_loadFriendsFailed": "Failed to load friends",
   "social_loadGroupsFailed": "Failed to load groups",
   "social_loadSharedFailed": "Failed to load shared charts",
+  "social_userNotFound": "User not found",
 
   "discovery_userNotFound": "User not found",
   "discovery_following": "Following",
@@ -383,14 +354,6 @@
   "popularCharts_title": "Popular Charts",
   "popularCharts_subtitle": "Most followed public charts",
 
-  "social_sentAgo": "Sent {time}",
-  "@social_sentAgo": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
   "time_minutesAgo": "{minutes}m ago",
   "@time_minutesAgo": {
     "placeholders": {

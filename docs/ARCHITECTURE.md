@@ -23,7 +23,7 @@ lib/
 │   ├── profile/          # User profile
 │   ├── settings/         # App settings
 │   ├── sharing/          # Chart export & sharing
-│   ├── social/           # Friends & groups
+│   ├── social/           # Following & groups
 │   ├── stories/          # 24h ephemeral content
 │   └── subscription/     # Premium features
 └── shared/

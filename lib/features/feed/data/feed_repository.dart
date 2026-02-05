@@ -24,19 +24,43 @@ class FeedRepository {
   Future<List<Post>> getFeed({int limit = 20, int offset = 0}) async {
     final userId = _currentUserId;
 
-    // Get posts from followed users and public posts
-    // Include original_post join for regenerated posts
-    final response = await _client
+    // Build the query for posts
+    var query = _client
         .from('posts')
         .select('''
           *,
           user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
-          original_post:posts!posts_original_post_id_fkey(
+          original_post:posts!original_post_id(
             *,
             user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
           )
-        ''')
-        .or('visibility.eq.public${userId != null ? ',user_id.in.(select following_id from user_follows where follower_id=eq.$userId)' : ''}')
+        ''');
+
+    // If user is logged in, get posts from followed users + public posts
+    if (userId != null) {
+      // First get the list of followed user IDs
+      final followsResponse = await _client
+          .from('user_follows')
+          .select('following_id')
+          .eq('follower_id', userId);
+
+      final followedIds = (followsResponse as List)
+          .map((f) => f['following_id'] as String)
+          .toList();
+
+      if (followedIds.isNotEmpty) {
+        // Show public posts OR posts from followed users
+        query = query.or('visibility.eq.public,user_id.in.(${followedIds.join(",")})');
+      } else {
+        // No follows, just show public posts
+        query = query.eq('visibility', 'public');
+      }
+    } else {
+      // Not logged in, just show public posts
+      query = query.eq('visibility', 'public');
+    }
+
+    final response = await query
         .order('created_at', ascending: false)
         .range(offset, offset + limit - 1);
 
@@ -68,7 +92,7 @@ class FeedRepository {
         .select('''
           *,
           user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
-          original_post:posts!posts_original_post_id_fkey(
+          original_post:posts!original_post_id(
             *,
             user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
           )
@@ -95,7 +119,7 @@ class FeedRepository {
         .select('''
           *,
           user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
-          original_post:posts!posts_original_post_id_fkey(
+          original_post:posts!original_post_id(
             *,
             user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
           )
@@ -242,6 +266,8 @@ class FeedRepository {
 
   /// Get comments for a post
   Future<List<PostComment>> getPostComments(String postId) async {
+    final userId = _currentUserId;
+
     final response = await _client
         .from('post_comments')
         .select('''
@@ -252,11 +278,13 @@ class FeedRepository {
         .isFilter('parent_id', null)
         .order('created_at', ascending: true);
 
-    final comments =
+    var comments =
         (response as List).map((json) => PostComment.fromJson(json)).toList();
 
     // Get replies for each comment
     final commentIds = comments.map((c) => c.id).toList();
+    List<PostComment> allReplies = [];
+
     if (commentIds.isNotEmpty) {
       final repliesResponse = await _client
           .from('post_comments')
@@ -267,19 +295,38 @@ class FeedRepository {
           .inFilter('parent_id', commentIds)
           .order('created_at', ascending: true);
 
-      final replies = (repliesResponse as List)
+      allReplies = (repliesResponse as List)
           .map((json) => PostComment.fromJson(json))
           .toList();
+    }
 
-      // Group replies by parent
+    // Get user's reactions for all comments and replies
+    if (userId != null) {
+      final allCommentIds = [...commentIds, ...allReplies.map((r) => r.id)];
+      if (allCommentIds.isNotEmpty) {
+        final userReactions = await _getUserCommentReactions(allCommentIds);
+
+        // Attach reactions to top-level comments
+        comments = comments.map((comment) {
+          return comment.copyWith(userReaction: userReactions[comment.id]);
+        }).toList();
+
+        // Attach reactions to replies
+        allReplies = allReplies.map((reply) {
+          return reply.copyWith(userReaction: userReactions[reply.id]);
+        }).toList();
+      }
+    }
+
+    // Group replies by parent and attach to comments
+    if (allReplies.isNotEmpty) {
       final repliesByParent = <String, List<PostComment>>{};
-      for (final reply in replies) {
+      for (final reply in allReplies) {
         repliesByParent
             .putIfAbsent(reply.parentId!, () => [])
             .add(reply);
       }
 
-      // Attach replies to comments
       return comments.map((comment) {
         return comment.copyWith(
           replies: repliesByParent[comment.id] ?? [],
@@ -342,6 +389,60 @@ class FeedRepository {
     await _client.from('post_comments').delete().eq('id', commentId);
   }
 
+  // ==================== Comment Reactions ====================
+
+  /// Add a reaction to a comment
+  Future<void> addCommentReaction(String commentId, ReactionType reactionType) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Remove existing reaction first (if any)
+    await _client
+        .from('reactions')
+        .delete()
+        .eq('user_id', userId)
+        .eq('comment_id', commentId);
+
+    // Add new reaction
+    await _client.from('reactions').insert({
+      'user_id': userId,
+      'comment_id': commentId,
+      'reaction_type': reactionType.dbValue,
+    });
+  }
+
+  /// Remove a reaction from a comment
+  Future<void> removeCommentReaction(String commentId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('reactions')
+        .delete()
+        .eq('user_id', userId)
+        .eq('comment_id', commentId);
+  }
+
+  /// Get user's reactions for a list of comments
+  Future<Map<String, ReactionType>> _getUserCommentReactions(List<String> commentIds) async {
+    final userId = _currentUserId;
+    if (userId == null) return {};
+
+    final response = await _client
+        .from('reactions')
+        .select('comment_id, reaction_type')
+        .eq('user_id', userId)
+        .inFilter('comment_id', commentIds);
+
+    final reactions = <String, ReactionType>{};
+    for (final json in response as List) {
+      reactions[json['comment_id'] as String] =
+          _parseReactionType(json['reaction_type'] as String);
+    }
+
+    return reactions;
+  }
+
   // ==================== Regenerate (Repost) ====================
 
   /// Regenerate (repost) a thought to your wall
@@ -376,7 +477,7 @@ class FeedRepository {
     }).select('''
       *,
       user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
-      original_post:posts!posts_original_post_id_fkey(
+      original_post:posts!original_post_id(
         *,
         user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
       )
@@ -396,7 +497,7 @@ class FeedRepository {
         .select('''
           *,
           user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type),
-          original_post:posts!posts_original_post_id_fkey(
+          original_post:posts!original_post_id(
             *,
             user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
           )

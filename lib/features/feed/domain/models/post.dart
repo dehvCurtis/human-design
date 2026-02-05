@@ -93,9 +93,11 @@ class Post {
     final user = json['user'] as Map<String, dynamic>?;
 
     // Parse original post if this is a regenerate
+    // Note: PostgREST returns [] instead of null for empty joins
     Post? originalPost;
-    if (json['original_post'] != null) {
-      originalPost = Post.fromJson(json['original_post'] as Map<String, dynamic>);
+    final originalPostData = json['original_post'];
+    if (originalPostData != null && originalPostData is Map<String, dynamic>) {
+      originalPost = Post.fromJson(originalPostData);
     }
 
     return Post(
@@ -253,6 +255,7 @@ class PostComment {
     required this.createdAt,
     this.updatedAt,
     this.replies,
+    this.userReaction,
   });
 
   final String id;
@@ -266,6 +269,7 @@ class PostComment {
   final DateTime createdAt;
   final DateTime? updatedAt;
   final List<PostComment>? replies;
+  final ReactionType? userReaction;
 
   bool get isReply => parentId != null;
 
@@ -300,6 +304,7 @@ class PostComment {
     DateTime? createdAt,
     DateTime? updatedAt,
     List<PostComment>? replies,
+    ReactionType? userReaction,
   }) {
     return PostComment(
       id: id ?? this.id,
@@ -313,6 +318,7 @@ class PostComment {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       replies: replies ?? this.replies,
+      userReaction: userReaction ?? this.userReaction,
     );
   }
 }

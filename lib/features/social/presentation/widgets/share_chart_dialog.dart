@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/error_handler.dart';
+import '../../../sharing/domain/sharing_providers.dart';
 import '../../domain/social_providers.dart';
 
 /// Dialog for sharing a chart with friends or groups
@@ -37,55 +41,40 @@ class ShareChartDialog extends ConsumerStatefulWidget {
   ConsumerState<ShareChartDialog> createState() => _ShareChartDialogState();
 }
 
-class _ShareChartDialogState extends ConsumerState<ShareChartDialog>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _ShareChartDialogState extends ConsumerState<ShareChartDialog> {
   bool _isSharing = false;
+  bool _isCreatingLink = false;
   String? _errorMessage;
   String? _successMessage;
+  String? _shareLink;
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _shareWithFriend(String friendId, String friendName) async {
+  Future<void> _createShareLink() async {
     setState(() {
-      _isSharing = true;
+      _isCreatingLink = true;
       _errorMessage = null;
       _successMessage = null;
     });
 
     try {
-      await ref.read(socialNotifierProvider.notifier).shareChartWithFriend(
+      final link = await ref.read(sharingNotifierProvider.notifier).createChartShareLink(
             chartId: widget.chartId,
-            friendId: friendId,
           );
 
       if (mounted) {
         setState(() {
-          _isSharing = false;
-          _successMessage = 'Chart shared with $friendName';
+          _isCreatingLink = false;
+          _shareLink = link.url;
+          _successMessage = 'Share link created!';
         });
 
-        // Close dialog after short delay
-        await Future.delayed(const Duration(seconds: 1));
-        if (mounted) {
-          Navigator.of(context).pop(true);
-        }
+        // Copy to clipboard
+        await Clipboard.setData(ClipboardData(text: link.url));
       }
     } catch (e) {
       if (mounted) {
         setState(() {
-          _isSharing = false;
-          _errorMessage = ErrorHandler.getUserMessage(e, context: 'share chart');
+          _isCreatingLink = false;
+          _errorMessage = ErrorHandler.getUserMessage(e, context: 'create share link');
         });
       }
     }
@@ -239,25 +228,49 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog>
             ),
           ),
 
-          // Tabs
-          TabBar(
-            controller: _tabController,
-            tabs: const [
-              Tab(text: 'Friends'),
-              Tab(text: 'Groups'),
-            ],
-          ),
-
           // Content
           Expanded(
-            child: _isSharing
+            child: _isSharing || _isCreatingLink
                 ? const Center(child: CircularProgressIndicator())
-                : TabBarView(
-                    controller: _tabController,
-                    children: [
-                      _FriendsTab(onShare: _shareWithFriend),
-                      _GroupsTab(onShare: _shareWithGroup),
-                    ],
+                : SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Primary option: Create Share Link
+                        _ShareLinkSection(
+                          shareLink: _shareLink,
+                          onCreateLink: _createShareLink,
+                          onCopyLink: () async {
+                            if (_shareLink != null) {
+                              await Clipboard.setData(ClipboardData(text: _shareLink!));
+                              if (!context.mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Link copied to clipboard')),
+                              );
+                            }
+                          },
+                          onManageLinks: () {
+                            Navigator.of(context).pop();
+                            context.push(AppRoutes.myShares);
+                          },
+                        ),
+
+                        const Divider(height: 32),
+
+                        // Secondary option: Share with Groups
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'Share with Groups',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        _GroupsList(onShare: _shareWithGroup),
+                      ],
+                    ),
                   ),
           ),
         ],
@@ -266,89 +279,137 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog>
   }
 }
 
-class _FriendsTab extends ConsumerWidget {
-  const _FriendsTab({required this.onShare});
+class _ShareLinkSection extends StatelessWidget {
+  const _ShareLinkSection({
+    required this.shareLink,
+    required this.onCreateLink,
+    required this.onCopyLink,
+    required this.onManageLinks,
+  });
 
-  final void Function(String friendId, String friendName) onShare;
+  final String? shareLink;
+  final VoidCallback onCreateLink;
+  final VoidCallback onCopyLink;
+  final VoidCallback onManageLinks;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final friendsAsync = ref.watch(friendsProvider);
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return friendsAsync.when(
-      data: (friends) {
-        if (friends.isEmpty) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.people_outline,
-                    size: 48,
-                    color: AppColors.textSecondaryLight.withAlpha(150),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'No Friends Yet',
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Add friends to share your chart with them.',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondaryLight,
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withAlpha(25),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.link, color: AppColors.primary, size: 28),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Create Share Link',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
+                    const SizedBox(height: 4),
+                    Text(
+                      'Anyone with the link can view your chart',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondaryLight,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+
+          if (shareLink != null) ...[
+            // Show the created link
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      shareLink!,
+                      style: theme.textTheme.bodySmall,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.copy, size: 20),
+                    onPressed: onCopyLink,
+                    tooltip: 'Copy link',
                   ),
                 ],
               ),
             ),
-          );
-        }
-
-        return ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          itemCount: friends.length,
-          itemBuilder: (context, index) {
-            final friend = friends[index];
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundColor: AppColors.primary.withAlpha(25),
-                backgroundImage: friend.avatarUrl != null
-                    ? NetworkImage(friend.avatarUrl!)
-                    : null,
-                child: friend.avatarUrl == null
-                    ? Text(
-                        friend.name.isNotEmpty
-                            ? friend.name[0].toUpperCase()
-                            : '?',
-                        style: const TextStyle(color: AppColors.primary),
-                      )
-                    : null,
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: onManageLinks,
+                    icon: const Icon(Icons.settings, size: 18),
+                    label: const Text('Manage Links'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: onCopyLink,
+                    icon: const Icon(Icons.check, size: 18),
+                    label: const Text('Copy Link'),
+                  ),
+                ),
+              ],
+            ),
+          ] else ...[
+            // Show create button
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: onCreateLink,
+                icon: const Icon(Icons.add_link),
+                label: const Text('Create Share Link'),
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
               ),
-              title: Text(friend.name),
-              trailing: FilledButton.icon(
-                onPressed: () => onShare(friend.friendId, friend.name),
-                icon: const Icon(Icons.send, size: 16),
-                label: const Text('Share'),
+            ),
+            const SizedBox(height: 8),
+            Center(
+              child: TextButton(
+                onPressed: onManageLinks,
+                child: const Text('View existing links'),
               ),
-            );
-          },
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, _) => Center(
-        child: Text(ErrorHandler.getUserMessage(error, context: 'load friends')),
+            ),
+          ],
+        ],
       ),
     );
   }
 }
 
-class _GroupsTab extends ConsumerWidget {
-  const _GroupsTab({required this.onShare});
+class _GroupsList extends ConsumerWidget {
+  const _GroupsList({required this.onShare});
 
   final void Function(String groupId, String groupName) onShare;
 
@@ -360,41 +421,37 @@ class _GroupsTab extends ConsumerWidget {
     return groupsAsync.when(
       data: (groups) {
         if (groups.isEmpty) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.groups_outlined,
-                    size: 48,
-                    color: AppColors.textSecondaryLight.withAlpha(150),
+          return Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.groups_outlined,
+                  size: 48,
+                  color: AppColors.textSecondaryLight.withAlpha(150),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'No Groups Yet',
+                  style: theme.textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Create a group to share your chart with multiple people.',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: AppColors.textSecondaryLight,
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'No Groups Yet',
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Create a group to share your chart with multiple people.',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondaryLight,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           );
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          itemCount: groups.length,
-          itemBuilder: (context, index) {
-            final group = groups[index];
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: groups.map((group) {
             return ListTile(
               leading: CircleAvatar(
                 backgroundColor: AppColors.accent.withAlpha(25),
@@ -419,11 +476,17 @@ class _GroupsTab extends ConsumerWidget {
                 label: const Text('Share'),
               ),
             );
-          },
+          }).toList(),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, _) => Center(
+      loading: () => const Center(
+        child: Padding(
+          padding: EdgeInsets.all(32),
+          child: CircularProgressIndicator(),
+        ),
+      ),
+      error: (error, _) => Padding(
+        padding: const EdgeInsets.all(32),
         child: Text(ErrorHandler.getUserMessage(error, context: 'load groups')),
       ),
     );

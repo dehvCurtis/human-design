@@ -461,12 +461,16 @@ class _CommentTile extends ConsumerWidget {
                   children: [
                     // Like button
                     _CommentActionButton(
-                      icon: Icons.thumb_up_outlined,
+                      icon: comment.userReaction != null
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      isActive: comment.userReaction != null,
                       label: comment.reactionCount > 0 ? '${comment.reactionCount}' : l10n.common_like,
                       onTap: () {
-                        // TODO: Implement comment like when backend supports it
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(l10n.common_comingSoon)),
+                        ref.read(feedNotifierProvider.notifier).toggleCommentReaction(
+                          postId,
+                          comment.id,
+                          comment.userReaction,
                         );
                       },
                     ),
@@ -544,15 +548,20 @@ class _CommentActionButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.isActive = false,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final color = isActive
+        ? theme.colorScheme.primary
+        : theme.colorScheme.onSurface.withValues(alpha: 0.6);
     return GestureDetector(
       onTap: onTap,
       child: Row(
@@ -561,13 +570,13 @@ class _CommentActionButton extends StatelessWidget {
           Icon(
             icon,
             size: 14,
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            color: color,
           ),
           const SizedBox(width: 4),
           Text(
             label,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+              color: color,
             ),
           ),
         ],

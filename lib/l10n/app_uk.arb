@@ -258,14 +258,11 @@
   "social_title": "Соціальне",
   "social_thoughts": "Думки",
   "social_discover": "Пошук",
-  "social_friends": "Друзі",
   "social_groups": "Групи",
   "social_invite": "Запросити",
-  "social_addFriend": "Додати друга",
   "social_createPost": "Поділіться думкою...",
   "social_noThoughtsYet": "Поки немає записів",
   "social_noThoughtsMessage": "Будьте першим, хто поділиться своїми відкриттями про Дизайн Людини!",
-  "social_sendRequest": "Надіслати запит",
   "social_createGroup": "Створити групу",
   "social_invite": "Запросити",
   "social_members": "Учасники",
@@ -285,27 +282,10 @@
   "social_friendsOnly": "Тільки друзі",
   "social_public": "Публічно",
   "social_shared": "Спільні",
-  "social_noFriendsYet": "Поки немає друзів",
-  "social_noFriendsMessage": "Додайте друзів для порівняння карт і вивчення ваших зв'язків.",
   "social_noGroupsYet": "Поки немає груп",
   "social_noGroupsMessage": "Створіть групи для аналізу командної динаміки з Пента-аналізом.",
   "social_noSharedCharts": "Немає спільних карт",
-  "social_noSharedChartsMessage": "Тут з'являться карти, якими поділились з вами друзі.",
-  "social_pendingRequests": "Очікуючі запити",
-  "social_friendRequests": "Запити в друзі",
-  "social_noPendingRequests": "Немає очікуючих запитів",
-  "social_addFriendPrompt": "Введіть email друга, щоб надіслати запит.",
-  "social_emailLabel": "Email",
-  "social_emailHint": "friend@example.com",
-  "social_userNotFound": "Користувача з таким email не знайдено",
-  "social_requestSent": "Запит дружби надіслано {name}!",
-  "@social_requestSent": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
+  "social_noSharedChartsMessage": "Тут з'являться карти, якими з вами поділились.",
   "social_createGroupPrompt": "Створіть групу для аналізу командної динаміки.",
   "social_groupName": "Назва групи",
   "social_groupNameHint": "Сім'я, Команда тощо",
@@ -321,15 +301,6 @@
   },
   "social_groupNameRequired": "Будь ласка, введіть назву групи",
   "social_createGroupFailed": "Не вдалося створити групу. Спробуйте ще раз.",
-  "social_friendsSince": "Друзі з {date}",
-  "@social_friendsSince": {
-    "placeholders": {
-      "date": {
-        "type": "String"
-      }
-    }
-  },
-  "social_compareCharts": "Порівняти карти",
   "social_noDescription": "Без опису",
   "social_admin": "Адмін",
   "social_sharedBy": "Поділився {name}",
@@ -340,17 +311,9 @@
       }
     }
   },
-  "social_loadFriendsFailed": "Не вдалося завантажити друзів",
   "social_loadGroupsFailed": "Не вдалося завантажити групи",
   "social_loadSharedFailed": "Не вдалося завантажити спільні карти",
-  "social_sentAgo": "Надіслано {time}",
-  "@social_sentAgo": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
+  "social_userNotFound": "Користувача не знайдено",
   "time_minutesAgo": "{minutes} хв. тому",
   "@time_minutesAgo": {
     "placeholders": {

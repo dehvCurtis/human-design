@@ -696,16 +696,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get social_discover => 'Поиск';
 
   @override
-  String get social_friends => 'Друзья';
-
-  @override
   String get social_groups => 'Группы';
 
   @override
   String get social_invite => 'Пригласить';
-
-  @override
-  String get social_addFriend => 'Добавить друга';
 
   @override
   String get social_createPost => 'Поделитесь мыслью...';
@@ -716,9 +710,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get social_noThoughtsMessage =>
       'Будьте первым, кто поделится своими открытиями о Дизайне Человека!';
-
-  @override
-  String get social_sendRequest => 'Отправить запрос';
 
   @override
   String get social_createGroup => 'Создать группу';
@@ -756,13 +747,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get social_shared => 'Общие';
 
   @override
-  String get social_noFriendsYet => 'Пока нет друзей';
-
-  @override
-  String get social_noFriendsMessage =>
-      'Добавьте друзей для сравнения карт и изучения ваших связей.';
-
-  @override
   String get social_noGroupsYet => 'Пока нет групп';
 
   @override
@@ -774,34 +758,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get social_noSharedChartsMessage =>
-      'Здесь появятся карты, которыми поделились с вами друзья.';
-
-  @override
-  String get social_pendingRequests => 'Ожидающие запросы';
-
-  @override
-  String get social_friendRequests => 'Запросы в друзья';
-
-  @override
-  String get social_noPendingRequests => 'Нет ожидающих запросов';
-
-  @override
-  String get social_addFriendPrompt =>
-      'Введите email друга, чтобы отправить запрос.';
-
-  @override
-  String get social_emailLabel => 'Email';
-
-  @override
-  String get social_emailHint => 'friend@example.com';
-
-  @override
-  String get social_userNotFound => 'Пользователь с таким email не найден';
-
-  @override
-  String social_requestSent(String name) {
-    return 'Запрос дружбы отправлен $name!';
-  }
+      'Здесь появятся карты, которыми с вами поделились.';
 
   @override
   String get social_createGroupPrompt =>
@@ -832,14 +789,6 @@ class AppLocalizationsRu extends AppLocalizations {
       'Не удалось создать группу. Попробуйте снова.';
 
   @override
-  String social_friendsSince(String date) {
-    return 'Друзья с $date';
-  }
-
-  @override
-  String get social_compareCharts => 'Сравнить карты';
-
-  @override
   String get social_noDescription => 'Без описания';
 
   @override
@@ -851,13 +800,13 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get social_loadFriendsFailed => 'Не удалось загрузить друзей';
-
-  @override
   String get social_loadGroupsFailed => 'Не удалось загрузить группы';
 
   @override
   String get social_loadSharedFailed => 'Не удалось загрузить общие карты';
+
+  @override
+  String get social_userNotFound => 'Пользователь не найден';
 
   @override
   String get discovery_userNotFound => 'Пользователь не найден';
@@ -954,11 +903,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get popularCharts_subtitle => 'Самые популярные публичные карты';
-
-  @override
-  String social_sentAgo(String time) {
-    return 'Отправлено $time';
-  }
 
   @override
   String time_minutesAgo(int minutes) {

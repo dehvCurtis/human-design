@@ -9,18 +9,6 @@ final socialRepositoryProvider = Provider<SocialRepository>((ref) {
   return SocialRepository(supabaseClient: client);
 });
 
-/// Provider for the user's friends list
-final friendsProvider = FutureProvider<List<Friend>>((ref) async {
-  final repository = ref.watch(socialRepositoryProvider);
-  return repository.getFriends();
-});
-
-/// Provider for pending friend requests
-final pendingRequestsProvider = FutureProvider<List<FriendRequest>>((ref) async {
-  final repository = ref.watch(socialRepositoryProvider);
-  return repository.getPendingRequests();
-});
-
 /// Provider for the user's groups
 final groupsProvider = FutureProvider<List<Group>>((ref) async {
   final repository = ref.watch(socialRepositoryProvider);
@@ -56,45 +44,6 @@ class SocialNotifier extends Notifier<SocialState> {
 
   SocialRepository get _repository => ref.read(socialRepositoryProvider);
 
-  /// Send a friend request by user ID
-  Future<void> sendFriendRequest(String friendId) async {
-    state = state.copyWith(isLoading: true, error: null);
-    try {
-      await _repository.sendFriendRequest(friendId);
-      state = state.copyWith(isLoading: false);
-      // Invalidate pending requests to refresh
-      ref.invalidate(pendingRequestsProvider);
-    } catch (e) {
-      state = state.copyWith(isLoading: false, error: e.toString());
-    }
-  }
-
-  /// Accept a friend request
-  Future<void> acceptFriendRequest(String requestId) async {
-    state = state.copyWith(isLoading: true, error: null);
-    try {
-      await _repository.acceptFriendRequest(requestId);
-      state = state.copyWith(isLoading: false);
-      // Invalidate both lists to refresh
-      ref.invalidate(friendsProvider);
-      ref.invalidate(pendingRequestsProvider);
-    } catch (e) {
-      state = state.copyWith(isLoading: false, error: e.toString());
-    }
-  }
-
-  /// Decline a friend request
-  Future<void> declineFriendRequest(String requestId) async {
-    state = state.copyWith(isLoading: true, error: null);
-    try {
-      await _repository.declineFriendRequest(requestId);
-      state = state.copyWith(isLoading: false);
-      ref.invalidate(pendingRequestsProvider);
-    } catch (e) {
-      state = state.copyWith(isLoading: false, error: e.toString());
-    }
-  }
-
   /// Create a new group
   Future<Group?> createGroup({
     required String name,
@@ -112,23 +61,6 @@ class SocialNotifier extends Notifier<SocialState> {
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
       return null;
-    }
-  }
-
-  /// Share chart with a friend
-  Future<void> shareChartWithFriend({
-    required String chartId,
-    required String friendId,
-  }) async {
-    state = state.copyWith(isLoading: true, error: null);
-    try {
-      await _repository.shareChartWithFriend(
-        chartId: chartId,
-        friendId: friendId,
-      );
-      state = state.copyWith(isLoading: false);
-    } catch (e) {
-      state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 
