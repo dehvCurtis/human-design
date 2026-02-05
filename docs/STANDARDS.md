@@ -32,6 +32,13 @@ While the major version is `0`, the app is in active development:
 | 0.1.0 | 1 | Initial app with chart calculation, bodygraph |
 | 0.2.0 | 2 | Social platform, gamification, quiz, sharing |
 | 0.2.1 | 3 | Integration channel layout fix, Heart/Ego adjustments |
+| 0.2.2 | 4 | Sun gate quick access, transit keynotes |
+| 0.2.3 | 5 | Critical HD wheel offset fix, timezone display |
+| 0.2.4 | 6 | Hanging gates (half-channel) visualization |
+| 0.2.5 | 7 | Bodygraph zoom/pan, Ego center circle, auth fixes |
+| 0.2.6 | - | Heart center position, Gate 10 direction fix |
+| 0.2.7 | - | Avatar upload, mentorship setup, bookmarks/likes |
+| 0.2.8 | 8 | More tab, Daily rename, Penta 2+, quiz answer fix |
 
 ### Updating the Version
 
