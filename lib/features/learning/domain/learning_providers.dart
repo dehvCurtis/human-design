@@ -43,6 +43,24 @@ final typeContentProvider = FutureProvider.family<List<LearningContent>, String>
   return repository.getContent(hdType: hdType);
 });
 
+/// Provider for bookmarked content
+final bookmarkedContentProvider = FutureProvider<List<LearningContent>>((ref) async {
+  final repository = ref.watch(learningRepositoryProvider);
+  return repository.getBookmarkedContent();
+});
+
+/// Provider for checking if content is bookmarked
+final isBookmarkedProvider = FutureProvider.family<bool, String>((ref, contentId) async {
+  final repository = ref.watch(learningRepositoryProvider);
+  return repository.isBookmarked(contentId);
+});
+
+/// Provider for checking if content is liked
+final isLikedProvider = FutureProvider.family<bool, String>((ref, contentId) async {
+  final repository = ref.watch(learningRepositoryProvider);
+  return repository.isLiked(contentId);
+});
+
 // ==================== Mentorship Providers ====================
 
 /// Provider for available mentors
@@ -180,6 +198,22 @@ class LearningNotifier extends Notifier<LearningState> {
   /// Record a view
   Future<void> recordView(String contentId) async {
     await _repository.recordView(contentId);
+  }
+
+  /// Toggle bookmark on content
+  Future<bool> toggleBookmark(String contentId) async {
+    final isNowBookmarked = await _repository.toggleBookmark(contentId);
+    ref.invalidate(isBookmarkedProvider(contentId));
+    ref.invalidate(bookmarkedContentProvider);
+    return isNowBookmarked;
+  }
+
+  /// Toggle like on content
+  Future<bool> toggleLike(String contentId) async {
+    final isNowLiked = await _repository.toggleLike(contentId);
+    ref.invalidate(isLikedProvider(contentId));
+    ref.invalidate(contentDetailProvider(contentId));
+    return isNowLiked;
   }
 
   /// Create or update mentorship profile

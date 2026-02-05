@@ -2,6 +2,83 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.7] - 2026-02-05
+
+### Added
+
+#### Profile Features
+- **Avatar Upload** - Users can now change their profile photo
+  - Camera and gallery options via bottom sheet picker
+  - Images resized to 512x512 with 85% quality optimization
+  - Uploads to Supabase storage with automatic URL update
+  - Loading indicator during upload
+
+#### Mentorship System
+- **Mentorship Profile Setup** - Full setup flow for mentors and mentees
+  - Role selection (Mentor, Mentee, or both)
+  - Bio/about section (up to 500 characters)
+  - Expertise areas selection (10 predefined HD topics)
+  - Experience years configuration for mentors
+  - Maximum mentees setting (1-10) for mentors
+  - Form validation and error handling
+
+#### Content Interaction
+- **Bookmark Feature** - Save content for later reading
+  - Toggle bookmark from content detail screen
+  - Visual feedback with filled/outline icon states
+  - Bookmarked content list provider
+- **Like Feature** - Show appreciation for content
+  - Toggle like with optimistic UI updates
+  - Like count automatically increments/decrements
+  - Visual feedback with filled/outline icon states
+- **Share Feature** - Share content externally
+  - Native share sheet integration via share_plus
+  - Shares content title and promotional text
+
+### Fixed
+
+#### Code Quality
+- **Lint Warnings** - Fixed null-aware operator warnings
+  - `edit_profile_screen.dart` - Changed `if (action != null) action!` to `?action`
+  - `detail_bottom_sheet.dart` - Changed `if (trailing != null) trailing!` to `?trailing`
+
+#### Share Screen
+- **Chart ID Placeholder** - Share links now use actual user chart ID
+  - Previously used hardcoded `'current-user-chart'` placeholder
+  - Now fetches from `userChartProvider` with validation
+  - Shows error message if user hasn't completed birth data
+
+### Technical Details
+
+New repository methods added:
+- `ProfileRepository.uploadAvatar(filePath)` - Upload avatar to Supabase storage
+- `LearningRepository.toggleBookmark(contentId)` - Toggle bookmark state
+- `LearningRepository.isBookmarked(contentId)` - Check bookmark status
+- `LearningRepository.getBookmarkedContent()` - Fetch bookmarked content list
+- `LearningRepository.toggleLike(contentId)` - Toggle like state
+- `LearningRepository.isLiked(contentId)` - Check like status
+
+New providers added:
+- `bookmarkedContentProvider` - List of bookmarked content
+- `isBookmarkedProvider(contentId)` - Check if content is bookmarked
+- `isLikedProvider(contentId)` - Check if content is liked
+
+New notifier methods:
+- `LearningNotifier.toggleBookmark(contentId)` - Toggle with cache invalidation
+- `LearningNotifier.toggleLike(contentId)` - Toggle with cache invalidation
+
+Files modified:
+- `profile_repository.dart` - Added avatar upload method
+- `edit_profile_screen.dart` - Added image picker and upload flow
+- `learning_repository.dart` - Added bookmark/like methods
+- `learning_providers.dart` - Added bookmark/like providers and notifier methods
+- `content_detail_screen.dart` - Added bookmark, like, and share UI components
+- `mentorship_screen.dart` - Added mentorship setup bottom sheet
+- `share_screen.dart` - Fixed chart ID to use actual user chart
+- `detail_bottom_sheet.dart` - Fixed lint warning
+
+---
+
 ## [0.2.6] - 2026-02-02
 
 ### Fixed

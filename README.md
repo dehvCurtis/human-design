@@ -14,6 +14,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
   - Zoom controls (+/-) for precise adjustment
 - **6-Tab Chart View** - Bodygraph, Planets, Properties, Gates, Channels, Chakras
 - **Saved Charts** - Create and manage charts for family, friends, and clients
+- **Profile Management** - Customize your profile with avatar upload and birth data editing
 - **Transit Tracking** - Current planetary transits and their impact on your chart
 - **Daily Affirmations** - Personalized affirmations based on your design
 
@@ -29,6 +30,12 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **19 Pre-defined Quizzes** - Types, Centers, Authorities, Profiles, Definitions, Gates, Channels
 - **Progress Tracking** - Track your learning journey and quiz scores
 - **Content Library** - Articles, guides, and educational materials
+  - Bookmark content for later reading
+  - Like and share content with others
+- **Mentorship Program** - Connect with HD practitioners
+  - Set up mentor or mentee profile
+  - Define expertise areas and experience
+  - Request mentorship from verified mentors
 
 ### Gamification
 - **Points & Levels** - Earn points for engagement and level up
