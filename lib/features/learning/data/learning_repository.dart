@@ -128,6 +128,132 @@ class LearningRepository {
     });
   }
 
+  /// Toggle bookmark on content
+  Future<bool> toggleBookmark(String contentId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Check if already bookmarked
+    final existing = await _client
+        .from('content_bookmarks')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('content_id', contentId)
+        .maybeSingle();
+
+    if (existing != null) {
+      // Remove bookmark
+      await _client
+          .from('content_bookmarks')
+          .delete()
+          .eq('user_id', userId)
+          .eq('content_id', contentId);
+      return false;
+    } else {
+      // Add bookmark
+      await _client.from('content_bookmarks').insert({
+        'user_id': userId,
+        'content_id': contentId,
+      });
+      return true;
+    }
+  }
+
+  /// Check if content is bookmarked
+  Future<bool> isBookmarked(String contentId) async {
+    final userId = _currentUserId;
+    if (userId == null) return false;
+
+    final response = await _client
+        .from('content_bookmarks')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('content_id', contentId)
+        .maybeSingle();
+
+    return response != null;
+  }
+
+  /// Get bookmarked content
+  Future<List<LearningContent>> getBookmarkedContent() async {
+    final userId = _currentUserId;
+    if (userId == null) return [];
+
+    final response = await _client
+        .from('content_bookmarks')
+        .select('''
+          content:content_library!content_bookmarks_content_id_fkey(
+            *,
+            author:profiles!content_library_author_id_fkey(id, name, avatar_url)
+          )
+        ''')
+        .eq('user_id', userId)
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .where((json) => json['content'] != null)
+        .map((json) => LearningContent.fromJson(json['content']))
+        .toList();
+  }
+
+  /// Toggle like on content
+  Future<bool> toggleLike(String contentId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Check if already liked
+    final existing = await _client
+        .from('content_likes')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('content_id', contentId)
+        .maybeSingle();
+
+    if (existing != null) {
+      // Remove like
+      await _client
+          .from('content_likes')
+          .delete()
+          .eq('user_id', userId)
+          .eq('content_id', contentId);
+      // Decrement like count
+      await _client.rpc('decrement', params: {
+        'table_name': 'content_library',
+        'row_id': contentId,
+        'column_name': 'like_count',
+      });
+      return false;
+    } else {
+      // Add like
+      await _client.from('content_likes').insert({
+        'user_id': userId,
+        'content_id': contentId,
+      });
+      // Increment like count
+      await _client.rpc('increment', params: {
+        'table_name': 'content_library',
+        'row_id': contentId,
+        'column_name': 'like_count',
+      });
+      return true;
+    }
+  }
+
+  /// Check if content is liked
+  Future<bool> isLiked(String contentId) async {
+    final userId = _currentUserId;
+    if (userId == null) return false;
+
+    final response = await _client
+        .from('content_likes')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('content_id', contentId)
+        .maybeSingle();
+
+    return response != null;
+  }
+
   // ==================== Mentorship ====================
 
   /// Get available mentors

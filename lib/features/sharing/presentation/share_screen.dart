@@ -433,12 +433,25 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
   }
 
   Future<void> _createShareLink(BuildContext context) async {
-    // For now, we'll use a placeholder chart ID
-    // In real implementation, this would come from the user's chart
     final errorColor = Theme.of(context).colorScheme.error;
+
+    // Get the user's chart to share
+    final userChart = await ref.read(userChartProvider.future);
+    if (userChart == null) {
+      if (mounted && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Please complete your birth data first to share your chart'),
+            backgroundColor: errorColor,
+          ),
+        );
+      }
+      return;
+    }
+
     try {
       await ref.read(sharingNotifierProvider.notifier).createChartShareLink(
-            chartId: 'current-user-chart',
+            chartId: userChart.id,
             expiresIn: _selectedExpiry,
           );
     } catch (e) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -243,6 +245,34 @@ class ProfileRepository {
       'chart_visibility': visibility.name,
       'updated_at': DateTime.now().toIso8601String(),
     }).eq('id', userId);
+  }
+
+  /// Upload avatar image and update profile
+  Future<String> uploadAvatar(String filePath) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Generate unique file name
+    final extension = filePath.split('.').last;
+    final fileName = '$userId/avatar_${DateTime.now().millisecondsSinceEpoch}.$extension';
+
+    // Upload to storage
+    await _client.storage.from('avatars').upload(
+      fileName,
+      File(filePath),
+      fileOptions: const FileOptions(cacheControl: '3600', upsert: true),
+    );
+
+    // Get public URL
+    final avatarUrl = _client.storage.from('avatars').getPublicUrl(fileName);
+
+    // Update profile with new avatar URL
+    await _client.from('profiles').update({
+      'avatar_url': avatarUrl,
+      'updated_at': DateTime.now().toIso8601String(),
+    }).eq('id', userId);
+
+    return avatarUrl;
   }
 
   /// Get share count for current month

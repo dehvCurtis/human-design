@@ -154,9 +154,11 @@ class MentorshipScreen extends ConsumerWidget {
   }
 
   void _showMentorshipSetup(BuildContext context, WidgetRef ref) {
-    // TODO: Implement mentorship profile setup
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Mentorship setup coming soon')),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      builder: (context) => const _MentorshipSetupSheet(),
     );
   }
 
@@ -574,6 +576,290 @@ class _RequestTile extends ConsumerWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _MentorshipSetupSheet extends ConsumerStatefulWidget {
+  const _MentorshipSetupSheet();
+
+  @override
+  ConsumerState<_MentorshipSetupSheet> createState() => _MentorshipSetupSheetState();
+}
+
+class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
+  final _formKey = GlobalKey<FormState>();
+  final _bioController = TextEditingController();
+
+  bool _isMentor = false;
+  bool _isMentee = true;
+  int _experienceYears = 0;
+  int _maxMentees = 3;
+  final Set<String> _selectedExpertise = {};
+  bool _isLoading = false;
+
+  static const _expertiseOptions = [
+    'Types & Strategy',
+    'Authority',
+    'Centers',
+    'Gates & Channels',
+    'Profiles',
+    'Variables',
+    'Transits',
+    'Relationships',
+    'Business & Career',
+    'Parenting',
+  ];
+
+  @override
+  void dispose() {
+    _bioController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _saveProfile() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    if (!_isMentor && !_isMentee) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select at least one role')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      await ref.read(learningNotifierProvider.notifier).updateMentorshipProfile(
+            isMentor: _isMentor,
+            isMentee: _isMentee,
+            bio: _bioController.text.trim().isEmpty ? null : _bioController.text.trim(),
+            experienceYears: _isMentor ? _experienceYears : null,
+            maxMentees: _isMentor ? _maxMentees : null,
+            expertiseAreas: _selectedExpertise.isEmpty ? null : _selectedExpertise.toList(),
+          );
+
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Mentorship profile created!')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'save profile'))),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return DraggableScrollableSheet(
+      initialChildSize: 0.9,
+      minChildSize: 0.5,
+      maxChildSize: 0.95,
+      expand: false,
+      builder: (context, scrollController) => Padding(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            controller: scrollController,
+            children: [
+              // Header
+              Row(
+                children: [
+                  Text(
+                    'Mentorship Setup',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Set up your mentorship profile to connect with others in the Human Design community.',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.outline,
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Role selection
+              Text(
+                'Your Role',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 12),
+              CheckboxListTile(
+                value: _isMentee,
+                onChanged: (value) => setState(() => _isMentee = value ?? false),
+                title: const Text('Mentee'),
+                subtitle: const Text('I want to learn from experienced practitioners'),
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: EdgeInsets.zero,
+              ),
+              CheckboxListTile(
+                value: _isMentor,
+                onChanged: (value) => setState(() => _isMentor = value ?? false),
+                title: const Text('Mentor'),
+                subtitle: const Text('I want to share my knowledge and guide others'),
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: EdgeInsets.zero,
+              ),
+              const SizedBox(height: 24),
+
+              // Bio
+              Text(
+                'About You',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _bioController,
+                maxLines: 4,
+                maxLength: 500,
+                decoration: const InputDecoration(
+                  hintText: 'Tell others about your Human Design journey...',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Expertise areas
+              Text(
+                'Areas of Interest',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _expertiseOptions.map((area) {
+                  final isSelected = _selectedExpertise.contains(area);
+                  return FilterChip(
+                    label: Text(area),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      setState(() {
+                        if (selected) {
+                          _selectedExpertise.add(area);
+                        } else {
+                          _selectedExpertise.remove(area);
+                        }
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 24),
+
+              // Mentor-specific fields
+              if (_isMentor) ...[
+                Text(
+                  'Mentor Settings',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                // Experience years
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Years of Experience'),
+                  trailing: SizedBox(
+                    width: 120,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: _experienceYears > 0
+                              ? () => setState(() => _experienceYears--)
+                              : null,
+                        ),
+                        Text(
+                          '$_experienceYears',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: () => setState(() => _experienceYears++),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Max mentees
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Maximum Mentees'),
+                  trailing: SizedBox(
+                    width: 120,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: _maxMentees > 1
+                              ? () => setState(() => _maxMentees--)
+                              : null,
+                        ),
+                        Text(
+                          '$_maxMentees',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: _maxMentees < 10
+                              ? () => setState(() => _maxMentees++)
+                              : null,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+              ],
+
+              // Save button
+              FilledButton(
+                onPressed: _isLoading ? null : _saveProfile,
+                child: _isLoading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Create Profile'),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
       ),
     );
   }

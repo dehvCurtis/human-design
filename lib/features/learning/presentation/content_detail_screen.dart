@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart' show ShareParams, SharePlus;
 
 import '../../../core/utils/error_handler.dart';
 import '../domain/learning_providers.dart';
@@ -70,21 +71,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                   onPressed: () => context.pop(),
                 ),
                 actions: [
-                  IconButton(
-                    icon: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.3),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.bookmark_outline, color: Colors.white),
-                    ),
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Bookmark feature coming soon')),
-                      );
-                    },
-                  ),
+                  _BookmarkButton(contentId: widget.contentId),
                   IconButton(
                     icon: Container(
                       padding: const EdgeInsets.all(8),
@@ -94,11 +81,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                       ),
                       child: const Icon(Icons.share, color: Colors.white),
                     ),
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Share feature coming soon')),
-                      );
-                    },
+                    onPressed: () => _shareContent(content),
                   ),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
@@ -397,14 +380,9 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Like feature coming soon')),
-                        );
-                      },
-                      icon: const Icon(Icons.thumb_up_outlined),
-                      label: Text('Like (${content.likeCount})'),
+                    child: _LikeButton(
+                      contentId: content.id,
+                      likeCount: content.likeCount,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -514,6 +492,132 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
           isCompleted: !isCompleted,
           progressPercent: !isCompleted ? 100 : 0,
         );
+  }
+
+  Future<void> _shareContent(LearningContent content) async {
+    final text = '${content.title}\n\nCheck out this Human Design content!';
+    await SharePlus.instance.share(ShareParams(text: text, subject: content.title));
+  }
+}
+
+class _BookmarkButton extends ConsumerWidget {
+  const _BookmarkButton({required this.contentId});
+
+  final String contentId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isBookmarkedAsync = ref.watch(isBookmarkedProvider(contentId));
+
+    return isBookmarkedAsync.when(
+      data: (isBookmarked) => IconButton(
+        icon: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.3),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
+            color: Colors.white,
+          ),
+        ),
+        onPressed: () async {
+          try {
+            final isNowBookmarked = await ref
+                .read(learningNotifierProvider.notifier)
+                .toggleBookmark(contentId);
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(isNowBookmarked ? 'Bookmarked' : 'Bookmark removed'),
+                  duration: const Duration(seconds: 1),
+                ),
+              );
+            }
+          } catch (e) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(ErrorHandler.getUserMessage(e))),
+              );
+            }
+          }
+        },
+      ),
+      loading: () => IconButton(
+        icon: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.3),
+            shape: BoxShape.circle,
+          ),
+          child: const SizedBox(
+            width: 24,
+            height: 24,
+            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+          ),
+        ),
+        onPressed: null,
+      ),
+      error: (_, _) => IconButton(
+        icon: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.3),
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(Icons.bookmark_outline, color: Colors.white),
+        ),
+        onPressed: null,
+      ),
+    );
+  }
+}
+
+class _LikeButton extends ConsumerWidget {
+  const _LikeButton({
+    required this.contentId,
+    required this.likeCount,
+  });
+
+  final String contentId;
+  final int likeCount;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isLikedAsync = ref.watch(isLikedProvider(contentId));
+
+    return isLikedAsync.when(
+      data: (isLiked) => OutlinedButton.icon(
+        onPressed: () async {
+          try {
+            await ref.read(learningNotifierProvider.notifier).toggleLike(contentId);
+          } catch (e) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(ErrorHandler.getUserMessage(e))),
+              );
+            }
+          }
+        },
+        icon: Icon(isLiked ? Icons.thumb_up : Icons.thumb_up_outlined),
+        label: Text('Like ($likeCount)'),
+      ),
+      loading: () => OutlinedButton.icon(
+        onPressed: null,
+        icon: const SizedBox(
+          width: 18,
+          height: 18,
+          child: CircularProgressIndicator(strokeWidth: 2),
+        ),
+        label: Text('Like ($likeCount)'),
+      ),
+      error: (_, _) => OutlinedButton.icon(
+        onPressed: null,
+        icon: const Icon(Icons.thumb_up_outlined),
+        label: Text('Like ($likeCount)'),
+      ),
+    );
   }
 }
 
