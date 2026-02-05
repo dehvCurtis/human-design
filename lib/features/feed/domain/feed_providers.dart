@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../shared/providers/supabase_provider.dart';
@@ -121,9 +122,15 @@ class FeedNotifier extends Notifier<FeedState> {
 
   /// React to a post
   Future<void> reactToPost(String postId, ReactionType reactionType) async {
-    await _repository.addReaction(postId, reactionType);
-    ref.invalidate(postProvider(postId));
-    ref.invalidate(reactionCountsProvider(postId));
+    try {
+      await _repository.addReaction(postId, reactionType);
+      ref.invalidate(postProvider(postId));
+      ref.invalidate(reactionCountsProvider(postId));
+      ref.invalidate(feedProvider); // Refresh feed to show updated reaction
+    } catch (e) {
+      debugPrint('Error reacting to post: $e');
+      rethrow;
+    }
   }
 
   /// Remove reaction from a post
@@ -154,6 +161,32 @@ class FeedNotifier extends Notifier<FeedState> {
     await _repository.deleteComment(commentId);
     ref.invalidate(postCommentsProvider(postId));
     ref.invalidate(postProvider(postId));
+  }
+
+  /// React to a comment
+  Future<void> reactToComment(String postId, String commentId, ReactionType reactionType) async {
+    try {
+      await _repository.addCommentReaction(commentId, reactionType);
+      ref.invalidate(postCommentsProvider(postId));
+    } catch (e) {
+      debugPrint('Error reacting to comment: $e');
+      rethrow;
+    }
+  }
+
+  /// Remove reaction from a comment
+  Future<void> removeCommentReaction(String postId, String commentId) async {
+    await _repository.removeCommentReaction(commentId);
+    ref.invalidate(postCommentsProvider(postId));
+  }
+
+  /// Toggle reaction on a comment
+  Future<void> toggleCommentReaction(String postId, String commentId, ReactionType? currentReaction) async {
+    if (currentReaction != null) {
+      await removeCommentReaction(postId, commentId);
+    } else {
+      await reactToComment(postId, commentId, ReactionType.like);
+    }
   }
 
   /// Refresh the feed
