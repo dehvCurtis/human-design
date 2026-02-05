@@ -10,6 +10,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../../core/utils/error_handler.dart';
 import '../../../../shared/providers/supabase_provider.dart';
+import '../../../chart/domain/chart_providers.dart';
 import '../../domain/feed_providers.dart';
 import '../../domain/models/post.dart';
 import 'gate_channel_picker_sheet.dart';
@@ -43,6 +44,8 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
   final List<XFile> _selectedImages = [];
   int? _selectedGate;
   String? _selectedChannelId;
+  String? _selectedChartId;
+  String? _selectedChartName;
 
   @override
   void initState() {
@@ -214,6 +217,20 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                 ),
               ],
 
+              // Selected chart tag
+              if (_selectedChartId != null) ...[
+                const SizedBox(height: 12),
+                Chip(
+                  avatar: const Icon(Icons.pie_chart_outline, size: 18),
+                  label: Text(_selectedChartName ?? 'Chart'),
+                  onDeleted: () => setState(() {
+                    _selectedChartId = null;
+                    _selectedChartName = null;
+                  }),
+                  deleteIcon: const Icon(Icons.close, size: 16),
+                ),
+              ],
+
               // Gate/Channel tags
               if (_selectedGate != null || _selectedChannelId != null) ...[
                 const SizedBox(height: 12),
@@ -262,15 +279,13 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                     tooltip: 'Add image',
                   ),
                   IconButton(
-                    icon: const Icon(Icons.pie_chart_outline),
-                    onPressed: () {
-                      setState(() {
-                        _selectedType = PostType.chartShare;
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Post type set to Chart Share')),
-                      );
-                    },
+                    icon: Icon(
+                      Icons.pie_chart_outline,
+                      color: _selectedChartId != null
+                          ? theme.colorScheme.primary
+                          : null,
+                    ),
+                    onPressed: _showChartPicker,
                     tooltip: 'Attach chart',
                   ),
                   IconButton(
@@ -343,6 +358,24 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         onChannelSelected: (channel) {
           setState(() {
             _selectedChannelId = channel;
+          });
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
+  void _showChartPicker() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => _ChartPickerSheet(
+        selectedChartId: _selectedChartId,
+        onChartSelected: (chartId, chartName) {
+          setState(() {
+            _selectedChartId = chartId;
+            _selectedChartName = chartName;
+            _selectedType = PostType.chartShare;
           });
           Navigator.pop(context);
         },
@@ -458,6 +491,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
             postType: _selectedType,
             visibility: _visibility,
             mediaUrls: mediaUrls,
+            chartId: _selectedChartId,
             gateNumber: _selectedGate,
             channelId: _selectedChannelId,
             transitData: widget.transitData,
@@ -568,6 +602,122 @@ class _VisibilitySelector extends StatelessWidget {
           onChanged(selected.first);
         }
       },
+    );
+  }
+}
+
+class _ChartPickerSheet extends ConsumerWidget {
+  const _ChartPickerSheet({
+    required this.selectedChartId,
+    required this.onChartSelected,
+  });
+
+  final String? selectedChartId;
+  final void Function(String chartId, String chartName) onChartSelected;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final chartsAsync = ref.watch(userSavedChartsProvider);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Handle
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          Text(
+            'Select Chart to Share',
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          chartsAsync.when(
+            data: (charts) {
+              if (charts.isEmpty) {
+                return Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Center(
+                    child: Text(
+                      'No charts available. Add your birth data to create a chart.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
+              }
+
+              return ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 300),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: charts.length,
+                  itemBuilder: (context, index) {
+                    final chart = charts[index];
+                    final isSelected = chart.id == selectedChartId;
+
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: isSelected
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.surfaceContainerHighest,
+                        child: Icon(
+                          Icons.pie_chart,
+                          color: isSelected
+                              ? theme.colorScheme.onPrimary
+                              : theme.colorScheme.onSurface,
+                        ),
+                      ),
+                      title: Text(chart.name),
+                      trailing: isSelected
+                          ? Icon(Icons.check, color: theme.colorScheme.primary)
+                          : null,
+                      selected: isSelected,
+                      onTap: () => onChartSelected(chart.id, chart.name),
+                    );
+                  },
+                ),
+              );
+            },
+            loading: () => const Padding(
+              padding: EdgeInsets.all(24),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (error, _) => Padding(
+              padding: const EdgeInsets.all(24),
+              child: Center(
+                child: Text(
+                  'Failed to load charts',
+                  style: TextStyle(color: theme.colorScheme.error),
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+        ],
+      ),
     );
   }
 }
