@@ -6,6 +6,11 @@ import '../../../core/router/app_router.dart';
 import '../../../core/utils/error_handler.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../discovery/domain/discovery_providers.dart';
+import '../../discovery/domain/models/user_discovery.dart';
+import '../../feed/domain/feed_providers.dart';
+import '../../feed/presentation/widgets/post_card.dart';
+import '../../feed/presentation/widgets/create_post_sheet.dart';
 import '../../home/domain/home_providers.dart';
 import '../../profile/data/profile_repository.dart';
 import '../data/social_repository.dart';
@@ -25,7 +30,7 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -49,16 +54,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
         title: Text(l10n.social_title),
         actions: [
           IconButton(
-            icon: const Icon(Icons.dynamic_feed_outlined),
-            onPressed: () => context.push(AppRoutes.feed),
-            tooltip: 'Feed',
-          ),
-          IconButton(
-            icon: const Icon(Icons.explore_outlined),
-            onPressed: () => context.push(AppRoutes.discover),
-            tooltip: 'Discover',
-          ),
-          IconButton(
             icon: const Icon(Icons.chat_bubble_outline),
             onPressed: () => context.push(AppRoutes.messages),
             tooltip: 'Messages',
@@ -72,28 +67,40 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
                 tooltip: l10n.social_pendingRequests,
               ),
             ),
-          IconButton(
-            icon: const Icon(Icons.person_add_outlined),
-            onPressed: () => _showAddFriendDialog(context, ref),
-          ),
         ],
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.start,
           tabs: [
+            Tab(text: l10n.social_thoughts),
+            Tab(text: l10n.social_discover),
             Tab(text: l10n.social_friends),
             Tab(text: l10n.social_groups),
-            Tab(text: l10n.social_shared),
           ],
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
+          const _ThoughtsTab(),
+          const _DiscoverTab(),
           _FriendsTab(onAddFriend: () => _showAddFriendDialog(context, ref)),
           _GroupsTab(onCreateGroup: () => _showCreateGroupDialog(context, ref)),
-          const _SharedTab(),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showCreatePostSheet(context, ref),
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  void _showCreatePostSheet(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => const CreatePostSheet(),
     );
   }
 
@@ -333,68 +340,107 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
     final nameController = TextEditingController();
     final descriptionController = TextEditingController();
     final l10n = AppLocalizations.of(context)!;
+    bool isCreating = false;
+    String? errorMessage;
 
     showDialog(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.social_createGroup),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(l10n.social_createGroupPrompt),
-            const SizedBox(height: 16),
-            TextField(
-              controller: nameController,
-              decoration: InputDecoration(
-                labelText: l10n.social_groupName,
-                hintText: l10n.social_groupNameHint,
-                prefixIcon: const Icon(Icons.group_outlined),
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Text(l10n.social_createGroup),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(l10n.social_createGroupPrompt),
+              const SizedBox(height: 16),
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  labelText: l10n.social_groupName,
+                  hintText: l10n.social_groupNameHint,
+                  prefixIcon: const Icon(Icons.group_outlined),
+                ),
+                textCapitalization: TextCapitalization.words,
+                enabled: !isCreating,
               ),
-              textCapitalization: TextCapitalization.words,
+              const SizedBox(height: 12),
+              TextField(
+                controller: descriptionController,
+                decoration: InputDecoration(
+                  labelText: l10n.social_groupDescription,
+                  hintText: l10n.social_groupDescriptionHint,
+                  prefixIcon: const Icon(Icons.description_outlined),
+                ),
+                maxLines: 2,
+                enabled: !isCreating,
+              ),
+              if (errorMessage != null) ...[
+                const SizedBox(height: 12),
+                Text(
+                  errorMessage!,
+                  style: const TextStyle(color: AppColors.error),
+                ),
+              ],
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: isCreating ? null : () => Navigator.pop(dialogContext),
+              child: Text(l10n.common_cancel),
             ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: descriptionController,
-              decoration: InputDecoration(
-                labelText: l10n.social_groupDescription,
-                hintText: l10n.social_groupDescriptionHint,
-                prefixIcon: const Icon(Icons.description_outlined),
-              ),
-              maxLines: 2,
+            ElevatedButton(
+              onPressed: isCreating
+                  ? null
+                  : () async {
+                      final name = nameController.text.trim();
+                      if (name.isEmpty) {
+                        setDialogState(() {
+                          errorMessage = l10n.social_groupNameRequired;
+                        });
+                        return;
+                      }
+
+                      setDialogState(() {
+                        isCreating = true;
+                        errorMessage = null;
+                      });
+
+                      final group = await ref
+                          .read(socialNotifierProvider.notifier)
+                          .createGroup(
+                            name: name,
+                            description: descriptionController.text.trim().isNotEmpty
+                                ? descriptionController.text.trim()
+                                : null,
+                          );
+
+                      // Check for error from notifier
+                      final socialState = ref.read(socialNotifierProvider);
+
+                      if (dialogContext.mounted) {
+                        if (group != null) {
+                          Navigator.pop(dialogContext);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(l10n.social_groupCreated(group.name))),
+                          );
+                        } else {
+                          setDialogState(() {
+                            isCreating = false;
+                            errorMessage = socialState.error ?? l10n.social_createGroupFailed;
+                          });
+                        }
+                      }
+                    },
+              child: isCreating
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Text(l10n.common_create),
             ),
           ],
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(l10n.common_cancel),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final name = nameController.text.trim();
-              if (name.isEmpty) return;
-
-              final group = await ref
-                  .read(socialNotifierProvider.notifier)
-                  .createGroup(
-                    name: name,
-                    description: descriptionController.text.trim().isNotEmpty
-                        ? descriptionController.text.trim()
-                        : null,
-                  );
-
-              if (dialogContext.mounted) {
-                Navigator.pop(dialogContext);
-                if (group != null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(l10n.social_groupCreated(group.name))),
-                  );
-                }
-              }
-            },
-            child: Text(l10n.common_create),
-          ),
-        ],
       ),
     );
   }
@@ -412,6 +458,189 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
       return l10n.time_daysAgo(diff.inDays);
     }
     return '${date.month}/${date.day}/${date.year}';
+  }
+}
+
+/// Tab showing the social feed (Thoughts)
+class _ThoughtsTab extends ConsumerWidget {
+  const _ThoughtsTab();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final postsAsync = ref.watch(feedProvider);
+    final l10n = AppLocalizations.of(context)!;
+
+    return postsAsync.when(
+      data: (posts) {
+        if (posts.isEmpty) {
+          return _EmptyState(
+            icon: Icons.chat_bubble_outline,
+            title: l10n.social_noThoughtsYet,
+            message: l10n.social_noThoughtsMessage,
+            actionLabel: null,
+            onAction: null,
+          );
+        }
+
+        return RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(feedProvider);
+          },
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: posts.length,
+            itemBuilder: (context, index) {
+              final post = posts[index];
+              return PostCard(
+                post: post,
+                onTap: () => context.push('/feed/post/${post.id}'),
+                onUserTap: () => context.push('/user/${post.userId}'),
+                onReaction: (reaction) {
+                  ref.read(feedNotifierProvider.notifier).reactToPost(
+                    post.id,
+                    reaction,
+                  );
+                },
+                onComment: () => context.push('/feed/post/${post.id}'),
+                onShare: () {
+                  // TODO: Implement share functionality
+                },
+              );
+            },
+          ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+            const SizedBox(height: 16),
+            Text(ErrorHandler.getUserMessage(error)),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => ref.invalidate(feedProvider),
+              child: Text(l10n.common_retry),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Tab showing user discovery
+class _DiscoverTab extends ConsumerWidget {
+  const _DiscoverTab();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final usersAsync = ref.watch(discoveredUsersProvider);
+    final l10n = AppLocalizations.of(context)!;
+
+    return usersAsync.when(
+      data: (result) {
+        if (result.users.isEmpty) {
+          return _EmptyState(
+            icon: Icons.explore_outlined,
+            title: l10n.discovery_noResults,
+            message: l10n.discovery_noResultsMessage,
+            actionLabel: null,
+            onAction: null,
+          );
+        }
+
+        return RefreshIndicator(
+          onRefresh: () async {
+            ref.invalidate(discoveredUsersProvider);
+          },
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: result.users.length,
+            itemBuilder: (context, index) {
+              final user = result.users[index];
+              return _DiscoverUserCard(
+                user: user,
+                onTap: () => context.push('/user/${user.id}'),
+                onFollow: () {
+                  ref.read(followNotifierProvider.notifier).toggleFollow(
+                    user.id,
+                    currentlyFollowing: user.isFollowing,
+                  );
+                },
+              );
+            },
+          ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, _) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
+            const SizedBox(height: 16),
+            Text(ErrorHandler.getUserMessage(error)),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () => ref.invalidate(discoveredUsersProvider),
+              child: Text(l10n.common_retry),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Card for discovered user in Discover tab
+class _DiscoverUserCard extends StatelessWidget {
+  const _DiscoverUserCard({
+    required this.user,
+    required this.onTap,
+    required this.onFollow,
+  });
+
+  final DiscoveredUser user;
+  final VoidCallback onTap;
+  final VoidCallback onFollow;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: AppColors.primary.withAlpha(25),
+          backgroundImage: user.avatarUrl != null
+              ? NetworkImage(user.avatarUrl!)
+              : null,
+          child: user.avatarUrl == null
+              ? Text(
+                  user.name[0].toUpperCase(),
+                  style: const TextStyle(color: AppColors.primary),
+                )
+              : null,
+        ),
+        title: Text(user.name),
+        subtitle: user.hdType != null
+            ? Text(user.hdType!)
+            : null,
+        trailing: user.isFollowing
+            ? OutlinedButton(
+                onPressed: onFollow,
+                child: Text(l10n.discovery_following),
+              )
+            : FilledButton(
+                onPressed: onFollow,
+                child: Text(l10n.discovery_follow),
+              ),
+        onTap: onTap,
+      ),
+    );
   }
 }
 
@@ -441,23 +670,42 @@ class _FriendsTab extends ConsumerWidget {
           onRefresh: () async {
             ref.invalidate(friendsProvider);
           },
-          child: ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: friends.length,
-            itemBuilder: (context, index) {
-              final friend = friends[index];
-              return _FriendCard(
-                friend: friend,
-                onTap: () {
-                  // Navigate to friend's profile
-                  context.push('/user/${friend.friendId}');
-                },
-                onCompare: () {
-                  // Navigate to composite chart
-                  context.push(AppRoutes.composite);
-                },
-              );
-            },
+          child: Column(
+            children: [
+              // Add Friend button at top
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton.icon(
+                    onPressed: onAddFriend,
+                    icon: const Icon(Icons.person_add_outlined),
+                    label: Text(l10n.social_addFriend),
+                  ),
+                ),
+              ),
+              // Friends list
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  itemCount: friends.length,
+                  itemBuilder: (context, index) {
+                    final friend = friends[index];
+                    return _FriendCard(
+                      friend: friend,
+                      onTap: () {
+                        // Navigate to friend's profile
+                        context.push('/user/${friend.friendId}');
+                      },
+                      onCompare: () {
+                        // Navigate to composite chart
+                        context.push(AppRoutes.composite);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -534,66 +782,6 @@ class _GroupsTab extends ConsumerWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => ref.invalidate(groupsProvider),
-              child: Text(l10n.common_retry),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SharedTab extends ConsumerWidget {
-  const _SharedTab();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final sharedAsync = ref.watch(sharedChartsProvider);
-    final l10n = AppLocalizations.of(context)!;
-
-    return sharedAsync.when(
-      data: (sharedCharts) {
-        if (sharedCharts.isEmpty) {
-          return _EmptyState(
-            icon: Icons.share_outlined,
-            title: l10n.social_noSharedCharts,
-            message: l10n.social_noSharedChartsMessage,
-            actionLabel: null,
-            onAction: null,
-          );
-        }
-
-        return RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(sharedChartsProvider);
-          },
-          child: ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: sharedCharts.length,
-            itemBuilder: (context, index) {
-              final shared = sharedCharts[index];
-              return _SharedChartCard(
-                sharedChart: shared,
-                onTap: () {
-                  // Navigate to view shared chart
-                  context.push('${AppRoutes.chart}/${shared.chartId}');
-                },
-              );
-            },
-          ),
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, _) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
-            const SizedBox(height: 16),
-            Text(l10n.social_loadSharedFailed),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => ref.invalidate(sharedChartsProvider),
               child: Text(l10n.common_retry),
             ),
           ],
@@ -756,40 +944,6 @@ class _GroupCard extends StatelessWidget {
             const Icon(Icons.chevron_right),
           ],
         ),
-        onTap: onTap,
-      ),
-    );
-  }
-}
-
-class _SharedChartCard extends StatelessWidget {
-  const _SharedChartCard({
-    required this.sharedChart,
-    required this.onTap,
-  });
-
-  final SharedChart sharedChart;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: AppColors.accent.withAlpha(25),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: const Icon(Icons.auto_graph, color: AppColors.accent),
-        ),
-        title: Text(sharedChart.chartName),
-        subtitle: Text(l10n.social_sharedBy(sharedChart.sharedByName)),
-        trailing: const Icon(Icons.chevron_right),
         onTap: onTap,
       ),
     );
