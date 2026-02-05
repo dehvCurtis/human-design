@@ -52,7 +52,9 @@ class SavedChartsScreen extends ConsumerWidget {
                   // Navigate to chart detail
                   context.push('${AppRoutes.chart}/${chart.id}');
                 },
-                onRename: () => _showRenameDialog(context, ref, chart),
+                onRename: chart.isCurrentUser
+                    ? null
+                    : () => _showRenameDialog(context, ref, chart),
                 onDelete: chart.isCurrentUser
                     ? null
                     : () => _showDeleteDialog(context, ref, chart),
@@ -201,14 +203,14 @@ class _ChartCard extends ConsumerWidget {
   const _ChartCard({
     required this.chartSummary,
     required this.onTap,
-    required this.onRename,
+    this.onRename,
     this.onDelete,
     required this.onShare,
   });
 
   final ChartSummary chartSummary;
   final VoidCallback onTap;
-  final VoidCallback onRename;
+  final VoidCallback? onRename;
   final VoidCallback? onDelete;
   final VoidCallback onShare;
 
@@ -440,7 +442,7 @@ class _ChartCard extends ConsumerWidget {
       onSelected: (value) {
         switch (value) {
           case 'rename':
-            onRename();
+            onRename?.call();
             break;
           case 'share':
             onShare();
@@ -451,14 +453,15 @@ class _ChartCard extends ConsumerWidget {
         }
       },
       itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 'rename',
-          child: ListTile(
-            leading: const Icon(Icons.edit_outlined),
-            title: Text(l10n.chart_rename),
-            contentPadding: EdgeInsets.zero,
+        if (onRename != null)
+          PopupMenuItem(
+            value: 'rename',
+            child: ListTile(
+              leading: const Icon(Icons.edit_outlined),
+              title: Text(l10n.chart_rename),
+              contentPadding: EdgeInsets.zero,
+            ),
           ),
-        ),
         PopupMenuItem(
           value: 'share',
           child: ListTile(

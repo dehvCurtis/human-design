@@ -61,10 +61,10 @@ class PentaScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
 
-            // Calculate button - always visible but disabled if < 3 charts selected
+            // Calculate button - always visible but disabled if < 2 charts selected
             if (pentaState.penta == null)
               ElevatedButton.icon(
-                onPressed: (pentaState.isCalculating || pentaState.selectedChartIds.length < 3)
+                onPressed: (pentaState.isCalculating || pentaState.selectedChartIds.length < 2)
                     ? null
                     : () {
                         ref.read(pentaNotifierProvider.notifier).calculatePenta();
@@ -79,8 +79,8 @@ class PentaScreen extends ConsumerWidget {
                 label: Text(
                   pentaState.isCalculating
                       ? l10n.penta_calculating
-                      : pentaState.selectedChartIds.length < 3
-                          ? 'Select ${3 - pentaState.selectedChartIds.length} more chart(s)'
+                      : pentaState.selectedChartIds.length < 2
+                          ? 'Select ${2 - pentaState.selectedChartIds.length} more chart(s)'
                           : l10n.penta_calculate,
                 ),
                 style: ElevatedButton.styleFrom(
@@ -357,7 +357,7 @@ class _ChartSelector extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Select 3-5 Charts',
+                        'Select 2-5 Charts',
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -366,7 +366,7 @@ class _ChartSelector extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       decoration: BoxDecoration(
-                        color: selectedChartIds.length >= 3
+                        color: selectedChartIds.length >= 2
                             ? AppColors.success.withAlpha(25)
                             : AppColors.warning.withAlpha(25),
                         borderRadius: BorderRadius.circular(12),
@@ -375,7 +375,7 @@ class _ChartSelector extends ConsumerWidget {
                         '${selectedChartIds.length}/5',
                         style: theme.textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: selectedChartIds.length >= 3
+                          color: selectedChartIds.length >= 2
                               ? AppColors.success
                               : AppColors.warning,
                         ),
@@ -415,7 +415,7 @@ class _ChartSelector extends ConsumerWidget {
                     ),
                   );
                 }),
-                if (selectedChartIds.length < 3) ...[
+                if (selectedChartIds.length < 2) ...[
                   const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -429,7 +429,7 @@ class _ChartSelector extends ConsumerWidget {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'Select at least ${3 - selectedChartIds.length} more chart(s)',
+                            'Select at least ${2 - selectedChartIds.length} more chart(s)',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: AppColors.info,
                             ),
