@@ -28,12 +28,21 @@
   "common_create": "Створити",
   "common_viewFull": "Детальніше",
   "common_send": "Надіслати",
+  "common_like": "Подобається",
+  "common_reply": "Відповісти",
+  "common_deleteConfirmation": "Ви впевнені, що хочете видалити? Цю дію не можна скасувати.",
+  "common_comingSoon": "Незабаром!",
 
   "nav_home": "Головна",
   "nav_chart": "Карта",
-  "nav_today": "Сьогодні",
+  "nav_today": "День",
   "nav_social": "Соціум",
   "nav_profile": "Профіль",
+  "nav_more": "Більше",
+  "nav_learn": "Навчання",
+
+  "affirmation_savedSuccess": "Афірмацію збережено!",
+  "affirmation_alreadySaved": "Афірмацію вже збережено",
 
   "home_goodMorning": "Доброго ранку",
   "home_goodAfternoon": "Доброго дня",
@@ -247,9 +256,15 @@
   "section_unconscious": "Несвідоме (Дизайн)",
 
   "social_title": "Соціальне",
+  "social_thoughts": "Думки",
+  "social_discover": "Пошук",
   "social_friends": "Друзі",
   "social_groups": "Групи",
+  "social_invite": "Запросити",
   "social_addFriend": "Додати друга",
+  "social_createPost": "Поділіться думкою...",
+  "social_noThoughtsYet": "Поки немає записів",
+  "social_noThoughtsMessage": "Будьте першим, хто поділиться своїми відкриттями про Дизайн Людини!",
   "social_sendRequest": "Надіслати запит",
   "social_createGroup": "Створити групу",
   "social_invite": "Запросити",
@@ -304,6 +319,8 @@
       }
     }
   },
+  "social_groupNameRequired": "Будь ласка, введіть назву групи",
+  "social_createGroupFailed": "Не вдалося створити групу. Спробуйте ще раз.",
   "social_friendsSince": "Друзі з {date}",
   "@social_friendsSince": {
     "placeholders": {
@@ -657,11 +674,23 @@
   "discovery_compatible": "сумісні",
   "discovery_followers": "Підписники",
   "discovery_followingLabel": "Підписки",
+  "discovery_noResults": "Користувачів не знайдено",
+  "discovery_noResultsMessage": "Спробуйте змінити фільтри або зайдіть пізніше",
 
   "userProfile_viewChart": "Бодіграф",
   "userProfile_chartPrivate": "Ця карта приватна",
   "userProfile_chartFriendsOnly": "Станьте взаємними підписниками, щоб побачити цю карту",
   "userProfile_chartFollowToView": "Підпишіться, щоб побачити цю карту",
+  "userProfile_publicProfile": "Публічний профіль",
+  "userProfile_privateProfile": "Приватний профіль",
+  "userProfile_friendsOnlyProfile": "Тільки для друзів",
+  "userProfile_followersList": "Підписники",
+  "userProfile_followingList": "Підписки",
+  "userProfile_noFollowers": "Поки немає підписників",
+  "userProfile_noFollowing": "Поки ні на кого не підписаний",
+  "userProfile_thoughts": "Думки",
+  "userProfile_noThoughts": "Поки немає опублікованих думок",
+  "userProfile_showAll": "Показати все",
 
   "popularCharts_title": "Популярні карти",
   "popularCharts_subtitle": "Найпопулярніші публічні карти",
@@ -1059,6 +1088,15 @@
   "thought_cannotRegenerateOwn": "Не можна зробити репост своєї думки",
   "thought_alreadyRegenerated": "Ви вже зробили репост цієї думки",
   "thought_postDetail": "Думка",
+  "thought_noComments": "Коментарів поки немає. Будьте першим!",
+  "thought_replyingTo": "Відповідь для {username}",
+  "@thought_replyingTo": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_writeReply": "Напишіть відповідь...",
+  "thought_commentPlaceholder": "Додати коментар...",
 
   "chakra_title": "Енергія чакр",
   "chakra_activated": "Активована",

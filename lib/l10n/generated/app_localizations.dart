@@ -256,6 +256,30 @@ abstract class AppLocalizations {
   /// **'Send'**
   String get common_send;
 
+  /// No description provided for @common_like.
+  ///
+  /// In en, this message translates to:
+  /// **'Like'**
+  String get common_like;
+
+  /// No description provided for @common_reply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get common_reply;
+
+  /// No description provided for @common_deleteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this? This action cannot be undone.'**
+  String get common_deleteConfirmation;
+
+  /// No description provided for @common_comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon!'**
+  String get common_comingSoon;
+
   /// No description provided for @nav_home.
   ///
   /// In en, this message translates to:
@@ -271,7 +295,7 @@ abstract class AppLocalizations {
   /// No description provided for @nav_today.
   ///
   /// In en, this message translates to:
-  /// **'Today'**
+  /// **'Daily'**
   String get nav_today;
 
   /// No description provided for @nav_social.
@@ -285,6 +309,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get nav_profile;
+
+  /// No description provided for @nav_more.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get nav_more;
+
+  /// No description provided for @nav_learn.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn'**
+  String get nav_learn;
+
+  /// No description provided for @affirmation_savedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Affirmation saved!'**
+  String get affirmation_savedSuccess;
+
+  /// No description provided for @affirmation_alreadySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Affirmation already saved'**
+  String get affirmation_alreadySaved;
 
   /// No description provided for @home_goodMorning.
   ///
@@ -1330,6 +1378,18 @@ abstract class AppLocalizations {
   /// **'Social'**
   String get social_title;
 
+  /// No description provided for @social_thoughts.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get social_thoughts;
+
+  /// No description provided for @social_discover.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover'**
+  String get social_discover;
+
   /// No description provided for @social_friends.
   ///
   /// In en, this message translates to:
@@ -1342,11 +1402,35 @@ abstract class AppLocalizations {
   /// **'Groups'**
   String get social_groups;
 
+  /// No description provided for @social_invite.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite'**
+  String get social_invite;
+
   /// No description provided for @social_addFriend.
   ///
   /// In en, this message translates to:
   /// **'Add Friend'**
   String get social_addFriend;
+
+  /// No description provided for @social_createPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Share a thought...'**
+  String get social_createPost;
+
+  /// No description provided for @social_noThoughtsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No thoughts yet'**
+  String get social_noThoughtsYet;
+
+  /// No description provided for @social_noThoughtsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Be the first to share your Human Design insights!'**
+  String get social_noThoughtsMessage;
 
   /// No description provided for @social_sendRequest.
   ///
@@ -1359,12 +1443,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create Group'**
   String get social_createGroup;
-
-  /// No description provided for @social_invite.
-  ///
-  /// In en, this message translates to:
-  /// **'Invite'**
-  String get social_invite;
 
   /// No description provided for @social_members.
   ///
@@ -1546,6 +1624,18 @@ abstract class AppLocalizations {
   /// **'Group \"{name}\" created!'**
   String social_groupCreated(String name);
 
+  /// No description provided for @social_groupNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a group name'**
+  String get social_groupNameRequired;
+
+  /// No description provided for @social_createGroupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create group. Please try again.'**
+  String get social_createGroupFailed;
+
   /// No description provided for @social_friendsSince.
   ///
   /// In en, this message translates to:
@@ -1672,6 +1762,18 @@ abstract class AppLocalizations {
   /// **'Following'**
   String get discovery_followingLabel;
 
+  /// No description provided for @discovery_noResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No users found'**
+  String get discovery_noResults;
+
+  /// No description provided for @discovery_noResultsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Try adjusting your filters or check back later'**
+  String get discovery_noResultsMessage;
+
   /// No description provided for @userProfile_viewChart.
   ///
   /// In en, this message translates to:
@@ -1695,6 +1797,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Follow to view this chart'**
   String get userProfile_chartFollowToView;
+
+  /// No description provided for @userProfile_publicProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Public Profile'**
+  String get userProfile_publicProfile;
+
+  /// No description provided for @userProfile_privateProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Private Profile'**
+  String get userProfile_privateProfile;
+
+  /// No description provided for @userProfile_friendsOnlyProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Friends Only'**
+  String get userProfile_friendsOnlyProfile;
+
+  /// No description provided for @userProfile_followersList.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get userProfile_followersList;
+
+  /// No description provided for @userProfile_followingList.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get userProfile_followingList;
+
+  /// No description provided for @userProfile_noFollowers.
+  ///
+  /// In en, this message translates to:
+  /// **'No followers yet'**
+  String get userProfile_noFollowers;
+
+  /// No description provided for @userProfile_noFollowing.
+  ///
+  /// In en, this message translates to:
+  /// **'Not following anyone yet'**
+  String get userProfile_noFollowing;
+
+  /// No description provided for @userProfile_thoughts.
+  ///
+  /// In en, this message translates to:
+  /// **'Thoughts'**
+  String get userProfile_thoughts;
+
+  /// No description provided for @userProfile_noThoughts.
+  ///
+  /// In en, this message translates to:
+  /// **'No thoughts shared yet'**
+  String get userProfile_noThoughts;
+
+  /// No description provided for @userProfile_showAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Show All'**
+  String get userProfile_showAll;
 
   /// No description provided for @popularCharts_title.
   ///
@@ -5121,6 +5283,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Thought'**
   String get thought_postDetail;
+
+  /// No description provided for @thought_noComments.
+  ///
+  /// In en, this message translates to:
+  /// **'No comments yet. Be the first to comment!'**
+  String get thought_noComments;
+
+  /// No description provided for @thought_replyingTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Replying to {username}'**
+  String thought_replyingTo(String username);
+
+  /// No description provided for @thought_writeReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a reply...'**
+  String get thought_writeReply;
+
+  /// No description provided for @thought_commentPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a comment...'**
+  String get thought_commentPlaceholder;
 }
 
 class _AppLocalizationsDelegate
