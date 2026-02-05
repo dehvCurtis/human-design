@@ -288,13 +288,18 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   Future<void> _rateApp(BuildContext context) async {
-    // App Store / Play Store URLs
-    const iosAppId = 'com.humandesign.app'; // Replace with actual App Store ID
+    // TODO: Replace with actual App Store ID after publishing
+    const iosAppId = '6450000000'; // Numeric App Store ID (placeholder)
     const androidPackage = 'com.humandesign.app';
 
-    final uri = Theme.of(context).platform == TargetPlatform.iOS
-        ? Uri.parse('https://apps.apple.com/app/id$iosAppId')
-        : Uri.parse('https://play.google.com/store/apps/details?id=$androidPackage');
+    final Uri uri;
+    if (Platform.isIOS) {
+      // iOS App Store - use itms-apps for native app store opening
+      uri = Uri.parse('itms-apps://itunes.apple.com/app/id$iosAppId?action=write-review');
+    } else {
+      // Google Play Store
+      uri = Uri.parse('https://play.google.com/store/apps/details?id=$androidPackage');
+    }
 
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);

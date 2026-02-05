@@ -28,12 +28,21 @@
   "common_create": "Создать",
   "common_viewFull": "Подробнее",
   "common_send": "Отправить",
+  "common_like": "Нравится",
+  "common_reply": "Ответить",
+  "common_deleteConfirmation": "Вы уверены, что хотите удалить? Это действие нельзя отменить.",
+  "common_comingSoon": "Скоро!",
 
   "nav_home": "Главная",
   "nav_chart": "Карта",
-  "nav_today": "Сегодня",
+  "nav_today": "День",
   "nav_social": "Социум",
   "nav_profile": "Профиль",
+  "nav_more": "Ещё",
+  "nav_learn": "Обучение",
+
+  "affirmation_savedSuccess": "Аффирмация сохранена!",
+  "affirmation_alreadySaved": "Аффирмация уже сохранена",
 
   "home_goodMorning": "Доброе утро",
   "home_goodAfternoon": "Добрый день",
@@ -247,9 +256,15 @@
   "section_unconscious": "Бессознательное (Дизайн)",
 
   "social_title": "Социальное",
+  "social_thoughts": "Мысли",
+  "social_discover": "Поиск",
   "social_friends": "Друзья",
   "social_groups": "Группы",
+  "social_invite": "Пригласить",
   "social_addFriend": "Добавить друга",
+  "social_createPost": "Поделитесь мыслью...",
+  "social_noThoughtsYet": "Пока нет записей",
+  "social_noThoughtsMessage": "Будьте первым, кто поделится своими открытиями о Дизайне Человека!",
   "social_sendRequest": "Отправить запрос",
   "social_createGroup": "Создать группу",
   "social_invite": "Пригласить",
@@ -304,6 +319,8 @@
       }
     }
   },
+  "social_groupNameRequired": "Пожалуйста, введите название группы",
+  "social_createGroupFailed": "Не удалось создать группу. Попробуйте снова.",
   "social_friendsSince": "Друзья с {date}",
   "@social_friendsSince": {
     "placeholders": {
@@ -656,11 +673,23 @@
   "discovery_compatible": "совместимы",
   "discovery_followers": "Подписчики",
   "discovery_followingLabel": "Подписки",
+  "discovery_noResults": "Пользователи не найдены",
+  "discovery_noResultsMessage": "Попробуйте изменить фильтры или зайдите позже",
 
   "userProfile_viewChart": "Бодиграф",
   "userProfile_chartPrivate": "Эта карта приватная",
   "userProfile_chartFriendsOnly": "Станьте взаимными подписчиками, чтобы увидеть эту карту",
   "userProfile_chartFollowToView": "Подпишитесь, чтобы увидеть эту карту",
+  "userProfile_publicProfile": "Открытый профиль",
+  "userProfile_privateProfile": "Закрытый профиль",
+  "userProfile_friendsOnlyProfile": "Только для друзей",
+  "userProfile_followersList": "Подписчики",
+  "userProfile_followingList": "Подписки",
+  "userProfile_noFollowers": "Пока нет подписчиков",
+  "userProfile_noFollowing": "Пока ни на кого не подписан",
+  "userProfile_thoughts": "Мысли",
+  "userProfile_noThoughts": "Пока нет опубликованных мыслей",
+  "userProfile_showAll": "Показать все",
 
   "popularCharts_title": "Популярные карты",
   "popularCharts_subtitle": "Самые популярные публичные карты",
@@ -1058,6 +1087,15 @@
   "thought_cannotRegenerateOwn": "Нельзя сделать репост своей мысли",
   "thought_alreadyRegenerated": "Вы уже сделали репост этой мысли",
   "thought_postDetail": "Мысль",
+  "thought_noComments": "Комментариев пока нет. Будьте первым!",
+  "thought_replyingTo": "Ответ для {username}",
+  "@thought_replyingTo": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_writeReply": "Напишите ответ...",
+  "thought_commentPlaceholder": "Добавить комментарий...",
 
   "chakra_title": "Энергия чакр",
   "chakra_activated": "Активирована",

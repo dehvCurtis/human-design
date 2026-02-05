@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shared/providers/supabase_provider.dart';
 import '../../chart/domain/models/human_design_chart.dart';
@@ -140,5 +143,91 @@ extension AffirmationRefreshExtension on WidgetRef {
   void getTransitAffirmation(String chartId) {
     read(_affirmationTypeProvider(chartId).notifier).state = AffirmationType.transit;
     read(_affirmationRefreshCounterProvider(chartId).notifier).state++;
+  }
+}
+
+// =============================================================================
+// Saved Affirmations
+// =============================================================================
+
+const _savedAffirmationsKey = 'saved_affirmations';
+
+/// Saved affirmation model
+class SavedAffirmation {
+  const SavedAffirmation({
+    required this.text,
+    required this.sourceDescription,
+    required this.savedAt,
+  });
+
+  final String text;
+  final String sourceDescription;
+  final DateTime savedAt;
+
+  Map<String, dynamic> toJson() => {
+        'text': text,
+        'sourceDescription': sourceDescription,
+        'savedAt': savedAt.toIso8601String(),
+      };
+
+  factory SavedAffirmation.fromJson(Map<String, dynamic> json) {
+    return SavedAffirmation(
+      text: json['text'] as String,
+      sourceDescription: json['sourceDescription'] as String,
+      savedAt: DateTime.parse(json['savedAt'] as String),
+    );
+  }
+}
+
+/// Provider for saved affirmations
+final savedAffirmationsProvider =
+    StateNotifierProvider<SavedAffirmationsNotifier, List<SavedAffirmation>>(
+  (ref) => SavedAffirmationsNotifier(),
+);
+
+/// Notifier for managing saved affirmations
+class SavedAffirmationsNotifier extends StateNotifier<List<SavedAffirmation>> {
+  SavedAffirmationsNotifier() : super([]) {
+    _loadSavedAffirmations();
+  }
+
+  Future<void> _loadSavedAffirmations() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString(_savedAffirmationsKey);
+    if (jsonString != null) {
+      final List<dynamic> jsonList = jsonDecode(jsonString);
+      state = jsonList
+          .map((json) => SavedAffirmation.fromJson(json as Map<String, dynamic>))
+          .toList();
+    }
+  }
+
+  Future<void> _saveToDisk() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonList = state.map((a) => a.toJson()).toList();
+    await prefs.setString(_savedAffirmationsKey, jsonEncode(jsonList));
+  }
+
+  /// Returns true if saved successfully, false if already saved
+  Future<bool> saveAffirmation(DailyAffirmation affirmation) async {
+    // Check if already saved (by text match)
+    if (state.any((saved) => saved.text == affirmation.text)) {
+      return false;
+    }
+
+    final saved = SavedAffirmation(
+      text: affirmation.text,
+      sourceDescription: affirmation.sourceDescription,
+      savedAt: DateTime.now(),
+    );
+
+    state = [...state, saved];
+    await _saveToDisk();
+    return true;
+  }
+
+  Future<void> removeAffirmation(String text) async {
+    state = state.where((a) => a.text != text).toList();
+    await _saveToDisk();
   }
 }

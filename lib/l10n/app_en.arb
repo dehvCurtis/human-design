@@ -31,12 +31,21 @@
   "common_create": "Create",
   "common_viewFull": "View Full",
   "common_send": "Send",
+  "common_like": "Like",
+  "common_reply": "Reply",
+  "common_deleteConfirmation": "Are you sure you want to delete this? This action cannot be undone.",
+  "common_comingSoon": "Coming soon!",
 
   "nav_home": "Home",
   "nav_chart": "Chart",
-  "nav_today": "Today",
+  "nav_today": "Daily",
   "nav_social": "Social",
   "nav_profile": "Profile",
+  "nav_more": "More",
+  "nav_learn": "Learn",
+
+  "affirmation_savedSuccess": "Affirmation saved!",
+  "affirmation_alreadySaved": "Affirmation already saved",
 
   "home_goodMorning": "Good morning",
   "home_goodAfternoon": "Good afternoon",
@@ -252,9 +261,15 @@
   "section_unconscious": "Unconscious (Design)",
 
   "social_title": "Social",
+  "social_thoughts": "Thoughts",
+  "social_discover": "Discover",
   "social_friends": "Friends",
   "social_groups": "Groups",
+  "social_invite": "Invite",
   "social_addFriend": "Add Friend",
+  "social_createPost": "Share a thought...",
+  "social_noThoughtsYet": "No thoughts yet",
+  "social_noThoughtsMessage": "Be the first to share your Human Design insights!",
   "social_sendRequest": "Send Request",
   "social_createGroup": "Create Group",
   "social_invite": "Invite",
@@ -309,6 +324,8 @@
       }
     }
   },
+  "social_groupNameRequired": "Please enter a group name",
+  "social_createGroupFailed": "Failed to create group. Please try again.",
   "social_friendsSince": "Friends since {date}",
   "@social_friendsSince": {
     "placeholders": {
@@ -345,11 +362,23 @@
   "discovery_compatible": "compatible",
   "discovery_followers": "Followers",
   "discovery_followingLabel": "Following",
+  "discovery_noResults": "No users found",
+  "discovery_noResultsMessage": "Try adjusting your filters or check back later",
 
   "userProfile_viewChart": "Bodygraph",
   "userProfile_chartPrivate": "This chart is private",
   "userProfile_chartFriendsOnly": "Become mutual followers to view this chart",
   "userProfile_chartFollowToView": "Follow to view this chart",
+  "userProfile_publicProfile": "Public Profile",
+  "userProfile_privateProfile": "Private Profile",
+  "userProfile_friendsOnlyProfile": "Friends Only",
+  "userProfile_followersList": "Followers",
+  "userProfile_followingList": "Following",
+  "userProfile_noFollowers": "No followers yet",
+  "userProfile_noFollowing": "Not following anyone yet",
+  "userProfile_thoughts": "Thoughts",
+  "userProfile_noThoughts": "No thoughts shared yet",
+  "userProfile_showAll": "Show All",
 
   "popularCharts_title": "Popular Charts",
   "popularCharts_subtitle": "Most followed public charts",
@@ -1263,5 +1292,14 @@
   },
   "thought_cannotRegenerateOwn": "You cannot regenerate your own thought",
   "thought_alreadyRegenerated": "You have already regenerated this thought",
-  "thought_postDetail": "Thought"
+  "thought_postDetail": "Thought",
+  "thought_noComments": "No comments yet. Be the first to comment!",
+  "thought_replyingTo": "Replying to {username}",
+  "@thought_replyingTo": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_writeReply": "Write a reply...",
+  "thought_commentPlaceholder": "Add a comment..."
 }

@@ -87,19 +87,44 @@ class AppLocalizationsUk extends AppLocalizations {
   String get common_send => 'Надіслати';
 
   @override
+  String get common_like => 'Подобається';
+
+  @override
+  String get common_reply => 'Відповісти';
+
+  @override
+  String get common_deleteConfirmation =>
+      'Ви впевнені, що хочете видалити? Цю дію не можна скасувати.';
+
+  @override
+  String get common_comingSoon => 'Незабаром!';
+
+  @override
   String get nav_home => 'Головна';
 
   @override
   String get nav_chart => 'Карта';
 
   @override
-  String get nav_today => 'Сьогодні';
+  String get nav_today => 'День';
 
   @override
   String get nav_social => 'Соціум';
 
   @override
   String get nav_profile => 'Профіль';
+
+  @override
+  String get nav_more => 'Більше';
+
+  @override
+  String get nav_learn => 'Навчання';
+
+  @override
+  String get affirmation_savedSuccess => 'Афірмацію збережено!';
+
+  @override
+  String get affirmation_alreadySaved => 'Афірмацію вже збережено';
 
   @override
   String get home_goodMorning => 'Доброго ранку';
@@ -667,22 +692,38 @@ class AppLocalizationsUk extends AppLocalizations {
   String get social_title => 'Соціальне';
 
   @override
+  String get social_thoughts => 'Думки';
+
+  @override
+  String get social_discover => 'Пошук';
+
+  @override
   String get social_friends => 'Друзі';
 
   @override
   String get social_groups => 'Групи';
 
   @override
+  String get social_invite => 'Запросити';
+
+  @override
   String get social_addFriend => 'Додати друга';
+
+  @override
+  String get social_createPost => 'Поділіться думкою...';
+
+  @override
+  String get social_noThoughtsYet => 'Поки немає записів';
+
+  @override
+  String get social_noThoughtsMessage =>
+      'Будьте першим, хто поділиться своїми відкриттями про Дизайн Людини!';
 
   @override
   String get social_sendRequest => 'Надіслати запит';
 
   @override
   String get social_createGroup => 'Створити групу';
-
-  @override
-  String get social_invite => 'Запросити';
 
   @override
   String get social_members => 'Учасники';
@@ -786,6 +827,13 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get social_groupNameRequired => 'Будь ласка, введіть назву групи';
+
+  @override
+  String get social_createGroupFailed =>
+      'Не вдалося створити групу. Спробуйте ще раз.';
+
+  @override
   String social_friendsSince(String date) {
     return 'Друзі з $date';
   }
@@ -853,6 +901,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get discovery_followingLabel => 'Підписки';
 
   @override
+  String get discovery_noResults => 'Користувачів не знайдено';
+
+  @override
+  String get discovery_noResultsMessage =>
+      'Спробуйте змінити фільтри або зайдіть пізніше';
+
+  @override
   String get userProfile_viewChart => 'Бодіграф';
 
   @override
@@ -865,6 +920,36 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get userProfile_chartFollowToView =>
       'Підпишіться, щоб побачити цю карту';
+
+  @override
+  String get userProfile_publicProfile => 'Публічний профіль';
+
+  @override
+  String get userProfile_privateProfile => 'Приватний профіль';
+
+  @override
+  String get userProfile_friendsOnlyProfile => 'Тільки для друзів';
+
+  @override
+  String get userProfile_followersList => 'Підписники';
+
+  @override
+  String get userProfile_followingList => 'Підписки';
+
+  @override
+  String get userProfile_noFollowers => 'Поки немає підписників';
+
+  @override
+  String get userProfile_noFollowing => 'Поки ні на кого не підписаний';
+
+  @override
+  String get userProfile_thoughts => 'Думки';
+
+  @override
+  String get userProfile_noThoughts => 'Поки немає опублікованих думок';
+
+  @override
+  String get userProfile_showAll => 'Показати все';
 
   @override
   String get popularCharts_title => 'Популярні карти';
@@ -2784,4 +2869,18 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get thought_postDetail => 'Думка';
+
+  @override
+  String get thought_noComments => 'Коментарів поки немає. Будьте першим!';
+
+  @override
+  String thought_replyingTo(String username) {
+    return 'Відповідь для $username';
+  }
+
+  @override
+  String get thought_writeReply => 'Напишіть відповідь...';
+
+  @override
+  String get thought_commentPlaceholder => 'Додати коментар...';
 }

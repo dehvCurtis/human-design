@@ -209,16 +209,27 @@ View the full post: $deepLink
   }
 }
 
-class PostDetailScreen extends ConsumerWidget {
+class PostDetailScreen extends ConsumerStatefulWidget {
   const PostDetailScreen({super.key, required this.postId});
 
   final String postId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PostDetailScreen> createState() => _PostDetailScreenState();
+}
+
+class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
+  PostComment? _replyingTo;
+
+  void _setReplyingTo(PostComment? comment) {
+    setState(() => _replyingTo = comment);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final postAsync = ref.watch(postProvider(postId));
-    final commentsAsync = ref.watch(postCommentsProvider(postId));
+    final postAsync = ref.watch(postProvider(widget.postId));
+    final commentsAsync = ref.watch(postCommentsProvider(widget.postId));
     final currentUserId = ref.watch(supabaseClientProvider).auth.currentUser?.id;
 
     return Scaffold(
@@ -250,7 +261,7 @@ class PostDetailScreen extends ConsumerWidget {
                         onComment: () {},
                         onShare: () {},
                         onUserTap: () => context.pushNamed('userProfile', pathParameters: {'id': post.userId}),
-                        onRegenerate: isOwnPost ? null : () => _handleRegenerate(context, ref, post),
+                        onRegenerate: isOwnPost ? null : () => _handleRegenerate(context, post),
                         onOriginalUserTap: post.originalPost != null
                             ? () => context.pushNamed('userProfile', pathParameters: {'id': post.originalPost!.userId})
                             : null,
@@ -260,7 +271,9 @@ class PostDetailScreen extends ConsumerWidget {
                       commentsAsync.when(
                         data: (comments) => _CommentsSection(
                           comments: comments,
-                          postId: postId,
+                          postId: widget.postId,
+                          onReply: _setReplyingTo,
+                          currentUserId: currentUserId,
                         ),
                         loading: () => const Padding(
                           padding: EdgeInsets.all(16),
@@ -275,7 +288,11 @@ class PostDetailScreen extends ConsumerWidget {
                   ),
                 ),
               ),
-              _CommentInput(postId: postId),
+              _CommentInput(
+                postId: widget.postId,
+                replyingTo: _replyingTo,
+                onCancelReply: () => _setReplyingTo(null),
+              ),
             ],
           );
         },
@@ -285,7 +302,7 @@ class PostDetailScreen extends ConsumerWidget {
     );
   }
 
-  void _handleRegenerate(BuildContext context, WidgetRef ref, Post post) {
+  void _handleRegenerate(BuildContext context, Post post) {
     final l10n = AppLocalizations.of(context)!;
     final currentUserId = ref.read(supabaseClientProvider).auth.currentUser?.id;
 
@@ -331,18 +348,24 @@ class _CommentsSection extends StatelessWidget {
   const _CommentsSection({
     required this.comments,
     required this.postId,
+    required this.onReply,
+    this.currentUserId,
   });
 
   final List<PostComment> comments;
   final String postId;
+  final void Function(PostComment comment) onReply;
+  final String? currentUserId;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (comments.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.all(32),
+      return Padding(
+        padding: const EdgeInsets.all(32),
         child: Text(
-          'No comments yet. Be the first to comment!',
+          l10n.thought_noComments,
           textAlign: TextAlign.center,
         ),
       );
@@ -356,24 +379,32 @@ class _CommentsSection extends StatelessWidget {
         return _CommentTile(
           comment: comments[index],
           postId: postId,
+          onReply: onReply,
+          currentUserId: currentUserId,
         );
       },
     );
   }
 }
 
-class _CommentTile extends StatelessWidget {
+class _CommentTile extends ConsumerWidget {
   const _CommentTile({
     required this.comment,
     required this.postId,
+    required this.onReply,
+    this.currentUserId,
   });
 
   final PostComment comment;
   final String postId;
+  final void Function(PostComment comment) onReply;
+  final String? currentUserId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final isOwnComment = comment.userId == currentUserId;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -385,14 +416,17 @@ class _CommentTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundImage: comment.userAvatarUrl != null
-                ? NetworkImage(comment.userAvatarUrl!)
-                : null,
-            child: comment.userAvatarUrl == null
-                ? Text(comment.userName[0].toUpperCase())
-                : null,
+          GestureDetector(
+            onTap: () => context.pushNamed('userProfile', pathParameters: {'id': comment.userId}),
+            child: CircleAvatar(
+              radius: 16,
+              backgroundImage: comment.userAvatarUrl != null
+                  ? NetworkImage(comment.userAvatarUrl!)
+                  : null,
+              child: comment.userAvatarUrl == null
+                  ? Text(comment.userName[0].toUpperCase())
+                  : null,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -401,10 +435,13 @@ class _CommentTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(
-                      comment.userName,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
+                    GestureDetector(
+                      onTap: () => context.pushNamed('userProfile', pathParameters: {'id': comment.userId}),
+                      child: Text(
+                        comment.userName,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -418,15 +455,74 @@ class _CommentTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(comment.content),
+                const SizedBox(height: 4),
+                // Action buttons
+                Row(
+                  children: [
+                    // Like button
+                    _CommentActionButton(
+                      icon: Icons.thumb_up_outlined,
+                      label: comment.reactionCount > 0 ? '${comment.reactionCount}' : l10n.common_like,
+                      onTap: () {
+                        // TODO: Implement comment like when backend supports it
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(l10n.common_comingSoon)),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 16),
+                    // Reply button (only for top-level comments)
+                    if (!comment.isReply)
+                      _CommentActionButton(
+                        icon: Icons.reply,
+                        label: l10n.common_reply,
+                        onTap: () => onReply(comment),
+                      ),
+                    const Spacer(),
+                    // Delete button (only for own comments)
+                    if (isOwnComment)
+                      _CommentActionButton(
+                        icon: Icons.delete_outline,
+                        label: l10n.common_delete,
+                        onTap: () => _confirmDelete(context, ref),
+                      ),
+                  ],
+                ),
                 if (comment.replies?.isNotEmpty == true) ...[
                   const SizedBox(height: 8),
                   ...comment.replies!.map((reply) => _CommentTile(
                         comment: reply,
                         postId: postId,
+                        onReply: onReply,
+                        currentUserId: currentUserId,
                       )),
                 ],
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _confirmDelete(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.common_delete),
+        content: Text(l10n.common_deleteConfirmation),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.common_cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ref.read(feedNotifierProvider.notifier).deleteComment(postId, comment.id);
+            },
+            child: Text(l10n.common_delete),
           ),
         ],
       ),
@@ -443,10 +539,53 @@ class _CommentTile extends StatelessWidget {
   }
 }
 
+class _CommentActionButton extends StatelessWidget {
+  const _CommentActionButton({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            size: 14,
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+          ),
+          const SizedBox(width: 4),
+          Text(
+            label,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _CommentInput extends ConsumerStatefulWidget {
-  const _CommentInput({required this.postId});
+  const _CommentInput({
+    required this.postId,
+    this.replyingTo,
+    this.onCancelReply,
+  });
 
   final String postId;
+  final PostComment? replyingTo;
+  final VoidCallback? onCancelReply;
 
   @override
   ConsumerState<_CommentInput> createState() => _CommentInputState();
@@ -454,17 +593,30 @@ class _CommentInput extends ConsumerStatefulWidget {
 
 class _CommentInputState extends ConsumerState<_CommentInput> {
   final _controller = TextEditingController();
+  final _focusNode = FocusNode();
   bool _isSubmitting = false;
+
+  @override
+  void didUpdateWidget(covariant _CommentInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Focus the input when replying to someone
+    if (widget.replyingTo != null && oldWidget.replyingTo == null) {
+      _focusNode.requestFocus();
+    }
+  }
 
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final isReplying = widget.replyingTo != null;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -477,40 +629,81 @@ class _CommentInputState extends ConsumerState<_CommentInput> {
         ),
       ),
       child: SafeArea(
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  hintText: 'Add a comment...',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: theme.colorScheme.surfaceContainerHighest,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+            // Reply indicator
+            if (isReplying)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.reply,
+                      size: 16,
+                      color: theme.colorScheme.primary,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        l10n.thought_replyingTo(widget.replyingTo!.userName),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.primary,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: widget.onCancelReply,
+                      child: Icon(
+                        Icons.close,
+                        size: 16,
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    decoration: InputDecoration(
+                      hintText: isReplying
+                          ? l10n.thought_writeReply
+                          : l10n.thought_addComment,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: theme.colorScheme.surfaceContainerHighest,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
+                    ),
+                    maxLines: 3,
+                    minLines: 1,
+                    textInputAction: TextInputAction.send,
+                    onSubmitted: (_) => _submitComment(),
                   ),
                 ),
-                maxLines: 3,
-                minLines: 1,
-                textInputAction: TextInputAction.send,
-                onSubmitted: (_) => _submitComment(),
-              ),
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              icon: _isSubmitting
-                  ? const SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.send),
-              onPressed: _isSubmitting ? null : _submitComment,
+                const SizedBox(width: 8),
+                IconButton(
+                  icon: _isSubmitting
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.send),
+                  onPressed: _isSubmitting ? null : _submitComment,
+                ),
+              ],
             ),
           ],
         ),
@@ -528,8 +721,10 @@ class _CommentInputState extends ConsumerState<_CommentInput> {
       await ref.read(feedNotifierProvider.notifier).addComment(
             postId: widget.postId,
             content: content,
+            parentId: widget.replyingTo?.id,
           );
       _controller.clear();
+      widget.onCancelReply?.call();
     } finally {
       if (mounted) {
         setState(() => _isSubmitting = false);

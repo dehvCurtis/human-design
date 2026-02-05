@@ -7,7 +7,7 @@ publish_to: 'none'
 # - MINOR: New features, backward compatible
 # - PATCH: Bug fixes, backward compatible
 # - BUILD: Incremental build number for app stores
-version: 1.0.0+1
+version: 0.2.8+8
 
 environment:
   sdk: ^3.8.0

@@ -2,6 +2,101 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.8] - 2026-02-05
+
+### Added
+
+#### Navigation Redesign
+- **More Tab** - Replaced Profile tab in bottom navigation with "More" tab
+  - Opens bottom sheet with quick access to Profile, Learn, and Settings
+  - Provides cleaner navigation while accommodating new features
+  - All three routes (Profile, Learning, Settings) now map to More tab index
+
+#### Social Screen Redesign
+- **Thoughts Tab** - New main tab showing feed of all thoughts/posts
+  - Shows posts from all users with reactions, comments, shares
+  - Floating action button to create new posts
+- **Discover Tab** - Browse and discover new users to follow
+  - Shows compatibility percentages with Human Design types
+  - Empty state with appropriate messaging
+- **Friends Tab** - View and manage friends list
+  - Add Friend button at top for quick access
+- **Groups Tab** - View and manage groups
+
+#### User Profile Enhancements
+- **Privacy Badge** - Shows profile visibility status (Public/Private/Friends Only)
+- **Clickable Followers/Following** - Tap counts to view full lists in bottom sheet
+- **Thoughts Section** - View recent posts from user profile
+  - "Show All" button to see complete post history
+
+#### Comments System
+- **Reply to Comments** - Reply to specific comments with visual indicator
+  - Reply button on comments (top-level only)
+  - "Replying to @username" indicator above input
+  - Cancel button to stop replying
+- **Like Comments** - Coming soon feature with placeholder
+- **Delete Own Comments** - Remove comments you've posted
+  - Confirmation dialog before deletion
+
+### Changed
+
+#### Navigation Labels
+- **Daily Tab** - Renamed "Today" tab to "Daily" in all languages
+  - English: "Daily"
+  - Russian: "День"
+  - Ukrainian: "День"
+
+#### Penta Analysis
+- **Minimum Charts Reduced** - Penta analysis now requires only 2 charts (was 3)
+  - Changed from "Select 3-5 Charts" to "Select 2-5 Charts"
+  - Allows couple/pair analysis in addition to group analysis
+
+### Fixed
+
+#### Chart Screen
+- **Sun Gate Button Removed** - Removed redundant Sun gate decimal display from chart app bar
+  - Sun gate information is already visible in Planets tab
+
+#### Quiz System
+- **Answer Selection Bug** - Users can now change their answer before submitting
+  - Previously, selecting an answer immediately locked the choice
+  - Now answers can be changed until the user submits
+
+#### Settings Screen
+- **Rate App Button** - Fixed iOS App Store URL format
+  - Now uses `itms-apps://` scheme for native app store opening
+  - Includes direct link to write-review action
+
+#### Social Groups
+- **Group Creation Error Handling** - Improved error feedback when creating groups
+  - Shows loading state during creation
+  - Displays error message if creation fails
+  - Added localized error messages (EN, RU, UK)
+
+#### Saved Charts
+- **Rename Option Hidden for Own Chart** - Users can no longer see rename option for their own chart
+  - Rename option now only appears for saved charts of other people
+
+### Technical Details
+
+Files modified:
+- `app_router.dart` - Added More tab with bottom sheet, updated route mapping
+- `app_en.arb`, `app_ru.arb`, `app_uk.arb` - Added nav_more, nav_learn, updated nav_today to Daily, added comment/reply strings
+- `chart_screen.dart` - Removed Sun gate button from app bar
+- `penta_providers.dart` - Changed minimum from 3 to 2 charts
+- `penta_screen.dart` - Updated UI text for 2-5 charts
+- `question_card.dart` - Fixed answer selection to allow changes before submit
+- `settings_screen.dart` - Fixed Rate App URL format for iOS
+- `social_screen.dart` - Redesigned with 4 tabs (Thoughts, Discover, Friends, Groups), added FAB for posts
+- `saved_charts_screen.dart` - Hidden rename for user's own chart
+- `home_providers.dart` - Added SavedAffirmation model and provider
+- `user_profile_screen.dart` - Added privacy badge, clickable followers/following, thoughts section
+- `discovery_providers.dart` - Added userFollowersProvider and userFollowingProvider
+- `discovery_repository.dart` - Added getUserFollowers() and getUserFollowing() methods
+- `feed_screen.dart` - Enhanced PostDetailScreen with reply functionality, added comment actions (reply, like, delete)
+
+---
+
 ## [0.2.7] - 2026-02-05
 
 ### Added

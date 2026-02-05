@@ -109,7 +109,7 @@ final pentaAnalysisProvider = FutureProvider<Penta?>((ref) async {
   if (selectedGroupId == null) return null;
 
   final charts = await ref.watch(pentaGroupChartsProvider(selectedGroupId).future);
-  if (charts.length < 3) return null;
+  if (charts.length < 2) return null;
 
   final calculator = ref.read(pentaCalculatorProvider);
   return calculator.calculate(charts);
@@ -152,9 +152,9 @@ class PentaNotifier extends Notifier<PentaState> {
 
   Future<void> calculatePenta() async {
     final selectedIds = state.selectedChartIds;
-    if (selectedIds.length < 3) {
+    if (selectedIds.length < 2) {
       state = state.copyWith(
-        errorMessage: 'Select at least 3 charts for Penta analysis',
+        errorMessage: 'Select at least 2 charts for Penta analysis',
       );
       return;
     }
@@ -171,7 +171,7 @@ class PentaNotifier extends Notifier<PentaState> {
         }
       }
 
-      if (charts.length < 3) {
+      if (charts.length < 2) {
         state = state.copyWith(
           isCalculating: false,
           errorMessage: 'Could not load enough charts for Penta analysis',

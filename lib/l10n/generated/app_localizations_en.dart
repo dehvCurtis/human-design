@@ -87,19 +87,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get common_send => 'Send';
 
   @override
+  String get common_like => 'Like';
+
+  @override
+  String get common_reply => 'Reply';
+
+  @override
+  String get common_deleteConfirmation =>
+      'Are you sure you want to delete this? This action cannot be undone.';
+
+  @override
+  String get common_comingSoon => 'Coming soon!';
+
+  @override
   String get nav_home => 'Home';
 
   @override
   String get nav_chart => 'Chart';
 
   @override
-  String get nav_today => 'Today';
+  String get nav_today => 'Daily';
 
   @override
   String get nav_social => 'Social';
 
   @override
   String get nav_profile => 'Profile';
+
+  @override
+  String get nav_more => 'More';
+
+  @override
+  String get nav_learn => 'Learn';
+
+  @override
+  String get affirmation_savedSuccess => 'Affirmation saved!';
+
+  @override
+  String get affirmation_alreadySaved => 'Affirmation already saved';
 
   @override
   String get home_goodMorning => 'Good morning';
@@ -662,22 +687,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get social_title => 'Social';
 
   @override
+  String get social_thoughts => 'Thoughts';
+
+  @override
+  String get social_discover => 'Discover';
+
+  @override
   String get social_friends => 'Friends';
 
   @override
   String get social_groups => 'Groups';
 
   @override
+  String get social_invite => 'Invite';
+
+  @override
   String get social_addFriend => 'Add Friend';
+
+  @override
+  String get social_createPost => 'Share a thought...';
+
+  @override
+  String get social_noThoughtsYet => 'No thoughts yet';
+
+  @override
+  String get social_noThoughtsMessage =>
+      'Be the first to share your Human Design insights!';
 
   @override
   String get social_sendRequest => 'Send Request';
 
   @override
   String get social_createGroup => 'Create Group';
-
-  @override
-  String get social_invite => 'Invite';
 
   @override
   String get social_members => 'Members';
@@ -781,6 +822,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get social_groupNameRequired => 'Please enter a group name';
+
+  @override
+  String get social_createGroupFailed =>
+      'Failed to create group. Please try again.';
+
+  @override
   String social_friendsSince(String date) {
     return 'Friends since $date';
   }
@@ -848,6 +896,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get discovery_followingLabel => 'Following';
 
   @override
+  String get discovery_noResults => 'No users found';
+
+  @override
+  String get discovery_noResultsMessage =>
+      'Try adjusting your filters or check back later';
+
+  @override
   String get userProfile_viewChart => 'Bodygraph';
 
   @override
@@ -859,6 +914,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get userProfile_chartFollowToView => 'Follow to view this chart';
+
+  @override
+  String get userProfile_publicProfile => 'Public Profile';
+
+  @override
+  String get userProfile_privateProfile => 'Private Profile';
+
+  @override
+  String get userProfile_friendsOnlyProfile => 'Friends Only';
+
+  @override
+  String get userProfile_followersList => 'Followers';
+
+  @override
+  String get userProfile_followingList => 'Following';
+
+  @override
+  String get userProfile_noFollowers => 'No followers yet';
+
+  @override
+  String get userProfile_noFollowing => 'Not following anyone yet';
+
+  @override
+  String get userProfile_thoughts => 'Thoughts';
+
+  @override
+  String get userProfile_noThoughts => 'No thoughts shared yet';
+
+  @override
+  String get userProfile_showAll => 'Show All';
 
   @override
   String get popularCharts_title => 'Popular Charts';
@@ -2772,4 +2857,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thought_postDetail => 'Thought';
+
+  @override
+  String get thought_noComments => 'No comments yet. Be the first to comment!';
+
+  @override
+  String thought_replyingTo(String username) {
+    return 'Replying to $username';
+  }
+
+  @override
+  String get thought_writeReply => 'Write a reply...';
+
+  @override
+  String get thought_commentPlaceholder => 'Add a comment...';
 }

@@ -186,7 +186,7 @@ class QuestionCard extends StatelessWidget {
       color: backgroundColor,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
-        onTap: showResult || selectedAnswerId != null
+        onTap: showResult
             ? null
             : () => onAnswerSelected?.call(option.id),
         borderRadius: BorderRadius.circular(12),

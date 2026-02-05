@@ -8,6 +8,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/widgets/language_selector.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../gamification/domain/gamification_providers.dart';
+import '../../lifestyle/domain/affirmation_service.dart';
 import '../../lifestyle/domain/transit_service.dart';
 import '../../notifications/domain/notification_providers.dart';
 import '../domain/home_providers.dart';
@@ -130,6 +131,7 @@ class HomeScreen extends ConsumerWidget {
                           onRefresh: () {
                             ref.refreshAffirmation(chart.id);
                           },
+                          onSave: () => _saveAffirmation(context, ref, affirmation),
                         )
                       : const SizedBox.shrink(),
                   loading: () => const _LoadingCard(),
@@ -358,6 +360,30 @@ class HomeScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _saveAffirmation(
+    BuildContext context,
+    WidgetRef ref,
+    DailyAffirmation affirmation,
+  ) async {
+    final l10n = AppLocalizations.of(context)!;
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    final saved = await ref
+        .read(savedAffirmationsProvider.notifier)
+        .saveAffirmation(affirmation);
+
+    if (context.mounted) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            saved ? l10n.affirmation_savedSuccess : l10n.affirmation_alreadySaved,
+          ),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 }
 

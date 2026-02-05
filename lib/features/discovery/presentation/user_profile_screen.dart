@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/utils/error_handler.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
+import '../../feed/domain/feed_providers.dart';
+import '../../feed/domain/models/post.dart';
 import '../domain/discovery_providers.dart';
 import '../domain/models/user_discovery.dart';
 
@@ -58,10 +60,14 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
             slivers: [
               // Header with user info
               SliverAppBar(
-                expandedHeight: 280,
+                expandedHeight: 300,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: _UserHeader(user: user),
+                  background: _UserHeader(
+                    user: user,
+                    onFollowersTap: () => _showFollowersList(context, widget.userId),
+                    onFollowingTap: () => _showFollowingList(context, widget.userId),
+                  ),
                 ),
               ),
 
@@ -167,6 +173,11 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                     ),
                   ),
                 ),
+              ),
+
+              // Thoughts section
+              SliverToBoxAdapter(
+                child: _ThoughtsSection(userId: widget.userId),
               ),
 
               // Bodygraph section (with access control)
@@ -280,15 +291,62 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   void _startConversation(BuildContext context, String userId) {
     context.push('/messages/user/$userId');
   }
+
+  void _showFollowersList(BuildContext context, String userId) {
+    final l10n = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.3,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => _FollowListSheet(
+          title: l10n.userProfile_followersList,
+          userId: userId,
+          isFollowers: true,
+          scrollController: scrollController,
+        ),
+      ),
+    );
+  }
+
+  void _showFollowingList(BuildContext context, String userId) {
+    final l10n = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.3,
+        maxChildSize: 0.9,
+        expand: false,
+        builder: (context, scrollController) => _FollowListSheet(
+          title: l10n.userProfile_followingList,
+          userId: userId,
+          isFollowers: false,
+          scrollController: scrollController,
+        ),
+      ),
+    );
+  }
 }
 
 class _UserHeader extends StatelessWidget {
-  const _UserHeader({required this.user});
+  const _UserHeader({
+    required this.user,
+    required this.onFollowersTap,
+    required this.onFollowingTap,
+  });
 
   final DiscoveredUser user;
+  final VoidCallback onFollowersTap;
+  final VoidCallback onFollowingTap;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -327,37 +385,74 @@ class _UserHeader extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            // HD Type badge
-            if (user.hdType != null) ...[
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  user.hdType!,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+            // HD Type badge and Privacy badge
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              alignment: WrapAlignment.center,
+              children: [
+                if (user.hdType != null)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Text(
+                      user.hdType!,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                // Privacy status badge
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        _getPrivacyIcon(user.chartVisibility),
+                        size: 14,
+                        color: Colors.white.withValues(alpha: 0.9),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        _getPrivacyLabel(l10n, user.chartVisibility),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.9),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
             const SizedBox(height: 16),
-            // Stats row
+            // Stats row - now clickable
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _StatItem(
-                  value: user.followerCount.toString(),
-                  label: AppLocalizations.of(context)!.discovery_followers,
+                GestureDetector(
+                  onTap: onFollowersTap,
+                  child: _StatItem(
+                    value: user.followerCount.toString(),
+                    label: l10n.discovery_followers,
+                  ),
                 ),
                 const SizedBox(width: 32),
-                _StatItem(
-                  value: user.followingCount.toString(),
-                  label: AppLocalizations.of(context)!.discovery_followingLabel,
+                GestureDetector(
+                  onTap: onFollowingTap,
+                  child: _StatItem(
+                    value: user.followingCount.toString(),
+                    label: l10n.discovery_followingLabel,
+                  ),
                 ),
               ],
             ),
@@ -365,6 +460,28 @@ class _UserHeader extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData _getPrivacyIcon(DiscoveredUserChartVisibility visibility) {
+    switch (visibility) {
+      case DiscoveredUserChartVisibility.public:
+        return Icons.public;
+      case DiscoveredUserChartVisibility.friends:
+        return Icons.people;
+      case DiscoveredUserChartVisibility.private:
+        return Icons.lock;
+    }
+  }
+
+  String _getPrivacyLabel(AppLocalizations l10n, DiscoveredUserChartVisibility visibility) {
+    switch (visibility) {
+      case DiscoveredUserChartVisibility.public:
+        return l10n.userProfile_publicProfile;
+      case DiscoveredUserChartVisibility.friends:
+        return l10n.userProfile_friendsOnlyProfile;
+      case DiscoveredUserChartVisibility.private:
+        return l10n.userProfile_privateProfile;
+    }
   }
 }
 
@@ -591,6 +708,299 @@ class _ChartNotVisibleMessage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Section showing user's recent thoughts/posts
+class _ThoughtsSection extends ConsumerWidget {
+  const _ThoughtsSection({required this.userId});
+
+  final String userId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final postsAsync = ref.watch(userPostsProvider(userId));
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.chat_bubble_outline,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    l10n.userProfile_thoughts,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  postsAsync.when(
+                    data: (posts) => posts.length > 3
+                        ? TextButton(
+                            onPressed: () => _showAllPosts(context, userId),
+                            child: Text(l10n.userProfile_showAll),
+                          )
+                        : const SizedBox.shrink(),
+                    loading: () => const SizedBox.shrink(),
+                    error: (_, _) => const SizedBox.shrink(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              postsAsync.when(
+                data: (posts) {
+                  if (posts.isEmpty) {
+                    return Container(
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          l10n.userProfile_noThoughts,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  // Show only first 3 posts
+                  final displayPosts = posts.take(3).toList();
+                  return Column(
+                    children: displayPosts.map((post) => _ThoughtTile(post: post)).toList(),
+                  );
+                },
+                loading: () => const SizedBox(
+                  height: 80,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                error: (error, _) => SizedBox(
+                  height: 80,
+                  child: Center(
+                    child: Text(
+                      ErrorHandler.getUserMessage(error),
+                      style: TextStyle(color: Theme.of(context).colorScheme.error),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showAllPosts(BuildContext context, String userId) {
+    // Navigate to user's posts feed
+    context.push('/feed/user/$userId');
+  }
+}
+
+/// Single thought/post tile for the profile
+class _ThoughtTile extends StatelessWidget {
+  const _ThoughtTile({required this.post});
+
+  final Post post;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            post.content,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Icon(
+                Icons.favorite_outline,
+                size: 14,
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                '${post.reactionCount}',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Icon(
+                Icons.chat_bubble_outline,
+                size: 14,
+                color: Theme.of(context).colorScheme.outline,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                '${post.commentCount}',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                _formatDate(post.createdAt),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatDate(DateTime date) {
+    final now = DateTime.now();
+    final diff = now.difference(date);
+
+    if (diff.inDays == 0) {
+      if (diff.inHours == 0) {
+        return '${diff.inMinutes}m';
+      }
+      return '${diff.inHours}h';
+    } else if (diff.inDays < 7) {
+      return '${diff.inDays}d';
+    }
+    return '${date.month}/${date.day}';
+  }
+}
+
+/// Bottom sheet showing followers or following list
+class _FollowListSheet extends ConsumerWidget {
+  const _FollowListSheet({
+    required this.title,
+    required this.userId,
+    required this.isFollowers,
+    required this.scrollController,
+  });
+
+  final String title;
+  final String userId;
+  final bool isFollowers;
+  final ScrollController scrollController;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final usersAsync = isFollowers
+        ? ref.watch(userFollowersProvider(userId))
+        : ref.watch(userFollowingProvider(userId));
+
+    return Column(
+      children: [
+        // Header
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
+        ),
+        const Divider(height: 1),
+        // List
+        Expanded(
+          child: usersAsync.when(
+            data: (users) {
+              if (users.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        isFollowers ? Icons.people_outline : Icons.person_search,
+                        size: 48,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        isFollowers
+                            ? l10n.userProfile_noFollowers
+                            : l10n.userProfile_noFollowing,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              return ListView.builder(
+                controller: scrollController,
+                itemCount: users.length,
+                itemBuilder: (context, index) {
+                  final user = users[index];
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: user.avatarUrl != null
+                          ? NetworkImage(user.avatarUrl!)
+                          : null,
+                      child: user.avatarUrl == null
+                          ? Text(user.name[0].toUpperCase())
+                          : null,
+                    ),
+                    title: Text(user.name),
+                    subtitle: user.hdType != null ? Text(user.hdType!) : null,
+                    trailing: user.isFollowing
+                        ? const Chip(
+                            label: Text('Following'),
+                            visualDensity: VisualDensity.compact,
+                          )
+                        : null,
+                    onTap: () {
+                      Navigator.pop(context);
+                      context.push('/user/${user.id}');
+                    },
+                  );
+                },
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, _) => Center(
+              child: Text(ErrorHandler.getUserMessage(error)),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
