@@ -203,3 +203,15 @@ final popularChartsProvider = FutureProvider<List<DiscoveredUser>>((ref) async {
   final repository = ref.watch(discoveryRepositoryProvider);
   return repository.getPopularCharts();
 });
+
+/// Provider for a specific user's followers
+final userFollowersProvider = FutureProvider.family<List<DiscoveredUser>, String>((ref, userId) async {
+  final repository = ref.watch(discoveryRepositoryProvider);
+  return repository.getUserFollowers(userId);
+});
+
+/// Provider for a specific user's following list
+final userFollowingProvider = FutureProvider.family<List<DiscoveredUser>, String>((ref, userId) async {
+  final repository = ref.watch(discoveryRepositoryProvider);
+  return repository.getUserFollowing(userId);
+});

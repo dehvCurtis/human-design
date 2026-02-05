@@ -148,6 +148,70 @@ class DiscoveryRepository {
     );
   }
 
+  /// Get a specific user's followers
+  Future<List<DiscoveredUser>> getUserFollowers(String userId) async {
+    final currentUserId = _currentUserId;
+
+    final response = await _client
+        .from('user_follows')
+        .select('''
+          follower:profiles!user_follows_follower_id_fkey(
+            id, name, avatar_url, bio, hd_type, hd_profile, hd_authority,
+            is_public, show_chart_publicly, chart_visibility, follower_count, following_count
+          )
+        ''')
+        .eq('following_id', userId)
+        .order('created_at', ascending: false);
+
+    final followerIds = (response as List)
+        .map((json) => (json['follower'] as Map<String, dynamic>)['id'] as String)
+        .toList();
+
+    final followingSet = currentUserId != null
+        ? await _getFollowingSet(followerIds)
+        : <String>{};
+
+    return response.map((json) {
+      final follower = json['follower'] as Map<String, dynamic>;
+      return DiscoveredUser.fromJson(
+        follower,
+        isFollowing: followingSet.contains(follower['id']),
+      );
+    }).toList();
+  }
+
+  /// Get a specific user's following list
+  Future<List<DiscoveredUser>> getUserFollowing(String userId) async {
+    final currentUserId = _currentUserId;
+
+    final response = await _client
+        .from('user_follows')
+        .select('''
+          following:profiles!user_follows_following_id_fkey(
+            id, name, avatar_url, bio, hd_type, hd_profile, hd_authority,
+            is_public, show_chart_publicly, chart_visibility, follower_count, following_count
+          )
+        ''')
+        .eq('follower_id', userId)
+        .order('created_at', ascending: false);
+
+    final followingIds = (response as List)
+        .map((json) => (json['following'] as Map<String, dynamic>)['id'] as String)
+        .toList();
+
+    final followingSet = currentUserId != null
+        ? await _getFollowingSet(followingIds)
+        : <String>{};
+
+    return response.map((json) {
+      final following = json['following'] as Map<String, dynamic>;
+      return DiscoveredUser.fromJson(
+        following,
+        isFollowing: followingSet.contains(following['id']),
+      );
+    }).toList();
+  }
+
   /// Get a specific user's profile
   Future<DiscoveredUser?> getUserProfile(String userId) async {
     final currentUserId = _currentUserId;
