@@ -771,9 +771,9 @@ class MainShell extends StatelessWidget {
             label: AppLocalizations.of(context)!.nav_social,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline),
-            activeIcon: const Icon(Icons.person),
-            label: AppLocalizations.of(context)!.nav_profile,
+            icon: const Icon(Icons.more_horiz_outlined),
+            activeIcon: const Icon(Icons.more_horiz),
+            label: AppLocalizations.of(context)!.nav_more,
           ),
         ],
       ),
@@ -798,7 +798,13 @@ class MainShell extends StatelessWidget {
         location.startsWith(AppRoutes.circles)) {
       return 3;
     }
-    if (location.startsWith(AppRoutes.profile)) return 4;
+    // Profile, Learning, Settings all map to "More" tab (index 4)
+    if (location.startsWith(AppRoutes.profile) ||
+        location.startsWith(AppRoutes.learning) ||
+        location.startsWith(AppRoutes.quizzes) ||
+        location.startsWith(AppRoutes.settings)) {
+      return 4;
+    }
     return 0;
   }
 
@@ -817,9 +823,64 @@ class MainShell extends StatelessWidget {
         context.go(AppRoutes.social);
         break;
       case 4:
-        context.go(AppRoutes.profile);
+        _showMoreBottomSheet(context);
         break;
     }
+  }
+
+  void _showMoreBottomSheet(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
+
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 16),
+                decoration: BoxDecoration(
+                  color: theme.dividerColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.person_outline),
+                title: Text(l10n.nav_profile),
+                onTap: () {
+                  Navigator.pop(context);
+                  context.go(AppRoutes.profile);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.school_outlined),
+                title: Text(l10n.nav_learn),
+                onTap: () {
+                  Navigator.pop(context);
+                  context.go(AppRoutes.learning);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.settings_outlined),
+                title: Text(l10n.common_settings),
+                onTap: () {
+                  Navigator.pop(context);
+                  context.push(AppRoutes.settings);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
