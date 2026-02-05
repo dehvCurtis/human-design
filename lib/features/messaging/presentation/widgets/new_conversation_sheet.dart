@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/utils/error_handler.dart';
-import '../../../social/domain/social_providers.dart';
-import '../../../social/data/social_repository.dart';
+import '../../../discovery/domain/discovery_providers.dart';
+import '../../../discovery/domain/models/user_discovery.dart';
 import '../../domain/messaging_providers.dart';
 
 class NewConversationSheet extends ConsumerStatefulWidget {
@@ -29,7 +29,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final friendsAsync = ref.watch(friendsProvider);
+    final followingAsync = ref.watch(followingListProvider);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -72,7 +72,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: 'Search friends...',
+                    hintText: 'Search people...',
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -91,18 +91,18 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
 
               const SizedBox(height: 16),
 
-              // Friends list
+              // Following list
               Expanded(
-                child: friendsAsync.when(
-                  data: (friends) {
-                    final filteredFriends = _searchQuery.isEmpty
-                        ? friends
-                        : friends
-                            .where((f) =>
-                                f.name.toLowerCase().contains(_searchQuery))
+                child: followingAsync.when(
+                  data: (following) {
+                    final filteredUsers = _searchQuery.isEmpty
+                        ? following
+                        : following
+                            .where((u) =>
+                                u.name.toLowerCase().contains(_searchQuery))
                             .toList();
 
-                    if (filteredFriends.isEmpty) {
+                    if (filteredUsers.isEmpty) {
                       return Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -115,8 +115,8 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                             const SizedBox(height: 16),
                             Text(
                               _searchQuery.isEmpty
-                                  ? 'No friends yet'
-                                  : 'No friends found',
+                                  ? 'No one followed yet'
+                                  : 'No users found',
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 color: theme.colorScheme.outline,
                               ),
@@ -139,20 +139,20 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                     return ListView.builder(
                       controller: scrollController,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: filteredFriends.length,
+                      itemCount: filteredUsers.length,
                       itemBuilder: (context, index) {
-                        final friend = filteredFriends[index];
-                        return _FriendTile(
-                          friend: friend,
+                        final user = filteredUsers[index];
+                        return _UserTile(
+                          user: user,
                           isLoading: _isLoading,
-                          onTap: () => _startConversation(friend),
+                          onTap: () => _startConversation(user),
                         );
                       },
                     );
                   },
                   loading: () => const Center(child: CircularProgressIndicator()),
                   error: (e, _) => Center(
-                    child: Text(ErrorHandler.getUserMessage(e, context: 'load friends')),
+                    child: Text(ErrorHandler.getUserMessage(e, context: 'load users')),
                   ),
                 ),
               ),
@@ -163,7 +163,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
     );
   }
 
-  Future<void> _startConversation(Friend friend) async {
+  Future<void> _startConversation(DiscoveredUser user) async {
     if (_isLoading) return;
 
     setState(() => _isLoading = true);
@@ -171,7 +171,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
     try {
       final conversation = await ref
           .read(messagingNotifierProvider.notifier)
-          .startConversation(friend.friendId);
+          .startConversation(user.id);
 
       if (mounted) {
         Navigator.pop(context);
@@ -194,14 +194,14 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
   }
 }
 
-class _FriendTile extends StatelessWidget {
-  const _FriendTile({
-    required this.friend,
+class _UserTile extends StatelessWidget {
+  const _UserTile({
+    required this.user,
     required this.isLoading,
     required this.onTap,
   });
 
-  final Friend friend;
+  final DiscoveredUser user;
   final bool isLoading;
   final VoidCallback onTap;
 
@@ -214,18 +214,19 @@ class _FriendTile extends StatelessWidget {
       leading: CircleAvatar(
         radius: 24,
         backgroundImage:
-            friend.avatarUrl != null ? NetworkImage(friend.avatarUrl!) : null,
-        child: friend.avatarUrl == null
+            user.avatarUrl != null ? NetworkImage(user.avatarUrl!) : null,
+        child: user.avatarUrl == null
             ? Text(
-                friend.name[0].toUpperCase(),
+                user.name[0].toUpperCase(),
                 style: theme.textTheme.titleMedium,
               )
             : null,
       ),
       title: Text(
-        friend.name,
+        user.name,
         style: theme.textTheme.titleMedium,
       ),
+      subtitle: user.hdType != null ? Text(user.hdType!) : null,
       trailing: Icon(
         Icons.chevron_right,
         color: theme.colorScheme.outline,

@@ -1390,12 +1390,6 @@ abstract class AppLocalizations {
   /// **'Discover'**
   String get social_discover;
 
-  /// No description provided for @social_friends.
-  ///
-  /// In en, this message translates to:
-  /// **'Friends'**
-  String get social_friends;
-
   /// No description provided for @social_groups.
   ///
   /// In en, this message translates to:
@@ -1407,12 +1401,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite'**
   String get social_invite;
-
-  /// No description provided for @social_addFriend.
-  ///
-  /// In en, this message translates to:
-  /// **'Add Friend'**
-  String get social_addFriend;
 
   /// No description provided for @social_createPost.
   ///
@@ -1431,12 +1419,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Be the first to share your Human Design insights!'**
   String get social_noThoughtsMessage;
-
-  /// No description provided for @social_sendRequest.
-  ///
-  /// In en, this message translates to:
-  /// **'Send Request'**
-  String get social_sendRequest;
 
   /// No description provided for @social_createGroup.
   ///
@@ -1504,18 +1486,6 @@ abstract class AppLocalizations {
   /// **'Shared'**
   String get social_shared;
 
-  /// No description provided for @social_noFriendsYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No Friends Yet'**
-  String get social_noFriendsYet;
-
-  /// No description provided for @social_noFriendsMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Add friends to compare charts and see how you connect.'**
-  String get social_noFriendsMessage;
-
   /// No description provided for @social_noGroupsYet.
   ///
   /// In en, this message translates to:
@@ -1537,56 +1507,8 @@ abstract class AppLocalizations {
   /// No description provided for @social_noSharedChartsMessage.
   ///
   /// In en, this message translates to:
-  /// **'Charts that friends share with you will appear here.'**
+  /// **'Charts shared with you will appear here.'**
   String get social_noSharedChartsMessage;
-
-  /// No description provided for @social_pendingRequests.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending Requests'**
-  String get social_pendingRequests;
-
-  /// No description provided for @social_friendRequests.
-  ///
-  /// In en, this message translates to:
-  /// **'Friend Requests'**
-  String get social_friendRequests;
-
-  /// No description provided for @social_noPendingRequests.
-  ///
-  /// In en, this message translates to:
-  /// **'No pending requests'**
-  String get social_noPendingRequests;
-
-  /// No description provided for @social_addFriendPrompt.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your friend\'s email address to send a request.'**
-  String get social_addFriendPrompt;
-
-  /// No description provided for @social_emailLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Email'**
-  String get social_emailLabel;
-
-  /// No description provided for @social_emailHint.
-  ///
-  /// In en, this message translates to:
-  /// **'friend@example.com'**
-  String get social_emailHint;
-
-  /// No description provided for @social_userNotFound.
-  ///
-  /// In en, this message translates to:
-  /// **'No user found with that email'**
-  String get social_userNotFound;
-
-  /// No description provided for @social_requestSent.
-  ///
-  /// In en, this message translates to:
-  /// **'Friend request sent to {name}!'**
-  String social_requestSent(String name);
 
   /// No description provided for @social_createGroupPrompt.
   ///
@@ -1636,18 +1558,6 @@ abstract class AppLocalizations {
   /// **'Failed to create group. Please try again.'**
   String get social_createGroupFailed;
 
-  /// No description provided for @social_friendsSince.
-  ///
-  /// In en, this message translates to:
-  /// **'Friends since {date}'**
-  String social_friendsSince(String date);
-
-  /// No description provided for @social_compareCharts.
-  ///
-  /// In en, this message translates to:
-  /// **'Compare Charts'**
-  String get social_compareCharts;
-
   /// No description provided for @social_noDescription.
   ///
   /// In en, this message translates to:
@@ -1666,12 +1576,6 @@ abstract class AppLocalizations {
   /// **'Shared by {name}'**
   String social_sharedBy(String name);
 
-  /// No description provided for @social_loadFriendsFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to load friends'**
-  String get social_loadFriendsFailed;
-
   /// No description provided for @social_loadGroupsFailed.
   ///
   /// In en, this message translates to:
@@ -1683,6 +1587,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load shared charts'**
   String get social_loadSharedFailed;
+
+  /// No description provided for @social_userNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get social_userNotFound;
 
   /// No description provided for @discovery_userNotFound.
   ///
@@ -1869,12 +1779,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Most followed public charts'**
   String get popularCharts_subtitle;
-
-  /// No description provided for @social_sentAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'Sent {time}'**
-  String social_sentAgo(String time);
 
   /// No description provided for @time_minutesAgo.
   ///

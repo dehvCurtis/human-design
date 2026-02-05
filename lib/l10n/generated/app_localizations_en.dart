@@ -693,16 +693,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get social_discover => 'Discover';
 
   @override
-  String get social_friends => 'Friends';
-
-  @override
   String get social_groups => 'Groups';
 
   @override
   String get social_invite => 'Invite';
-
-  @override
-  String get social_addFriend => 'Add Friend';
 
   @override
   String get social_createPost => 'Share a thought...';
@@ -713,9 +707,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get social_noThoughtsMessage =>
       'Be the first to share your Human Design insights!';
-
-  @override
-  String get social_sendRequest => 'Send Request';
 
   @override
   String get social_createGroup => 'Create Group';
@@ -753,13 +744,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get social_shared => 'Shared';
 
   @override
-  String get social_noFriendsYet => 'No Friends Yet';
-
-  @override
-  String get social_noFriendsMessage =>
-      'Add friends to compare charts and see how you connect.';
-
-  @override
   String get social_noGroupsYet => 'No Groups Yet';
 
   @override
@@ -771,34 +755,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get social_noSharedChartsMessage =>
-      'Charts that friends share with you will appear here.';
-
-  @override
-  String get social_pendingRequests => 'Pending Requests';
-
-  @override
-  String get social_friendRequests => 'Friend Requests';
-
-  @override
-  String get social_noPendingRequests => 'No pending requests';
-
-  @override
-  String get social_addFriendPrompt =>
-      'Enter your friend\'s email address to send a request.';
-
-  @override
-  String get social_emailLabel => 'Email';
-
-  @override
-  String get social_emailHint => 'friend@example.com';
-
-  @override
-  String get social_userNotFound => 'No user found with that email';
-
-  @override
-  String social_requestSent(String name) {
-    return 'Friend request sent to $name!';
-  }
+      'Charts shared with you will appear here.';
 
   @override
   String get social_createGroupPrompt =>
@@ -829,14 +786,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to create group. Please try again.';
 
   @override
-  String social_friendsSince(String date) {
-    return 'Friends since $date';
-  }
-
-  @override
-  String get social_compareCharts => 'Compare Charts';
-
-  @override
   String get social_noDescription => 'No description';
 
   @override
@@ -848,13 +797,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get social_loadFriendsFailed => 'Failed to load friends';
-
-  @override
   String get social_loadGroupsFailed => 'Failed to load groups';
 
   @override
   String get social_loadSharedFailed => 'Failed to load shared charts';
+
+  @override
+  String get social_userNotFound => 'User not found';
 
   @override
   String get discovery_userNotFound => 'User not found';
@@ -950,11 +899,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get popularCharts_subtitle => 'Most followed public charts';
-
-  @override
-  String social_sentAgo(String time) {
-    return 'Sent $time';
-  }
 
   @override
   String time_minutesAgo(int minutes) {

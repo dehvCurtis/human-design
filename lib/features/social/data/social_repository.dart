@@ -1,96 +1,13 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-/// Repository for social features (sharing, comments, friends, groups)
+/// Repository for social features (sharing, comments, groups)
 class SocialRepository {
   SocialRepository({required SupabaseClient supabaseClient})
       : _client = supabaseClient;
 
   final SupabaseClient _client;
 
-  // ==================== Friends ====================
-
-  /// Get user's friends list
-  Future<List<Friend>> getFriends() async {
-    final userId = _client.auth.currentUser?.id;
-    if (userId == null) return [];
-
-    final response = await _client
-        .from('friendships')
-        .select('''
-          id,
-          friend:profiles!friendships_friend_id_fkey(id, name, avatar_url),
-          created_at
-        ''')
-        .eq('user_id', userId)
-        .eq('status', 'accepted');
-
-    return (response as List).map((json) => Friend.fromJson(json)).toList();
-  }
-
-  /// Send friend request
-  Future<void> sendFriendRequest(String friendId) async {
-    final userId = _client.auth.currentUser?.id;
-    if (userId == null) throw StateError('User not authenticated');
-
-    await _client.from('friendships').insert({
-      'user_id': userId,
-      'friend_id': friendId,
-      'status': 'pending',
-    });
-  }
-
-  /// Accept friend request
-  Future<void> acceptFriendRequest(String requestId) async {
-    await _client.from('friendships').update({
-      'status': 'accepted',
-      'updated_at': DateTime.now().toIso8601String(),
-    }).eq('id', requestId);
-  }
-
-  /// Decline friend request
-  Future<void> declineFriendRequest(String requestId) async {
-    await _client.from('friendships').delete().eq('id', requestId);
-  }
-
-  /// Get pending friend requests
-  Future<List<FriendRequest>> getPendingRequests() async {
-    final userId = _client.auth.currentUser?.id;
-    if (userId == null) return [];
-
-    final response = await _client
-        .from('friendships')
-        .select('''
-          id,
-          requester:profiles!friendships_user_id_fkey(id, name, avatar_url),
-          created_at
-        ''')
-        .eq('friend_id', userId)
-        .eq('status', 'pending');
-
-    return (response as List)
-        .map((json) => FriendRequest.fromJson(json))
-        .toList();
-  }
-
   // ==================== Sharing ====================
-
-  /// Share a chart with a friend
-  Future<ShareRecord> shareChartWithFriend({
-    required String chartId,
-    required String friendId,
-  }) async {
-    final userId = _client.auth.currentUser?.id;
-    if (userId == null) throw StateError('User not authenticated');
-
-    final response = await _client.from('shares').insert({
-      'chart_id': chartId,
-      'shared_by': userId,
-      'shared_with': friendId,
-      'share_type': 'friend',
-    }).select().single();
-
-    return ShareRecord.fromJson(response);
-  }
 
   /// Share chart with a group
   Future<ShareRecord> shareChartWithGroup({
@@ -322,60 +239,6 @@ class SocialRepository {
 }
 
 // ==================== Models ====================
-
-class Friend {
-  const Friend({
-    required this.id,
-    required this.friendId,
-    required this.name,
-    this.avatarUrl,
-    required this.createdAt,
-  });
-
-  final String id;
-  final String friendId;
-  final String name;
-  final String? avatarUrl;
-  final DateTime createdAt;
-
-  factory Friend.fromJson(Map<String, dynamic> json) {
-    final friend = json['friend'] as Map<String, dynamic>;
-    return Friend(
-      id: json['id'] as String,
-      friendId: friend['id'] as String,
-      name: friend['name'] as String? ?? 'Unknown',
-      avatarUrl: friend['avatar_url'] as String?,
-      createdAt: DateTime.parse(json['created_at'] as String),
-    );
-  }
-}
-
-class FriendRequest {
-  const FriendRequest({
-    required this.id,
-    required this.requesterId,
-    required this.requesterName,
-    this.requesterAvatarUrl,
-    required this.createdAt,
-  });
-
-  final String id;
-  final String requesterId;
-  final String requesterName;
-  final String? requesterAvatarUrl;
-  final DateTime createdAt;
-
-  factory FriendRequest.fromJson(Map<String, dynamic> json) {
-    final requester = json['requester'] as Map<String, dynamic>;
-    return FriendRequest(
-      id: json['id'] as String,
-      requesterId: requester['id'] as String,
-      requesterName: requester['name'] as String? ?? 'Unknown',
-      requesterAvatarUrl: requester['avatar_url'] as String?,
-      createdAt: DateTime.parse(json['created_at'] as String),
-    );
-  }
-}
 
 class ShareRecord {
   const ShareRecord({

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart' show ShareParams, SharePlus;
 
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/error_handler.dart';
@@ -11,8 +12,7 @@ import '../../discovery/domain/models/user_discovery.dart';
 import '../../feed/domain/feed_providers.dart';
 import '../../feed/presentation/widgets/post_card.dart';
 import '../../feed/presentation/widgets/create_post_sheet.dart';
-import '../../home/domain/home_providers.dart';
-import '../../profile/data/profile_repository.dart';
+import '../../../shared/providers/supabase_provider.dart';
 import '../data/social_repository.dart';
 import '../domain/social_providers.dart';
 
@@ -30,7 +30,7 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -41,12 +41,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
 
   @override
   Widget build(BuildContext context) {
-    final pendingRequests = ref.watch(pendingRequestsProvider);
-    final pendingCount = pendingRequests.when(
-      data: (list) => list.length,
-      loading: () => 0,
-      error: (_, _) => 0,
-    );
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -58,15 +52,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
             onPressed: () => context.push(AppRoutes.messages),
             tooltip: 'Messages',
           ),
-          if (pendingCount > 0)
-            Badge(
-              label: Text('$pendingCount'),
-              child: IconButton(
-                icon: const Icon(Icons.notifications_outlined),
-                onPressed: () => _showPendingRequestsDialog(context),
-                tooltip: l10n.social_pendingRequests,
-              ),
-            ),
         ],
         bottom: TabBar(
           controller: _tabController,
@@ -75,7 +60,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
           tabs: [
             Tab(text: l10n.social_thoughts),
             Tab(text: l10n.social_discover),
-            Tab(text: l10n.social_friends),
             Tab(text: l10n.social_groups),
           ],
         ),
@@ -85,7 +69,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
         children: [
           const _ThoughtsTab(),
           const _DiscoverTab(),
-          _FriendsTab(onAddFriend: () => _showAddFriendDialog(context, ref)),
           _GroupsTab(onCreateGroup: () => _showCreateGroupDialog(context, ref)),
         ],
       ),
@@ -101,238 +84,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
       context: context,
       isScrollControlled: true,
       builder: (context) => const CreatePostSheet(),
-    );
-  }
-
-  void _showAddFriendDialog(BuildContext context, WidgetRef ref) {
-    final emailController = TextEditingController();
-    final l10n = AppLocalizations.of(context)!;
-    UserSearchResult? foundUser;
-    bool isSearching = false;
-    String? errorMessage;
-
-    showDialog(
-      context: context,
-      builder: (dialogContext) => StatefulBuilder(
-        builder: (context, setDialogState) => AlertDialog(
-          title: Text(l10n.social_addFriend),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(l10n.social_addFriendPrompt),
-              const SizedBox(height: 16),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: l10n.social_emailLabel,
-                  hintText: l10n.social_emailHint,
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  suffixIcon: isSearching
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () async {
-                            final email = emailController.text.trim();
-                            if (email.isEmpty) return;
-
-                            setDialogState(() {
-                              isSearching = true;
-                              errorMessage = null;
-                              foundUser = null;
-                            });
-
-                            final result = await ref
-                                .read(profileRepositoryProvider)
-                                .findUserByEmail(email);
-
-                            setDialogState(() {
-                              isSearching = false;
-                              foundUser = result;
-                              if (result == null) {
-                                errorMessage = l10n.social_userNotFound;
-                              }
-                            });
-                          },
-                        ),
-                  errorText: errorMessage,
-                ),
-                keyboardType: TextInputType.emailAddress,
-                onSubmitted: (_) async {
-                  final email = emailController.text.trim();
-                  if (email.isEmpty) return;
-
-                  setDialogState(() {
-                    isSearching = true;
-                    errorMessage = null;
-                    foundUser = null;
-                  });
-
-                  final result = await ref
-                      .read(profileRepositoryProvider)
-                      .findUserByEmail(email);
-
-                  setDialogState(() {
-                    isSearching = false;
-                    foundUser = result;
-                    if (result == null) {
-                      errorMessage = l10n.social_userNotFound;
-                    }
-                  });
-                },
-              ),
-              if (foundUser != null) ...[
-                const SizedBox(height: 16),
-                Card(
-                  color: AppColors.success.withAlpha(25),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: foundUser!.avatarUrl != null
-                          ? NetworkImage(foundUser!.avatarUrl!)
-                          : null,
-                      child: foundUser!.avatarUrl == null
-                          ? Text(foundUser!.displayName[0].toUpperCase())
-                          : null,
-                    ),
-                    title: Text(foundUser!.displayName),
-                    subtitle: Text(foundUser!.email),
-                    trailing: const Icon(
-                      Icons.check_circle,
-                      color: AppColors.success,
-                    ),
-                  ),
-                ),
-              ],
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(l10n.common_cancel),
-            ),
-            ElevatedButton(
-              onPressed: foundUser == null
-                  ? null
-                  : () async {
-                      await ref
-                          .read(socialNotifierProvider.notifier)
-                          .sendFriendRequest(foundUser!.id);
-
-                      if (dialogContext.mounted) {
-                        Navigator.pop(dialogContext);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              l10n.social_requestSent(foundUser!.displayName),
-                            ),
-                          ),
-                        );
-                      }
-                    },
-              child: Text(l10n.social_sendRequest),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showPendingRequestsDialog(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.5,
-        minChildSize: 0.25,
-        maxChildSize: 0.75,
-        expand: false,
-        builder: (context, scrollController) => Consumer(
-          builder: (context, ref, _) {
-            final requests = ref.watch(pendingRequestsProvider);
-
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    l10n.social_friendRequests,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
-                const Divider(height: 1),
-                Expanded(
-                  child: requests.when(
-                    data: (list) {
-                      if (list.isEmpty) {
-                        return Center(
-                          child: Text(l10n.social_noPendingRequests),
-                        );
-                      }
-
-                      return ListView.builder(
-                        controller: scrollController,
-                        itemCount: list.length,
-                        itemBuilder: (context, index) {
-                          final request = list[index];
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: request.requesterAvatarUrl != null
-                                  ? NetworkImage(request.requesterAvatarUrl!)
-                                  : null,
-                              child: request.requesterAvatarUrl == null
-                                  ? Text(request.requesterName[0].toUpperCase())
-                                  : null,
-                            ),
-                            title: Text(request.requesterName),
-                            subtitle: Text(
-                              l10n.social_sentAgo(_formatDate(request.createdAt, l10n)),
-                            ),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.close,
-                                    color: AppColors.error,
-                                  ),
-                                  onPressed: () {
-                                    ref
-                                        .read(socialNotifierProvider.notifier)
-                                        .declineFriendRequest(request.id);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.check,
-                                    color: AppColors.success,
-                                  ),
-                                  onPressed: () {
-                                    ref
-                                        .read(socialNotifierProvider.notifier)
-                                        .acceptFriendRequest(request.id);
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    error: (e, _) => Center(child: Text(ErrorHandler.getUserMessage(e))),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
     );
   }
 
@@ -445,20 +196,6 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
     );
   }
 
-  String _formatDate(DateTime date, AppLocalizations l10n) {
-    final now = DateTime.now();
-    final diff = now.difference(date);
-
-    if (diff.inDays == 0) {
-      if (diff.inHours == 0) {
-        return l10n.time_minutesAgo(diff.inMinutes);
-      }
-      return l10n.time_hoursAgo(diff.inHours);
-    } else if (diff.inDays < 7) {
-      return l10n.time_daysAgo(diff.inDays);
-    }
-    return '${date.month}/${date.day}/${date.year}';
-  }
 }
 
 /// Tab showing the social feed (Thoughts)
@@ -468,6 +205,7 @@ class _ThoughtsTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postsAsync = ref.watch(feedProvider);
+    final currentUserId = ref.watch(currentUserIdProvider);
     final l10n = AppLocalizations.of(context)!;
 
     return postsAsync.when(
@@ -491,8 +229,10 @@ class _ThoughtsTab extends ConsumerWidget {
             itemCount: posts.length,
             itemBuilder: (context, index) {
               final post = posts[index];
+              final isOwnPost = currentUserId != null && post.userId == currentUserId;
               return PostCard(
                 post: post,
+                isOwnPost: isOwnPost,
                 onTap: () => context.push('/feed/post/${post.id}'),
                 onUserTap: () => context.push('/user/${post.userId}'),
                 onReaction: (reaction) {
@@ -503,8 +243,61 @@ class _ThoughtsTab extends ConsumerWidget {
                 },
                 onComment: () => context.push('/feed/post/${post.id}'),
                 onShare: () {
-                  // TODO: Implement share functionality
+                  SharePlus.instance.share(
+                    ShareParams(text: 'Check out this thought on Human Design:\n\n"${post.content}"\n\n- ${post.userName}'),
+                  );
                 },
+                onRegenerate: isOwnPost ? null : () async {
+                  try {
+                    await ref.read(feedNotifierProvider.notifier).regeneratePost(
+                      originalPostId: post.id,
+                    );
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Post regenerated to your wall!')),
+                      );
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Failed to regenerate: $e')),
+                      );
+                    }
+                  }
+                },
+                onDelete: isOwnPost ? () async {
+                  final confirm = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Delete Post'),
+                      content: const Text('Are you sure you want to delete this post?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          style: TextButton.styleFrom(foregroundColor: Colors.red),
+                          child: const Text('Delete'),
+                        ),
+                      ],
+                    ),
+                  );
+                  if (confirm == true) {
+                    await ref.read(feedNotifierProvider.notifier).deletePost(post.id);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Post deleted')),
+                      );
+                    }
+                  }
+                } : null,
+                onReport: !isOwnPost ? () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Post reported. Thank you for helping keep our community safe.')),
+                  );
+                } : null,
               );
             },
           ),
@@ -644,91 +437,6 @@ class _DiscoverUserCard extends StatelessWidget {
   }
 }
 
-class _FriendsTab extends ConsumerWidget {
-  const _FriendsTab({required this.onAddFriend});
-
-  final VoidCallback onAddFriend;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final friendsAsync = ref.watch(friendsProvider);
-    final l10n = AppLocalizations.of(context)!;
-
-    return friendsAsync.when(
-      data: (friends) {
-        if (friends.isEmpty) {
-          return _EmptyState(
-            icon: Icons.people_outline,
-            title: l10n.social_noFriendsYet,
-            message: l10n.social_noFriendsMessage,
-            actionLabel: l10n.social_addFriend,
-            onAction: onAddFriend,
-          );
-        }
-
-        return RefreshIndicator(
-          onRefresh: () async {
-            ref.invalidate(friendsProvider);
-          },
-          child: Column(
-            children: [
-              // Add Friend button at top
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: onAddFriend,
-                    icon: const Icon(Icons.person_add_outlined),
-                    label: Text(l10n.social_addFriend),
-                  ),
-                ),
-              ),
-              // Friends list
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                  itemCount: friends.length,
-                  itemBuilder: (context, index) {
-                    final friend = friends[index];
-                    return _FriendCard(
-                      friend: friend,
-                      onTap: () {
-                        // Navigate to friend's profile
-                        context.push('/user/${friend.friendId}');
-                      },
-                      onCompare: () {
-                        // Navigate to composite chart
-                        context.push(AppRoutes.composite);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, _) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.error_outline, size: 48, color: AppColors.error),
-            const SizedBox(height: 16),
-            Text(l10n.social_loadFriendsFailed),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () => ref.invalidate(friendsProvider),
-              child: Text(l10n.common_retry),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _GroupsTab extends ConsumerWidget {
   const _GroupsTab({required this.onCreateGroup});
 
@@ -843,61 +551,6 @@ class _EmptyState extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class _FriendCard extends StatelessWidget {
-  const _FriendCard({
-    required this.friend,
-    required this.onTap,
-    required this.onCompare,
-  });
-
-  final Friend friend;
-  final VoidCallback onTap;
-  final VoidCallback onCompare;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: AppColors.primary.withAlpha(25),
-          backgroundImage: friend.avatarUrl != null
-              ? NetworkImage(friend.avatarUrl!)
-              : null,
-          child: friend.avatarUrl == null
-              ? Text(
-                  friend.name[0].toUpperCase(),
-                  style: const TextStyle(color: AppColors.primary),
-                )
-              : null,
-        ),
-        title: Text(friend.name),
-        subtitle: Text(
-          l10n.social_friendsSince(_formatDate(friend.createdAt)),
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.compare_arrows),
-              onPressed: onCompare,
-              tooltip: l10n.social_compareCharts,
-            ),
-            const Icon(Icons.chevron_right),
-          ],
-        ),
-        onTap: onTap,
-      ),
-    );
-  }
-
-  String _formatDate(DateTime date) {
-    return '${date.month}/${date.day}/${date.year}';
   }
 }
 
