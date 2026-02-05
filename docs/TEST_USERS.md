@@ -39,15 +39,7 @@ Each test user has complete profile data including:
 
 ## Pre-configured Relationships
 
-### Friendships (for test@humandesign.app)
-
-| Status | Users |
-|--------|-------|
-| **Accepted** | Alice, Bob, Carol, David |
-| **Pending (from)** | Emma, Frank |
-| **Pending (to)** | Grace |
-
-### Follow Relationships
+### Follow Relationships (for test@humandesign.app)
 
 | Direction | Users |
 |-----------|-------|
@@ -124,4 +116,4 @@ The seed scripts are located at:
 To remove test users, delete them from the Supabase Dashboard:
 1. Go to Authentication > Users
 2. Delete users with `@test.hd` email domain
-3. The cascade delete will remove all related data (profiles, posts, friendships, follows)
+3. The cascade delete will remove all related data (profiles, posts, follows)

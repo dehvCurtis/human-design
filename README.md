@@ -19,14 +19,15 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **Daily Affirmations** - Personalized affirmations based on your design
 
 ### Social Platform
-- **4-Tab Social Screen** - Thoughts, Discover, Friends, Groups
+- **3-Tab Social Screen** - Thoughts, Discover, Groups
 - **Thoughts Feed** - Share insights, reflections, transit observations, and achievements
+- **Following System** - Twitter-style one-way following (replaced mutual friends system)
 - **Discovery & Matching** - Find users by HD type, profile, authority with compatibility scoring
 - **User Profiles** - Privacy badges, clickable followers/following lists, thoughts section
-- **Comments System** - Reply to comments, delete own comments, nested replies
+- **Comments System** - Reply to comments, like comments, delete own comments, nested replies
 - **Stories** - 24-hour ephemeral content with HD color themes
 - **Direct Messaging** - Real-time conversations with chart/transit sharing
-- **Friends & Groups** - Build your HD community
+- **Groups** - Build your HD community with group sharing
 
 ### Learning & Quizzes
 - **Quiz System** - 138+ factual Human Design questions across 7 categories

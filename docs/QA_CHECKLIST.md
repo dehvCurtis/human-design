@@ -315,15 +315,15 @@
 | 4.1.7 | Can save to device gallery | P2 | [ ] | Requires manual test |
 | 4.1.8 | Can share via social apps | P2 | [ ] | Requires manual test |
 
-### 4.2 Share with Friends (P1)
+### 4.2 Share via Link (P1)
 
 | # | Test Case | Priority | Status | Notes |
 |---|-----------|----------|--------|-------|
-| 4.2.1 | "Share with Friend" option available | P1 | [C] | Share feature |
-| 4.2.2 | Friend picker displays friend list | P1 | [C] | Friend selector |
-| 4.2.3 | Can select multiple friends | P2 | [C] | Multi-select |
+| 4.2.1 | "Create Share Link" option available | P1 | [C] | Share dialog |
+| 4.2.2 | Share link generated successfully | P1 | [C] | Sharing repository |
+| 4.2.3 | Link auto-copied to clipboard | P2 | [C] | Clipboard API |
 | 4.2.4 | Share confirmation shown | P2 | [C] | Success message |
-| 4.2.5 | Shared chart appears in friend's received charts | P1 | [C] | Sharing repository |
+| 4.2.5 | Link opens chart in browser | P1 | [C] | Deep linking |
 | 4.2.6 | Free user share limit enforced | P2 | [C] | Subscription check |
 
 ### 4.3 Share with Group (P2)
@@ -415,19 +415,19 @@
 
 ## 8. Social Features
 
-### 8.1 Friends (P1)
+### 8.1 Following System (P1)
 
 | # | Test Case | Priority | Status | Notes |
 |---|-----------|----------|--------|-------|
-| 8.1.1 | Friends list accessible | P1 | [C] | Social screen |
-| 8.1.2 | Can search for users to add | P1 | [C] | User search |
-| 8.1.3 | Can send friend request | P1 | [C] | Friend request action |
-| 8.1.4 | Friend request notification received | P1 | [C] | Notification service |
-| 8.1.5 | Can accept friend request | P1 | [C] | Accept action |
-| 8.1.6 | Can decline friend request | P1 | [C] | Decline action |
-| 8.1.7 | Friend added to list after acceptance | P1 | [C] | Provider refresh |
-| 8.1.8 | Can remove friend | P1 | [C] | Remove action |
-| 8.1.9 | Can view friend's chart | P1 | [C] | Profile navigation |
+| 8.1.1 | Following list accessible via profile | P1 | [C] | User profile |
+| 8.1.2 | Can search for users in Discover | P1 | [C] | User search |
+| 8.1.3 | Can follow user from Discover | P1 | [C] | Follow button |
+| 8.1.4 | Can unfollow user | P1 | [C] | Unfollow action |
+| 8.1.5 | Follow count updates | P1 | [C] | Provider refresh |
+| 8.1.6 | Follower count updates | P1 | [C] | Provider refresh |
+| 8.1.7 | Can view followed user's chart | P1 | [C] | Profile navigation |
+| 8.1.8 | Posts from followed users in feed | P1 | [C] | Feed provider |
+| 8.1.9 | Can message any user | P2 | [C] | New conversation |
 | 8.1.10 | Can block user | P2 | [C] | Block action |
 
 ### 8.2 Discovery (P1)
@@ -448,7 +448,7 @@
 | # | Test Case | Priority | Status | Notes |
 |---|-----------|----------|--------|-------|
 | 8.3.1 | Feed screen accessible | P1 | [C] | /feed route |
-| 8.3.2 | Posts from friends/followed displayed | P1 | [C] | Feed provider |
+| 8.3.2 | Posts from followed users displayed | P1 | [C] | Feed provider |
 | 8.3.3 | Can create new post | P1 | [C] | Create post sheet |
 | 8.3.4 | Can add image to post | P2 | [C] | Image picker |
 | 8.3.5 | Can add hashtags to post | P2 | [C] | Hashtag input |
@@ -469,7 +469,7 @@
 | 8.4.2 | Can create new story | P2 | [C] | Create story sheet |
 | 8.4.3 | Can add photo to story | P2 | [C] | Image picker |
 | 8.4.4 | Can add text overlay | P2 | [C] | Text overlay editor |
-| 8.4.5 | Story visible to friends | P2 | [C] | Story visibility |
+| 8.4.5 | Story visible to followers | P2 | [C] | Story visibility |
 | 8.4.6 | Tapping story opens viewer | P2 | [C] | Story viewer screen |
 | 8.4.7 | Story auto-advances | P2 | [C] | Timer logic |
 | 8.4.8 | Tap to skip to next story | P2 | [C] | Gesture handler |
@@ -576,7 +576,7 @@
 | 10.7.4 | All-time leaderboard displays | P2 | [C] | All-time tab |
 | 10.7.5 | User's rank highlighted | P2 | [C] | Rank highlighting |
 | 10.7.6 | Leaderboard pagination works | P3 | [C] | Pagination |
-| 10.7.7 | Friends-only leaderboard (if available) | P3 | [ ] | Requires verification |
+| 10.7.7 | Following-only leaderboard (if available) | P3 | [ ] | Requires verification |
 
 ---
 
@@ -702,7 +702,7 @@
 | 15.1.4 | Username shown | P1 | [C] | Username display |
 | 15.1.5 | Bio displayed | P2 | [C] | Bio text |
 | 15.1.6 | HD Type badge shown | P2 | [C] | Type badge |
-| 15.1.7 | Stats displayed (friends, posts, etc.) | P2 | [C] | Stats row |
+| 15.1.7 | Stats displayed (followers, following, posts) | P2 | [C] | Stats row |
 | 15.1.8 | Posts/activity tab | P2 | [C] | Tab view |
 | 15.1.9 | Charts tab | P2 | [C] | Tab view |
 
@@ -978,7 +978,7 @@
 
 | # | Test Case | Priority | Status | Notes |
 |---|-----------|----------|--------|-------|
-| 21.3.1 | Empty states handled (no posts, no friends) | P2 | [C] | Empty state widgets |
+| 21.3.1 | Empty states handled (no posts, no following) | P2 | [C] | Empty state widgets |
 | 21.3.2 | Very long text doesn't break UI | P2 | [C] | Text overflow |
 | 21.3.3 | Special characters in names handled | P2 | [C] | Unicode support |
 | 21.3.4 | Emoji in input fields work | P2 | [C] | Emoji support |

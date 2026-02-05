@@ -2,6 +2,76 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.9] - 2026-02-05
+
+### Changed
+
+#### Social System Redesign
+- **Removed Friends System** - Replaced mutual friends with Twitter-style following
+  - Social screen now has 3 tabs: Thoughts, Discover, Groups (was 4 tabs)
+  - Removed Friends tab and all friend request functionality
+  - Users can now follow anyone without approval required
+  - Simplified social interactions for better user experience
+
+#### Comment Reactions
+- **Comment Liking** - Fully implemented comment like functionality
+  - Heart icon for liking comments (was showing "Coming Soon")
+  - Toggle like on/off with visual feedback
+  - Reaction count updates in real-time
+  - Uses existing `reactions` table with `comment_id` field
+
+#### Reaction Icons
+- **Heart Icons** - Consistent heart icons for all like actions
+  - Posts: Filled heart when liked, outline when not
+  - Comments: Filled heart when liked, outline when not
+  - Removed thumbs up icons throughout the app
+  - Updated ReactionBar widget to use heart icons
+
+#### Share Chart Dialog
+- **Share Link First** - Create Share Link is now the primary option
+  - Prominent "Create Share Link" button at top of dialog
+  - Link auto-copies to clipboard on creation
+  - "Manage Links" option to view existing shares
+  - Groups moved to secondary section below
+
+### Fixed
+
+#### Code Quality
+- **Deprecated API Usage** - Fixed `Share.share()` deprecation
+  - Updated to `SharePlus.instance.share(ShareParams(...))` in social_screen.dart
+- **Print Statements** - Replaced `print()` with `debugPrint()` in feed_providers.dart
+- **Unused Code** - Removed unused `_ActionButtonCompact` widget from post_card.dart
+- **Static Analysis** - All flutter analyze issues resolved (0 errors, 0 warnings)
+
+### Removed
+
+#### Friends System (Complete Removal)
+- `Friend` and `FriendRequest` model classes from social_repository.dart
+- `friendsProvider` and `pendingRequestsProvider` from social_providers.dart
+- `getFriends()`, `sendFriendRequest()`, `acceptFriendRequest()`, `declineFriendRequest()`, `getPendingRequests()` methods
+- `_FriendsTab` and `_FriendCard` widgets from social_screen.dart
+- Pending requests badge and dialog from social screen
+- Friends tab from ShareChartDialog (now Groups only + Share Link)
+- ~17 friend-related localization keys from EN, RU, UK ARB files
+
+### Technical Details
+
+Files modified:
+- `social_screen.dart` - Reduced from 4 to 3 tabs, removed all friend-related code
+- `social_repository.dart` - Removed Friend/FriendRequest models and methods
+- `social_providers.dart` - Removed friendsProvider and friend-related notifier methods
+- `share_chart_dialog.dart` - Added Share Link section, removed Friends tab
+- `new_conversation_sheet.dart` - Changed from friendsProvider to followingListProvider
+- `feed_screen.dart` - Implemented comment liking with heart icons
+- `feed_providers.dart` - Added reactToComment, removeCommentReaction, toggleCommentReaction methods
+- `feed_repository.dart` - Added addCommentReaction, removeCommentReaction, _getUserCommentReactions methods
+- `post.dart` - Added userReaction field to PostComment model
+- `post_card.dart` - Changed reaction button to heart icon, removed unused widget
+- `reaction_bar.dart` - Changed from thumb icon to heart icon
+- `app_en.arb`, `app_ru.arb`, `app_uk.arb` - Removed friend-related localization keys
+
+---
+
 ## [0.2.8] - 2026-02-05
 
 ### Added
