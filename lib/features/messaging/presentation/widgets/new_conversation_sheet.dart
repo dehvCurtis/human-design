@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/router/app_router.dart';
 import '../../../../core/utils/error_handler.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../discovery/domain/discovery_providers.dart';
 import '../../../discovery/domain/models/user_discovery.dart';
 import '../../domain/messaging_providers.dart';
@@ -59,7 +60,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  'New Message',
+                  AppLocalizations.of(context)!.messages_title,
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -72,7 +73,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                 child: TextField(
                   controller: _searchController,
                   decoration: InputDecoration(
-                    hintText: 'Search people...',
+                    hintText: AppLocalizations.of(context)!.discovery_searchUsers,
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -115,8 +116,8 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                             const SizedBox(height: 16),
                             Text(
                               _searchQuery.isEmpty
-                                  ? 'No one followed yet'
-                                  : 'No users found',
+                                  ? AppLocalizations.of(context)!.discovery_notFollowingAnyone
+                                  : AppLocalizations.of(context)!.discovery_noUsersFound,
                               style: theme.textTheme.bodyLarge?.copyWith(
                                 color: theme.colorScheme.outline,
                               ),
@@ -128,7 +129,7 @@ class _NewConversationSheetState extends ConsumerState<NewConversationSheet> {
                                   Navigator.pop(context);
                                   context.push(AppRoutes.discover);
                                 },
-                                child: const Text('Discover people'),
+                                child: Text(AppLocalizations.of(context)!.discovery_discoverPeople),
                               ),
                             ],
                           ],

@@ -10,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' show FileOptions;
 import 'package:uuid/uuid.dart';
 
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../chart/domain/chart_providers.dart';
 import '../../home/domain/home_providers.dart';
 import '../domain/messaging_providers.dart';
@@ -52,10 +53,11 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
   }
 
   void _handleMenuAction(BuildContext context, String action) {
+    final l10n = AppLocalizations.of(context)!;
     switch (action) {
       case 'mute':
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Notifications muted')),
+          SnackBar(content: Text(l10n.messages_notificationsMuted)),
         );
         break;
       case 'block':
@@ -68,24 +70,25 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
   }
 
   void _showBlockConfirmation(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Block User'),
-        content: const Text('Are you sure you want to block this user? You will no longer receive messages from them.'),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.messages_blockUser),
+        content: Text(l10n.messages_blockUserConfirm),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.common_cancel),
           ),
           FilledButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(dialogContext);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('User blocked')),
+                SnackBar(content: Text(l10n.messages_userBlocked)),
               );
             },
-            child: const Text('Block'),
+            child: Text(l10n.messages_block),
           ),
         ],
       ),
@@ -93,26 +96,27 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
   }
 
   void _showDeleteConfirmation(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Delete Conversation'),
-        content: const Text('Are you sure you want to delete this conversation? This action cannot be undone.'),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.messages_deleteConversation),
+        content: Text(l10n.messages_deleteConversationConfirm),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.common_cancel),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.pop(dialogContext);
               this.context.pop(); // Go back to conversations list
               ScaffoldMessenger.of(this.context).showSnackBar(
-                const SnackBar(content: Text('Conversation deleted')),
+                SnackBar(content: Text(l10n.messages_conversationDeleted)),
               );
             },
-            child: const Text('Delete'),
+            child: Text(l10n.common_delete),
           ),
         ],
       ),
@@ -176,42 +180,45 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
               ],
             );
           },
-          loading: () => const Text('Loading...'),
-          error: (_, _) => const Text('Conversation'),
+          loading: () => Text(AppLocalizations.of(context)!.messages_loading),
+          error: (_, _) => Text(AppLocalizations.of(context)!.messages_conversation),
         ),
         actions: [
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert),
             onSelected: (value) => _handleMenuAction(context, value),
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'mute',
-                child: ListTile(
-                  leading: Icon(Icons.notifications_off_outlined),
-                  title: Text('Mute Notifications'),
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity: VisualDensity.compact,
+            itemBuilder: (context) {
+              final l10n = AppLocalizations.of(context)!;
+              return [
+                PopupMenuItem(
+                  value: 'mute',
+                  child: ListTile(
+                    leading: const Icon(Icons.notifications_off_outlined),
+                    title: Text(l10n.messages_muteNotifications),
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'block',
-                child: ListTile(
-                  leading: Icon(Icons.block),
-                  title: Text('Block User'),
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity: VisualDensity.compact,
+                PopupMenuItem(
+                  value: 'block',
+                  child: ListTile(
+                    leading: const Icon(Icons.block),
+                    title: Text(l10n.messages_blockUser),
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'delete',
-                child: ListTile(
-                  leading: Icon(Icons.delete_outline, color: Colors.red),
-                  title: Text('Delete Conversation', style: TextStyle(color: Colors.red)),
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity: VisualDensity.compact,
+                PopupMenuItem(
+                  value: 'delete',
+                  child: ListTile(
+                    leading: const Icon(Icons.delete_outline, color: Colors.red),
+                    title: Text(l10n.messages_deleteConversation, style: const TextStyle(color: Colors.red)),
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                  ),
                 ),
-              ),
-            ],
+              ];
+            },
           ),
         ],
       ),
@@ -231,7 +238,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Start the conversation!',
+                          AppLocalizations.of(context)!.messages_startConversation,
                           style: theme.textTheme.bodyLarge?.copyWith(
                             color: theme.colorScheme.outline,
                           ),

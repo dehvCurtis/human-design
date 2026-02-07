@@ -6,10 +6,11 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/error_handler.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../sharing/domain/sharing_providers.dart';
 import '../../domain/social_providers.dart';
 
-/// Dialog for sharing a chart with friends or groups
+/// Dialog for sharing a chart with groups or via share links
 class ShareChartDialog extends ConsumerStatefulWidget {
   const ShareChartDialog({
     super.key,
@@ -64,7 +65,7 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog> {
         setState(() {
           _isCreatingLink = false;
           _shareLink = link.url;
-          _successMessage = 'Share link created!';
+          _successMessage = AppLocalizations.of(context)!.share_linkCopied;
         });
 
         // Copy to clipboard
@@ -152,7 +153,7 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Share Chart',
+                            AppLocalizations.of(context)!.share_shareChart,
                             style: theme.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -245,7 +246,7 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog> {
                               await Clipboard.setData(ClipboardData(text: _shareLink!));
                               if (!context.mounted) return;
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Link copied to clipboard')),
+                                SnackBar(content: Text(AppLocalizations.of(context)!.share_linkCopied)),
                               );
                             }
                           },
@@ -261,7 +262,7 @@ class _ShareChartDialogState extends ConsumerState<ShareChartDialog> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
-                            'Share with Groups',
+                            AppLocalizations.of(context)!.social_groups,
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
@@ -317,14 +318,14 @@ class _ShareLinkSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Create Share Link',
+                      AppLocalizations.of(context)!.share_createShareLink,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Anyone with the link can view your chart',
+                      AppLocalizations.of(context)!.share_createShareableLinks,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: AppColors.textSecondaryLight,
                       ),
@@ -368,7 +369,7 @@ class _ShareLinkSection extends StatelessWidget {
                   child: OutlinedButton.icon(
                     onPressed: onManageLinks,
                     icon: const Icon(Icons.settings, size: 18),
-                    label: const Text('Manage Links'),
+                    label: Text(AppLocalizations.of(context)!.share_myShares),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -376,7 +377,7 @@ class _ShareLinkSection extends StatelessWidget {
                   child: FilledButton.icon(
                     onPressed: onCopyLink,
                     icon: const Icon(Icons.check, size: 18),
-                    label: const Text('Copy Link'),
+                    label: Text(AppLocalizations.of(context)!.common_copy),
                   ),
                 ),
               ],
@@ -388,7 +389,7 @@ class _ShareLinkSection extends StatelessWidget {
               child: FilledButton.icon(
                 onPressed: onCreateLink,
                 icon: const Icon(Icons.add_link),
-                label: const Text('Create Share Link'),
+                label: Text(AppLocalizations.of(context)!.share_createShareLink),
                 style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
@@ -398,7 +399,7 @@ class _ShareLinkSection extends StatelessWidget {
             Center(
               child: TextButton(
                 onPressed: onManageLinks,
-                child: const Text('View existing links'),
+                child: Text(AppLocalizations.of(context)!.share_myShares),
               ),
             ),
           ],
@@ -433,12 +434,12 @@ class _GroupsList extends ConsumerWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'No Groups Yet',
+                  AppLocalizations.of(context)!.social_noGroupsYet,
                   style: theme.textTheme.titleMedium,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Create a group to share your chart with multiple people.',
+                  AppLocalizations.of(context)!.social_noGroupsMessage,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: AppColors.textSecondaryLight,
                   ),
@@ -473,7 +474,7 @@ class _GroupsList extends ConsumerWidget {
               trailing: FilledButton.icon(
                 onPressed: () => onShare(group.id, group.name),
                 icon: const Icon(Icons.send, size: 16),
-                label: const Text('Share'),
+                label: Text(AppLocalizations.of(context)!.common_share),
               ),
             );
           }).toList(),

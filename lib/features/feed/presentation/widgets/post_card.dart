@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/url_validator.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../hashtags/presentation/widgets/hashtag_text.dart';
 import '../../domain/models/post.dart';
 import 'reaction_bar.dart';
@@ -288,46 +289,46 @@ class _PostHeader extends StatelessWidget {
             }
           },
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               value: 'share',
               child: Row(
                 children: [
-                  Icon(Icons.share_outlined, size: 20),
-                  SizedBox(width: 12),
-                  Text('Share'),
+                  const Icon(Icons.share_outlined, size: 20),
+                  const SizedBox(width: 12),
+                  Text(AppLocalizations.of(context)!.post_share),
                 ],
               ),
             ),
             if (isOwnPost && onEdit != null)
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'edit',
                 child: Row(
                   children: [
-                    Icon(Icons.edit_outlined, size: 20),
-                    SizedBox(width: 12),
-                    Text('Edit'),
+                    const Icon(Icons.edit_outlined, size: 20),
+                    const SizedBox(width: 12),
+                    Text(AppLocalizations.of(context)!.post_edit),
                   ],
                 ),
               ),
             if (isOwnPost && onDelete != null)
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'delete',
                 child: Row(
                   children: [
-                    Icon(Icons.delete_outline, size: 20, color: Colors.red),
-                    SizedBox(width: 12),
-                    Text('Delete', style: TextStyle(color: Colors.red)),
+                    const Icon(Icons.delete_outline, size: 20, color: Colors.red),
+                    const SizedBox(width: 12),
+                    Text(AppLocalizations.of(context)!.common_delete, style: const TextStyle(color: Colors.red)),
                   ],
                 ),
               ),
             if (!isOwnPost && onReport != null)
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: 'report',
                 child: Row(
                   children: [
-                    Icon(Icons.flag_outlined, size: 20),
-                    SizedBox(width: 12),
-                    Text('Report'),
+                    const Icon(Icons.flag_outlined, size: 20),
+                    const SizedBox(width: 12),
+                    Text(AppLocalizations.of(context)!.post_report),
                   ],
                 ),
               ),
@@ -481,7 +482,7 @@ class _PostTag extends StatelessWidget {
       children: [
         if (gateNumber != null)
           Chip(
-            label: Text('Gate $gateNumber'),
+            label: Text(AppLocalizations.of(context)!.chart_gate(gateNumber!)),
             labelStyle: const TextStyle(fontSize: 12),
             padding: EdgeInsets.zero,
             visualDensity: VisualDensity.compact,
@@ -489,7 +490,7 @@ class _PostTag extends StatelessWidget {
           ),
         if (channelId != null)
           Chip(
-            label: Text('Channel $channelId'),
+            label: Text(AppLocalizations.of(context)!.chart_channel(channelId!)),
             labelStyle: const TextStyle(fontSize: 12),
             padding: EdgeInsets.zero,
             visualDensity: VisualDensity.compact,
@@ -627,7 +628,7 @@ class _RegenerateHeader extends StatelessWidget {
         ),
         const SizedBox(width: 6),
         Text(
-          'Regenerated from ',
+          '${AppLocalizations.of(context)!.thought_regenerate} ',
           style: theme.textTheme.bodySmall?.copyWith(
             color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
           ),

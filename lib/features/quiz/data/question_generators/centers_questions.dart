@@ -107,6 +107,46 @@ class CentersQuestionGenerator extends QuestionGenerator {
           'The Spleen center is biologically connected to the lymphatic system, spleen organ, and immune function. This is why it governs survival instinct, health awareness, and intuitive body intelligence.',
     ));
 
+    // Additional beginner questions
+    questions.add(createTrueFalse(
+      category: QuizCategory.centers,
+      difficulty: QuizDifficulty.beginner,
+      statement: 'When a center is undefined, you are inconsistent in that area but can also be very wise about it.',
+      isTrue: true,
+      explanation:
+          'Undefined centers are areas where we take in and amplify energy from others. While this creates inconsistency, it also gives us the potential for deep wisdom through experiencing many different expressions of that energy.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.centers,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'What does it mean when a center is colored in on your chart?',
+      correctAnswer: 'The center is defined - it operates consistently',
+      wrongAnswers: ['The center is damaged', 'The center is blocked', 'The center needs healing'],
+      explanation:
+          'A colored/filled-in center is defined, meaning it operates consistently and reliably. You broadcast this energy to others rather than taking it in.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.centers,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Which center is responsible for mental anxiety and inspiration?',
+      correctAnswer: 'Head',
+      wrongAnswers: ['Ajna', 'Throat', 'G Center'],
+      explanation:
+          'The Head center is the pressure center for mental activity - it creates the pressure to think and be inspired. When undefined, it can lead to thinking about things that don\'t matter.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.centers,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Which center processes thoughts and creates fixed concepts?',
+      correctAnswer: 'Ajna',
+      wrongAnswers: ['Head', 'Throat', 'Spleen'],
+      explanation:
+          'The Ajna center is the awareness center for mental conceptualization. It processes the inspiration from the Head center into concepts, theories, and opinions.',
+    ));
+
     return questions;
   }
 

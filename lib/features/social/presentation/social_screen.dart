@@ -254,7 +254,7 @@ class _ThoughtsTab extends ConsumerWidget {
                     );
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Post regenerated to your wall!')),
+                        SnackBar(content: Text(l10n.thought_regenerateSuccess)),
                       );
                     }
                   } catch (e) {
@@ -268,18 +268,18 @@ class _ThoughtsTab extends ConsumerWidget {
                 onDelete: isOwnPost ? () async {
                   final confirm = await showDialog<bool>(
                     context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Delete Post'),
-                      content: const Text('Are you sure you want to delete this post?'),
+                    builder: (dialogContext) => AlertDialog(
+                      title: Text(l10n.common_delete),
+                      content: Text(l10n.common_deleteConfirmation),
                       actions: [
                         TextButton(
-                          onPressed: () => Navigator.pop(context, false),
-                          child: const Text('Cancel'),
+                          onPressed: () => Navigator.pop(dialogContext, false),
+                          child: Text(l10n.common_cancel),
                         ),
                         TextButton(
-                          onPressed: () => Navigator.pop(context, true),
+                          onPressed: () => Navigator.pop(dialogContext, true),
                           style: TextButton.styleFrom(foregroundColor: Colors.red),
-                          child: const Text('Delete'),
+                          child: Text(l10n.common_delete),
                         ),
                       ],
                     ),
@@ -288,14 +288,14 @@ class _ThoughtsTab extends ConsumerWidget {
                     await ref.read(feedNotifierProvider.notifier).deletePost(post.id);
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Post deleted')),
+                        SnackBar(content: Text(l10n.common_delete)),
                       );
                     }
                   }
                 } : null,
                 onReport: !isOwnPost ? () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Post reported. Thank you for helping keep our community safe.')),
+                    SnackBar(content: Text(l10n.post_report)),
                   );
                 } : null,
               );

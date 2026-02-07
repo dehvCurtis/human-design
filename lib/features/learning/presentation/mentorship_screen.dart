@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -13,13 +14,14 @@ class MentorshipScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final mentorsAsync = ref.watch(mentorsProvider);
     final myProfileAsync = ref.watch(myMentorshipProfileProvider);
     final requestsAsync = ref.watch(pendingMentorshipRequestsProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mentorship'),
+        title: Text(l10n.mentorship_title),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -70,7 +72,7 @@ class MentorshipScreen extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          'Pending Requests',
+                          l10n.mentorship_pendingRequests,
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -91,7 +93,7 @@ class MentorshipScreen extends ConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  'Available Mentors',
+                  l10n.mentorship_availableMentors,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -115,7 +117,7 @@ class MentorshipScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'No mentors available',
+                            l10n.mentorship_noMentorsAvailable,
                             style: theme.textTheme.bodyLarge?.copyWith(
                               color: theme.colorScheme.outline,
                             ),
@@ -167,38 +169,39 @@ class MentorshipScreen extends ConsumerWidget {
     WidgetRef ref,
     MentorshipProfile mentor,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     final messageController = TextEditingController();
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Request Mentorship from ${mentor.userName}'),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.mentorship_requestMentorship(mentor.userName ?? '')),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Send a message explaining what you would like to learn:',
-              style: Theme.of(context).textTheme.bodyMedium,
+              l10n.mentorship_sendMessage,
+              style: Theme.of(dialogContext).textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
             TextField(
               controller: messageController,
               maxLines: 4,
-              decoration: const InputDecoration(
-                hintText: 'I would like to learn more about...',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                hintText: l10n.mentorship_learnPrompt,
+                border: const OutlineInputBorder(),
               ),
             ),
           ],
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.common_cancel),
           ),
           FilledButton(
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pop(dialogContext);
               try {
                 await ref.read(learningNotifierProvider.notifier).sendMentorshipRequest(
                       mentorId: mentor.userId,
@@ -206,7 +209,7 @@ class MentorshipScreen extends ConsumerWidget {
                     );
                 if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Request sent!')),
+                    SnackBar(content: Text(l10n.mentorship_requestSent)),
                   );
                 }
               } catch (e) {
@@ -217,7 +220,7 @@ class MentorshipScreen extends ConsumerWidget {
                 }
               }
             },
-            child: const Text('Send Request'),
+            child: Text(l10n.mentorship_sendRequest),
           ),
         ],
       ),
@@ -233,6 +236,7 @@ class _BecomeMentorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Card(
       margin: const EdgeInsets.all(16),
@@ -261,14 +265,14 @@ class _BecomeMentorCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Become a Mentor',
+                      l10n.mentorship_becomeAMentor,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Share your Human Design knowledge',
+                      l10n.mentorship_shareKnowledge,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: theme.colorScheme.outline,
                       ),

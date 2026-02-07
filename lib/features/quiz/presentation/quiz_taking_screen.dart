@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/quiz_providers.dart';
 import 'widgets/question_card.dart';
 import 'widgets/quiz_progress_bar.dart';
@@ -62,21 +63,20 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
   }
 
   void _handleTimeUp() {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: const Text('Time\'s Up!'),
-        content: const Text(
-          'You\'ve run out of time. Your progress will be submitted.',
-        ),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.quiz_timesUp),
+        content: Text(l10n.quiz_timesUpMessage),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(dialogContext).pop();
               _completeQuiz();
             },
-            child: const Text('OK'),
+            child: Text(l10n.quiz_ok),
           ),
         ],
       ),
@@ -88,10 +88,11 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
     final session = ref.watch(quizSessionProvider);
 
     if (session == null) {
+      final l10n = AppLocalizations.of(context)!;
       return Scaffold(
-        appBar: AppBar(title: const Text('Quiz')),
-        body: const Center(
-          child: Text('No active quiz session'),
+        appBar: AppBar(title: Text(l10n.quiz_title)),
+        body: Center(
+          child: Text(l10n.quiz_noActiveSession),
         ),
       );
     }
@@ -186,6 +187,7 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
   }
 
   Widget _buildBottomButton(BuildContext context, QuizSessionState session) {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -204,8 +206,8 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
                   ),
                   child: Text(
                     session.currentQuestionIndex >= session.totalQuestions - 1
-                        ? 'See Results'
-                        : 'Next Question',
+                        ? l10n.quiz_seeResults
+                        : l10n.quiz_nextQuestion,
                   ),
                 )
               : ElevatedButton(
@@ -219,7 +221,7 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text('Submit Answer'),
+                  child: Text(l10n.quiz_submitAnswer),
                 ),
         ),
       ),
@@ -227,6 +229,7 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
   }
 
   Widget _buildCompletedView(BuildContext context, QuizSessionState session) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -234,7 +237,7 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
           const CircularProgressIndicator(),
           const SizedBox(height: 24),
           Text(
-            'Calculating your results...',
+            l10n.common_loading,
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
@@ -243,8 +246,9 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
   }
 
   Widget _buildNoQuestionsView() {
-    return const Center(
-      child: Text('No questions available'),
+    final l10n = AppLocalizations.of(context)!;
+    return Center(
+      child: Text(l10n.quiz_noQuestionsAvailable),
     );
   }
 
@@ -306,22 +310,21 @@ class _QuizTakingScreenState extends ConsumerState<QuizTakingScreen> {
   }
 
   Future<bool> _confirmExit(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Exit Quiz?'),
-        content: const Text(
-          'Your progress will be lost if you exit now.',
-        ),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.quiz_exitQuiz),
+        content: Text(l10n.quiz_exitWarning),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.common_cancel),
           ),
           TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
+            onPressed: () => Navigator.of(dialogContext).pop(true),
             style: TextButton.styleFrom(foregroundColor: AppColors.error),
-            child: const Text('Exit'),
+            child: Text(l10n.quiz_exit),
           ),
         ],
       ),
