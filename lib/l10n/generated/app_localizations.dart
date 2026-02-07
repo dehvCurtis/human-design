@@ -5211,6 +5211,708 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add a comment...'**
   String get thought_commentPlaceholder;
+
+  /// No description provided for @messages_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get messages_title;
+
+  /// No description provided for @messages_conversation.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation'**
+  String get messages_conversation;
+
+  /// No description provided for @messages_loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get messages_loading;
+
+  /// No description provided for @messages_muteNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute Notifications'**
+  String get messages_muteNotifications;
+
+  /// No description provided for @messages_notificationsMuted.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications muted'**
+  String get messages_notificationsMuted;
+
+  /// No description provided for @messages_blockUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Block User'**
+  String get messages_blockUser;
+
+  /// No description provided for @messages_blockUserConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to block this user? You will no longer receive messages from them.'**
+  String get messages_blockUserConfirm;
+
+  /// No description provided for @messages_userBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'User blocked'**
+  String get messages_userBlocked;
+
+  /// No description provided for @messages_block.
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get messages_block;
+
+  /// No description provided for @messages_deleteConversation.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Conversation'**
+  String get messages_deleteConversation;
+
+  /// No description provided for @messages_deleteConversationConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this conversation? This action cannot be undone.'**
+  String get messages_deleteConversationConfirm;
+
+  /// No description provided for @messages_conversationDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation deleted'**
+  String get messages_conversationDeleted;
+
+  /// No description provided for @messages_startConversation.
+  ///
+  /// In en, this message translates to:
+  /// **'Start the conversation!'**
+  String get messages_startConversation;
+
+  /// No description provided for @profile_takePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Take Photo'**
+  String get profile_takePhoto;
+
+  /// No description provided for @profile_chooseFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from Gallery'**
+  String get profile_chooseFromGallery;
+
+  /// No description provided for @profile_avatarUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Avatar updated successfully'**
+  String get profile_avatarUpdated;
+
+  /// No description provided for @profile_profileUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get profile_profileUpdated;
+
+  /// No description provided for @profile_noProfileFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No profile found'**
+  String get profile_noProfileFound;
+
+  /// No description provided for @discovery_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover'**
+  String get discovery_title;
+
+  /// No description provided for @discovery_searchUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Search users...'**
+  String get discovery_searchUsers;
+
+  /// No description provided for @discovery_discoverTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover'**
+  String get discovery_discoverTab;
+
+  /// No description provided for @discovery_followingTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get discovery_followingTab;
+
+  /// No description provided for @discovery_followersTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get discovery_followersTab;
+
+  /// No description provided for @discovery_noUsersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No users found'**
+  String get discovery_noUsersFound;
+
+  /// No description provided for @discovery_tryAdjustingFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Try adjusting your filters'**
+  String get discovery_tryAdjustingFilters;
+
+  /// No description provided for @discovery_notFollowingAnyone.
+  ///
+  /// In en, this message translates to:
+  /// **'Not following anyone'**
+  String get discovery_notFollowingAnyone;
+
+  /// No description provided for @discovery_discoverPeople.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover people to follow'**
+  String get discovery_discoverPeople;
+
+  /// No description provided for @discovery_noFollowersYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No followers yet'**
+  String get discovery_noFollowersYet;
+
+  /// No description provided for @discovery_shareInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your insights to gain followers'**
+  String get discovery_shareInsights;
+
+  /// No description provided for @discovery_clearAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get discovery_clearAll;
+
+  /// No description provided for @chart_gate.
+  ///
+  /// In en, this message translates to:
+  /// **'Gate {number}'**
+  String chart_gate(int number);
+
+  /// No description provided for @chart_channel.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel {id}'**
+  String chart_channel(String id);
+
+  /// No description provided for @chart_center.
+  ///
+  /// In en, this message translates to:
+  /// **'Center'**
+  String get chart_center;
+
+  /// No description provided for @chart_keynote.
+  ///
+  /// In en, this message translates to:
+  /// **'Keynote'**
+  String get chart_keynote;
+
+  /// No description provided for @chart_element.
+  ///
+  /// In en, this message translates to:
+  /// **'Element'**
+  String get chart_element;
+
+  /// No description provided for @chart_location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get chart_location;
+
+  /// No description provided for @chart_hdCenters.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Centers'**
+  String get chart_hdCenters;
+
+  /// No description provided for @reaction_comment.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment'**
+  String get reaction_comment;
+
+  /// No description provided for @reaction_react.
+  ///
+  /// In en, this message translates to:
+  /// **'React'**
+  String get reaction_react;
+
+  /// No description provided for @reaction_standard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard'**
+  String get reaction_standard;
+
+  /// No description provided for @reaction_humanDesign.
+  ///
+  /// In en, this message translates to:
+  /// **'Human Design'**
+  String get reaction_humanDesign;
+
+  /// No description provided for @share_shareChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Chart'**
+  String get share_shareChart;
+
+  /// No description provided for @share_createShareLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Share Link'**
+  String get share_createShareLink;
+
+  /// No description provided for @share_shareViaUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Share via URL'**
+  String get share_shareViaUrl;
+
+  /// No description provided for @share_exportAsPng.
+  ///
+  /// In en, this message translates to:
+  /// **'Export as PNG'**
+  String get share_exportAsPng;
+
+  /// No description provided for @share_fullReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Full report'**
+  String get share_fullReport;
+
+  /// No description provided for @share_linkExpiration.
+  ///
+  /// In en, this message translates to:
+  /// **'Link Expiration'**
+  String get share_linkExpiration;
+
+  /// No description provided for @share_neverExpires.
+  ///
+  /// In en, this message translates to:
+  /// **'Never expires'**
+  String get share_neverExpires;
+
+  /// No description provided for @share_oneHour.
+  ///
+  /// In en, this message translates to:
+  /// **'1 hour'**
+  String get share_oneHour;
+
+  /// No description provided for @share_twentyFourHours.
+  ///
+  /// In en, this message translates to:
+  /// **'24 hours'**
+  String get share_twentyFourHours;
+
+  /// No description provided for @share_sevenDays.
+  ///
+  /// In en, this message translates to:
+  /// **'7 days'**
+  String get share_sevenDays;
+
+  /// No description provided for @share_thirtyDays.
+  ///
+  /// In en, this message translates to:
+  /// **'30 days'**
+  String get share_thirtyDays;
+
+  /// No description provided for @share_creating.
+  ///
+  /// In en, this message translates to:
+  /// **'Creating...'**
+  String get share_creating;
+
+  /// No description provided for @share_signInToShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to share your chart'**
+  String get share_signInToShare;
+
+  /// No description provided for @share_createShareableLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Create shareable links to your Human Design chart'**
+  String get share_createShareableLinks;
+
+  /// No description provided for @share_linkImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Image'**
+  String get share_linkImage;
+
+  /// No description provided for @share_pdf.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get share_pdf;
+
+  /// No description provided for @post_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get post_share;
+
+  /// No description provided for @post_edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get post_edit;
+
+  /// No description provided for @post_report.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get post_report;
+
+  /// No description provided for @mentorship_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Mentorship'**
+  String get mentorship_title;
+
+  /// No description provided for @mentorship_pendingRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Requests'**
+  String get mentorship_pendingRequests;
+
+  /// No description provided for @mentorship_availableMentors.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Mentors'**
+  String get mentorship_availableMentors;
+
+  /// No description provided for @mentorship_noMentorsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No mentors available'**
+  String get mentorship_noMentorsAvailable;
+
+  /// No description provided for @mentorship_requestMentorship.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Mentorship from {name}'**
+  String mentorship_requestMentorship(String name);
+
+  /// No description provided for @mentorship_sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a message explaining what you would like to learn:'**
+  String get mentorship_sendMessage;
+
+  /// No description provided for @mentorship_learnPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'I would like to learn more about...'**
+  String get mentorship_learnPrompt;
+
+  /// No description provided for @mentorship_requestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Request sent!'**
+  String get mentorship_requestSent;
+
+  /// No description provided for @mentorship_sendRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Request'**
+  String get mentorship_sendRequest;
+
+  /// No description provided for @mentorship_becomeAMentor.
+  ///
+  /// In en, this message translates to:
+  /// **'Become a Mentor'**
+  String get mentorship_becomeAMentor;
+
+  /// No description provided for @mentorship_shareKnowledge.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your Human Design knowledge'**
+  String get mentorship_shareKnowledge;
+
+  /// No description provided for @story_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get story_cancel;
+
+  /// No description provided for @story_createStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Story'**
+  String get story_createStory;
+
+  /// No description provided for @story_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get story_share;
+
+  /// No description provided for @story_typeYourStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your story...'**
+  String get story_typeYourStory;
+
+  /// No description provided for @story_background.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get story_background;
+
+  /// No description provided for @story_attachTransitGate.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach Transit Gate (optional)'**
+  String get story_attachTransitGate;
+
+  /// No description provided for @story_none.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get story_none;
+
+  /// No description provided for @story_gateNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Gate {number}'**
+  String story_gateNumber(int number);
+
+  /// No description provided for @story_whoCanSee.
+  ///
+  /// In en, this message translates to:
+  /// **'Who can see this?'**
+  String get story_whoCanSee;
+
+  /// No description provided for @story_followers.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get story_followers;
+
+  /// No description provided for @story_everyone.
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone'**
+  String get story_everyone;
+
+  /// No description provided for @challenges_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Challenges'**
+  String get challenges_title;
+
+  /// No description provided for @challenges_daily.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get challenges_daily;
+
+  /// No description provided for @challenges_weekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get challenges_weekly;
+
+  /// No description provided for @challenges_monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get challenges_monthly;
+
+  /// No description provided for @challenges_noDailyChallenges.
+  ///
+  /// In en, this message translates to:
+  /// **'No daily challenges available'**
+  String get challenges_noDailyChallenges;
+
+  /// No description provided for @challenges_noWeeklyChallenges.
+  ///
+  /// In en, this message translates to:
+  /// **'No weekly challenges available'**
+  String get challenges_noWeeklyChallenges;
+
+  /// No description provided for @challenges_noMonthlyChallenges.
+  ///
+  /// In en, this message translates to:
+  /// **'No monthly challenges available'**
+  String get challenges_noMonthlyChallenges;
+
+  /// No description provided for @challenges_errorLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading challenges'**
+  String get challenges_errorLoading;
+
+  /// No description provided for @challenges_claimedPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Claimed {points} points!'**
+  String challenges_claimedPoints(int points);
+
+  /// No description provided for @challenges_totalPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get challenges_totalPoints;
+
+  /// No description provided for @challenges_level.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get challenges_level;
+
+  /// No description provided for @learning_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get learning_all;
+
+  /// No description provided for @learning_types.
+  ///
+  /// In en, this message translates to:
+  /// **'Types'**
+  String get learning_types;
+
+  /// No description provided for @learning_gates.
+  ///
+  /// In en, this message translates to:
+  /// **'Gates'**
+  String get learning_gates;
+
+  /// No description provided for @learning_centers.
+  ///
+  /// In en, this message translates to:
+  /// **'Centers'**
+  String get learning_centers;
+
+  /// No description provided for @learning_liveSessions.
+  ///
+  /// In en, this message translates to:
+  /// **'Live Sessions'**
+  String get learning_liveSessions;
+
+  /// No description provided for @quiz_noActiveSession.
+  ///
+  /// In en, this message translates to:
+  /// **'No active quiz session'**
+  String get quiz_noActiveSession;
+
+  /// No description provided for @quiz_noQuestionsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No questions available'**
+  String get quiz_noQuestionsAvailable;
+
+  /// No description provided for @quiz_ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get quiz_ok;
+
+  /// No description provided for @liveSessions_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Live Sessions'**
+  String get liveSessions_title;
+
+  /// No description provided for @liveSessions_upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get liveSessions_upcoming;
+
+  /// No description provided for @liveSessions_mySessions.
+  ///
+  /// In en, this message translates to:
+  /// **'My Sessions'**
+  String get liveSessions_mySessions;
+
+  /// No description provided for @liveSessions_errorLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading sessions'**
+  String get liveSessions_errorLoading;
+
+  /// No description provided for @liveSessions_registeredSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Registered successfully!'**
+  String get liveSessions_registeredSuccessfully;
+
+  /// No description provided for @liveSessions_cancelRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Registration'**
+  String get liveSessions_cancelRegistration;
+
+  /// No description provided for @liveSessions_cancelRegistrationConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel your registration?'**
+  String get liveSessions_cancelRegistrationConfirm;
+
+  /// No description provided for @liveSessions_no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get liveSessions_no;
+
+  /// No description provided for @liveSessions_yesCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Cancel'**
+  String get liveSessions_yesCancel;
+
+  /// No description provided for @liveSessions_registrationCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration cancelled'**
+  String get liveSessions_registrationCancelled;
+
+  /// No description provided for @gateChannelPicker_gates.
+  ///
+  /// In en, this message translates to:
+  /// **'Gates (64)'**
+  String get gateChannelPicker_gates;
+
+  /// No description provided for @gateChannelPicker_channels.
+  ///
+  /// In en, this message translates to:
+  /// **'Channels (36)'**
+  String get gateChannelPicker_channels;
+
+  /// No description provided for @gateChannelPicker_search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search gates or channels...'**
+  String get gateChannelPicker_search;
+
+  /// No description provided for @leaderboard_weekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get leaderboard_weekly;
+
+  /// No description provided for @leaderboard_monthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get leaderboard_monthly;
+
+  /// No description provided for @leaderboard_allTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All Time'**
+  String get leaderboard_allTime;
 }
 
 class _AppLocalizationsDelegate

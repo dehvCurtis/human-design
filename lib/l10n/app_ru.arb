@@ -1207,5 +1207,162 @@
   "planetary_personality": "Личность",
   "planetary_design": "Дизайн",
   "planetary_consciousBirth": "Сознательное · Рождение",
-  "planetary_unconsciousPrenatal": "Бессознательное · 88° Пренатально"
+  "planetary_unconsciousPrenatal": "Бессознательное · 88° Пренатально",
+
+  "messages_title": "Сообщения",
+  "messages_conversation": "Беседа",
+  "messages_loading": "Загрузка...",
+  "messages_muteNotifications": "Отключить уведомления",
+  "messages_notificationsMuted": "Уведомления отключены",
+  "messages_blockUser": "Заблокировать",
+  "messages_blockUserConfirm": "Вы уверены, что хотите заблокировать этого пользователя? Вы больше не будете получать от него сообщения.",
+  "messages_userBlocked": "Пользователь заблокирован",
+  "messages_block": "Заблокировать",
+  "messages_deleteConversation": "Удалить беседу",
+  "messages_deleteConversationConfirm": "Вы уверены, что хотите удалить эту беседу? Это действие нельзя отменить.",
+  "messages_conversationDeleted": "Беседа удалена",
+  "messages_startConversation": "Начните беседу!",
+
+  "profile_takePhoto": "Сделать фото",
+  "profile_chooseFromGallery": "Выбрать из галереи",
+  "profile_avatarUpdated": "Аватар успешно обновлён",
+  "profile_profileUpdated": "Профиль успешно обновлён",
+  "profile_noProfileFound": "Профиль не найден",
+
+  "discovery_title": "Поиск",
+  "discovery_searchUsers": "Поиск пользователей...",
+  "discovery_discoverTab": "Поиск",
+  "discovery_followingTab": "Подписки",
+  "discovery_followersTab": "Подписчики",
+  "discovery_noUsersFound": "Пользователи не найдены",
+  "discovery_tryAdjustingFilters": "Попробуйте изменить фильтры",
+  "discovery_notFollowingAnyone": "Не подписан ни на кого",
+  "discovery_discoverPeople": "Найдите людей для подписки",
+  "discovery_noFollowersYet": "Пока нет подписчиков",
+  "discovery_shareInsights": "Делитесь инсайтами, чтобы получить подписчиков",
+  "discovery_clearAll": "Очистить всё",
+
+  "chart_gate": "Ворота {number}",
+  "@chart_gate": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "chart_channel": "Канал {id}",
+  "@chart_channel": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "chart_center": "Центр",
+  "chart_keynote": "Ключевая нота",
+  "chart_element": "Элемент",
+  "chart_location": "Расположение",
+  "chart_hdCenters": "Центры HD",
+
+  "reaction_comment": "Комментарий",
+  "reaction_react": "Реакция",
+  "reaction_standard": "Стандартные",
+  "reaction_humanDesign": "Human Design",
+
+  "share_shareChart": "Поделиться картой",
+  "share_createShareLink": "Создать ссылку",
+  "share_shareViaUrl": "Поделиться ссылкой",
+  "share_exportAsPng": "Экспорт в PNG",
+  "share_fullReport": "Полный отчёт",
+  "share_linkExpiration": "Срок действия ссылки",
+  "share_neverExpires": "Бессрочно",
+  "share_oneHour": "1 час",
+  "share_twentyFourHours": "24 часа",
+  "share_sevenDays": "7 дней",
+  "share_thirtyDays": "30 дней",
+  "share_creating": "Создаём...",
+  "share_signInToShare": "Войдите, чтобы поделиться картой",
+  "share_createShareableLinks": "Создавайте ссылки на вашу карту Дизайна Человека",
+  "share_linkImage": "Изображение",
+  "share_pdf": "PDF",
+
+  "post_share": "Поделиться",
+  "post_edit": "Редактировать",
+  "post_report": "Пожаловаться",
+
+  "mentorship_title": "Наставничество",
+  "mentorship_pendingRequests": "Ожидающие запросы",
+  "mentorship_availableMentors": "Доступные наставники",
+  "mentorship_noMentorsAvailable": "Нет доступных наставников",
+  "mentorship_requestMentorship": "Запросить наставничество у {name}",
+  "@mentorship_requestMentorship": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "mentorship_sendMessage": "Напишите, чему хотите научиться:",
+  "mentorship_learnPrompt": "Я хотел бы узнать больше о...",
+  "mentorship_requestSent": "Запрос отправлен!",
+  "mentorship_sendRequest": "Отправить запрос",
+  "mentorship_becomeAMentor": "Стать наставником",
+  "mentorship_shareKnowledge": "Делитесь знаниями о Дизайне Человека",
+
+  "story_cancel": "Отмена",
+  "story_createStory": "Создать историю",
+  "story_share": "Поделиться",
+  "story_typeYourStory": "Введите вашу историю...",
+  "story_background": "Фон",
+  "story_attachTransitGate": "Прикрепить транзитные ворота (необязательно)",
+  "story_none": "Нет",
+  "story_gateNumber": "Ворота {number}",
+  "@story_gateNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "story_whoCanSee": "Кто может видеть?",
+  "story_followers": "Подписчики",
+  "story_everyone": "Все",
+
+  "challenges_title": "Задания",
+  "challenges_daily": "Дневные",
+  "challenges_weekly": "Недельные",
+  "challenges_monthly": "Месячные",
+  "challenges_noDailyChallenges": "Нет дневных заданий",
+  "challenges_noWeeklyChallenges": "Нет недельных заданий",
+  "challenges_noMonthlyChallenges": "Нет месячных заданий",
+  "challenges_errorLoading": "Ошибка загрузки заданий",
+  "challenges_claimedPoints": "Получено {points} очков!",
+  "@challenges_claimedPoints": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "challenges_totalPoints": "Всего очков",
+  "challenges_level": "Уровень",
+
+  "learning_all": "Все",
+  "learning_types": "Типы",
+  "learning_gates": "Ворота",
+  "learning_centers": "Центры",
+  "learning_liveSessions": "Прямые эфиры",
+
+  "quiz_noActiveSession": "Нет активной сессии теста",
+  "quiz_noQuestionsAvailable": "Нет доступных вопросов",
+  "quiz_ok": "ОК",
+
+  "liveSessions_title": "Прямые эфиры",
+  "liveSessions_upcoming": "Предстоящие",
+  "liveSessions_mySessions": "Мои сессии",
+  "liveSessions_errorLoading": "Ошибка загрузки сессий",
+  "liveSessions_registeredSuccessfully": "Регистрация успешна!",
+  "liveSessions_cancelRegistration": "Отменить регистрацию",
+  "liveSessions_cancelRegistrationConfirm": "Вы уверены, что хотите отменить регистрацию?",
+  "liveSessions_no": "Нет",
+  "liveSessions_yesCancel": "Да, отменить",
+  "liveSessions_registrationCancelled": "Регистрация отменена",
+
+  "gateChannelPicker_gates": "Ворота (64)",
+  "gateChannelPicker_channels": "Каналы (36)",
+  "gateChannelPicker_search": "Поиск ворот или каналов...",
+
+  "leaderboard_weekly": "Неделя",
+  "leaderboard_monthly": "Месяц",
+  "leaderboard_allTime": "Всё время"
 }

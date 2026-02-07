@@ -1264,5 +1264,162 @@
     }
   },
   "thought_writeReply": "Write a reply...",
-  "thought_commentPlaceholder": "Add a comment..."
+  "thought_commentPlaceholder": "Add a comment...",
+
+  "messages_title": "Messages",
+  "messages_conversation": "Conversation",
+  "messages_loading": "Loading...",
+  "messages_muteNotifications": "Mute Notifications",
+  "messages_notificationsMuted": "Notifications muted",
+  "messages_blockUser": "Block User",
+  "messages_blockUserConfirm": "Are you sure you want to block this user? You will no longer receive messages from them.",
+  "messages_userBlocked": "User blocked",
+  "messages_block": "Block",
+  "messages_deleteConversation": "Delete Conversation",
+  "messages_deleteConversationConfirm": "Are you sure you want to delete this conversation? This action cannot be undone.",
+  "messages_conversationDeleted": "Conversation deleted",
+  "messages_startConversation": "Start the conversation!",
+
+  "profile_takePhoto": "Take Photo",
+  "profile_chooseFromGallery": "Choose from Gallery",
+  "profile_avatarUpdated": "Avatar updated successfully",
+  "profile_profileUpdated": "Profile updated successfully",
+  "profile_noProfileFound": "No profile found",
+
+  "discovery_title": "Discover",
+  "discovery_searchUsers": "Search users...",
+  "discovery_discoverTab": "Discover",
+  "discovery_followingTab": "Following",
+  "discovery_followersTab": "Followers",
+  "discovery_noUsersFound": "No users found",
+  "discovery_tryAdjustingFilters": "Try adjusting your filters",
+  "discovery_notFollowingAnyone": "Not following anyone",
+  "discovery_discoverPeople": "Discover people to follow",
+  "discovery_noFollowersYet": "No followers yet",
+  "discovery_shareInsights": "Share your insights to gain followers",
+  "discovery_clearAll": "Clear all",
+
+  "chart_gate": "Gate {number}",
+  "@chart_gate": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "chart_channel": "Channel {id}",
+  "@chart_channel": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "chart_center": "Center",
+  "chart_keynote": "Keynote",
+  "chart_element": "Element",
+  "chart_location": "Location",
+  "chart_hdCenters": "HD Centers",
+
+  "reaction_comment": "Comment",
+  "reaction_react": "React",
+  "reaction_standard": "Standard",
+  "reaction_humanDesign": "Human Design",
+
+  "share_shareChart": "Share Chart",
+  "share_createShareLink": "Create Share Link",
+  "share_shareViaUrl": "Share via URL",
+  "share_exportAsPng": "Export as PNG",
+  "share_fullReport": "Full report",
+  "share_linkExpiration": "Link Expiration",
+  "share_neverExpires": "Never expires",
+  "share_oneHour": "1 hour",
+  "share_twentyFourHours": "24 hours",
+  "share_sevenDays": "7 days",
+  "share_thirtyDays": "30 days",
+  "share_creating": "Creating...",
+  "share_signInToShare": "Sign in to share your chart",
+  "share_createShareableLinks": "Create shareable links to your Human Design chart",
+  "share_linkImage": "Image",
+  "share_pdf": "PDF",
+
+  "post_share": "Share",
+  "post_edit": "Edit",
+  "post_report": "Report",
+
+  "mentorship_title": "Mentorship",
+  "mentorship_pendingRequests": "Pending Requests",
+  "mentorship_availableMentors": "Available Mentors",
+  "mentorship_noMentorsAvailable": "No mentors available",
+  "mentorship_requestMentorship": "Request Mentorship from {name}",
+  "@mentorship_requestMentorship": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "mentorship_sendMessage": "Send a message explaining what you would like to learn:",
+  "mentorship_learnPrompt": "I would like to learn more about...",
+  "mentorship_requestSent": "Request sent!",
+  "mentorship_sendRequest": "Send Request",
+  "mentorship_becomeAMentor": "Become a Mentor",
+  "mentorship_shareKnowledge": "Share your Human Design knowledge",
+
+  "story_cancel": "Cancel",
+  "story_createStory": "Create Story",
+  "story_share": "Share",
+  "story_typeYourStory": "Type your story...",
+  "story_background": "Background",
+  "story_attachTransitGate": "Attach Transit Gate (optional)",
+  "story_none": "None",
+  "story_gateNumber": "Gate {number}",
+  "@story_gateNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "story_whoCanSee": "Who can see this?",
+  "story_followers": "Followers",
+  "story_everyone": "Everyone",
+
+  "challenges_title": "Challenges",
+  "challenges_daily": "Daily",
+  "challenges_weekly": "Weekly",
+  "challenges_monthly": "Monthly",
+  "challenges_noDailyChallenges": "No daily challenges available",
+  "challenges_noWeeklyChallenges": "No weekly challenges available",
+  "challenges_noMonthlyChallenges": "No monthly challenges available",
+  "challenges_errorLoading": "Error loading challenges",
+  "challenges_claimedPoints": "Claimed {points} points!",
+  "@challenges_claimedPoints": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "challenges_totalPoints": "Total Points",
+  "challenges_level": "Level",
+
+  "learning_all": "All",
+  "learning_types": "Types",
+  "learning_gates": "Gates",
+  "learning_centers": "Centers",
+  "learning_liveSessions": "Live Sessions",
+
+  "quiz_noActiveSession": "No active quiz session",
+  "quiz_noQuestionsAvailable": "No questions available",
+  "quiz_ok": "OK",
+
+  "liveSessions_title": "Live Sessions",
+  "liveSessions_upcoming": "Upcoming",
+  "liveSessions_mySessions": "My Sessions",
+  "liveSessions_errorLoading": "Error loading sessions",
+  "liveSessions_registeredSuccessfully": "Registered successfully!",
+  "liveSessions_cancelRegistration": "Cancel Registration",
+  "liveSessions_cancelRegistrationConfirm": "Are you sure you want to cancel your registration?",
+  "liveSessions_no": "No",
+  "liveSessions_yesCancel": "Yes, Cancel",
+  "liveSessions_registrationCancelled": "Registration cancelled",
+
+  "gateChannelPicker_gates": "Gates (64)",
+  "gateChannelPicker_channels": "Channels (36)",
+  "gateChannelPicker_search": "Search gates or channels...",
+
+  "leaderboard_weekly": "Weekly",
+  "leaderboard_monthly": "Monthly",
+  "leaderboard_allTime": "All Time"
 }
