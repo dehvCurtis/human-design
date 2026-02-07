@@ -98,6 +98,56 @@ class ProfilesQuestionGenerator extends QuestionGenerator {
           'Line 3, the Martyr, learns through experimentation and making mistakes. Their life path involves trying things, failing, adapting, and sharing what they learned.',
     ));
 
+    // Additional beginner questions
+    questions.add(createMultipleChoice(
+      category: QuizCategory.profiles,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'What does the first number in a profile (e.g., the "1" in 1/3) represent?',
+      correctAnswer: 'The conscious personality line',
+      wrongAnswers: ['The unconscious design line', 'Your age', 'Your type'],
+      explanation:
+          'The first number in a profile represents the conscious line - the part of your profile you are aware of and identify with. This comes from your personality (black) calculation.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.profiles,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Which line is known as the natural born teacher who attracts students?',
+      correctAnswer: 'Line 4 - The Opportunist',
+      wrongAnswers: ['Line 1 - The Investigator', 'Line 2 - The Hermit', 'Line 6 - The Role Model'],
+      explanation:
+          'Line 4, the Opportunist, builds influence through their network of relationships. They are natural networkers and teachers who attract opportunities through who they know.',
+    ));
+
+    questions.add(createTrueFalse(
+      category: QuizCategory.profiles,
+      difficulty: QuizDifficulty.beginner,
+      statement: 'Line 2 (The Hermit) loves being called out by others and enjoys being in the spotlight.',
+      isTrue: false,
+      explanation:
+          'Line 2, the Hermit, prefers solitude and being left alone. While they have natural talents, they are often unaware of them and can feel uncomfortable when called out.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.profiles,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Line 6 goes through three distinct life phases. What is the final phase called?',
+      correctAnswer: 'Role Model phase (after age 50)',
+      wrongAnswers: ['Hermit phase', 'Investigator phase', 'Martyr phase'],
+      explanation:
+          'Line 6 (Role Model) goes through: 1) Trial and error phase (0-30), 2) Observer phase (30-50), and 3) Role Model phase (after 50) where they embody wisdom and become an example for others.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.profiles,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Which line is associated with projection fields and being seen as a savior or problem-solver?',
+      correctAnswer: 'Line 5 - The Heretic',
+      wrongAnswers: ['Line 1 - The Investigator', 'Line 3 - The Martyr', 'Line 4 - The Opportunist'],
+      explanation:
+          'Line 5, the Heretic, carries a projection field where others project their expectations onto them. They are universalizers who can see practical solutions for the collective.',
+    ));
+
     return questions;
   }
 

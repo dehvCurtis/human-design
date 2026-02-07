@@ -2815,4 +2815,371 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get thought_commentPlaceholder => 'Add a comment...';
+
+  @override
+  String get messages_title => 'Messages';
+
+  @override
+  String get messages_conversation => 'Conversation';
+
+  @override
+  String get messages_loading => 'Loading...';
+
+  @override
+  String get messages_muteNotifications => 'Mute Notifications';
+
+  @override
+  String get messages_notificationsMuted => 'Notifications muted';
+
+  @override
+  String get messages_blockUser => 'Block User';
+
+  @override
+  String get messages_blockUserConfirm =>
+      'Are you sure you want to block this user? You will no longer receive messages from them.';
+
+  @override
+  String get messages_userBlocked => 'User blocked';
+
+  @override
+  String get messages_block => 'Block';
+
+  @override
+  String get messages_deleteConversation => 'Delete Conversation';
+
+  @override
+  String get messages_deleteConversationConfirm =>
+      'Are you sure you want to delete this conversation? This action cannot be undone.';
+
+  @override
+  String get messages_conversationDeleted => 'Conversation deleted';
+
+  @override
+  String get messages_startConversation => 'Start the conversation!';
+
+  @override
+  String get profile_takePhoto => 'Take Photo';
+
+  @override
+  String get profile_chooseFromGallery => 'Choose from Gallery';
+
+  @override
+  String get profile_avatarUpdated => 'Avatar updated successfully';
+
+  @override
+  String get profile_profileUpdated => 'Profile updated successfully';
+
+  @override
+  String get profile_noProfileFound => 'No profile found';
+
+  @override
+  String get discovery_title => 'Discover';
+
+  @override
+  String get discovery_searchUsers => 'Search users...';
+
+  @override
+  String get discovery_discoverTab => 'Discover';
+
+  @override
+  String get discovery_followingTab => 'Following';
+
+  @override
+  String get discovery_followersTab => 'Followers';
+
+  @override
+  String get discovery_noUsersFound => 'No users found';
+
+  @override
+  String get discovery_tryAdjustingFilters => 'Try adjusting your filters';
+
+  @override
+  String get discovery_notFollowingAnyone => 'Not following anyone';
+
+  @override
+  String get discovery_discoverPeople => 'Discover people to follow';
+
+  @override
+  String get discovery_noFollowersYet => 'No followers yet';
+
+  @override
+  String get discovery_shareInsights => 'Share your insights to gain followers';
+
+  @override
+  String get discovery_clearAll => 'Clear all';
+
+  @override
+  String chart_gate(int number) {
+    return 'Gate $number';
+  }
+
+  @override
+  String chart_channel(String id) {
+    return 'Channel $id';
+  }
+
+  @override
+  String get chart_center => 'Center';
+
+  @override
+  String get chart_keynote => 'Keynote';
+
+  @override
+  String get chart_element => 'Element';
+
+  @override
+  String get chart_location => 'Location';
+
+  @override
+  String get chart_hdCenters => 'HD Centers';
+
+  @override
+  String get reaction_comment => 'Comment';
+
+  @override
+  String get reaction_react => 'React';
+
+  @override
+  String get reaction_standard => 'Standard';
+
+  @override
+  String get reaction_humanDesign => 'Human Design';
+
+  @override
+  String get share_shareChart => 'Share Chart';
+
+  @override
+  String get share_createShareLink => 'Create Share Link';
+
+  @override
+  String get share_shareViaUrl => 'Share via URL';
+
+  @override
+  String get share_exportAsPng => 'Export as PNG';
+
+  @override
+  String get share_fullReport => 'Full report';
+
+  @override
+  String get share_linkExpiration => 'Link Expiration';
+
+  @override
+  String get share_neverExpires => 'Never expires';
+
+  @override
+  String get share_oneHour => '1 hour';
+
+  @override
+  String get share_twentyFourHours => '24 hours';
+
+  @override
+  String get share_sevenDays => '7 days';
+
+  @override
+  String get share_thirtyDays => '30 days';
+
+  @override
+  String get share_creating => 'Creating...';
+
+  @override
+  String get share_signInToShare => 'Sign in to share your chart';
+
+  @override
+  String get share_createShareableLinks =>
+      'Create shareable links to your Human Design chart';
+
+  @override
+  String get share_linkImage => 'Image';
+
+  @override
+  String get share_pdf => 'PDF';
+
+  @override
+  String get post_share => 'Share';
+
+  @override
+  String get post_edit => 'Edit';
+
+  @override
+  String get post_report => 'Report';
+
+  @override
+  String get mentorship_title => 'Mentorship';
+
+  @override
+  String get mentorship_pendingRequests => 'Pending Requests';
+
+  @override
+  String get mentorship_availableMentors => 'Available Mentors';
+
+  @override
+  String get mentorship_noMentorsAvailable => 'No mentors available';
+
+  @override
+  String mentorship_requestMentorship(String name) {
+    return 'Request Mentorship from $name';
+  }
+
+  @override
+  String get mentorship_sendMessage =>
+      'Send a message explaining what you would like to learn:';
+
+  @override
+  String get mentorship_learnPrompt => 'I would like to learn more about...';
+
+  @override
+  String get mentorship_requestSent => 'Request sent!';
+
+  @override
+  String get mentorship_sendRequest => 'Send Request';
+
+  @override
+  String get mentorship_becomeAMentor => 'Become a Mentor';
+
+  @override
+  String get mentorship_shareKnowledge => 'Share your Human Design knowledge';
+
+  @override
+  String get story_cancel => 'Cancel';
+
+  @override
+  String get story_createStory => 'Create Story';
+
+  @override
+  String get story_share => 'Share';
+
+  @override
+  String get story_typeYourStory => 'Type your story...';
+
+  @override
+  String get story_background => 'Background';
+
+  @override
+  String get story_attachTransitGate => 'Attach Transit Gate (optional)';
+
+  @override
+  String get story_none => 'None';
+
+  @override
+  String story_gateNumber(int number) {
+    return 'Gate $number';
+  }
+
+  @override
+  String get story_whoCanSee => 'Who can see this?';
+
+  @override
+  String get story_followers => 'Followers';
+
+  @override
+  String get story_everyone => 'Everyone';
+
+  @override
+  String get challenges_title => 'Challenges';
+
+  @override
+  String get challenges_daily => 'Daily';
+
+  @override
+  String get challenges_weekly => 'Weekly';
+
+  @override
+  String get challenges_monthly => 'Monthly';
+
+  @override
+  String get challenges_noDailyChallenges => 'No daily challenges available';
+
+  @override
+  String get challenges_noWeeklyChallenges => 'No weekly challenges available';
+
+  @override
+  String get challenges_noMonthlyChallenges =>
+      'No monthly challenges available';
+
+  @override
+  String get challenges_errorLoading => 'Error loading challenges';
+
+  @override
+  String challenges_claimedPoints(int points) {
+    return 'Claimed $points points!';
+  }
+
+  @override
+  String get challenges_totalPoints => 'Total Points';
+
+  @override
+  String get challenges_level => 'Level';
+
+  @override
+  String get learning_all => 'All';
+
+  @override
+  String get learning_types => 'Types';
+
+  @override
+  String get learning_gates => 'Gates';
+
+  @override
+  String get learning_centers => 'Centers';
+
+  @override
+  String get learning_liveSessions => 'Live Sessions';
+
+  @override
+  String get quiz_noActiveSession => 'No active quiz session';
+
+  @override
+  String get quiz_noQuestionsAvailable => 'No questions available';
+
+  @override
+  String get quiz_ok => 'OK';
+
+  @override
+  String get liveSessions_title => 'Live Sessions';
+
+  @override
+  String get liveSessions_upcoming => 'Upcoming';
+
+  @override
+  String get liveSessions_mySessions => 'My Sessions';
+
+  @override
+  String get liveSessions_errorLoading => 'Error loading sessions';
+
+  @override
+  String get liveSessions_registeredSuccessfully => 'Registered successfully!';
+
+  @override
+  String get liveSessions_cancelRegistration => 'Cancel Registration';
+
+  @override
+  String get liveSessions_cancelRegistrationConfirm =>
+      'Are you sure you want to cancel your registration?';
+
+  @override
+  String get liveSessions_no => 'No';
+
+  @override
+  String get liveSessions_yesCancel => 'Yes, Cancel';
+
+  @override
+  String get liveSessions_registrationCancelled => 'Registration cancelled';
+
+  @override
+  String get gateChannelPicker_gates => 'Gates (64)';
+
+  @override
+  String get gateChannelPicker_channels => 'Channels (36)';
+
+  @override
+  String get gateChannelPicker_search => 'Search gates or channels...';
+
+  @override
+  String get leaderboard_weekly => 'Weekly';
+
+  @override
+  String get leaderboard_monthly => 'Monthly';
+
+  @override
+  String get leaderboard_allTime => 'All Time';
 }

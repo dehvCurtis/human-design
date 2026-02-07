@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.10] - 2026-02-06
+
+### Added
+
+#### RevenueCat Integration
+- **In-App Purchases** - Full RevenueCat SDK integration for subscriptions
+  - Platform-specific initialization (iOS/macOS, Android)
+  - Automatic user linking with Supabase auth
+  - Monthly and yearly subscription packages
+  - Free trial detection and display
+  - Purchase flow with error handling
+  - Restore purchases functionality
+  - Supabase `is_premium` sync as fallback
+
+### Technical Details
+
+Files modified:
+- `main.dart` - Added `_initializeRevenueCat()` for SDK initialization on app startup
+- `subscription_repository.dart` - Complete rewrite from mock to RevenueCat SDK
+  - `getSubscription()` - Fetches entitlements from RevenueCat
+  - `getOffers()` - Fetches packages with pricing from RevenueCat offerings
+  - `purchaseSubscription()` - Uses `PurchaseParams.package()` API
+  - `restorePurchases()` - Restores previous purchases
+  - `loginToRevenueCat()` / `logoutFromRevenueCat()` - Auth sync helpers
+
+SDK version: purchases_flutter ^9.10.x
+
+---
+
 ## [0.2.9] - 2026-02-05
 
 ### Changed

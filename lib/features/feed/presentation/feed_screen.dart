@@ -98,13 +98,14 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
   }
 
   void _showCreatePostSheet(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final currentUser = ref.read(supabaseClientProvider).auth.currentUser;
     if (currentUser == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Please sign in to create posts'),
+          content: Text(l10n.auth_signInRequired),
           action: SnackBarAction(
-            label: 'Sign In',
+            label: l10n.auth_signIn,
             onPressed: () => context.go(AppRoutes.signIn),
           ),
         ),
@@ -239,7 +240,7 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
       body: postAsync.when(
         data: (post) {
           if (post == null) {
-            return const Center(child: Text('Post not found'));
+            return Center(child: Text(l10n.common_error));
           }
 
           final isOwnPost = post.userId == currentUserId;
@@ -800,6 +801,7 @@ class _ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -808,14 +810,14 @@ class _ErrorView extends StatelessWidget {
           children: [
             const Icon(Icons.error_outline, size: 48, color: Colors.red),
             const SizedBox(height: 16),
-            Text('Error loading feed', style: Theme.of(context).textTheme.titleMedium),
+            Text(l10n.common_error, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
             Text(error, textAlign: TextAlign.center),
             const SizedBox(height: 16),
             FilledButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(l10n.common_retry),
             ),
           ],
         ),

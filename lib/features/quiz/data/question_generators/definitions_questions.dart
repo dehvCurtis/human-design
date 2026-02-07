@@ -75,6 +75,55 @@ class DefinitionsQuestionGenerator extends QuestionGenerator {
           'Reflectors are the only type that always has No Definition. They have all 9 centers undefined/open, making them unique in how they experience and process energy.',
     ));
 
+    // Additional beginner questions
+    questions.add(createMultipleChoice(
+      category: QuizCategory.definitions,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'What does Split Definition mean for someone\'s energy?',
+      correctAnswer: 'They need others to bridge their defined areas',
+      wrongAnswers: ['They have more energy than others', 'They have no defined centers', 'They are fully self-contained'],
+      explanation:
+          'Split Definition means there are two or more separate areas of definition in the chart with a gap between them. These individuals often seek out others whose gates bridge their split.',
+    ));
+
+    questions.add(createTrueFalse(
+      category: QuizCategory.definitions,
+      difficulty: QuizDifficulty.beginner,
+      statement: 'People with Single Definition are completely self-contained and don\'t need others energetically.',
+      isTrue: true,
+      explanation:
+          'Single Definition means all defined centers are connected. While they still need relationships, energetically they are self-contained and don\'t have an internal pull to find bridging energy.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.definitions,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Triple Split Definition has how many separate areas of definition?',
+      correctAnswer: '3 separate defined areas',
+      wrongAnswers: ['1 connected area', '2 separate areas', '4 or more separate areas'],
+      explanation:
+          'Triple Split Definition means there are three separate islands of defined centers with gaps between them. This creates a more complex process for integrating energy.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.definitions,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Which definition type is the rarest?',
+      correctAnswer: 'Quadruple Split',
+      wrongAnswers: ['Single Definition', 'Split Definition', 'Triple Split'],
+      explanation:
+          'Quadruple Split is the rarest definition type, with four separate areas of definition in the chart. These individuals have complex energy dynamics and benefit from group environments.',
+    ));
+
+    questions.add(createTrueFalse(
+      category: QuizCategory.definitions,
+      difficulty: QuizDifficulty.beginner,
+      statement: 'Definition type tells you how quickly you can process information and make decisions.',
+      isTrue: true,
+      explanation:
+          'Definition type does affect processing speed. Single Definition processes information quickly, while Split and Triple Split may need more time as they have to bridge different parts of their design.',
+    ));
+
     return questions;
   }
 

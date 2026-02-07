@@ -1208,5 +1208,162 @@
   "planetary_personality": "Особистість",
   "planetary_design": "Дизайн",
   "planetary_consciousBirth": "Свідоме · Народження",
-  "planetary_unconsciousPrenatal": "Несвідоме · 88° Пренатально"
+  "planetary_unconsciousPrenatal": "Несвідоме · 88° Пренатально",
+
+  "messages_title": "Повідомлення",
+  "messages_conversation": "Бесіда",
+  "messages_loading": "Завантаження...",
+  "messages_muteNotifications": "Вимкнути сповіщення",
+  "messages_notificationsMuted": "Сповіщення вимкнено",
+  "messages_blockUser": "Заблокувати",
+  "messages_blockUserConfirm": "Ви впевнені, що хочете заблокувати цього користувача? Ви більше не отримуватимете від нього повідомлень.",
+  "messages_userBlocked": "Користувача заблоковано",
+  "messages_block": "Заблокувати",
+  "messages_deleteConversation": "Видалити бесіду",
+  "messages_deleteConversationConfirm": "Ви впевнені, що хочете видалити цю бесіду? Цю дію не можна скасувати.",
+  "messages_conversationDeleted": "Бесіду видалено",
+  "messages_startConversation": "Почніть бесіду!",
+
+  "profile_takePhoto": "Зробити фото",
+  "profile_chooseFromGallery": "Обрати з галереї",
+  "profile_avatarUpdated": "Аватар успішно оновлено",
+  "profile_profileUpdated": "Профіль успішно оновлено",
+  "profile_noProfileFound": "Профіль не знайдено",
+
+  "discovery_title": "Пошук",
+  "discovery_searchUsers": "Пошук користувачів...",
+  "discovery_discoverTab": "Пошук",
+  "discovery_followingTab": "Підписки",
+  "discovery_followersTab": "Підписники",
+  "discovery_noUsersFound": "Користувачів не знайдено",
+  "discovery_tryAdjustingFilters": "Спробуйте змінити фільтри",
+  "discovery_notFollowingAnyone": "Не підписаний ні на кого",
+  "discovery_discoverPeople": "Знайдіть людей для підписки",
+  "discovery_noFollowersYet": "Поки немає підписників",
+  "discovery_shareInsights": "Діліться інсайтами, щоб отримати підписників",
+  "discovery_clearAll": "Очистити все",
+
+  "chart_gate": "Ворота {number}",
+  "@chart_gate": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "chart_channel": "Канал {id}",
+  "@chart_channel": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "chart_center": "Центр",
+  "chart_keynote": "Ключова нота",
+  "chart_element": "Елемент",
+  "chart_location": "Розташування",
+  "chart_hdCenters": "Центри HD",
+
+  "reaction_comment": "Коментар",
+  "reaction_react": "Реакція",
+  "reaction_standard": "Стандартні",
+  "reaction_humanDesign": "Human Design",
+
+  "share_shareChart": "Поділитися картою",
+  "share_createShareLink": "Створити посилання",
+  "share_shareViaUrl": "Поділитися посиланням",
+  "share_exportAsPng": "Експорт у PNG",
+  "share_fullReport": "Повний звіт",
+  "share_linkExpiration": "Термін дії посилання",
+  "share_neverExpires": "Безстроково",
+  "share_oneHour": "1 година",
+  "share_twentyFourHours": "24 години",
+  "share_sevenDays": "7 днів",
+  "share_thirtyDays": "30 днів",
+  "share_creating": "Створюємо...",
+  "share_signInToShare": "Увійдіть, щоб поділитися картою",
+  "share_createShareableLinks": "Створюйте посилання на вашу карту Дизайну Людини",
+  "share_linkImage": "Зображення",
+  "share_pdf": "PDF",
+
+  "post_share": "Поділитися",
+  "post_edit": "Редагувати",
+  "post_report": "Поскаржитися",
+
+  "mentorship_title": "Наставництво",
+  "mentorship_pendingRequests": "Очікувані запити",
+  "mentorship_availableMentors": "Доступні наставники",
+  "mentorship_noMentorsAvailable": "Немає доступних наставників",
+  "mentorship_requestMentorship": "Запросити наставництво у {name}",
+  "@mentorship_requestMentorship": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "mentorship_sendMessage": "Напишіть, чому хочете навчитися:",
+  "mentorship_learnPrompt": "Я хотів би дізнатися більше про...",
+  "mentorship_requestSent": "Запит надіслано!",
+  "mentorship_sendRequest": "Надіслати запит",
+  "mentorship_becomeAMentor": "Стати наставником",
+  "mentorship_shareKnowledge": "Діліться знаннями про Дизайн Людини",
+
+  "story_cancel": "Скасувати",
+  "story_createStory": "Створити історію",
+  "story_share": "Поділитися",
+  "story_typeYourStory": "Введіть вашу історію...",
+  "story_background": "Фон",
+  "story_attachTransitGate": "Прикріпити транзитні ворота (необов'язково)",
+  "story_none": "Немає",
+  "story_gateNumber": "Ворота {number}",
+  "@story_gateNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "story_whoCanSee": "Хто може бачити?",
+  "story_followers": "Підписники",
+  "story_everyone": "Усі",
+
+  "challenges_title": "Завдання",
+  "challenges_daily": "Денні",
+  "challenges_weekly": "Тижневі",
+  "challenges_monthly": "Місячні",
+  "challenges_noDailyChallenges": "Немає денних завдань",
+  "challenges_noWeeklyChallenges": "Немає тижневих завдань",
+  "challenges_noMonthlyChallenges": "Немає місячних завдань",
+  "challenges_errorLoading": "Помилка завантаження завдань",
+  "challenges_claimedPoints": "Отримано {points} очків!",
+  "@challenges_claimedPoints": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "challenges_totalPoints": "Всього очків",
+  "challenges_level": "Рівень",
+
+  "learning_all": "Усі",
+  "learning_types": "Типи",
+  "learning_gates": "Ворота",
+  "learning_centers": "Центри",
+  "learning_liveSessions": "Прямі ефіри",
+
+  "quiz_noActiveSession": "Немає активної сесії тесту",
+  "quiz_noQuestionsAvailable": "Немає доступних питань",
+  "quiz_ok": "ОК",
+
+  "liveSessions_title": "Прямі ефіри",
+  "liveSessions_upcoming": "Майбутні",
+  "liveSessions_mySessions": "Мої сесії",
+  "liveSessions_errorLoading": "Помилка завантаження сесій",
+  "liveSessions_registeredSuccessfully": "Реєстрація успішна!",
+  "liveSessions_cancelRegistration": "Скасувати реєстрацію",
+  "liveSessions_cancelRegistrationConfirm": "Ви впевнені, що хочете скасувати реєстрацію?",
+  "liveSessions_no": "Ні",
+  "liveSessions_yesCancel": "Так, скасувати",
+  "liveSessions_registrationCancelled": "Реєстрацію скасовано",
+
+  "gateChannelPicker_gates": "Ворота (64)",
+  "gateChannelPicker_channels": "Канали (36)",
+  "gateChannelPicker_search": "Пошук воріт або каналів...",
+
+  "leaderboard_weekly": "Тиждень",
+  "leaderboard_monthly": "Місяць",
+  "leaderboard_allTime": "Весь час"
 }

@@ -175,7 +175,7 @@ flutter build apk
 - ✅ Premium screen with paywall UI
 - ✅ Subscription providers with purchase/restore
 - ✅ Share limit enforcement for free users
-- ⚠️ RevenueCat integration (scaffolded, needs App Store/Play Store setup)
+- ✅ RevenueCat SDK integration (requires App Store/Play Store product setup)
 
 ### Push Notifications ✅
 - ✅ Firebase Cloud Messaging integration

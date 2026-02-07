@@ -2827,4 +2827,371 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get thought_commentPlaceholder => 'Додати коментар...';
+
+  @override
+  String get messages_title => 'Повідомлення';
+
+  @override
+  String get messages_conversation => 'Бесіда';
+
+  @override
+  String get messages_loading => 'Завантаження...';
+
+  @override
+  String get messages_muteNotifications => 'Вимкнути сповіщення';
+
+  @override
+  String get messages_notificationsMuted => 'Сповіщення вимкнено';
+
+  @override
+  String get messages_blockUser => 'Заблокувати';
+
+  @override
+  String get messages_blockUserConfirm =>
+      'Ви впевнені, що хочете заблокувати цього користувача? Ви більше не отримуватимете від нього повідомлень.';
+
+  @override
+  String get messages_userBlocked => 'Користувача заблоковано';
+
+  @override
+  String get messages_block => 'Заблокувати';
+
+  @override
+  String get messages_deleteConversation => 'Видалити бесіду';
+
+  @override
+  String get messages_deleteConversationConfirm =>
+      'Ви впевнені, що хочете видалити цю бесіду? Цю дію не можна скасувати.';
+
+  @override
+  String get messages_conversationDeleted => 'Бесіду видалено';
+
+  @override
+  String get messages_startConversation => 'Почніть бесіду!';
+
+  @override
+  String get profile_takePhoto => 'Зробити фото';
+
+  @override
+  String get profile_chooseFromGallery => 'Обрати з галереї';
+
+  @override
+  String get profile_avatarUpdated => 'Аватар успішно оновлено';
+
+  @override
+  String get profile_profileUpdated => 'Профіль успішно оновлено';
+
+  @override
+  String get profile_noProfileFound => 'Профіль не знайдено';
+
+  @override
+  String get discovery_title => 'Пошук';
+
+  @override
+  String get discovery_searchUsers => 'Пошук користувачів...';
+
+  @override
+  String get discovery_discoverTab => 'Пошук';
+
+  @override
+  String get discovery_followingTab => 'Підписки';
+
+  @override
+  String get discovery_followersTab => 'Підписники';
+
+  @override
+  String get discovery_noUsersFound => 'Користувачів не знайдено';
+
+  @override
+  String get discovery_tryAdjustingFilters => 'Спробуйте змінити фільтри';
+
+  @override
+  String get discovery_notFollowingAnyone => 'Не підписаний ні на кого';
+
+  @override
+  String get discovery_discoverPeople => 'Знайдіть людей для підписки';
+
+  @override
+  String get discovery_noFollowersYet => 'Поки немає підписників';
+
+  @override
+  String get discovery_shareInsights =>
+      'Діліться інсайтами, щоб отримати підписників';
+
+  @override
+  String get discovery_clearAll => 'Очистити все';
+
+  @override
+  String chart_gate(int number) {
+    return 'Ворота $number';
+  }
+
+  @override
+  String chart_channel(String id) {
+    return 'Канал $id';
+  }
+
+  @override
+  String get chart_center => 'Центр';
+
+  @override
+  String get chart_keynote => 'Ключова нота';
+
+  @override
+  String get chart_element => 'Елемент';
+
+  @override
+  String get chart_location => 'Розташування';
+
+  @override
+  String get chart_hdCenters => 'Центри HD';
+
+  @override
+  String get reaction_comment => 'Коментар';
+
+  @override
+  String get reaction_react => 'Реакція';
+
+  @override
+  String get reaction_standard => 'Стандартні';
+
+  @override
+  String get reaction_humanDesign => 'Human Design';
+
+  @override
+  String get share_shareChart => 'Поділитися картою';
+
+  @override
+  String get share_createShareLink => 'Створити посилання';
+
+  @override
+  String get share_shareViaUrl => 'Поділитися посиланням';
+
+  @override
+  String get share_exportAsPng => 'Експорт у PNG';
+
+  @override
+  String get share_fullReport => 'Повний звіт';
+
+  @override
+  String get share_linkExpiration => 'Термін дії посилання';
+
+  @override
+  String get share_neverExpires => 'Безстроково';
+
+  @override
+  String get share_oneHour => '1 година';
+
+  @override
+  String get share_twentyFourHours => '24 години';
+
+  @override
+  String get share_sevenDays => '7 днів';
+
+  @override
+  String get share_thirtyDays => '30 днів';
+
+  @override
+  String get share_creating => 'Створюємо...';
+
+  @override
+  String get share_signInToShare => 'Увійдіть, щоб поділитися картою';
+
+  @override
+  String get share_createShareableLinks =>
+      'Створюйте посилання на вашу карту Дизайну Людини';
+
+  @override
+  String get share_linkImage => 'Зображення';
+
+  @override
+  String get share_pdf => 'PDF';
+
+  @override
+  String get post_share => 'Поділитися';
+
+  @override
+  String get post_edit => 'Редагувати';
+
+  @override
+  String get post_report => 'Поскаржитися';
+
+  @override
+  String get mentorship_title => 'Наставництво';
+
+  @override
+  String get mentorship_pendingRequests => 'Очікувані запити';
+
+  @override
+  String get mentorship_availableMentors => 'Доступні наставники';
+
+  @override
+  String get mentorship_noMentorsAvailable => 'Немає доступних наставників';
+
+  @override
+  String mentorship_requestMentorship(String name) {
+    return 'Запросити наставництво у $name';
+  }
+
+  @override
+  String get mentorship_sendMessage => 'Напишіть, чому хочете навчитися:';
+
+  @override
+  String get mentorship_learnPrompt => 'Я хотів би дізнатися більше про...';
+
+  @override
+  String get mentorship_requestSent => 'Запит надіслано!';
+
+  @override
+  String get mentorship_sendRequest => 'Надіслати запит';
+
+  @override
+  String get mentorship_becomeAMentor => 'Стати наставником';
+
+  @override
+  String get mentorship_shareKnowledge => 'Діліться знаннями про Дизайн Людини';
+
+  @override
+  String get story_cancel => 'Скасувати';
+
+  @override
+  String get story_createStory => 'Створити історію';
+
+  @override
+  String get story_share => 'Поділитися';
+
+  @override
+  String get story_typeYourStory => 'Введіть вашу історію...';
+
+  @override
+  String get story_background => 'Фон';
+
+  @override
+  String get story_attachTransitGate =>
+      'Прикріпити транзитні ворота (необов\'язково)';
+
+  @override
+  String get story_none => 'Немає';
+
+  @override
+  String story_gateNumber(int number) {
+    return 'Ворота $number';
+  }
+
+  @override
+  String get story_whoCanSee => 'Хто може бачити?';
+
+  @override
+  String get story_followers => 'Підписники';
+
+  @override
+  String get story_everyone => 'Усі';
+
+  @override
+  String get challenges_title => 'Завдання';
+
+  @override
+  String get challenges_daily => 'Денні';
+
+  @override
+  String get challenges_weekly => 'Тижневі';
+
+  @override
+  String get challenges_monthly => 'Місячні';
+
+  @override
+  String get challenges_noDailyChallenges => 'Немає денних завдань';
+
+  @override
+  String get challenges_noWeeklyChallenges => 'Немає тижневих завдань';
+
+  @override
+  String get challenges_noMonthlyChallenges => 'Немає місячних завдань';
+
+  @override
+  String get challenges_errorLoading => 'Помилка завантаження завдань';
+
+  @override
+  String challenges_claimedPoints(int points) {
+    return 'Отримано $points очків!';
+  }
+
+  @override
+  String get challenges_totalPoints => 'Всього очків';
+
+  @override
+  String get challenges_level => 'Рівень';
+
+  @override
+  String get learning_all => 'Усі';
+
+  @override
+  String get learning_types => 'Типи';
+
+  @override
+  String get learning_gates => 'Ворота';
+
+  @override
+  String get learning_centers => 'Центри';
+
+  @override
+  String get learning_liveSessions => 'Прямі ефіри';
+
+  @override
+  String get quiz_noActiveSession => 'Немає активної сесії тесту';
+
+  @override
+  String get quiz_noQuestionsAvailable => 'Немає доступних питань';
+
+  @override
+  String get quiz_ok => 'ОК';
+
+  @override
+  String get liveSessions_title => 'Прямі ефіри';
+
+  @override
+  String get liveSessions_upcoming => 'Майбутні';
+
+  @override
+  String get liveSessions_mySessions => 'Мої сесії';
+
+  @override
+  String get liveSessions_errorLoading => 'Помилка завантаження сесій';
+
+  @override
+  String get liveSessions_registeredSuccessfully => 'Реєстрація успішна!';
+
+  @override
+  String get liveSessions_cancelRegistration => 'Скасувати реєстрацію';
+
+  @override
+  String get liveSessions_cancelRegistrationConfirm =>
+      'Ви впевнені, що хочете скасувати реєстрацію?';
+
+  @override
+  String get liveSessions_no => 'Ні';
+
+  @override
+  String get liveSessions_yesCancel => 'Так, скасувати';
+
+  @override
+  String get liveSessions_registrationCancelled => 'Реєстрацію скасовано';
+
+  @override
+  String get gateChannelPicker_gates => 'Ворота (64)';
+
+  @override
+  String get gateChannelPicker_channels => 'Канали (36)';
+
+  @override
+  String get gateChannelPicker_search => 'Пошук воріт або каналів...';
+
+  @override
+  String get leaderboard_weekly => 'Тиждень';
+
+  @override
+  String get leaderboard_monthly => 'Місяць';
+
+  @override
+  String get leaderboard_allTime => 'Весь час';
 }

@@ -181,6 +181,46 @@ class AuthoritiesQuestionGenerator extends QuestionGenerator {
           'There are 7 different authorities in Human Design. Your authority depends on which centers are defined in your chart and follows a specific hierarchy (Emotional > Sacral > Splenic > Ego > Self > Environmental > Lunar).',
     ));
 
+    // Additional beginner questions
+    questions.add(createMultipleChoice(
+      category: QuizCategory.authorities,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'What should someone with Emotional Authority do before making a decision?',
+      correctAnswer: 'Wait for emotional clarity over time',
+      wrongAnswers: ['Decide immediately', 'Ask others for advice', 'Follow their first impulse'],
+      explanation:
+          'People with Emotional Authority need to ride their emotional wave and wait until they feel clear about a decision. There is no truth in the now for them - clarity comes over time.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.authorities,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Splenic Authority provides guidance through what means?',
+      correctAnswer: 'Instant intuitive hits that come once and don\'t repeat',
+      wrongAnswers: ['Emotional feelings', 'Logical analysis', 'Physical exhaustion'],
+      explanation:
+          'Splenic Authority provides instant, in-the-moment intuitive guidance. The Spleen speaks once, very quietly, and won\'t repeat itself. It\'s about survival and well-being.',
+    ));
+
+    questions.add(createTrueFalse(
+      category: QuizCategory.authorities,
+      difficulty: QuizDifficulty.beginner,
+      statement: 'Mental/Environmental Authority means you should make decisions based on logic.',
+      isTrue: false,
+      explanation:
+          'Mental/Environmental Authority (also called Outer Authority) means the mind is not the decision-maker. These individuals need to talk things through with others and use their environment as a sounding board.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.authorities,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Self-Projected Authority uses which center for guidance?',
+      correctAnswer: 'G Center (Identity)',
+      wrongAnswers: ['Sacral Center', 'Head Center', 'Root Center'],
+      explanation:
+          'Self-Projected Authority relies on the G Center - hearing oneself speak about identity and direction. These individuals need to speak their truth out loud to find clarity.',
+    ));
+
     return questions;
   }
 

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/providers/supabase_provider.dart';
 import '../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
 import '../../home/domain/home_providers.dart';
@@ -35,6 +36,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final currentUser = ref.watch(supabaseClientProvider).auth.currentUser;
     final sharingState = ref.watch(sharingNotifierProvider);
     final myLinksAsync = ref.watch(myShareLinksProvider);
@@ -44,7 +46,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     if (currentUser == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Share Chart'),
+          title: Text(l10n.share_shareChart),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => context.pop(),
@@ -63,13 +65,13 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  'Sign in to share your chart',
+                  l10n.share_signInToShare,
                   style: theme.textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Create shareable links to your Human Design chart',
+                  l10n.share_createShareableLinks,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),
@@ -79,7 +81,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                 FilledButton.icon(
                   onPressed: () => context.go(AppRoutes.signIn),
                   icon: const Icon(Icons.login),
-                  label: const Text('Sign In'),
+                  label: Text(l10n.auth_signIn),
                 ),
               ],
             ),
@@ -90,7 +92,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Share Chart'),
+        title: Text(l10n.share_shareChart),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
@@ -106,7 +108,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Create Share Link',
+                    l10n.share_createShareLink,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -119,8 +121,8 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                       Expanded(
                         child: _ShareOptionCard(
                           icon: Icons.link,
-                          label: 'Link',
-                          description: 'Share via URL',
+                          label: l10n.share_link,
+                          description: l10n.share_shareViaUrl,
                           isSelected: true,
                           onTap: () {},
                         ),
@@ -129,8 +131,8 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                       Expanded(
                         child: _ShareOptionCard(
                           icon: Icons.image,
-                          label: 'Image',
-                          description: 'Export as PNG',
+                          label: l10n.share_linkImage,
+                          description: l10n.share_exportAsPng,
                           isSelected: false,
                           isLoading: _isExporting,
                           onTap: _isExporting ? () {} : () => _exportAsImage(context),
@@ -140,8 +142,8 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                       Expanded(
                         child: _ShareOptionCard(
                           icon: Icons.picture_as_pdf,
-                          label: 'PDF',
-                          description: 'Full report',
+                          label: l10n.share_pdf,
+                          description: l10n.share_fullReport,
                           isSelected: false,
                           isLoading: _isExporting,
                           onTap: _isExporting ? () {} : () => _exportAsPdf(context),
@@ -154,7 +156,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
 
                   // Expiry selector
                   Text(
-                    'Link Expiration',
+                    l10n.share_linkExpiration,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -193,8 +195,8 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                           : const Icon(Icons.link),
                       label: Text(
                         sharingState.isCreatingLink
-                            ? 'Creating...'
-                            : 'Create Share Link',
+                            ? l10n.share_creating
+                            : l10n.share_createShareLink,
                       ),
                     ),
                   ),
@@ -220,7 +222,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Link created!',
+                                  l10n.share_linkCopied,
                                   style: theme.textTheme.titleSmall?.copyWith(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -467,29 +469,29 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
   }
 
   void _copyLink(BuildContext context, String url) {
+    final l10n = AppLocalizations.of(context)!;
     Clipboard.setData(ClipboardData(text: url));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Link copied to clipboard!')),
+      SnackBar(content: Text(l10n.share_linkCopied)),
     );
   }
 
   Future<void> _revokeLink(BuildContext context, String shareId) async {
+    final l10n = AppLocalizations.of(context)!;
     final errorColor = Theme.of(context).colorScheme.error;
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Revoke Link'),
-        content: const Text(
-          'This will permanently disable this share link. Anyone with the link will no longer be able to view your chart.',
-        ),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.share_revokeTitle),
+        content: Text(l10n.share_revokeMessage),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.common_cancel),
           ),
           FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Revoke'),
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.share_revoke),
           ),
         ],
       ),
@@ -501,7 +503,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
       await ref.read(sharingNotifierProvider.notifier).revokeShareLink(shareId);
       if (mounted && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Link revoked')),
+          SnackBar(content: Text(l10n.share_linkRevoked)),
         );
       }
     } catch (e) {

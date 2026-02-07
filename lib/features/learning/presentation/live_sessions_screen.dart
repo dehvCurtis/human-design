@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -32,9 +33,10 @@ class _LiveSessionsScreenState extends ConsumerState<LiveSessionsScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Live Sessions'),
+        title: Text(l10n.liveSessions_title),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -47,9 +49,9 @@ class _LiveSessionsScreenState extends ConsumerState<LiveSessionsScreen>
         ),
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
-            Tab(text: 'Upcoming'),
-            Tab(text: 'My Sessions'),
+          tabs: [
+            Tab(text: l10n.liveSessions_upcoming),
+            Tab(text: l10n.liveSessions_mySessions),
           ],
         ),
       ),
@@ -70,6 +72,7 @@ class _UpcomingSessionsTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final sessionsAsync = ref.watch(upcomingSessionsProvider);
 
     return RefreshIndicator(
@@ -90,14 +93,14 @@ class _UpcomingSessionsTab extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No upcoming sessions',
+                    l10n.quiz_noQuizzes,
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.outline,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Check back later for new sessions',
+                    l10n.quiz_checkBackLater,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.outline,
                     ),
@@ -125,11 +128,11 @@ class _UpcomingSessionsTab extends ConsumerWidget {
             children: [
               Icon(Icons.error_outline, size: 48, color: theme.colorScheme.error),
               const SizedBox(height: 16),
-              Text('Error loading sessions'),
+              Text(l10n.liveSessions_errorLoading),
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () => ref.invalidate(upcomingSessionsProvider),
-                child: const Text('Retry'),
+                child: Text(l10n.common_retry),
               ),
             ],
           ),
@@ -143,11 +146,12 @@ class _UpcomingSessionsTab extends ConsumerWidget {
     WidgetRef ref,
     LiveSession session,
   ) async {
+    final l10n = AppLocalizations.of(context)!;
     try {
       await ref.read(learningNotifierProvider.notifier).registerForSession(session.id);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Registered successfully!')),
+          SnackBar(content: Text(l10n.liveSessions_registeredSuccessfully)),
         );
       }
     } catch (e) {
@@ -169,6 +173,7 @@ class _MySessionsTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final sessionsAsync = ref.watch(myRegisteredSessionsProvider);
 
     return RefreshIndicator(
@@ -189,14 +194,14 @@ class _MySessionsTab extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'No registered sessions',
+                    l10n.quiz_noQuizzes,
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.outline,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Register for sessions in Upcoming tab',
+                    l10n.quiz_checkBackLater,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.outline,
                     ),
@@ -225,11 +230,11 @@ class _MySessionsTab extends ConsumerWidget {
             children: [
               Icon(Icons.error_outline, size: 48, color: theme.colorScheme.error),
               const SizedBox(height: 16),
-              Text('Error loading sessions'),
+              Text(l10n.liveSessions_errorLoading),
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () => ref.invalidate(myRegisteredSessionsProvider),
-                child: const Text('Retry'),
+                child: Text(l10n.common_retry),
               ),
             ],
           ),
@@ -243,19 +248,20 @@ class _MySessionsTab extends ConsumerWidget {
     WidgetRef ref,
     LiveSession session,
   ) async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Cancel Registration'),
-        content: const Text('Are you sure you want to cancel your registration?'),
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.liveSessions_cancelRegistration),
+        content: Text(l10n.liveSessions_cancelRegistrationConfirm),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('No'),
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.liveSessions_no),
           ),
           FilledButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('Yes, Cancel'),
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.liveSessions_yesCancel),
           ),
         ],
       ),
@@ -267,7 +273,7 @@ class _MySessionsTab extends ConsumerWidget {
       await ref.read(learningNotifierProvider.notifier).cancelRegistration(session.id);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Registration cancelled')),
+          SnackBar(content: Text(l10n.liveSessions_registrationCancelled)),
         );
       }
     } catch (e) {

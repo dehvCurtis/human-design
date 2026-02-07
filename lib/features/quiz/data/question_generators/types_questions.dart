@@ -127,6 +127,36 @@ class TypesQuestionGenerator extends QuestionGenerator {
           'Manifestors make up approximately 8-9% of the population. Historically they were the rulers and leaders before the shift to Generators building the workforce.',
     ));
 
+    // Additional beginner questions
+    questions.add(createTrueFalse(
+      category: QuizCategory.types,
+      difficulty: QuizDifficulty.beginner,
+      statement: 'Generators have sustainable life force energy from their defined Sacral center.',
+      isTrue: true,
+      explanation:
+          'The Sacral center, when defined, provides Generators with sustainable life force energy. This is what allows them to work consistently and build things over time.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.types,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'What should a Manifestor do before taking action that affects others?',
+      correctAnswer: 'Inform those who will be impacted',
+      wrongAnswers: ['Wait for an invitation', 'Ask for permission', 'Respond to external stimuli'],
+      explanation:
+          'Manifestors should inform (not ask permission) those who will be affected by their actions. This reduces resistance and helps others feel included rather than caught off guard.',
+    ));
+
+    questions.add(createMultipleChoice(
+      category: QuizCategory.types,
+      difficulty: QuizDifficulty.beginner,
+      questionText: 'Which type is designed to guide and direct the energy of others?',
+      correctAnswer: 'Projector',
+      wrongAnswers: ['Generator', 'Manifestor', 'Reflector'],
+      explanation:
+          'Projectors are designed to guide and direct the energy of others. They have a penetrating aura that allows them to see deeply into systems and people.',
+    ));
+
     return questions;
   }
 

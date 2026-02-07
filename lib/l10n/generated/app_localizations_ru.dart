@@ -2825,4 +2825,372 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get thought_commentPlaceholder => 'Добавить комментарий...';
+
+  @override
+  String get messages_title => 'Сообщения';
+
+  @override
+  String get messages_conversation => 'Беседа';
+
+  @override
+  String get messages_loading => 'Загрузка...';
+
+  @override
+  String get messages_muteNotifications => 'Отключить уведомления';
+
+  @override
+  String get messages_notificationsMuted => 'Уведомления отключены';
+
+  @override
+  String get messages_blockUser => 'Заблокировать';
+
+  @override
+  String get messages_blockUserConfirm =>
+      'Вы уверены, что хотите заблокировать этого пользователя? Вы больше не будете получать от него сообщения.';
+
+  @override
+  String get messages_userBlocked => 'Пользователь заблокирован';
+
+  @override
+  String get messages_block => 'Заблокировать';
+
+  @override
+  String get messages_deleteConversation => 'Удалить беседу';
+
+  @override
+  String get messages_deleteConversationConfirm =>
+      'Вы уверены, что хотите удалить эту беседу? Это действие нельзя отменить.';
+
+  @override
+  String get messages_conversationDeleted => 'Беседа удалена';
+
+  @override
+  String get messages_startConversation => 'Начните беседу!';
+
+  @override
+  String get profile_takePhoto => 'Сделать фото';
+
+  @override
+  String get profile_chooseFromGallery => 'Выбрать из галереи';
+
+  @override
+  String get profile_avatarUpdated => 'Аватар успешно обновлён';
+
+  @override
+  String get profile_profileUpdated => 'Профиль успешно обновлён';
+
+  @override
+  String get profile_noProfileFound => 'Профиль не найден';
+
+  @override
+  String get discovery_title => 'Поиск';
+
+  @override
+  String get discovery_searchUsers => 'Поиск пользователей...';
+
+  @override
+  String get discovery_discoverTab => 'Поиск';
+
+  @override
+  String get discovery_followingTab => 'Подписки';
+
+  @override
+  String get discovery_followersTab => 'Подписчики';
+
+  @override
+  String get discovery_noUsersFound => 'Пользователи не найдены';
+
+  @override
+  String get discovery_tryAdjustingFilters => 'Попробуйте изменить фильтры';
+
+  @override
+  String get discovery_notFollowingAnyone => 'Не подписан ни на кого';
+
+  @override
+  String get discovery_discoverPeople => 'Найдите людей для подписки';
+
+  @override
+  String get discovery_noFollowersYet => 'Пока нет подписчиков';
+
+  @override
+  String get discovery_shareInsights =>
+      'Делитесь инсайтами, чтобы получить подписчиков';
+
+  @override
+  String get discovery_clearAll => 'Очистить всё';
+
+  @override
+  String chart_gate(int number) {
+    return 'Ворота $number';
+  }
+
+  @override
+  String chart_channel(String id) {
+    return 'Канал $id';
+  }
+
+  @override
+  String get chart_center => 'Центр';
+
+  @override
+  String get chart_keynote => 'Ключевая нота';
+
+  @override
+  String get chart_element => 'Элемент';
+
+  @override
+  String get chart_location => 'Расположение';
+
+  @override
+  String get chart_hdCenters => 'Центры HD';
+
+  @override
+  String get reaction_comment => 'Комментарий';
+
+  @override
+  String get reaction_react => 'Реакция';
+
+  @override
+  String get reaction_standard => 'Стандартные';
+
+  @override
+  String get reaction_humanDesign => 'Human Design';
+
+  @override
+  String get share_shareChart => 'Поделиться картой';
+
+  @override
+  String get share_createShareLink => 'Создать ссылку';
+
+  @override
+  String get share_shareViaUrl => 'Поделиться ссылкой';
+
+  @override
+  String get share_exportAsPng => 'Экспорт в PNG';
+
+  @override
+  String get share_fullReport => 'Полный отчёт';
+
+  @override
+  String get share_linkExpiration => 'Срок действия ссылки';
+
+  @override
+  String get share_neverExpires => 'Бессрочно';
+
+  @override
+  String get share_oneHour => '1 час';
+
+  @override
+  String get share_twentyFourHours => '24 часа';
+
+  @override
+  String get share_sevenDays => '7 дней';
+
+  @override
+  String get share_thirtyDays => '30 дней';
+
+  @override
+  String get share_creating => 'Создаём...';
+
+  @override
+  String get share_signInToShare => 'Войдите, чтобы поделиться картой';
+
+  @override
+  String get share_createShareableLinks =>
+      'Создавайте ссылки на вашу карту Дизайна Человека';
+
+  @override
+  String get share_linkImage => 'Изображение';
+
+  @override
+  String get share_pdf => 'PDF';
+
+  @override
+  String get post_share => 'Поделиться';
+
+  @override
+  String get post_edit => 'Редактировать';
+
+  @override
+  String get post_report => 'Пожаловаться';
+
+  @override
+  String get mentorship_title => 'Наставничество';
+
+  @override
+  String get mentorship_pendingRequests => 'Ожидающие запросы';
+
+  @override
+  String get mentorship_availableMentors => 'Доступные наставники';
+
+  @override
+  String get mentorship_noMentorsAvailable => 'Нет доступных наставников';
+
+  @override
+  String mentorship_requestMentorship(String name) {
+    return 'Запросить наставничество у $name';
+  }
+
+  @override
+  String get mentorship_sendMessage => 'Напишите, чему хотите научиться:';
+
+  @override
+  String get mentorship_learnPrompt => 'Я хотел бы узнать больше о...';
+
+  @override
+  String get mentorship_requestSent => 'Запрос отправлен!';
+
+  @override
+  String get mentorship_sendRequest => 'Отправить запрос';
+
+  @override
+  String get mentorship_becomeAMentor => 'Стать наставником';
+
+  @override
+  String get mentorship_shareKnowledge =>
+      'Делитесь знаниями о Дизайне Человека';
+
+  @override
+  String get story_cancel => 'Отмена';
+
+  @override
+  String get story_createStory => 'Создать историю';
+
+  @override
+  String get story_share => 'Поделиться';
+
+  @override
+  String get story_typeYourStory => 'Введите вашу историю...';
+
+  @override
+  String get story_background => 'Фон';
+
+  @override
+  String get story_attachTransitGate =>
+      'Прикрепить транзитные ворота (необязательно)';
+
+  @override
+  String get story_none => 'Нет';
+
+  @override
+  String story_gateNumber(int number) {
+    return 'Ворота $number';
+  }
+
+  @override
+  String get story_whoCanSee => 'Кто может видеть?';
+
+  @override
+  String get story_followers => 'Подписчики';
+
+  @override
+  String get story_everyone => 'Все';
+
+  @override
+  String get challenges_title => 'Задания';
+
+  @override
+  String get challenges_daily => 'Дневные';
+
+  @override
+  String get challenges_weekly => 'Недельные';
+
+  @override
+  String get challenges_monthly => 'Месячные';
+
+  @override
+  String get challenges_noDailyChallenges => 'Нет дневных заданий';
+
+  @override
+  String get challenges_noWeeklyChallenges => 'Нет недельных заданий';
+
+  @override
+  String get challenges_noMonthlyChallenges => 'Нет месячных заданий';
+
+  @override
+  String get challenges_errorLoading => 'Ошибка загрузки заданий';
+
+  @override
+  String challenges_claimedPoints(int points) {
+    return 'Получено $points очков!';
+  }
+
+  @override
+  String get challenges_totalPoints => 'Всего очков';
+
+  @override
+  String get challenges_level => 'Уровень';
+
+  @override
+  String get learning_all => 'Все';
+
+  @override
+  String get learning_types => 'Типы';
+
+  @override
+  String get learning_gates => 'Ворота';
+
+  @override
+  String get learning_centers => 'Центры';
+
+  @override
+  String get learning_liveSessions => 'Прямые эфиры';
+
+  @override
+  String get quiz_noActiveSession => 'Нет активной сессии теста';
+
+  @override
+  String get quiz_noQuestionsAvailable => 'Нет доступных вопросов';
+
+  @override
+  String get quiz_ok => 'ОК';
+
+  @override
+  String get liveSessions_title => 'Прямые эфиры';
+
+  @override
+  String get liveSessions_upcoming => 'Предстоящие';
+
+  @override
+  String get liveSessions_mySessions => 'Мои сессии';
+
+  @override
+  String get liveSessions_errorLoading => 'Ошибка загрузки сессий';
+
+  @override
+  String get liveSessions_registeredSuccessfully => 'Регистрация успешна!';
+
+  @override
+  String get liveSessions_cancelRegistration => 'Отменить регистрацию';
+
+  @override
+  String get liveSessions_cancelRegistrationConfirm =>
+      'Вы уверены, что хотите отменить регистрацию?';
+
+  @override
+  String get liveSessions_no => 'Нет';
+
+  @override
+  String get liveSessions_yesCancel => 'Да, отменить';
+
+  @override
+  String get liveSessions_registrationCancelled => 'Регистрация отменена';
+
+  @override
+  String get gateChannelPicker_gates => 'Ворота (64)';
+
+  @override
+  String get gateChannelPicker_channels => 'Каналы (36)';
+
+  @override
+  String get gateChannelPicker_search => 'Поиск ворот или каналов...';
+
+  @override
+  String get leaderboard_weekly => 'Неделя';
+
+  @override
+  String get leaderboard_monthly => 'Месяц';
+
+  @override
+  String get leaderboard_allTime => 'Всё время';
 }
