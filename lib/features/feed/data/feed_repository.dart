@@ -669,4 +669,70 @@ class FeedRepository {
         return ReactionType.like;
     }
   }
+
+  // ==================== Type/Channel Discussion Feeds ====================
+
+  /// Get posts filtered by HD type.
+  /// Users posting in type-specific feeds must have that type in their profile.
+  Future<List<Post>> getPostsByType({
+    required String hdType,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    // Validate hdType to prevent injection
+    const validTypes = [
+      'Manifestor',
+      'Generator',
+      'Manifesting Generator',
+      'Projector',
+      'Reflector',
+    ];
+    if (!validTypes.contains(hdType)) {
+      throw ArgumentError('Invalid HD type: $hdType');
+    }
+
+    final data = await _client
+        .from('posts')
+        .select('''
+          *,
+          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+        ''')
+        .eq('visibility', 'public')
+        .eq('user.hd_type', hdType)
+        .order('created_at', ascending: false)
+        .range(offset, offset + limit - 1);
+
+    return data.map((json) => Post.fromJson(json)).toList();
+  }
+
+  /// Get posts that mention a specific channel (by gate numbers).
+  /// Searches for channel references in post content.
+  Future<List<Post>> getPostsByChannel({
+    required int gate1,
+    required int gate2,
+    int limit = 20,
+    int offset = 0,
+  }) async {
+    // Validate gate numbers
+    if (gate1 < 1 || gate1 > 64 || gate2 < 1 || gate2 > 64) {
+      throw ArgumentError('Invalid gate numbers');
+    }
+
+    final channelId = '$gate1-$gate2';
+    final reverseChannelId = '$gate2-$gate1';
+
+    // Search for posts mentioning this channel
+    final data = await _client
+        .from('posts')
+        .select('''
+          *,
+          user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
+        ''')
+        .eq('visibility', 'public')
+        .or('content.ilike.%$channelId%,content.ilike.%$reverseChannelId%')
+        .order('created_at', ascending: false)
+        .range(offset, offset + limit - 1);
+
+    return data.map((json) => Post.fromJson(json)).toList();
+  }
 }

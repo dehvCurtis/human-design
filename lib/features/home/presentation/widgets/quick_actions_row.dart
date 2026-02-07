@@ -16,6 +16,7 @@ class QuickActionsRow extends StatelessWidget {
     this.onFeedTap,
     this.onLearningTap,
     this.onMessagesTap,
+    this.onEventsTap,
   });
 
   final VoidCallback? onChartTap;
@@ -27,6 +28,7 @@ class QuickActionsRow extends StatelessWidget {
   final VoidCallback? onFeedTap;
   final VoidCallback? onLearningTap;
   final VoidCallback? onMessagesTap;
+  final VoidCallback? onEventsTap;
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +129,15 @@ class QuickActionsRow extends StatelessWidget {
                 onTap: onMessagesTap,
               ),
             ),
-            const Spacer(),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _QuickActionButton(
+                icon: Icons.event_outlined,
+                label: 'Events',
+                color: Colors.deepPurple,
+                onTap: onEventsTap,
+              ),
+            ),
             const Spacer(),
             const Spacer(),
           ],

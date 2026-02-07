@@ -121,6 +121,17 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
           ],
         ),
       ),
+      floatingActionButton: chartAsync.whenOrNull(
+        data: (chart) => chart != null
+            ? FloatingActionButton.extended(
+                onPressed: () => context.push(AppRoutes.aiChat),
+                icon: const Icon(Icons.auto_awesome),
+                label: Text(l10n.ai_askAi),
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+              )
+            : null,
+      ),
       body: chartAsync.when(
         data: (chart) {
           if (chart == null) {
@@ -143,7 +154,10 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
               _GatesTab(chart: chart),
 
               // Channels Tab
-              _ChannelsTab(chart: chart),
+              _ChannelsTab(
+                chart: chart,
+                onChannelTap: (channelId) => showChannelDetailSheet(context, channelId),
+              ),
 
               // Chakras Tab
               _ChakrasTab(chart: chart),
@@ -335,35 +349,39 @@ class _BodygraphTabState extends State<_BodygraphTab> {
   }
 
   void _showChannelDetail(BuildContext context, String channelId) {
-    final parts = channelId.split('-');
-    if (parts.length != 2) return;
-
-    final gate1 = int.tryParse(parts[0]);
-    final gate2 = int.tryParse(parts[1]);
-    if (gate1 == null || gate2 == null) return;
-
-    final gate1Info = gates[gate1];
-    final gate2Info = gates[gate2];
-
-    DetailBottomSheet.show(
-      context: context,
-      title: 'Channel $channelId',
-      subtitle:
-          '${gate1Info?.name ?? 'Gate $gate1'} - ${gate2Info?.name ?? 'Gate $gate2'}',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _ChannelGateRow(gateNumber: gate1, gateInfo: gate1Info),
-          const SizedBox(height: 16),
-          const Center(
-            child: Icon(Icons.swap_vert, color: AppColors.primary),
-          ),
-          const SizedBox(height: 16),
-          _ChannelGateRow(gateNumber: gate2, gateInfo: gate2Info),
-        ],
-      ),
-    );
+    showChannelDetailSheet(context, channelId);
   }
+}
+
+void showChannelDetailSheet(BuildContext context, String channelId) {
+  final parts = channelId.split('-');
+  if (parts.length != 2) return;
+
+  final gate1 = int.tryParse(parts[0]);
+  final gate2 = int.tryParse(parts[1]);
+  if (gate1 == null || gate2 == null) return;
+
+  final gate1Info = gates[gate1];
+  final gate2Info = gates[gate2];
+
+  DetailBottomSheet.show(
+    context: context,
+    title: 'Channel $channelId',
+    subtitle:
+        '${gate1Info?.name ?? 'Gate $gate1'} - ${gate2Info?.name ?? 'Gate $gate2'}',
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _ChannelGateRow(gateNumber: gate1, gateInfo: gate1Info),
+        const SizedBox(height: 16),
+        const Center(
+          child: Icon(Icons.swap_vert, color: AppColors.primary),
+        ),
+        const SizedBox(height: 16),
+        _ChannelGateRow(gateNumber: gate2, gateInfo: gate2Info),
+      ],
+    ),
+  );
 }
 
 class _PlanetsTab extends StatelessWidget {
@@ -577,9 +595,10 @@ class _GatesTab extends StatelessWidget {
 }
 
 class _ChannelsTab extends StatelessWidget {
-  const _ChannelsTab({required this.chart});
+  const _ChannelsTab({required this.chart, this.onChannelTap});
 
   final HumanDesignChart chart;
+  final void Function(String channelId)? onChannelTap;
 
   @override
   Widget build(BuildContext context) {
@@ -626,6 +645,9 @@ class _ChannelsTab extends StatelessWidget {
           gate2: channel.gate2,
           hasConscious: channelActivation.hasConscious,
           hasUnconscious: channelActivation.hasUnconscious,
+          onTap: onChannelTap != null
+              ? () => onChannelTap!(channel.id)
+              : null,
         );
       },
     );
@@ -1074,6 +1096,7 @@ class _ChannelCard extends StatelessWidget {
     required this.gate2,
     required this.hasConscious,
     required this.hasUnconscious,
+    this.onTap,
   });
 
   final String channelId;
@@ -1081,6 +1104,7 @@ class _ChannelCard extends StatelessWidget {
   final int gate2;
   final bool hasConscious;
   final bool hasUnconscious;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -1102,60 +1126,64 @@ class _ChannelCard extends StatelessWidget {
     }
 
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: channelColor,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    channelId,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: channelColor.withAlpha(25),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    activationType,
-                    style: TextStyle(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
                       color: channelColor,
-                      fontSize: 11,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      channelId,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              '${gate1Info?.name ?? 'Gate $gate1'} ↔ ${gate2Info?.name ?? 'Gate $gate2'}',
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Connects ${gate1Info?.center.displayName ?? 'Unknown'} to ${gate2Info?.center.displayName ?? 'Unknown'}',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondaryLight,
+                  const SizedBox(width: 8),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: channelColor.withAlpha(25),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      activationType,
+                      style: TextStyle(
+                        color: channelColor,
+                        fontSize: 11,
+                      ),
+                    ),
                   ),
-            ),
-          ],
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                '${gate1Info?.name ?? 'Gate $gate1'} ↔ ${gate2Info?.name ?? 'Gate $gate2'}',
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Connects ${gate1Info?.center.displayName ?? 'Unknown'} to ${gate2Info?.center.displayName ?? 'Unknown'}',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.textSecondaryLight,
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1421,5 +1421,70 @@
 
   "leaderboard_weekly": "Weekly",
   "leaderboard_monthly": "Monthly",
-  "leaderboard_allTime": "All Time"
+  "leaderboard_allTime": "All Time",
+
+  "ai_chatTitle": "AI Assistant",
+  "ai_askAi": "Ask AI",
+  "ai_askAboutChart": "Ask AI About Your Chart",
+  "ai_miniDescription": "Get personalized insights about your Human Design",
+  "ai_welcomeTitle": "Your HD Assistant",
+  "ai_welcomeSubtitle": "Ask me anything about your Human Design chart. I can explain your type, strategy, authority, gates, channels, and more.",
+  "ai_inputPlaceholder": "Ask about your chart...",
+  "ai_newConversation": "New Conversation",
+  "ai_conversations": "Conversations",
+  "ai_noConversations": "No conversations yet",
+  "ai_noConversationsMessage": "Start a conversation with the AI to get personalized chart insights.",
+  "ai_deleteConversation": "Delete Conversation",
+  "ai_deleteConversationConfirm": "Are you sure you want to delete this conversation?",
+  "ai_messagesExhausted": "Free Messages Used Up",
+  "ai_upgradeForUnlimited": "Upgrade to Premium for unlimited AI conversations about your Human Design chart.",
+  "ai_usageCount": "{used} of {limit} free messages used",
+  "@ai_usageCount": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "ai_errorGeneric": "Something went wrong. Please try again.",
+  "ai_errorNetwork": "Could not reach the AI service. Check your connection.",
+
+  "events_title": "Community Events",
+  "events_upcoming": "Upcoming",
+  "events_past": "Past",
+  "events_create": "Create Event",
+  "events_noUpcoming": "No upcoming events",
+  "events_noUpcomingMessage": "Create an event to connect with the HD community!",
+  "events_online": "Online",
+  "events_inPerson": "In Person",
+  "events_hybrid": "Hybrid",
+  "events_participants": "{count, plural, =1{1 participant} other{{count} participants}}",
+  "@events_participants": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "events_register": "Register",
+  "events_registered": "Registered",
+  "events_cancelRegistration": "Cancel Registration",
+  "events_registrationFull": "Event Full",
+  "events_eventTitle": "Event Title",
+  "events_eventDescription": "Description",
+  "events_eventType": "Event Type",
+  "events_startDate": "Start Date & Time",
+  "events_endDate": "End Date & Time",
+  "events_location": "Location",
+  "events_virtualLink": "Virtual Meeting Link",
+  "events_maxParticipants": "Max Participants",
+  "events_hdTypeFilter": "HD Type Filter",
+  "events_allTypes": "Open to All Types",
+  "events_created": "Event created!",
+  "events_deleted": "Event deleted",
+  "events_notFound": "Event not found",
+
+  "chartOfDay_title": "Chart of the Day",
+  "chartOfDay_featured": "Featured Chart",
+  "chartOfDay_viewChart": "View Chart",
+
+  "discussion_typeDiscussion": "Type Discussion",
+  "discussion_channelDiscussion": "Channel Discussion"
 }

@@ -58,6 +58,10 @@ import '../../features/experts/presentation/expert_detail_screen.dart';
 import '../../features/learning_paths/presentation/learning_paths_screen.dart';
 import '../../features/learning_paths/presentation/learning_path_detail_screen.dart';
 import '../../features/discovery/presentation/popular_charts_screen.dart';
+import '../../features/ai_assistant/presentation/ai_chat_screen.dart';
+import '../../features/events/presentation/events_screen.dart';
+import '../../features/events/presentation/event_detail_screen.dart';
+import '../../features/events/presentation/create_event_screen.dart';
 
 /// Route names
 class AppRoutes {
@@ -141,6 +145,16 @@ class AppRoutes {
 
   // Popular charts route
   static const String popularCharts = '/popular-charts';
+
+  // AI Assistant routes
+  static const String aiChat = '/ai-chat';
+  static const String aiConversations = '/ai-conversations';
+  static const String aiConversationDetail = '/ai-chat/:conversationId';
+
+  // Community events routes
+  static const String events = '/events';
+  static const String eventDetail = '/event/:id';
+  static const String createEvent = '/events/create';
 }
 
 /// Provider for the router
@@ -451,6 +465,39 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.leaderboard,
             name: 'leaderboard',
             builder: (context, state) => const LeaderboardScreen(),
+          ),
+          // AI Assistant routes
+          GoRoute(
+            path: AppRoutes.aiChat,
+            name: 'aiChat',
+            builder: (context, state) => const AiChatScreen(),
+          ),
+          GoRoute(
+            path: '/ai-chat/:conversationId',
+            name: 'aiConversationDetail',
+            builder: (context, state) {
+              final conversationId = state.pathParameters['conversationId']!;
+              return AiChatScreen(conversationId: conversationId);
+            },
+          ),
+          // Community events routes
+          GoRoute(
+            path: AppRoutes.events,
+            name: 'events',
+            builder: (context, state) => const EventsScreen(),
+          ),
+          GoRoute(
+            path: '/event/:id',
+            name: 'eventDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return EventDetailScreen(eventId: id);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.createEvent,
+            name: 'createEvent',
+            builder: (context, state) => const CreateEventScreen(),
           ),
           GoRoute(
             path: AppRoutes.messages,
@@ -795,7 +842,9 @@ class MainShell extends StatelessWidget {
         location.startsWith(AppRoutes.discover) ||
         location.startsWith(AppRoutes.messages) ||
         location.startsWith(AppRoutes.stories) ||
-        location.startsWith(AppRoutes.circles)) {
+        location.startsWith(AppRoutes.circles) ||
+        location.startsWith(AppRoutes.events) ||
+        location.startsWith('/event')) {
       return 3;
     }
     // Profile, Learning, Settings all map to "More" tab (index 4)

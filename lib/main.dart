@@ -96,6 +96,11 @@ Future<void> _validateSession() async {
   }
 }
 
+/// Whether RevenueCat was successfully configured.
+/// Guards all Purchases.* calls to prevent Swift-level fatal errors
+/// when the SDK is not configured (e.g., missing API key).
+bool revenueCatConfigured = false;
+
 /// Initialize RevenueCat for in-app purchases
 ///
 /// Configures RevenueCat with platform-specific API keys.
@@ -127,6 +132,7 @@ Future<void> _initializeRevenueCat() async {
     }
 
     await Purchases.configure(configuration);
+    revenueCatConfigured = true;
     debugPrint('RevenueCat: Initialized successfully');
   } catch (e) {
     debugPrint('RevenueCat initialization failed: $e');

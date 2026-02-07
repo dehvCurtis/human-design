@@ -3182,4 +3182,171 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get leaderboard_allTime => 'All Time';
+
+  @override
+  String get ai_chatTitle => 'AI Assistant';
+
+  @override
+  String get ai_askAi => 'Ask AI';
+
+  @override
+  String get ai_askAboutChart => 'Ask AI About Your Chart';
+
+  @override
+  String get ai_miniDescription =>
+      'Get personalized insights about your Human Design';
+
+  @override
+  String get ai_welcomeTitle => 'Your HD Assistant';
+
+  @override
+  String get ai_welcomeSubtitle =>
+      'Ask me anything about your Human Design chart. I can explain your type, strategy, authority, gates, channels, and more.';
+
+  @override
+  String get ai_inputPlaceholder => 'Ask about your chart...';
+
+  @override
+  String get ai_newConversation => 'New Conversation';
+
+  @override
+  String get ai_conversations => 'Conversations';
+
+  @override
+  String get ai_noConversations => 'No conversations yet';
+
+  @override
+  String get ai_noConversationsMessage =>
+      'Start a conversation with the AI to get personalized chart insights.';
+
+  @override
+  String get ai_deleteConversation => 'Delete Conversation';
+
+  @override
+  String get ai_deleteConversationConfirm =>
+      'Are you sure you want to delete this conversation?';
+
+  @override
+  String get ai_messagesExhausted => 'Free Messages Used Up';
+
+  @override
+  String get ai_upgradeForUnlimited =>
+      'Upgrade to Premium for unlimited AI conversations about your Human Design chart.';
+
+  @override
+  String ai_usageCount(int used, int limit) {
+    return '$used of $limit free messages used';
+  }
+
+  @override
+  String get ai_errorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String get ai_errorNetwork =>
+      'Could not reach the AI service. Check your connection.';
+
+  @override
+  String get events_title => 'Community Events';
+
+  @override
+  String get events_upcoming => 'Upcoming';
+
+  @override
+  String get events_past => 'Past';
+
+  @override
+  String get events_create => 'Create Event';
+
+  @override
+  String get events_noUpcoming => 'No upcoming events';
+
+  @override
+  String get events_noUpcomingMessage =>
+      'Create an event to connect with the HD community!';
+
+  @override
+  String get events_online => 'Online';
+
+  @override
+  String get events_inPerson => 'In Person';
+
+  @override
+  String get events_hybrid => 'Hybrid';
+
+  @override
+  String events_participants(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count participants',
+      one: '1 participant',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get events_register => 'Register';
+
+  @override
+  String get events_registered => 'Registered';
+
+  @override
+  String get events_cancelRegistration => 'Cancel Registration';
+
+  @override
+  String get events_registrationFull => 'Event Full';
+
+  @override
+  String get events_eventTitle => 'Event Title';
+
+  @override
+  String get events_eventDescription => 'Description';
+
+  @override
+  String get events_eventType => 'Event Type';
+
+  @override
+  String get events_startDate => 'Start Date & Time';
+
+  @override
+  String get events_endDate => 'End Date & Time';
+
+  @override
+  String get events_location => 'Location';
+
+  @override
+  String get events_virtualLink => 'Virtual Meeting Link';
+
+  @override
+  String get events_maxParticipants => 'Max Participants';
+
+  @override
+  String get events_hdTypeFilter => 'HD Type Filter';
+
+  @override
+  String get events_allTypes => 'Open to All Types';
+
+  @override
+  String get events_created => 'Event created!';
+
+  @override
+  String get events_deleted => 'Event deleted';
+
+  @override
+  String get events_notFound => 'Event not found';
+
+  @override
+  String get chartOfDay_title => 'Chart of the Day';
+
+  @override
+  String get chartOfDay_featured => 'Featured Chart';
+
+  @override
+  String get chartOfDay_viewChart => 'View Chart';
+
+  @override
+  String get discussion_typeDiscussion => 'Type Discussion';
+
+  @override
+  String get discussion_channelDiscussion => 'Channel Discussion';
 }

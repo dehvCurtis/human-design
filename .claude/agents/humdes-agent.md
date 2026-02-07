@@ -42,6 +42,7 @@ final authNotifierProvider = NotifierProvider<AuthNotifier, AppAuthState>(() => 
 - **Database**: PostgreSQL with Row Level Security (RLS)
 - **Realtime**: Subscriptions for live updates
 - **Storage**: File uploads for avatars, chart images
+- **Edge Functions**: Deno/TypeScript serverless functions (JWT auth, input validation)
 - **Provider**: `lib/shared/providers/supabase_provider.dart`
 
 ### Calculations - Swiss Ephemeris
@@ -193,6 +194,7 @@ double hdWheelPosition = (tropicalLongitude + _hdWheelOffset) % 360;
 - `lib/core/constants/human_design_constants.dart` - HD data definitions
 - `lib/core/router/app_router.dart` - Navigation routes
 - `lib/core/theme/app_theme.dart` - Theme configuration
+- `lib/core/theme/app_colors.dart` - Color tokens (light/dark)
 
 ### Chart Feature
 - `lib/features/chart/domain/models/human_design_chart.dart` - Chart model
@@ -204,13 +206,67 @@ double hdWheelPosition = (tropicalLongitude + _hdWheelOffset) % 360;
 - `lib/features/ephemeris/data/ephemeris_service.dart` - Swiss Ephemeris service
 - `lib/features/ephemeris/mappers/degree_to_gate_mapper.dart` - Degree to gate mapping
 
+### AI Assistant Feature
+- `lib/features/ai_assistant/` - AI chat interface
+- `supabase/functions/ai-chat/index.ts` - AI Edge Function (JWT auth, multi-provider, quota enforcement)
+- `supabase/migrations/20260206_ai_and_community.sql` - AI tables (conversations, messages, usage)
+
+### Events Feature
+- `lib/features/events/` - HD community events
+
+### Discovery Feature
+- `lib/features/discovery/` - User discovery and matching
+- `lib/features/discovery/domain/services/` - Compatibility services
+- `lib/features/discovery/presentation/widgets/chart_of_day_card.dart` - Chart of the Day
+
+### Feed & Discussions
+- `lib/features/feed/` - Social content feed
+- `lib/features/feed/presentation/channel_discussion_screen.dart` - Channel discussions
+- `lib/features/feed/presentation/type_discussion_screen.dart` - Type discussions
+
 ### Other Features
 - `lib/features/auth/` - Authentication
 - `lib/features/profile/` - User profiles
-- `lib/features/home/` - Home screen
-- `lib/features/gamification/` - Points, badges, challenges
+- `lib/features/home/` - Home screen with quick actions
+- `lib/features/gamification/` - Points, badges, challenges, leaderboards
 - `lib/features/social/` - Friends, groups
-- `lib/features/subscription/` - Premium features
+- `lib/features/subscription/` - Premium features (RevenueCat)
+- `lib/features/learning/` - Content library, mentorship
+- `lib/features/quiz/` - HD knowledge quizzes (138+ questions)
+- `lib/features/stories/` - 24h ephemeral content
+- `lib/features/messaging/` - Direct messages
+- `lib/features/notifications/` - Push notifications (FCM)
+- `lib/features/lifestyle/` - Affirmations, transits
+- `lib/features/penta/` - Group chart calculations
+- `lib/features/sharing/` - Chart export & sharing
+
+### Supabase Backend
+- `supabase/migrations/` - SQL migrations (RLS, indexes, functions)
+- `supabase/functions/` - Edge Functions (Deno/TypeScript)
+
+---
+
+## Security Patterns
+
+### Supabase Migrations
+- Every table has RLS enabled with SELECT/INSERT/UPDATE/DELETE policies
+- `auth.uid() = user_id` for row ownership
+- `CHECK` constraints on text lengths and enum values
+- `SECURITY DEFINER` functions for atomic operations (counters, upserts)
+- Indexes on `(user_id, sort_column)` for common queries
+
+### Edge Functions
+- JWT validation via `supabase.auth.getUser()` on every request
+- Input validation: string length limits, UUID format, enum whitelisting
+- Service role key only via `Deno.env.get()`, never hardcoded
+- CORS headers on all responses including errors
+- Premium/quota checks enforced server-side
+- Structured error responses (no stack traces or SQL errors exposed)
+
+### Client-Side
+- Anon key is public (OK), service role key never in client code
+- User input validated before Supabase calls
+- No raw HTML rendering of user content (XSS prevention)
 
 ---
 
@@ -222,7 +278,8 @@ double hdWheelPosition = (tropicalLongitude + _hdWheelOffset) % 360;
 3. Create providers in `domain/<feature>_providers.dart`
 4. Create screens in `presentation/<screen>_screen.dart`
 5. Add routes to `app_router.dart`
-6. Add localization keys to `l10n/*.arb` files
+6. Add localization keys to `l10n/*.arb` files (EN, RU, UK)
+7. Run `flutter gen-l10n` and `flutter analyze`
 
 ### Creating a Provider
 ```dart
@@ -238,6 +295,16 @@ final myDataProvider = FutureProvider<MyData>((ref) async {
 // Stateful with notifier
 final myNotifierProvider = NotifierProvider<MyNotifier, MyState>(() => MyNotifier());
 ```
+
+### Creating a Supabase Migration
+- File: `supabase/migrations/YYYYMMDD_description.sql`
+- Pattern: CREATE TABLE → indexes → ENABLE RLS → policies → functions
+- Reference: `supabase/migrations/20260206_ai_and_community.sql`
+
+### Creating an Edge Function
+- Directory: `supabase/functions/<name>/index.ts`
+- Pattern: CORS → JWT auth → validate input → business logic → response
+- Reference: `supabase/functions/ai-chat/index.ts`
 
 ### Debugging Chart Calculations
 1. Log planetary positions from ephemeris service

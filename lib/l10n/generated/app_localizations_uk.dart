@@ -3194,4 +3194,173 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get leaderboard_allTime => 'Весь час';
+
+  @override
+  String get ai_chatTitle => 'AI Асистент';
+
+  @override
+  String get ai_askAi => 'Запитати AI';
+
+  @override
+  String get ai_askAboutChart => 'Запитати AI про вашу карту';
+
+  @override
+  String get ai_miniDescription =>
+      'Отримайте персональні інсайти про ваш Дизайн Людини';
+
+  @override
+  String get ai_welcomeTitle => 'Ваш HD Асистент';
+
+  @override
+  String get ai_welcomeSubtitle =>
+      'Запитайте мене будь-що про вашу карту Дизайну Людини. Я можу пояснити ваш тип, стратегію, авторитет, ворота, канали та багато іншого.';
+
+  @override
+  String get ai_inputPlaceholder => 'Запитайте про вашу карту...';
+
+  @override
+  String get ai_newConversation => 'Нова розмова';
+
+  @override
+  String get ai_conversations => 'Розмови';
+
+  @override
+  String get ai_noConversations => 'Розмов поки немає';
+
+  @override
+  String get ai_noConversationsMessage =>
+      'Почніть розмову з AI, щоб отримати персональні інсайти по карті.';
+
+  @override
+  String get ai_deleteConversation => 'Видалити розмову';
+
+  @override
+  String get ai_deleteConversationConfirm =>
+      'Ви впевнені, що хочете видалити цю розмову?';
+
+  @override
+  String get ai_messagesExhausted => 'Безкоштовні повідомлення вичерпано';
+
+  @override
+  String get ai_upgradeForUnlimited =>
+      'Оновіться до Преміум для безлімітних AI розмов про вашу карту Дизайну Людини.';
+
+  @override
+  String ai_usageCount(int used, int limit) {
+    return '$used з $limit безкоштовних повідомлень використано';
+  }
+
+  @override
+  String get ai_errorGeneric => 'Щось пішло не так. Спробуйте ще раз.';
+
+  @override
+  String get ai_errorNetwork =>
+      'Не вдалося підключитися до AI сервісу. Перевірте з\'єднання.';
+
+  @override
+  String get events_title => 'Події спільноти';
+
+  @override
+  String get events_upcoming => 'Майбутні';
+
+  @override
+  String get events_past => 'Минулі';
+
+  @override
+  String get events_create => 'Створити подію';
+
+  @override
+  String get events_noUpcoming => 'Немає майбутніх подій';
+
+  @override
+  String get events_noUpcomingMessage =>
+      'Створіть подію, щоб об\'єднати HD спільноту!';
+
+  @override
+  String get events_online => 'Онлайн';
+
+  @override
+  String get events_inPerson => 'Очно';
+
+  @override
+  String get events_hybrid => 'Гібрид';
+
+  @override
+  String events_participants(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count учасників',
+      many: '$count учасників',
+      few: '$count учасники',
+      one: '1 учасник',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get events_register => 'Зареєструватися';
+
+  @override
+  String get events_registered => 'Зареєстрований';
+
+  @override
+  String get events_cancelRegistration => 'Скасувати реєстрацію';
+
+  @override
+  String get events_registrationFull => 'Подію заповнено';
+
+  @override
+  String get events_eventTitle => 'Назва події';
+
+  @override
+  String get events_eventDescription => 'Опис';
+
+  @override
+  String get events_eventType => 'Тип події';
+
+  @override
+  String get events_startDate => 'Дата та час початку';
+
+  @override
+  String get events_endDate => 'Дата та час закінчення';
+
+  @override
+  String get events_location => 'Місце проведення';
+
+  @override
+  String get events_virtualLink => 'Посилання на онлайн-зустріч';
+
+  @override
+  String get events_maxParticipants => 'Максимум учасників';
+
+  @override
+  String get events_hdTypeFilter => 'Фільтр за типом HD';
+
+  @override
+  String get events_allTypes => 'Для всіх типів';
+
+  @override
+  String get events_created => 'Подію створено!';
+
+  @override
+  String get events_deleted => 'Подію видалено';
+
+  @override
+  String get events_notFound => 'Подію не знайдено';
+
+  @override
+  String get chartOfDay_title => 'Карта дня';
+
+  @override
+  String get chartOfDay_featured => 'Рекомендована карта';
+
+  @override
+  String get chartOfDay_viewChart => 'Переглянути карту';
+
+  @override
+  String get discussion_typeDiscussion => 'Обговорення типів';
+
+  @override
+  String get discussion_channelDiscussion => 'Обговорення каналів';
 }

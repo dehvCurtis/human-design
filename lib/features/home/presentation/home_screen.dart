@@ -17,6 +17,8 @@ import 'widgets/chart_preview_card.dart';
 import 'widgets/gamification_summary_card.dart';
 import 'widgets/transit_summary_card.dart';
 import 'widgets/quick_actions_row.dart';
+import '../../ai_assistant/presentation/ai_mini_widget.dart';
+import '../../discovery/presentation/widgets/chart_of_day_card.dart';
 
 /// Main home screen with chart preview and daily insights
 class HomeScreen extends ConsumerWidget {
@@ -108,6 +110,11 @@ class HomeScreen extends ConsumerWidget {
 
                 const SizedBox(height: 16),
 
+                // AI Assistant Card
+                const AiMiniWidget(),
+
+                const SizedBox(height: 16),
+
                 // Quick Actions
                 QuickActionsRow(
                   onChartTap: () => context.go(AppRoutes.chart),
@@ -119,7 +126,13 @@ class HomeScreen extends ConsumerWidget {
                   onFeedTap: () => context.push(AppRoutes.feed),
                   onLearningTap: () => context.push(AppRoutes.learning),
                   onMessagesTap: () => context.push(AppRoutes.messages),
+                  onEventsTap: () => context.push(AppRoutes.events),
                 ),
+
+                const SizedBox(height: 16),
+
+                // Chart of the Day
+                const ChartOfDayCard(),
 
                 const SizedBox(height: 16),
 

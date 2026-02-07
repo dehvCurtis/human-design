@@ -5913,6 +5913,306 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All Time'**
   String get leaderboard_allTime;
+
+  /// No description provided for @ai_chatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Assistant'**
+  String get ai_chatTitle;
+
+  /// No description provided for @ai_askAi.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI'**
+  String get ai_askAi;
+
+  /// No description provided for @ai_askAboutChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask AI About Your Chart'**
+  String get ai_askAboutChart;
+
+  /// No description provided for @ai_miniDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Get personalized insights about your Human Design'**
+  String get ai_miniDescription;
+
+  /// No description provided for @ai_welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your HD Assistant'**
+  String get ai_welcomeTitle;
+
+  /// No description provided for @ai_welcomeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask me anything about your Human Design chart. I can explain your type, strategy, authority, gates, channels, and more.'**
+  String get ai_welcomeSubtitle;
+
+  /// No description provided for @ai_inputPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about your chart...'**
+  String get ai_inputPlaceholder;
+
+  /// No description provided for @ai_newConversation.
+  ///
+  /// In en, this message translates to:
+  /// **'New Conversation'**
+  String get ai_newConversation;
+
+  /// No description provided for @ai_conversations.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversations'**
+  String get ai_conversations;
+
+  /// No description provided for @ai_noConversations.
+  ///
+  /// In en, this message translates to:
+  /// **'No conversations yet'**
+  String get ai_noConversations;
+
+  /// No description provided for @ai_noConversationsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a conversation with the AI to get personalized chart insights.'**
+  String get ai_noConversationsMessage;
+
+  /// No description provided for @ai_deleteConversation.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Conversation'**
+  String get ai_deleteConversation;
+
+  /// No description provided for @ai_deleteConversationConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this conversation?'**
+  String get ai_deleteConversationConfirm;
+
+  /// No description provided for @ai_messagesExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'Free Messages Used Up'**
+  String get ai_messagesExhausted;
+
+  /// No description provided for @ai_upgradeForUnlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to Premium for unlimited AI conversations about your Human Design chart.'**
+  String get ai_upgradeForUnlimited;
+
+  /// No description provided for @ai_usageCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{used} of {limit} free messages used'**
+  String ai_usageCount(int used, int limit);
+
+  /// No description provided for @ai_errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get ai_errorGeneric;
+
+  /// No description provided for @ai_errorNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not reach the AI service. Check your connection.'**
+  String get ai_errorNetwork;
+
+  /// No description provided for @events_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Community Events'**
+  String get events_title;
+
+  /// No description provided for @events_upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get events_upcoming;
+
+  /// No description provided for @events_past.
+  ///
+  /// In en, this message translates to:
+  /// **'Past'**
+  String get events_past;
+
+  /// No description provided for @events_create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Event'**
+  String get events_create;
+
+  /// No description provided for @events_noUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming events'**
+  String get events_noUpcoming;
+
+  /// No description provided for @events_noUpcomingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Create an event to connect with the HD community!'**
+  String get events_noUpcomingMessage;
+
+  /// No description provided for @events_online.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get events_online;
+
+  /// No description provided for @events_inPerson.
+  ///
+  /// In en, this message translates to:
+  /// **'In Person'**
+  String get events_inPerson;
+
+  /// No description provided for @events_hybrid.
+  ///
+  /// In en, this message translates to:
+  /// **'Hybrid'**
+  String get events_hybrid;
+
+  /// No description provided for @events_participants.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 participant} other{{count} participants}}'**
+  String events_participants(int count);
+
+  /// No description provided for @events_register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get events_register;
+
+  /// No description provided for @events_registered.
+  ///
+  /// In en, this message translates to:
+  /// **'Registered'**
+  String get events_registered;
+
+  /// No description provided for @events_cancelRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Registration'**
+  String get events_cancelRegistration;
+
+  /// No description provided for @events_registrationFull.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Full'**
+  String get events_registrationFull;
+
+  /// No description provided for @events_eventTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Title'**
+  String get events_eventTitle;
+
+  /// No description provided for @events_eventDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get events_eventDescription;
+
+  /// No description provided for @events_eventType.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Type'**
+  String get events_eventType;
+
+  /// No description provided for @events_startDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date & Time'**
+  String get events_startDate;
+
+  /// No description provided for @events_endDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date & Time'**
+  String get events_endDate;
+
+  /// No description provided for @events_location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get events_location;
+
+  /// No description provided for @events_virtualLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Virtual Meeting Link'**
+  String get events_virtualLink;
+
+  /// No description provided for @events_maxParticipants.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Participants'**
+  String get events_maxParticipants;
+
+  /// No description provided for @events_hdTypeFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'HD Type Filter'**
+  String get events_hdTypeFilter;
+
+  /// No description provided for @events_allTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to All Types'**
+  String get events_allTypes;
+
+  /// No description provided for @events_created.
+  ///
+  /// In en, this message translates to:
+  /// **'Event created!'**
+  String get events_created;
+
+  /// No description provided for @events_deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Event deleted'**
+  String get events_deleted;
+
+  /// No description provided for @events_notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Event not found'**
+  String get events_notFound;
+
+  /// No description provided for @chartOfDay_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart of the Day'**
+  String get chartOfDay_title;
+
+  /// No description provided for @chartOfDay_featured.
+  ///
+  /// In en, this message translates to:
+  /// **'Featured Chart'**
+  String get chartOfDay_featured;
+
+  /// No description provided for @chartOfDay_viewChart.
+  ///
+  /// In en, this message translates to:
+  /// **'View Chart'**
+  String get chartOfDay_viewChart;
+
+  /// No description provided for @discussion_typeDiscussion.
+  ///
+  /// In en, this message translates to:
+  /// **'Type Discussion'**
+  String get discussion_typeDiscussion;
+
+  /// No description provided for @discussion_channelDiscussion.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel Discussion'**
+  String get discussion_channelDiscussion;
 }
 
 class _AppLocalizationsDelegate

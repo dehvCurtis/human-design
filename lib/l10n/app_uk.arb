@@ -1365,5 +1365,70 @@
 
   "leaderboard_weekly": "Тиждень",
   "leaderboard_monthly": "Місяць",
-  "leaderboard_allTime": "Весь час"
+  "leaderboard_allTime": "Весь час",
+
+  "ai_chatTitle": "AI Асистент",
+  "ai_askAi": "Запитати AI",
+  "ai_askAboutChart": "Запитати AI про вашу карту",
+  "ai_miniDescription": "Отримайте персональні інсайти про ваш Дизайн Людини",
+  "ai_welcomeTitle": "Ваш HD Асистент",
+  "ai_welcomeSubtitle": "Запитайте мене будь-що про вашу карту Дизайну Людини. Я можу пояснити ваш тип, стратегію, авторитет, ворота, канали та багато іншого.",
+  "ai_inputPlaceholder": "Запитайте про вашу карту...",
+  "ai_newConversation": "Нова розмова",
+  "ai_conversations": "Розмови",
+  "ai_noConversations": "Розмов поки немає",
+  "ai_noConversationsMessage": "Почніть розмову з AI, щоб отримати персональні інсайти по карті.",
+  "ai_deleteConversation": "Видалити розмову",
+  "ai_deleteConversationConfirm": "Ви впевнені, що хочете видалити цю розмову?",
+  "ai_messagesExhausted": "Безкоштовні повідомлення вичерпано",
+  "ai_upgradeForUnlimited": "Оновіться до Преміум для безлімітних AI розмов про вашу карту Дизайну Людини.",
+  "ai_usageCount": "{used} з {limit} безкоштовних повідомлень використано",
+  "@ai_usageCount": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "ai_errorGeneric": "Щось пішло не так. Спробуйте ще раз.",
+  "ai_errorNetwork": "Не вдалося підключитися до AI сервісу. Перевірте з'єднання.",
+
+  "events_title": "Події спільноти",
+  "events_upcoming": "Майбутні",
+  "events_past": "Минулі",
+  "events_create": "Створити подію",
+  "events_noUpcoming": "Немає майбутніх подій",
+  "events_noUpcomingMessage": "Створіть подію, щоб об'єднати HD спільноту!",
+  "events_online": "Онлайн",
+  "events_inPerson": "Очно",
+  "events_hybrid": "Гібрид",
+  "events_participants": "{count, plural, =1{1 учасник} few{{count} учасники} many{{count} учасників} other{{count} учасників}}",
+  "@events_participants": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "events_register": "Зареєструватися",
+  "events_registered": "Зареєстрований",
+  "events_cancelRegistration": "Скасувати реєстрацію",
+  "events_registrationFull": "Подію заповнено",
+  "events_eventTitle": "Назва події",
+  "events_eventDescription": "Опис",
+  "events_eventType": "Тип події",
+  "events_startDate": "Дата та час початку",
+  "events_endDate": "Дата та час закінчення",
+  "events_location": "Місце проведення",
+  "events_virtualLink": "Посилання на онлайн-зустріч",
+  "events_maxParticipants": "Максимум учасників",
+  "events_hdTypeFilter": "Фільтр за типом HD",
+  "events_allTypes": "Для всіх типів",
+  "events_created": "Подію створено!",
+  "events_deleted": "Подію видалено",
+  "events_notFound": "Подію не знайдено",
+
+  "chartOfDay_title": "Карта дня",
+  "chartOfDay_featured": "Рекомендована карта",
+  "chartOfDay_viewChart": "Переглянути карту",
+
+  "discussion_typeDiscussion": "Обговорення типів",
+  "discussion_channelDiscussion": "Обговорення каналів"
 }

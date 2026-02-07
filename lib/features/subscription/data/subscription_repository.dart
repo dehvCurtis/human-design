@@ -3,6 +3,7 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/config/app_config.dart';
+import '../../../main.dart' show revenueCatConfigured;
 import '../domain/models/subscription.dart';
 
 /// Repository for subscription operations using RevenueCat
@@ -18,6 +19,11 @@ class SubscriptionRepository {
   Future<Subscription> getSubscription() async {
     final userId = _currentUserId;
     if (userId == null) return Subscription.free('');
+
+    // Skip RevenueCat if not configured to avoid Swift-level fatal error
+    if (!revenueCatConfigured) {
+      return _getSubscriptionFromSupabase(userId);
+    }
 
     try {
       // Get customer info from RevenueCat
@@ -93,6 +99,8 @@ class SubscriptionRepository {
 
   /// Get available subscription offers from RevenueCat
   Future<List<SubscriptionOffer>> getOffers() async {
+    if (!revenueCatConfigured) return _getDefaultOffers();
+
     try {
       final offerings = await Purchases.getOfferings();
 
@@ -191,6 +199,7 @@ class SubscriptionRepository {
   Future<bool> purchaseSubscription(SubscriptionTier tier) async {
     final userId = _currentUserId;
     if (userId == null) return false;
+    if (!revenueCatConfigured) return false;
 
     try {
       // Get offerings
@@ -245,6 +254,7 @@ class SubscriptionRepository {
   Future<bool> restorePurchases() async {
     final userId = _currentUserId;
     if (userId == null) return false;
+    if (!revenueCatConfigured) return false;
 
     try {
       final customerInfo = await Purchases.restorePurchases();
@@ -323,6 +333,7 @@ class SubscriptionRepository {
 
   /// Login user to RevenueCat (call after Supabase auth)
   Future<void> loginToRevenueCat(String userId) async {
+    if (!revenueCatConfigured) return;
     try {
       await Purchases.logIn(userId);
       debugPrint('Logged into RevenueCat with user: $userId');
@@ -333,6 +344,7 @@ class SubscriptionRepository {
 
   /// Logout from RevenueCat (call on Supabase signout)
   Future<void> logoutFromRevenueCat() async {
+    if (!revenueCatConfigured) return;
     try {
       await Purchases.logOut();
       debugPrint('Logged out of RevenueCat');

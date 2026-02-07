@@ -1364,5 +1364,70 @@
 
   "leaderboard_weekly": "Неделя",
   "leaderboard_monthly": "Месяц",
-  "leaderboard_allTime": "Всё время"
+  "leaderboard_allTime": "Всё время",
+
+  "ai_chatTitle": "AI Ассистент",
+  "ai_askAi": "Спросить AI",
+  "ai_askAboutChart": "Спросить AI о вашей карте",
+  "ai_miniDescription": "Получите персональные инсайты о вашем Дизайне Человека",
+  "ai_welcomeTitle": "Ваш HD Ассистент",
+  "ai_welcomeSubtitle": "Задайте мне любой вопрос о вашей карте Дизайна Человека. Я могу объяснить ваш тип, стратегию, авторитет, ворота, каналы и многое другое.",
+  "ai_inputPlaceholder": "Спросите о вашей карте...",
+  "ai_newConversation": "Новый разговор",
+  "ai_conversations": "Разговоры",
+  "ai_noConversations": "Разговоров пока нет",
+  "ai_noConversationsMessage": "Начните разговор с AI, чтобы получить персональные инсайты по карте.",
+  "ai_deleteConversation": "Удалить разговор",
+  "ai_deleteConversationConfirm": "Вы уверены, что хотите удалить этот разговор?",
+  "ai_messagesExhausted": "Бесплатные сообщения израсходованы",
+  "ai_upgradeForUnlimited": "Обновитесь до Премиум для безлимитных AI разговоров о вашей карте Дизайна Человека.",
+  "ai_usageCount": "{used} из {limit} бесплатных сообщений использовано",
+  "@ai_usageCount": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "ai_errorGeneric": "Что-то пошло не так. Попробуйте снова.",
+  "ai_errorNetwork": "Не удалось подключиться к AI сервису. Проверьте соединение.",
+
+  "events_title": "Мероприятия сообщества",
+  "events_upcoming": "Предстоящие",
+  "events_past": "Прошедшие",
+  "events_create": "Создать мероприятие",
+  "events_noUpcoming": "Предстоящих мероприятий нет",
+  "events_noUpcomingMessage": "Создайте мероприятие, чтобы объединить HD сообщество!",
+  "events_online": "Онлайн",
+  "events_inPerson": "Очно",
+  "events_hybrid": "Гибрид",
+  "events_participants": "{count, plural, =1{1 участник} few{{count} участника} many{{count} участников} other{{count} участников}}",
+  "@events_participants": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "events_register": "Зарегистрироваться",
+  "events_registered": "Зарегистрирован",
+  "events_cancelRegistration": "Отменить регистрацию",
+  "events_registrationFull": "Мероприятие заполнено",
+  "events_eventTitle": "Название мероприятия",
+  "events_eventDescription": "Описание",
+  "events_eventType": "Тип мероприятия",
+  "events_startDate": "Дата и время начала",
+  "events_endDate": "Дата и время окончания",
+  "events_location": "Место проведения",
+  "events_virtualLink": "Ссылка на онлайн-встречу",
+  "events_maxParticipants": "Максимум участников",
+  "events_hdTypeFilter": "Фильтр по типу HD",
+  "events_allTypes": "Для всех типов",
+  "events_created": "Мероприятие создано!",
+  "events_deleted": "Мероприятие удалено",
+  "events_notFound": "Мероприятие не найдено",
+
+  "chartOfDay_title": "Карта дня",
+  "chartOfDay_featured": "Рекомендованная карта",
+  "chartOfDay_viewChart": "Посмотреть карту",
+
+  "discussion_typeDiscussion": "Обсуждение типов",
+  "discussion_channelDiscussion": "Обсуждение каналов"
 }
