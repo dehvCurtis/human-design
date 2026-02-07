@@ -105,7 +105,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                 offersAsync.when(
                   data: (offers) => _buildPricingSection(context, l10n, offers),
                   loading: () => const Center(child: CircularProgressIndicator()),
-                  error: (_, _) => const Text('Failed to load pricing'),
+                  error: (_, _) => Text(l10n.common_error),
                 ),
 
                 const SizedBox(height: 24),
@@ -180,7 +180,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Premium Active',
+                  l10n.premium_features,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.success,
@@ -282,7 +282,7 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Choose Your Plan',
+          l10n.premium_subscribe,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -437,8 +437,9 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         .purchase(_selectedTier);
 
     if (success && mounted && context.mounted) {
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Welcome to Premium!')),
+        SnackBar(content: Text(l10n.premium_features)),
       );
       context.pop();
     }
@@ -450,11 +451,10 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         .restorePurchases();
 
     if (mounted && context.mounted) {
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            success ? 'Purchases restored!' : 'No previous purchases found',
-          ),
+          content: Text(l10n.premium_restore),
         ),
       );
       if (success) {

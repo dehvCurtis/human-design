@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -50,6 +54,9 @@ void main() async {
   // Validate and refresh session if needed
   await _validateSession();
 
+  // Initialize RevenueCat
+  await _initializeRevenueCat();
+
   // Initialize Swiss Ephemeris
   await EphemerisService.instance.initialize();
 
@@ -86,6 +93,44 @@ Future<void> _validateSession() async {
   } catch (e) {
     // Log but don't fail app startup - user will be redirected to login if needed
     debugPrint('Session validation failed: $e');
+  }
+}
+
+/// Initialize RevenueCat for in-app purchases
+///
+/// Configures RevenueCat with platform-specific API keys.
+/// Links purchases to Supabase user ID when authenticated.
+Future<void> _initializeRevenueCat() async {
+  try {
+    // Get platform-specific API key
+    String? apiKey;
+    if (Platform.isIOS || Platform.isMacOS) {
+      apiKey = AppConfig.revenueCatAppleApiKey;
+    } else if (Platform.isAndroid) {
+      apiKey = AppConfig.revenueCatGoogleApiKey;
+    }
+
+    if (apiKey == null || apiKey.isEmpty) {
+      debugPrint('RevenueCat: No API key configured for this platform');
+      return;
+    }
+
+    // Configure RevenueCat
+    await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.info);
+
+    final configuration = PurchasesConfiguration(apiKey);
+
+    // Link to Supabase user ID if authenticated
+    final userId = Supabase.instance.client.auth.currentUser?.id;
+    if (userId != null) {
+      configuration.appUserID = userId;
+    }
+
+    await Purchases.configure(configuration);
+    debugPrint('RevenueCat: Initialized successfully');
+  } catch (e) {
+    debugPrint('RevenueCat initialization failed: $e');
+    // Continue without RevenueCat - purchases will fail gracefully
   }
 }
 
