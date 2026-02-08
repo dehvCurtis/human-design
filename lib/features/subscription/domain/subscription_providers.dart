@@ -109,12 +109,12 @@ class SubscriptionNotifier extends Notifier<SubscriptionState> {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      final success = await _repository.purchaseMessagePack(pack);
+      final purchaseId = await _repository.purchaseMessagePack(pack);
 
-      if (success) {
-        // Credit bonus messages via AI repository
+      if (purchaseId != null) {
+        // Credit bonus messages via Edge Function (validates purchase server-side)
         final aiRepo = ref.read(aiRepositoryProvider);
-        await aiRepo.addBonusMessages(pack.messageCount);
+        await aiRepo.addBonusMessages(pack.messageCount, purchaseId: purchaseId);
 
         // Refresh usage and packs
         ref.invalidate(aiUsageProvider);
@@ -126,7 +126,7 @@ class SubscriptionNotifier extends Notifier<SubscriptionState> {
         );
       }
 
-      return success;
+      return purchaseId != null;
     } catch (e) {
       state = state.copyWith(
         isLoading: false,

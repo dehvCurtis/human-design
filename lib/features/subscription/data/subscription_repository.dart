@@ -334,29 +334,30 @@ class SubscriptionRepository {
     }
   }
 
-  /// Purchase a consumable message pack via RevenueCat
-  Future<bool> purchaseMessagePack(MessagePack pack) async {
+  /// Purchase a consumable message pack via RevenueCat.
+  /// Returns the purchase record ID on success, or null on failure.
+  Future<String?> purchaseMessagePack(MessagePack pack) async {
     final userId = _currentUserId;
-    if (userId == null) return false;
+    if (userId == null) return null;
 
     if (!revenueCatConfigured) {
       // In development/testing, just credit the messages directly
       debugPrint('RevenueCat not configured — skipping purchase for ${pack.messageCount} messages');
-      return false;
+      return null;
     }
 
     try {
       final rcPackage = pack.package as Package?;
       if (rcPackage == null) {
         debugPrint('No RevenueCat package for message pack');
-        return false;
+        return null;
       }
 
       // Make consumable purchase
       await Purchases.purchase(PurchaseParams.package(rcPackage));
 
-      // Log the purchase in Supabase for auditing
-      await _logMessagePackPurchase(
+      // Log the purchase in Supabase for auditing and get purchase ID
+      final purchaseId = await _logMessagePackPurchase(
         userId: userId,
         messageCount: pack.messageCount,
         productId: pack.productId ?? '',
@@ -364,22 +365,23 @@ class SubscriptionRepository {
         currency: pack.currency,
       );
 
-      return true;
+      return purchaseId;
     } on PurchasesErrorCode catch (e) {
       if (e == PurchasesErrorCode.purchaseCancelledError) {
         debugPrint('Message pack purchase cancelled by user');
       } else {
         debugPrint('Message pack purchase error: $e');
       }
-      return false;
+      return null;
     } catch (e) {
       debugPrint('Message pack purchase failed: $e');
-      return false;
+      return null;
     }
   }
 
-  /// Log a message pack purchase for auditing
-  Future<void> _logMessagePackPurchase({
+  /// Log a message pack purchase for auditing.
+  /// Returns the purchase ID for use in bonus message redemption.
+  Future<String?> _logMessagePackPurchase({
     required String userId,
     required int messageCount,
     required String productId,
@@ -387,15 +389,17 @@ class SubscriptionRepository {
     required String currency,
   }) async {
     try {
-      await _client.from('ai_purchases').insert({
+      final response = await _client.from('ai_purchases').insert({
         'user_id': userId,
         'message_count': messageCount,
         'product_id': productId,
         'price': price,
         'currency': currency,
-      });
+      }).select('id').single();
+      return response['id'] as String;
     } catch (e) {
       debugPrint('Failed to log message pack purchase: $e');
+      return null;
     }
   }
 

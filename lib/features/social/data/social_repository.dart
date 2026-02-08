@@ -7,6 +7,9 @@ class SocialRepository {
 
   final SupabaseClient _client;
 
+  /// Maximum allowed comment content length (matches DB constraint)
+  static const int maxCommentLength = 2000;
+
   // ==================== Sharing ====================
 
   /// Share chart with a group
@@ -75,6 +78,8 @@ class SocialRepository {
   }
 
   /// Add a comment to a chart
+  ///
+  /// Enforces content length limit (defense-in-depth; DB also enforces via CHECK).
   Future<Comment> addComment({
     required String chartId,
     required String content,
@@ -84,6 +89,12 @@ class SocialRepository {
   }) async {
     final userId = _client.auth.currentUser?.id;
     if (userId == null) throw StateError('User not authenticated');
+
+    if (content.length > maxCommentLength) {
+      throw ArgumentError(
+        'Comment exceeds maximum length of $maxCommentLength characters',
+      );
+    }
 
     final response = await _client.from('comments').insert({
       'chart_id': chartId,
@@ -111,6 +122,12 @@ class SocialRepository {
     required String commentId,
     required String content,
   }) async {
+    if (content.length > maxCommentLength) {
+      throw ArgumentError(
+        'Comment exceeds maximum length of $maxCommentLength characters',
+      );
+    }
+
     await _client.from('comments').update({
       'content': content,
       'updated_at': DateTime.now().toIso8601String(),
@@ -171,11 +188,31 @@ class SocialRepository {
   }
 
   /// Add member to group
+  ///
+  /// Only the current user can add themselves, or a group admin can add others.
+  /// Server-side RLS enforces this, but we also validate client-side.
   Future<void> addGroupMember({
     required String groupId,
     required String userId,
     String role = 'member',
   }) async {
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null) throw StateError('User not authenticated');
+
+    // If adding someone other than yourself, verify caller is an admin
+    if (userId != currentUserId) {
+      final adminCheck = await _client
+          .from('group_members')
+          .select('role')
+          .eq('group_id', groupId)
+          .eq('user_id', currentUserId)
+          .maybeSingle();
+
+      if (adminCheck == null || adminCheck['role'] != 'admin') {
+        throw StateError('Only group admins can add other members');
+      }
+    }
+
     await _client.from('group_members').insert({
       'group_id': groupId,
       'user_id': userId,
