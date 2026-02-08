@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../shared/providers/supabase_provider.dart';
+import '../../home/domain/home_providers.dart';
 import '../../subscription/domain/subscription_providers.dart';
 import '../data/ai_repository.dart';
 import '../data/chart_context_builder.dart';
@@ -228,3 +229,51 @@ const _generalQuestions = [
   'What is the significance of gates and channels?',
   'How does authority work in decision-making?',
 ];
+
+// ============================================================================
+// Feature-specific AI providers
+// ============================================================================
+
+/// Provider for today's AI transit insight.
+/// Auto-fetches once per session; cached until invalidated.
+final transitInsightProvider = FutureProvider<AiMessage?>((ref) async {
+  final chart = await ref.watch(userChartProvider.future);
+  if (chart == null) return null;
+
+  final transits = ref.watch(todayTransitsProvider);
+  final impact = await ref.watch(transitImpactProvider.future);
+  final repository = ref.watch(aiRepositoryProvider);
+
+  return repository.getTransitInsight(
+    chart: chart,
+    transits: transits,
+    impact: impact,
+  );
+});
+
+/// Provider for AI chart reading. Takes a chart ID.
+/// This is an autoDispose family provider so each chart gets its own reading.
+final chartReadingProvider =
+    FutureProvider.autoDispose<AiMessage?>((ref) async {
+  final chart = await ref.watch(userChartProvider.future);
+  if (chart == null) return null;
+
+  final repository = ref.watch(aiRepositoryProvider);
+  return repository.getChartReading(chart: chart);
+});
+
+/// Provider for today's AI journaling prompts.
+final journalingPromptsProvider = FutureProvider<AiMessage?>((ref) async {
+  final chart = await ref.watch(userChartProvider.future);
+  if (chart == null) return null;
+
+  final transits = ref.watch(todayTransitsProvider);
+  final impact = await ref.watch(transitImpactProvider.future);
+  final repository = ref.watch(aiRepositoryProvider);
+
+  return repository.getJournalingPrompts(
+    chart: chart,
+    transits: transits,
+    impact: impact,
+  );
+});
