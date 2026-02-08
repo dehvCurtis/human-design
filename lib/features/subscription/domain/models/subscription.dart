@@ -136,6 +136,33 @@ class PremiumFeature {
   final String icon;
 }
 
+/// A one-time purchasable pack of AI messages
+class MessagePack {
+  const MessagePack({
+    required this.messageCount,
+    required this.price,
+    required this.currency,
+    this.productId,
+    this.package, // RevenueCat Package for actual purchase
+  });
+
+  final int messageCount;
+  final double price;
+  final String currency;
+  final String? productId;
+  final dynamic package; // Package from purchases_flutter
+
+  String get formattedPrice => '\$$price';
+  double get pricePerMessage => price / messageCount;
+}
+
+/// Default message packs when RevenueCat is unavailable
+const defaultMessagePacks = [
+  MessagePack(messageCount: 3, price: 1.99, currency: 'USD'),
+  MessagePack(messageCount: 5, price: 2.99, currency: 'USD'),
+  MessagePack(messageCount: 10, price: 4.99, currency: 'USD'),
+];
+
 /// Predefined premium features
 const premiumFeatures = [
   PremiumFeature(

@@ -219,7 +219,15 @@ class _BodygraphWidgetState extends State<BodygraphWidget>
   }
 
   void _handleTap(TapDownDetails details) {
-    final localPosition = details.localPosition;
+    var localPosition = details.localPosition;
+
+    // Account for InteractiveViewer zoom/pan transformation
+    if (widget.enableZoom) {
+      final matrix = _transformationController.value.clone()..invert();
+      final transformed = MatrixUtils.transformPoint(matrix, localPosition);
+      localPosition = transformed;
+    }
+
     final size = context.size;
     if (size == null) return;
 

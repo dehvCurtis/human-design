@@ -291,6 +291,114 @@ class SubscriptionRepository {
     }
   }
 
+  /// Get available message packs from RevenueCat (falls back to defaults)
+  Future<List<MessagePack>> getMessagePacks() async {
+    if (!revenueCatConfigured) return defaultMessagePacks.toList();
+
+    try {
+      final offerings = await Purchases.getOfferings();
+
+      // Look for a "message_packs" offering or consumable products
+      final packOffering = offerings.getOffering('message_packs');
+      if (packOffering == null) {
+        return defaultMessagePacks.toList();
+      }
+
+      final packs = <MessagePack>[];
+      for (final package in packOffering.availablePackages) {
+        final product = package.storeProduct;
+        // Extract message count from product ID (e.g., "ai_messages_3")
+        final countMatch = RegExp(r'(\d+)').firstMatch(product.identifier);
+        final count = countMatch != null
+            ? int.tryParse(countMatch.group(1)!) ?? 0
+            : 0;
+
+        if (count > 0) {
+          packs.add(MessagePack(
+            messageCount: count,
+            price: product.price,
+            currency: product.currencyCode,
+            productId: product.identifier,
+            package: package,
+          ));
+        }
+      }
+
+      // Sort by message count
+      packs.sort((a, b) => a.messageCount.compareTo(b.messageCount));
+
+      return packs.isEmpty ? defaultMessagePacks.toList() : packs;
+    } catch (e) {
+      debugPrint('Failed to get message packs from RevenueCat: $e');
+      return defaultMessagePacks.toList();
+    }
+  }
+
+  /// Purchase a consumable message pack via RevenueCat
+  Future<bool> purchaseMessagePack(MessagePack pack) async {
+    final userId = _currentUserId;
+    if (userId == null) return false;
+
+    if (!revenueCatConfigured) {
+      // In development/testing, just credit the messages directly
+      debugPrint('RevenueCat not configured — skipping purchase for ${pack.messageCount} messages');
+      return false;
+    }
+
+    try {
+      final rcPackage = pack.package as Package?;
+      if (rcPackage == null) {
+        debugPrint('No RevenueCat package for message pack');
+        return false;
+      }
+
+      // Make consumable purchase
+      await Purchases.purchase(PurchaseParams.package(rcPackage));
+
+      // Log the purchase in Supabase for auditing
+      await _logMessagePackPurchase(
+        userId: userId,
+        messageCount: pack.messageCount,
+        productId: pack.productId ?? '',
+        price: pack.price,
+        currency: pack.currency,
+      );
+
+      return true;
+    } on PurchasesErrorCode catch (e) {
+      if (e == PurchasesErrorCode.purchaseCancelledError) {
+        debugPrint('Message pack purchase cancelled by user');
+      } else {
+        debugPrint('Message pack purchase error: $e');
+      }
+      return false;
+    } catch (e) {
+      debugPrint('Message pack purchase failed: $e');
+      return false;
+    }
+  }
+
+  /// Log a message pack purchase for auditing
+  Future<void> _logMessagePackPurchase({
+    required String userId,
+    required int messageCount,
+    required String productId,
+    required double price,
+    required String currency,
+  }) async {
+    try {
+      await _client.from('ai_purchases').insert({
+        'user_id': userId,
+        'message_count': messageCount,
+        'product_id': productId,
+        'price': price,
+        'currency': currency,
+      });
+    } catch (e) {
+      debugPrint('Failed to log message pack purchase: $e');
+    }
+  }
+
   /// Check share limit for free users
   Future<({int used, int limit, bool canShare})> checkShareLimit() async {
     final userId = _currentUserId;

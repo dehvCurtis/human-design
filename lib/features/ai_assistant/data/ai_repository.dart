@@ -151,6 +151,18 @@ class AiRepository {
     );
   }
 
+  /// Add bonus messages from a purchased message pack.
+  Future<void> addBonusMessages(int count) async {
+    final now = DateTime.now();
+    final periodStart = DateTime(now.year, now.month, 1);
+
+    await _client.rpc('add_ai_bonus_messages', params: {
+      'p_user_id': _currentUserId,
+      'p_period_start': periodStart.toIso8601String().split('T')[0],
+      'p_count': count,
+    });
+  }
+
   /// Delete a conversation and all its messages.
   ///
   /// RLS ensures only the owner can delete.

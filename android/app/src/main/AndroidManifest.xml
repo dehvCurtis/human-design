@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
-        android:label="human_design"
+        android:label="AuraMap"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

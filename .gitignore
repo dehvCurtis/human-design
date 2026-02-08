@@ -95,6 +95,7 @@ coverage/
 # Environment
 .env
 .env.*
+!.env.example
 *.env
 
 # Credentials
@@ -106,6 +107,9 @@ credentials.json
 *.g.dart
 *.freezed.dart
 *.mocks.dart
+
+# Supabase CLI temp files
+supabase/.temp/
 
 # Ephemeris data (large binary files)
 ephe_temp/

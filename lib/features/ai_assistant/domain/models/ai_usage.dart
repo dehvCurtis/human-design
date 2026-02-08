@@ -5,21 +5,27 @@ class AiUsage extends Equatable {
   const AiUsage({
     required this.messagesThisMonth,
     required this.limit,
+    this.bonusMessages = 0,
   });
 
   final int messagesThisMonth;
   final int limit;
+  final int bonusMessages;
+
+  /// Effective limit including purchased bonus messages
+  int get effectiveLimit => limit + bonusMessages;
 
   /// Whether the user can send another AI message
-  bool get canSendMessage => messagesThisMonth < limit;
+  bool get canSendMessage => messagesThisMonth < effectiveLimit;
 
   /// Messages remaining this month
-  int get remaining => (limit - messagesThisMonth).clamp(0, limit);
+  int get remaining => (effectiveLimit - messagesThisMonth).clamp(0, effectiveLimit);
 
   factory AiUsage.fromJson(Map<String, dynamic> json, {required int limit}) {
     return AiUsage(
       messagesThisMonth: json['messages_count'] as int? ?? 0,
       limit: limit,
+      bonusMessages: json['bonus_messages'] as int? ?? 0,
     );
   }
 
@@ -40,5 +46,5 @@ class AiUsage extends Equatable {
   }
 
   @override
-  List<Object?> get props => [messagesThisMonth, limit];
+  List<Object?> get props => [messagesThisMonth, limit, bonusMessages];
 }

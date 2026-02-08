@@ -39,6 +39,9 @@ While the major version is `0`, the app is in active development:
 | 0.2.6 | - | Heart center position, Gate 10 direction fix |
 | 0.2.7 | - | Avatar upload, mentorship setup, bookmarks/likes |
 | 0.2.8 | 8 | More tab, Daily rename, Penta 2+, quiz answer fix |
+| 0.2.9 | - | Social redesign (following system), comment likes |
+| 0.2.10 | - | RevenueCat integration, in-app purchases |
+| 0.2.11 | - | AI assistant, hero CTA, 8 locales, onboarding fix |
 
 ### Updating the Version
 
@@ -85,8 +88,8 @@ flutter run -d <device> \
 
 ```bash
 flutter run -d ios \
-  --dart-define=SUPABASE_URL=https://uqngxpvcmwkcrvnyatvp.supabase.co \
-  --dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+  --dart-define=SUPABASE_URL=https://your-project-ref.supabase.co \
+  --dart-define=SUPABASE_ANON_KEY=your-anon-key-here
 ```
 
 ### Why `--dart-define`?

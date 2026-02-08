@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
 
-  "appName": "Human Design",
+  "appName": "AuraMap",
   "@appName": {
     "description": "The name of the application"
   },
@@ -129,7 +129,7 @@
   "auth_birthInformation": "Birth Information",
   "auth_calculateMyChart": "Calculate My Chart",
 
-  "onboarding_welcome": "Welcome to Human Design",
+  "onboarding_welcome": "Welcome to AuraMap",
   "onboarding_welcomeSubtitle": "Discover your unique energetic blueprint",
   "onboarding_birthData": "Enter Your Birth Data",
   "onboarding_birthDataSubtitle": "We need this to calculate your chart",
@@ -558,8 +558,8 @@
   "settings_deleteAccountFailed": "Failed to delete account. Please try again.",
   "settings_passwordChanged": "Password changed successfully",
   "settings_passwordChangeFailed": "Failed to change password. Please try again.",
-  "settings_feedbackSubject": "Human Design App Feedback",
-  "settings_feedbackBody": "Hi,\n\nI would like to share the following feedback about the Human Design app:\n\n",
+  "settings_feedbackSubject": "AuraMap App Feedback",
+  "settings_feedbackBody": "Hi,\n\nI would like to share the following feedback about AuraMap:\n\n",
   "auth_newPassword": "New Password",
   "auth_passwordRequired": "Password is required",
   "auth_passwordTooShort": "Password must be at least 8 characters",
@@ -567,7 +567,7 @@
   "settings_exportData": "Export My Data",
   "settings_exportDataSubtitle": "Download a copy of all your data (GDPR)",
   "settings_exportingData": "Preparing your data export...",
-  "settings_exportDataSubject": "Human Design App - My Data Export",
+  "settings_exportDataSubject": "AuraMap - My Data Export",
   "settings_exportDataFailed": "Failed to export data. Please try again.",
 
   "error_generic": "Something went wrong",
@@ -594,7 +594,7 @@
   "profile_exportFailed": "Failed to export PDF",
   "profile_signOutConfirmTitle": "Sign Out",
   "profile_loadFailed": "Failed to load profile",
-  "profile_defaultUserName": "Human Design User",
+  "profile_defaultUserName": "AuraMap User",
   "profile_birthDate": "Date",
   "profile_birthTime": "Time",
   "profile_birthLocation": "Location",
@@ -1427,6 +1427,7 @@
   "ai_askAi": "Ask AI",
   "ai_askAboutChart": "Ask AI About Your Chart",
   "ai_miniDescription": "Get personalized insights about your Human Design",
+  "ai_startChatting": "Start chatting",
   "ai_welcomeTitle": "Your HD Assistant",
   "ai_welcomeSubtitle": "Ask me anything about your Human Design chart. I can explain your type, strategy, authority, gates, channels, and more.",
   "ai_inputPlaceholder": "Ask about your chart...",
@@ -1486,5 +1487,28 @@
   "chartOfDay_viewChart": "View Chart",
 
   "discussion_typeDiscussion": "Type Discussion",
-  "discussion_channelDiscussion": "Channel Discussion"
+  "discussion_channelDiscussion": "Channel Discussion",
+
+  "ai_wantMoreInsights": "Want more AI insights?",
+  "ai_messagesPackTitle": "{count} Messages",
+  "@ai_messagesPackTitle": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "ai_orSubscribe": "or subscribe for unlimited",
+  "ai_bestValue": "Best value",
+  "ai_getMoreMessages": "Get more messages",
+  "ai_fromPrice": "From {price}",
+  "@ai_fromPrice": {
+    "placeholders": {
+      "price": {"type": "String"}
+    }
+  },
+  "ai_perMessage": "{price}/message",
+  "@ai_perMessage": {
+    "placeholders": {
+      "price": {"type": "String"}
+    }
+  }
 }

@@ -9,7 +9,7 @@ class AppLocalizationsUk extends AppLocalizations {
   AppLocalizationsUk([String locale = 'uk']) : super(locale);
 
   @override
-  String get appName => 'Дизайн Людини';
+  String get appName => 'AuraMap';
 
   @override
   String get common_save => 'Зберегти';
@@ -1390,11 +1390,11 @@ class AppLocalizationsUk extends AppLocalizations {
       'Не вдалося змінити пароль. Спробуйте ще раз.';
 
   @override
-  String get settings_feedbackSubject => 'Відгук про додаток Human Design';
+  String get settings_feedbackSubject => 'Відгук про додаток AuraMap';
 
   @override
   String get settings_feedbackBody =>
-      'Вітаю,\n\nХочу поділитися відгуком про додаток Human Design:\n\n';
+      'Вітаю,\n\nХочу поділитися відгуком про додаток AuraMap:\n\n';
 
   @override
   String get auth_newPassword => 'Новий пароль';
@@ -1419,8 +1419,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get settings_exportingData => 'Підготовка експорту даних...';
 
   @override
-  String get settings_exportDataSubject =>
-      'Додаток Human Design - Експорт даних';
+  String get settings_exportDataSubject => 'AuraMap - Експорт даних';
 
   @override
   String get settings_exportDataFailed =>
@@ -1499,7 +1498,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get profile_loadFailed => 'Не вдалося завантажити профіль';
 
   @override
-  String get profile_defaultUserName => 'Користувач Human Design';
+  String get profile_defaultUserName => 'Користувач AuraMap';
 
   @override
   String get profile_birthDate => 'Дата';
@@ -3209,6 +3208,9 @@ class AppLocalizationsUk extends AppLocalizations {
       'Отримайте персональні інсайти про ваш Дизайн Людини';
 
   @override
+  String get ai_startChatting => 'Почати чат';
+
+  @override
   String get ai_welcomeTitle => 'Ваш HD Асистент';
 
   @override
@@ -3363,4 +3365,31 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get discussion_channelDiscussion => 'Обговорення каналів';
+
+  @override
+  String get ai_wantMoreInsights => 'Бажаєте більше AI-інсайтів?';
+
+  @override
+  String ai_messagesPackTitle(int count) {
+    return '$count повідомлень';
+  }
+
+  @override
+  String get ai_orSubscribe => 'або підпишіться на безлімітний доступ';
+
+  @override
+  String get ai_bestValue => 'Найкраща ціна';
+
+  @override
+  String get ai_getMoreMessages => 'Отримати більше повідомлень';
+
+  @override
+  String ai_fromPrice(String price) {
+    return 'Від $price';
+  }
+
+  @override
+  String ai_perMessage(String price) {
+    return '$price/повідомлення';
+  }
 }

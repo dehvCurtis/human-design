@@ -321,7 +321,8 @@ class DiscoveryRepository {
 
     // Apply search query
     if (filter.searchQuery != null && filter.searchQuery!.isNotEmpty) {
-      query = query.ilike('name', '%${filter.searchQuery}%');
+      final sanitized = _sanitizeSearchQuery(filter.searchQuery!);
+      query = query.ilike('name', '%$sanitized%');
     }
 
     // Only users with chart data
@@ -403,7 +404,7 @@ class DiscoveryRepository {
           is_public, show_chart_publicly, follower_count, following_count
         ''')
         .eq('is_public', true)
-        .or('name.ilike.%$query%,email.ilike.%$query%');
+        .or('name.ilike.%${_sanitizeSearchQuery(query)}%,email.ilike.%${_sanitizeSearchQuery(query)}%');
 
     // Apply filter before transform operations
     if (currentUserId != null) {
@@ -600,6 +601,16 @@ class DiscoveryRepository {
         .maybeSingle();
 
     return response != null;
+  }
+
+  // ==================== Input Sanitization ====================
+
+  /// Escape LIKE/ILIKE special characters to prevent pattern injection
+  String _sanitizeSearchQuery(String query) {
+    return query
+        .replaceAll(r'\', r'\\')
+        .replaceAll('%', r'\%')
+        .replaceAll('_', r'\_');
   }
 
   // ==================== Helper Methods ====================

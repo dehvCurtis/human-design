@@ -685,8 +685,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           child: Column(
             children: [
               // Language flags at top right
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              Wrap(
+                alignment: WrapAlignment.end,
+                spacing: 4,
+                runSpacing: 4,
                 children: AppLocale.values.map((locale) {
                   final isSelected = locale == currentLocale;
                   return GestureDetector(
@@ -695,7 +697,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      margin: const EdgeInsets.only(left: 4),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: isSelected

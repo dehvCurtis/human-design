@@ -17,6 +17,7 @@ lib/
 │   ├── feed/             # Content feed & posts
 │   ├── gamification/     # Points, badges, challenges
 │   ├── home/             # Home screen & providers
+│   ├── ai_assistant/      # AI chat (Claude/Gemini/OpenAI)
 │   ├── learning/         # Content library & mentorship
 │   ├── lifestyle/        # Transits & affirmations
 │   ├── messaging/        # Direct messages
@@ -25,7 +26,7 @@ lib/
 │   ├── sharing/          # Chart export & sharing
 │   ├── social/           # Following & groups
 │   ├── stories/          # 24h ephemeral content
-│   └── subscription/     # Premium features
+│   └── subscription/     # Premium features & message packs
 └── shared/
     ├── providers/        # Supabase client
     └── widgets/          # Reusable UI components
@@ -103,6 +104,18 @@ UI (Widget) → Provider → Repository/Service → Supabase/Ephemeris
 | `contentLibraryProvider` | FutureProvider.family | Learning content |
 | `sharingNotifierProvider` | NotifierProvider | Sharing operations |
 
+### AI Assistant Providers
+
+| Provider | Type | Purpose |
+|----------|------|---------|
+| `aiRepositoryProvider` | Provider | AI repository singleton |
+| `aiUsageProvider` | FutureProvider | Usage quota tracking |
+| `canUseAiProvider` | FutureProvider | Client-side quota check |
+| `aiChatNotifierProvider` | NotifierProvider | Active chat session state |
+| `aiConversationsProvider` | FutureProvider | Conversation list |
+| `aiMessagesProvider` | FutureProvider.family | Messages per conversation |
+| `suggestedQuestionsProvider` | Provider.family | Chart-based question suggestions |
+
 ## Security
 
 ### Row Level Security (RLS)
@@ -144,6 +157,11 @@ All Supabase tables use RLS policies:
 - `user_badges` - Earned badges
 - `challenges` - Challenge definitions
 - `user_challenges` - Challenge progress
+
+### AI Tables
+- `ai_conversations` - AI chat conversations per user
+- `ai_messages` - Individual messages (user + assistant)
+- `ai_usage` - Monthly message count tracking per user
 
 ### Learning Tables
 - `content_library` - Articles, guides, quizzes
