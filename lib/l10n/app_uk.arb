@@ -1,8 +1,6 @@
 {
   "@@locale": "uk",
-
   "appName": "AuraMap",
-
   "common_save": "Зберегти",
   "common_cancel": "Скасувати",
   "common_delete": "Видалити",
@@ -32,18 +30,16 @@
   "common_reply": "Відповісти",
   "common_deleteConfirmation": "Ви впевнені, що хочете видалити? Цю дію не можна скасувати.",
   "common_comingSoon": "Незабаром!",
-
   "nav_home": "Головна",
   "nav_chart": "Карта",
   "nav_today": "День",
   "nav_social": "Соціум",
   "nav_profile": "Профіль",
+  "nav_ai": "ШІ",
   "nav_more": "Більше",
   "nav_learn": "Навчання",
-
   "affirmation_savedSuccess": "Афірмацію збережено!",
   "affirmation_alreadySaved": "Афірмацію вже збережено",
-
   "home_goodMorning": "Доброго ранку",
   "home_goodAfternoon": "Доброго дня",
   "home_goodEvening": "Доброго вечора",
@@ -58,7 +54,6 @@
   "home_definedCenters": "Визначені центри",
   "home_activeChannels": "Активні канали",
   "home_activeGates": "Активні ворота",
-
   "transit_today": "Транзити сьогодні",
   "transit_sun": "Сонце",
   "transit_earth": "Земля",
@@ -88,7 +83,6 @@
     }
   },
   "transit_noConnections": "Немає прямих транзитних зв'язків сьогодні",
-
   "auth_signIn": "Увійти",
   "auth_signUp": "Реєстрація",
   "auth_signInWithApple": "Увійти через Apple",
@@ -124,7 +118,6 @@
   "auth_and": " та ",
   "auth_birthInformation": "Дані народження",
   "auth_calculateMyChart": "Розрахувати мою карту",
-
   "onboarding_welcome": "Ласкаво просимо до Дизайну Людини",
   "onboarding_welcomeSubtitle": "Відкрийте свій унікальний енергетичний план",
   "onboarding_birthData": "Введіть дані народження",
@@ -145,7 +138,6 @@
   "onboarding_getStarted": "Почати",
   "onboarding_alreadyHaveAccount": "У мене вже є акаунт",
   "onboarding_liveInAlignment": "Відкрийте свій унікальний енергетичний відбиток та живіть у гармонії зі своєю справжньою природою.",
-
   "chart_myChart": "Моя карта",
   "chart_viewChart": "Переглянути карту",
   "chart_calculate": "Розрахувати карту",
@@ -192,19 +184,16 @@
   "chart_addChartDescription": "Створіть карту для іншої людини, ввівши її дані народження.",
   "chart_calculateAndSave": "Розрахувати та зберегти карту",
   "chart_saved": "Карту успішно збережено",
-
   "type_manifestor": "Маніфестор",
   "type_generator": "Генератор",
   "type_manifestingGenerator": "Маніфестуючий Генератор",
   "type_projector": "Проектор",
   "type_reflector": "Рефлектор",
-
   "type_manifestor_strategy": "Інформувати",
   "type_generator_strategy": "Відгукуватися",
   "type_manifestingGenerator_strategy": "Відгукуватися",
   "type_projector_strategy": "Чекати на запрошення",
   "type_reflector_strategy": "Чекати місячний цикл",
-
   "authority_emotional": "Емоційний",
   "authority_sacral": "Сакральний",
   "authority_splenic": "Селезінковий",
@@ -212,13 +201,11 @@
   "authority_self": "Само-проектований",
   "authority_environment": "Ментальний/Оточення",
   "authority_lunar": "Місячний",
-
   "definition_none": "Без визначеності",
   "definition_single": "Одинарна визначеність",
   "definition_split": "Розщеплена визначеність",
   "definition_tripleSplit": "Потрійне розщеплення",
   "definition_quadrupleSplit": "Четвертне розщеплення",
-
   "profile_1_3": "1/3 Дослідник/Мученик",
   "profile_1_4": "1/4 Дослідник/Опортуніст",
   "profile_2_4": "2/4 Відлюдник/Опортуніст",
@@ -231,7 +218,6 @@
   "profile_5_2": "5/2 Єретик/Відлюдник",
   "profile_6_2": "6/2 Рольова модель/Відлюдник",
   "profile_6_3": "6/3 Рольова модель/Мученик",
-
   "center_head": "Головний",
   "center_ajna": "Аджна",
   "center_throat": "Горловий",
@@ -243,7 +229,6 @@
   "center_root": "Кореневий",
   "center_defined": "Визначений",
   "center_undefined": "Невизначений",
-
   "section_type": "Тип",
   "section_strategy": "Стратегія",
   "section_authority": "Авторитет",
@@ -254,7 +239,6 @@
   "section_gates": "Ворота",
   "section_conscious": "Свідоме (Особистість)",
   "section_unconscious": "Несвідоме (Дизайн)",
-
   "social_title": "Соціальне",
   "social_thoughts": "Думки",
   "social_discover": "Пошук",
@@ -264,7 +248,6 @@
   "social_noThoughtsYet": "Поки немає записів",
   "social_noThoughtsMessage": "Будьте першим, хто поділиться своїми відкриттями про Дизайн Людини!",
   "social_createGroup": "Створити групу",
-  "social_invite": "Запросити",
   "social_members": "Учасники",
   "social_comments": "Коментарі",
   "social_addComment": "Додати коментар...",
@@ -338,7 +321,6 @@
       }
     }
   },
-
   "transit_title": "Транзити сьогодні",
   "transit_currentEnergies": "Поточні енергії",
   "transit_sunGate": "Ворота Сонця",
@@ -365,7 +347,6 @@
   },
   "transit_noPersonalImpact": "Немає прямих транзитних зв'язків сьогодні",
   "transit_viewFullTransit": "Переглянути повну карту транзитів",
-
   "affirmation_title": "Щоденна афірмація",
   "affirmation_forYourType": "Для вашого типу {type}",
   "@affirmation_forYourType": {
@@ -389,7 +370,6 @@
   "affirmation_share": "Поділитися афірмацією",
   "affirmation_notifications": "Сповіщення про афірмації",
   "affirmation_notificationTime": "Час сповіщення",
-
   "lifestyle_today": "Сьогодні",
   "lifestyle_insights": "Інсайти",
   "lifestyle_journal": "Щоденник",
@@ -399,7 +379,6 @@
   "lifestyle_mood": "Настрій",
   "lifestyle_energy": "Рівень енергії",
   "lifestyle_reflection": "Роздуми",
-
   "penta_title": "Пента",
   "penta_description": "Груповий аналіз для 3-5 людей",
   "penta_createNew": "Створити Пенту",
@@ -418,7 +397,6 @@
   "penta_electromagneticConnections": "Електромагнітні зв'язки",
   "penta_connectionsDescription": "Особливі енергетичні зв'язки між учасниками, що створюють притягання та хімію.",
   "penta_areasForAttention": "Області для уваги",
-
   "composite_title": "Композитна карта",
   "composite_infoText": "Композитна карта показує динаміку відносин між двома людьми, розкриваючи, як ваші карти взаємодіють та доповнюють одна одну.",
   "composite_selectTwoCharts": "Виберіть 2 карти",
@@ -450,7 +428,6 @@
   "composite_needMoreChartsDesc": "Для аналізу відносин потрібні мінімум 2 карти. Додайте ще одну карту.",
   "composite_selectTwoHint": "Виберіть 2 карти для аналізу зв'язку",
   "composite_selectOneMore": "Виберіть ще 1 карту",
-
   "premium_upgrade": "Перейти на Premium",
   "premium_subscribe": "Підписатися",
   "premium_restore": "Відновити покупки",
@@ -467,7 +444,6 @@
   "premium_perMonth": "/місяць",
   "premium_perYear": "/рік",
   "premium_bestValue": "Найкраща пропозиція",
-
   "settings_appearance": "Зовнішній вигляд",
   "settings_language": "Мова",
   "settings_selectLanguage": "Вибір мови",
@@ -530,7 +506,6 @@
   "settings_chartFriendsDesc": "Взаємні підписники можуть бачити вашу карту",
   "settings_chartPublic": "Публічна",
   "settings_chartPublicDesc": "Ваші підписники можуть бачити вашу карту",
-
   "error_generic": "Щось пішло не так",
   "error_network": "Немає підключення до інтернету",
   "error_invalidEmail": "Введіть коректний email",
@@ -539,7 +514,6 @@
   "error_birthDataRequired": "Введіть дані народження",
   "error_locationRequired": "Оберіть місце народження",
   "error_chartCalculation": "Не вдалося розрахувати карту",
-
   "profile_editProfile": "Редагувати профіль",
   "profile_shareChart": "Поділитися картою",
   "profile_exportPdf": "Експорт у PDF",
@@ -560,7 +534,6 @@
   "profile_birthTime": "Час",
   "profile_birthLocation": "Місце",
   "profile_birthTimezone": "Часовий пояс",
-
   "gamification_yourProgress": "Ваш прогрес",
   "gamification_level": "Рівень",
   "gamification_points": "очків",
@@ -575,9 +548,7 @@
   "gamification_earnedBadge": "Ви отримали значок!",
   "gamification_claimReward": "Отримати нагороду",
   "gamification_completed": "Виконано",
-
   "common_copy": "Копіювати",
-
   "share_myShares": "Мої посилання",
   "share_createNew": "Створити",
   "share_newLink": "Нове посилання",
@@ -608,7 +579,6 @@
   "share_activeLabel": "Активне",
   "share_expiredOn": "Прострочено {date}",
   "share_expiresIn": "Закінчується через {time}",
-
   "auth_emailNotConfirmed": "Підтвердіть email",
   "auth_resendConfirmation": "Надіслати повторно",
   "auth_confirmationSent": "Лист надіслано",
@@ -618,12 +588,9 @@
   "auth_clickLinkToActivate": "Будь ласка, натисніть на посилання в листі для активації акаунту.",
   "auth_goToSignIn": "Перейти до входу",
   "auth_returnToHome": "Повернутися на головну",
-
   "home_savedCharts": "Збережені",
-
   "chart_planets": "Планети",
   "chart_chakras": "Чакри",
-
   "discovery_userNotFound": "Користувача не знайдено",
   "discovery_following": "Підписаний",
   "discovery_follow": "Підписатися",
@@ -639,7 +606,6 @@
   "discovery_followingLabel": "Підписки",
   "discovery_noResults": "Користувачів не знайдено",
   "discovery_noResultsMessage": "Спробуйте змінити фільтри або зайдіть пізніше",
-
   "userProfile_viewChart": "Бодіграф",
   "userProfile_chartPrivate": "Ця карта приватна",
   "userProfile_chartFriendsOnly": "Станьте взаємними підписниками, щоб побачити цю карту",
@@ -654,10 +620,8 @@
   "userProfile_thoughts": "Думки",
   "userProfile_noThoughts": "Поки немає опублікованих думок",
   "userProfile_showAll": "Показати все",
-
   "popularCharts_title": "Популярні карти",
   "popularCharts_subtitle": "Найпопулярніші публічні карти",
-
   "hashtags_explore": "Хештеги",
   "hashtags_trending": "У тренді",
   "hashtags_popular": "Популярні",
@@ -670,32 +634,38 @@
   "hashtag_postCount": "{count, plural, =1{1 пост} few{{count} пости} other{{count} постів}}",
   "@hashtag_postCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "hashtag_recentPosts": "{count, plural, =1{1 пост сьогодні} few{{count} пости сьогодні} other{{count} постів сьогодні}}",
   "@hashtag_recentPosts": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
-
   "feed_forYou": "Для вас",
   "feed_trending": "У тренді",
   "feed_hdTopics": "Теми HD",
   "feed_gateTitle": "Ворота {number}",
   "@feed_gateTitle": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "feed_gatePosts": "Пости про ворота {number}",
   "@feed_gatePosts": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
-
   "transit_events_title": "Події транзитів",
   "transit_events_happening": "Зараз",
   "transit_events_upcoming": "Майбутні",
@@ -713,13 +683,17 @@
   "transit_events_endsIn": "Закінчується через {time}",
   "@transit_events_endsIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "transit_events_startsIn": "Почнеться через {time}",
   "@transit_events_startsIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "transit_events_notFound": "Подію не знайдено",
@@ -733,22 +707,21 @@
   "transit_events_experiencingWith": "Переживають цей транзит з {count} іншими",
   "@transit_events_experiencingWith": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "transit_events_joinCommunity": "Приєднатися до спільноти",
   "transit_events_shareYourExperience": "Поділіться досвідом та зв'яжіться з іншими",
-
   "activity_title": "Активність друзів",
   "activity_noActivities": "Поки немає активності друзів",
   "activity_followFriends": "Підпишіться на друзів, щоб бачити їхні досягнення тут!",
   "activity_findFriends": "Знайти друзів",
   "activity_celebrate": "Привітати",
   "activity_celebrated": "Привітали",
-
   "cancel": "Скасувати",
   "create": "Створити",
-
   "groupChallenges_title": "Групові челенджі",
   "groupChallenges_myTeams": "Мої команди",
   "groupChallenges_challenges": "Челенджі",
@@ -764,13 +737,17 @@
   "groupChallenges_memberCount": "{count, plural, =1{1 учасник} few{{count} учасники} other{{count} учасників}}",
   "@groupChallenges_memberCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_points": "{points} очк.",
   "@groupChallenges_points": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_noChallenges": "Немає активних челенджів",
@@ -779,25 +756,33 @@
   "groupChallenges_reward": "{points} очк. нагорода",
   "@groupChallenges_reward": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_teamsEnrolled": "{count} команд",
   "@groupChallenges_teamsEnrolled": {
     "placeholders": {
-      "count": {"type": "String"}
+      "count": {
+        "type": "String"
+      }
     }
   },
   "groupChallenges_participants": "{count} учасників",
   "@groupChallenges_participants": {
     "placeholders": {
-      "count": {"type": "String"}
+      "count": {
+        "type": "String"
+      }
     }
   },
   "groupChallenges_endsIn": "Закінчується через {time}",
   "@groupChallenges_endsIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "groupChallenges_weekly": "Тиждень",
@@ -817,7 +802,9 @@
   "groupChallenges_contributed": "{points} очк. внесено",
   "@groupChallenges_contributed": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_joinedTeam": "Ви вступили до команди!",
@@ -838,7 +825,6 @@
   "groupChallenges_enroll": "Записати",
   "groupChallenges_teamEnrolled": "Команду успішно записано!",
   "groupChallenges_noTeamsEnrolled": "Поки немає записаних команд",
-
   "circles_title": "Кола сумісності",
   "circles_myCircles": "Мої кола",
   "circles_invitations": "Запрошення",
@@ -855,7 +841,9 @@
   "circles_memberCount": "{count, plural, =1{1 учасник} few{{count} учасники} other{{count} учасників}}",
   "@circles_memberCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "circles_private": "Приватне",
@@ -864,7 +852,9 @@
   "circles_invitedBy": "Запросив {name}",
   "@circles_invitedBy": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "circles_decline": "Відхилити",
@@ -884,7 +874,9 @@
   "circles_deleteConfirmation": "Ви впевнені, що хочете видалити \"{name}\"? Цю дію не можна скасувати.",
   "@circles_deleteConfirmation": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "circles_deleted": "Коло видалено",
@@ -904,7 +896,6 @@
   "circles_writePost": "Поділіться чимось з вашим колом...",
   "circles_noPosts": "Поки немає постів",
   "circles_beFirstToPost": "Будьте першим, хто поділиться чимось з вашим колом!",
-
   "experts_title": "Експерти HD",
   "experts_becomeExpert": "Стати експертом",
   "experts_filterBySpecialization": "Фільтр за спеціалізацією",
@@ -915,7 +906,9 @@
   "experts_followers": "{count} підписників",
   "@experts_followers": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "experts_notFound": "Експерта не знайдено",
@@ -934,7 +927,6 @@
   "experts_followersLabel": "Підписники",
   "experts_rating": "Рейтинг",
   "experts_years": "Років",
-
   "learningPaths_title": "Навчальні шляхи",
   "learningPaths_explore": "Огляд",
   "learningPaths_inProgress": "У процесі",
@@ -950,58 +942,78 @@
   "learningPaths_enrolled": "{count} записано",
   "@learningPaths_enrolled": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPaths_stepsCount": "{count} кроків",
   "@learningPaths_stepsCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPaths_progress": "{completed} з {total} кроків",
   "@learningPaths_progress": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "learningPaths_resume": "Продовжити",
   "learningPaths_completedOn": "Завершено {date}",
   "@learningPaths_completedOn": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "learningPathNotFound": "Навчальний шлях не знайдено",
   "learningPathMinutes": "{minutes} хв",
   "@learningPathMinutes": {
     "placeholders": {
-      "minutes": {"type": "int"}
+      "minutes": {
+        "type": "int"
+      }
     }
   },
   "learningPathSteps": "{count} кроків",
   "@learningPathSteps": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPathBy": "Від {author}",
   "@learningPathBy": {
     "placeholders": {
-      "author": {"type": "String"}
+      "author": {
+        "type": "String"
+      }
     }
   },
   "learningPathEnrolled": "{count} записано",
   "@learningPathEnrolled": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPathCompleted": "{count} завершено",
   "@learningPathCompleted": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPathEnroll": "Почати навчання",
@@ -1010,8 +1022,12 @@
   "learningPathProgressText": "{completed} з {total} кроків завершено",
   "@learningPathProgressText": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "learningPathStepsTitle": "Кроки навчання",
@@ -1019,13 +1035,14 @@
   "learningPathEnrollMessage": "Ви будете записані на \"{title}\" і зможете відстежувати прогрес.",
   "@learningPathEnrollMessage": {
     "placeholders": {
-      "title": {"type": "String"}
+      "title": {
+        "type": "String"
+      }
     }
   },
   "learningPathViewContent": "Переглянути контент",
   "learningPathMarkComplete": "Позначити як завершене",
   "learningPathStepCompleted": "Крок завершено!",
-
   "thought_title": "Думки",
   "thought_feedTitle": "Думки",
   "thought_createNew": "Поділитися думкою",
@@ -1035,7 +1052,9 @@
   "thought_regeneratedFrom": "Репост від @{username}",
   "@thought_regeneratedFrom": {
     "placeholders": {
-      "username": {"type": "String"}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "thought_regenerateSuccess": "Думку додано на вашу стіну!",
@@ -1045,7 +1064,9 @@
   "thought_regenerateCount": "{count, plural, =1{1 репост} few{{count} репости} other{{count} репостів}}",
   "@thought_regenerateCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "thought_cannotRegenerateOwn": "Не можна зробити репост своєї думки",
@@ -1055,19 +1076,22 @@
   "thought_replyingTo": "Відповідь для {username}",
   "@thought_replyingTo": {
     "placeholders": {
-      "username": {"type": "String"}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "thought_writeReply": "Напишіть відповідь...",
   "thought_commentPlaceholder": "Додати коментар...",
-
   "chakra_title": "Енергія чакр",
   "chakra_activated": "Активована",
   "chakra_inactive": "Неактивна",
   "chakra_activatedCount": "{count} з 7 чакр активовано",
   "@chakra_activatedCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "chakra_hdMapping": "Відповідність центрам HD",
@@ -1094,13 +1118,14 @@
   "chakra_crown": "Сахасрара",
   "chakra_crown_sanskrit": "Sahasrara",
   "chakra_crown_description": "Духовний зв'язок та свідомість",
-
   "quiz_title": "Тести",
   "quiz_yourProgress": "Ваш прогрес",
   "quiz_quizzesCompleted": "{count} тестів завершено",
   "@quiz_quizzesCompleted": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "quiz_accuracy": "Точність",
@@ -1113,13 +1138,17 @@
   "quiz_questions": "{count} питань",
   "@quiz_questions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "quiz_points": "+{points} очк.",
   "@quiz_points": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "quiz_completed": "Завершено",
@@ -1136,14 +1165,20 @@
   "quiz_questionOf": "Питання {current} з {total}",
   "@quiz_questionOf": {
     "placeholders": {
-      "current": {"type": "int"},
-      "total": {"type": "int"}
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "quiz_correct": "{count} правильно",
   "@quiz_correct": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "quiz_submitAnswer": "Відповісти",
@@ -1171,13 +1206,17 @@
   "quiz_strongest": "Найсильніша: {category}",
   "@quiz_strongest": {
     "placeholders": {
-      "category": {"type": "String"}
+      "category": {
+        "type": "String"
+      }
     }
   },
   "quiz_needsWork": "Потребує роботи: {category}",
   "@quiz_needsWork": {
     "placeholders": {
-      "category": {"type": "String"}
+      "category": {
+        "type": "String"
+      }
     }
   },
   "quiz_category_types": "Типи",
@@ -1199,17 +1238,19 @@
   "quiz_shareSubject": "Мій результат {score}% у \"{quizTitle}\" - Тест Дизайну Людини",
   "@quiz_shareSubject": {
     "placeholders": {
-      "quizTitle": {"type": "String"},
-      "score": {"type": "int"}
+      "quizTitle": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      }
     }
   },
   "quiz_failedToLoadStats": "Не вдалося завантажити статистику",
-
   "planetary_personality": "Особистість",
   "planetary_design": "Дизайн",
   "planetary_consciousBirth": "Свідоме · Народження",
   "planetary_unconsciousPrenatal": "Несвідоме · 88° Пренатально",
-
   "messages_title": "Повідомлення",
   "messages_conversation": "Бесіда",
   "messages_loading": "Завантаження...",
@@ -1223,13 +1264,11 @@
   "messages_deleteConversationConfirm": "Ви впевнені, що хочете видалити цю бесіду? Цю дію не можна скасувати.",
   "messages_conversationDeleted": "Бесіду видалено",
   "messages_startConversation": "Почніть бесіду!",
-
   "profile_takePhoto": "Зробити фото",
   "profile_chooseFromGallery": "Обрати з галереї",
   "profile_avatarUpdated": "Аватар успішно оновлено",
   "profile_profileUpdated": "Профіль успішно оновлено",
   "profile_noProfileFound": "Профіль не знайдено",
-
   "discovery_title": "Пошук",
   "discovery_searchUsers": "Пошук користувачів...",
   "discovery_discoverTab": "Пошук",
@@ -1242,17 +1281,20 @@
   "discovery_noFollowersYet": "Поки немає підписників",
   "discovery_shareInsights": "Діліться інсайтами, щоб отримати підписників",
   "discovery_clearAll": "Очистити все",
-
   "chart_gate": "Ворота {number}",
   "@chart_gate": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "chart_channel": "Канал {id}",
   "@chart_channel": {
     "placeholders": {
-      "id": {"type": "String"}
+      "id": {
+        "type": "String"
+      }
     }
   },
   "chart_center": "Центр",
@@ -1260,12 +1302,10 @@
   "chart_element": "Елемент",
   "chart_location": "Розташування",
   "chart_hdCenters": "Центри HD",
-
   "reaction_comment": "Коментар",
   "reaction_react": "Реакція",
   "reaction_standard": "Стандартні",
   "reaction_humanDesign": "Human Design",
-
   "share_shareChart": "Поділитися картою",
   "share_createShareLink": "Створити посилання",
   "share_shareViaUrl": "Поділитися посиланням",
@@ -1282,11 +1322,9 @@
   "share_createShareableLinks": "Створюйте посилання на вашу карту Дизайну Людини",
   "share_linkImage": "Зображення",
   "share_pdf": "PDF",
-
   "post_share": "Поділитися",
   "post_edit": "Редагувати",
   "post_report": "Поскаржитися",
-
   "mentorship_title": "Наставництво",
   "mentorship_pendingRequests": "Очікувані запити",
   "mentorship_availableMentors": "Доступні наставники",
@@ -1294,7 +1332,9 @@
   "mentorship_requestMentorship": "Запросити наставництво у {name}",
   "@mentorship_requestMentorship": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "mentorship_sendMessage": "Напишіть, чому хочете навчитися:",
@@ -1303,7 +1343,6 @@
   "mentorship_sendRequest": "Надіслати запит",
   "mentorship_becomeAMentor": "Стати наставником",
   "mentorship_shareKnowledge": "Діліться знаннями про Дизайн Людини",
-
   "story_cancel": "Скасувати",
   "story_createStory": "Створити історію",
   "story_share": "Поділитися",
@@ -1314,13 +1353,14 @@
   "story_gateNumber": "Ворота {number}",
   "@story_gateNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "story_whoCanSee": "Хто може бачити?",
   "story_followers": "Підписники",
   "story_everyone": "Усі",
-
   "challenges_title": "Завдання",
   "challenges_daily": "Денні",
   "challenges_weekly": "Тижневі",
@@ -1332,22 +1372,21 @@
   "challenges_claimedPoints": "Отримано {points} очків!",
   "@challenges_claimedPoints": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "challenges_totalPoints": "Всього очків",
   "challenges_level": "Рівень",
-
   "learning_all": "Усі",
   "learning_types": "Типи",
   "learning_gates": "Ворота",
   "learning_centers": "Центри",
   "learning_liveSessions": "Прямі ефіри",
-
   "quiz_noActiveSession": "Немає активної сесії тесту",
   "quiz_noQuestionsAvailable": "Немає доступних питань",
   "quiz_ok": "ОК",
-
   "liveSessions_title": "Прямі ефіри",
   "liveSessions_upcoming": "Майбутні",
   "liveSessions_mySessions": "Мої сесії",
@@ -1358,15 +1397,12 @@
   "liveSessions_no": "Ні",
   "liveSessions_yesCancel": "Так, скасувати",
   "liveSessions_registrationCancelled": "Реєстрацію скасовано",
-
   "gateChannelPicker_gates": "Ворота (64)",
   "gateChannelPicker_channels": "Канали (36)",
   "gateChannelPicker_search": "Пошук воріт або каналів...",
-
   "leaderboard_weekly": "Тиждень",
   "leaderboard_monthly": "Місяць",
   "leaderboard_allTime": "Весь час",
-
   "ai_chatTitle": "AI Асистент",
   "ai_askAi": "Запитати AI",
   "ai_askAboutChart": "Запитати AI про вашу карту",
@@ -1386,13 +1422,16 @@
   "ai_usageCount": "{used} з {limit} безкоштовних повідомлень використано",
   "@ai_usageCount": {
     "placeholders": {
-      "used": {"type": "int"},
-      "limit": {"type": "int"}
+      "used": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
+      }
     }
   },
   "ai_errorGeneric": "Щось пішло не так. Спробуйте ще раз.",
   "ai_errorNetwork": "Не вдалося підключитися до AI сервісу. Перевірте з'єднання.",
-
   "events_title": "Події спільноти",
   "events_upcoming": "Майбутні",
   "events_past": "Минулі",
@@ -1405,7 +1444,9 @@
   "events_participants": "{count, plural, =1{1 учасник} few{{count} учасники} many{{count} учасників} other{{count} учасників}}",
   "@events_participants": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "events_register": "Зареєструватися",
@@ -1425,19 +1466,33 @@
   "events_created": "Подію створено!",
   "events_deleted": "Подію видалено",
   "events_notFound": "Подію не знайдено",
-
   "chartOfDay_title": "Карта дня",
   "chartOfDay_featured": "Рекомендована карта",
   "chartOfDay_viewChart": "Переглянути карту",
-
   "discussion_typeDiscussion": "Обговорення типів",
   "discussion_channelDiscussion": "Обговорення каналів",
-
   "ai_wantMoreInsights": "Бажаєте більше AI-інсайтів?",
   "ai_messagesPackTitle": "{count} повідомлень",
   "ai_orSubscribe": "або підпишіться на безлімітний доступ",
   "ai_bestValue": "Найкраща ціна",
   "ai_getMoreMessages": "Отримати більше повідомлень",
   "ai_fromPrice": "Від {price}",
-  "ai_perMessage": "{price}/повідомлення"
+  "ai_perMessage": "{price}/повідомлення",
+  "ai_transitInsightTitle": "Today's Transit Insight",
+  "ai_transitInsightDesc": "Get a personalized AI interpretation of how today's transits affect your chart.",
+  "ai_chartReadingTitle": "AI Chart Reading",
+  "ai_chartReadingDesc": "Generate a comprehensive AI reading of your Human Design chart.",
+  "ai_chartReadingCost": "This reading uses 3 AI messages from your quota.",
+  "ai_compatibilityTitle": "AI Compatibility Reading",
+  "ai_compatibilityReading": "AI Compatibility Analysis",
+  "ai_dreamJournalTitle": "Dream Journal",
+  "ai_dreamEntryHint": "Record your dreams to discover hidden insights from your design...",
+  "ai_interpretDream": "Interpret Dream",
+  "ai_journalPromptsTitle": "Journal Prompts",
+  "ai_journalPromptsDesc": "Get personalized journaling prompts based on your chart and today's transits.",
+  "ai_generating": "Generating...",
+  "ai_askFollowUp": "Ask Follow-up",
+  "ai_regenerate": "Regenerate",
+  "ai_exportPdf": "Export PDF",
+  "ai_shareReading": "Share Reading"
 }

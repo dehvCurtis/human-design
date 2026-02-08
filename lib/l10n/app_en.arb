@@ -41,6 +41,7 @@
   "nav_today": "Daily",
   "nav_social": "Social",
   "nav_profile": "Profile",
+  "nav_ai": "AI",
   "nav_more": "More",
   "nav_learn": "Learn",
 
@@ -1510,5 +1511,23 @@
     "placeholders": {
       "price": {"type": "String"}
     }
-  }
+  },
+
+  "ai_transitInsightTitle": "Today's Transit Insight",
+  "ai_transitInsightDesc": "Get a personalized AI interpretation of how today's transits affect your chart.",
+  "ai_chartReadingTitle": "AI Chart Reading",
+  "ai_chartReadingDesc": "Generate a comprehensive AI reading of your Human Design chart.",
+  "ai_chartReadingCost": "This reading uses 3 AI messages from your quota.",
+  "ai_compatibilityTitle": "AI Compatibility Reading",
+  "ai_compatibilityReading": "AI Compatibility Analysis",
+  "ai_dreamJournalTitle": "Dream Journal",
+  "ai_dreamEntryHint": "Record your dreams to discover hidden insights from your design...",
+  "ai_interpretDream": "Interpret Dream",
+  "ai_journalPromptsTitle": "Journal Prompts",
+  "ai_journalPromptsDesc": "Get personalized journaling prompts based on your chart and today's transits.",
+  "ai_generating": "Generating...",
+  "ai_askFollowUp": "Ask Follow-up",
+  "ai_regenerate": "Regenerate",
+  "ai_exportPdf": "Export PDF",
+  "ai_shareReading": "Share Reading"
 }

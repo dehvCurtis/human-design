@@ -1,11 +1,9 @@
 {
   "@@locale": "de",
-
   "appName": "AuraMap",
   "@appName": {
     "description": "The name of the application"
   },
-
   "common_save": "Speichern",
   "common_cancel": "Abbrechen",
   "common_delete": "Löschen",
@@ -35,18 +33,16 @@
   "common_reply": "Antworten",
   "common_deleteConfirmation": "Sind Sie sicher, dass Sie dies löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
   "common_comingSoon": "Demnächst verfügbar!",
-
   "nav_home": "Start",
   "nav_chart": "Chart",
   "nav_today": "Täglich",
   "nav_social": "Sozial",
   "nav_profile": "Profil",
+  "nav_ai": "KI",
   "nav_more": "Mehr",
   "nav_learn": "Lernen",
-
   "affirmation_savedSuccess": "Affirmation gespeichert!",
   "affirmation_alreadySaved": "Affirmation bereits gespeichert",
-
   "home_goodMorning": "Guten Morgen",
   "home_goodAfternoon": "Guten Tag",
   "home_goodEvening": "Guten Abend",
@@ -62,7 +58,6 @@
   "home_definedCenters": "Definierte Zentren",
   "home_activeChannels": "Aktive Kanäle",
   "home_activeGates": "Aktive Tore",
-
   "transit_today": "Heutige Transite",
   "transit_sun": "Sonne",
   "transit_earth": "Erde",
@@ -92,7 +87,6 @@
     }
   },
   "transit_noConnections": "Heute keine direkten Transitverbindungen",
-
   "auth_signIn": "Anmelden",
   "auth_signUp": "Registrieren",
   "auth_signInWithApple": "Mit Apple anmelden",
@@ -128,7 +122,6 @@
   "auth_and": " und ",
   "auth_birthInformation": "Geburtsinformationen",
   "auth_calculateMyChart": "Mein Chart berechnen",
-
   "onboarding_welcome": "Willkommen bei AuraMap",
   "onboarding_welcomeSubtitle": "Entdecken Sie Ihre einzigartige energetische Blaupause",
   "onboarding_birthData": "Geben Sie Ihre Geburtsdaten ein",
@@ -149,7 +142,6 @@
   "onboarding_getStarted": "Loslegen",
   "onboarding_alreadyHaveAccount": "Ich habe bereits ein Konto",
   "onboarding_liveInAlignment": "Entdecken Sie Ihre einzigartige energetische Blaupause und leben Sie im Einklang mit Ihrer wahren Natur.",
-
   "chart_myChart": "Mein Chart",
   "chart_viewChart": "Chart anzeigen",
   "chart_calculate": "Chart berechnen",
@@ -197,19 +189,16 @@
   "chart_unconsciousGates": "Unbewusste Tore",
   "chart_personalitySide": "Persönlichkeitsseite - was Sie bewusst wahrnehmen",
   "chart_designSide": "Designseite - was andere in Ihnen sehen",
-
   "type_manifestor": "Manifestor",
   "type_generator": "Generator",
   "type_manifestingGenerator": "Manifestierender Generator",
   "type_projector": "Projektor",
   "type_reflector": "Reflektor",
-
   "type_manifestor_strategy": "Informieren",
   "type_generator_strategy": "Reagieren",
   "type_manifestingGenerator_strategy": "Reagieren",
   "type_projector_strategy": "Auf Einladung warten",
   "type_reflector_strategy": "Einen Mondzyklus warten",
-
   "authority_emotional": "Emotional",
   "authority_sacral": "Sakral",
   "authority_splenic": "Milz",
@@ -217,13 +206,11 @@
   "authority_self": "Selbst-Projiziert",
   "authority_environment": "Mental/Umgebung",
   "authority_lunar": "Lunar",
-
   "definition_none": "Keine Definition",
   "definition_single": "Einfache Definition",
   "definition_split": "Geteilte Definition",
   "definition_tripleSplit": "Dreifach-Teilung",
   "definition_quadrupleSplit": "Vierfach-Teilung",
-
   "profile_1_3": "1/3 Forscher/Märtyrer",
   "profile_1_4": "1/4 Forscher/Opportunist",
   "profile_2_4": "2/4 Eremit/Opportunist",
@@ -236,7 +223,6 @@
   "profile_5_2": "5/2 Ketzer/Eremit",
   "profile_6_2": "6/2 Rollenvorbild/Eremit",
   "profile_6_3": "6/3 Rollenvorbild/Märtyrer",
-
   "center_head": "Kopf",
   "center_ajna": "Ajna",
   "center_throat": "Kehle",
@@ -248,7 +234,6 @@
   "center_root": "Wurzel",
   "center_defined": "Definiert",
   "center_undefined": "Undefiniert",
-
   "section_type": "Typ",
   "section_strategy": "Strategie",
   "section_authority": "Autorität",
@@ -259,7 +244,6 @@
   "section_gates": "Tore",
   "section_conscious": "Bewusst (Persönlichkeit)",
   "section_unconscious": "Unbewusst (Design)",
-
   "social_title": "Sozial",
   "social_thoughts": "Gedanken",
   "social_discover": "Entdecken",
@@ -318,7 +302,6 @@
   "social_loadGroupsFailed": "Laden der Gruppen fehlgeschlagen",
   "social_loadSharedFailed": "Laden der geteilten Charts fehlgeschlagen",
   "social_userNotFound": "Benutzer nicht gefunden",
-
   "discovery_userNotFound": "Benutzer nicht gefunden",
   "discovery_following": "Folge ich",
   "discovery_follow": "Folgen",
@@ -334,7 +317,6 @@
   "discovery_followingLabel": "Folge ich",
   "discovery_noResults": "Keine Benutzer gefunden",
   "discovery_noResultsMessage": "Versuchen Sie, Ihre Filter anzupassen oder schauen Sie später wieder vorbei",
-
   "userProfile_viewChart": "Bodygraph",
   "userProfile_chartPrivate": "Dieses Chart ist privat",
   "userProfile_chartFriendsOnly": "Werden Sie gegenseitige Follower, um dieses Chart anzusehen",
@@ -349,10 +331,8 @@
   "userProfile_thoughts": "Gedanken",
   "userProfile_noThoughts": "Noch keine Gedanken geteilt",
   "userProfile_showAll": "Alle anzeigen",
-
   "popularCharts_title": "Beliebte Charts",
   "popularCharts_subtitle": "Meistgefolgte öffentliche Charts",
-
   "time_minutesAgo": "vor {minutes}m",
   "@time_minutesAgo": {
     "placeholders": {
@@ -377,7 +357,6 @@
       }
     }
   },
-
   "transit_title": "Heutige Transite",
   "transit_currentEnergies": "Aktuelle Energien",
   "transit_sunGate": "Sonnentor",
@@ -404,7 +383,6 @@
   },
   "transit_noPersonalImpact": "Heute keine direkten Transitverbindungen",
   "transit_viewFullTransit": "Vollständiges Transit-Chart anzeigen",
-
   "affirmation_title": "Tägliche Affirmation",
   "affirmation_forYourType": "Für Ihren {type}",
   "@affirmation_forYourType": {
@@ -428,7 +406,6 @@
   "affirmation_share": "Affirmation teilen",
   "affirmation_notifications": "Tägliche Affirmations-Benachrichtigungen",
   "affirmation_notificationTime": "Benachrichtigungszeit",
-
   "lifestyle_today": "Heute",
   "lifestyle_insights": "Erkenntnisse",
   "lifestyle_journal": "Tagebuch",
@@ -438,7 +415,6 @@
   "lifestyle_mood": "Stimmung",
   "lifestyle_energy": "Energieniveau",
   "lifestyle_reflection": "Reflexion",
-
   "penta_title": "Penta",
   "penta_description": "Gruppenanalyse für 3-5 Personen",
   "penta_createNew": "Penta erstellen",
@@ -457,7 +433,6 @@
   "penta_electromagneticConnections": "Elektromagnetische Verbindungen",
   "penta_connectionsDescription": "Besondere Energieverbindungen zwischen Mitgliedern, die Anziehung und Chemie erzeugen.",
   "penta_areasForAttention": "Bereiche, die Aufmerksamkeit benötigen",
-
   "composite_title": "Komposit-Chart",
   "composite_infoText": "Ein Komposit-Chart zeigt die Beziehungsdynamik zwischen zwei Personen und offenbart, wie Ihre Charts interagieren und sich ergänzen.",
   "composite_selectTwoCharts": "2 Charts auswählen",
@@ -489,7 +464,6 @@
   "composite_needMoreChartsDesc": "Sie benötigen mindestens 2 Charts, um eine Beziehung zu analysieren. Fügen Sie ein weiteres Chart hinzu, um fortzufahren.",
   "composite_selectTwoHint": "Wählen Sie 2 Charts aus, um ihre Verbindung zu analysieren",
   "composite_selectOneMore": "Wählen Sie noch 1 Chart aus",
-
   "premium_upgrade": "Auf Premium upgraden",
   "premium_subscribe": "Abonnieren",
   "premium_restore": "Käufe wiederherstellen",
@@ -505,7 +479,6 @@
   "premium_perMonth": "/Monat",
   "premium_perYear": "/Jahr",
   "premium_bestValue": "Bester Wert",
-
   "settings_appearance": "Erscheinungsbild",
   "settings_language": "Sprache",
   "settings_selectLanguage": "Sprache auswählen",
@@ -568,7 +541,6 @@
   "settings_exportingData": "Bereite Ihren Datenexport vor...",
   "settings_exportDataSubject": "AuraMap - Mein Datenexport",
   "settings_exportDataFailed": "Datenexport fehlgeschlagen. Bitte versuchen Sie es erneut.",
-
   "error_generic": "Etwas ist schief gelaufen",
   "error_network": "Keine Internetverbindung",
   "error_invalidEmail": "Bitte geben Sie eine gültige E-Mail ein",
@@ -577,7 +549,6 @@
   "error_birthDataRequired": "Bitte geben Sie Ihre Geburtsdaten ein",
   "error_locationRequired": "Bitte wählen Sie Ihren Geburtsort aus",
   "error_chartCalculation": "Ihr Chart konnte nicht berechnet werden",
-
   "profile_editProfile": "Profil bearbeiten",
   "profile_shareChart": "Mein Chart teilen",
   "profile_exportPdf": "Chart als PDF exportieren",
@@ -598,7 +569,6 @@
   "profile_birthTime": "Zeit",
   "profile_birthLocation": "Ort",
   "profile_birthTimezone": "Zeitzone",
-
   "chart_chakras": "Chakras",
   "chakra_title": "Chakra-Energie",
   "chakra_activated": "Aktiviert",
@@ -614,35 +584,27 @@
   "chakra_hdMapping": "HD-Zentrum-Zuordnung",
   "chakra_element": "Element",
   "chakra_location": "Ort",
-
   "chakra_root": "Wurzel",
   "chakra_root_sanskrit": "Muladhara",
   "chakra_root_description": "Erdung, Überleben und Stabilität",
-
   "chakra_sacral": "Sakral",
   "chakra_sacral_sanskrit": "Svadhisthana",
   "chakra_sacral_description": "Kreativität, Sexualität und Emotionen",
-
   "chakra_solarPlexus": "Solarplexus",
   "chakra_solarPlexus_sanskrit": "Manipura",
   "chakra_solarPlexus_description": "Persönliche Kraft, Selbstvertrauen und Wille",
-
   "chakra_heart": "Herz",
   "chakra_heart_sanskrit": "Anahata",
   "chakra_heart_description": "Liebe, Mitgefühl und Verbindung",
-
   "chakra_throat": "Kehle",
   "chakra_throat_sanskrit": "Vishuddha",
   "chakra_throat_description": "Kommunikation, Ausdruck und Wahrheit",
-
   "chakra_thirdEye": "Drittes Auge",
   "chakra_thirdEye_sanskrit": "Ajna",
   "chakra_thirdEye_description": "Intuition, Einsicht und Vorstellungskraft",
-
   "chakra_crown": "Krone",
   "chakra_crown_sanskrit": "Sahasrara",
   "chakra_crown_description": "Spirituelle Verbindung und Bewusstsein",
-
   "quiz_title": "Quiz",
   "quiz_yourProgress": "Ihr Fortschritt",
   "quiz_quizzesCompleted": "{count} Quiz abgeschlossen",
@@ -763,17 +725,19 @@
   "quiz_shareSubject": "Ich habe {score}% bei \"{quizTitle}\" erreicht - Human Design Quiz",
   "@quiz_shareSubject": {
     "placeholders": {
-      "quizTitle": {"type": "String"},
-      "score": {"type": "int"}
+      "quizTitle": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      }
     }
   },
   "quiz_failedToLoadStats": "Laden der Statistiken fehlgeschlagen",
-
   "planetary_personality": "Persönlichkeit",
   "planetary_design": "Design",
-  "planetary_consciousBirth": "Bewusst \u00b7 Geburt",
-  "planetary_unconsciousPrenatal": "Unbewusst \u00b7 88\u00b0 Pränatal",
-
+  "planetary_consciousBirth": "Bewusst · Geburt",
+  "planetary_unconsciousPrenatal": "Unbewusst · 88° Pränatal",
   "gamification_yourProgress": "Ihr Fortschritt",
   "gamification_level": "Level",
   "gamification_points": "Pkt",
@@ -788,9 +752,7 @@
   "gamification_earnedBadge": "Sie haben ein Abzeichen verdient!",
   "gamification_claimReward": "Belohnung beanspruchen",
   "gamification_completed": "Abgeschlossen",
-
   "common_copy": "Kopieren",
-
   "share_myShares": "Meine Shares",
   "share_createNew": "Neu erstellen",
   "share_newLink": "Neuer Link",
@@ -800,13 +762,17 @@
   "share_activeLinks": "{count} aktive Links",
   "@share_activeLinks": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "share_expiredLinks": "{count} abgelaufen",
   "@share_expiredLinks": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "share_clearExpired": "Löschen",
@@ -814,7 +780,9 @@
   "share_clearExpiredMessage": "Dies entfernt {count} abgelaufene Links aus Ihrem Verlauf.",
   "@share_clearExpiredMessage": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "share_clearAll": "Alle löschen",
@@ -834,7 +802,9 @@
   "share_views": "{count} Aufrufe",
   "@share_views": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "share_expired": "Abgelaufen",
@@ -842,16 +812,19 @@
   "share_expiredOn": "Abgelaufen am {date}",
   "@share_expiredOn": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "share_expiresIn": "Läuft ab in {time}",
   "@share_expiresIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
-
   "auth_emailNotConfirmed": "Bitte bestätigen Sie Ihre E-Mail",
   "auth_resendConfirmation": "Bestätigungs-E-Mail erneut senden",
   "auth_confirmationSent": "Bestätigungs-E-Mail gesendet",
@@ -861,7 +834,6 @@
   "auth_clickLinkToActivate": "Bitte klicken Sie auf den Link in der E-Mail, um Ihr Konto zu aktivieren.",
   "auth_goToSignIn": "Zur Anmeldung",
   "auth_returnToHome": "Zurück zur Startseite",
-
   "hashtags_explore": "Hashtags erkunden",
   "hashtags_trending": "Trending",
   "hashtags_popular": "Beliebt",
@@ -874,32 +846,38 @@
   "hashtag_postCount": "{count, plural, =1{1 Beitrag} other{{count} Beiträge}}",
   "@hashtag_postCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "hashtag_recentPosts": "{count, plural, =1{1 Beitrag heute} other{{count} Beiträge heute}}",
   "@hashtag_recentPosts": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
-
   "feed_forYou": "Für Sie",
   "feed_trending": "Trending",
   "feed_hdTopics": "HD-Themen",
   "feed_gateTitle": "Tor {number}",
   "@feed_gateTitle": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "feed_gatePosts": "Beiträge über Tor {number}",
   "@feed_gatePosts": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
-
   "transit_events_title": "Transit-Ereignisse",
   "transit_events_happening": "Gerade jetzt",
   "transit_events_upcoming": "Bevorstehend",
@@ -917,13 +895,17 @@
   "transit_events_endsIn": "Endet in {time}",
   "@transit_events_endsIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "transit_events_startsIn": "Beginnt in {time}",
   "@transit_events_startsIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "transit_events_notFound": "Ereignis nicht gefunden",
@@ -937,22 +919,21 @@
   "transit_events_experiencingWith": "Erleben Sie diesen Transit mit {count} anderen",
   "@transit_events_experiencingWith": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "transit_events_joinCommunity": "Der Community beitreten",
   "transit_events_shareYourExperience": "Teilen Sie Ihre Erfahrung und vernetzen Sie sich mit anderen",
-
   "activity_title": "Freundesaktivität",
   "activity_noActivities": "Noch keine Freundesaktivität",
   "activity_followFriends": "Folgen Sie Freunden, um ihre Erfolge und Meilensteine hier zu sehen!",
   "activity_findFriends": "Freunde finden",
   "activity_celebrate": "Feiern",
   "activity_celebrated": "Gefeiert",
-
   "cancel": "Abbrechen",
   "create": "Erstellen",
-
   "groupChallenges_title": "Gruppenherausforderungen",
   "groupChallenges_myTeams": "Meine Teams",
   "groupChallenges_challenges": "Herausforderungen",
@@ -968,13 +949,17 @@
   "groupChallenges_memberCount": "{count, plural, =1{1 Mitglied} other{{count} Mitglieder}}",
   "@groupChallenges_memberCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_points": "{points} Pkt",
   "@groupChallenges_points": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_noChallenges": "Keine aktiven Herausforderungen",
@@ -983,25 +968,33 @@
   "groupChallenges_reward": "{points} Pkt Belohnung",
   "@groupChallenges_reward": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_teamsEnrolled": "{count} Teams",
   "@groupChallenges_teamsEnrolled": {
     "placeholders": {
-      "count": {"type": "String"}
+      "count": {
+        "type": "String"
+      }
     }
   },
   "groupChallenges_participants": "{count} Teilnehmer",
   "@groupChallenges_participants": {
     "placeholders": {
-      "count": {"type": "String"}
+      "count": {
+        "type": "String"
+      }
     }
   },
   "groupChallenges_endsIn": "Endet in {time}",
   "@groupChallenges_endsIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "groupChallenges_weekly": "Wöchentlich",
@@ -1021,7 +1014,9 @@
   "groupChallenges_contributed": "{points} Pkt beigetragen",
   "@groupChallenges_contributed": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "groupChallenges_joinedTeam": "Erfolgreich dem Team beigetreten!",
@@ -1042,7 +1037,6 @@
   "groupChallenges_enroll": "Anmelden",
   "groupChallenges_teamEnrolled": "Team erfolgreich angemeldet!",
   "groupChallenges_noTeamsEnrolled": "Noch keine Teams angemeldet",
-
   "circles_title": "Kompatibilitätskreise",
   "circles_myCircles": "Meine Kreise",
   "circles_invitations": "Einladungen",
@@ -1059,7 +1053,9 @@
   "circles_memberCount": "{count, plural, =1{1 Mitglied} other{{count} Mitglieder}}",
   "@circles_memberCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "circles_private": "Privat",
@@ -1068,7 +1064,9 @@
   "circles_invitedBy": "Eingeladen von {name}",
   "@circles_invitedBy": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "circles_decline": "Ablehnen",
@@ -1088,7 +1086,9 @@
   "circles_deleteConfirmation": "Sind Sie sicher, dass Sie \"{name}\" löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
   "@circles_deleteConfirmation": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "circles_deleted": "Kreis gelöscht",
@@ -1108,7 +1108,6 @@
   "circles_writePost": "Teilen Sie etwas mit Ihrem Kreis...",
   "circles_noPosts": "Noch keine Beiträge",
   "circles_beFirstToPost": "Seien Sie der Erste, der etwas mit Ihrem Kreis teilt!",
-
   "experts_title": "HD-Experten",
   "experts_becomeExpert": "Experte werden",
   "experts_filterBySpecialization": "Nach Spezialisierung filtern",
@@ -1119,7 +1118,9 @@
   "experts_followers": "{count} Follower",
   "@experts_followers": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "experts_notFound": "Experte nicht gefunden",
@@ -1138,7 +1139,6 @@
   "experts_followersLabel": "Follower",
   "experts_rating": "Bewertung",
   "experts_years": "Jahre",
-
   "learningPaths_title": "Lernpfade",
   "learningPaths_explore": "Erkunden",
   "learningPaths_inProgress": "In Bearbeitung",
@@ -1154,58 +1154,78 @@
   "learningPaths_enrolled": "{count} angemeldet",
   "@learningPaths_enrolled": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPaths_stepsCount": "{count} Schritte",
   "@learningPaths_stepsCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPaths_progress": "{completed} von {total} Schritten",
   "@learningPaths_progress": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "learningPaths_resume": "Fortsetzen",
   "learningPaths_completedOn": "Abgeschlossen am {date}",
   "@learningPaths_completedOn": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "learningPathNotFound": "Lernpfad nicht gefunden",
   "learningPathMinutes": "{minutes} Min",
   "@learningPathMinutes": {
     "placeholders": {
-      "minutes": {"type": "int"}
+      "minutes": {
+        "type": "int"
+      }
     }
   },
   "learningPathSteps": "{count} Schritte",
   "@learningPathSteps": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPathBy": "Von {author}",
   "@learningPathBy": {
     "placeholders": {
-      "author": {"type": "String"}
+      "author": {
+        "type": "String"
+      }
     }
   },
   "learningPathEnrolled": "{count} angemeldet",
   "@learningPathEnrolled": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPathCompleted": "{count} abgeschlossen",
   "@learningPathCompleted": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "learningPathEnroll": "Lernen beginnen",
@@ -1214,8 +1234,12 @@
   "learningPathProgressText": "{completed} von {total} Schritten abgeschlossen",
   "@learningPathProgressText": {
     "placeholders": {
-      "completed": {"type": "int"},
-      "total": {"type": "int"}
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
     }
   },
   "learningPathStepsTitle": "Lernschritte",
@@ -1223,13 +1247,14 @@
   "learningPathEnrollMessage": "Sie werden für \"{title}\" angemeldet und können Ihren Fortschritt verfolgen, während Sie jeden Schritt abschließen.",
   "@learningPathEnrollMessage": {
     "placeholders": {
-      "title": {"type": "String"}
+      "title": {
+        "type": "String"
+      }
     }
   },
   "learningPathViewContent": "Inhalt anzeigen",
   "learningPathMarkComplete": "Als abgeschlossen markieren",
   "learningPathStepCompleted": "Schritt abgeschlossen!",
-
   "thought_title": "Gedanken",
   "thought_feedTitle": "Gedanken",
   "thought_createNew": "Gedanken teilen",
@@ -1239,7 +1264,9 @@
   "thought_regeneratedFrom": "Regeneriert von @{username}",
   "@thought_regeneratedFrom": {
     "placeholders": {
-      "username": {"type": "String"}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "thought_regenerateSuccess": "Gedanke auf Ihrer Pinnwand regeneriert!",
@@ -1249,7 +1276,9 @@
   "thought_regenerateCount": "{count, plural, =1{1 Regenerierung} other{{count} Regenerierungen}}",
   "@thought_regenerateCount": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "thought_cannotRegenerateOwn": "Sie können Ihren eigenen Gedanken nicht regenerieren",
@@ -1259,12 +1288,13 @@
   "thought_replyingTo": "Antwort an {username}",
   "@thought_replyingTo": {
     "placeholders": {
-      "username": {"type": "String"}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "thought_writeReply": "Antwort schreiben...",
   "thought_commentPlaceholder": "Kommentar hinzufügen...",
-
   "messages_title": "Nachrichten",
   "messages_conversation": "Konversation",
   "messages_loading": "Lädt...",
@@ -1278,13 +1308,11 @@
   "messages_deleteConversationConfirm": "Sind Sie sicher, dass Sie diese Konversation löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
   "messages_conversationDeleted": "Konversation gelöscht",
   "messages_startConversation": "Beginnen Sie die Konversation!",
-
   "profile_takePhoto": "Foto aufnehmen",
   "profile_chooseFromGallery": "Aus Galerie auswählen",
   "profile_avatarUpdated": "Avatar erfolgreich aktualisiert",
   "profile_profileUpdated": "Profil erfolgreich aktualisiert",
   "profile_noProfileFound": "Kein Profil gefunden",
-
   "discovery_title": "Entdecken",
   "discovery_searchUsers": "Benutzer suchen...",
   "discovery_discoverTab": "Entdecken",
@@ -1297,17 +1325,20 @@
   "discovery_noFollowersYet": "Noch keine Follower",
   "discovery_shareInsights": "Teilen Sie Ihre Erkenntnisse, um Follower zu gewinnen",
   "discovery_clearAll": "Alle löschen",
-
   "chart_gate": "Tor {number}",
   "@chart_gate": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "chart_channel": "Kanal {id}",
   "@chart_channel": {
     "placeholders": {
-      "id": {"type": "String"}
+      "id": {
+        "type": "String"
+      }
     }
   },
   "chart_center": "Zentrum",
@@ -1315,12 +1346,10 @@
   "chart_element": "Element",
   "chart_location": "Ort",
   "chart_hdCenters": "HD-Zentren",
-
   "reaction_comment": "Kommentieren",
   "reaction_react": "Reagieren",
   "reaction_standard": "Standard",
   "reaction_humanDesign": "Human Design",
-
   "share_shareChart": "Chart teilen",
   "share_createShareLink": "Share-Link erstellen",
   "share_shareViaUrl": "Via URL teilen",
@@ -1337,11 +1366,9 @@
   "share_createShareableLinks": "Erstellen Sie teilbare Links zu Ihrem Human Design Chart",
   "share_linkImage": "Bild",
   "share_pdf": "PDF",
-
   "post_share": "Teilen",
   "post_edit": "Bearbeiten",
   "post_report": "Melden",
-
   "mentorship_title": "Mentoring",
   "mentorship_pendingRequests": "Ausstehende Anfragen",
   "mentorship_availableMentors": "Verfügbare Mentoren",
@@ -1349,7 +1376,9 @@
   "mentorship_requestMentorship": "Mentoring von {name} anfragen",
   "@mentorship_requestMentorship": {
     "placeholders": {
-      "name": {"type": "String"}
+      "name": {
+        "type": "String"
+      }
     }
   },
   "mentorship_sendMessage": "Senden Sie eine Nachricht, in der Sie erklären, was Sie lernen möchten:",
@@ -1358,7 +1387,6 @@
   "mentorship_sendRequest": "Anfrage senden",
   "mentorship_becomeAMentor": "Mentor werden",
   "mentorship_shareKnowledge": "Teilen Sie Ihr Human Design Wissen",
-
   "story_cancel": "Abbrechen",
   "story_createStory": "Story erstellen",
   "story_share": "Teilen",
@@ -1369,13 +1397,14 @@
   "story_gateNumber": "Tor {number}",
   "@story_gateNumber": {
     "placeholders": {
-      "number": {"type": "int"}
+      "number": {
+        "type": "int"
+      }
     }
   },
   "story_whoCanSee": "Wer kann dies sehen?",
   "story_followers": "Follower",
   "story_everyone": "Alle",
-
   "challenges_title": "Herausforderungen",
   "challenges_daily": "Täglich",
   "challenges_weekly": "Wöchentlich",
@@ -1387,22 +1416,21 @@
   "challenges_claimedPoints": "{points} Punkte beansprucht!",
   "@challenges_claimedPoints": {
     "placeholders": {
-      "points": {"type": "int"}
+      "points": {
+        "type": "int"
+      }
     }
   },
   "challenges_totalPoints": "Gesamtpunkte",
   "challenges_level": "Level",
-
   "learning_all": "Alle",
   "learning_types": "Typen",
   "learning_gates": "Tore",
   "learning_centers": "Zentren",
   "learning_liveSessions": "Live-Sessions",
-
   "quiz_noActiveSession": "Keine aktive Quiz-Session",
   "quiz_noQuestionsAvailable": "Keine Fragen verfügbar",
   "quiz_ok": "OK",
-
   "liveSessions_title": "Live-Sessions",
   "liveSessions_upcoming": "Bevorstehend",
   "liveSessions_mySessions": "Meine Sessions",
@@ -1413,15 +1441,12 @@
   "liveSessions_no": "Nein",
   "liveSessions_yesCancel": "Ja, abbrechen",
   "liveSessions_registrationCancelled": "Registrierung abgebrochen",
-
   "gateChannelPicker_gates": "Tore (64)",
   "gateChannelPicker_channels": "Kanäle (36)",
   "gateChannelPicker_search": "Tore oder Kanäle suchen...",
-
   "leaderboard_weekly": "Wöchentlich",
   "leaderboard_monthly": "Monatlich",
   "leaderboard_allTime": "Alle Zeiten",
-
   "ai_chatTitle": "KI-Assistent",
   "ai_askAi": "KI fragen",
   "ai_askAboutChart": "KI über Ihr Chart fragen",
@@ -1441,13 +1466,16 @@
   "ai_usageCount": "{used} von {limit} kostenlosen Nachrichten verwendet",
   "@ai_usageCount": {
     "placeholders": {
-      "used": {"type": "int"},
-      "limit": {"type": "int"}
+      "used": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
+      }
     }
   },
   "ai_errorGeneric": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
   "ai_errorNetwork": "Der KI-Service konnte nicht erreicht werden. Überprüfen Sie Ihre Verbindung.",
-
   "events_title": "Community-Events",
   "events_upcoming": "Bevorstehend",
   "events_past": "Vergangen",
@@ -1460,7 +1488,9 @@
   "events_participants": "{count, plural, =1{1 Teilnehmer} other{{count} Teilnehmer}}",
   "@events_participants": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "events_register": "Registrieren",
@@ -1480,19 +1510,33 @@
   "events_created": "Event erstellt!",
   "events_deleted": "Event gelöscht",
   "events_notFound": "Event nicht gefunden",
-
   "chartOfDay_title": "Chart des Tages",
   "chartOfDay_featured": "Empfohlenes Chart",
   "chartOfDay_viewChart": "Chart anzeigen",
-
   "discussion_typeDiscussion": "Typ-Diskussion",
   "discussion_channelDiscussion": "Kanal-Diskussion",
-
   "ai_wantMoreInsights": "Mehr AI-Einblicke gewünscht?",
   "ai_messagesPackTitle": "{count} Nachrichten",
   "ai_orSubscribe": "oder abonnieren für unbegrenzt",
   "ai_bestValue": "Bester Wert",
   "ai_getMoreMessages": "Mehr Nachrichten erhalten",
   "ai_fromPrice": "Ab {price}",
-  "ai_perMessage": "{price}/Nachricht"
+  "ai_perMessage": "{price}/Nachricht",
+  "ai_transitInsightTitle": "Today's Transit Insight",
+  "ai_transitInsightDesc": "Get a personalized AI interpretation of how today's transits affect your chart.",
+  "ai_chartReadingTitle": "AI Chart Reading",
+  "ai_chartReadingDesc": "Generate a comprehensive AI reading of your Human Design chart.",
+  "ai_chartReadingCost": "This reading uses 3 AI messages from your quota.",
+  "ai_compatibilityTitle": "AI Compatibility Reading",
+  "ai_compatibilityReading": "AI Compatibility Analysis",
+  "ai_dreamJournalTitle": "Dream Journal",
+  "ai_dreamEntryHint": "Record your dreams to discover hidden insights from your design...",
+  "ai_interpretDream": "Interpret Dream",
+  "ai_journalPromptsTitle": "Journal Prompts",
+  "ai_journalPromptsDesc": "Get personalized journaling prompts based on your chart and today's transits.",
+  "ai_generating": "Generating...",
+  "ai_askFollowUp": "Ask Follow-up",
+  "ai_regenerate": "Regenerate",
+  "ai_exportPdf": "Export PDF",
+  "ai_shareReading": "Share Reading"
 }

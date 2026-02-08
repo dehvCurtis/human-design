@@ -320,6 +320,12 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get nav_profile;
 
+  /// No description provided for @nav_ai.
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get nav_ai;
+
   /// No description provided for @nav_more.
   ///
   /// In en, this message translates to:
@@ -6271,6 +6277,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{price}/message'**
   String ai_perMessage(String price);
+
+  /// No description provided for @ai_transitInsightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Transit Insight'**
+  String get ai_transitInsightTitle;
+
+  /// No description provided for @ai_transitInsightDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a personalized AI interpretation of how today\'s transits affect your chart.'**
+  String get ai_transitInsightDesc;
+
+  /// No description provided for @ai_chartReadingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Chart Reading'**
+  String get ai_chartReadingTitle;
+
+  /// No description provided for @ai_chartReadingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate a comprehensive AI reading of your Human Design chart.'**
+  String get ai_chartReadingDesc;
+
+  /// No description provided for @ai_chartReadingCost.
+  ///
+  /// In en, this message translates to:
+  /// **'This reading uses 3 AI messages from your quota.'**
+  String get ai_chartReadingCost;
+
+  /// No description provided for @ai_compatibilityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Compatibility Reading'**
+  String get ai_compatibilityTitle;
+
+  /// No description provided for @ai_compatibilityReading.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Compatibility Analysis'**
+  String get ai_compatibilityReading;
+
+  /// No description provided for @ai_dreamJournalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dream Journal'**
+  String get ai_dreamJournalTitle;
+
+  /// No description provided for @ai_dreamEntryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Record your dreams to discover hidden insights from your design...'**
+  String get ai_dreamEntryHint;
+
+  /// No description provided for @ai_interpretDream.
+  ///
+  /// In en, this message translates to:
+  /// **'Interpret Dream'**
+  String get ai_interpretDream;
+
+  /// No description provided for @ai_journalPromptsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Journal Prompts'**
+  String get ai_journalPromptsTitle;
+
+  /// No description provided for @ai_journalPromptsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Get personalized journaling prompts based on your chart and today\'s transits.'**
+  String get ai_journalPromptsDesc;
+
+  /// No description provided for @ai_generating.
+  ///
+  /// In en, this message translates to:
+  /// **'Generating...'**
+  String get ai_generating;
+
+  /// No description provided for @ai_askFollowUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask Follow-up'**
+  String get ai_askFollowUp;
+
+  /// No description provided for @ai_regenerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate'**
+  String get ai_regenerate;
+
+  /// No description provided for @ai_exportPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Export PDF'**
+  String get ai_exportPdf;
+
+  /// No description provided for @ai_shareReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Reading'**
+  String get ai_shareReading;
 }
 
 class _AppLocalizationsDelegate
