@@ -5,7 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_be.dart';
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_ro.dart';
 import 'app_localizations_ru.dart';
 import 'app_localizations_uk.dart';
 
@@ -95,7 +100,12 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('be'),
+    Locale('de'),
     Locale('en'),
+    Locale('es'),
+    Locale('pt'),
+    Locale('ro'),
     Locale('ru'),
     Locale('uk'),
   ];
@@ -103,7 +113,7 @@ abstract class AppLocalizations {
   /// The name of the application
   ///
   /// In en, this message translates to:
-  /// **'Human Design'**
+  /// **'AuraMap'**
   String get appName;
 
   /// No description provided for @common_save.
@@ -685,7 +695,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboarding_welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Human Design'**
+  /// **'Welcome to AuraMap'**
   String get onboarding_welcome;
 
   /// No description provided for @onboarding_welcomeSubtitle.
@@ -2671,13 +2681,13 @@ abstract class AppLocalizations {
   /// No description provided for @settings_feedbackSubject.
   ///
   /// In en, this message translates to:
-  /// **'Human Design App Feedback'**
+  /// **'AuraMap App Feedback'**
   String get settings_feedbackSubject;
 
   /// No description provided for @settings_feedbackBody.
   ///
   /// In en, this message translates to:
-  /// **'Hi,\n\nI would like to share the following feedback about the Human Design app:\n\n'**
+  /// **'Hi,\n\nI would like to share the following feedback about AuraMap:\n\n'**
   String get settings_feedbackBody;
 
   /// No description provided for @auth_newPassword.
@@ -2725,7 +2735,7 @@ abstract class AppLocalizations {
   /// No description provided for @settings_exportDataSubject.
   ///
   /// In en, this message translates to:
-  /// **'Human Design App - My Data Export'**
+  /// **'AuraMap - My Data Export'**
   String get settings_exportDataSubject;
 
   /// No description provided for @settings_exportDataFailed.
@@ -2875,7 +2885,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_defaultUserName.
   ///
   /// In en, this message translates to:
-  /// **'Human Design User'**
+  /// **'AuraMap User'**
   String get profile_defaultUserName;
 
   /// No description provided for @profile_birthDate.
@@ -5938,6 +5948,12 @@ abstract class AppLocalizations {
   /// **'Get personalized insights about your Human Design'**
   String get ai_miniDescription;
 
+  /// No description provided for @ai_startChatting.
+  ///
+  /// In en, this message translates to:
+  /// **'Start chatting'**
+  String get ai_startChatting;
+
   /// No description provided for @ai_welcomeTitle.
   ///
   /// In en, this message translates to:
@@ -6213,6 +6229,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Channel Discussion'**
   String get discussion_channelDiscussion;
+
+  /// No description provided for @ai_wantMoreInsights.
+  ///
+  /// In en, this message translates to:
+  /// **'Want more AI insights?'**
+  String get ai_wantMoreInsights;
+
+  /// No description provided for @ai_messagesPackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Messages'**
+  String ai_messagesPackTitle(int count);
+
+  /// No description provided for @ai_orSubscribe.
+  ///
+  /// In en, this message translates to:
+  /// **'or subscribe for unlimited'**
+  String get ai_orSubscribe;
+
+  /// No description provided for @ai_bestValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Best value'**
+  String get ai_bestValue;
+
+  /// No description provided for @ai_getMoreMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Get more messages'**
+  String get ai_getMoreMessages;
+
+  /// No description provided for @ai_fromPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'From {price}'**
+  String ai_fromPrice(String price);
+
+  /// No description provided for @ai_perMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{price}/message'**
+  String ai_perMessage(String price);
 }
 
 class _AppLocalizationsDelegate
@@ -6225,8 +6283,16 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'ru', 'uk'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'be',
+    'de',
+    'en',
+    'es',
+    'pt',
+    'ro',
+    'ru',
+    'uk',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -6235,8 +6301,18 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'be':
+      return AppLocalizationsBe();
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
+    case 'es':
+      return AppLocalizationsEs();
+    case 'pt':
+      return AppLocalizationsPt();
+    case 'ro':
+      return AppLocalizationsRo();
     case 'ru':
       return AppLocalizationsRu();
     case 'uk':

@@ -1,7 +1,7 @@
 {
   "@@locale": "uk",
 
-  "appName": "Дизайн Людини",
+  "appName": "AuraMap",
 
   "common_save": "Зберегти",
   "common_cancel": "Скасувати",
@@ -511,8 +511,8 @@
   "settings_deleteAccountFailed": "Не вдалося видалити акаунт. Спробуйте ще раз.",
   "settings_passwordChanged": "Пароль успішно змінено",
   "settings_passwordChangeFailed": "Не вдалося змінити пароль. Спробуйте ще раз.",
-  "settings_feedbackSubject": "Відгук про додаток Human Design",
-  "settings_feedbackBody": "Вітаю,\n\nХочу поділитися відгуком про додаток Human Design:\n\n",
+  "settings_feedbackSubject": "Відгук про додаток AuraMap",
+  "settings_feedbackBody": "Вітаю,\n\nХочу поділитися відгуком про додаток AuraMap:\n\n",
   "auth_newPassword": "Новий пароль",
   "auth_passwordRequired": "Введіть пароль",
   "auth_passwordTooShort": "Пароль має бути не менше 8 символів",
@@ -520,7 +520,7 @@
   "settings_exportData": "Експорт моїх даних",
   "settings_exportDataSubtitle": "Завантажити копію всіх ваших даних (GDPR)",
   "settings_exportingData": "Підготовка експорту даних...",
-  "settings_exportDataSubject": "Додаток Human Design - Експорт даних",
+  "settings_exportDataSubject": "AuraMap - Експорт даних",
   "settings_exportDataFailed": "Не вдалося експортувати дані. Спробуйте ще раз.",
   "settings_chartVisibility": "Видимість карти",
   "settings_chartVisibilitySubtitle": "Хто може бачити вашу карту",
@@ -555,7 +555,7 @@
   "profile_exportFailed": "Не вдалося експортувати PDF",
   "profile_signOutConfirmTitle": "Вихід",
   "profile_loadFailed": "Не вдалося завантажити профіль",
-  "profile_defaultUserName": "Користувач Human Design",
+  "profile_defaultUserName": "Користувач AuraMap",
   "profile_birthDate": "Дата",
   "profile_birthTime": "Час",
   "profile_birthLocation": "Місце",
@@ -1371,6 +1371,7 @@
   "ai_askAi": "Запитати AI",
   "ai_askAboutChart": "Запитати AI про вашу карту",
   "ai_miniDescription": "Отримайте персональні інсайти про ваш Дизайн Людини",
+  "ai_startChatting": "Почати чат",
   "ai_welcomeTitle": "Ваш HD Асистент",
   "ai_welcomeSubtitle": "Запитайте мене будь-що про вашу карту Дизайну Людини. Я можу пояснити ваш тип, стратегію, авторитет, ворота, канали та багато іншого.",
   "ai_inputPlaceholder": "Запитайте про вашу карту...",
@@ -1430,5 +1431,13 @@
   "chartOfDay_viewChart": "Переглянути карту",
 
   "discussion_typeDiscussion": "Обговорення типів",
-  "discussion_channelDiscussion": "Обговорення каналів"
+  "discussion_channelDiscussion": "Обговорення каналів",
+
+  "ai_wantMoreInsights": "Бажаєте більше AI-інсайтів?",
+  "ai_messagesPackTitle": "{count} повідомлень",
+  "ai_orSubscribe": "або підпишіться на безлімітний доступ",
+  "ai_bestValue": "Найкраща ціна",
+  "ai_getMoreMessages": "Отримати більше повідомлень",
+  "ai_fromPrice": "Від {price}",
+  "ai_perMessage": "{price}/повідомлення"
 }

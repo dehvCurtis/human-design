@@ -1,0 +1,1498 @@
+{
+  "@@locale": "pt",
+
+  "appName": "AuraMap",
+  "@appName": {
+    "description": "The name of the application"
+  },
+
+  "common_save": "Salvar",
+  "common_cancel": "Cancelar",
+  "common_delete": "Excluir",
+  "common_edit": "Editar",
+  "common_done": "Concluído",
+  "common_next": "Próximo",
+  "common_back": "Voltar",
+  "common_skip": "Pular",
+  "common_continue": "Continuar",
+  "common_loading": "Carregando...",
+  "common_error": "Erro",
+  "common_retry": "Tentar novamente",
+  "common_close": "Fechar",
+  "common_search": "Buscar",
+  "common_share": "Compartilhar",
+  "common_settings": "Configurações",
+  "common_logout": "Sair",
+  "common_profile": "Perfil",
+  "common_type": "Tipo",
+  "common_strategy": "Estratégia",
+  "common_authority": "Autoridade",
+  "common_definition": "Definição",
+  "common_create": "Criar",
+  "common_viewFull": "Ver Completo",
+  "common_send": "Enviar",
+  "common_like": "Curtir",
+  "common_reply": "Responder",
+  "common_deleteConfirmation": "Tem certeza de que deseja excluir isso? Esta ação não pode ser desfeita.",
+  "common_comingSoon": "Em breve!",
+
+  "nav_home": "Início",
+  "nav_chart": "Mapa",
+  "nav_today": "Diário",
+  "nav_social": "Social",
+  "nav_profile": "Perfil",
+  "nav_more": "Mais",
+  "nav_learn": "Aprender",
+
+  "affirmation_savedSuccess": "Afirmação salva!",
+  "affirmation_alreadySaved": "Afirmação já salva",
+
+  "home_goodMorning": "Bom dia",
+  "home_goodAfternoon": "Boa tarde",
+  "home_goodEvening": "Boa noite",
+  "home_yourDesign": "Seu Design",
+  "home_completeProfile": "Complete Seu Perfil",
+  "home_enterBirthData": "Inserir Dados de Nascimento",
+  "home_myChart": "Meu Mapa",
+  "home_savedCharts": "Salvos",
+  "home_composite": "Composto",
+  "home_penta": "Penta",
+  "home_friends": "Amigos",
+  "home_myBodygraph": "Meu Bodygraph",
+  "home_definedCenters": "Centros Definidos",
+  "home_activeChannels": "Canais Ativos",
+  "home_activeGates": "Portas Ativas",
+
+  "transit_today": "Trânsitos de Hoje",
+  "transit_sun": "Sol",
+  "transit_earth": "Terra",
+  "transit_moon": "Lua",
+  "transit_gate": "Porta {number}",
+  "@transit_gate": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_newChannelsActivated": "{count, plural, =1{1 novo canal ativado} other{{count} novos canais ativados}}",
+  "@transit_newChannelsActivated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_gatesHighlighted": "{count, plural, =1{1 porta destacada} other{{count} portas destacadas}}",
+  "@transit_gatesHighlighted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_noConnections": "Nenhuma conexão direta de trânsito hoje",
+
+  "auth_signIn": "Entrar",
+  "auth_signUp": "Cadastrar",
+  "auth_signInWithApple": "Entrar com Apple",
+  "auth_signInWithGoogle": "Entrar com Google",
+  "auth_signInWithEmail": "Entrar com E-mail",
+  "auth_email": "E-mail",
+  "auth_password": "Senha",
+  "auth_confirmPassword": "Confirmar Senha",
+  "auth_forgotPassword": "Esqueceu a Senha?",
+  "auth_noAccount": "Não tem uma conta?",
+  "auth_hasAccount": "Já tem uma conta?",
+  "auth_termsAgree": "Ao se cadastrar, você concorda com nossos Termos de Serviço e Política de Privacidade",
+  "auth_welcomeBack": "Bem-vindo de volta",
+  "auth_signInSubtitle": "Entre para continuar sua jornada de Design Humano",
+  "auth_signInRequired": "Entrada Necessária",
+  "auth_signInToCalculateChart": "Por favor, entre para calcular e salvar seu mapa de Design Humano.",
+  "auth_signInToCreateStory": "Por favor, entre para compartilhar histórias com a comunidade.",
+  "auth_signUpSubtitle": "Comece sua jornada de Design Humano hoje",
+  "auth_signUpWithApple": "Cadastrar com Apple",
+  "auth_signUpWithGoogle": "Cadastrar com Google",
+  "auth_enterName": "Digite seu nome",
+  "auth_nameRequired": "Nome é obrigatório",
+  "auth_termsOfService": "Termos de Serviço",
+  "auth_privacyPolicy": "Política de Privacidade",
+  "auth_acceptTerms": "Por favor, aceite os Termos de Serviço para continuar",
+  "auth_resetPasswordTitle": "Redefinir Senha",
+  "auth_resetPasswordPrompt": "Digite seu endereço de e-mail e enviaremos um link para redefinir sua senha.",
+  "auth_enterEmail": "Digite seu e-mail",
+  "auth_resetEmailSent": "E-mail de redefinição de senha enviado!",
+  "auth_name": "Nome",
+  "auth_createAccount": "Criar Conta",
+  "auth_iAgreeTo": "Eu concordo com ",
+  "auth_and": " e ",
+  "auth_birthInformation": "Informações de Nascimento",
+  "auth_calculateMyChart": "Calcular Meu Mapa",
+
+  "onboarding_welcome": "Bem-vindo ao AuraMap",
+  "onboarding_welcomeSubtitle": "Descubra seu blueprint energético único",
+  "onboarding_birthData": "Digite Seus Dados de Nascimento",
+  "onboarding_birthDataSubtitle": "Precisamos disso para calcular seu mapa",
+  "onboarding_birthDate": "Data de Nascimento",
+  "onboarding_birthTime": "Hora de Nascimento",
+  "onboarding_birthLocation": "Local de Nascimento",
+  "onboarding_searchLocation": "Buscar uma cidade...",
+  "onboarding_unknownTime": "Não sei minha hora de nascimento",
+  "onboarding_timeImportance": "Saber sua hora exata de nascimento é importante para um mapa preciso",
+  "onboarding_birthDataExplanation": "Seus dados de nascimento são usados para calcular seu mapa único de Design Humano. Quanto mais precisa a informação, mais preciso será seu mapa.",
+  "onboarding_noTimeWarning": "Sem uma hora de nascimento precisa, alguns detalhes do mapa (como seu Ascendente e linhas exatas das portas) podem não ser precisos. Usaremos meio-dia como padrão.",
+  "onboarding_enterBirthTimeInstead": "Inserir hora de nascimento",
+  "onboarding_birthDataPrivacy": "Seus dados de nascimento são criptografados e armazenados com segurança. Você pode atualizar ou excluí-los a qualquer momento nas configurações do seu perfil.",
+  "onboarding_saveFailed": "Falha ao salvar dados de nascimento",
+  "onboarding_fillAllFields": "Por favor, preencha todos os campos obrigatórios",
+  "onboarding_selectLanguage": "Selecionar Idioma",
+  "onboarding_getStarted": "Começar",
+  "onboarding_alreadyHaveAccount": "Já tenho uma conta",
+  "onboarding_liveInAlignment": "Descubra seu blueprint energético único e viva em alinhamento com sua verdadeira natureza.",
+
+  "chart_myChart": "Meu Mapa",
+  "chart_viewChart": "Ver Mapa",
+  "chart_calculate": "Calcular Mapa",
+  "chart_recalculate": "Recalcular",
+  "chart_share": "Compartilhar Mapa",
+  "chart_createChart": "Criar Mapa",
+  "chart_composite": "Mapa Composto",
+  "chart_transit": "Trânsitos de Hoje",
+  "chart_bodygraph": "Bodygraph",
+  "chart_planets": "Planetas",
+  "chart_details": "Detalhes do Mapa",
+  "chart_properties": "Propriedades",
+  "chart_gates": "Portas",
+  "chart_channels": "Canais",
+  "chart_noChartYet": "Ainda Sem Mapa",
+  "chart_addBirthDataPrompt": "Adicione seus dados de nascimento para gerar seu mapa único de Design Humano.",
+  "chart_addBirthData": "Adicionar Dados de Nascimento",
+  "chart_noActiveChannels": "Sem Canais Ativos",
+  "chart_channelsFormedBothGates": "Canais são formados quando ambas as portas estão definidas.",
+  "chart_savedCharts": "Mapas Salvos",
+  "chart_addChart": "Adicionar Mapa",
+  "chart_noSavedCharts": "Sem Mapas Salvos",
+  "chart_noSavedChartsMessage": "Crie mapas para você e outros para salvá-los aqui.",
+  "chart_loadFailed": "Falha ao carregar mapas",
+  "chart_renameChart": "Renomear Mapa",
+  "chart_rename": "Renomear",
+  "chart_renameFailed": "Falha ao renomear mapa",
+  "chart_deleteChart": "Excluir Mapa",
+  "chart_deleteConfirm": "Tem certeza de que deseja excluir \"{name}\"? Esta ação não pode ser desfeita.",
+  "@chart_deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chart_deleteFailed": "Falha ao excluir mapa",
+  "chart_you": "Você",
+  "chart_personName": "Nome",
+  "chart_enterPersonName": "Digite o nome da pessoa",
+  "chart_addChartDescription": "Crie um mapa para outra pessoa inserindo suas informações de nascimento.",
+  "chart_calculateAndSave": "Calcular e Salvar Mapa",
+  "chart_saved": "Mapa salvo com sucesso",
+  "chart_consciousGates": "Portas Conscientes",
+  "chart_unconsciousGates": "Portas Inconscientes",
+  "chart_personalitySide": "Lado da Personalidade - do que você está consciente",
+  "chart_designSide": "Lado do Design - o que os outros veem em você",
+
+  "type_manifestor": "Manifestador",
+  "type_generator": "Gerador",
+  "type_manifestingGenerator": "Gerador Manifestante",
+  "type_projector": "Projetor",
+  "type_reflector": "Refletor",
+
+  "type_manifestor_strategy": "Informar",
+  "type_generator_strategy": "Responder",
+  "type_manifestingGenerator_strategy": "Responder",
+  "type_projector_strategy": "Aguardar Convite",
+  "type_reflector_strategy": "Aguardar Ciclo Lunar",
+
+  "authority_emotional": "Emocional",
+  "authority_sacral": "Sacral",
+  "authority_splenic": "Esplênica",
+  "authority_ego": "Ego/Coração",
+  "authority_self": "Auto-Projetada",
+  "authority_environment": "Mental/Ambiental",
+  "authority_lunar": "Lunar",
+
+  "definition_none": "Sem Definição",
+  "definition_single": "Definição Simples",
+  "definition_split": "Definição Dividida",
+  "definition_tripleSplit": "Divisão Tripla",
+  "definition_quadrupleSplit": "Divisão Quádrupla",
+
+  "profile_1_3": "1/3 Investigador/Mártir",
+  "profile_1_4": "1/4 Investigador/Oportunista",
+  "profile_2_4": "2/4 Eremita/Oportunista",
+  "profile_2_5": "2/5 Eremita/Herege",
+  "profile_3_5": "3/5 Mártir/Herege",
+  "profile_3_6": "3/6 Mártir/Modelo",
+  "profile_4_6": "4/6 Oportunista/Modelo",
+  "profile_4_1": "4/1 Oportunista/Investigador",
+  "profile_5_1": "5/1 Herege/Investigador",
+  "profile_5_2": "5/2 Herege/Eremita",
+  "profile_6_2": "6/2 Modelo/Eremita",
+  "profile_6_3": "6/3 Modelo/Mártir",
+
+  "center_head": "Cabeça",
+  "center_ajna": "Ajna",
+  "center_throat": "Garganta",
+  "center_g": "G/Eu",
+  "center_heart": "Coração/Ego",
+  "center_sacral": "Sacral",
+  "center_solarPlexus": "Plexo Solar",
+  "center_spleen": "Baço",
+  "center_root": "Raiz",
+  "center_defined": "Definido",
+  "center_undefined": "Indefinido",
+
+  "section_type": "Tipo",
+  "section_strategy": "Estratégia",
+  "section_authority": "Autoridade",
+  "section_profile": "Perfil",
+  "section_definition": "Definição",
+  "section_centers": "Centros",
+  "section_channels": "Canais",
+  "section_gates": "Portas",
+  "section_conscious": "Consciente (Personalidade)",
+  "section_unconscious": "Inconsciente (Design)",
+
+  "social_title": "Social",
+  "social_thoughts": "Pensamentos",
+  "social_discover": "Descobrir",
+  "social_groups": "Grupos",
+  "social_invite": "Convidar",
+  "social_createPost": "Compartilhe um pensamento...",
+  "social_noThoughtsYet": "Ainda sem pensamentos",
+  "social_noThoughtsMessage": "Seja o primeiro a compartilhar suas percepções sobre Design Humano!",
+  "social_createGroup": "Criar Grupo",
+  "social_members": "Membros",
+  "social_comments": "Comentários",
+  "social_addComment": "Adicionar um comentário...",
+  "social_noComments": "Ainda sem comentários",
+  "social_shareLimit": "Você tem {remaining} compartilhamentos restantes este mês",
+  "@social_shareLimit": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "social_visibility": "Visibilidade",
+  "social_private": "Privado",
+  "social_friendsOnly": "Apenas Amigos",
+  "social_public": "Público",
+  "social_shared": "Compartilhado",
+  "social_noGroupsYet": "Ainda Sem Grupos",
+  "social_noGroupsMessage": "Crie grupos para analisar dinâmicas de equipe com análise Penta.",
+  "social_noSharedCharts": "Sem Mapas Compartilhados",
+  "social_noSharedChartsMessage": "Mapas compartilhados com você aparecerão aqui.",
+  "social_createGroupPrompt": "Crie um grupo para analisar dinâmicas de equipe.",
+  "social_groupName": "Nome do Grupo",
+  "social_groupNameHint": "Família, Equipe, etc.",
+  "social_groupDescription": "Descrição (opcional)",
+  "social_groupDescriptionHint": "Para que serve este grupo?",
+  "social_groupCreated": "Grupo \"{name}\" criado!",
+  "@social_groupCreated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_groupNameRequired": "Por favor, digite um nome para o grupo",
+  "social_createGroupFailed": "Falha ao criar grupo. Por favor, tente novamente.",
+  "social_noDescription": "Sem descrição",
+  "social_admin": "Administrador",
+  "social_sharedBy": "Compartilhado por {name}",
+  "@social_sharedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_loadGroupsFailed": "Falha ao carregar grupos",
+  "social_loadSharedFailed": "Falha ao carregar mapas compartilhados",
+  "social_userNotFound": "Usuário não encontrado",
+
+  "discovery_userNotFound": "Usuário não encontrado",
+  "discovery_following": "Seguindo",
+  "discovery_follow": "Seguir",
+  "discovery_sendMessage": "Enviar Mensagem",
+  "discovery_about": "Sobre",
+  "discovery_humanDesign": "Design Humano",
+  "discovery_type": "Tipo",
+  "discovery_profile": "Perfil",
+  "discovery_authority": "Autoridade",
+  "discovery_compatibility": "Compatibilidade",
+  "discovery_compatible": "compatível",
+  "discovery_followers": "Seguidores",
+  "discovery_followingLabel": "Seguindo",
+  "discovery_noResults": "Nenhum usuário encontrado",
+  "discovery_noResultsMessage": "Tente ajustar seus filtros ou volte mais tarde",
+
+  "userProfile_viewChart": "Bodygraph",
+  "userProfile_chartPrivate": "Este mapa é privado",
+  "userProfile_chartFriendsOnly": "Torne-se seguidor mútuo para ver este mapa",
+  "userProfile_chartFollowToView": "Siga para ver este mapa",
+  "userProfile_publicProfile": "Perfil Público",
+  "userProfile_privateProfile": "Perfil Privado",
+  "userProfile_friendsOnlyProfile": "Apenas Amigos",
+  "userProfile_followersList": "Seguidores",
+  "userProfile_followingList": "Seguindo",
+  "userProfile_noFollowers": "Ainda sem seguidores",
+  "userProfile_noFollowing": "Ainda não está seguindo ninguém",
+  "userProfile_thoughts": "Pensamentos",
+  "userProfile_noThoughts": "Ainda sem pensamentos compartilhados",
+  "userProfile_showAll": "Mostrar Tudo",
+
+  "popularCharts_title": "Mapas Populares",
+  "popularCharts_subtitle": "Mapas públicos mais seguidos",
+
+  "time_minutesAgo": "{minutes}m atrás",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "{hours}h atrás",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "{days}d atrás",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+
+  "transit_title": "Trânsitos de Hoje",
+  "transit_currentEnergies": "Energias Atuais",
+  "transit_sunGate": "Porta do Sol",
+  "transit_earthGate": "Porta da Terra",
+  "transit_moonGate": "Porta da Lua",
+  "transit_activeGates": "Portas de Trânsito Ativas",
+  "transit_activeChannels": "Canais de Trânsito Ativos",
+  "transit_personalImpact": "Impacto Pessoal",
+  "transit_gateActivated": "Porta {gate} ativada por trânsito",
+  "@transit_gateActivated": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_channelFormed": "Canal {channel} formado com seu mapa",
+  "@transit_channelFormed": {
+    "placeholders": {
+      "channel": {
+        "type": "String"
+      }
+    }
+  },
+  "transit_noPersonalImpact": "Nenhuma conexão direta de trânsito hoje",
+  "transit_viewFullTransit": "Ver Mapa de Trânsito Completo",
+
+  "affirmation_title": "Afirmação Diária",
+  "affirmation_forYourType": "Para Seu {type}",
+  "@affirmation_forYourType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "affirmation_basedOnGate": "Baseado na Porta {gate}",
+  "@affirmation_basedOnGate": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "affirmation_refresh": "Nova Afirmação",
+  "affirmation_save": "Salvar Afirmação",
+  "affirmation_saved": "Afirmações Salvas",
+  "affirmation_share": "Compartilhar Afirmação",
+  "affirmation_notifications": "Notificações de Afirmação Diária",
+  "affirmation_notificationTime": "Horário de Notificação",
+
+  "lifestyle_today": "Hoje",
+  "lifestyle_insights": "Percepções",
+  "lifestyle_journal": "Diário",
+  "lifestyle_addJournalEntry": "Adicionar Entrada de Diário",
+  "lifestyle_journalPrompt": "Como você está experienciando seu design hoje?",
+  "lifestyle_noJournalEntries": "Ainda sem entradas no diário",
+  "lifestyle_mood": "Humor",
+  "lifestyle_energy": "Nível de Energia",
+  "lifestyle_reflection": "Reflexão",
+
+  "penta_title": "Penta",
+  "penta_description": "Análise de grupo para 3-5 pessoas",
+  "penta_createNew": "Criar Penta",
+  "penta_selectMembers": "Selecionar Membros",
+  "penta_minMembers": "Mínimo de 3 membros necessário",
+  "penta_maxMembers": "Máximo de 5 membros",
+  "penta_groupDynamics": "Dinâmicas de Grupo",
+  "penta_missingRoles": "Papéis Ausentes",
+  "penta_strengths": "Forças do Grupo",
+  "penta_analysis": "Análise Penta",
+  "penta_clearAnalysis": "Limpar Análise",
+  "penta_infoText": "A análise Penta revela os papéis naturais que emergem em pequenos grupos de 3-5 pessoas, mostrando como cada membro contribui para as dinâmicas da equipe.",
+  "penta_calculating": "Calculando...",
+  "penta_calculate": "Calcular Penta",
+  "penta_groupRoles": "Papéis do Grupo",
+  "penta_electromagneticConnections": "Conexões Eletromagnéticas",
+  "penta_connectionsDescription": "Conexões energéticas especiais entre membros que criam atração e química.",
+  "penta_areasForAttention": "Áreas de Atenção",
+
+  "composite_title": "Mapa Composto",
+  "composite_infoText": "Um mapa composto mostra as dinâmicas de relacionamento entre duas pessoas, revelando como seus mapas interagem e se complementam.",
+  "composite_selectTwoCharts": "Selecione 2 Mapas",
+  "composite_calculate": "Analisar Conexão",
+  "composite_calculating": "Analisando...",
+  "composite_clearAnalysis": "Limpar Análise",
+  "composite_connectionTheme": "Tema da Conexão",
+  "composite_definedCenters": "Definidos",
+  "composite_undefinedCenters": "Abertos",
+  "composite_score": "Pontuação",
+  "composite_themeVeryBonded": "Conexão muito unida - vocês podem se sentir profundamente entrelaçados, o que pode ser intenso",
+  "composite_themeBonded": "Conexão unida - forte senso de união e energia compartilhada",
+  "composite_themeBalanced": "Conexão equilibrada - mistura saudável de união e independência",
+  "composite_themeIndependent": "Conexão independente - mais espaço para crescimento individual",
+  "composite_themeVeryIndependent": "Conexão muito independente - tempo de conexão intencional ajuda a fortalecer o vínculo",
+  "composite_electromagnetic": "Canais Eletromagnéticos",
+  "composite_electromagneticDesc": "Atração intensa - vocês se completam",
+  "composite_companionship": "Canais de Companheirismo",
+  "composite_companionshipDesc": "Conforto e estabilidade - compreensão compartilhada",
+  "composite_dominance": "Canais de Dominância",
+  "composite_dominanceDesc": "Um ensina/condiciona o outro",
+  "composite_compromise": "Canais de Compromisso",
+  "composite_compromiseDesc": "Tensão natural - requer consciência",
+  "composite_noConnections": "Sem Conexões de Canal",
+  "composite_noConnectionsDesc": "Estes mapas não formam conexões diretas de canal, mas ainda pode haver interações interessantes de portas.",
+  "composite_noChartsTitle": "Nenhum Mapa Disponível",
+  "composite_noChartsDesc": "Crie mapas para você e outros para comparar suas dinâmicas de relacionamento.",
+  "composite_needMoreCharts": "Precisa de Mais Mapas",
+  "composite_needMoreChartsDesc": "Você precisa de pelo menos 2 mapas para analisar um relacionamento. Adicione outro mapa para continuar.",
+  "composite_selectTwoHint": "Selecione 2 mapas para analisar sua conexão",
+  "composite_selectOneMore": "Selecione mais 1 mapa",
+
+  "premium_upgrade": "Atualizar para Premium",
+  "premium_subscribe": "Assinar",
+  "premium_restore": "Restaurar Compras",
+  "premium_features": "Recursos Premium",
+  "premium_unlimitedShares": "Compartilhamento Ilimitado de Mapas",
+  "premium_groupCharts": "Mapas de Grupo",
+  "premium_advancedTransits": "Análise Avançada de Trânsitos",
+  "premium_personalizedAffirmations": "Afirmações Personalizadas",
+  "premium_journalInsights": "Percepções do Diário",
+  "premium_adFree": "Experiência Sem Anúncios",
+  "premium_monthly": "Mensal",
+  "premium_yearly": "Anual",
+  "premium_perMonth": "/mês",
+  "premium_perYear": "/ano",
+  "premium_bestValue": "Melhor Valor",
+
+  "settings_appearance": "Aparência",
+  "settings_language": "Idioma",
+  "settings_selectLanguage": "Selecionar Idioma",
+  "settings_changeLanguage": "Alterar Idioma",
+  "settings_theme": "Tema",
+  "settings_selectTheme": "Selecionar Tema",
+  "settings_chartDisplay": "Exibição do Mapa",
+  "settings_showGateNumbers": "Mostrar Números das Portas",
+  "settings_showGateNumbersSubtitle": "Exibir números das portas no bodygraph",
+  "settings_use24HourTime": "Usar Formato 24 Horas",
+  "settings_use24HourTimeSubtitle": "Exibir hora no formato de 24 horas",
+  "settings_feedback": "Feedback",
+  "settings_hapticFeedback": "Feedback Tátil",
+  "settings_hapticFeedbackSubtitle": "Vibração nas interações",
+  "settings_account": "Conta",
+  "settings_changePassword": "Alterar Senha",
+  "settings_deleteAccount": "Excluir Conta",
+  "settings_deleteAccountConfirm": "Tem certeza de que deseja excluir sua conta? Esta ação não pode ser desfeita e todos os seus dados serão permanentemente excluídos.",
+  "settings_appVersion": "Versão do App",
+  "settings_rateApp": "Avaliar o App",
+  "settings_sendFeedback": "Enviar Feedback",
+  "settings_themeLight": "Claro",
+  "settings_themeDark": "Escuro",
+  "settings_themeSystem": "Sistema",
+  "settings_notifications": "Notificações",
+  "settings_privacy": "Privacidade",
+  "settings_chartVisibility": "Visibilidade do Mapa",
+  "settings_chartVisibilitySubtitle": "Controle quem pode ver seu mapa de Design Humano",
+  "settings_chartPrivate": "Privado",
+  "settings_chartPrivateDesc": "Apenas você pode ver seu mapa",
+  "settings_chartFriends": "Amigos",
+  "settings_chartFriendsDesc": "Seguidores mútuos podem ver seu mapa",
+  "settings_chartPublic": "Público",
+  "settings_chartPublicDesc": "Seus seguidores podem ver seu mapa",
+  "settings_about": "Sobre",
+  "settings_help": "Ajuda e Suporte",
+  "settings_terms": "Termos de Serviço",
+  "settings_privacyPolicy": "Política de Privacidade",
+  "settings_version": "Versão",
+  "settings_dailyTransits": "Trânsitos Diários",
+  "settings_dailyTransitsSubtitle": "Receber atualizações diárias de trânsito",
+  "settings_gateChanges": "Mudanças de Porta",
+  "settings_gateChangesSubtitle": "Notificar quando o Sol muda de porta",
+  "settings_socialActivity": "Atividade Social",
+  "settings_socialActivitySubtitle": "Solicitações de amizade e mapas compartilhados",
+  "settings_achievements": "Conquistas",
+  "settings_achievementsSubtitle": "Desbloqueios de emblemas e marcos",
+  "settings_deleteAccountWarning": "Isso irá excluir permanentemente todos os seus dados incluindo mapas, postagens e mensagens.",
+  "settings_deleteAccountFailed": "Falha ao excluir conta. Por favor, tente novamente.",
+  "settings_passwordChanged": "Senha alterada com sucesso",
+  "settings_passwordChangeFailed": "Falha ao alterar senha. Por favor, tente novamente.",
+  "settings_feedbackSubject": "Feedback do App AuraMap",
+  "settings_feedbackBody": "Olá,\n\nGostaria de compartilhar o seguinte feedback sobre o AuraMap:\n\n",
+  "auth_newPassword": "Nova Senha",
+  "auth_passwordRequired": "Senha é obrigatória",
+  "auth_passwordTooShort": "Senha deve ter pelo menos 8 caracteres",
+  "auth_passwordsDoNotMatch": "Senhas não coincidem",
+  "settings_exportData": "Exportar Meus Dados",
+  "settings_exportDataSubtitle": "Baixar uma cópia de todos os seus dados (GDPR)",
+  "settings_exportingData": "Preparando sua exportação de dados...",
+  "settings_exportDataSubject": "AuraMap - Exportação dos Meus Dados",
+  "settings_exportDataFailed": "Falha ao exportar dados. Por favor, tente novamente.",
+
+  "error_generic": "Algo deu errado",
+  "error_network": "Sem conexão com a internet",
+  "error_invalidEmail": "Por favor, digite um e-mail válido",
+  "error_invalidPassword": "Senha deve ter pelo menos 8 caracteres",
+  "error_passwordMismatch": "Senhas não coincidem",
+  "error_birthDataRequired": "Por favor, digite seus dados de nascimento",
+  "error_locationRequired": "Por favor, selecione seu local de nascimento",
+  "error_chartCalculation": "Não foi possível calcular seu mapa",
+
+  "profile_editProfile": "Editar Perfil",
+  "profile_shareChart": "Compartilhar Meu Mapa",
+  "profile_exportPdf": "Exportar Mapa em PDF",
+  "profile_upgradePremium": "Atualizar para Premium",
+  "profile_birthData": "Dados de Nascimento",
+  "profile_chartSummary": "Resumo do Mapa",
+  "profile_viewFullChart": "Ver Mapa Completo",
+  "profile_signOut": "Sair",
+  "profile_signOutConfirm": "Tem certeza de que deseja sair?",
+  "profile_addBirthDataPrompt": "Adicione seus dados de nascimento para gerar seu mapa de Design Humano.",
+  "profile_addBirthDataToShare": "Adicione dados de nascimento para compartilhar seu mapa",
+  "profile_addBirthDataToExport": "Adicione dados de nascimento para exportar seu mapa",
+  "profile_exportFailed": "Falha ao exportar PDF",
+  "profile_signOutConfirmTitle": "Sair",
+  "profile_loadFailed": "Falha ao carregar perfil",
+  "profile_defaultUserName": "Usuário AuraMap",
+  "profile_birthDate": "Data",
+  "profile_birthTime": "Hora",
+  "profile_birthLocation": "Local",
+  "profile_birthTimezone": "Fuso Horário",
+
+  "chart_chakras": "Chakras",
+  "chakra_title": "Energia dos Chakras",
+  "chakra_activated": "Ativado",
+  "chakra_inactive": "Inativo",
+  "chakra_activatedCount": "{count} de 7 chakras ativados",
+  "@chakra_activatedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chakra_hdMapping": "Mapeamento de Centro HD",
+  "chakra_element": "Elemento",
+  "chakra_location": "Localização",
+
+  "chakra_root": "Raiz",
+  "chakra_root_sanskrit": "Muladhara",
+  "chakra_root_description": "Ancoragem, sobrevivência e estabilidade",
+
+  "chakra_sacral": "Sacral",
+  "chakra_sacral_sanskrit": "Svadhisthana",
+  "chakra_sacral_description": "Criatividade, sexualidade e emoções",
+
+  "chakra_solarPlexus": "Plexo Solar",
+  "chakra_solarPlexus_sanskrit": "Manipura",
+  "chakra_solarPlexus_description": "Poder pessoal, confiança e vontade",
+
+  "chakra_heart": "Coração",
+  "chakra_heart_sanskrit": "Anahata",
+  "chakra_heart_description": "Amor, compaixão e conexão",
+
+  "chakra_throat": "Garganta",
+  "chakra_throat_sanskrit": "Vishuddha",
+  "chakra_throat_description": "Comunicação, expressão e verdade",
+
+  "chakra_thirdEye": "Terceiro Olho",
+  "chakra_thirdEye_sanskrit": "Ajna",
+  "chakra_thirdEye_description": "Intuição, percepção e imaginação",
+
+  "chakra_crown": "Coroa",
+  "chakra_crown_sanskrit": "Sahasrara",
+  "chakra_crown_description": "Conexão espiritual e consciência",
+
+  "quiz_title": "Quizzes",
+  "quiz_yourProgress": "Seu Progresso",
+  "quiz_quizzesCompleted": "{count} quizzes completados",
+  "@quiz_quizzesCompleted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_accuracy": "Precisão",
+  "quiz_streak": "Sequência",
+  "quiz_all": "Todos",
+  "quiz_difficulty": "Dificuldade",
+  "quiz_beginner": "Iniciante",
+  "quiz_intermediate": "Intermediário",
+  "quiz_advanced": "Avançado",
+  "quiz_questions": "{count} perguntas",
+  "@quiz_questions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_points": "+{points} pts",
+  "@quiz_points": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_completed": "Completado",
+  "quiz_noQuizzes": "Nenhum quiz disponível",
+  "quiz_checkBackLater": "Volte mais tarde para novo conteúdo",
+  "quiz_startQuiz": "Iniciar Quiz",
+  "quiz_tryAgain": "Tentar Novamente",
+  "quiz_backToQuizzes": "Voltar aos Quizzes",
+  "quiz_shareResults": "Compartilhar Resultados",
+  "quiz_yourBest": "Seu Melhor",
+  "quiz_perfectScore": "Pontuação Perfeita!",
+  "quiz_newBest": "Novo Recorde!",
+  "quiz_streakExtended": "Sequência Estendida!",
+  "quiz_questionOf": "Pergunta {current} de {total}",
+  "@quiz_questionOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_correct": "{count} corretas",
+  "@quiz_correct": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_submitAnswer": "Enviar Resposta",
+  "quiz_nextQuestion": "Próxima Pergunta",
+  "quiz_seeResults": "Ver Resultados",
+  "quiz_exitQuiz": "Sair do Quiz?",
+  "quiz_exitWarning": "Seu progresso será perdido se você sair agora.",
+  "quiz_exit": "Sair",
+  "quiz_timesUp": "Tempo Esgotado!",
+  "quiz_timesUpMessage": "Você ficou sem tempo. Seu progresso será enviado.",
+  "quiz_excellent": "Excelente!",
+  "quiz_goodJob": "Bom Trabalho!",
+  "quiz_keepLearning": "Continue Aprendendo!",
+  "quiz_keepPracticing": "Continue Praticando!",
+  "quiz_masteredTopic": "Você dominou este tópico!",
+  "quiz_strongUnderstanding": "Você tem uma compreensão forte.",
+  "quiz_onRightTrack": "Você está no caminho certo.",
+  "quiz_reviewExplanations": "Revise as explicações para melhorar.",
+  "quiz_studyMaterial": "Estude o material e tente novamente.",
+  "quiz_attemptHistory": "Histórico de Tentativas",
+  "quiz_statistics": "Estatísticas de Quiz",
+  "quiz_totalQuizzes": "Quizzes",
+  "quiz_totalQuestions": "Perguntas",
+  "quiz_bestStreak": "Melhor Sequência",
+  "quiz_strongest": "Mais forte: {category}",
+  "@quiz_strongest": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "quiz_needsWork": "Precisa trabalhar: {category}",
+  "@quiz_needsWork": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "quiz_category_types": "Tipos",
+  "quiz_category_centers": "Centros",
+  "quiz_category_authorities": "Autoridades",
+  "quiz_category_profiles": "Perfis",
+  "quiz_category_gates": "Portas",
+  "quiz_category_channels": "Canais",
+  "quiz_category_definitions": "Definições",
+  "quiz_category_general": "Geral",
+  "quiz_explanation": "Explicação",
+  "quiz_quizzes": "Quizzes",
+  "quiz_questionsLabel": "Perguntas",
+  "quiz_shareProgress": "Compartilhar Progresso",
+  "quiz_shareProgressSubject": "Meu Progresso de Aprendizado de Design Humano",
+  "quiz_sharePerfect": "Consegui uma pontuação perfeita! Estou dominando o Design Humano.",
+  "quiz_shareExcellent": "Estou indo muito bem na minha jornada de aprendizado de Design Humano!",
+  "quiz_shareGoodJob": "Estou aprendendo sobre Design Humano. Cada quiz me ajuda a crescer!",
+  "quiz_shareSubject": "Pontuei {score}% em \"{quizTitle}\" - Quiz de Design Humano",
+  "@quiz_shareSubject": {
+    "placeholders": {
+      "quizTitle": {"type": "String"},
+      "score": {"type": "int"}
+    }
+  },
+  "quiz_failedToLoadStats": "Falha ao carregar estatísticas",
+
+  "planetary_personality": "Personalidade",
+  "planetary_design": "Design",
+  "planetary_consciousBirth": "Consciente \u00b7 Nascimento",
+  "planetary_unconsciousPrenatal": "Inconsciente \u00b7 88\u00b0 Pré-natal",
+
+  "gamification_yourProgress": "Seu Progresso",
+  "gamification_level": "Nível",
+  "gamification_points": "pts",
+  "gamification_viewAll": "Ver Tudo",
+  "gamification_allChallengesComplete": "Todos os desafios diários completos!",
+  "gamification_dailyChallenge": "Desafio Diário",
+  "gamification_achievements": "Conquistas",
+  "gamification_challenges": "Desafios",
+  "gamification_leaderboard": "Classificação",
+  "gamification_streak": "Sequência",
+  "gamification_badges": "Emblemas",
+  "gamification_earnedBadge": "Você ganhou um emblema!",
+  "gamification_claimReward": "Reclamar Recompensa",
+  "gamification_completed": "Completado",
+
+  "common_copy": "Copiar",
+
+  "share_myShares": "Meus Compartilhamentos",
+  "share_createNew": "Criar Novo",
+  "share_newLink": "Novo Link",
+  "share_noShares": "Sem Links Compartilhados",
+  "share_noSharesMessage": "Crie links de compartilhamento para permitir que outros vejam seu mapa sem precisar de uma conta.",
+  "share_createFirst": "Crie Seu Primeiro Link",
+  "share_activeLinks": "{count} Links Ativos",
+  "@share_activeLinks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_expiredLinks": "{count} Expirados",
+  "@share_expiredLinks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_clearExpired": "Limpar",
+  "share_clearExpiredTitle": "Limpar Links Expirados",
+  "share_clearExpiredMessage": "Isso removerá {count} links expirados do seu histórico.",
+  "@share_clearExpiredMessage": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_clearAll": "Limpar Tudo",
+  "share_expiredCleared": "Links expirados removidos",
+  "share_linkCopied": "Link copiado para área de transferência",
+  "share_revokeTitle": "Revogar Link",
+  "share_revokeMessage": "Isso desativará permanentemente este link de compartilhamento. Qualquer pessoa com o link não poderá mais ver seu mapa.",
+  "share_revoke": "Revogar",
+  "share_linkRevoked": "Link revogado",
+  "share_totalLinks": "Total",
+  "share_active": "Ativo",
+  "share_totalViews": "Visualizações",
+  "share_chartLink": "Compartilhamento de Mapa",
+  "share_transitLink": "Compartilhamento de Trânsito",
+  "share_compatibilityLink": "Relatório de Compatibilidade",
+  "share_link": "Link de Compartilhamento",
+  "share_views": "{count} visualizações",
+  "@share_views": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_expired": "Expirado",
+  "share_activeLabel": "Ativo",
+  "share_expiredOn": "Expirado em {date}",
+  "@share_expiredOn": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "share_expiresIn": "Expira em {time}",
+  "@share_expiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+
+  "auth_emailNotConfirmed": "Por favor, confirme seu e-mail",
+  "auth_resendConfirmation": "Reenviar E-mail de Confirmação",
+  "auth_confirmationSent": "E-mail de confirmação enviado",
+  "auth_checkEmail": "Verifique seu e-mail para o link de confirmação",
+  "auth_checkYourEmail": "Verifique Seu E-mail",
+  "auth_confirmationLinkSent": "Enviamos um link de confirmação para:",
+  "auth_clickLinkToActivate": "Por favor, clique no link do e-mail para ativar sua conta.",
+  "auth_goToSignIn": "Ir para Entrar",
+  "auth_returnToHome": "Voltar ao Início",
+
+  "hashtags_explore": "Explorar Hashtags",
+  "hashtags_trending": "Em Alta",
+  "hashtags_popular": "Popular",
+  "hashtags_hdTopics": "Tópicos HD",
+  "hashtags_noTrending": "Ainda sem hashtags em alta",
+  "hashtags_noPopular": "Ainda sem hashtags populares",
+  "hashtags_noHdTopics": "Ainda sem tópicos HD",
+  "hashtag_noPosts": "Ainda sem postagens",
+  "hashtag_beFirst": "Seja o primeiro a postar com esta hashtag!",
+  "hashtag_postCount": "{count, plural, =1{1 postagem} other{{count} postagens}}",
+  "@hashtag_postCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hashtag_recentPosts": "{count, plural, =1{1 postagem hoje} other{{count} postagens hoje}}",
+  "@hashtag_recentPosts": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "feed_forYou": "Para Você",
+  "feed_trending": "Em Alta",
+  "feed_hdTopics": "Tópicos HD",
+  "feed_gateTitle": "Porta {number}",
+  "@feed_gateTitle": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "feed_gatePosts": "Postagens sobre Porta {number}",
+  "@feed_gatePosts": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+
+  "transit_events_title": "Eventos de Trânsito",
+  "transit_events_happening": "Acontecendo Agora",
+  "transit_events_upcoming": "Próximos",
+  "transit_events_past": "Eventos Passados",
+  "transit_events_noCurrentEvents": "Nenhum evento acontecendo agora",
+  "transit_events_noUpcomingEvents": "Nenhum evento próximo agendado",
+  "transit_events_noPastEvents": "Nenhum evento passado",
+  "transit_events_live": "AO VIVO",
+  "transit_events_join": "Participar",
+  "transit_events_joined": "Participando",
+  "transit_events_leave": "Sair",
+  "transit_events_participating": "participando",
+  "transit_events_posts": "postagens",
+  "transit_events_viewInsights": "Ver Percepções",
+  "transit_events_endsIn": "Termina em {time}",
+  "@transit_events_endsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "transit_events_startsIn": "Começa em {time}",
+  "@transit_events_startsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "transit_events_notFound": "Evento não encontrado",
+  "transit_events_communityPosts": "Postagens da Comunidade",
+  "transit_events_noPosts": "Ainda sem postagens para este evento",
+  "transit_events_shareExperience": "Compartilhar Experiência",
+  "transit_events_participants": "Participantes",
+  "transit_events_duration": "Duração",
+  "transit_events_eventEnded": "Este evento terminou",
+  "transit_events_youreParticipating": "Você está participando!",
+  "transit_events_experiencingWith": "Experienciando este trânsito com {count} outros",
+  "@transit_events_experiencingWith": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "transit_events_joinCommunity": "Participar da Comunidade",
+  "transit_events_shareYourExperience": "Compartilhe sua experiência e conecte-se com outros",
+
+  "activity_title": "Atividade de Amigos",
+  "activity_noActivities": "Ainda sem atividade de amigos",
+  "activity_followFriends": "Siga amigos para ver suas conquistas e marcos aqui!",
+  "activity_findFriends": "Encontrar Amigos",
+  "activity_celebrate": "Celebrar",
+  "activity_celebrated": "Celebrado",
+
+  "cancel": "Cancelar",
+  "create": "Criar",
+
+  "groupChallenges_title": "Desafios em Grupo",
+  "groupChallenges_myTeams": "Minhas Equipes",
+  "groupChallenges_challenges": "Desafios",
+  "groupChallenges_leaderboard": "Classificação",
+  "groupChallenges_createTeam": "Criar Equipe",
+  "groupChallenges_teamName": "Nome da Equipe",
+  "groupChallenges_teamNameHint": "Digite um nome de equipe",
+  "groupChallenges_teamDescription": "Descrição",
+  "groupChallenges_teamDescriptionHint": "Sobre o que é sua equipe?",
+  "groupChallenges_teamCreated": "Equipe criada com sucesso!",
+  "groupChallenges_noTeams": "Ainda Sem Equipes",
+  "groupChallenges_noTeamsDescription": "Crie ou entre em uma equipe para competir em desafios em grupo!",
+  "groupChallenges_memberCount": "{count, plural, =1{1 membro} other{{count} membros}}",
+  "@groupChallenges_memberCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "groupChallenges_points": "{points} pts",
+  "@groupChallenges_points": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_noChallenges": "Sem Desafios Ativos",
+  "groupChallenges_active": "Ativo",
+  "groupChallenges_upcoming": "Próximos",
+  "groupChallenges_reward": "Recompensa de {points} pts",
+  "@groupChallenges_reward": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_teamsEnrolled": "{count} equipes",
+  "@groupChallenges_teamsEnrolled": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "groupChallenges_participants": "{count} participantes",
+  "@groupChallenges_participants": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "groupChallenges_endsIn": "Termina em {time}",
+  "@groupChallenges_endsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "groupChallenges_weekly": "Semanal",
+  "groupChallenges_monthly": "Mensal",
+  "groupChallenges_allTime": "Todos os Tempos",
+  "groupChallenges_noTeamsOnLeaderboard": "Ainda sem equipes na classificação",
+  "groupChallenges_pts": "pts",
+  "groupChallenges_teamNotFound": "Equipe não encontrada",
+  "groupChallenges_members": "Membros",
+  "groupChallenges_totalPoints": "Pontos Totais",
+  "groupChallenges_joined": "Participou",
+  "groupChallenges_join": "Participar",
+  "groupChallenges_status": "Status",
+  "groupChallenges_about": "Sobre",
+  "groupChallenges_noMembers": "Ainda sem membros",
+  "groupChallenges_admin": "Administrador",
+  "groupChallenges_contributed": "{points} pts contribuídos",
+  "@groupChallenges_contributed": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_joinedTeam": "Entrou na equipe com sucesso!",
+  "groupChallenges_leaveTeam": "Sair da Equipe",
+  "groupChallenges_leaveConfirmation": "Tem certeza de que deseja sair desta equipe? Seus pontos contribuídos permanecerão com a equipe.",
+  "groupChallenges_leave": "Sair",
+  "groupChallenges_leftTeam": "Você saiu da equipe",
+  "groupChallenges_challengeDetails": "Detalhes do Desafio",
+  "groupChallenges_challengeNotFound": "Desafio não encontrado",
+  "groupChallenges_target": "Meta",
+  "groupChallenges_starts": "Começa",
+  "groupChallenges_ends": "Termina",
+  "groupChallenges_hdTypes": "Tipos HD",
+  "groupChallenges_noTeamsToEnroll": "Sem Equipes para Inscrever",
+  "groupChallenges_createTeamToJoin": "Crie uma equipe primeiro para se inscrever em desafios",
+  "groupChallenges_enrollTeam": "Inscrever uma Equipe",
+  "groupChallenges_enrolled": "Inscrito",
+  "groupChallenges_enroll": "Inscrever",
+  "groupChallenges_teamEnrolled": "Equipe inscrita com sucesso!",
+  "groupChallenges_noTeamsEnrolled": "Ainda sem equipes inscritas",
+
+  "circles_title": "Círculos de Compatibilidade",
+  "circles_myCircles": "Meus Círculos",
+  "circles_invitations": "Convites",
+  "circles_create": "Criar Círculo",
+  "circles_selectIcon": "Selecione um ícone",
+  "circles_name": "Nome do Círculo",
+  "circles_nameHint": "Família, Equipe, Amigos...",
+  "circles_description": "Descrição",
+  "circles_descriptionHint": "Para que serve este círculo?",
+  "circles_created": "Círculo criado com sucesso!",
+  "circles_noCircles": "Ainda Sem Círculos",
+  "circles_noCirclesDescription": "Crie um círculo para analisar compatibilidade com amigos, família ou membros da equipe.",
+  "circles_suggestions": "Início Rápido",
+  "circles_memberCount": "{count, plural, =1{1 membro} other{{count} membros}}",
+  "@circles_memberCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "circles_private": "Privado",
+  "circles_noInvitations": "Sem Convites",
+  "circles_noInvitationsDescription": "Convites de círculo que você receber aparecerão aqui.",
+  "circles_invitedBy": "Convidado por {name}",
+  "@circles_invitedBy": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "circles_decline": "Recusar",
+  "circles_accept": "Aceitar",
+  "circles_invitationDeclined": "Convite recusado",
+  "circles_invitationAccepted": "Você entrou no círculo!",
+  "circles_notFound": "Círculo não encontrado",
+  "circles_invite": "Convidar Membro",
+  "circles_members": "Membros",
+  "circles_analysis": "Análise",
+  "circles_feed": "Feed",
+  "circles_inviteMember": "Convidar Membro",
+  "circles_sendInvite": "Enviar Convite",
+  "circles_invitationSent": "Convite enviado!",
+  "circles_invitationFailed": "Falha ao enviar convite",
+  "circles_deleteTitle": "Excluir Círculo",
+  "circles_deleteConfirmation": "Tem certeza de que deseja excluir \"{name}\"? Esta ação não pode ser desfeita.",
+  "@circles_deleteConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "circles_deleted": "Círculo excluído",
+  "circles_noMembers": "Ainda sem membros",
+  "circles_noAnalysis": "Ainda Sem Análise",
+  "circles_runAnalysis": "Execute uma análise de compatibilidade para ver como os membros do seu círculo interagem.",
+  "circles_needMoreMembers": "Adicione pelo menos 2 membros para executar uma análise.",
+  "circles_analyzeCompatibility": "Analisar Compatibilidade",
+  "circles_harmonyScore": "Pontuação de Harmonia",
+  "circles_typeDistribution": "Distribuição de Tipos",
+  "circles_electromagneticConnections": "Conexões Eletromagnéticas",
+  "circles_electromagneticDesc": "Atração intensa - vocês se completam",
+  "circles_companionshipConnections": "Conexões de Companheirismo",
+  "circles_companionshipDesc": "Conforto e estabilidade - compreensão compartilhada",
+  "circles_groupStrengths": "Forças do Grupo",
+  "circles_areasForGrowth": "Áreas de Crescimento",
+  "circles_writePost": "Compartilhe algo com seu círculo...",
+  "circles_noPosts": "Ainda Sem Postagens",
+  "circles_beFirstToPost": "Seja o primeiro a compartilhar algo com seu círculo!",
+
+  "experts_title": "Especialistas HD",
+  "experts_becomeExpert": "Tornar-se Especialista",
+  "experts_filterBySpecialization": "Filtrar por Especialização",
+  "experts_allExperts": "Todos os Especialistas",
+  "experts_experts": "Especialistas",
+  "experts_noExperts": "Nenhum especialista encontrado",
+  "experts_featured": "Especialistas em Destaque",
+  "experts_followers": "{count} seguidores",
+  "@experts_followers": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "experts_notFound": "Especialista não encontrado",
+  "experts_following": "Seguindo",
+  "experts_follow": "Seguir",
+  "experts_about": "Sobre",
+  "experts_specializations": "Especializações",
+  "experts_credentials": "Credenciais",
+  "experts_reviews": "Avaliações",
+  "experts_writeReview": "Escrever Avaliação",
+  "experts_reviewContent": "Sua Avaliação",
+  "experts_reviewHint": "Compartilhe sua experiência trabalhando com este especialista...",
+  "experts_submitReview": "Enviar Avaliação",
+  "experts_reviewSubmitted": "Avaliação enviada com sucesso!",
+  "experts_noReviews": "Ainda sem avaliações",
+  "experts_followersLabel": "Seguidores",
+  "experts_rating": "Avaliação",
+  "experts_years": "Anos",
+
+  "learningPaths_title": "Trilhas de Aprendizado",
+  "learningPaths_explore": "Explorar",
+  "learningPaths_inProgress": "Em Andamento",
+  "learningPaths_completed": "Concluídos",
+  "learningPaths_featured": "Trilhas em Destaque",
+  "learningPaths_allPaths": "Todas as Trilhas",
+  "learningPaths_noPathsExplore": "Nenhuma trilha de aprendizado disponível",
+  "learningPaths_noPathsInProgress": "Nenhuma Trilha em Andamento",
+  "learningPaths_noPathsInProgressDescription": "Inscreva-se em uma trilha de aprendizado para começar sua jornada!",
+  "learningPaths_browsePaths": "Explorar Trilhas",
+  "learningPaths_noPathsCompleted": "Nenhuma Trilha Concluída",
+  "learningPaths_noPathsCompletedDescription": "Complete trilhas de aprendizado para vê-las aqui!",
+  "learningPaths_enrolled": "{count} inscritos",
+  "@learningPaths_enrolled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPaths_stepsCount": "{count} etapas",
+  "@learningPaths_stepsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPaths_progress": "{completed} de {total} etapas",
+  "@learningPaths_progress": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "learningPaths_resume": "Retomar",
+  "learningPaths_completedOn": "Concluído em {date}",
+  "@learningPaths_completedOn": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "learningPathNotFound": "Trilha de aprendizado não encontrada",
+  "learningPathMinutes": "{minutes} min",
+  "@learningPathMinutes": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "learningPathSteps": "{count} etapas",
+  "@learningPathSteps": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathBy": "Por {author}",
+  "@learningPathBy": {
+    "placeholders": {
+      "author": {"type": "String"}
+    }
+  },
+  "learningPathEnrolled": "{count} inscritos",
+  "@learningPathEnrolled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathCompleted": "{count} concluídos",
+  "@learningPathCompleted": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathEnroll": "Começar a Aprender",
+  "learningPathYourProgress": "Seu Progresso",
+  "learningPathCompletedBadge": "Concluído",
+  "learningPathProgressText": "{completed} de {total} etapas concluídas",
+  "@learningPathProgressText": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "learningPathStepsTitle": "Etapas de Aprendizado",
+  "learningPathEnrollTitle": "Começar Esta Trilha?",
+  "learningPathEnrollMessage": "Você será inscrito em \"{title}\" e poderá acompanhar seu progresso conforme completa cada etapa.",
+  "@learningPathEnrollMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "learningPathViewContent": "Ver Conteúdo",
+  "learningPathMarkComplete": "Marcar como Concluído",
+  "learningPathStepCompleted": "Etapa concluída!",
+
+  "thought_title": "Pensamentos",
+  "thought_feedTitle": "Pensamentos",
+  "thought_createNew": "Compartilhar um Pensamento",
+  "thought_emptyFeed": "Seu feed de pensamentos está vazio",
+  "thought_emptyFeedMessage": "Siga pessoas ou compartilhe um pensamento para começar",
+  "thought_regenerate": "Regenerar",
+  "thought_regeneratedFrom": "Regenerado de @{username}",
+  "@thought_regeneratedFrom": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_regenerateSuccess": "Pensamento regenerado para seu mural!",
+  "thought_regenerateConfirm": "Regenerar este pensamento?",
+  "thought_regenerateDescription": "Isso compartilhará este pensamento em seu mural, creditando o autor original.",
+  "thought_addComment": "Adicionar um comentário (opcional)",
+  "thought_regenerateCount": "{count, plural, =1{1 regeneração} other{{count} regenerações}}",
+  "@thought_regenerateCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "thought_cannotRegenerateOwn": "Você não pode regenerar seu próprio pensamento",
+  "thought_alreadyRegenerated": "Você já regenerou este pensamento",
+  "thought_postDetail": "Pensamento",
+  "thought_noComments": "Ainda sem comentários. Seja o primeiro a comentar!",
+  "thought_replyingTo": "Respondendo a {username}",
+  "@thought_replyingTo": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_writeReply": "Escrever uma resposta...",
+  "thought_commentPlaceholder": "Adicionar um comentário...",
+
+  "messages_title": "Mensagens",
+  "messages_conversation": "Conversa",
+  "messages_loading": "Carregando...",
+  "messages_muteNotifications": "Silenciar Notificações",
+  "messages_notificationsMuted": "Notificações silenciadas",
+  "messages_blockUser": "Bloquear Usuário",
+  "messages_blockUserConfirm": "Tem certeza de que deseja bloquear este usuário? Você não receberá mais mensagens dele.",
+  "messages_userBlocked": "Usuário bloqueado",
+  "messages_block": "Bloquear",
+  "messages_deleteConversation": "Excluir Conversa",
+  "messages_deleteConversationConfirm": "Tem certeza de que deseja excluir esta conversa? Esta ação não pode ser desfeita.",
+  "messages_conversationDeleted": "Conversa excluída",
+  "messages_startConversation": "Comece a conversa!",
+
+  "profile_takePhoto": "Tirar Foto",
+  "profile_chooseFromGallery": "Escolher da Galeria",
+  "profile_avatarUpdated": "Avatar atualizado com sucesso",
+  "profile_profileUpdated": "Perfil atualizado com sucesso",
+  "profile_noProfileFound": "Nenhum perfil encontrado",
+
+  "discovery_title": "Descobrir",
+  "discovery_searchUsers": "Buscar usuários...",
+  "discovery_discoverTab": "Descobrir",
+  "discovery_followingTab": "Seguindo",
+  "discovery_followersTab": "Seguidores",
+  "discovery_noUsersFound": "Nenhum usuário encontrado",
+  "discovery_tryAdjustingFilters": "Tente ajustar seus filtros",
+  "discovery_notFollowingAnyone": "Não está seguindo ninguém",
+  "discovery_discoverPeople": "Descubra pessoas para seguir",
+  "discovery_noFollowersYet": "Ainda sem seguidores",
+  "discovery_shareInsights": "Compartilhe suas percepções para ganhar seguidores",
+  "discovery_clearAll": "Limpar tudo",
+
+  "chart_gate": "Porta {number}",
+  "@chart_gate": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "chart_channel": "Canal {id}",
+  "@chart_channel": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "chart_center": "Centro",
+  "chart_keynote": "Nota-chave",
+  "chart_element": "Elemento",
+  "chart_location": "Localização",
+  "chart_hdCenters": "Centros HD",
+
+  "reaction_comment": "Comentar",
+  "reaction_react": "Reagir",
+  "reaction_standard": "Padrão",
+  "reaction_humanDesign": "Design Humano",
+
+  "share_shareChart": "Compartilhar Mapa",
+  "share_createShareLink": "Criar Link de Compartilhamento",
+  "share_shareViaUrl": "Compartilhar via URL",
+  "share_exportAsPng": "Exportar como PNG",
+  "share_fullReport": "Relatório completo",
+  "share_linkExpiration": "Expiração do Link",
+  "share_neverExpires": "Nunca expira",
+  "share_oneHour": "1 hora",
+  "share_twentyFourHours": "24 horas",
+  "share_sevenDays": "7 dias",
+  "share_thirtyDays": "30 dias",
+  "share_creating": "Criando...",
+  "share_signInToShare": "Entre para compartilhar seu mapa",
+  "share_createShareableLinks": "Crie links compartilháveis para seu mapa de Design Humano",
+  "share_linkImage": "Imagem",
+  "share_pdf": "PDF",
+
+  "post_share": "Compartilhar",
+  "post_edit": "Editar",
+  "post_report": "Denunciar",
+
+  "mentorship_title": "Mentoria",
+  "mentorship_pendingRequests": "Solicitações Pendentes",
+  "mentorship_availableMentors": "Mentores Disponíveis",
+  "mentorship_noMentorsAvailable": "Nenhum mentor disponível",
+  "mentorship_requestMentorship": "Solicitar Mentoria de {name}",
+  "@mentorship_requestMentorship": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "mentorship_sendMessage": "Envie uma mensagem explicando o que você gostaria de aprender:",
+  "mentorship_learnPrompt": "Gostaria de aprender mais sobre...",
+  "mentorship_requestSent": "Solicitação enviada!",
+  "mentorship_sendRequest": "Enviar Solicitação",
+  "mentorship_becomeAMentor": "Tornar-se um Mentor",
+  "mentorship_shareKnowledge": "Compartilhe seu conhecimento de Design Humano",
+
+  "story_cancel": "Cancelar",
+  "story_createStory": "Criar História",
+  "story_share": "Compartilhar",
+  "story_typeYourStory": "Digite sua história...",
+  "story_background": "Fundo",
+  "story_attachTransitGate": "Anexar Porta de Trânsito (opcional)",
+  "story_none": "Nenhum",
+  "story_gateNumber": "Porta {number}",
+  "@story_gateNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "story_whoCanSee": "Quem pode ver isso?",
+  "story_followers": "Seguidores",
+  "story_everyone": "Todos",
+
+  "challenges_title": "Desafios",
+  "challenges_daily": "Diário",
+  "challenges_weekly": "Semanal",
+  "challenges_monthly": "Mensal",
+  "challenges_noDailyChallenges": "Nenhum desafio diário disponível",
+  "challenges_noWeeklyChallenges": "Nenhum desafio semanal disponível",
+  "challenges_noMonthlyChallenges": "Nenhum desafio mensal disponível",
+  "challenges_errorLoading": "Erro ao carregar desafios",
+  "challenges_claimedPoints": "Reclamou {points} pontos!",
+  "@challenges_claimedPoints": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "challenges_totalPoints": "Pontos Totais",
+  "challenges_level": "Nível",
+
+  "learning_all": "Todos",
+  "learning_types": "Tipos",
+  "learning_gates": "Portas",
+  "learning_centers": "Centros",
+  "learning_liveSessions": "Sessões Ao Vivo",
+
+  "quiz_noActiveSession": "Nenhuma sessão de quiz ativa",
+  "quiz_noQuestionsAvailable": "Nenhuma pergunta disponível",
+  "quiz_ok": "OK",
+
+  "liveSessions_title": "Sessões Ao Vivo",
+  "liveSessions_upcoming": "Próximas",
+  "liveSessions_mySessions": "Minhas Sessões",
+  "liveSessions_errorLoading": "Erro ao carregar sessões",
+  "liveSessions_registeredSuccessfully": "Registrado com sucesso!",
+  "liveSessions_cancelRegistration": "Cancelar Registro",
+  "liveSessions_cancelRegistrationConfirm": "Tem certeza de que deseja cancelar seu registro?",
+  "liveSessions_no": "Não",
+  "liveSessions_yesCancel": "Sim, Cancelar",
+  "liveSessions_registrationCancelled": "Registro cancelado",
+
+  "gateChannelPicker_gates": "Portas (64)",
+  "gateChannelPicker_channels": "Canais (36)",
+  "gateChannelPicker_search": "Buscar portas ou canais...",
+
+  "leaderboard_weekly": "Semanal",
+  "leaderboard_monthly": "Mensal",
+  "leaderboard_allTime": "Todos os Tempos",
+
+  "ai_chatTitle": "Assistente IA",
+  "ai_askAi": "Perguntar à IA",
+  "ai_askAboutChart": "Pergunte à IA Sobre Seu Mapa",
+  "ai_miniDescription": "Obtenha percepções personalizadas sobre seu Design Humano",
+  "ai_startChatting": "Começar a conversar",
+  "ai_welcomeTitle": "Seu Assistente HD",
+  "ai_welcomeSubtitle": "Pergunte-me qualquer coisa sobre seu mapa de Design Humano. Posso explicar seu tipo, estratégia, autoridade, portas, canais e muito mais.",
+  "ai_inputPlaceholder": "Pergunte sobre seu mapa...",
+  "ai_newConversation": "Nova Conversa",
+  "ai_conversations": "Conversas",
+  "ai_noConversations": "Ainda sem conversas",
+  "ai_noConversationsMessage": "Inicie uma conversa com a IA para obter percepções personalizadas do mapa.",
+  "ai_deleteConversation": "Excluir Conversa",
+  "ai_deleteConversationConfirm": "Tem certeza de que deseja excluir esta conversa?",
+  "ai_messagesExhausted": "Mensagens Gratuitas Esgotadas",
+  "ai_upgradeForUnlimited": "Atualize para Premium para conversas ilimitadas com IA sobre seu mapa de Design Humano.",
+  "ai_usageCount": "{used} de {limit} mensagens gratuitas usadas",
+  "@ai_usageCount": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "ai_errorGeneric": "Algo deu errado. Por favor, tente novamente.",
+  "ai_errorNetwork": "Não foi possível alcançar o serviço de IA. Verifique sua conexão.",
+
+  "events_title": "Eventos da Comunidade",
+  "events_upcoming": "Próximos",
+  "events_past": "Passados",
+  "events_create": "Criar Evento",
+  "events_noUpcoming": "Nenhum evento próximo",
+  "events_noUpcomingMessage": "Crie um evento para conectar-se com a comunidade HD!",
+  "events_online": "Online",
+  "events_inPerson": "Presencial",
+  "events_hybrid": "Híbrido",
+  "events_participants": "{count, plural, =1{1 participante} other{{count} participantes}}",
+  "@events_participants": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "events_register": "Registrar",
+  "events_registered": "Registrado",
+  "events_cancelRegistration": "Cancelar Registro",
+  "events_registrationFull": "Evento Lotado",
+  "events_eventTitle": "Título do Evento",
+  "events_eventDescription": "Descrição",
+  "events_eventType": "Tipo de Evento",
+  "events_startDate": "Data e Hora de Início",
+  "events_endDate": "Data e Hora de Término",
+  "events_location": "Local",
+  "events_virtualLink": "Link da Reunião Virtual",
+  "events_maxParticipants": "Máximo de Participantes",
+  "events_hdTypeFilter": "Filtro de Tipo HD",
+  "events_allTypes": "Aberto para Todos os Tipos",
+  "events_created": "Evento criado!",
+  "events_deleted": "Evento excluído",
+  "events_notFound": "Evento não encontrado",
+
+  "chartOfDay_title": "Mapa do Dia",
+  "chartOfDay_featured": "Mapa em Destaque",
+  "chartOfDay_viewChart": "Ver Mapa",
+
+  "discussion_typeDiscussion": "Discussão de Tipo",
+  "discussion_channelDiscussion": "Discussão de Canal",
+
+  "ai_wantMoreInsights": "Quer mais insights de AI?",
+  "ai_messagesPackTitle": "{count} Mensagens",
+  "ai_orSubscribe": "ou assine para ilimitado",
+  "ai_bestValue": "Melhor valor",
+  "ai_getMoreMessages": "Obter mais mensagens",
+  "ai_fromPrice": "A partir de {price}",
+  "ai_perMessage": "{price}/mensagem"
+}

@@ -47,10 +47,13 @@ class GeminiProvider implements AiProvider {
     }));
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": this.apiKey,
+        },
         body: JSON.stringify({
           system_instruction: { parts: [{ text: systemPrompt }] },
           contents,
@@ -180,7 +183,7 @@ class OpenAIProvider implements AiProvider {
 // ============================================================================
 
 function createAiProvider(): AiProvider {
-  const provider = Deno.env.get("AI_PROVIDER") || "gemini";
+  const provider = Deno.env.get("AI_PROVIDER") || "claude";
 
   switch (provider) {
     case "gemini": {
@@ -351,14 +354,16 @@ Deno.serve(async (req) => {
 
       const { data: usage } = await adminClient
         .from("ai_usage")
-        .select("messages_count")
+        .select("messages_count, bonus_messages")
         .eq("user_id", userId)
         .eq("period_start", periodStart)
         .maybeSingle();
 
       const currentUsage = usage?.messages_count ?? 0;
+      const bonusMessages = usage?.bonus_messages ?? 0;
+      const effectiveLimit = FREE_MESSAGES_PER_MONTH + bonusMessages;
 
-      if (currentUsage >= FREE_MESSAGES_PER_MONTH) {
+      if (currentUsage >= effectiveLimit) {
         return new Response(
           JSON.stringify({
             error: "Monthly AI message limit reached. Upgrade to Premium for unlimited access.",

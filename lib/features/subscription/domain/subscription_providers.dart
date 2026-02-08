@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../shared/providers/supabase_provider.dart';
+import '../../ai_assistant/domain/ai_providers.dart';
 import '../data/subscription_repository.dart';
 import 'models/subscription.dart';
 
@@ -31,6 +32,12 @@ final subscriptionOffersProvider = FutureProvider<List<SubscriptionOffer>>((ref)
 final shareLimitProvider = FutureProvider<({int used, int limit, bool canShare})>((ref) async {
   final repository = ref.watch(subscriptionRepositoryProvider);
   return repository.checkShareLimit();
+});
+
+/// Provider for available message packs
+final messagePacksProvider = FutureProvider<List<MessagePack>>((ref) async {
+  final repository = ref.watch(subscriptionRepositoryProvider);
+  return repository.getMessagePacks();
 });
 
 /// Notifier for subscription actions
@@ -84,6 +91,38 @@ class SubscriptionNotifier extends Notifier<SubscriptionState> {
         state = state.copyWith(
           isLoading: false,
           error: 'No previous purchases found.',
+        );
+      }
+
+      return success;
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        error: 'An error occurred: $e',
+      );
+      return false;
+    }
+  }
+
+  /// Purchase a message pack (consumable)
+  Future<bool> purchaseMessagePack(MessagePack pack) async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final success = await _repository.purchaseMessagePack(pack);
+
+      if (success) {
+        // Credit bonus messages via AI repository
+        final aiRepo = ref.read(aiRepositoryProvider);
+        await aiRepo.addBonusMessages(pack.messageCount);
+
+        // Refresh usage and packs
+        ref.invalidate(aiUsageProvider);
+        state = state.copyWith(isLoading: false, purchaseSuccess: true);
+      } else {
+        state = state.copyWith(
+          isLoading: false,
+          error: 'Purchase was not completed.',
         );
       }
 

@@ -6,7 +6,7 @@ class AppConfig {
   AppConfig._();
 
   /// App name
-  static const String appName = 'Human Design';
+  static const String appName = 'AuraMap';
 
   /// App version (should match pubspec.yaml)
   static const String appVersion = '1.0.0';
@@ -87,7 +87,7 @@ class AppConfig {
   static const String aiChatFunctionName = 'ai-chat';
 
   /// Premium entitlement ID
-  static const String premiumEntitlementId = 'premium';
+  static const String premiumEntitlementId = 'AuraMap Pro';
 
   /// Ephemeris files path (relative to assets)
   static const String ephemerisPath = 'assets/ephe';

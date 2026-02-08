@@ -52,10 +52,20 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **Penta Analysis** - Small group (2-5 people) dynamics for couples and teams
 - **HD Compatibility Scoring** - Type, profile, channel, and center compatibility
 
+### AI Assistant
+- **Ask AI About Your Chart** - Personalized AI chat powered by Claude, Gemini, or GPT
+- **Chart-Aware Responses** - AI receives your chart data (type, centers, gates, channels) for personalized insights
+- **Conversation History** - Save and resume AI conversations
+- **Multi-Provider Support** - Claude (default), Gemini, OpenAI backends
+- **Usage Quota** - 5 free messages/month, unlimited for premium users
+- **Message Packs** - One-time purchasable packs (3, 5, or 10 messages) for non-subscribers
+
 ### Premium Features
-- **Subscription Tiers** - Free, Plus, and Pro plans
+- **Subscription Tiers** - Free, Monthly, and Yearly plans
 - **Extended Sharing** - Unlimited chart exports and shares
 - **Advanced Reports** - Detailed compatibility and transit reports
+- **Unlimited AI Chat** - No message limits for premium subscribers
+- **Message Packs** - Available for free users as an alternative to subscribing
 
 ## Tech Stack
 
@@ -68,7 +78,8 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 | Navigation | GoRouter |
 | Subscriptions | RevenueCat |
 | Push Notifications | Firebase Cloud Messaging |
-| Localization | EN, RU, UK |
+| AI Chat | Supabase Edge Functions + Claude/Gemini/OpenAI |
+| Localization | EN, RU, UK, DE, ES, PT, RO, BE |
 
 ## Getting Started
 
@@ -118,6 +129,7 @@ lib/
 │   └── theme/            # Design system (colors, typography)
 ├── features/
 │   ├── auth/             # Authentication (email, Apple, Google)
+│   ├── ai_assistant/      # AI chat (Claude/Gemini/OpenAI)
 │   ├── chart/            # Chart calculation & bodygraph display
 │   ├── composite/        # Relationship charts
 │   ├── discovery/        # User discovery & matching
@@ -138,7 +150,7 @@ lib/
 │   ├── stories/          # 24h ephemeral content
 │   ├── subscription/     # Premium features (RevenueCat)
 │   └── transits/         # Transit tracking
-├── l10n/                 # Localization (EN, RU, UK)
+├── l10n/                 # Localization (EN, RU, UK, DE, ES, PT, RO, BE)
 └── shared/
     ├── providers/        # Supabase client provider
     └── widgets/          # Reusable UI components

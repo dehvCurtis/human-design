@@ -25,6 +25,14 @@ lib/
 │   ├── router/app_router.dart   # GoRouter navigation
 │   └── theme/                   # Theming (app_theme.dart, app_colors.dart)
 ├── features/                    # Feature modules
+│   ├── ai_assistant/             # AI chat assistant
+│   │   ├── data/ai_repository.dart
+│   │   ├── data/chart_context_builder.dart
+│   │   ├── domain/ai_providers.dart
+│   │   ├── domain/models/ai_conversation.dart
+│   │   ├── domain/models/ai_message.dart
+│   │   ├── domain/models/ai_usage.dart
+│   │   └── presentation/ai_chat_screen.dart
 │   ├── auth/                    # Authentication
 │   │   ├── data/auth_repository.dart
 │   │   └── domain/auth_providers.dart
@@ -146,7 +154,7 @@ flutter build apk
 - ✅ Saved charts management (create, rename, delete)
 - ✅ Profile screen with birth data editing
 - ✅ Settings screen with theme and language selection
-- ✅ Full localization (EN, RU, UK)
+- ✅ Full localization (EN, RU, UK, DE, ES, PT, RO, BE)
 
 ### Social Platform ✅
 - ✅ Discovery screen with HD compatibility matching
@@ -169,6 +177,14 @@ flutter build apk
 - ✅ Multiple quiz categories (Types, Centers, Authorities, etc.)
 - ✅ Quiz progress tracking and scoring
 - ✅ Content library for learning materials
+
+### AI Assistant ✅
+- ✅ AI chat with personalized chart context
+- ✅ Multi-provider backend (Claude, Gemini, OpenAI)
+- ✅ Conversation history and management
+- ✅ Usage quota (5 free/month, unlimited premium)
+- ✅ Hero CTA on home screen (first position)
+- ✅ Supabase Edge Function backend
 
 ### Subscription/Premium ✅
 - ✅ Subscription models and repository

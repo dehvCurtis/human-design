@@ -2,6 +2,82 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.12] - 2026-02-07
+
+### Added
+
+#### AI Message Packs
+- **One-Time Message Packs** - Purchasable message credits for free users
+  - 3 packs: 3 messages ($1.99), 5 messages ($2.99), 10 messages ($4.99)
+  - Per-message pricing incentivizes subscription over packs
+  - RevenueCat consumable product integration with default fallback
+  - Purchase audit trail in `ai_purchases` table
+- **Redesigned AI Paywall** - New `AiPremiumGate` with pack options + subscription CTA
+  - Row of 3 message pack cards with price and per-message cost
+  - "or subscribe for unlimited" divider
+  - "Best value" badge on subscription button
+  - Replaces old single "Upgrade" button
+- **Home Screen Exhausted State** - AI hero CTA updates when quota is used
+  - "Get more messages" label replaces "Start chatting"
+  - "From $1.99" badge replaces "0 remaining"
+  - Colors stay consistent with primary indigo palette
+
+#### Database
+- `bonus_messages` column on `ai_usage` table
+- `add_ai_bonus_messages` RPC function (upsert with increment)
+- `ai_purchases` audit table with RLS policies
+
+### Changed
+- `AiUsage` model now tracks `bonusMessages` with `effectiveLimit` getter
+- Edge Function quota check factors in `bonus_messages`
+- `AiPremiumGate` upgraded from `StatelessWidget` to `ConsumerWidget`
+
+### Fixed
+- **Chart Share via Post** - Fixed validation that blocked chart-only posts
+  - `create_post_sheet.dart` validation now allows posts with just a chart attached
+  - Previously required text or images even when chart was selected
+
+---
+
+## [0.2.11] - 2026-02-07
+
+### Added
+
+#### AI Assistant
+- **AI Chat Feature** - Personalized AI assistant for Human Design questions
+  - Supabase Edge Function backend with multi-provider support (Claude, Gemini, OpenAI)
+  - Chart-aware system prompt with sanitized chart context (type, centers, gates, channels)
+  - Conversation history with save/resume functionality
+  - Usage quota enforcement (5 free messages/month, unlimited for premium)
+  - Defense-in-depth: client-side and server-side quota checks
+  - Input validation (2000 char limit, 20 message history cap)
+  - Suggested questions based on user's chart data
+
+#### AI Hero CTA on Home Screen
+- **Prominent AI Card** - Redesigned AiMiniWidget as a large hero CTA
+  - Vertical layout with 64x64 gradient icon, bold title, description
+  - "Start chatting" action label with arrow
+  - Stronger gradient background (15-20% alpha)
+  - Moved to first position on home screen (before transit summary)
+  - Usage badge for free users showing remaining messages
+
+#### Expanded Localization
+- **5 New Languages** - Added German, Spanish, Portuguese, Romanian, Belarusian
+  - Total supported locales: EN, RU, UK, DE, ES, PT, RO, BE
+  - All AI assistant strings localized across all 8 languages
+
+### Fixed
+
+#### Onboarding Screen Overflow
+- **Flag Row Overflow** - Fixed RenderFlex overflow (4px on right) on onboarding screen
+  - Replaced `Row` with `Wrap` widget for locale flag selector
+  - Flags now wrap to second line on narrow screens instead of overflowing
+
+#### Security
+- Database security fixes (see `supabase/migrations/20260207_security_fixes.sql`)
+
+---
+
 ## [0.2.10] - 2026-02-06
 
 ### Added

@@ -54,7 +54,12 @@ enum AppThemeMode {
 /// Supported app locales
 enum AppLocale {
   english('en', 'English', '🇺🇸'),
+  spanish('es', 'Español', '🇪🇸'),
+  portuguese('pt', 'Português', '🇧🇷'),
+  german('de', 'Deutsch', '🇩🇪'),
+  romanian('ro', 'Română', '🇷🇴'),
   russian('ru', 'Русский', '🇷🇺'),
+  belarusian('be', 'Беларуская', '🇧🇾'),
   ukrainian('uk', 'Українська', '🇺🇦');
 
   const AppLocale(this.code, this.displayName, this.flag);
@@ -67,8 +72,18 @@ enum AppLocale {
 
   static AppLocale fromCode(String? code) {
     switch (code) {
+      case 'es':
+        return AppLocale.spanish;
+      case 'pt':
+        return AppLocale.portuguese;
+      case 'de':
+        return AppLocale.german;
+      case 'ro':
+        return AppLocale.romanian;
       case 'ru':
         return AppLocale.russian;
+      case 'be':
+        return AppLocale.belarusian;
       case 'uk':
         return AppLocale.ukrainian;
       default:

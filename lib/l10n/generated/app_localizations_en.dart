@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Human Design';
+  String get appName => 'AuraMap';
 
   @override
   String get common_save => 'Save';
@@ -325,7 +325,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_calculateMyChart => 'Calculate My Chart';
 
   @override
-  String get onboarding_welcome => 'Welcome to Human Design';
+  String get onboarding_welcome => 'Welcome to AuraMap';
 
   @override
   String get onboarding_welcomeSubtitle =>
@@ -1382,11 +1382,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to change password. Please try again.';
 
   @override
-  String get settings_feedbackSubject => 'Human Design App Feedback';
+  String get settings_feedbackSubject => 'AuraMap App Feedback';
 
   @override
   String get settings_feedbackBody =>
-      'Hi,\n\nI would like to share the following feedback about the Human Design app:\n\n';
+      'Hi,\n\nI would like to share the following feedback about AuraMap:\n\n';
 
   @override
   String get auth_newPassword => 'New Password';
@@ -1411,7 +1411,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_exportingData => 'Preparing your data export...';
 
   @override
-  String get settings_exportDataSubject => 'Human Design App - My Data Export';
+  String get settings_exportDataSubject => 'AuraMap - My Data Export';
 
   @override
   String get settings_exportDataFailed =>
@@ -1490,7 +1490,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile_loadFailed => 'Failed to load profile';
 
   @override
-  String get profile_defaultUserName => 'Human Design User';
+  String get profile_defaultUserName => 'AuraMap User';
 
   @override
   String get profile_birthDate => 'Date';
@@ -3197,6 +3197,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Get personalized insights about your Human Design';
 
   @override
+  String get ai_startChatting => 'Start chatting';
+
+  @override
   String get ai_welcomeTitle => 'Your HD Assistant';
 
   @override
@@ -3349,4 +3352,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get discussion_channelDiscussion => 'Channel Discussion';
+
+  @override
+  String get ai_wantMoreInsights => 'Want more AI insights?';
+
+  @override
+  String ai_messagesPackTitle(int count) {
+    return '$count Messages';
+  }
+
+  @override
+  String get ai_orSubscribe => 'or subscribe for unlimited';
+
+  @override
+  String get ai_bestValue => 'Best value';
+
+  @override
+  String get ai_getMoreMessages => 'Get more messages';
+
+  @override
+  String ai_fromPrice(String price) {
+    return 'From $price';
+  }
+
+  @override
+  String ai_perMessage(String price) {
+    return '$price/message';
+  }
 }

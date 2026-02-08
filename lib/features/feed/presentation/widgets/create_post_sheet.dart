@@ -470,7 +470,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
 
   Future<void> _submitPost() async {
     final content = _contentController.text.trim();
-    if (content.isEmpty && _selectedImages.isEmpty) {
+    if (content.isEmpty && _selectedImages.isEmpty && _selectedChartId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter some content or add an image')),
       );

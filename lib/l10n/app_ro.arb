@@ -1,0 +1,1498 @@
+{
+  "@@locale": "ro",
+
+  "appName": "AuraMap",
+  "@appName": {
+    "description": "The name of the application"
+  },
+
+  "common_save": "Salvează",
+  "common_cancel": "Anulează",
+  "common_delete": "Șterge",
+  "common_edit": "Editează",
+  "common_done": "Gata",
+  "common_next": "Următorul",
+  "common_back": "Înapoi",
+  "common_skip": "Sari peste",
+  "common_continue": "Continuă",
+  "common_loading": "Se încarcă...",
+  "common_error": "Eroare",
+  "common_retry": "Reîncearcă",
+  "common_close": "Închide",
+  "common_search": "Caută",
+  "common_share": "Distribuie",
+  "common_settings": "Setări",
+  "common_logout": "Deconectare",
+  "common_profile": "Profil",
+  "common_type": "Tip",
+  "common_strategy": "Strategie",
+  "common_authority": "Autoritate",
+  "common_definition": "Definiție",
+  "common_create": "Creează",
+  "common_viewFull": "Vezi Complet",
+  "common_send": "Trimite",
+  "common_like": "Apreciază",
+  "common_reply": "Răspunde",
+  "common_deleteConfirmation": "Ești sigur că vrei să ștergi asta? Această acțiune nu poate fi anulată.",
+  "common_comingSoon": "În curând!",
+
+  "nav_home": "Acasă",
+  "nav_chart": "Hartă",
+  "nav_today": "Zilnic",
+  "nav_social": "Social",
+  "nav_profile": "Profil",
+  "nav_more": "Mai mult",
+  "nav_learn": "Învață",
+
+  "affirmation_savedSuccess": "Afirmație salvată!",
+  "affirmation_alreadySaved": "Afirmație deja salvată",
+
+  "home_goodMorning": "Bună dimineața",
+  "home_goodAfternoon": "Bună ziua",
+  "home_goodEvening": "Bună seara",
+  "home_yourDesign": "Designul Tău",
+  "home_completeProfile": "Completează Profilul",
+  "home_enterBirthData": "Introdu Datele de Naștere",
+  "home_myChart": "Harta Mea",
+  "home_savedCharts": "Salvate",
+  "home_composite": "Compozit",
+  "home_penta": "Penta",
+  "home_friends": "Prieteni",
+  "home_myBodygraph": "Bodygraph-ul Meu",
+  "home_definedCenters": "Centre Definite",
+  "home_activeChannels": "Canale Active",
+  "home_activeGates": "Porți Active",
+
+  "transit_today": "Tranzitele de Astăzi",
+  "transit_sun": "Soare",
+  "transit_earth": "Pământ",
+  "transit_moon": "Lună",
+  "transit_gate": "Poarta {number}",
+  "@transit_gate": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_newChannelsActivated": "{count, plural, =1{1 canal nou activat} other{{count} canale noi activate}}",
+  "@transit_newChannelsActivated": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_gatesHighlighted": "{count, plural, =1{1 poartă evidențiată} other{{count} porți evidențiate}}",
+  "@transit_gatesHighlighted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_noConnections": "Nicio conexiune directă de tranzit astăzi",
+
+  "auth_signIn": "Conectare",
+  "auth_signUp": "Înregistrare",
+  "auth_signInWithApple": "Conectează-te cu Apple",
+  "auth_signInWithGoogle": "Conectează-te cu Google",
+  "auth_signInWithEmail": "Conectează-te cu Email",
+  "auth_email": "Email",
+  "auth_password": "Parolă",
+  "auth_confirmPassword": "Confirmă Parola",
+  "auth_forgotPassword": "Ai uitat parola?",
+  "auth_noAccount": "Nu ai cont?",
+  "auth_hasAccount": "Ai deja un cont?",
+  "auth_termsAgree": "Prin înregistrare, accepți Termenii și Condițiile și Politica de Confidențialitate",
+  "auth_welcomeBack": "Bine ai revenit",
+  "auth_signInSubtitle": "Conectează-te pentru a continua călătoria ta în Design Uman",
+  "auth_signInRequired": "Autentificare Necesară",
+  "auth_signInToCalculateChart": "Te rugăm să te conectezi pentru a calcula și salva harta ta de Design Uman.",
+  "auth_signInToCreateStory": "Te rugăm să te conectezi pentru a distribui povești cu comunitatea.",
+  "auth_signUpSubtitle": "Începe călătoria ta în Design Uman astăzi",
+  "auth_signUpWithApple": "Înregistrează-te cu Apple",
+  "auth_signUpWithGoogle": "Înregistrează-te cu Google",
+  "auth_enterName": "Introdu numele tău",
+  "auth_nameRequired": "Numele este obligatoriu",
+  "auth_termsOfService": "Termeni și Condiții",
+  "auth_privacyPolicy": "Politica de Confidențialitate",
+  "auth_acceptTerms": "Te rugăm să accepți Termenii și Condițiile pentru a continua",
+  "auth_resetPasswordTitle": "Resetare Parolă",
+  "auth_resetPasswordPrompt": "Introdu adresa ta de email și îți vom trimite un link pentru a-ți reseta parola.",
+  "auth_enterEmail": "Introdu email-ul tău",
+  "auth_resetEmailSent": "Email de resetare parolă trimis!",
+  "auth_name": "Nume",
+  "auth_createAccount": "Creează Cont",
+  "auth_iAgreeTo": "Sunt de acord cu ",
+  "auth_and": " și ",
+  "auth_birthInformation": "Informații de Naștere",
+  "auth_calculateMyChart": "Calculează Harta Mea",
+
+  "onboarding_welcome": "Bine ai venit la AuraMap",
+  "onboarding_welcomeSubtitle": "Descoperă planul tău energetic unic",
+  "onboarding_birthData": "Introdu Datele Tale de Naștere",
+  "onboarding_birthDataSubtitle": "Avem nevoie de acestea pentru a calcula harta ta",
+  "onboarding_birthDate": "Data Nașterii",
+  "onboarding_birthTime": "Ora Nașterii",
+  "onboarding_birthLocation": "Locul Nașterii",
+  "onboarding_searchLocation": "Caută un oraș...",
+  "onboarding_unknownTime": "Nu știu ora nașterii",
+  "onboarding_timeImportance": "Cunoașterea exactă a orei nașterii este importantă pentru o hartă precisă",
+  "onboarding_birthDataExplanation": "Datele tale de naștere sunt folosite pentru a calcula harta ta unică de Design Uman. Cu cât informațiile sunt mai precise, cu atât harta ta va fi mai exactă.",
+  "onboarding_noTimeWarning": "Fără o oră exactă a nașterii, unele detalii ale hărții (cum ar fi semnul ascendent și liniile exacte ale porților) pot să nu fie precise. Vom folosi amiaza ca valoare implicită.",
+  "onboarding_enterBirthTimeInstead": "Introdu ora nașterii în schimb",
+  "onboarding_birthDataPrivacy": "Datele tale de naștere sunt criptate și stocate în siguranță. Le poți actualiza sau șterge oricând din setările profilului.",
+  "onboarding_saveFailed": "Salvarea datelor de naștere a eșuat",
+  "onboarding_fillAllFields": "Te rugăm să completezi toate câmpurile necesare",
+  "onboarding_selectLanguage": "Selectează Limba",
+  "onboarding_getStarted": "Începe",
+  "onboarding_alreadyHaveAccount": "Am deja un cont",
+  "onboarding_liveInAlignment": "Descoperă planul tău energetic unic și trăiește în armonie cu adevărata ta natură.",
+
+  "chart_myChart": "Harta Mea",
+  "chart_viewChart": "Vezi Harta",
+  "chart_calculate": "Calculează Harta",
+  "chart_recalculate": "Recalculează",
+  "chart_share": "Distribuie Harta",
+  "chart_createChart": "Creează Hartă",
+  "chart_composite": "Hartă Compozită",
+  "chart_transit": "Tranzitele de Astăzi",
+  "chart_bodygraph": "Bodygraph",
+  "chart_planets": "Planete",
+  "chart_details": "Detalii Hartă",
+  "chart_properties": "Proprietăți",
+  "chart_gates": "Porți",
+  "chart_channels": "Canale",
+  "chart_noChartYet": "Încă Fără Hartă",
+  "chart_addBirthDataPrompt": "Adaugă datele tale de naștere pentru a genera harta ta unică de Design Uman.",
+  "chart_addBirthData": "Adaugă Date de Naștere",
+  "chart_noActiveChannels": "Niciun Canal Activ",
+  "chart_channelsFormedBothGates": "Canalele se formează când ambele porți sunt definite.",
+  "chart_savedCharts": "Hărți Salvate",
+  "chart_addChart": "Adaugă Hartă",
+  "chart_noSavedCharts": "Nicio Hartă Salvată",
+  "chart_noSavedChartsMessage": "Creează hărți pentru tine și alții pentru a le salva aici.",
+  "chart_loadFailed": "Încărcarea hărților a eșuat",
+  "chart_renameChart": "Redenumește Harta",
+  "chart_rename": "Redenumește",
+  "chart_renameFailed": "Redenumirea hărții a eșuat",
+  "chart_deleteChart": "Șterge Harta",
+  "chart_deleteConfirm": "Ești sigur că vrei să ștergi \"{name}\"? Această acțiune nu poate fi anulată.",
+  "@chart_deleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chart_deleteFailed": "Ștergerea hărții a eșuat",
+  "chart_you": "Tu",
+  "chart_personName": "Nume",
+  "chart_enterPersonName": "Introdu numele persoanei",
+  "chart_addChartDescription": "Creează o hartă pentru altcineva introducând informațiile lor de naștere.",
+  "chart_calculateAndSave": "Calculează & Salvează Harta",
+  "chart_saved": "Hartă salvată cu succes",
+  "chart_consciousGates": "Porți Conștiente",
+  "chart_unconsciousGates": "Porți Inconștiente",
+  "chart_personalitySide": "Partea Personalității - ceea ce ești conștient",
+  "chart_designSide": "Partea Designului - ceea ce văd alții în tine",
+
+  "type_manifestor": "Manifestor",
+  "type_generator": "Generator",
+  "type_manifestingGenerator": "Generator Manifestor",
+  "type_projector": "Proiector",
+  "type_reflector": "Reflector",
+
+  "type_manifestor_strategy": "Să Informezi",
+  "type_generator_strategy": "Să Răspunzi",
+  "type_manifestingGenerator_strategy": "Să Răspunzi",
+  "type_projector_strategy": "Să Aștepți Invitația",
+  "type_reflector_strategy": "Să Aștepți un Ciclu Lunar",
+
+  "authority_emotional": "Emoțională",
+  "authority_sacral": "Sacrală",
+  "authority_splenic": "Splenică",
+  "authority_ego": "Ego/Inimă",
+  "authority_self": "Auto-Proiectată",
+  "authority_environment": "Mentală/Ambientală",
+  "authority_lunar": "Lunară",
+
+  "definition_none": "Fără Definiție",
+  "definition_single": "Definiție Simplă",
+  "definition_split": "Definiție Divizată",
+  "definition_tripleSplit": "Divizare Triplă",
+  "definition_quadrupleSplit": "Divizare Cvadrupla",
+
+  "profile_1_3": "1/3 Investigator/Martir",
+  "profile_1_4": "1/4 Investigator/Oportunist",
+  "profile_2_4": "2/4 Eremit/Oportunist",
+  "profile_2_5": "2/5 Eremit/Eretic",
+  "profile_3_5": "3/5 Martir/Eretic",
+  "profile_3_6": "3/6 Martir/Model de Rol",
+  "profile_4_6": "4/6 Oportunist/Model de Rol",
+  "profile_4_1": "4/1 Oportunist/Investigator",
+  "profile_5_1": "5/1 Eretic/Investigator",
+  "profile_5_2": "5/2 Eretic/Eremit",
+  "profile_6_2": "6/2 Model de Rol/Eremit",
+  "profile_6_3": "6/3 Model de Rol/Martir",
+
+  "center_head": "Cap",
+  "center_ajna": "Ajna",
+  "center_throat": "Gât",
+  "center_g": "G/Sinele",
+  "center_heart": "Inimă/Ego",
+  "center_sacral": "Sacral",
+  "center_solarPlexus": "Plexul Solar",
+  "center_spleen": "Splină",
+  "center_root": "Rădăcină",
+  "center_defined": "Definit",
+  "center_undefined": "Nedefinit",
+
+  "section_type": "Tip",
+  "section_strategy": "Strategie",
+  "section_authority": "Autoritate",
+  "section_profile": "Profil",
+  "section_definition": "Definiție",
+  "section_centers": "Centre",
+  "section_channels": "Canale",
+  "section_gates": "Porți",
+  "section_conscious": "Conștient (Personalitate)",
+  "section_unconscious": "Inconștient (Design)",
+
+  "social_title": "Social",
+  "social_thoughts": "Gânduri",
+  "social_discover": "Descoperă",
+  "social_groups": "Grupuri",
+  "social_invite": "Invită",
+  "social_createPost": "Distribuie un gând...",
+  "social_noThoughtsYet": "Încă fără gânduri",
+  "social_noThoughtsMessage": "Fii primul care își împărtășește perspectivele despre Design Uman!",
+  "social_createGroup": "Creează Grup",
+  "social_members": "Membri",
+  "social_comments": "Comentarii",
+  "social_addComment": "Adaugă un comentariu...",
+  "social_noComments": "Încă fără comentarii",
+  "social_shareLimit": "Ai rămas {remaining} distribuiri în această lună",
+  "@social_shareLimit": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "social_visibility": "Vizibilitate",
+  "social_private": "Privat",
+  "social_friendsOnly": "Doar Prieteni",
+  "social_public": "Public",
+  "social_shared": "Distribuit",
+  "social_noGroupsYet": "Încă Fără Grupuri",
+  "social_noGroupsMessage": "Creează grupuri pentru a analiza dinamica echipei cu analiza Penta.",
+  "social_noSharedCharts": "Nicio Hartă Distribuită",
+  "social_noSharedChartsMessage": "Hărțile distribuite cu tine vor apărea aici.",
+  "social_createGroupPrompt": "Creează un grup pentru a analiza dinamica echipei.",
+  "social_groupName": "Nume Grup",
+  "social_groupNameHint": "Familie, Echipă, etc.",
+  "social_groupDescription": "Descriere (opțional)",
+  "social_groupDescriptionHint": "Pentru ce este acest grup?",
+  "social_groupCreated": "Grupul \"{name}\" a fost creat!",
+  "@social_groupCreated": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_groupNameRequired": "Te rugăm să introduci un nume pentru grup",
+  "social_createGroupFailed": "Crearea grupului a eșuat. Te rugăm să încerci din nou.",
+  "social_noDescription": "Fără descriere",
+  "social_admin": "Administrator",
+  "social_sharedBy": "Distribuit de {name}",
+  "@social_sharedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "social_loadGroupsFailed": "Încărcarea grupurilor a eșuat",
+  "social_loadSharedFailed": "Încărcarea hărților distribuite a eșuat",
+  "social_userNotFound": "Utilizator negăsit",
+
+  "discovery_userNotFound": "Utilizator negăsit",
+  "discovery_following": "Urmărești",
+  "discovery_follow": "Urmărește",
+  "discovery_sendMessage": "Trimite Mesaj",
+  "discovery_about": "Despre",
+  "discovery_humanDesign": "Design Uman",
+  "discovery_type": "Tip",
+  "discovery_profile": "Profil",
+  "discovery_authority": "Autoritate",
+  "discovery_compatibility": "Compatibilitate",
+  "discovery_compatible": "compatibil",
+  "discovery_followers": "Urmăritori",
+  "discovery_followingLabel": "Urmărești",
+  "discovery_noResults": "Niciun utilizator găsit",
+  "discovery_noResultsMessage": "Încearcă să ajustezi filtrele sau verifică mai târziu",
+
+  "userProfile_viewChart": "Bodygraph",
+  "userProfile_chartPrivate": "Această hartă este privată",
+  "userProfile_chartFriendsOnly": "Deveniți urmăritori reciproci pentru a vedea această hartă",
+  "userProfile_chartFollowToView": "Urmărește pentru a vedea această hartă",
+  "userProfile_publicProfile": "Profil Public",
+  "userProfile_privateProfile": "Profil Privat",
+  "userProfile_friendsOnlyProfile": "Doar Prieteni",
+  "userProfile_followersList": "Urmăritori",
+  "userProfile_followingList": "Urmărești",
+  "userProfile_noFollowers": "Încă fără urmăritori",
+  "userProfile_noFollowing": "Nu urmărești pe nimeni încă",
+  "userProfile_thoughts": "Gânduri",
+  "userProfile_noThoughts": "Încă fără gânduri distribuite",
+  "userProfile_showAll": "Arată Tot",
+
+  "popularCharts_title": "Hărți Populare",
+  "popularCharts_subtitle": "Cele mai urmărite hărți publice",
+
+  "time_minutesAgo": "Acum {minutes}m",
+  "@time_minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hoursAgo": "Acum {hours}h",
+  "@time_hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "time_daysAgo": "Acum {days}z",
+  "@time_daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+
+  "transit_title": "Tranzitele de Astăzi",
+  "transit_currentEnergies": "Energii Curente",
+  "transit_sunGate": "Poarta Soarelui",
+  "transit_earthGate": "Poarta Pământului",
+  "transit_moonGate": "Poarta Lunii",
+  "transit_activeGates": "Porți de Tranzit Active",
+  "transit_activeChannels": "Canale de Tranzit Active",
+  "transit_personalImpact": "Impact Personal",
+  "transit_gateActivated": "Poarta {gate} activată prin tranzit",
+  "@transit_gateActivated": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "transit_channelFormed": "Canalul {channel} format cu harta ta",
+  "@transit_channelFormed": {
+    "placeholders": {
+      "channel": {
+        "type": "String"
+      }
+    }
+  },
+  "transit_noPersonalImpact": "Nicio conexiune directă de tranzit astăzi",
+  "transit_viewFullTransit": "Vezi Harta Completă de Tranzit",
+
+  "affirmation_title": "Afirmația Zilei",
+  "affirmation_forYourType": "Pentru {type} Tău",
+  "@affirmation_forYourType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "affirmation_basedOnGate": "Bazată pe Poarta {gate}",
+  "@affirmation_basedOnGate": {
+    "placeholders": {
+      "gate": {
+        "type": "int"
+      }
+    }
+  },
+  "affirmation_refresh": "Afirmație Nouă",
+  "affirmation_save": "Salvează Afirmația",
+  "affirmation_saved": "Afirmații Salvate",
+  "affirmation_share": "Distribuie Afirmația",
+  "affirmation_notifications": "Notificări Afirmație Zilnică",
+  "affirmation_notificationTime": "Ora Notificării",
+
+  "lifestyle_today": "Astăzi",
+  "lifestyle_insights": "Perspective",
+  "lifestyle_journal": "Jurnal",
+  "lifestyle_addJournalEntry": "Adaugă Intrare în Jurnal",
+  "lifestyle_journalPrompt": "Cum experimentezi designul tău astăzi?",
+  "lifestyle_noJournalEntries": "Încă fără intrări în jurnal",
+  "lifestyle_mood": "Stare",
+  "lifestyle_energy": "Nivel de Energie",
+  "lifestyle_reflection": "Reflecție",
+
+  "penta_title": "Penta",
+  "penta_description": "Analiză de grup pentru 3-5 persoane",
+  "penta_createNew": "Creează Penta",
+  "penta_selectMembers": "Selectează Membri",
+  "penta_minMembers": "Minim 3 membri necesari",
+  "penta_maxMembers": "Maxim 5 membri",
+  "penta_groupDynamics": "Dinamica Grupului",
+  "penta_missingRoles": "Roluri Lipsă",
+  "penta_strengths": "Puncte Forte ale Grupului",
+  "penta_analysis": "Analiză Penta",
+  "penta_clearAnalysis": "Șterge Analiza",
+  "penta_infoText": "Analiza Penta dezvăluie rolurile naturale care apar în grupuri mici de 3-5 persoane, arătând cum contribuie fiecare membru la dinamica echipei.",
+  "penta_calculating": "Se calculează...",
+  "penta_calculate": "Calculează Penta",
+  "penta_groupRoles": "Roluri în Grup",
+  "penta_electromagneticConnections": "Conexiuni Electromagnetice",
+  "penta_connectionsDescription": "Conexiuni energetice speciale între membri care creează atracție și chimie.",
+  "penta_areasForAttention": "Zone de Atenție",
+
+  "composite_title": "Hartă Compozită",
+  "composite_infoText": "O hartă compozită arată dinamica relației dintre două persoane, dezvăluind cum interacționează și se completează hărțile voastre.",
+  "composite_selectTwoCharts": "Selectează 2 Hărți",
+  "composite_calculate": "Analizează Conexiunea",
+  "composite_calculating": "Se analizează...",
+  "composite_clearAnalysis": "Șterge Analiza",
+  "composite_connectionTheme": "Tema Conexiunii",
+  "composite_definedCenters": "Definite",
+  "composite_undefinedCenters": "Deschise",
+  "composite_score": "Scor",
+  "composite_themeVeryBonded": "Conexiune foarte strânsă - te poți simți profund interconectat, ceea ce poate fi intens",
+  "composite_themeBonded": "Conexiune strânsă - sentiment puternic de unitate și energie partajată",
+  "composite_themeBalanced": "Conexiune echilibrată - mix sănătos de unitate și independență",
+  "composite_themeIndependent": "Conexiune independentă - mai mult spațiu pentru creștere individuală",
+  "composite_themeVeryIndependent": "Conexiune foarte independentă - timpul intenționat de conexiune ajută la întărirea legăturii",
+  "composite_electromagnetic": "Canale Electromagnetice",
+  "composite_electromagneticDesc": "Atracție intensă - vă completați unul pe celălalt",
+  "composite_companionship": "Canale de Tovărășie",
+  "composite_companionshipDesc": "Confort și stabilitate - înțelegere partajată",
+  "composite_dominance": "Canale de Dominație",
+  "composite_dominanceDesc": "Unul predă/condiționează pe celălalt",
+  "composite_compromise": "Canale de Compromis",
+  "composite_compromiseDesc": "Tensiune naturală - necesită conștientizare",
+  "composite_noConnections": "Fără Conexiuni de Canale",
+  "composite_noConnectionsDesc": "Aceste hărți nu formează nicio conexiune directă de canale, dar pot exista totuși interacțiuni interesante între porți.",
+  "composite_noChartsTitle": "Nicio Hartă Disponibilă",
+  "composite_noChartsDesc": "Creează hărți pentru tine și alții pentru a compara dinamica relațiilor.",
+  "composite_needMoreCharts": "Sunt Necesare Mai Multe Hărți",
+  "composite_needMoreChartsDesc": "Ai nevoie de cel puțin 2 hărți pentru a analiza o relație. Adaugă altă hartă pentru a continua.",
+  "composite_selectTwoHint": "Selectează 2 hărți pentru a analiza conexiunea lor",
+  "composite_selectOneMore": "Selectează încă 1 hartă",
+
+  "premium_upgrade": "Actualizează la Premium",
+  "premium_subscribe": "Abonează-te",
+  "premium_restore": "Restaurează Achizițiile",
+  "premium_features": "Funcții Premium",
+  "premium_unlimitedShares": "Distribuiri Nelimitate de Hărți",
+  "premium_groupCharts": "Hărți de Grup",
+  "premium_advancedTransits": "Analiză Avansată de Tranzite",
+  "premium_personalizedAffirmations": "Afirmații Personalizate",
+  "premium_journalInsights": "Perspective din Jurnal",
+  "premium_adFree": "Experiență Fără Reclame",
+  "premium_monthly": "Lunar",
+  "premium_yearly": "Anual",
+  "premium_perMonth": "/lună",
+  "premium_perYear": "/an",
+  "premium_bestValue": "Cel Mai Bun Preț",
+
+  "settings_appearance": "Aspect",
+  "settings_language": "Limba",
+  "settings_selectLanguage": "Selectează Limba",
+  "settings_changeLanguage": "Schimbă Limba",
+  "settings_theme": "Temă",
+  "settings_selectTheme": "Selectează Tema",
+  "settings_chartDisplay": "Afișare Hartă",
+  "settings_showGateNumbers": "Arată Numerele Porților",
+  "settings_showGateNumbersSubtitle": "Afișează numerele porților pe bodygraph",
+  "settings_use24HourTime": "Folosește Ora în Format 24h",
+  "settings_use24HourTimeSubtitle": "Afișează ora în format 24 de ore",
+  "settings_feedback": "Feedback",
+  "settings_hapticFeedback": "Feedback Haptic",
+  "settings_hapticFeedbackSubtitle": "Vibrație la interacțiuni",
+  "settings_account": "Cont",
+  "settings_changePassword": "Schimbă Parola",
+  "settings_deleteAccount": "Șterge Contul",
+  "settings_deleteAccountConfirm": "Ești sigur că vrei să ștergi contul? Această acțiune nu poate fi anulată și toate datele tale vor fi șterse permanent.",
+  "settings_appVersion": "Versiune Aplicație",
+  "settings_rateApp": "Evaluează Aplicația",
+  "settings_sendFeedback": "Trimite Feedback",
+  "settings_themeLight": "Luminos",
+  "settings_themeDark": "Întunecat",
+  "settings_themeSystem": "Sistem",
+  "settings_notifications": "Notificări",
+  "settings_privacy": "Confidențialitate",
+  "settings_chartVisibility": "Vizibilitate Hartă",
+  "settings_chartVisibilitySubtitle": "Controlează cine poate vedea harta ta de Design Uman",
+  "settings_chartPrivate": "Privat",
+  "settings_chartPrivateDesc": "Doar tu poți vedea harta ta",
+  "settings_chartFriends": "Prieteni",
+  "settings_chartFriendsDesc": "Urmăritorii reciproci pot vedea harta ta",
+  "settings_chartPublic": "Public",
+  "settings_chartPublicDesc": "Urmăritorii tăi pot vedea harta ta",
+  "settings_about": "Despre",
+  "settings_help": "Ajutor & Suport",
+  "settings_terms": "Termeni și Condiții",
+  "settings_privacyPolicy": "Politica de Confidențialitate",
+  "settings_version": "Versiune",
+  "settings_dailyTransits": "Tranzite Zilnice",
+  "settings_dailyTransitsSubtitle": "Primește actualizări zilnice despre tranzite",
+  "settings_gateChanges": "Schimbări de Porți",
+  "settings_gateChangesSubtitle": "Notifică când Soarele schimbă porțile",
+  "settings_socialActivity": "Activitate Socială",
+  "settings_socialActivitySubtitle": "Cereri de prietenie și hărți distribuite",
+  "settings_achievements": "Realizări",
+  "settings_achievementsSubtitle": "Deblocări de insigne și obiective",
+  "settings_deleteAccountWarning": "Aceasta va șterge permanent toate datele tale, inclusiv hărți, postări și mesaje.",
+  "settings_deleteAccountFailed": "Ștergerea contului a eșuat. Te rugăm să încerci din nou.",
+  "settings_passwordChanged": "Parolă schimbată cu succes",
+  "settings_passwordChangeFailed": "Schimbarea parolei a eșuat. Te rugăm să încerci din nou.",
+  "settings_feedbackSubject": "Feedback Aplicație AuraMap",
+  "settings_feedbackBody": "Bună,\n\nAș dori să împărtășesc următorul feedback despre AuraMap:\n\n",
+  "auth_newPassword": "Parolă Nouă",
+  "auth_passwordRequired": "Parola este obligatorie",
+  "auth_passwordTooShort": "Parola trebuie să aibă cel puțin 8 caractere",
+  "auth_passwordsDoNotMatch": "Parolele nu se potrivesc",
+  "settings_exportData": "Exportă Datele Mele",
+  "settings_exportDataSubtitle": "Descarcă o copie a tuturor datelor tale (GDPR)",
+  "settings_exportingData": "Se pregătesc datele pentru export...",
+  "settings_exportDataSubject": "AuraMap - Export Date Personale",
+  "settings_exportDataFailed": "Exportul datelor a eșuat. Te rugăm să încerci din nou.",
+
+  "error_generic": "Ceva nu a mers bine",
+  "error_network": "Fără conexiune la internet",
+  "error_invalidEmail": "Te rugăm să introduci un email valid",
+  "error_invalidPassword": "Parola trebuie să aibă cel puțin 8 caractere",
+  "error_passwordMismatch": "Parolele nu se potrivesc",
+  "error_birthDataRequired": "Te rugăm să introduci datele tale de naștere",
+  "error_locationRequired": "Te rugăm să selectezi locul nașterii",
+  "error_chartCalculation": "Nu s-a putut calcula harta ta",
+
+  "profile_editProfile": "Editează Profilul",
+  "profile_shareChart": "Distribuie Harta Mea",
+  "profile_exportPdf": "Exportă Harta PDF",
+  "profile_upgradePremium": "Actualizează la Premium",
+  "profile_birthData": "Date de Naștere",
+  "profile_chartSummary": "Rezumat Hartă",
+  "profile_viewFullChart": "Vezi Harta Completă",
+  "profile_signOut": "Deconectare",
+  "profile_signOutConfirm": "Ești sigur că vrei să te deconectezi?",
+  "profile_addBirthDataPrompt": "Adaugă datele tale de naștere pentru a genera harta ta de Design Uman.",
+  "profile_addBirthDataToShare": "Adaugă date de naștere pentru a distribui harta ta",
+  "profile_addBirthDataToExport": "Adaugă date de naștere pentru a exporta harta ta",
+  "profile_exportFailed": "Exportul PDF a eșuat",
+  "profile_signOutConfirmTitle": "Deconectare",
+  "profile_loadFailed": "Încărcarea profilului a eșuat",
+  "profile_defaultUserName": "Utilizator AuraMap",
+  "profile_birthDate": "Data",
+  "profile_birthTime": "Ora",
+  "profile_birthLocation": "Locație",
+  "profile_birthTimezone": "Fus Orar",
+
+  "chart_chakras": "Chakre",
+  "chakra_title": "Energie Chakră",
+  "chakra_activated": "Activată",
+  "chakra_inactive": "Inactivă",
+  "chakra_activatedCount": "{count} din 7 chakre activate",
+  "@chakra_activatedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chakra_hdMapping": "Corespondență Centre HD",
+  "chakra_element": "Element",
+  "chakra_location": "Locație",
+
+  "chakra_root": "Rădăcină",
+  "chakra_root_sanskrit": "Muladhara",
+  "chakra_root_description": "Înrădăcinare, supraviețuire și stabilitate",
+
+  "chakra_sacral": "Sacrală",
+  "chakra_sacral_sanskrit": "Svadhisthana",
+  "chakra_sacral_description": "Creativitate, sexualitate și emocii",
+
+  "chakra_solarPlexus": "Plexul Solar",
+  "chakra_solarPlexus_sanskrit": "Manipura",
+  "chakra_solarPlexus_description": "Putere personală, încredere și voință",
+
+  "chakra_heart": "Inimă",
+  "chakra_heart_sanskrit": "Anahata",
+  "chakra_heart_description": "Dragoste, compasiune și conexiune",
+
+  "chakra_throat": "Gât",
+  "chakra_throat_sanskrit": "Vishuddha",
+  "chakra_throat_description": "Comunicare, expresie și adevăr",
+
+  "chakra_thirdEye": "Al Treilea Ochi",
+  "chakra_thirdEye_sanskrit": "Ajna",
+  "chakra_thirdEye_description": "Intuiție, perspicacitate și imaginație",
+
+  "chakra_crown": "Coroană",
+  "chakra_crown_sanskrit": "Sahasrara",
+  "chakra_crown_description": "Conexiune spirituală și conștiință",
+
+  "quiz_title": "Chestionare",
+  "quiz_yourProgress": "Progresul Tău",
+  "quiz_quizzesCompleted": "{count} chestionare completate",
+  "@quiz_quizzesCompleted": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_accuracy": "Precizie",
+  "quiz_streak": "Serie",
+  "quiz_all": "Toate",
+  "quiz_difficulty": "Dificultate",
+  "quiz_beginner": "Începător",
+  "quiz_intermediate": "Intermediar",
+  "quiz_advanced": "Avansat",
+  "quiz_questions": "{count} întrebări",
+  "@quiz_questions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_points": "+{points} pct",
+  "@quiz_points": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_completed": "Completat",
+  "quiz_noQuizzes": "Niciun chestionar disponibil",
+  "quiz_checkBackLater": "Verifică mai târziu pentru conținut nou",
+  "quiz_startQuiz": "Începe Chestionarul",
+  "quiz_tryAgain": "Încearcă Din Nou",
+  "quiz_backToQuizzes": "Înapoi la Chestionare",
+  "quiz_shareResults": "Distribuie Rezultatele",
+  "quiz_yourBest": "Cel Mai Bun Scor",
+  "quiz_perfectScore": "Scor Perfect!",
+  "quiz_newBest": "Scor Nou Maxim!",
+  "quiz_streakExtended": "Serie Extinsă!",
+  "quiz_questionOf": "Întrebarea {current} din {total}",
+  "@quiz_questionOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_correct": "{count} corecte",
+  "@quiz_correct": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quiz_submitAnswer": "Trimite Răspunsul",
+  "quiz_nextQuestion": "Următoarea Întrebare",
+  "quiz_seeResults": "Vezi Rezultatele",
+  "quiz_exitQuiz": "Ieși din Chestionar?",
+  "quiz_exitWarning": "Progresul tău va fi pierdut dacă ieși acum.",
+  "quiz_exit": "Ieși",
+  "quiz_timesUp": "Timpul Expirat!",
+  "quiz_timesUpMessage": "Ai rămas fără timp. Progresul tău va fi trimis.",
+  "quiz_excellent": "Excelent!",
+  "quiz_goodJob": "Bună Treabă!",
+  "quiz_keepLearning": "Continuă să Înveți!",
+  "quiz_keepPracticing": "Continuă să Exersezi!",
+  "quiz_masteredTopic": "Ai stăpânit acest subiect!",
+  "quiz_strongUnderstanding": "Ai o înțelegere solidă.",
+  "quiz_onRightTrack": "Ești pe drumul cel bun.",
+  "quiz_reviewExplanations": "Revizuiește explicațiile pentru a te îmbunătăți.",
+  "quiz_studyMaterial": "Studiază materialul și încearcă din nou.",
+  "quiz_attemptHistory": "Istoric Încercări",
+  "quiz_statistics": "Statistici Chestionare",
+  "quiz_totalQuizzes": "Chestionare",
+  "quiz_totalQuestions": "Întrebări",
+  "quiz_bestStreak": "Cea Mai Bună Serie",
+  "quiz_strongest": "Cel mai puternic: {category}",
+  "@quiz_strongest": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "quiz_needsWork": "Necesită îmbunătățire: {category}",
+  "@quiz_needsWork": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "quiz_category_types": "Tipuri",
+  "quiz_category_centers": "Centre",
+  "quiz_category_authorities": "Autorități",
+  "quiz_category_profiles": "Profiluri",
+  "quiz_category_gates": "Porți",
+  "quiz_category_channels": "Canale",
+  "quiz_category_definitions": "Definiții",
+  "quiz_category_general": "General",
+  "quiz_explanation": "Explicație",
+  "quiz_quizzes": "Chestionare",
+  "quiz_questionsLabel": "Întrebări",
+  "quiz_shareProgress": "Distribuie Progresul",
+  "quiz_shareProgressSubject": "Progresul Meu în Învățarea Designului Uman",
+  "quiz_sharePerfect": "Am obținut un scor perfect! Stăpânesc Design Uman.",
+  "quiz_shareExcellent": "Mă descurc foarte bine în călătoria mea de învățare a Designului Uman!",
+  "quiz_shareGoodJob": "Învăț despre Design Uman. Fiecare chestionar mă ajută să cresc!",
+  "quiz_shareSubject": "Am obținut {score}% la \"{quizTitle}\" - Chestionar Design Uman",
+  "@quiz_shareSubject": {
+    "placeholders": {
+      "quizTitle": {"type": "String"},
+      "score": {"type": "int"}
+    }
+  },
+  "quiz_failedToLoadStats": "Încărcarea statisticilor a eșuat",
+
+  "planetary_personality": "Personalitate",
+  "planetary_design": "Design",
+  "planetary_consciousBirth": "Conștient \u00b7 Naștere",
+  "planetary_unconsciousPrenatal": "Inconștient \u00b7 88\u00b0 Prenatal",
+
+  "gamification_yourProgress": "Progresul Tău",
+  "gamification_level": "Nivel",
+  "gamification_points": "pct",
+  "gamification_viewAll": "Vezi Tot",
+  "gamification_allChallengesComplete": "Toate provocările zilnice completate!",
+  "gamification_dailyChallenge": "Provocare Zilnică",
+  "gamification_achievements": "Realizări",
+  "gamification_challenges": "Provocări",
+  "gamification_leaderboard": "Clasament",
+  "gamification_streak": "Serie",
+  "gamification_badges": "Insigne",
+  "gamification_earnedBadge": "Ai câștigat o insignă!",
+  "gamification_claimReward": "Revendică Recompensa",
+  "gamification_completed": "Completat",
+
+  "common_copy": "Copiază",
+
+  "share_myShares": "Distribuirile Mele",
+  "share_createNew": "Creează Nou",
+  "share_newLink": "Link Nou",
+  "share_noShares": "Niciun Link Distribuit",
+  "share_noSharesMessage": "Creează linkuri de distribuire pentru a permite altora să vadă harta ta fără a fi nevoie de cont.",
+  "share_createFirst": "Creează Primul Tău Link",
+  "share_activeLinks": "{count} Linkuri Active",
+  "@share_activeLinks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_expiredLinks": "{count} Expirate",
+  "@share_expiredLinks": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_clearExpired": "Șterge",
+  "share_clearExpiredTitle": "Șterge Linkurile Expirate",
+  "share_clearExpiredMessage": "Aceasta va elimina {count} linkuri expirate din istoricul tău.",
+  "@share_clearExpiredMessage": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_clearAll": "Șterge Tot",
+  "share_expiredCleared": "Linkuri expirate șterse",
+  "share_linkCopied": "Link copiat în clipboard",
+  "share_revokeTitle": "Revocă Link",
+  "share_revokeMessage": "Aceasta va dezactiva permanent acest link de distribuire. Oricine are linkul nu va mai putea vedea harta ta.",
+  "share_revoke": "Revocă",
+  "share_linkRevoked": "Link revocat",
+  "share_totalLinks": "Total",
+  "share_active": "Active",
+  "share_totalViews": "Vizualizări",
+  "share_chartLink": "Distribuire Hartă",
+  "share_transitLink": "Distribuire Tranzit",
+  "share_compatibilityLink": "Raport de Compatibilitate",
+  "share_link": "Link de Distribuire",
+  "share_views": "{count} vizualizări",
+  "@share_views": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "share_expired": "Expirat",
+  "share_activeLabel": "Activ",
+  "share_expiredOn": "Expirat {date}",
+  "@share_expiredOn": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "share_expiresIn": "Expiră în {time}",
+  "@share_expiresIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+
+  "auth_emailNotConfirmed": "Te rugăm să confirmați email-ul",
+  "auth_resendConfirmation": "Retrimite Email de Confirmare",
+  "auth_confirmationSent": "Email de confirmare trimis",
+  "auth_checkEmail": "Verifică email-ul pentru linkul de confirmare",
+  "auth_checkYourEmail": "Verifică Email-ul",
+  "auth_confirmationLinkSent": "Am trimis un link de confirmare la:",
+  "auth_clickLinkToActivate": "Te rugăm să apeși pe linkul din email pentru a-ți activa contul.",
+  "auth_goToSignIn": "Mergi la Conectare",
+  "auth_returnToHome": "Înapoi la Pagina Principală",
+
+  "hashtags_explore": "Explorează Hashtag-uri",
+  "hashtags_trending": "În Tendințe",
+  "hashtags_popular": "Populare",
+  "hashtags_hdTopics": "Subiecte HD",
+  "hashtags_noTrending": "Încă fără hashtag-uri în tendințe",
+  "hashtags_noPopular": "Încă fără hashtag-uri populare",
+  "hashtags_noHdTopics": "Încă fără subiecte HD",
+  "hashtag_noPosts": "Încă fără postări",
+  "hashtag_beFirst": "Fii primul care postează cu acest hashtag!",
+  "hashtag_postCount": "{count, plural, =1{1 postare} other{{count} postări}}",
+  "@hashtag_postCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hashtag_recentPosts": "{count, plural, =1{1 postare astăzi} other{{count} postări astăzi}}",
+  "@hashtag_recentPosts": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+
+  "feed_forYou": "Pentru Tine",
+  "feed_trending": "În Tendințe",
+  "feed_hdTopics": "Subiecte HD",
+  "feed_gateTitle": "Poarta {number}",
+  "@feed_gateTitle": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "feed_gatePosts": "Postări despre Poarta {number}",
+  "@feed_gatePosts": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+
+  "transit_events_title": "Evenimente de Tranzit",
+  "transit_events_happening": "Acum",
+  "transit_events_upcoming": "Viitoare",
+  "transit_events_past": "Evenimente Trecute",
+  "transit_events_noCurrentEvents": "Niciun eveniment în desfășurare acum",
+  "transit_events_noUpcomingEvents": "Niciun eveniment viitor programat",
+  "transit_events_noPastEvents": "Niciun eveniment trecut",
+  "transit_events_live": "LIVE",
+  "transit_events_join": "Alătură-te",
+  "transit_events_joined": "Alăturat",
+  "transit_events_leave": "Pleacă",
+  "transit_events_participating": "participă",
+  "transit_events_posts": "postări",
+  "transit_events_viewInsights": "Vezi Perspective",
+  "transit_events_endsIn": "Se termină în {time}",
+  "@transit_events_endsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "transit_events_startsIn": "Începe în {time}",
+  "@transit_events_startsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "transit_events_notFound": "Eveniment negăsit",
+  "transit_events_communityPosts": "Postări din Comunitate",
+  "transit_events_noPosts": "Încă fără postări pentru acest eveniment",
+  "transit_events_shareExperience": "Distribuie Experiența",
+  "transit_events_participants": "Participanți",
+  "transit_events_duration": "Durată",
+  "transit_events_eventEnded": "Acest eveniment s-a încheiat",
+  "transit_events_youreParticipating": "Participi!",
+  "transit_events_experiencingWith": "Experimentezi acest tranzit cu {count} alții",
+  "@transit_events_experiencingWith": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "transit_events_joinCommunity": "Alătură-te Comunității",
+  "transit_events_shareYourExperience": "Distribuie experiența ta și conectează-te cu alții",
+
+  "activity_title": "Activitatea Prietenilor",
+  "activity_noActivities": "Încă fără activitate a prietenilor",
+  "activity_followFriends": "Urmărește prieteni pentru a le vedea realizările și obiectivele aici!",
+  "activity_findFriends": "Găsește Prieteni",
+  "activity_celebrate": "Celebrează",
+  "activity_celebrated": "Celebrat",
+
+  "cancel": "Anulează",
+  "create": "Creează",
+
+  "groupChallenges_title": "Provocări de Grup",
+  "groupChallenges_myTeams": "Echipele Mele",
+  "groupChallenges_challenges": "Provocări",
+  "groupChallenges_leaderboard": "Clasament",
+  "groupChallenges_createTeam": "Creează Echipă",
+  "groupChallenges_teamName": "Nume Echipă",
+  "groupChallenges_teamNameHint": "Introdu un nume pentru echipă",
+  "groupChallenges_teamDescription": "Descriere",
+  "groupChallenges_teamDescriptionHint": "Despre ce este echipa ta?",
+  "groupChallenges_teamCreated": "Echipă creată cu succes!",
+  "groupChallenges_noTeams": "Încă Fără Echipe",
+  "groupChallenges_noTeamsDescription": "Creează sau alătură-te unei echipe pentru a concura în provocări de grup!",
+  "groupChallenges_memberCount": "{count, plural, =1{1 membru} other{{count} membri}}",
+  "@groupChallenges_memberCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "groupChallenges_points": "{points} pct",
+  "@groupChallenges_points": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_noChallenges": "Nicio Provocare Activă",
+  "groupChallenges_active": "Active",
+  "groupChallenges_upcoming": "Viitoare",
+  "groupChallenges_reward": "{points} pct recompensă",
+  "@groupChallenges_reward": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_teamsEnrolled": "{count} echipe",
+  "@groupChallenges_teamsEnrolled": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "groupChallenges_participants": "{count} participanți",
+  "@groupChallenges_participants": {
+    "placeholders": {
+      "count": {"type": "String"}
+    }
+  },
+  "groupChallenges_endsIn": "Se termină în {time}",
+  "@groupChallenges_endsIn": {
+    "placeholders": {
+      "time": {"type": "String"}
+    }
+  },
+  "groupChallenges_weekly": "Săptămânal",
+  "groupChallenges_monthly": "Lunar",
+  "groupChallenges_allTime": "Tot Timpul",
+  "groupChallenges_noTeamsOnLeaderboard": "Încă fără echipe în clasament",
+  "groupChallenges_pts": "pct",
+  "groupChallenges_teamNotFound": "Echipă negăsită",
+  "groupChallenges_members": "Membri",
+  "groupChallenges_totalPoints": "Puncte Totale",
+  "groupChallenges_joined": "Alăturat",
+  "groupChallenges_join": "Alătură-te",
+  "groupChallenges_status": "Stare",
+  "groupChallenges_about": "Despre",
+  "groupChallenges_noMembers": "Încă fără membri",
+  "groupChallenges_admin": "Administrator",
+  "groupChallenges_contributed": "{points} pct contribuite",
+  "@groupChallenges_contributed": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "groupChallenges_joinedTeam": "Te-ai alăturat echipei cu succes!",
+  "groupChallenges_leaveTeam": "Părăsește Echipa",
+  "groupChallenges_leaveConfirmation": "Ești sigur că vrei să părăsești această echipă? Punctele tale contribuite vor rămâne la echipă.",
+  "groupChallenges_leave": "Pleacă",
+  "groupChallenges_leftTeam": "Ai părăsit echipa",
+  "groupChallenges_challengeDetails": "Detalii Provocare",
+  "groupChallenges_challengeNotFound": "Provocare negăsită",
+  "groupChallenges_target": "Obiectiv",
+  "groupChallenges_starts": "Începe",
+  "groupChallenges_ends": "Se Termină",
+  "groupChallenges_hdTypes": "Tipuri HD",
+  "groupChallenges_noTeamsToEnroll": "Nicio Echipă de Înscris",
+  "groupChallenges_createTeamToJoin": "Creează mai întâi o echipă pentru a te înscrie în provocări",
+  "groupChallenges_enrollTeam": "Înscrie o Echipă",
+  "groupChallenges_enrolled": "Înscris",
+  "groupChallenges_enroll": "Înscrie-te",
+  "groupChallenges_teamEnrolled": "Echipă înscrisă cu succes!",
+  "groupChallenges_noTeamsEnrolled": "Încă fără echipe înscrise",
+
+  "circles_title": "Cercuri de Compatibilitate",
+  "circles_myCircles": "Cercurile Mele",
+  "circles_invitations": "Invitații",
+  "circles_create": "Creează Cerc",
+  "circles_selectIcon": "Selectează o pictogramă",
+  "circles_name": "Nume Cerc",
+  "circles_nameHint": "Familie, Echipă, Prieteni...",
+  "circles_description": "Descriere",
+  "circles_descriptionHint": "Pentru ce este acest cerc?",
+  "circles_created": "Cerc creat cu succes!",
+  "circles_noCircles": "Încă Fără Cercuri",
+  "circles_noCirclesDescription": "Creează un cerc pentru a analiza compatibilitatea cu prieteni, familie sau membri echipei.",
+  "circles_suggestions": "Start Rapid",
+  "circles_memberCount": "{count, plural, =1{1 membru} other{{count} membri}}",
+  "@circles_memberCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "circles_private": "Privat",
+  "circles_noInvitations": "Fără Invitații",
+  "circles_noInvitationsDescription": "Invitațiile la cercuri pe care le primești vor apărea aici.",
+  "circles_invitedBy": "Invitat de {name}",
+  "@circles_invitedBy": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "circles_decline": "Refuză",
+  "circles_accept": "Acceptă",
+  "circles_invitationDeclined": "Invitație refuzată",
+  "circles_invitationAccepted": "Te-ai alăturat cercului!",
+  "circles_notFound": "Cerc negăsit",
+  "circles_invite": "Invită Membru",
+  "circles_members": "Membri",
+  "circles_analysis": "Analiză",
+  "circles_feed": "Feed",
+  "circles_inviteMember": "Invită Membru",
+  "circles_sendInvite": "Trimite Invitația",
+  "circles_invitationSent": "Invitație trimisă!",
+  "circles_invitationFailed": "Trimiterea invitației a eșuat",
+  "circles_deleteTitle": "Șterge Cercul",
+  "circles_deleteConfirmation": "Ești sigur că vrei să ștergi \"{name}\"? Această acțiune nu poate fi anulată.",
+  "@circles_deleteConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "circles_deleted": "Cerc șters",
+  "circles_noMembers": "Încă fără membri",
+  "circles_noAnalysis": "Încă Fără Analiză",
+  "circles_runAnalysis": "Rulează o analiză de compatibilitate pentru a vedea cum interacționează membrii cercului tău.",
+  "circles_needMoreMembers": "Adaugă cel puțin 2 membri pentru a rula o analiză.",
+  "circles_analyzeCompatibility": "Analizează Compatibilitatea",
+  "circles_harmonyScore": "Scor de Armonie",
+  "circles_typeDistribution": "Distribuția Tipurilor",
+  "circles_electromagneticConnections": "Conexiuni Electromagnetice",
+  "circles_electromagneticDesc": "Atracție intensă - vă completați unul pe celălalt",
+  "circles_companionshipConnections": "Conexiuni de Tovărășie",
+  "circles_companionshipDesc": "Confort și stabilitate - înțelegere partajată",
+  "circles_groupStrengths": "Puncte Forte ale Grupului",
+  "circles_areasForGrowth": "Zone de Creștere",
+  "circles_writePost": "Distribuie ceva cu cercul tău...",
+  "circles_noPosts": "Încă Fără Postări",
+  "circles_beFirstToPost": "Fii primul care distribuie ceva cu cercul tău!",
+
+  "experts_title": "Experți HD",
+  "experts_becomeExpert": "Devino Expert",
+  "experts_filterBySpecialization": "Filtrează după Specializare",
+  "experts_allExperts": "Toți Experții",
+  "experts_experts": "Experți",
+  "experts_noExperts": "Niciun expert găsit",
+  "experts_featured": "Experți Remarcabili",
+  "experts_followers": "{count} urmăritori",
+  "@experts_followers": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "experts_notFound": "Expert negăsit",
+  "experts_following": "Urmărești",
+  "experts_follow": "Urmărește",
+  "experts_about": "Despre",
+  "experts_specializations": "Specializări",
+  "experts_credentials": "Credențiale",
+  "experts_reviews": "Recenzii",
+  "experts_writeReview": "Scrie Recenzie",
+  "experts_reviewContent": "Recenzia Ta",
+  "experts_reviewHint": "Distribuie experiența ta de lucru cu acest expert...",
+  "experts_submitReview": "Trimite Recenzia",
+  "experts_reviewSubmitted": "Recenzie trimisă cu succes!",
+  "experts_noReviews": "Încă fără recenzii",
+  "experts_followersLabel": "Urmăritori",
+  "experts_rating": "Evaluare",
+  "experts_years": "Ani",
+
+  "learningPaths_title": "Trasee de Învățare",
+  "learningPaths_explore": "Explorează",
+  "learningPaths_inProgress": "În Progres",
+  "learningPaths_completed": "Completate",
+  "learningPaths_featured": "Trasee Recomandate",
+  "learningPaths_allPaths": "Toate Traseele",
+  "learningPaths_noPathsExplore": "Niciun traseu de învățare disponibil",
+  "learningPaths_noPathsInProgress": "Niciun Traseu În Progres",
+  "learningPaths_noPathsInProgressDescription": "Înscrie-te într-un traseu de învățare pentru a-ți începe călătoria!",
+  "learningPaths_browsePaths": "Răsfoiește Traseele",
+  "learningPaths_noPathsCompleted": "Niciun Traseu Completat",
+  "learningPaths_noPathsCompletedDescription": "Completează trasee de învățare pentru a le vedea aici!",
+  "learningPaths_enrolled": "{count} înscriși",
+  "@learningPaths_enrolled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPaths_stepsCount": "{count} pași",
+  "@learningPaths_stepsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPaths_progress": "{completed} din {total} pași",
+  "@learningPaths_progress": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "learningPaths_resume": "Continuă",
+  "learningPaths_completedOn": "Completat pe {date}",
+  "@learningPaths_completedOn": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "learningPathNotFound": "Traseu de învățare negăsit",
+  "learningPathMinutes": "{minutes} min",
+  "@learningPathMinutes": {
+    "placeholders": {
+      "minutes": {"type": "int"}
+    }
+  },
+  "learningPathSteps": "{count} pași",
+  "@learningPathSteps": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathBy": "De {author}",
+  "@learningPathBy": {
+    "placeholders": {
+      "author": {"type": "String"}
+    }
+  },
+  "learningPathEnrolled": "{count} înscriși",
+  "@learningPathEnrolled": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathCompleted": "{count} completați",
+  "@learningPathCompleted": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "learningPathEnroll": "Începe Învățarea",
+  "learningPathYourProgress": "Progresul Tău",
+  "learningPathCompletedBadge": "Completat",
+  "learningPathProgressText": "{completed} din {total} pași completați",
+  "@learningPathProgressText": {
+    "placeholders": {
+      "completed": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "learningPathStepsTitle": "Pași de Învățare",
+  "learningPathEnrollTitle": "Începi Acest Traseu?",
+  "learningPathEnrollMessage": "Vei fi înscris în \"{title}\" și poți urmări progresul pe măsură ce completezi fiecare pas.",
+  "@learningPathEnrollMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "learningPathViewContent": "Vezi Conținutul",
+  "learningPathMarkComplete": "Marchează ca Completat",
+  "learningPathStepCompleted": "Pas completat!",
+
+  "thought_title": "Gânduri",
+  "thought_feedTitle": "Gânduri",
+  "thought_createNew": "Distribuie un Gând",
+  "thought_emptyFeed": "Feed-ul tău de gânduri este gol",
+  "thought_emptyFeedMessage": "Urmărește oameni sau distribuie un gând pentru a începe",
+  "thought_regenerate": "Regenerează",
+  "thought_regeneratedFrom": "Regenerat de la @{username}",
+  "@thought_regeneratedFrom": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_regenerateSuccess": "Gând regenerat pe peretele tău!",
+  "thought_regenerateConfirm": "Regenerezi acest gând?",
+  "thought_regenerateDescription": "Aceasta va distribui acest gând pe peretele tău, creditând autorul original.",
+  "thought_addComment": "Adaugă un comentariu (opțional)",
+  "thought_regenerateCount": "{count, plural, =1{1 regenerare} other{{count} regenerări}}",
+  "@thought_regenerateCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "thought_cannotRegenerateOwn": "Nu poți regenera propriul gând",
+  "thought_alreadyRegenerated": "Ai regenerat deja acest gând",
+  "thought_postDetail": "Gând",
+  "thought_noComments": "Încă fără comentarii. Fii primul care comentează!",
+  "thought_replyingTo": "Răspunzi lui {username}",
+  "@thought_replyingTo": {
+    "placeholders": {
+      "username": {"type": "String"}
+    }
+  },
+  "thought_writeReply": "Scrie un răspuns...",
+  "thought_commentPlaceholder": "Adaugă un comentariu...",
+
+  "messages_title": "Mesaje",
+  "messages_conversation": "Conversație",
+  "messages_loading": "Se încarcă...",
+  "messages_muteNotifications": "Dezactivează Notificările",
+  "messages_notificationsMuted": "Notificări dezactivate",
+  "messages_blockUser": "Blochează Utilizatorul",
+  "messages_blockUserConfirm": "Ești sigur că vrei să blochezi acest utilizator? Nu vei mai primi mesaje de la el.",
+  "messages_userBlocked": "Utilizator blocat",
+  "messages_block": "Blochează",
+  "messages_deleteConversation": "Șterge Conversația",
+  "messages_deleteConversationConfirm": "Ești sigur că vrei să ștergi această conversație? Această acțiune nu poate fi anulată.",
+  "messages_conversationDeleted": "Conversație ștearsă",
+  "messages_startConversation": "Începe conversația!",
+
+  "profile_takePhoto": "Fă o Fotografie",
+  "profile_chooseFromGallery": "Alege din Galerie",
+  "profile_avatarUpdated": "Avatar actualizat cu succes",
+  "profile_profileUpdated": "Profil actualizat cu succes",
+  "profile_noProfileFound": "Niciun profil găsit",
+
+  "discovery_title": "Descoperă",
+  "discovery_searchUsers": "Caută utilizatori...",
+  "discovery_discoverTab": "Descoperă",
+  "discovery_followingTab": "Urmărești",
+  "discovery_followersTab": "Urmăritori",
+  "discovery_noUsersFound": "Niciun utilizator găsit",
+  "discovery_tryAdjustingFilters": "Încearcă să ajustezi filtrele",
+  "discovery_notFollowingAnyone": "Nu urmărești pe nimeni",
+  "discovery_discoverPeople": "Descoperă oameni de urmărit",
+  "discovery_noFollowersYet": "Încă fără urmăritori",
+  "discovery_shareInsights": "Distribuie perspectivele tale pentru a câștiga urmăritori",
+  "discovery_clearAll": "Șterge tot",
+
+  "chart_gate": "Poarta {number}",
+  "@chart_gate": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "chart_channel": "Canalul {id}",
+  "@chart_channel": {
+    "placeholders": {
+      "id": {"type": "String"}
+    }
+  },
+  "chart_center": "Centru",
+  "chart_keynote": "Notă Cheie",
+  "chart_element": "Element",
+  "chart_location": "Locație",
+  "chart_hdCenters": "Centre HD",
+
+  "reaction_comment": "Comentează",
+  "reaction_react": "Reacționează",
+  "reaction_standard": "Standard",
+  "reaction_humanDesign": "Design Uman",
+
+  "share_shareChart": "Distribuie Harta",
+  "share_createShareLink": "Creează Link de Distribuire",
+  "share_shareViaUrl": "Distribuie prin URL",
+  "share_exportAsPng": "Exportă ca PNG",
+  "share_fullReport": "Raport complet",
+  "share_linkExpiration": "Expirare Link",
+  "share_neverExpires": "Nu expiră niciodată",
+  "share_oneHour": "1 oră",
+  "share_twentyFourHours": "24 de ore",
+  "share_sevenDays": "7 zile",
+  "share_thirtyDays": "30 de zile",
+  "share_creating": "Se creează...",
+  "share_signInToShare": "Conectează-te pentru a distribui harta ta",
+  "share_createShareableLinks": "Creează linkuri partajabile către harta ta de Design Uman",
+  "share_linkImage": "Imagine",
+  "share_pdf": "PDF",
+
+  "post_share": "Distribuie",
+  "post_edit": "Editează",
+  "post_report": "Raportează",
+
+  "mentorship_title": "Mentorat",
+  "mentorship_pendingRequests": "Cereri în Așteptare",
+  "mentorship_availableMentors": "Mentori Disponibili",
+  "mentorship_noMentorsAvailable": "Niciun mentor disponibil",
+  "mentorship_requestMentorship": "Cere Mentorat de la {name}",
+  "@mentorship_requestMentorship": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "mentorship_sendMessage": "Trimite un mesaj explicând ce ai dori să înveți:",
+  "mentorship_learnPrompt": "Aș dori să învăț mai multe despre...",
+  "mentorship_requestSent": "Cerere trimisă!",
+  "mentorship_sendRequest": "Trimite Cererea",
+  "mentorship_becomeAMentor": "Devino Mentor",
+  "mentorship_shareKnowledge": "Distribuie cunoștințele tale despre Design Uman",
+
+  "story_cancel": "Anulează",
+  "story_createStory": "Creează Poveste",
+  "story_share": "Distribuie",
+  "story_typeYourStory": "Scrie povestea ta...",
+  "story_background": "Fundal",
+  "story_attachTransitGate": "Atașează Poartă de Tranzit (opțional)",
+  "story_none": "Niciuna",
+  "story_gateNumber": "Poarta {number}",
+  "@story_gateNumber": {
+    "placeholders": {
+      "number": {"type": "int"}
+    }
+  },
+  "story_whoCanSee": "Cine poate vedea asta?",
+  "story_followers": "Urmăritori",
+  "story_everyone": "Toată Lumea",
+
+  "challenges_title": "Provocări",
+  "challenges_daily": "Zilnice",
+  "challenges_weekly": "Săptămânale",
+  "challenges_monthly": "Lunare",
+  "challenges_noDailyChallenges": "Nicio provocare zilnică disponibilă",
+  "challenges_noWeeklyChallenges": "Nicio provocare săptămânală disponibilă",
+  "challenges_noMonthlyChallenges": "Nicio provocare lunară disponibilă",
+  "challenges_errorLoading": "Eroare la încărcarea provocărilor",
+  "challenges_claimedPoints": "Ai revendicat {points} puncte!",
+  "@challenges_claimedPoints": {
+    "placeholders": {
+      "points": {"type": "int"}
+    }
+  },
+  "challenges_totalPoints": "Puncte Totale",
+  "challenges_level": "Nivel",
+
+  "learning_all": "Toate",
+  "learning_types": "Tipuri",
+  "learning_gates": "Porți",
+  "learning_centers": "Centre",
+  "learning_liveSessions": "Sesiuni Live",
+
+  "quiz_noActiveSession": "Nicio sesiune de chestionar activă",
+  "quiz_noQuestionsAvailable": "Nicio întrebare disponibilă",
+  "quiz_ok": "OK",
+
+  "liveSessions_title": "Sesiuni Live",
+  "liveSessions_upcoming": "Viitoare",
+  "liveSessions_mySessions": "Sesiunile Mele",
+  "liveSessions_errorLoading": "Eroare la încărcarea sesiunilor",
+  "liveSessions_registeredSuccessfully": "Înregistrat cu succes!",
+  "liveSessions_cancelRegistration": "Anulează Înregistrarea",
+  "liveSessions_cancelRegistrationConfirm": "Ești sigur că vrei să anulezi înregistrarea?",
+  "liveSessions_no": "Nu",
+  "liveSessions_yesCancel": "Da, Anulează",
+  "liveSessions_registrationCancelled": "Înregistrare anulată",
+
+  "gateChannelPicker_gates": "Porți (64)",
+  "gateChannelPicker_channels": "Canale (36)",
+  "gateChannelPicker_search": "Caută porți sau canale...",
+
+  "leaderboard_weekly": "Săptămânal",
+  "leaderboard_monthly": "Lunar",
+  "leaderboard_allTime": "Tot Timpul",
+
+  "ai_chatTitle": "Asistent AI",
+  "ai_askAi": "Întreabă AI",
+  "ai_askAboutChart": "Întreabă AI despre Harta Ta",
+  "ai_miniDescription": "Obține perspective personalizate despre Design-ul tău Uman",
+  "ai_startChatting": "Începe conversația",
+  "ai_welcomeTitle": "Asistentul Tău HD",
+  "ai_welcomeSubtitle": "Întreabă-mă orice despre harta ta de Design Uman. Pot explica tipul, strategia, autoritatea, porțile, canalele tale și multe altele.",
+  "ai_inputPlaceholder": "Întreabă despre harta ta...",
+  "ai_newConversation": "Conversație Nouă",
+  "ai_conversations": "Conversații",
+  "ai_noConversations": "Încă fără conversații",
+  "ai_noConversationsMessage": "Începe o conversație cu AI pentru a obține perspective personalizate despre hartă.",
+  "ai_deleteConversation": "Șterge Conversația",
+  "ai_deleteConversationConfirm": "Ești sigur că vrei să ștergi această conversație?",
+  "ai_messagesExhausted": "Mesaje Gratuite Epuizate",
+  "ai_upgradeForUnlimited": "Actualizează la Premium pentru conversații AI nelimitate despre harta ta de Design Uman.",
+  "ai_usageCount": "{used} din {limit} mesaje gratuite folosite",
+  "@ai_usageCount": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "ai_errorGeneric": "Ceva nu a mers bine. Te rugăm să încerci din nou.",
+  "ai_errorNetwork": "Nu s-a putut contacta serviciul AI. Verifică conexiunea.",
+
+  "events_title": "Evenimente din Comunitate",
+  "events_upcoming": "Viitoare",
+  "events_past": "Trecute",
+  "events_create": "Creează Eveniment",
+  "events_noUpcoming": "Niciun eveniment viitor",
+  "events_noUpcomingMessage": "Creează un eveniment pentru a te conecta cu comunitatea HD!",
+  "events_online": "Online",
+  "events_inPerson": "Fizic",
+  "events_hybrid": "Hibrid",
+  "events_participants": "{count, plural, =1{1 participant} other{{count} participanți}}",
+  "@events_participants": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "events_register": "Înregistrează-te",
+  "events_registered": "Înregistrat",
+  "events_cancelRegistration": "Anulează Înregistrarea",
+  "events_registrationFull": "Eveniment Complet",
+  "events_eventTitle": "Titlu Eveniment",
+  "events_eventDescription": "Descriere",
+  "events_eventType": "Tip Eveniment",
+  "events_startDate": "Data & Ora de Început",
+  "events_endDate": "Data & Ora de Sfârșit",
+  "events_location": "Locație",
+  "events_virtualLink": "Link Întâlnire Virtuală",
+  "events_maxParticipants": "Participanți Maximi",
+  "events_hdTypeFilter": "Filtru Tip HD",
+  "events_allTypes": "Deschis pentru Toate Tipurile",
+  "events_created": "Eveniment creat!",
+  "events_deleted": "Eveniment șters",
+  "events_notFound": "Eveniment negăsit",
+
+  "chartOfDay_title": "Harta Zilei",
+  "chartOfDay_featured": "Hartă Remarcabilă",
+  "chartOfDay_viewChart": "Vezi Harta",
+
+  "discussion_typeDiscussion": "Discuție despre Tip",
+  "discussion_channelDiscussion": "Discuție despre Canal",
+
+  "ai_wantMoreInsights": "Vrei mai multe analize AI?",
+  "ai_messagesPackTitle": "{count} Mesaje",
+  "ai_orSubscribe": "sau abonează-te pentru nelimitat",
+  "ai_bestValue": "Cea mai bună valoare",
+  "ai_getMoreMessages": "Obține mai multe mesaje",
+  "ai_fromPrice": "De la {price}",
+  "ai_perMessage": "{price}/mesaj"
+}

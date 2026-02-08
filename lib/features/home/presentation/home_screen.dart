@@ -88,6 +88,11 @@ class HomeScreen extends ConsumerWidget {
             padding: const EdgeInsets.all(16),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
+                // AI Assistant Hero CTA
+                const AiMiniWidget(),
+
+                const SizedBox(height: 16),
+
                 // Today's Transit Summary
                 transitImpactAsync.when(
                   data: (impact) => TransitSummaryCard(
@@ -107,11 +112,6 @@ class HomeScreen extends ConsumerWidget {
 
                 // Gamification Progress
                 const GamificationSummaryCard(),
-
-                const SizedBox(height: 16),
-
-                // AI Assistant Card
-                const AiMiniWidget(),
 
                 const SizedBox(height: 16),
 

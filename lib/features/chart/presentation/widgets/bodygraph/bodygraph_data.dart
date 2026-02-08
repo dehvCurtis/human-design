@@ -74,4 +74,4 @@ const double channelStrokeWidthSelected = 6.0;
 /// Hit test thresholds
 const double gateHitTestRadius = 15.0;
 const double centerHitTestPadding = 5.0;
-const double channelHitTestThreshold = 10.0;
+const double channelHitTestThreshold = 15.0;
