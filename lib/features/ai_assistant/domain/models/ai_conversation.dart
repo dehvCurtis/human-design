@@ -4,7 +4,12 @@ import 'package:equatable/equatable.dart';
 enum AiContextType {
   chart,
   transit,
-  general;
+  general,
+  transitInsight,
+  chartReading,
+  compatibility,
+  dream,
+  journal;
 
   String get value {
     switch (this) {
@@ -14,6 +19,16 @@ enum AiContextType {
         return 'transit';
       case AiContextType.general:
         return 'general';
+      case AiContextType.transitInsight:
+        return 'transit_insight';
+      case AiContextType.chartReading:
+        return 'chart_reading';
+      case AiContextType.compatibility:
+        return 'compatibility';
+      case AiContextType.dream:
+        return 'dream';
+      case AiContextType.journal:
+        return 'journal';
     }
   }
 
@@ -25,6 +40,16 @@ enum AiContextType {
         return AiContextType.transit;
       case 'general':
         return AiContextType.general;
+      case 'transit_insight':
+        return AiContextType.transitInsight;
+      case 'chart_reading':
+        return AiContextType.chartReading;
+      case 'compatibility':
+        return AiContextType.compatibility;
+      case 'dream':
+        return AiContextType.dream;
+      case 'journal':
+        return AiContextType.journal;
       default:
         return AiContextType.general;
     }

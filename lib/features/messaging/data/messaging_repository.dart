@@ -260,7 +260,11 @@ class MessagingRepository {
         .subscribe();
   }
 
-  /// Subscribe to new messages across all conversations
+  /// Subscribe to new messages across all conversations.
+  ///
+  /// Security: Supabase Realtime respects RLS policies, so only messages
+  /// the user has SELECT access to will trigger events. Client-side
+  /// verification is kept as defense-in-depth.
   RealtimeChannel subscribeToAllMessages(
     void Function(DirectMessage message) onMessage,
   ) {
@@ -276,34 +280,29 @@ class MessagingRepository {
           schema: 'public',
           table: 'direct_messages',
           callback: (payload) async {
-            // Check if this message is in a conversation we're part of
-            final conversationId = payload.newRecord['conversation_id'] as String;
-            final senderId = payload.newRecord['sender_id'] as String;
+            final senderId = payload.newRecord['sender_id'] as String?;
 
             // Don't notify for our own messages
-            if (senderId == userId) return;
+            if (senderId == null || senderId == userId) return;
 
-            // Verify we're in this conversation
-            final convResponse = await _client
-                .from('conversations')
-                .select('id')
-                .eq('id', conversationId)
-                .contains('participant_ids', [userId])
-                .maybeSingle();
+            // Fetch full message via RLS-protected query (will return null
+            // if user doesn't have SELECT access to this message)
+            try {
+              final response = await _client
+                  .from('direct_messages')
+                  .select('''
+                    *,
+                    sender:profiles!direct_messages_sender_id_fkey(id, name, avatar_url)
+                  ''')
+                  .eq('id', payload.newRecord['id'] as String)
+                  .maybeSingle();
 
-            if (convResponse == null) return;
+              if (response == null) return; // RLS filtered out — not our message
 
-            // Fetch full message
-            final response = await _client
-                .from('direct_messages')
-                .select('''
-                  *,
-                  sender:profiles!direct_messages_sender_id_fkey(id, name, avatar_url)
-                ''')
-                .eq('id', payload.newRecord['id'] as String)
-                .single();
-
-            onMessage(DirectMessage.fromJson(response));
+              onMessage(DirectMessage.fromJson(response));
+            } catch (_) {
+              // Silently ignore — likely not our message
+            }
           },
         )
         .subscribe();

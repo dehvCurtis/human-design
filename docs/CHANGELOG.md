@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.13] - 2026-02-07
+
+### Added
+
+#### AI Transit Insights
+- **Personalized Transit Interpretation** - AI-generated daily insight based on chart + transits
+  - Transit header showing current Sun gate and key transits
+  - Generate button with cached results
+  - "Ask follow-up" button to continue in AI chat
+  - Integrated on home screen via AI Features card
+
+#### AI Chart Reading
+- **Comprehensive Chart Reading** - Multi-paragraph AI reading with section parsing
+  - Covers Type & Strategy, Authority, Profile, Centers, Channels, Incarnation Cross
+  - Expandable section cards parsed from AI markdown response
+  - PDF export via `ChartExportService.exportReadingAsPdf()`
+  - Share reading as text
+  - Uses 4096 max tokens for long-form content
+
+#### AI Compatibility Reading
+- **Composite Chart Analysis** - AI-powered compatibility reading for two charts
+  - Accessible from composite screen via AppBar action button
+  - Covers electromagnetic channels, companionship, center bridging, profile harmonics
+  - Uses 2048 max tokens
+  - "Ask follow-up" button for continued conversation
+
+#### AI Dream Interpretation
+- **Dream Journal Feature** - New `dream_journal/` feature module
+  - `JournalEntry` model with `JournalEntryType` enum (dream/journal)
+  - `DreamRepository` with full CRUD (getEntries, getEntry, createEntry, updateInterpretation, deleteEntry)
+  - Dream journal list screen with entry cards, date formatting, transit Sun gate badges
+  - Dream entry screen with text input and "Interpret with AI" button
+  - Bottom sheet detail view with AI interpretation display
+  - Dreams interpreted through HD chart + current transits lens
+
+#### AI Journaling Prompts
+- **Daily Journal Prompts** - Personalized prompts based on chart + transits
+  - 3-5 AI-generated prompts displayed as cards
+  - Inline text areas for writing responses
+  - Save entries to journal_entries table
+  - Regenerate button for new prompts
+  - Transit context summary header
+
+#### Database
+- `journal_entries` table with RLS policies
+  - Columns: id, user_id, content, entry_type, ai_interpretation, transit_sun_gate, conversation_id, prompt, created_at
+  - `entry_type` CHECK constraint: 'dream' or 'journal'
+  - Index on (user_id, created_at DESC)
+
+#### Navigation & UI
+- 6 new routes: aiTransitInsight, aiChartReading, aiCompatibility, dreamJournal, dreamEntry, journalPrompts
+- AI Features card on home screen (Transit Insight + Chart Reading shortcuts)
+- Quick actions: Dreams (moon icon) and Journal (edit_note icon) added
+- AI button on composite screen AppBar
+
+### Changed
+- `AiContextType` enum extended with 5 new values: transitInsight, chartReading, compatibility, dream, journal
+- `ChartContextBuilder` extended with `buildTransitContext()`, `buildCompatibilityContext()`, `buildTransitContextSummary()`
+- `AiRepository` extended with convenience methods for all 5 features + `maxTokens` parameter
+- Edge Function updated with specialized system prompts per context type and per-context max_tokens
+- `ChartExportService` extended with `exportReadingAsPdf()` for AI reading PDF export
+- All 8 ARB files updated with 17 new localization keys
+
+---
+
 ## [0.2.12] - 2026-02-07
 
 ### Added

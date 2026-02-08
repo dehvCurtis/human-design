@@ -94,11 +94,11 @@ class StoriesNotifier extends Notifier<StoriesState> {
   /// Check if a story has been viewed
   bool isViewed(String storyId) => state.viewedStoryIds.contains(storyId);
 
-  /// Clean up expired stories
+  /// Clean up expired stories for current user
   /// Should be called on app startup or periodically
   Future<int> cleanupExpiredStories() async {
     try {
-      final deletedCount = await _repository.cleanupExpiredStories();
+      final deletedCount = await _repository.cleanupMyExpiredStories();
       if (deletedCount > 0) {
         // Refresh stories after cleanup
         ref.invalidate(feedStoriesProvider);

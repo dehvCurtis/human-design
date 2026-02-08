@@ -115,6 +115,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get nav_profile => 'Perfil';
 
   @override
+  String get nav_ai => 'IA';
+
+  @override
   String get nav_more => 'Más';
 
   @override
@@ -3405,4 +3408,60 @@ class AppLocalizationsEs extends AppLocalizations {
   String ai_perMessage(String price) {
     return '$price/mensaje';
   }
+
+  @override
+  String get ai_transitInsightTitle => 'Today\'s Transit Insight';
+
+  @override
+  String get ai_transitInsightDesc =>
+      'Get a personalized AI interpretation of how today\'s transits affect your chart.';
+
+  @override
+  String get ai_chartReadingTitle => 'AI Chart Reading';
+
+  @override
+  String get ai_chartReadingDesc =>
+      'Generate a comprehensive AI reading of your Human Design chart.';
+
+  @override
+  String get ai_chartReadingCost =>
+      'This reading uses 3 AI messages from your quota.';
+
+  @override
+  String get ai_compatibilityTitle => 'AI Compatibility Reading';
+
+  @override
+  String get ai_compatibilityReading => 'AI Compatibility Analysis';
+
+  @override
+  String get ai_dreamJournalTitle => 'Dream Journal';
+
+  @override
+  String get ai_dreamEntryHint =>
+      'Record your dreams to discover hidden insights from your design...';
+
+  @override
+  String get ai_interpretDream => 'Interpret Dream';
+
+  @override
+  String get ai_journalPromptsTitle => 'Journal Prompts';
+
+  @override
+  String get ai_journalPromptsDesc =>
+      'Get personalized journaling prompts based on your chart and today\'s transits.';
+
+  @override
+  String get ai_generating => 'Generating...';
+
+  @override
+  String get ai_askFollowUp => 'Ask Follow-up';
+
+  @override
+  String get ai_regenerate => 'Regenerate';
+
+  @override
+  String get ai_exportPdf => 'Export PDF';
+
+  @override
+  String get ai_shareReading => 'Share Reading';
 }

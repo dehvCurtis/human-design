@@ -2,9 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/config/app_config.dart';
+import '../../chart/domain/models/human_design_chart.dart';
+import '../../composite/domain/composite_calculator.dart';
+import '../../lifestyle/domain/transit_service.dart';
 import '../domain/models/ai_conversation.dart';
 import '../domain/models/ai_message.dart';
 import '../domain/models/ai_usage.dart';
+import 'chart_context_builder.dart';
 
 /// Repository for AI chat operations via Supabase Edge Functions.
 ///
@@ -40,6 +44,7 @@ class AiRepository {
   /// [message] - user's message (validated for length)
   /// [chartContext] - sanitized chart context map (no user-controlled strings)
   /// [contextType] - type of context for the conversation
+  /// [maxTokens] - optional max tokens override for long-form content
   ///
   /// Returns the assistant's response as an [AiMessage].
   Future<AiMessage> sendMessage({
@@ -47,6 +52,7 @@ class AiRepository {
     required String message,
     Map<String, dynamic>? chartContext,
     AiContextType contextType = AiContextType.chart,
+    int? maxTokens,
   }) async {
     // Client-side input validation (defense-in-depth; server also validates)
     final sanitizedMessage = _sanitizeInput(message);
@@ -67,6 +73,7 @@ class AiRepository {
           'message': sanitizedMessage,
           'chart_context': chartContext,
           'context_type': contextType.value,
+          if (maxTokens != null) 'max_tokens': maxTokens,
         },
       );
 
@@ -152,15 +159,34 @@ class AiRepository {
   }
 
   /// Add bonus messages from a purchased message pack.
-  Future<void> addBonusMessages(int count) async {
-    final now = DateTime.now();
-    final periodStart = DateTime(now.year, now.month, 1);
+  ///
+  /// Routes through an Edge Function that validates the purchase
+  /// and uses service_role to grant bonus messages. The underlying
+  /// RPC is not callable from the authenticated role (security hardening).
+  Future<void> addBonusMessages(int count, {required String purchaseId}) async {
+    try {
+      final response = await _client.functions.invoke(
+        'grant-bonus-messages',
+        body: {
+          'count': count,
+          'purchase_id': purchaseId,
+        },
+      );
 
-    await _client.rpc('add_ai_bonus_messages', params: {
-      'p_user_id': _currentUserId,
-      'p_period_start': periodStart.toIso8601String().split('T')[0],
-      'p_count': count,
-    });
+      if (response.status != 200) {
+        final errorBody = response.data;
+        final errorMessage = errorBody is Map
+            ? errorBody['error'] as String? ?? 'Failed to add bonus messages'
+            : 'Failed to add bonus messages';
+        throw AiServiceException(errorMessage, statusCode: response.status);
+      }
+    } on FunctionException catch (e) {
+      debugPrint('Grant bonus messages error: ${e.reasonPhrase}');
+      throw AiServiceException(
+        'Failed to add bonus messages. Please try again.',
+        statusCode: e.status,
+      );
+    }
   }
 
   /// Delete a conversation and all its messages.
@@ -197,6 +223,81 @@ class AiRepository {
         .update({'title': sanitizedTitle})
         .eq('id', conversationId)
         .eq('user_id', _currentUserId);
+  }
+
+  /// Get AI transit insight for the user's chart and current transits.
+  Future<AiMessage> getTransitInsight({
+    required HumanDesignChart chart,
+    required TransitChart transits,
+    TransitImpact? impact,
+  }) async {
+    final context = ChartContextBuilder.buildTransitContext(chart, transits, impact);
+    return sendMessage(
+      message: 'Give me my personalized transit insight for today.',
+      chartContext: context,
+      contextType: AiContextType.transitInsight,
+    );
+  }
+
+  /// Get a comprehensive AI chart reading.
+  Future<AiMessage> getChartReading({
+    required HumanDesignChart chart,
+  }) async {
+    final context = ChartContextBuilder.buildChartContext(chart);
+    return sendMessage(
+      message: 'Generate a comprehensive reading of my Human Design chart.',
+      chartContext: context,
+      contextType: AiContextType.chartReading,
+      maxTokens: 4096,
+    );
+  }
+
+  /// Get AI compatibility reading for two charts.
+  Future<AiMessage> getCompatibilityReading({
+    required HumanDesignChart person1,
+    required HumanDesignChart person2,
+    required CompositeResult report,
+  }) async {
+    final context = ChartContextBuilder.buildCompatibilityContext(
+      person1,
+      person2,
+      report,
+    );
+    return sendMessage(
+      message: 'Analyze the compatibility between these two people.',
+      chartContext: context,
+      contextType: AiContextType.compatibility,
+      maxTokens: 2048,
+    );
+  }
+
+  /// Interpret a dream through the HD lens.
+  Future<AiMessage> interpretDream({
+    required String dreamText,
+    required HumanDesignChart chart,
+    required TransitChart transits,
+    TransitImpact? impact,
+  }) async {
+    final context = ChartContextBuilder.buildTransitContext(chart, transits, impact);
+    return sendMessage(
+      message: dreamText,
+      chartContext: context,
+      contextType: AiContextType.dream,
+    );
+  }
+
+  /// Get personalized journaling prompts.
+  Future<AiMessage> getJournalingPrompts({
+    required HumanDesignChart chart,
+    required TransitChart transits,
+    TransitImpact? impact,
+  }) async {
+    final context = ChartContextBuilder.buildTransitContext(chart, transits, impact);
+    return sendMessage(
+      message: 'Generate personalized journaling prompts for me today.',
+      chartContext: context,
+      contextType: AiContextType.journal,
+    );
   }
 
   /// Sanitize user input by trimming whitespace.

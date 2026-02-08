@@ -16,7 +16,7 @@ import 'widgets/affirmation_card.dart';
 import 'widgets/chart_preview_card.dart';
 import 'widgets/gamification_summary_card.dart';
 import 'widgets/transit_summary_card.dart';
-import 'widgets/quick_actions_row.dart';
+import 'widgets/quick_actions_row.dart'; // QuickActionsGrid
 import '../../ai_assistant/presentation/ai_mini_widget.dart';
 import '../../discovery/presentation/widgets/chart_of_day_card.dart';
 
@@ -115,17 +115,25 @@ class HomeScreen extends ConsumerWidget {
 
                 const SizedBox(height: 16),
 
-                // Quick Actions
-                QuickActionsRow(
+                // Quick Actions (categorized)
+                QuickActionsGrid(
+                  // Charts
                   onChartTap: () => context.go(AppRoutes.chart),
                   onSavedChartsTap: () => context.push(AppRoutes.savedCharts),
                   onCompositeTap: () => context.push(AppRoutes.composite),
                   onPentaTap: () => context.push(AppRoutes.penta),
+                  // AI & Insights
+                  onTransitInsightTap: () => context.push(AppRoutes.aiTransitInsight),
+                  onChartReadingTap: () => context.push(AppRoutes.aiChartReading),
+                  onDreamJournalTap: () => context.push(AppRoutes.dreamJournal),
+                  onJournalPromptsTap: () => context.push(AppRoutes.journalPrompts),
+                  // Community
                   onSocialTap: () => context.go(AppRoutes.social),
                   onDiscoverTap: () => context.push(AppRoutes.discover),
                   onFeedTap: () => context.push(AppRoutes.feed),
-                  onLearningTap: () => context.push(AppRoutes.learning),
                   onMessagesTap: () => context.push(AppRoutes.messages),
+                  // Learn
+                  onLearningTap: () => context.push(AppRoutes.learning),
                   onEventsTap: () => context.push(AppRoutes.events),
                 ),
 

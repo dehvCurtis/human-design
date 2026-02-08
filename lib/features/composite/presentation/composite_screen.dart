@@ -32,7 +32,22 @@ class CompositeScreen extends ConsumerWidget {
             },
             tooltip: l10n.chart_addChart,
           ),
-          if (compositeState.result != null)
+          if (compositeState.result != null) ...[
+            IconButton(
+              icon: const Icon(Icons.auto_awesome),
+              onPressed: () {
+                final result = compositeState.result!;
+                context.push(
+                  AppRoutes.aiCompatibility,
+                  extra: {
+                    'person1': result.person1,
+                    'person2': result.person2,
+                    'result': result,
+                  },
+                );
+              },
+              tooltip: l10n.ai_compatibilityTitle,
+            ),
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () {
@@ -40,6 +55,7 @@ class CompositeScreen extends ConsumerWidget {
               },
               tooltip: l10n.composite_clearAnalysis,
             ),
+          ],
         ],
       ),
       body: SingleChildScrollView(
