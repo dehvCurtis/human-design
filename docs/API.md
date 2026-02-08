@@ -172,6 +172,41 @@ id, session_id, user_id, registered_at,
 attended, attended_at
 ```
 
+### AI Tables
+
+#### ai_conversations
+```sql
+id, user_id, title, context_type, last_message_at, created_at
+-- context_type: chart, transit, general, transit_insight, chart_reading, compatibility, dream, journal
+```
+
+#### ai_messages
+```sql
+id, conversation_id, role, content, created_at
+-- role: user, assistant
+```
+
+#### ai_usage
+```sql
+id, user_id, period_start, message_count, bonus_messages, created_at
+```
+
+#### ai_purchases
+```sql
+id, user_id, product_id, message_count, purchased_at
+```
+
+### Journal Tables
+
+#### journal_entries
+```sql
+id, user_id, content, entry_type, ai_interpretation,
+transit_sun_gate, conversation_id, prompt, created_at
+-- entry_type: 'dream' or 'journal'
+-- RLS: Users can manage own entries (auth.uid() = user_id)
+-- Index: (user_id, created_at DESC)
+```
+
 ## Environment Variables
 
 ```
@@ -211,6 +246,10 @@ Config: `lib/core/config/supabase_config.dart`
 | GamificationRepository | `gamification/data/` | Points, badges, challenges |
 | LearningRepository | `learning/data/` | Content & mentorship |
 | SharingRepository | `sharing/data/` | Chart export & sharing |
+| AiRepository | `ai_assistant/data/` | AI chat, transit insights, chart reading, compatibility, dream, journal |
+| ChartContextBuilder | `ai_assistant/data/` | Sanitized chart/transit/compatibility context for AI prompts |
+| DreamRepository | `dream_journal/data/` | Dream journal & journaling CRUD |
+| ChartExportService | `sharing/services/` | Chart PNG/PDF export including AI readings |
 
 ## RPC Functions
 
@@ -219,6 +258,11 @@ Config: `lib/core/config/supabase_config.dart`
 award_points(user_uuid, points_amount, action, reference_uuid, desc)
 check_and_award_badges(user_uuid)
 update_streak(user_uuid)
+```
+
+### AI
+```sql
+add_ai_bonus_messages(p_user_id, p_period_start, p_count)
 ```
 
 ### Counters

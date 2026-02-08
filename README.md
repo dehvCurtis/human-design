@@ -59,6 +59,11 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **Multi-Provider Support** - Claude (default), Gemini, OpenAI backends
 - **Usage Quota** - 5 free messages/month, unlimited for premium users
 - **Message Packs** - One-time purchasable packs (3, 5, or 10 messages) for non-subscribers
+- **AI Transit Insights** - Daily personalized interpretation of how transits affect your chart
+- **AI Chart Reading** - Comprehensive multi-paragraph chart reading with PDF export
+- **AI Compatibility Reading** - AI-powered analysis of composite charts between two people
+- **AI Dream Interpretation** - Dream journal with HD-lens AI interpretation using chart + transits
+- **AI Journaling Prompts** - Daily personalized journaling prompts based on chart and transits
 
 ### Premium Features
 - **Subscription Tiers** - Free, Monthly, and Yearly plans
@@ -145,6 +150,7 @@ lib/
 │   ├── profile/          # User profile management
 │   ├── quiz/             # Quiz system & question generators
 │   ├── settings/         # App settings & preferences
+│   ├── dream_journal/    # Dream journal & journaling
 │   ├── sharing/          # Chart export & sharing
 │   ├── social/           # Friends & groups
 │   ├── stories/          # 24h ephemeral content

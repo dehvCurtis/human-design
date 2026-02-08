@@ -17,7 +17,8 @@ lib/
 │   ├── feed/             # Content feed & posts
 │   ├── gamification/     # Points, badges, challenges
 │   ├── home/             # Home screen & providers
-│   ├── ai_assistant/      # AI chat (Claude/Gemini/OpenAI)
+│   ├── ai_assistant/      # AI chat, transit insights, chart reading, compatibility, dream, journal
+│   ├── dream_journal/    # Dream journal & journaling entries
 │   ├── learning/         # Content library & mentorship
 │   ├── lifestyle/        # Transits & affirmations
 │   ├── messaging/        # Direct messages
@@ -115,6 +116,18 @@ UI (Widget) → Provider → Repository/Service → Supabase/Ephemeris
 | `aiConversationsProvider` | FutureProvider | Conversation list |
 | `aiMessagesProvider` | FutureProvider.family | Messages per conversation |
 | `suggestedQuestionsProvider` | Provider.family | Chart-based question suggestions |
+| `transitInsightProvider` | FutureProvider | Today's AI transit insight |
+| `chartReadingProvider` | FutureProvider.autoDispose | AI chart reading generation |
+| `journalingPromptsProvider` | FutureProvider | Today's AI journaling prompts |
+
+### Dream Journal Providers
+
+| Provider | Type | Purpose |
+|----------|------|---------|
+| `dreamRepositoryProvider` | Provider | DreamRepository singleton |
+| `dreamEntriesProvider` | FutureProvider | Dream entries list |
+| `journalEntriesProvider` | FutureProvider | Journal entries list |
+| `journalEntryProvider` | FutureProvider.family | Single journal entry by ID |
 
 ## Security
 
@@ -162,6 +175,10 @@ All Supabase tables use RLS policies:
 - `ai_conversations` - AI chat conversations per user
 - `ai_messages` - Individual messages (user + assistant)
 - `ai_usage` - Monthly message count tracking per user
+- `ai_purchases` - Message pack purchase audit trail
+
+### Journal Tables
+- `journal_entries` - Dream journal and journaling entries (entry_type: dream/journal)
 
 ### Learning Tables
 - `content_library` - Articles, guides, quizzes
