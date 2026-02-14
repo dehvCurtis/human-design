@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../main.dart' show firebaseConfigured;
 import '../../../shared/providers/supabase_provider.dart';
 import '../data/notification_service.dart';
 
@@ -12,6 +13,7 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
 
 /// Provider for notification initialization (call once on app start)
 final notificationInitProvider = FutureProvider<void>((ref) async {
+  if (!firebaseConfigured) return;
   final service = ref.watch(notificationServiceProvider);
   await service.initialize();
 });

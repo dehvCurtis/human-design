@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../main.dart' show firebaseConfigured;
+
 /// Service for handling push notifications via Firebase Cloud Messaging
 class NotificationService {
   NotificationService({required SupabaseClient supabaseClient})
@@ -20,6 +22,11 @@ class NotificationService {
 
   /// Initialize notification service
   Future<void> initialize() async {
+    if (!firebaseConfigured) {
+      debugPrint('NotificationService: Firebase not configured, skipping initialization');
+      return;
+    }
+
     // Request permission
     final settings = await _messaging.requestPermission(
       alert: true,

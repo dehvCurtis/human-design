@@ -40,9 +40,10 @@ void main() async {
   // Initialize Firebase (requires firebase_options.dart from flutterfire configure)
   try {
     await Firebase.initializeApp();
+    firebaseConfigured = true;
   } catch (e) {
     debugPrint('Firebase initialization failed: $e');
-    debugPrint('Run: flutterfire configure');
+    debugPrint('Push notifications disabled. Run: flutterfire configure');
   }
 
   // Initialize SharedPreferences
@@ -95,6 +96,11 @@ Future<void> _validateSession() async {
     debugPrint('Session validation failed: $e');
   }
 }
+
+/// Whether Firebase was successfully initialized.
+/// Guards all Firebase-dependent calls (FCM, analytics) to prevent errors
+/// when firebase_options.dart doesn't exist (needs `flutterfire configure`).
+bool firebaseConfigured = false;
 
 /// Whether RevenueCat was successfully configured.
 /// Guards all Purchases.* calls to prevent Swift-level fatal errors
