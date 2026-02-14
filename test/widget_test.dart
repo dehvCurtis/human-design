@@ -4,6 +4,7 @@
 // Native services (Swiss Ephemeris) are mocked for test environment.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -146,8 +147,40 @@ DailyAffirmation _createMockAffirmation() {
 
 void main() {
   setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
     // Set up mock SharedPreferences before any initialization
     SharedPreferences.setMockInitialValues({});
+
+    // Mock Firebase platform channel so Firebase.initializeApp() doesn't crash
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/firebase_core'),
+      (MethodCall methodCall) async {
+        if (methodCall.method == 'Firebase#initializeCore') {
+          return [
+            {
+              'name': '[DEFAULT]',
+              'options': {
+                'apiKey': 'fake-api-key',
+                'appId': 'fake-app-id',
+                'messagingSenderId': 'fake-sender-id',
+                'projectId': 'fake-project-id',
+              },
+              'pluginConstants': {},
+            }
+          ];
+        }
+        if (methodCall.method == 'Firebase#initializeApp') {
+          return {
+            'name': methodCall.arguments['appName'] ?? '[DEFAULT]',
+            'options': methodCall.arguments['options'] ?? {},
+            'pluginConstants': {},
+          };
+        }
+        return null;
+      },
+    );
 
     // Load environment variables from .env file
     await AppConfig.load();
