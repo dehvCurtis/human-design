@@ -198,11 +198,23 @@ flutter build apk
 - ✅ Notification service with local notifications
 - ✅ Topic subscriptions (transits, affirmations, challenges)
 - ✅ Notification preferences provider
-- ⚠️ Requires `flutterfire configure` for full setup
+- ✅ Gracefully optional Firebase (app runs without `flutterfire configure`)
+
+### Store Readiness ✅
+- ✅ iOS bundle identifier updated (`com.humandesign.app`)
+- ✅ iOS PrivacyInfo.xcprivacy manifest (iOS 17+ requirement)
+- ✅ Firebase gracefully optional via `firebaseConfigured` flag
+- ✅ RevenueCat gracefully optional via `revenueCatConfigured` flag
+- ✅ Removed unused `screenshot` package dependency
+- ✅ Replaced deprecated `flutter_markdown` with `flutter_markdown_plus`
+- ✅ Dismissable AI premium gate in chat screen
+- ✅ Chart image rendering for post attachments (Canvas-based PNG export)
+- ✅ Profile avatar button on home screen app bar
+- ✅ Auto-dispose journal/dream entry providers for fresh data
 
 ### Not Started
 - ❌ Offline support (Drift local database)
-- ❌ App Store / Play Store submission
+- ❌ App Store / Play Store submission (ready for submission)
 
 ## Code Style Guidelines
 
@@ -216,15 +228,20 @@ flutter build apk
 
 ## Testing Strategy
 
-- **Unit tests**: Chart calculations, mappers, services
+- **Unit tests**: Chart calculations, mappers, services, models
   - `test/gate_wheel_offset_test.dart` - Verifies 58° HD wheel offset
   - `test/timezone_fix_test.dart` - Verifies timezone conversions
-- **Widget tests**: Bodygraph rendering, form validation
+  - `test/calculate_chart_test.dart` - Type, Authority, Definition calculation logic (22 tests)
+  - `test/ai_usage_test.dart` - AI quota, bonus messages, period reset (35 tests)
+  - `test/feed_post_test.dart` - Post model, enums, content validation (40 tests)
+- **Widget tests**: App smoke test, bodygraph rendering, form validation
+  - `test/widget_test.dart` - App renders with mocked Firebase and providers
 - **Integration tests**: Auth flows, chart generation
 - **Manual verification**: Chart accuracy against humdes.com
   - Compare Conscious/Design Sun gates
   - Verify Type, Profile, Authority
   - Check Incarnation Cross (Sun/Earth gates)
+- **Current coverage**: 113+ tests passing
 
 ## Common Tasks
 
