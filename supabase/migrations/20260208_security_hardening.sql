@@ -115,6 +115,8 @@ $$;
 -- they participate in.
 
 -- Lock down team challenge functions to team members only
+-- DROP first because parameter names changed (CREATE OR REPLACE cannot rename params)
+DROP FUNCTION IF EXISTS public.increment_team_member_count(uuid);
 CREATE OR REPLACE FUNCTION public.increment_team_member_count(p_team_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
@@ -130,6 +132,7 @@ BEGIN
 END;
 $$;
 
+DROP FUNCTION IF EXISTS public.decrement_team_member_count(uuid);
 CREATE OR REPLACE FUNCTION public.decrement_team_member_count(p_team_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
@@ -138,6 +141,7 @@ END;
 $$;
 
 -- Lock down circle functions to circle members only
+DROP FUNCTION IF EXISTS public.increment_circle_member_count(uuid);
 CREATE OR REPLACE FUNCTION public.increment_circle_member_count(p_circle_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
@@ -152,6 +156,7 @@ BEGIN
 END;
 $$;
 
+DROP FUNCTION IF EXISTS public.decrement_circle_member_count(uuid);
 CREATE OR REPLACE FUNCTION public.decrement_circle_member_count(p_circle_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
@@ -160,6 +165,7 @@ END;
 $$;
 
 -- Lock down event participant functions to registered users
+DROP FUNCTION IF EXISTS public.increment_event_participants(uuid);
 CREATE OR REPLACE FUNCTION public.increment_event_participants(p_event_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
@@ -174,6 +180,7 @@ BEGIN
 END;
 $$;
 
+DROP FUNCTION IF EXISTS public.decrement_event_participants(uuid);
 CREATE OR REPLACE FUNCTION public.decrement_event_participants(p_event_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
