@@ -10,13 +10,13 @@ final dreamRepositoryProvider = Provider<DreamRepository>((ref) {
 });
 
 /// Provider for all dream entries
-final dreamEntriesProvider = FutureProvider<List<JournalEntry>>((ref) async {
+final dreamEntriesProvider = FutureProvider.autoDispose<List<JournalEntry>>((ref) async {
   final repository = ref.watch(dreamRepositoryProvider);
   return repository.getEntries(type: JournalEntryType.dream);
 });
 
 /// Provider for all journal entries
-final journalEntriesProvider = FutureProvider<List<JournalEntry>>((ref) async {
+final journalEntriesProvider = FutureProvider.autoDispose<List<JournalEntry>>((ref) async {
   final repository = ref.watch(dreamRepositoryProvider);
   return repository.getEntries(type: JournalEntryType.journal);
 });

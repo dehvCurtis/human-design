@@ -104,7 +104,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(ErrorHandler.getUserMessage(e, context: 'upload avatar')),
+            content: Text(
+              ErrorHandler.getUserMessage(e, context: 'upload avatar'),
+            ),
             backgroundColor: AppColors.error,
           ),
         );
@@ -152,7 +154,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = ErrorHandler.getUserMessage(e, context: 'update profile');
+          _errorMessage = ErrorHandler.getUserMessage(
+            e,
+            context: 'update profile',
+          );
           _isLoading = false;
         });
       }
@@ -205,12 +210,17 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       decoration: BoxDecoration(
                         color: AppColors.error.withAlpha(25),
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.error.withAlpha(128)),
+                        border: Border.all(
+                          color: AppColors.error.withAlpha(128),
+                        ),
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.error_outline,
-                              color: AppColors.error, size: 20),
+                          const Icon(
+                            Icons.error_outline,
+                            color: AppColors.error,
+                            size: 20,
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
@@ -241,9 +251,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                               child: profile.avatarUrl == null
                                   ? Text(
                                       _getInitials(profile.name ?? 'User'),
-                                      style: theme.textTheme.headlineMedium?.copyWith(
-                                        color: AppColors.primary,
-                                      ),
+                                      style: theme.textTheme.headlineMedium
+                                          ?.copyWith(color: AppColors.primary),
                                     )
                                   : null,
                             ),
@@ -271,12 +280,16 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         ),
                         const SizedBox(height: 8),
                         TextButton(
-                          onPressed: _isUploadingAvatar ? null : _pickAndUploadAvatar,
+                          onPressed: _isUploadingAvatar
+                              ? null
+                              : _pickAndUploadAvatar,
                           child: _isUploadingAvatar
                               ? const SizedBox(
                                   width: 20,
                                   height: 20,
-                                  child: CircularProgressIndicator(strokeWidth: 2),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
                                 )
                               : const Text('Change Photo'),
                         ),
@@ -349,7 +362,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     title: l10n.profile_birthData,
                     action: TextButton(
                       onPressed: () => context.push('/birth-data?edit=true'),
-                      child: Text(profile.hasBirthData ? l10n.common_edit : 'Add'),
+                      child: Text(
+                        profile.hasBirthData ? l10n.common_edit : 'Add',
+                      ),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -359,12 +374,18 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         _InfoRow(
                           icon: Icons.calendar_today,
                           label: 'Date',
-                          value: _formatDate(profile.birthDate!, profile.timezone),
+                          value: _formatDate(
+                            profile.birthDate!,
+                            profile.timezone,
+                          ),
                         ),
                         _InfoRow(
                           icon: Icons.access_time,
                           label: 'Time',
-                          value: _formatTime(profile.birthDate!, profile.timezone),
+                          value: _formatTime(
+                            profile.birthDate!,
+                            profile.timezone,
+                          ),
                         ),
                         if (profile.birthLocation != null)
                           _InfoRow(
@@ -411,7 +432,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       ListTile(
                         leading: const Icon(Icons.language),
                         title: const Text('Language'),
-                        subtitle: Text(_getLanguageName(profile.preferredLanguage)),
+                        subtitle: Text(
+                          _getLanguageName(profile.preferredLanguage),
+                        ),
                         trailing: const Icon(Icons.chevron_right),
                         onTap: () => context.push('/settings'),
                       ),
@@ -489,10 +512,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 }
 
 class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({
-    required this.title,
-    this.action,
-  });
+  const _SectionHeader({required this.title, this.action});
 
   final String title;
   final Widget? action;
@@ -504,9 +524,9 @@ class _SectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         ?action,
       ],
@@ -524,9 +544,7 @@ class _InfoCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Column(
-          children: children,
-        ),
+        child: Column(children: children),
       ),
     );
   }
@@ -562,12 +580,7 @@ class _InfoRow extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: Text(
-              value,
-              style: theme.textTheme.bodyMedium,
-            ),
-          ),
+          Expanded(child: Text(value, style: theme.textTheme.bodyMedium)),
         ],
       ),
     );

@@ -15,9 +15,11 @@ class AiPremiumGate extends ConsumerWidget {
   const AiPremiumGate({
     super.key,
     required this.usage,
+    this.onDismiss,
   });
 
   final AiUsage usage;
+  final VoidCallback? onDismiss;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,6 +47,19 @@ class AiPremiumGate extends ConsumerWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Dismiss button
+          if (onDismiss != null)
+            Align(
+              alignment: Alignment.topRight,
+              child: GestureDetector(
+                onTap: onDismiss,
+                child: Icon(
+                  Icons.close,
+                  size: 20,
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                ),
+              ),
+            ),
           // Title
           Text(
             l10n.ai_wantMoreInsights,
