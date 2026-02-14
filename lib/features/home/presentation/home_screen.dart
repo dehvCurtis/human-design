@@ -76,10 +76,7 @@ class HomeScreen extends ConsumerWidget {
                 icon: const Icon(Icons.notifications_outlined),
                 onPressed: () => context.push(AppRoutes.activityFeed),
               ),
-              IconButton(
-                icon: const Icon(Icons.settings_outlined),
-                onPressed: () => context.push(AppRoutes.settings),
-              ),
+              _ProfileButton(),
             ],
           ),
 
@@ -419,6 +416,39 @@ class _LoadingCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: const Center(
           child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
+}
+
+class _ProfileButton extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileAsync = ref.watch(userProfileProvider);
+    final avatarUrl = profileAsync.whenOrNull(
+      data: (profile) => profile?.avatarUrl,
+    );
+    final name = profileAsync.whenOrNull(
+      data: (profile) => profile?.name,
+    );
+
+    return GestureDetector(
+      onTap: () => context.push(AppRoutes.profile),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: CircleAvatar(
+          radius: 16,
+          backgroundImage:
+              avatarUrl != null ? NetworkImage(avatarUrl) : null,
+          child: avatarUrl == null
+              ? Text(
+                  name != null && name.isNotEmpty
+                      ? name[0].toUpperCase()
+                      : '?',
+                  style: Theme.of(context).textTheme.labelMedium,
+                )
+              : null,
         ),
       ),
     );

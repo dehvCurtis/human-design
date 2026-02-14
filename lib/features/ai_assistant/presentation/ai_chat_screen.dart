@@ -30,6 +30,7 @@ class AiChatScreen extends ConsumerStatefulWidget {
 
 class _AiChatScreenState extends ConsumerState<AiChatScreen> {
   final _scrollController = ScrollController();
+  bool _dismissedGate = false;
 
   @override
   void initState() {
@@ -155,9 +156,12 @@ class _AiChatScreenState extends ConsumerState<AiChatScreen> {
           // Premium gate or input bar
           canUseAsync.when(
             data: (canUse) {
-              if (!canUse || chatState.error == 'quota_exceeded') {
+              if (!_dismissedGate && (!canUse || chatState.error == 'quota_exceeded')) {
                 return usageAsync.when(
-                  data: (usage) => AiPremiumGate(usage: usage),
+                  data: (usage) => AiPremiumGate(
+                    usage: usage,
+                    onDismiss: () => setState(() => _dismissedGate = true),
+                  ),
                   loading: () => const SizedBox.shrink(),
                   error: (_, _) => const SizedBox.shrink(),
                 );

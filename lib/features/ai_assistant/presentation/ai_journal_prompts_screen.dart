@@ -108,7 +108,10 @@ class _AiJournalPromptsScreenState
             ),
             const SizedBox(height: 16),
             FilledButton.icon(
-              onPressed: () => setState(() => _hasRequested = true),
+              onPressed: () {
+                ref.invalidate(journalingPromptsProvider);
+                setState(() => _hasRequested = true);
+              },
               icon: const Icon(Icons.auto_awesome),
               label: Text(l10n.ai_journalPromptsTitle),
             ),
