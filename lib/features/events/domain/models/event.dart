@@ -93,8 +93,7 @@ class CommunityEvent extends Equatable {
       maxParticipants: json['max_participants'] as int?,
       currentParticipants: json['current_participants'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
-      creatorName: json['creator']?['display_name'] as String? ??
-          json['creator']?['full_name'] as String?,
+      creatorName: json['creator']?['name'] as String?,
     );
   }
 
@@ -133,8 +132,7 @@ class EventParticipant extends Equatable {
       userId: json['user_id'] as String,
       status: json['status'] as String? ?? 'registered',
       createdAt: DateTime.parse(json['created_at'] as String),
-      userName: json['user']?['display_name'] as String? ??
-          json['user']?['full_name'] as String?,
+      userName: json['user']?['name'] as String?,
     );
   }
 
