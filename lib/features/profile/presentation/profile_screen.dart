@@ -7,10 +7,14 @@ import 'package:timezone/timezone.dart' as tz;
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../ai_assistant/domain/ai_providers.dart';
+import '../../ai_assistant/domain/models/ai_usage.dart';
 import '../../auth/domain/auth_providers.dart';
 import '../../chart/domain/models/human_design_chart.dart';
 import '../../chart/domain/pdf_export_service.dart';
 import '../../home/domain/home_providers.dart';
+import '../../subscription/domain/models/subscription.dart';
+import '../../subscription/domain/subscription_providers.dart';
 import '../data/profile_repository.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -59,6 +63,10 @@ class ProfileScreen extends ConsumerWidget {
                 ),
                 error: (_, _) => const SizedBox.shrink(),
               ),
+              const SizedBox(height: 16),
+
+              // Subscription & AI Credits
+              const _SubscriptionCreditsCard(),
               const SizedBox(height: 24),
 
               // Action Buttons
@@ -150,13 +158,6 @@ class ProfileScreen extends ConsumerWidget {
                 icon: Icons.folder_outlined,
                 label: l10n.chart_savedCharts,
                 onTap: () => context.push(AppRoutes.savedCharts),
-              ),
-              const SizedBox(height: 8),
-              _ActionButton(
-                icon: Icons.workspace_premium_outlined,
-                label: l10n.profile_upgradePremium,
-                onTap: () => context.push(AppRoutes.premium),
-                highlight: true,
               ),
               const SizedBox(height: 24),
 
@@ -448,6 +449,115 @@ class _SummaryRow extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SubscriptionCreditsCard extends ConsumerWidget {
+  const _SubscriptionCreditsCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final subscriptionAsync = ref.watch(subscriptionProvider);
+    final aiUsageAsync = ref.watch(aiUsageProvider);
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Subscription & Credits',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const Divider(),
+            subscriptionAsync.when(
+              data: (subscription) => _buildSubscriptionInfo(context, subscription),
+              loading: () => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+              ),
+              error: (_, _) => _SummaryRow(label: 'Plan', value: 'Free'),
+            ),
+            aiUsageAsync.when(
+              data: (usage) => _buildAiUsageInfo(context, usage, subscriptionAsync.value),
+              loading: () => const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8),
+                child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+              ),
+              error: (_, _) => const SizedBox.shrink(),
+            ),
+            const SizedBox(height: 12),
+            subscriptionAsync.when(
+              data: (subscription) => SizedBox(
+                width: double.infinity,
+                child: subscription.isPremium
+                    ? OutlinedButton(
+                        onPressed: () => context.push(AppRoutes.premium),
+                        child: const Text('Manage Subscription'),
+                      )
+                    : ElevatedButton.icon(
+                        onPressed: () => context.push(AppRoutes.premium),
+                        icon: const Icon(Icons.workspace_premium_outlined, size: 18),
+                        label: const Text('Upgrade to Premium'),
+                      ),
+              ),
+              loading: () => const SizedBox.shrink(),
+              error: (_, _) => SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => context.push(AppRoutes.premium),
+                  icon: const Icon(Icons.workspace_premium_outlined, size: 18),
+                  label: const Text('Upgrade to Premium'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSubscriptionInfo(BuildContext context, Subscription subscription) {
+    final tierLabel = subscription.tier.displayName;
+    final statusLabel = subscription.isTrial ? 'Trial' : (subscription.isPremium ? 'Active' : '');
+
+    return _SummaryRow(
+      label: 'Plan',
+      value: statusLabel.isNotEmpty ? '$tierLabel ($statusLabel)' : tierLabel,
+    );
+  }
+
+  Widget _buildAiUsageInfo(BuildContext context, AiUsage usage, Subscription? subscription) {
+    final isPremium = subscription?.isPremium ?? false;
+
+    if (isPremium) {
+      return const _SummaryRow(label: 'AI Messages', value: 'Unlimited');
+    }
+
+    final remaining = usage.remaining;
+    final effectiveLimit = usage.effectiveLimit;
+    final used = usage.messagesThisMonth;
+    final progress = effectiveLimit > 0 ? (used / effectiveLimit).clamp(0.0, 1.0) : 0.0;
+
+    return Column(
+      children: [
+        _SummaryRow(label: 'AI Messages', value: '$remaining / $effectiveLimit remaining'),
+        Padding(
+          padding: const EdgeInsets.only(top: 4, bottom: 4),
+          child: LinearProgressIndicator(
+            value: progress,
+            backgroundColor: AppColors.primary.withAlpha(30),
+            valueColor: AlwaysStoppedAnimation<Color>(
+              remaining > 0 ? AppColors.primary : AppColors.error,
+            ),
+            borderRadius: BorderRadius.circular(4),
+          ),
+        ),
+        if (usage.bonusMessages > 0)
+          _SummaryRow(label: 'Bonus Messages', value: '${usage.bonusMessages}'),
+      ],
     );
   }
 }

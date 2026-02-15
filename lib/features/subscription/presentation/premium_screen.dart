@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../ai_assistant/domain/ai_providers.dart';
 import '../domain/models/subscription.dart';
 import '../domain/subscription_providers.dart';
 
@@ -107,6 +108,11 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
                   loading: () => const Center(child: CircularProgressIndicator()),
                   error: (_, _) => Text(l10n.common_error),
                 ),
+
+                const SizedBox(height: 24),
+
+                // AI Message Packs
+                _buildMessagePacksSection(context, l10n, ref, subscriptionState),
 
                 const SizedBox(height: 24),
 
@@ -445,6 +451,106 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
     }
   }
 
+  Widget _buildMessagePacksSection(
+    BuildContext context,
+    AppLocalizations l10n,
+    WidgetRef ref,
+    SubscriptionState state,
+  ) {
+    final packsAsync = ref.watch(messagePacksProvider);
+    final usageAsync = ref.watch(aiUsageProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Divider with "or"
+        Row(
+          children: [
+            Expanded(child: Divider(color: Theme.of(context).dividerColor)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                l10n.ai_orSubscribe,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColors.textSecondaryLight,
+                    ),
+              ),
+            ),
+            Expanded(child: Divider(color: Theme.of(context).dividerColor)),
+          ],
+        ),
+        const SizedBox(height: 24),
+        Text(
+          'AI Message Packs',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        usageAsync.when(
+          data: (usage) => Text(
+            usage.limit >= 999999
+                ? 'You have unlimited AI messages'
+                : '${usage.remaining} of ${usage.effectiveLimit} messages remaining this month',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColors.textSecondaryLight,
+                ),
+          ),
+          loading: () => const SizedBox.shrink(),
+          error: (_, _) => const SizedBox.shrink(),
+        ),
+        const SizedBox(height: 16),
+        packsAsync.when(
+          data: (packs) => Row(
+            children: packs.map((pack) {
+              return Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: _MessagePackCard(
+                    pack: pack,
+                    isLoading: state.isLoading,
+                    onTap: () => _purchasePack(ref, context, pack),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (_, _) => Row(
+            children: defaultMessagePacks.map((pack) {
+              return Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: _MessagePackCard(
+                    pack: pack,
+                    isLoading: state.isLoading,
+                    onTap: () => _purchasePack(ref, context, pack),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _purchasePack(
+    WidgetRef ref,
+    BuildContext context,
+    MessagePack pack,
+  ) async {
+    final notifier = ref.read(subscriptionNotifierProvider.notifier);
+    final success = await notifier.purchaseMessagePack(pack);
+    if (success && context.mounted) {
+      ref.invalidate(messagePacksProvider);
+      ref.invalidate(aiUsageProvider);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${pack.messageCount} messages added!')),
+      );
+    }
+  }
+
   Future<void> _restorePurchases(BuildContext context) async {
     final success = await ref
         .read(subscriptionNotifierProvider.notifier)
@@ -461,5 +567,71 @@ class _PremiumScreenState extends ConsumerState<PremiumScreen> {
         context.pop();
       }
     }
+  }
+}
+
+class _MessagePackCard extends StatelessWidget {
+  const _MessagePackCard({
+    required this.pack,
+    required this.isLoading,
+    required this.onTap,
+  });
+
+  final MessagePack pack;
+  final bool isLoading;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: isLoading ? null : onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: AppColors.primary.withValues(alpha: 0.3),
+            ),
+            color: AppColors.primary.withValues(alpha: 0.05),
+          ),
+          child: Column(
+            children: [
+              Text(
+                l10n.ai_messagesPackTitle(pack.messageCount),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                pack.formattedPrice,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                l10n.ai_perMessage(
+                  '\$${pack.pricePerMessage.toStringAsFixed(2)}',
+                ),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.5),
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -158,9 +158,9 @@ class MessagePack {
 
 /// Default message packs when RevenueCat is unavailable
 const defaultMessagePacks = [
-  MessagePack(messageCount: 3, price: 1.99, currency: 'USD'),
-  MessagePack(messageCount: 5, price: 2.99, currency: 'USD'),
-  MessagePack(messageCount: 10, price: 4.99, currency: 'USD'),
+  MessagePack(messageCount: 10, price: 2.99, currency: 'USD'),
+  MessagePack(messageCount: 25, price: 5.99, currency: 'USD'),
+  MessagePack(messageCount: 50, price: 9.99, currency: 'USD'),
 ];
 
 /// Predefined premium features
