@@ -1,4 +1,4 @@
-package com.example.human_design
+package com.humandesign.app
 
 import io.flutter.embedding.android.FlutterActivity
 
