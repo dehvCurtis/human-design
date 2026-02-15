@@ -8,6 +8,7 @@ enum PostType {
   question,
   achievement,
   regenerate,
+  dreamShare,
 }
 
 enum PostVisibility {
@@ -40,6 +41,7 @@ class Post {
     required this.visibility,
     this.mediaUrls,
     this.chartId,
+    this.chartData,
     this.gateNumber,
     this.channelId,
     this.transitData,
@@ -68,6 +70,7 @@ class Post {
   final PostVisibility visibility;
   final List<String>? mediaUrls;
   final String? chartId;
+  final Map<String, dynamic>? chartData;
   final int? gateNumber;
   final String? channelId;
   final Map<String, dynamic>? transitData;
@@ -111,6 +114,7 @@ class Post {
       visibility: _parseVisibility(json['visibility'] as String),
       mediaUrls: (json['media_urls'] as List<dynamic>?)?.cast<String>(),
       chartId: json['chart_id'] as String?,
+      chartData: json['chart_data'] as Map<String, dynamic>?,
       gateNumber: json['gate_number'] as int?,
       channelId: json['channel_id'] as String?,
       transitData: json['transit_data'] as Map<String, dynamic>?,
@@ -139,6 +143,7 @@ class Post {
       'visibility': visibility.name,
       'media_urls': mediaUrls,
       'chart_id': chartId,
+      'chart_data': chartData,
       'gate_number': gateNumber,
       'channel_id': channelId,
       'transit_data': transitData,
@@ -160,6 +165,7 @@ class Post {
     PostVisibility? visibility,
     List<String>? mediaUrls,
     String? chartId,
+    Map<String, dynamic>? chartData,
     int? gateNumber,
     String? channelId,
     Map<String, dynamic>? transitData,
@@ -188,6 +194,7 @@ class Post {
       visibility: visibility ?? this.visibility,
       mediaUrls: mediaUrls ?? this.mediaUrls,
       chartId: chartId ?? this.chartId,
+      chartData: chartData ?? this.chartData,
       gateNumber: gateNumber ?? this.gateNumber,
       channelId: channelId ?? this.channelId,
       transitData: transitData ?? this.transitData,
@@ -223,6 +230,8 @@ class Post {
         return PostType.achievement;
       case 'regenerate':
         return PostType.regenerate;
+      case 'dream_share':
+        return PostType.dreamShare;
       default:
         return PostType.insight;
     }
@@ -465,6 +474,8 @@ extension PostTypeExtension on PostType {
         return 'achievement';
       case PostType.regenerate:
         return 'regenerate';
+      case PostType.dreamShare:
+        return 'dream_share';
     }
   }
 }

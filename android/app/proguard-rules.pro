@@ -58,7 +58,7 @@
 
 # SQLite / Drift
 -keep class org.sqlite.** { *; }
--keep class com.example.human_design.** { *; }
+-keep class com.humandesign.app.** { *; }
 
 # Don't warn about missing classes
 -dontwarn java.lang.invoke.*

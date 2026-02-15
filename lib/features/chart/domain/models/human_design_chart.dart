@@ -59,6 +59,120 @@ class HumanDesignChart extends Equatable {
   /// Check if a specific center is defined
   bool isCenterDefined(HumanDesignCenter center) => definedCenters.contains(center);
 
+  /// Serialize chart data for embedding in feed posts.
+  /// Only includes fields needed to render the bodygraph widget.
+  Map<String, dynamic> toShareJson() {
+    return {
+      'name': name,
+      'type': type.name,
+      'strategy': strategy,
+      'authority': authority.name,
+      'profile': profile.name,
+      'definition': definition.name,
+      'definedCenters': definedCenters.map((c) => c.name).toList(),
+      'consciousGates': consciousActivations.entries.map((e) => {
+        'planet': e.key.name,
+        'gate': e.value.gate,
+        'line': e.value.line,
+        'color': e.value.color,
+        'tone': e.value.tone,
+        'base': e.value.base,
+        'degree': e.value.degree,
+      }).toList(),
+      'unconsciousGates': unconsciousActivations.entries.map((e) => {
+        'planet': e.key.name,
+        'gate': e.value.gate,
+        'line': e.value.line,
+        'color': e.value.color,
+        'tone': e.value.tone,
+        'base': e.value.base,
+        'degree': e.value.degree,
+      }).toList(),
+      'activeChannels': activeChannels.map((ch) => {
+        'gate1': ch.channel.gate1,
+        'gate2': ch.channel.gate2,
+        'gate1Conscious': ch.gate1Conscious,
+        'gate1Unconscious': ch.gate1Unconscious,
+        'gate2Conscious': ch.gate2Conscious,
+        'gate2Unconscious': ch.gate2Unconscious,
+      }).toList(),
+    };
+  }
+
+  /// Reconstruct a chart from share JSON data (for rendering in feed posts).
+  factory HumanDesignChart.fromShareJson(Map<String, dynamic> json) {
+    final definedCenters = (json['definedCenters'] as List<dynamic>)
+        .map((name) => HumanDesignCenter.values.byName(name as String))
+        .toSet();
+
+    final allCenters = HumanDesignCenter.values.toSet();
+
+    final consciousActivations = <HumanDesignPlanet, GateActivation>{};
+    for (final entry in json['consciousGates'] as List<dynamic>) {
+      final map = entry as Map<String, dynamic>;
+      consciousActivations[HumanDesignPlanet.values.byName(map['planet'] as String)] =
+          GateActivation(
+        gate: map['gate'] as int,
+        line: map['line'] as int,
+        color: map['color'] as int,
+        tone: map['tone'] as int,
+        base: map['base'] as int,
+        degree: (map['degree'] as num).toDouble(),
+      );
+    }
+
+    final unconsciousActivations = <HumanDesignPlanet, GateActivation>{};
+    for (final entry in json['unconsciousGates'] as List<dynamic>) {
+      final map = entry as Map<String, dynamic>;
+      unconsciousActivations[HumanDesignPlanet.values.byName(map['planet'] as String)] =
+          GateActivation(
+        gate: map['gate'] as int,
+        line: map['line'] as int,
+        color: map['color'] as int,
+        tone: map['tone'] as int,
+        base: map['base'] as int,
+        degree: (map['degree'] as num).toDouble(),
+      );
+    }
+
+    final activeChannelsList = <ChannelActivation>[];
+    for (final entry in json['activeChannels'] as List<dynamic>) {
+      final map = entry as Map<String, dynamic>;
+      final g1 = map['gate1'] as int;
+      final g2 = map['gate2'] as int;
+      final channelData = channels.firstWhere(
+        (c) => (c.gate1 == g1 && c.gate2 == g2) || (c.gate1 == g2 && c.gate2 == g1),
+      );
+      activeChannelsList.add(ChannelActivation(
+        channel: channelData,
+        gate1Conscious: map['gate1Conscious'] as bool,
+        gate1Unconscious: map['gate1Unconscious'] as bool,
+        gate2Conscious: map['gate2Conscious'] as bool,
+        gate2Unconscious: map['gate2Unconscious'] as bool,
+      ));
+    }
+
+    return HumanDesignChart(
+      id: 'shared',
+      userId: '',
+      name: json['name'] as String? ?? '',
+      birthDateTime: DateTime.now(),
+      birthLocation: const BirthLocation(city: '', country: '', latitude: 0, longitude: 0),
+      timezone: 'UTC',
+      type: HumanDesignType.values.byName(json['type'] as String),
+      strategy: json['strategy'] as String,
+      authority: Authority.values.byName(json['authority'] as String),
+      profile: Profile.values.byName(json['profile'] as String),
+      definition: Definition.values.byName(json['definition'] as String),
+      definedCenters: definedCenters,
+      undefinedCenters: allCenters.difference(definedCenters),
+      activeChannels: activeChannelsList,
+      consciousActivations: consciousActivations,
+      unconsciousActivations: unconsciousActivations,
+      createdAt: DateTime.now(),
+    );
+  }
+
   /// Get activations for a specific gate
   GateActivationInfo? getGateInfo(int gateNumber) {
     GateActivation? conscious;

@@ -19,7 +19,7 @@ class ChartOfDayService {
 
     final data = await _client
         .from('chart_of_day')
-        .select('*, user:profiles!user_id(id, display_name, full_name, avatar_url)')
+        .select('*, user:profiles!user_id(id, name, avatar_url)')
         .eq('featured_date', dateStr)
         .maybeSingle();
 
@@ -53,8 +53,7 @@ class ChartOfDayEntry {
       userId: json['user_id'] as String,
       featuredDate: DateTime.parse(json['featured_date'] as String),
       reason: json['reason'] as String?,
-      userName: json['user']?['display_name'] as String? ??
-          json['user']?['full_name'] as String?,
+      userName: json['user']?['name'] as String?,
       avatarUrl: json['user']?['avatar_url'] as String?,
     );
   }

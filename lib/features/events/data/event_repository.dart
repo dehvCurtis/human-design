@@ -22,7 +22,7 @@ class EventRepository {
   Future<List<CommunityEvent>> getUpcomingEvents() async {
     final data = await _client
         .from('community_events')
-        .select('*, creator:profiles!creator_id(display_name, full_name)')
+        .select('*, creator:profiles!creator_id(name)')
         .gte('starts_at', DateTime.now().toIso8601String())
         .order('starts_at', ascending: true)
         .limit(50);
@@ -36,7 +36,7 @@ class EventRepository {
   Future<List<CommunityEvent>> getPastEvents() async {
     final data = await _client
         .from('community_events')
-        .select('*, creator:profiles!creator_id(display_name, full_name)')
+        .select('*, creator:profiles!creator_id(name)')
         .lt('ends_at', DateTime.now().toIso8601String())
         .order('starts_at', ascending: false)
         .limit(30);
@@ -50,7 +50,7 @@ class EventRepository {
   Future<CommunityEvent> getEvent(String eventId) async {
     final data = await _client
         .from('community_events')
-        .select('*, creator:profiles!creator_id(display_name, full_name)')
+        .select('*, creator:profiles!creator_id(name)')
         .eq('id', eventId)
         .single();
 
@@ -101,7 +101,7 @@ class EventRepository {
             'gate_themes': gateThemes,
           if (maxParticipants != null) 'max_participants': maxParticipants,
         })
-        .select('*, creator:profiles!creator_id(display_name, full_name)')
+        .select('*, creator:profiles!creator_id(name)')
         .single();
 
     return CommunityEvent.fromJson(data);
@@ -150,7 +150,7 @@ class EventRepository {
   Future<List<EventParticipant>> getParticipants(String eventId) async {
     final data = await _client
         .from('event_participants')
-        .select('*, user:profiles!user_id(display_name, full_name)')
+        .select('*, user:profiles!user_id(name)')
         .eq('event_id', eventId)
         .eq('status', 'registered')
         .order('created_at', ascending: true);

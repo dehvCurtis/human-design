@@ -9,6 +9,8 @@ class DreamRepository {
 
   final SupabaseClient _client;
 
+  String? get _currentUserIdOrNull => _client.auth.currentUser?.id;
+
   String get _currentUserId {
     final user = _client.auth.currentUser;
     if (user == null) throw StateError('User not authenticated');
@@ -20,10 +22,13 @@ class DreamRepository {
     JournalEntryType? type,
     int limit = 50,
   }) async {
+    final userId = _currentUserIdOrNull;
+    if (userId == null) return [];
+
     var query = _client
         .from('journal_entries')
         .select()
-        .eq('user_id', _currentUserId);
+        .eq('user_id', userId);
 
     if (type != null) {
       query = query.eq('entry_type', type.value);
@@ -38,11 +43,14 @@ class DreamRepository {
 
   /// Get a single entry by ID.
   Future<JournalEntry?> getEntry(String id) async {
+    final userId = _currentUserIdOrNull;
+    if (userId == null) return null;
+
     final data = await _client
         .from('journal_entries')
         .select()
         .eq('id', id)
-        .eq('user_id', _currentUserId)
+        .eq('user_id', userId)
         .maybeSingle();
 
     if (data == null) return null;

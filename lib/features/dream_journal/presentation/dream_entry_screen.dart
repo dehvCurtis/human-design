@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../ai_assistant/data/ai_repository.dart';
 import '../../ai_assistant/domain/ai_providers.dart';
+import '../../feed/domain/models/post.dart';
+import '../../feed/presentation/widgets/create_post_sheet.dart';
 import '../../home/domain/home_providers.dart';
 import '../domain/dream_providers.dart';
 import '../domain/models/journal_entry.dart';
@@ -23,6 +26,12 @@ class _DreamEntryScreenState extends ConsumerState<DreamEntryScreen> {
   String? _interpretation;
   String? _error;
   bool _isSaved = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() => setState(() {}));
+  }
 
   @override
   void dispose() {
@@ -67,14 +76,15 @@ class _DreamEntryScreenState extends ConsumerState<DreamEntryScreen> {
         });
         ref.invalidate(aiUsageProvider);
 
-        // Save to database
-        final sunGate = transits.sunGate.gate;
-        final dreamRepo = ref.read(dreamRepositoryProvider);
-        await dreamRepo.createEntry(
-          content: dreamText,
-          entryType: JournalEntryType.dream,
-          transitSunGate: sunGate,
-        ).then((entry) async {
+        // Save to database (separate try/catch so interpretation still shows on save failure)
+        try {
+          final sunGate = transits.sunGate.gate;
+          final dreamRepo = ref.read(dreamRepositoryProvider);
+          final entry = await dreamRepo.createEntry(
+            content: dreamText,
+            entryType: JournalEntryType.dream,
+            transitSunGate: sunGate,
+          );
           await dreamRepo.updateInterpretation(
             entryId: entry.id,
             aiInterpretation: message.content,
@@ -84,7 +94,10 @@ class _DreamEntryScreenState extends ConsumerState<DreamEntryScreen> {
             setState(() => _isSaved = true);
             ref.invalidate(dreamEntriesProvider);
           }
-        });
+        } catch (saveError) {
+          debugPrint('Dream save error: $saveError');
+          // Interpretation succeeded, just couldn't save - don't show error
+        }
       }
     } on AiServiceException catch (e) {
       if (mounted) {
@@ -232,6 +245,45 @@ class _DreamEntryScreenState extends ConsumerState<DreamEntryScreen> {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        final dreamText = _controller.text.trim();
+                        final content =
+                            'Dream:\n$dreamText\n\nAI Interpretation:\n${_interpretation!}';
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) => CreatePostSheet(
+                            initialPostType: PostType.dreamShare,
+                            prefillContent: content,
+                            gateNumber:
+                                ref.read(todayTransitsProvider).sunGate.gate,
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.forum_outlined, size: 18),
+                      label: const Text('Share to Feed'),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        final dreamText = _controller.text.trim();
+                        final text =
+                            'My Dream:\n$dreamText\n\nAI Interpretation:\n${_interpretation!}\n\nShared from Human Design App';
+                        SharePlus.instance.share(ShareParams(text: text));
+                      },
+                      icon: const Icon(Icons.share_outlined, size: 18),
+                      label: const Text('Share'),
+                    ),
+                  ),
+                ],
               ),
             ],
 
