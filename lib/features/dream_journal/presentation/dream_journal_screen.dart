@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
+import '../../feed/domain/models/post.dart';
+import '../../feed/presentation/widgets/create_post_sheet.dart';
 import '../domain/dream_providers.dart';
 import '../domain/models/journal_entry.dart';
 
@@ -239,6 +242,43 @@ class DreamJournalScreen extends ConsumerWidget {
                   SelectableText(
                     entry.aiInterpretation!,
                     style: theme.textTheme.bodyMedium?.copyWith(height: 1.6),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            final content =
+                                'Dream:\n${entry.content}\n\nAI Interpretation:\n${entry.aiInterpretation!}';
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (ctx) => CreatePostSheet(
+                                initialPostType: PostType.dreamShare,
+                                prefillContent: content,
+                                gateNumber: entry.transitSunGate,
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.forum_outlined, size: 18),
+                          label: const Text('Share to Feed'),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () {
+                            final text =
+                                'My Dream:\n${entry.content}\n\nAI Interpretation:\n${entry.aiInterpretation!}\n\nShared from Human Design App';
+                            SharePlus.instance.share(ShareParams(text: text));
+                          },
+                          icon: const Icon(Icons.share_outlined, size: 18),
+                          label: const Text('Share'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ],

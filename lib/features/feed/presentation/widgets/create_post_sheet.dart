@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,8 +11,6 @@ import 'package:uuid/uuid.dart';
 import '../../../../core/utils/error_handler.dart';
 import '../../../../shared/providers/supabase_provider.dart';
 import '../../../chart/domain/chart_providers.dart';
-import '../../../chart/domain/models/human_design_chart.dart';
-import '../../../chart/presentation/widgets/bodygraph/bodygraph_painter.dart';
 import '../../domain/feed_providers.dart';
 import '../../domain/models/post.dart';
 import 'gate_channel_picker_sheet.dart';
@@ -468,120 +465,9 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         return 'Celebrate your achievement!';
       case PostType.regenerate:
         return ''; // Regenerate type not used in create sheet
+      case PostType.dreamShare:
+        return 'Share your dream and its interpretation...';
     }
-  }
-
-  /// Render the bodygraph chart as a PNG image for embedding in the post.
-  Future<Uint8List?> _captureChartImage(String chartId) async {
-    final chart = await ref.read(chartByIdProvider(chartId).future);
-    if (chart == null) return null;
-
-    try {
-      return await _renderChartToPng(chart);
-    } catch (e) {
-      debugPrint('Error capturing chart image: $e');
-      return null;
-    }
-  }
-
-  /// Render a HumanDesignChart to a PNG using the BodygraphPainter directly.
-  static Future<Uint8List?> _renderChartToPng(HumanDesignChart chart) async {
-    const double width = 700;
-    const double height = 900;
-    const double padding = 32;
-
-    final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder);
-
-    // Draw white background
-    canvas.drawRect(
-      const Rect.fromLTWH(0, 0, width, height),
-      Paint()..color = Colors.white,
-    );
-
-    // Draw chart name header
-    final nameParagraph = _buildParagraph(
-      chart.name,
-      width - padding * 2,
-      fontSize: 24,
-      fontWeight: FontWeight.bold,
-      color: Colors.black87,
-    );
-    canvas.drawParagraph(nameParagraph, const Offset(padding, padding));
-
-    // Draw type/profile/authority subtitle
-    final subtitle =
-        '${chart.type.displayName}  |  ${chart.profile.notation}  |  ${chart.authority.displayName}';
-    final subtitleParagraph = _buildParagraph(
-      subtitle,
-      width - padding * 2,
-      fontSize: 16,
-      color: Colors.grey.shade600,
-    );
-    canvas.drawParagraph(subtitleParagraph, const Offset(padding, padding + 34));
-
-    // Draw bodygraph using the existing painter
-    final bodygraphSize = const Size(width - padding * 2, height - 100);
-    canvas.save();
-    canvas.translate(padding, 80);
-
-    final painter = BodygraphPainter(
-      chart: chart,
-      showGateNumbers: true,
-      showInactiveGates: true,
-      showInactiveChannels: true,
-    );
-    painter.paint(canvas, bodygraphSize);
-    canvas.restore();
-
-    final picture = recorder.endRecording();
-    final img = await picture.toImage(width.toInt(), height.toInt());
-    final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
-    return byteData?.buffer.asUint8List();
-  }
-
-  /// Build a paragraph for text rendering on canvas.
-  static ui.Paragraph _buildParagraph(
-    String text,
-    double maxWidth, {
-    double fontSize = 14,
-    FontWeight fontWeight = FontWeight.normal,
-    Color color = Colors.black,
-  }) {
-    final builder = ui.ParagraphBuilder(
-      ui.ParagraphStyle(textAlign: TextAlign.center, maxLines: 2),
-    )
-      ..pushStyle(ui.TextStyle(
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        color: color,
-      ))
-      ..addText(text);
-    final paragraph = builder.build();
-    paragraph.layout(ui.ParagraphConstraints(width: maxWidth));
-    return paragraph;
-  }
-
-  /// Upload chart image bytes to Supabase storage and return the public URL.
-  Future<String?> _uploadChartImage(Uint8List bytes) async {
-    final client = ref.read(supabaseClientProvider);
-    final userId = client.auth.currentUser?.id;
-    if (userId == null) return null;
-
-    const uuid = Uuid();
-    final fileName = '${uuid.v4()}.png';
-    final filePath = '$userId/posts/$fileName';
-
-    await client.storage.from('post-images').uploadBinary(
-      filePath,
-      bytes,
-      fileOptions: const FileOptions(
-        contentType: 'image/png',
-        upsert: true,
-      ),
-    );
-
-    return client.storage.from('post-images').getPublicUrl(filePath);
   }
 
   Future<void> _submitPost() async {
@@ -602,14 +488,12 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         mediaUrls = await _uploadImages();
       }
 
-      // Capture and upload chart image if a chart is attached
+      // Serialize chart data as JSON if a chart is attached
+      Map<String, dynamic>? chartData;
       if (_selectedChartId != null) {
-        final chartBytes = await _captureChartImage(_selectedChartId!);
-        if (chartBytes != null) {
-          final chartUrl = await _uploadChartImage(chartBytes);
-          if (chartUrl != null) {
-            mediaUrls = [...?mediaUrls, chartUrl];
-          }
+        final chart = await ref.read(chartByIdProvider(_selectedChartId!).future);
+        if (chart != null) {
+          chartData = chart.toShareJson();
         }
       }
 
@@ -619,6 +503,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
             visibility: _visibility,
             mediaUrls: mediaUrls,
             chartId: _selectedChartId,
+            chartData: chartData,
             gateNumber: _selectedGate,
             channelId: _selectedChannelId,
             transitData: widget.transitData,
@@ -690,6 +575,8 @@ class _PostTypeChip extends StatelessWidget {
         return (Icons.emoji_events_outlined, 'Achievement', Colors.orange);
       case PostType.regenerate:
         return (Icons.repeat, 'Regenerate', Colors.green);
+      case PostType.dreamShare:
+        return (Icons.nights_stay, 'Dream', Colors.deepPurple);
     }
   }
 }

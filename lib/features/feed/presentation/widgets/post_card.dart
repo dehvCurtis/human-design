@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/url_validator.dart';
 import '../../../../l10n/generated/app_localizations.dart';
+import '../../../chart/domain/models/human_design_chart.dart';
+import '../../../chart/presentation/widgets/bodygraph/bodygraph_widget.dart';
 import '../../../hashtags/presentation/widgets/hashtag_text.dart';
 import '../../domain/models/post.dart';
 import 'reaction_bar.dart';
@@ -142,6 +144,12 @@ class PostCard extends StatelessWidget {
                 if (post.mediaUrls?.isNotEmpty == true) ...[
                   const SizedBox(height: 12),
                   _PostMedia(mediaUrls: post.mediaUrls!),
+                ],
+
+                // Chart data (live bodygraph)
+                if (post.chartData != null) ...[
+                  const SizedBox(height: 12),
+                  _PostChartPreview(chartData: post.chartData!),
                 ],
               ],
 
@@ -460,6 +468,8 @@ class _PostTypeBadge extends StatelessWidget {
         return (Icons.emoji_events_outlined, 'Achievement', Colors.orange);
       case PostType.regenerate:
         return (Icons.repeat, 'Regenerate', Colors.green);
+      case PostType.dreamShare:
+        return (Icons.nights_stay, 'Dream', Colors.deepPurple);
     }
   }
 }
@@ -886,6 +896,94 @@ class _ReactionButtonCompact extends StatelessWidget {
         },
       ),
     );
+  }
+}
+
+class _PostChartPreview extends StatelessWidget {
+  const _PostChartPreview({required this.chartData});
+
+  final Map<String, dynamic> chartData;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    try {
+      final chart = HumanDesignChart.fromShareJson(chartData);
+
+      return Container(
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          ),
+        ),
+        child: Column(
+          children: [
+            // Bodygraph
+            SizedBox(
+              height: 250,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: BodygraphWidget(
+                  chart: chart,
+                  interactive: false,
+                  showGateNumbers: true,
+                ),
+              ),
+            ),
+            // Chart info subtitle
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (chart.name.isNotEmpty) ...[
+                    Text(
+                      chart.name,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '|',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.outline,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                  Text(
+                    '${chart.type.displayName}  ${chart.profile.notation}  ${chart.authority.displayName}',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      return Container(
+        height: 100,
+        decoration: BoxDecoration(
+          color: theme.colorScheme.errorContainer.withValues(alpha: 0.3),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Center(
+          child: Text(
+            'Unable to display chart',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.error,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
 

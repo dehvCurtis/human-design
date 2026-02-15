@@ -249,7 +249,7 @@ void main() {
 
   group('PostType Enum', () {
     test('all PostType values are defined', () {
-      expect(PostType.values.length, equals(7));
+      expect(PostType.values.length, equals(8));
       expect(PostType.values, contains(PostType.insight));
       expect(PostType.values, contains(PostType.reflection));
       expect(PostType.values, contains(PostType.transitShare));
@@ -257,6 +257,7 @@ void main() {
       expect(PostType.values, contains(PostType.question));
       expect(PostType.values, contains(PostType.achievement));
       expect(PostType.values, contains(PostType.regenerate));
+      expect(PostType.values, contains(PostType.dreamShare));
     });
 
     test('PostType.dbValue returns correct database values', () {
@@ -267,6 +268,7 @@ void main() {
       expect(PostType.question.dbValue, equals('question'));
       expect(PostType.achievement.dbValue, equals('achievement'));
       expect(PostType.regenerate.dbValue, equals('regenerate'));
+      expect(PostType.dreamShare.dbValue, equals('dream_share'));
     });
 
     test('Post._parsePostType handles all valid types', () {
@@ -278,6 +280,7 @@ void main() {
         'question': PostType.question,
         'achievement': PostType.achievement,
         'regenerate': PostType.regenerate,
+        'dream_share': PostType.dreamShare,
       };
 
       testCases.forEach((dbValue, expectedType) {
