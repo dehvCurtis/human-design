@@ -9,7 +9,7 @@ class AppLocalizationsRo extends AppLocalizations {
   AppLocalizationsRo([String locale = 'ro']) : super(locale);
 
   @override
-  String get appName => 'AuraMap';
+  String get appName => 'Inside Me';
 
   @override
   String get common_save => 'Salvează';
@@ -329,7 +329,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get auth_calculateMyChart => 'Calculează Harta Mea';
 
   @override
-  String get onboarding_welcome => 'Bine ai venit la AuraMap';
+  String get onboarding_welcome => 'Bine ai venit la Inside Me';
 
   @override
   String get onboarding_welcomeSubtitle =>
@@ -1398,11 +1398,11 @@ class AppLocalizationsRo extends AppLocalizations {
       'Schimbarea parolei a eșuat. Te rugăm să încerci din nou.';
 
   @override
-  String get settings_feedbackSubject => 'Feedback Aplicație AuraMap';
+  String get settings_feedbackSubject => 'Feedback Aplicație Inside Me';
 
   @override
   String get settings_feedbackBody =>
-      'Bună,\n\nAș dori să împărtășesc următorul feedback despre AuraMap:\n\n';
+      'Bună,\n\nAș dori să împărtășesc următorul feedback despre Inside Me:\n\n';
 
   @override
   String get auth_newPassword => 'Parolă Nouă';
@@ -1428,7 +1428,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get settings_exportingData => 'Se pregătesc datele pentru export...';
 
   @override
-  String get settings_exportDataSubject => 'AuraMap - Export Date Personale';
+  String get settings_exportDataSubject => 'Inside Me - Export Date Personale';
 
   @override
   String get settings_exportDataFailed =>
@@ -1509,7 +1509,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get profile_loadFailed => 'Încărcarea profilului a eșuat';
 
   @override
-  String get profile_defaultUserName => 'Utilizator AuraMap';
+  String get profile_defaultUserName => 'Utilizator Inside Me';
 
   @override
   String get profile_birthDate => 'Data';

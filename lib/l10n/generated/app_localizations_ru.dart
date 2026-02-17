@@ -9,7 +9,7 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get appName => 'AuraMap';
+  String get appName => 'Inside Me';
 
   @override
   String get common_save => 'Сохранить';
@@ -1392,11 +1392,11 @@ class AppLocalizationsRu extends AppLocalizations {
       'Не удалось изменить пароль. Попробуйте ещё раз.';
 
   @override
-  String get settings_feedbackSubject => 'Отзыв о приложении AuraMap';
+  String get settings_feedbackSubject => 'Отзыв о приложении Inside Me';
 
   @override
   String get settings_feedbackBody =>
-      'Здравствуйте,\n\nХочу поделиться отзывом о приложении AuraMap:\n\n';
+      'Здравствуйте,\n\nХочу поделиться отзывом о приложении Inside Me:\n\n';
 
   @override
   String get auth_newPassword => 'Новый пароль';
@@ -1421,7 +1421,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settings_exportingData => 'Подготовка экспорта данных...';
 
   @override
-  String get settings_exportDataSubject => 'AuraMap - Экспорт данных';
+  String get settings_exportDataSubject => 'Inside Me - Экспорт данных';
 
   @override
   String get settings_exportDataFailed =>
@@ -1500,7 +1500,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profile_loadFailed => 'Не удалось загрузить профиль';
 
   @override
-  String get profile_defaultUserName => 'Пользователь AuraMap';
+  String get profile_defaultUserName => 'Пользователь Inside Me';
 
   @override
   String get profile_birthDate => 'Дата';
