@@ -276,7 +276,7 @@ class _DreamEntryScreenState extends ConsumerState<DreamEntryScreen> {
                       onPressed: () {
                         final dreamText = _controller.text.trim();
                         final text =
-                            'My Dream:\n$dreamText\n\nAI Interpretation:\n${_interpretation!}\n\nShared from Human Design App';
+                            'My Dream:\n$dreamText\n\nAI Interpretation:\n${_interpretation!}\n\nShared from Inside Me: Human Design';
                         SharePlus.instance.share(ShareParams(text: text));
                       },
                       icon: const Icon(Icons.share_outlined, size: 18),

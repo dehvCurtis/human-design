@@ -130,7 +130,7 @@ class AffirmationCard extends StatelessWidget {
 
 ${affirmation.sourceDescription}
 
-- Human Design App
+- Inside Me: Human Design
 ''';
     SharePlus.instance.share(ShareParams(text: text));
   }

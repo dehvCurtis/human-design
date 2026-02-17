@@ -113,7 +113,7 @@ abstract class AppLocalizations {
   /// The name of the application
   ///
   /// In en, this message translates to:
-  /// **'AuraMap'**
+  /// **'Inside Me'**
   String get appName;
 
   /// No description provided for @common_save.
@@ -701,7 +701,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboarding_welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to AuraMap'**
+  /// **'Welcome to Inside Me'**
   String get onboarding_welcome;
 
   /// No description provided for @onboarding_welcomeSubtitle.
@@ -2687,13 +2687,13 @@ abstract class AppLocalizations {
   /// No description provided for @settings_feedbackSubject.
   ///
   /// In en, this message translates to:
-  /// **'AuraMap App Feedback'**
+  /// **'Inside Me App Feedback'**
   String get settings_feedbackSubject;
 
   /// No description provided for @settings_feedbackBody.
   ///
   /// In en, this message translates to:
-  /// **'Hi,\n\nI would like to share the following feedback about AuraMap:\n\n'**
+  /// **'Hi,\n\nI would like to share the following feedback about Inside Me:\n\n'**
   String get settings_feedbackBody;
 
   /// No description provided for @auth_newPassword.
@@ -2741,7 +2741,7 @@ abstract class AppLocalizations {
   /// No description provided for @settings_exportDataSubject.
   ///
   /// In en, this message translates to:
-  /// **'AuraMap - My Data Export'**
+  /// **'Inside Me - My Data Export'**
   String get settings_exportDataSubject;
 
   /// No description provided for @settings_exportDataFailed.
@@ -2891,7 +2891,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_defaultUserName.
   ///
   /// In en, this message translates to:
-  /// **'AuraMap User'**
+  /// **'Inside Me User'**
   String get profile_defaultUserName;
 
   /// No description provided for @profile_birthDate.

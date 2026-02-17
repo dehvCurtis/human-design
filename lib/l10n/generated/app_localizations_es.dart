@@ -9,7 +9,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appName => 'AuraMap';
+  String get appName => 'Inside Me';
 
   @override
   String get common_save => 'Guardar';
@@ -330,7 +330,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get auth_calculateMyChart => 'Calcular Mi Carta';
 
   @override
-  String get onboarding_welcome => 'Bienvenido a AuraMap';
+  String get onboarding_welcome => 'Bienvenido a Inside Me';
 
   @override
   String get onboarding_welcomeSubtitle => 'Descubre tu plano energético único';
@@ -1394,11 +1394,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get settings_feedbackSubject =>
-      'Retroalimentación de la Aplicación AuraMap';
+      'Retroalimentación de la Aplicación Inside Me';
 
   @override
   String get settings_feedbackBody =>
-      'Hola,\n\nMe gustaría compartir la siguiente retroalimentación sobre AuraMap:\n\n';
+      'Hola,\n\nMe gustaría compartir la siguiente retroalimentación sobre Inside Me:\n\n';
 
   @override
   String get auth_newPassword => 'Nueva Contraseña';
@@ -1424,7 +1424,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settings_exportingData => 'Preparando tu exportación de datos...';
 
   @override
-  String get settings_exportDataSubject => 'AuraMap - Exportación de Mis Datos';
+  String get settings_exportDataSubject =>
+      'Inside Me - Exportación de Mis Datos';
 
   @override
   String get settings_exportDataFailed =>
@@ -1507,7 +1508,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get profile_loadFailed => 'Error al cargar perfil';
 
   @override
-  String get profile_defaultUserName => 'Usuario de AuraMap';
+  String get profile_defaultUserName => 'Usuario de Inside Me';
 
   @override
   String get profile_birthDate => 'Fecha';

@@ -134,7 +134,7 @@ class _FeedScreenState extends ConsumerState<FeedScreen> {
 
     // Create share text with post preview
     final shareText = '''
-${post.userName} shared on Human Design App:
+${post.userName} shared on Inside Me: Human Design:
 
 "${post.content.length > 200 ? '${post.content.substring(0, 200)}...' : post.content}"
 

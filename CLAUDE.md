@@ -1,4 +1,4 @@
-# Human Design App - Claude Agent Guide
+# Inside Me: Human Design - Claude Agent Guide
 
 This document provides context for Claude Code to work effectively with this Flutter Human Design application.
 

@@ -6,13 +6,13 @@ class AppConfig {
   AppConfig._();
 
   /// App name
-  static const String appName = 'AuraMap';
+  static const String appName = 'Inside Me';
 
   /// App version (should match pubspec.yaml)
   static const String appVersion = '1.0.0';
 
   /// App URL for deep links and sharing
-  static const String appUrl = 'https://app.humandesign.com';
+  static const String appUrl = 'https://dehvcurtis.github.io/inside-me-human-design';
 
   /// Load environment variables from .env file
   /// Call this before accessing any environment-dependent config
@@ -87,7 +87,7 @@ class AppConfig {
   static const String aiChatFunctionName = 'ai-chat';
 
   /// Premium entitlement ID
-  static const String premiumEntitlementId = 'AuraMap Pro';
+  static const String premiumEntitlementId = 'Inside Me Pro';
 
   /// Ephemeris files path (relative to assets)
   static const String ephemerisPath = 'assets/ephe';

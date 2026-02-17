@@ -271,7 +271,7 @@ class DreamJournalScreen extends ConsumerWidget {
                         child: OutlinedButton.icon(
                           onPressed: () {
                             final text =
-                                'My Dream:\n${entry.content}\n\nAI Interpretation:\n${entry.aiInterpretation!}\n\nShared from Human Design App';
+                                'My Dream:\n${entry.content}\n\nAI Interpretation:\n${entry.aiInterpretation!}\n\nShared from Inside Me: Human Design';
                             SharePlus.instance.share(ShareParams(text: text));
                           },
                           icon: const Icon(Icons.share_outlined, size: 18),
