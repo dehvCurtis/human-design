@@ -150,12 +150,12 @@ class SettingsScreen extends ConsumerWidget {
           _SettingsTile(
             icon: Icons.privacy_tip_outlined,
             title: l10n.settings_privacyPolicy,
-            onTap: () => _openUrl('${AppConfig.appUrl}/privacy'),
+            onTap: () => _openUrl('${AppConfig.appUrl}/privacy-policy'),
           ),
           _SettingsTile(
             icon: Icons.description_outlined,
             title: l10n.settings_terms,
-            onTap: () => _openUrl('${AppConfig.appUrl}/terms'),
+            onTap: () => _openUrl('${AppConfig.appUrl}/terms-of-service'),
           ),
           _SettingsTile(
             icon: Icons.download_outlined,
