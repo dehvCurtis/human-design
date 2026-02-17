@@ -1,10 +1,10 @@
-# AuraMap Pre-Launch Checklist
+# Inside Me Pre-Launch Checklist
 
 ## Subscription & Payments
 
 - [ ] Create Apple Developer account (if not done)
 - [ ] Create Google Play Developer account ($25 fee, if not done)
-- [ ] **App Store Connect**: Create subscription group "AuraMap Premium"
+- [ ] **App Store Connect**: Create subscription group "Inside Me Premium"
   - [ ] Add product `premium_monthly` — $9.99/month
   - [ ] Add product `premium_yearly` — $79.99/year
 - [ ] **Google Play Console**: Create matching subscriptions
@@ -63,7 +63,7 @@
 ## App Store Connect (iOS)
 
 - [ ] Create app in App Store Connect
-- [ ] App name: AuraMap
+- [ ] App name: Inside Me
 - [ ] Set primary category (Lifestyle or Entertainment)
 - [ ] Write app description and keywords
 - [ ] Upload app icon (1024x1024)

@@ -1,4 +1,4 @@
-# Human Design App
+# Inside Me: Human Design
 
 A comprehensive Flutter mobile application for Human Design chart generation, learning, and social interaction.
 
@@ -21,7 +21,8 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 ### Social Platform
 - **3-Tab Social Screen** - Thoughts, Discover, Groups
 - **Thoughts Feed** - Share insights, reflections, transit observations, and achievements
-- **Following System** - Twitter-style one-way following (replaced mutual friends system)
+- **Dream Sharing** - Share dream journal entries with AI interpretations to the feed or externally
+- **Following System** - Twitter-style one-way following
 - **Discovery & Matching** - Find users by HD type, profile, authority with compatibility scoring
 - **User Profiles** - Privacy badges, clickable followers/following lists, thoughts section
 - **Comments System** - Reply to comments, like comments, delete own comments, nested replies
@@ -34,12 +35,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **19 Pre-defined Quizzes** - Types, Centers, Authorities, Profiles, Definitions, Gates, Channels
 - **Progress Tracking** - Track your learning journey and quiz scores
 - **Content Library** - Articles, guides, and educational materials
-  - Bookmark content for later reading
-  - Like and share content with others
 - **Mentorship Program** - Connect with HD practitioners
-  - Set up mentor or mentee profile
-  - Define expertise areas and experience
-  - Request mentorship from verified mentors
 
 ### Gamification
 - **Points & Levels** - Earn points for engagement and level up
@@ -54,23 +50,20 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 
 ### AI Assistant
 - **Ask AI About Your Chart** - Personalized AI chat powered by Claude, Gemini, or GPT
-- **Chart-Aware Responses** - AI receives your chart data (type, centers, gates, channels) for personalized insights
+- **Chart-Aware Responses** - AI receives your chart data for personalized insights
 - **Conversation History** - Save and resume AI conversations
-- **Multi-Provider Support** - Claude (default), Gemini, OpenAI backends
-- **Usage Quota** - 5 free messages/month, unlimited for premium users
-- **Message Packs** - One-time purchasable packs (3, 5, or 10 messages) for non-subscribers
 - **AI Transit Insights** - Daily personalized interpretation of how transits affect your chart
 - **AI Chart Reading** - Comprehensive multi-paragraph chart reading with PDF export
 - **AI Compatibility Reading** - AI-powered analysis of composite charts between two people
 - **AI Dream Interpretation** - Dream journal with HD-lens AI interpretation using chart + transits
 - **AI Journaling Prompts** - Daily personalized journaling prompts based on chart and transits
+- **Usage Quota** - Free messages/month, unlimited for premium users
 
 ### Premium Features
 - **Subscription Tiers** - Free, Monthly, and Yearly plans
 - **Extended Sharing** - Unlimited chart exports and shares
 - **Advanced Reports** - Detailed compatibility and transit reports
 - **Unlimited AI Chat** - No message limits for premium subscribers
-- **Message Packs** - Available for free users as an alternative to subscribing
 
 ## Tech Stack
 
@@ -91,8 +84,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 ### Prerequisites
 
 - Flutter SDK ^3.8.0
-- Xcode (for iOS development)
-- Android Studio (for Android development)
+- Xcode (for iOS/macOS development)
 - Supabase project (for backend)
 
 ### Installation
@@ -108,17 +100,22 @@ cd human-design
 flutter pub get
 ```
 
-3. Configure Supabase:
-   - Create a Supabase project
-   - Run migrations from `supabase/migrations/`
-   - Update `lib/core/config/app_config.dart` with your credentials
+3. Configure environment:
+   - Copy `.env.example` to `.env`
+   - Add your Supabase URL and Anon Key
+   - Add RevenueCat API keys (optional)
 
-4. Generate localizations:
+4. Run Supabase migrations:
+```bash
+supabase db push
+```
+
+5. Generate localizations:
 ```bash
 flutter gen-l10n
 ```
 
-5. Run the app:
+6. Run the app:
 ```bash
 flutter run
 ```
@@ -134,10 +131,11 @@ lib/
 │   └── theme/            # Design system (colors, typography)
 ├── features/
 │   ├── auth/             # Authentication (email, Apple, Google)
-│   ├── ai_assistant/      # AI chat (Claude/Gemini/OpenAI)
+│   ├── ai_assistant/     # AI chat (Claude/Gemini/OpenAI)
 │   ├── chart/            # Chart calculation & bodygraph display
 │   ├── composite/        # Relationship charts
 │   ├── discovery/        # User discovery & matching
+│   ├── dream_journal/    # Dream journal & AI interpretation
 │   ├── ephemeris/        # Swiss Ephemeris integration
 │   ├── feed/             # Content feed & posts
 │   ├── gamification/     # Points, badges, challenges, leaderboards
@@ -150,7 +148,6 @@ lib/
 │   ├── profile/          # User profile management
 │   ├── quiz/             # Quiz system & question generators
 │   ├── settings/         # App settings & preferences
-│   ├── dream_journal/    # Dream journal & journaling
 │   ├── sharing/          # Chart export & sharing
 │   ├── social/           # Friends & groups
 │   ├── stories/          # 24h ephemeral content
@@ -188,14 +185,18 @@ The app calculates accurate Human Design charts verified against reference sites
 ### Planetary Bodies Tracked
 Sun, Earth, Moon, North Node, South Node, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto
 
-## Documentation
+## Testing
 
-- [Architecture](docs/ARCHITECTURE.md) - System design and patterns
-- [API Reference](docs/API.md) - Provider and repository documentation
-- [Changelog](docs/CHANGELOG.md) - Version history and updates
-- [Development Guide](docs/DEVELOPMENT.md) - Setup and contribution guidelines
-- [Standards](docs/STANDARDS.md) - Code style and conventions
-- [Test Users](docs/TEST_USERS.md) - Test accounts for social feature development
+```bash
+# Run all tests (113 passing)
+flutter test
+
+# Run specific test suites
+flutter test test/calculate_chart_test.dart    # Type, Authority, Definition
+flutter test test/gate_wheel_offset_test.dart  # HD wheel offset verification
+flutter test test/feed_post_test.dart          # Post model & enums
+flutter test test/ai_usage_test.dart           # AI quota & usage
+```
 
 ## Key Commands
 
@@ -215,26 +216,14 @@ flutter gen-l10n
 # Build for iOS
 flutter build ios
 
-# Build for Android
-flutter build apk
+# Build for macOS
+flutter build macos
 ```
 
-## Testing
+## Links
 
-### Test Accounts
-
-For testing social features, use these pre-configured test accounts:
-
-| Account | Email | Password |
-|---------|-------|----------|
-| Main | `test@humandesign.app` | *(your password)* |
-| Alice (Manifestor) | `alice@test.hd` | `TestPass123` |
-| Bob (Generator) | `bob@test.hd` | `TestPass123` |
-| Carol (MG) | `carol@test.hd` | `TestPass123` |
-| David (Projector) | `david@test.hd` | `TestPass123` |
-| Emma (Reflector) | `emma@test.hd` | `TestPass123` |
-
-See [Test Users](docs/TEST_USERS.md) for complete documentation including pre-configured friendships, follows, and posts.
+- [Privacy Policy](https://dehvcurtis.github.io/inside-me-human-design/privacy-policy)
+- [Terms of Service](https://dehvcurtis.github.io/inside-me-human-design/terms-of-service)
 
 ## License
 
