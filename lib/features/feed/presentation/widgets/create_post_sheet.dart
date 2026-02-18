@@ -418,6 +418,12 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     for (final image in _selectedImages) {
       final bytes = await image.readAsBytes();
 
+      // Validate file size (max 10 MB)
+      const maxImageSizeBytes = 10 * 1024 * 1024;
+      if (bytes.length > maxImageSizeBytes) {
+        throw StateError('Image exceeds maximum size of 10 MB');
+      }
+
       // Validate MIME type using header bytes (prevents extension spoofing)
       final validationError = _validateImageMimeType(bytes, image.path);
       if (validationError != null) {

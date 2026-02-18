@@ -353,7 +353,7 @@ class DiscoveryRepository {
     // Execute query with ordering and pagination
     final response = await query
         .order(orderColumn, ascending: ascending)
-        .range(offset, offset + limit);
+        .range(offset, offset + limit - 1);
 
     // Get follow relationships
     final userIds = (response as List)
@@ -404,7 +404,7 @@ class DiscoveryRepository {
           is_public, show_chart_publicly, follower_count, following_count
         ''')
         .eq('is_public', true)
-        .or('name.ilike.%${_sanitizeSearchQuery(query)}%,email.ilike.%${_sanitizeSearchQuery(query)}%');
+        .ilike('name', '%${_sanitizeSearchQuery(query)}%');
 
     // Apply filter before transform operations
     if (currentUserId != null) {

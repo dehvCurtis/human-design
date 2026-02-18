@@ -112,9 +112,16 @@ class SharingRepository {
     return (response as List).map((json) => SharedLink.fromJson(json)).toList();
   }
 
-  /// Revoke a share link
+  /// Revoke a share link (ownership enforced by filtering on shared_by)
   Future<void> revokeShareLink(String shareId) async {
-    await _client.from('shares').delete().eq('id', shareId);
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('shares')
+        .delete()
+        .eq('id', shareId)
+        .eq('shared_by', userId);
   }
 
   /// Record share link view

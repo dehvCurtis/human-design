@@ -77,6 +77,10 @@ class AuthRepository {
   ///
   /// Returns true if state matches, false otherwise.
   /// Always clears the pending state after validation.
+  ///
+  /// Note: With PKCE auth flow enabled (AuthFlowType.pkce), CSRF protection
+  /// is already provided by the code_verifier/code_challenge exchange.
+  /// This state parameter provides additional defense-in-depth.
   bool validateOAuthState(String? returnedState) {
     final isValid = _pendingOAuthState != null &&
         returnedState != null &&

@@ -50,9 +50,16 @@ class SocialRepository {
         .toList();
   }
 
-  /// Revoke a share
+  /// Revoke a share (ownership enforced by filtering on shared_by)
   Future<void> revokeShare(String shareId) async {
-    await _client.from('shares').delete().eq('id', shareId);
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('shares')
+        .delete()
+        .eq('id', shareId)
+        .eq('shared_by', userId);
   }
 
   // ==================== Comments ====================
@@ -117,11 +124,14 @@ class SocialRepository {
     return Comment.fromJson(response);
   }
 
-  /// Update a comment
+  /// Update a comment (ownership enforced by filtering on user_id)
   Future<void> updateComment({
     required String commentId,
     required String content,
   }) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
     if (content.length > maxCommentLength) {
       throw ArgumentError(
         'Comment exceeds maximum length of $maxCommentLength characters',
@@ -131,12 +141,19 @@ class SocialRepository {
     await _client.from('comments').update({
       'content': content,
       'updated_at': DateTime.now().toIso8601String(),
-    }).eq('id', commentId);
+    }).eq('id', commentId).eq('user_id', userId);
   }
 
-  /// Delete a comment
+  /// Delete a comment (ownership enforced by filtering on user_id)
   Future<void> deleteComment(String commentId) async {
-    await _client.from('comments').delete().eq('id', commentId);
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('comments')
+        .delete()
+        .eq('id', commentId)
+        .eq('user_id', userId);
   }
 
   // ==================== Groups ====================
@@ -221,10 +238,29 @@ class SocialRepository {
   }
 
   /// Remove member from group
+  ///
+  /// Only the user themselves or a group admin can remove members.
   Future<void> removeGroupMember({
     required String groupId,
     required String userId,
   }) async {
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null) throw StateError('User not authenticated');
+
+    // Allow self-removal, or require admin status
+    if (userId != currentUserId) {
+      final adminCheck = await _client
+          .from('group_members')
+          .select('role')
+          .eq('group_id', groupId)
+          .eq('user_id', currentUserId)
+          .maybeSingle();
+
+      if (adminCheck == null || adminCheck['role'] != 'admin') {
+        throw StateError('Only group admins can remove other members');
+      }
+    }
+
     await _client
         .from('group_members')
         .delete()
