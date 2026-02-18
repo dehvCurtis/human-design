@@ -265,12 +265,15 @@ class ReactionNotifier extends Notifier<Map<String, ReactionType?>> {
 
   /// Toggle reaction on a post
   Future<void> toggleReaction(String postId, ReactionType reactionType, ReactionType? currentReaction) async {
-    // Optimistic update
+    // Optimistic update — use bracket notation for dynamic map key
+    final newState = Map<String, ReactionType?>.from(state);
     if (currentReaction == reactionType) {
-      state = {...state, postId: null};
+      newState[postId] = null;
+      state = newState;
       await _repository.removeReaction(postId);
     } else {
-      state = {...state, postId: reactionType};
+      newState[postId] = reactionType;
+      state = newState;
       await _repository.addReaction(postId, reactionType);
     }
 

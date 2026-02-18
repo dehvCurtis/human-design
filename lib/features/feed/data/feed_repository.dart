@@ -184,13 +184,21 @@ class FeedRepository {
     return Post.fromJson(response);
   }
 
-  /// Update a post
+  /// Update a post (ownership enforced by filtering on user_id + RLS)
   Future<Post> updatePost({
     required String postId,
     String? content,
     PostVisibility? visibility,
     bool? isPinned,
   }) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Validate content length on update (same as create)
+    if (content != null && content.length > maxPostLength) {
+      throw ArgumentError('Post content exceeds $maxPostLength characters');
+    }
+
     final updates = <String, dynamic>{};
     if (content != null) updates['content'] = content;
     if (visibility != null) updates['visibility'] = visibility.name;
@@ -200,6 +208,7 @@ class FeedRepository {
         .from('posts')
         .update(updates)
         .eq('id', postId)
+        .eq('user_id', userId)
         .select('''
           *,
           user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
@@ -209,9 +218,16 @@ class FeedRepository {
     return Post.fromJson(response);
   }
 
-  /// Delete a post
+  /// Delete a post (ownership enforced by filtering on user_id + RLS)
   Future<void> deletePost(String postId) async {
-    await _client.from('posts').delete().eq('id', postId);
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('posts')
+        .delete()
+        .eq('id', postId)
+        .eq('user_id', userId);
   }
 
   // ==================== Reactions ====================
@@ -368,15 +384,23 @@ class FeedRepository {
     return PostComment.fromJson(response);
   }
 
-  /// Update a comment
+  /// Update a comment (ownership enforced by filtering on user_id + RLS)
   Future<PostComment> updateComment({
     required String commentId,
     required String content,
   }) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    if (content.length > maxCommentLength) {
+      throw ArgumentError('Comment exceeds $maxCommentLength characters');
+    }
+
     final response = await _client
         .from('post_comments')
         .update({'content': content})
         .eq('id', commentId)
+        .eq('user_id', userId)
         .select('''
           *,
           user:profiles!post_comments_user_id_fkey(id, name, avatar_url)
@@ -386,9 +410,16 @@ class FeedRepository {
     return PostComment.fromJson(response);
   }
 
-  /// Delete a comment
+  /// Delete a comment (ownership enforced by filtering on user_id + RLS)
   Future<void> deleteComment(String commentId) async {
-    await _client.from('post_comments').delete().eq('id', commentId);
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('post_comments')
+        .delete()
+        .eq('id', commentId)
+        .eq('user_id', userId);
   }
 
   // ==================== Comment Reactions ====================

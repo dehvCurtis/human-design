@@ -101,6 +101,12 @@ class StoriesRepository {
     return getUserStories(userId);
   }
 
+  /// Maximum story content length
+  static const int maxStoryContentLength = 2000;
+
+  /// Maximum story reply length
+  static const int maxReplyLength = 1000;
+
   /// Create a new story
   Future<Story> createStory({
     String? content,
@@ -113,6 +119,10 @@ class StoriesRepository {
   }) async {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
+
+    if (content != null && content.length > maxStoryContentLength) {
+      throw ArgumentError('Story content exceeds $maxStoryContentLength characters');
+    }
 
     final response = await _client.from('stories').insert({
       'user_id': userId,
@@ -131,9 +141,16 @@ class StoriesRepository {
     return Story.fromJson(response);
   }
 
-  /// Delete a story
+  /// Delete a story (ownership enforced by filtering on user_id + RLS)
   Future<void> deleteStory(String storyId) async {
-    await _client.from('stories').delete().eq('id', storyId);
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('stories')
+        .delete()
+        .eq('id', storyId)
+        .eq('user_id', userId);
   }
 
   // ==================== Views ====================
@@ -256,6 +273,10 @@ class StoriesRepository {
   Future<StoryReply> replyToStory(String storyId, String content) async {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
+
+    if (content.length > maxReplyLength) {
+      throw ArgumentError('Reply exceeds $maxReplyLength characters');
+    }
 
     final response = await _client.from('story_replies').insert({
       'story_id': storyId,

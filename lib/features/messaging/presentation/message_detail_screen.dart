@@ -82,11 +82,34 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
             child: Text(l10n.common_cancel),
           ),
           FilledButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(dialogContext);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.messages_userBlocked)),
-              );
+              try {
+                // Get the other user's ID from the conversation
+                final conversation = ref.read(conversationProvider(widget.conversationId)).value;
+                final currentUserId = ref.read(currentUserIdProvider);
+                final otherUser = conversation?.participants
+                    .where((p) => p.id != currentUserId)
+                    .firstOrNull;
+
+                if (otherUser != null) {
+                  final repo = ref.read(messagingRepositoryProvider);
+                  await repo.blockUser(otherUser.id);
+                }
+
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.messages_userBlocked)),
+                  );
+                  this.context.pop();
+                }
+              } catch (e) {
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(ErrorHandler.getUserMessage(e))),
+                  );
+                }
+              }
             },
             child: Text(l10n.messages_block),
           ),
@@ -109,12 +132,25 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            onPressed: () {
+            onPressed: () async {
               Navigator.pop(dialogContext);
-              this.context.pop(); // Go back to conversations list
-              ScaffoldMessenger.of(this.context).showSnackBar(
-                SnackBar(content: Text(l10n.messages_conversationDeleted)),
-              );
+              try {
+                final repo = ref.read(messagingRepositoryProvider);
+                await repo.deleteConversation(widget.conversationId);
+
+                if (mounted) {
+                  this.context.pop();
+                  ScaffoldMessenger.of(this.context).showSnackBar(
+                    SnackBar(content: Text(l10n.messages_conversationDeleted)),
+                  );
+                }
+              } catch (e) {
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(ErrorHandler.getUserMessage(e))),
+                  );
+                }
+              }
             },
             child: Text(l10n.common_delete),
           ),

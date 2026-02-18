@@ -308,6 +308,73 @@ class MessagingRepository {
         .subscribe();
   }
 
+  // ==================== Block & Delete ====================
+
+  /// Block a user (prevents messaging and hides from discovery)
+  Future<void> blockUser(String blockedUserId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client.from('blocked_users').upsert({
+      'user_id': userId,
+      'blocked_user_id': blockedUserId,
+    });
+  }
+
+  /// Unblock a user
+  Future<void> unblockUser(String blockedUserId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client
+        .from('blocked_users')
+        .delete()
+        .eq('user_id', userId)
+        .eq('blocked_user_id', blockedUserId);
+  }
+
+  /// Delete a conversation (soft-delete: removes current user from participants)
+  ///
+  /// Note: This removes the conversation from the user's view. If both
+  /// participants delete, the conversation and messages become orphaned
+  /// and will be cleaned up by scheduled jobs.
+  Future<void> deleteConversation(String conversationId) async {
+    final userId = _currentUserId;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Verify participant membership before deleting
+    final conversation = await _client
+        .from('conversations')
+        .select('participant_ids')
+        .eq('id', conversationId)
+        .contains('participant_ids', [userId])
+        .maybeSingle();
+
+    if (conversation == null) {
+      throw StateError('Conversation not found or not a participant');
+    }
+
+    // Remove user from participants
+    final participantIds =
+        (conversation['participant_ids'] as List<dynamic>).cast<String>();
+    participantIds.remove(userId);
+
+    if (participantIds.isEmpty) {
+      // Last participant — delete the conversation and messages
+      await _client
+          .from('direct_messages')
+          .delete()
+          .eq('conversation_id', conversationId);
+      await _client.from('conversations').delete().eq('id', conversationId);
+    } else {
+      // Just remove this user from participants
+      await _client
+          .from('conversations')
+          .update({'participant_ids': participantIds})
+          .eq('id', conversationId);
+    }
+  }
+
   // ==================== Helper Methods ====================
 
   Future<int> _getUnreadCount(String conversationId) async {
