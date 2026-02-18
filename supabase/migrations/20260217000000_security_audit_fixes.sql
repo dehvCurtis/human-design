@@ -87,20 +87,21 @@ END $$;
 -- 4. CRITICAL: Fix increment_event_posts — no authorization
 -- ============================================================================
 
-CREATE OR REPLACE FUNCTION public.increment_event_posts(p_event_id uuid)
+DROP FUNCTION IF EXISTS public.increment_event_posts(uuid);
+CREATE OR REPLACE FUNCTION public.increment_event_posts(event_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   -- Validate caller has a post linked to this event
   IF NOT EXISTS (
-    SELECT 1 FROM public.transit_event_posts
-    WHERE event_id = p_event_id AND user_id = auth.uid()
+    SELECT 1 FROM public.transit_event_posts tep
+    WHERE tep.event_id = increment_event_posts.event_id AND tep.user_id = auth.uid()
   ) THEN
     RAISE EXCEPTION 'No post linked to this event';
   END IF;
 
   UPDATE public.transit_events
   SET post_count = post_count + 1
-  WHERE id = p_event_id;
+  WHERE id = increment_event_posts.event_id;
 END;
 $$;
 
@@ -108,13 +109,14 @@ $$;
 -- 5. HIGH: Fix increment_poll_option_count — vote inflation
 -- ============================================================================
 
-CREATE OR REPLACE FUNCTION public.increment_poll_option_count(p_option_id uuid)
+DROP FUNCTION IF EXISTS public.increment_poll_option_count(uuid);
+CREATE OR REPLACE FUNCTION public.increment_poll_option_count(option_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   -- Only increment if caller actually has a vote for this option
   IF NOT EXISTS (
-    SELECT 1 FROM public.poll_votes
-    WHERE option_id = p_option_id AND user_id = auth.uid()
+    SELECT 1 FROM public.poll_votes pv
+    WHERE pv.option_id = increment_poll_option_count.option_id AND pv.user_id = auth.uid()
   ) THEN
     RAISE EXCEPTION 'No vote found for this option';
   END IF;
@@ -124,14 +126,14 @@ BEGIN
     SELECT 1 FROM public.poll_options po
     JOIN public.story_polls sp ON sp.id = po.poll_id
     JOIN public.stories s ON s.id = sp.story_id
-    WHERE po.id = p_option_id AND s.expires_at > NOW()
+    WHERE po.id = increment_poll_option_count.option_id AND s.expires_at > NOW()
   ) THEN
     RAISE EXCEPTION 'Story has expired';
   END IF;
 
   UPDATE public.poll_options
   SET vote_count = vote_count + 1
-  WHERE id = p_option_id;
+  WHERE id = increment_poll_option_count.option_id;
 END;
 $$;
 
@@ -185,9 +187,10 @@ $$;
 
 CREATE OR REPLACE FUNCTION public.get_friend_activities(
   current_user_id uuid,
-  activity_limit integer DEFAULT 50
+  limit_count integer DEFAULT 50,
+  offset_count integer DEFAULT 0
 )
-RETURNS SETOF public.activities
+RETURNS SETOF JSON
 LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   -- Override parameter with actual caller to prevent enumeration
@@ -198,13 +201,30 @@ BEGIN
   END IF;
 
   RETURN QUERY
-  SELECT a.* FROM public.activities a
+  SELECT json_build_object(
+      'id', a.id,
+      'user_id', a.user_id,
+      'activity_type', a.activity_type,
+      'target_id', a.target_id,
+      'target_name', a.target_name,
+      'metadata', a.metadata,
+      'created_at', a.created_at,
+      'user', json_build_object(
+          'id', p.id,
+          'name', p.name,
+          'avatar_url', p.avatar_url,
+          'hd_type', p.hd_type
+      )
+  )
+  FROM public.activities a
+  JOIN public.profiles p ON p.id = a.user_id
   WHERE a.user_id IN (
     SELECT following_id FROM public.user_follows
     WHERE follower_id = current_user_id
   )
   ORDER BY a.created_at DESC
-  LIMIT activity_limit;
+  LIMIT limit_count
+  OFFSET offset_count;
 END;
 $$;
 
@@ -213,7 +233,7 @@ $$;
 -- ============================================================================
 
 CREATE OR REPLACE FUNCTION public.get_following_ids(user_id uuid)
-RETURNS SETOF uuid
+RETURNS UUID[]
 LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   -- Override parameter with actual caller
@@ -223,9 +243,10 @@ BEGIN
     RAISE EXCEPTION 'Not authenticated';
   END IF;
 
-  RETURN QUERY
-  SELECT following_id FROM public.user_follows
-  WHERE follower_id = user_id;
+  RETURN ARRAY(
+    SELECT following_id FROM public.user_follows
+    WHERE follower_id = user_id
+  );
 END;
 $$;
 
@@ -233,7 +254,8 @@ $$;
 -- 9. HIGH: Fix hashtag counter functions
 -- ============================================================================
 
-CREATE OR REPLACE FUNCTION public.increment_hashtag_count(p_hashtag_id uuid)
+DROP FUNCTION IF EXISTS public.increment_hashtag_count(uuid);
+CREATE OR REPLACE FUNCTION public.increment_hashtag_count(hashtag_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   IF auth.uid() IS NULL THEN
@@ -244,23 +266,24 @@ BEGIN
   IF NOT EXISTS (
     SELECT 1 FROM public.post_hashtags ph
     JOIN public.posts p ON p.id = ph.post_id
-    WHERE ph.hashtag_id = p_hashtag_id AND p.user_id = auth.uid()
+    WHERE ph.hashtag_id = increment_hashtag_count.hashtag_id AND p.user_id = auth.uid()
   ) THEN
     RAISE EXCEPTION 'No post with this hashtag';
   END IF;
 
-  UPDATE public.hashtags SET use_count = use_count + 1 WHERE id = p_hashtag_id;
+  UPDATE public.hashtags SET use_count = use_count + 1 WHERE id = increment_hashtag_count.hashtag_id;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION public.decrement_hashtag_count(p_hashtag_id uuid)
+DROP FUNCTION IF EXISTS public.decrement_hashtag_count(uuid);
+CREATE OR REPLACE FUNCTION public.decrement_hashtag_count(hashtag_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   IF auth.uid() IS NULL THEN
     RAISE EXCEPTION 'Not authenticated';
   END IF;
 
-  UPDATE public.hashtags SET use_count = GREATEST(use_count - 1, 0) WHERE id = p_hashtag_id;
+  UPDATE public.hashtags SET use_count = GREATEST(use_count - 1, 0) WHERE id = decrement_hashtag_count.hashtag_id;
 END;
 $$;
 
@@ -268,7 +291,8 @@ $$;
 -- 10. HIGH: Fix expert follower count functions
 -- ============================================================================
 
-CREATE OR REPLACE FUNCTION public.increment_expert_follower_count(p_expert_id uuid)
+DROP FUNCTION IF EXISTS public.increment_expert_follower_count(uuid);
+CREATE OR REPLACE FUNCTION public.increment_expert_follower_count(target_expert_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   IF auth.uid() IS NULL THEN
@@ -277,24 +301,25 @@ BEGIN
 
   -- Verify caller follows this expert
   IF NOT EXISTS (
-    SELECT 1 FROM public.expert_followers
-    WHERE expert_id = p_expert_id AND user_id = auth.uid()
+    SELECT 1 FROM public.expert_follows ef
+    WHERE ef.expert_id = target_expert_id AND ef.user_id = auth.uid()
   ) THEN
     RAISE EXCEPTION 'Not following this expert';
   END IF;
 
-  UPDATE public.experts SET follower_count = follower_count + 1 WHERE id = p_expert_id;
+  UPDATE public.experts SET follower_count = follower_count + 1 WHERE id = target_expert_id;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION public.decrement_expert_follower_count(p_expert_id uuid)
+DROP FUNCTION IF EXISTS public.decrement_expert_follower_count(uuid);
+CREATE OR REPLACE FUNCTION public.decrement_expert_follower_count(target_expert_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   IF auth.uid() IS NULL THEN
     RAISE EXCEPTION 'Not authenticated';
   END IF;
 
-  UPDATE public.experts SET follower_count = GREATEST(follower_count - 1, 0) WHERE id = p_expert_id;
+  UPDATE public.experts SET follower_count = GREATEST(follower_count - 1, 0) WHERE id = target_expert_id;
 END;
 $$;
 
@@ -302,29 +327,47 @@ $$;
 -- 11. HIGH: Fix increment_team_challenge_progress — no auth check
 -- ============================================================================
 
+DROP FUNCTION IF EXISTS public.increment_team_challenge_progress(uuid, uuid, integer);
 CREATE OR REPLACE FUNCTION public.increment_team_challenge_progress(
-  p_team_id uuid,
-  p_challenge_id uuid,
-  p_increment integer DEFAULT 1
+  target_team_id uuid,
+  target_challenge_id uuid,
+  increment integer DEFAULT 1
 )
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
+DECLARE
+  target_value INTEGER;
 BEGIN
   -- Validate caller is a team member
   IF NOT EXISTS (
-    SELECT 1 FROM public.team_members
-    WHERE team_id = p_team_id AND user_id = auth.uid()
+    SELECT 1 FROM public.team_members tm
+    WHERE tm.team_id = target_team_id AND tm.user_id = auth.uid()
   ) THEN
     RAISE EXCEPTION 'Not a member of this team';
   END IF;
 
   -- Cap increment
-  IF p_increment < 0 OR p_increment > 10 THEN
+  IF increment_team_challenge_progress.increment < 0 OR increment_team_challenge_progress.increment > 10 THEN
     RAISE EXCEPTION 'Invalid increment amount';
   END IF;
 
-  UPDATE public.team_challenges
-  SET current_progress = current_progress + p_increment
-  WHERE team_id = p_team_id AND challenge_id = p_challenge_id;
+  -- Get target value for the challenge
+  SELECT gc.target_value INTO target_value
+  FROM public.group_challenges gc
+  WHERE gc.id = target_challenge_id;
+
+  -- Update progress
+  UPDATE public.team_challenge_progress
+  SET progress = progress + increment_team_challenge_progress.increment,
+      updated_at = NOW(),
+      is_completed = CASE
+          WHEN progress + increment_team_challenge_progress.increment >= target_value THEN true
+          ELSE is_completed
+      END,
+      completed_at = CASE
+          WHEN progress + increment_team_challenge_progress.increment >= target_value AND completed_at IS NULL THEN NOW()
+          ELSE completed_at
+      END
+  WHERE team_id = target_team_id AND challenge_id = target_challenge_id;
 END;
 $$;
 
@@ -423,7 +466,8 @@ CREATE POLICY "Users can reply to non-expired stories"
 -- 17. MEDIUM: Add learning path counter auth checks
 -- ============================================================================
 
-CREATE OR REPLACE FUNCTION public.increment_path_enrollment_count(p_path_id uuid)
+DROP FUNCTION IF EXISTS public.increment_path_enrollment_count(uuid);
+CREATE OR REPLACE FUNCTION public.increment_path_enrollment_count(target_path_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   IF auth.uid() IS NULL THEN
@@ -432,17 +476,18 @@ BEGIN
 
   -- Verify caller is enrolled
   IF NOT EXISTS (
-    SELECT 1 FROM public.user_learning_paths
-    WHERE learning_path_id = p_path_id AND user_id = auth.uid()
+    SELECT 1 FROM public.learning_path_progress lpp
+    WHERE lpp.path_id = target_path_id AND lpp.user_id = auth.uid()
   ) THEN
     RAISE EXCEPTION 'Not enrolled in this path';
   END IF;
 
-  UPDATE public.learning_paths SET enrollment_count = enrollment_count + 1 WHERE id = p_path_id;
+  UPDATE public.learning_paths SET enrollment_count = enrollment_count + 1 WHERE id = target_path_id;
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION public.increment_path_completion_count(p_path_id uuid)
+DROP FUNCTION IF EXISTS public.increment_path_completion_count(uuid);
+CREATE OR REPLACE FUNCTION public.increment_path_completion_count(target_path_id uuid)
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER AS $$
 BEGIN
   IF auth.uid() IS NULL THEN
@@ -451,12 +496,12 @@ BEGIN
 
   -- Verify caller completed the path
   IF NOT EXISTS (
-    SELECT 1 FROM public.user_learning_paths
-    WHERE learning_path_id = p_path_id AND user_id = auth.uid() AND is_completed = true
+    SELECT 1 FROM public.learning_path_progress lpp
+    WHERE lpp.path_id = target_path_id AND lpp.user_id = auth.uid() AND lpp.is_completed = true
   ) THEN
     RAISE EXCEPTION 'Path not completed';
   END IF;
 
-  UPDATE public.learning_paths SET completion_count = completion_count + 1 WHERE id = p_path_id;
+  UPDATE public.learning_paths SET completion_count = completion_count + 1 WHERE id = target_path_id;
 END;
 $$;
