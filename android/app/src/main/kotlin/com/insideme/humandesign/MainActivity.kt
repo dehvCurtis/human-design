@@ -1,4 +1,4 @@
-package com.humandesign.app
+package com.insideme.humandesign
 
 import io.flutter.embedding.android.FlutterActivity
 

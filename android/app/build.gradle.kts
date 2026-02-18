@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.humandesign.app"
+    namespace = "com.insideme.humandesign"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.humandesign.app"
+        applicationId = "com.insideme.humandesign"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

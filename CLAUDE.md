@@ -201,7 +201,7 @@ flutter build apk
 - ✅ Gracefully optional Firebase (app runs without `flutterfire configure`)
 
 ### Store Readiness ✅
-- ✅ iOS bundle identifier updated (`com.humandesign.app`)
+- ✅ iOS bundle identifier updated (`com.insideme.humandesign`)
 - ✅ iOS PrivacyInfo.xcprivacy manifest (iOS 17+ requirement)
 - ✅ Firebase gracefully optional via `firebaseConfigured` flag
 - ✅ RevenueCat gracefully optional via `revenueCatConfigured` flag

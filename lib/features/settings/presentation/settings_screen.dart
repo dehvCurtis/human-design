@@ -290,7 +290,7 @@ class SettingsScreen extends ConsumerWidget {
   Future<void> _rateApp(BuildContext context) async {
     // TODO: Replace with actual App Store ID after publishing
     const iosAppId = '6450000000'; // Numeric App Store ID (placeholder)
-    const androidPackage = 'com.humandesign.app';
+    const androidPackage = 'com.insideme.humandesign';
 
     final Uri uri;
     if (Platform.isIOS) {
