@@ -130,7 +130,7 @@ lib/
 │   ├── router/           # GoRouter navigation
 │   └── theme/            # Design system (colors, typography)
 ├── features/
-│   ├── auth/             # Authentication (email, Apple, Google)
+│   ├── auth/             # Authentication (email, Apple, Google, Microsoft)
 │   ├── ai_assistant/     # AI chat (Claude/Gemini/OpenAI)
 │   ├── chart/            # Chart calculation & bodygraph display
 │   ├── composite/        # Relationship charts

@@ -2,6 +2,95 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.16] - 2026-02-18
+
+### Added
+
+#### Microsoft Authentication
+- **Microsoft Sign-In** - Added Azure AD OAuth provider for sign-in and sign-up
+  - `signInWithMicrosoft()` method in auth repository using `OAuthProvider.azure`
+  - `MicrosoftSignInButton` widget with custom Microsoft 4-square logo (`_MicrosoftLogo`)
+  - Microsoft button added to both sign-in and sign-up screens
+  - Loading state handling with `_isMicrosoftLoading`
+
+### Changed
+
+#### Title Screen
+- **App Title Updated** - Changed onboarding welcome text from "Welcome to Inside Me" to "Inside Me: Human Design"
+
+#### Localization
+- Added `auth_signUpWithMicrosoft` key to all ARB files
+
+### Technical Details
+
+Files modified:
+- `auth_repository.dart` - Added `signInWithMicrosoft()` method
+- `auth_providers.dart` - Added `signInWithMicrosoft()` to AuthNotifier
+- `oauth_button.dart` - Added `microsoft` to OAuthProvider enum, MicrosoftSignInButton, _MicrosoftLogo, _MicrosoftLogoPainter
+- `sign_in_screen.dart` - Added Microsoft loading state and button
+- `sign_up_screen.dart` - Added Microsoft loading state and button
+- `app_en.arb` - Added auth_signUpWithMicrosoft, updated onboarding_welcome
+
+---
+
+## [0.2.15] - 2026-02-17
+
+### Changed
+
+#### Bundle ID Update
+- **New Bundle ID** - Changed from `com.humandesign.app` to `com.insideme.humandesign`
+  - Updated across iOS, macOS, and Android project configurations
+  - Moved Android Kotlin source directory to match new package name
+  - Updated proguard rules and settings screen references
+
+#### iOS Signing Configuration
+- **Manual Code Signing** - Configured Xcode project for App Store distribution
+  - Distribution certificate: Apple Distribution (AFU44LJQW9)
+  - Provisioning profile: Inside Me App Store Distribution
+  - Manual signing applied to Debug, Release, and Profile build configurations
+
+### Technical Details
+
+Files modified:
+- `ios/Runner.xcodeproj/project.pbxproj` - Bundle ID and manual signing config
+- `macos/Runner.xcodeproj/project.pbxproj` - Bundle ID update
+- `macos/Runner/Configs/AppInfo.xcconfig` - Bundle ID update
+- `android/app/build.gradle.kts` - namespace and applicationId
+- `android/app/src/main/kotlin/` - Moved to `com/insideme/humandesign/`
+- `android/app/proguard-rules.pro` - Updated package reference
+- `lib/features/settings/presentation/settings_screen.dart` - Updated bundle ID reference
+
+---
+
+## [0.2.14] - 2026-02-17
+
+### Fixed
+
+#### Security Audit
+- **Social Media Feature Security** - Comprehensive security audit across social features
+  - Fixed SQL injection vectors in feed, social, and messaging repositories
+  - Added input validation and sanitization for user-generated content
+  - Hardened RLS policies for posts, comments, reactions, stories, and messages
+  - Fixed parameter name mismatches in database functions
+  - Added rate limiting constraints and content length validation
+
+### Technical Details
+
+Files modified:
+- `feed_repository.dart` - Input validation, parameterized queries
+- `social_repository.dart` - Input sanitization, SQL injection prevention
+- `messaging_repository.dart` - Content validation, query hardening
+- `stories_repository.dart` - Input validation, expiry checks
+- `discovery_repository.dart` - Search input sanitization
+- `create_post_sheet.dart` - Client-side content validation
+- `create_story_sheet.dart` - Input length limits
+- `message_detail_screen.dart` - Message content validation
+- `feed_screen.dart` - Comment input validation
+- `post.dart` - Model-level validation
+- `supabase/migrations/20260217000000_security_audit_fixes.sql` - DB function fixes and RLS policy hardening
+
+---
+
 ## [0.2.13] - 2026-02-07
 
 ### Added

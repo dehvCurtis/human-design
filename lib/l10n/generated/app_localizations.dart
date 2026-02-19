@@ -608,6 +608,12 @@ abstract class AppLocalizations {
   /// **'Sign up with Google'**
   String get auth_signUpWithGoogle;
 
+  /// No description provided for @auth_signUpWithMicrosoft.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Microsoft'**
+  String get auth_signUpWithMicrosoft;
+
   /// No description provided for @auth_enterName.
   ///
   /// In en, this message translates to:
@@ -701,7 +707,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboarding_welcome.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Inside Me'**
+  /// **'Inside Me: Human Design'**
   String get onboarding_welcome;
 
   /// No description provided for @onboarding_welcomeSubtitle.

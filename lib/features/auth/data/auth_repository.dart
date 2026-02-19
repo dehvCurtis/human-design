@@ -73,6 +73,17 @@ class AuthRepository {
     );
   }
 
+  /// Sign in with Microsoft (Azure)
+  Future<bool> signInWithMicrosoft() async {
+    _pendingOAuthState = const Uuid().v4();
+    return await _client.auth.signInWithOAuth(
+      OAuthProvider.azure,
+      redirectTo: _getRedirectUrl(),
+      authScreenLaunchMode: LaunchMode.externalApplication,
+      queryParams: {'state': _pendingOAuthState!},
+    );
+  }
+
   /// Validate OAuth state parameter (call after OAuth redirect)
   ///
   /// Returns true if state matches, false otherwise.

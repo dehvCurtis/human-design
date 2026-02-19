@@ -114,6 +114,7 @@
   "auth_signUpSubtitle": "Start your Human Design journey today",
   "auth_signUpWithApple": "Sign up with Apple",
   "auth_signUpWithGoogle": "Sign up with Google",
+  "auth_signUpWithMicrosoft": "Sign up with Microsoft",
   "auth_enterName": "Enter your name",
   "auth_nameRequired": "Name is required",
   "auth_termsOfService": "Terms of Service",
@@ -130,7 +131,7 @@
   "auth_birthInformation": "Birth Information",
   "auth_calculateMyChart": "Calculate My Chart",
 
-  "onboarding_welcome": "Welcome to Inside Me",
+  "onboarding_welcome": "Inside Me: Human Design",
   "onboarding_welcomeSubtitle": "Discover your unique energetic blueprint",
   "onboarding_birthData": "Enter Your Birth Data",
   "onboarding_birthDataSubtitle": "We need this to calculate your chart",

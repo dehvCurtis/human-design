@@ -117,6 +117,16 @@ class AuthNotifier extends Notifier<AppAuthState> {
     }
   }
 
+  Future<void> signInWithMicrosoft() async {
+    state = AppAuthState.loading();
+    try {
+      await _repository.signInWithMicrosoft();
+      // OAuth flow will redirect, state will be updated by auth listener
+    } catch (e) {
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
+    }
+  }
+
   Future<void> signOut() async {
     state = AppAuthState.loading();
     try {

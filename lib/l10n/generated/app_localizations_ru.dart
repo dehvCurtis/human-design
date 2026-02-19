@@ -284,6 +284,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Регистрация через Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
+
+  @override
   String get auth_enterName => 'Введите ваше имя';
 
   @override

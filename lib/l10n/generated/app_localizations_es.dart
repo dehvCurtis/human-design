@@ -282,6 +282,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Registrarse con Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
+
+  @override
   String get auth_enterName => 'Ingresa tu nombre';
 
   @override

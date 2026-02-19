@@ -281,6 +281,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Cadastrar com Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
+
+  @override
   String get auth_enterName => 'Digite seu nome';
 
   @override

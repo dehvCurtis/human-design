@@ -146,7 +146,7 @@ flutter build apk
 ## Current Implementation Status
 
 ### Core Features ✅
-- ✅ Supabase auth (email, Apple, Google)
+- ✅ Supabase auth (email, Apple, Google, Microsoft)
 - ✅ Swiss Ephemeris planetary calculations
 - ✅ Bodygraph visualization widget with all 9 centers, gates, channels
 - ✅ Chart screen with 6 tabs (Bodygraph, Planets, Properties, Gates, Channels, Chakras)
