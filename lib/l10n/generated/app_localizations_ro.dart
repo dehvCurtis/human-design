@@ -3469,4 +3469,144 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get ai_shareReading => 'Distribuie Citirea';
+
+  @override
+  String get group_notFound => 'Grupul nu a fost găsit';
+
+  @override
+  String get group_members => 'Membri';
+
+  @override
+  String get group_sharedCharts => 'Hărți Partajate';
+
+  @override
+  String get group_feed => 'Flux';
+
+  @override
+  String get group_invite => 'Invită';
+
+  @override
+  String get group_inviteMembers => 'Invită Membri';
+
+  @override
+  String get group_searchUsers => 'Caută după nume...';
+
+  @override
+  String get group_searchHint => 'Tastați cel puțin 2 caractere pentru a căuta';
+
+  @override
+  String get group_noUsersFound => 'Nu au fost găsiți utilizatori';
+
+  @override
+  String group_memberAdded(String name) {
+    return '$name a fost adăugat în grup';
+  }
+
+  @override
+  String get group_addMemberFailed => 'Nu s-a putut adăuga membrul';
+
+  @override
+  String get group_noMembers => 'Încă nu există membri';
+
+  @override
+  String get group_promote => 'Promovați la Administrator';
+
+  @override
+  String get group_demote => 'Retrogradați la Membru';
+
+  @override
+  String get group_removeMember => 'Eliminați';
+
+  @override
+  String get group_promoteTitle => 'Promovați Membrul';
+
+  @override
+  String group_promoteConfirmation(String name) {
+    return 'Faceți din $name un administrator al acestui grup?';
+  }
+
+  @override
+  String get group_demoteTitle => 'Retrogradați Membrul';
+
+  @override
+  String group_demoteConfirmation(String name) {
+    return 'Eliminați rolul de administrator al lui $name?';
+  }
+
+  @override
+  String get group_removeMemberTitle => 'Eliminați Membrul';
+
+  @override
+  String group_removeMemberConfirmation(String name) {
+    return 'Eliminați $name din acest grup?';
+  }
+
+  @override
+  String get group_editName => 'Editați Numele';
+
+  @override
+  String get group_editDescription => 'Editați Descrierea';
+
+  @override
+  String get group_delete => 'Ștergeți Grupul';
+
+  @override
+  String get group_deleteTitle => 'Ștergeți Grupul';
+
+  @override
+  String group_deleteConfirmation(String name) {
+    return 'Sigur doriți să ștergeți \"$name\"? Această acțiune nu poate fi anulată.';
+  }
+
+  @override
+  String get group_deleted => 'Grupul a fost șters';
+
+  @override
+  String get group_leave => 'Părăsiți Grupul';
+
+  @override
+  String get group_leaveTitle => 'Părăsiți Grupul';
+
+  @override
+  String group_leaveConfirmation(String name) {
+    return 'Sigur doriți să părăsiți \"$name\"?';
+  }
+
+  @override
+  String get group_left => 'Ați părăsit grupul';
+
+  @override
+  String get group_updated => 'Grupul a fost actualizat';
+
+  @override
+  String get group_noSharedCharts => 'Fără Hărți Partajate';
+
+  @override
+  String get group_noSharedChartsMessage =>
+      'Partajați harta dvs. cu grupul din ecranul hărții.';
+
+  @override
+  String get group_writePost => 'Scrieți ceva...';
+
+  @override
+  String get group_noPosts => 'Încă Nu Există Postări';
+
+  @override
+  String get group_beFirstToPost => 'Începeți conversația!';
+
+  @override
+  String get group_deletePostConfirmation => 'Ștergeți această postare?';
+
+  @override
+  String get group_shareChart => 'Distribuiți harta';
+
+  @override
+  String get group_share => 'Distribuiți';
+
+  @override
+  String get group_chartShared => 'Harta a fost distribuită grupului';
+
+  @override
+  String get group_noChartsToShare =>
+      'Nu există hărți salvate de distribuit. Creați mai întâi o hartă.';
 }

@@ -10,6 +10,15 @@ class SocialRepository {
   /// Maximum allowed comment content length (matches DB constraint)
   static const int maxCommentLength = 2000;
 
+  /// Maximum allowed group post content length (matches DB constraint)
+  static const int maxGroupPostLength = 5000;
+
+  /// Maximum allowed group name length (matches DB constraint)
+  static const int maxGroupNameLength = 100;
+
+  /// Maximum allowed group description length (matches DB constraint)
+  static const int maxGroupDescriptionLength = 500;
+
   // ==================== Sharing ====================
 
   /// Share chart with a group
@@ -284,6 +293,223 @@ class SocialRepository {
         .toList();
   }
 
+  // ==================== Group Management ====================
+
+  /// Update group details (admin only)
+  Future<void> updateGroup({
+    required String groupId,
+    String? name,
+    String? description,
+  }) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    if (name != null && (name.isEmpty || name.length > maxGroupNameLength)) {
+      throw ArgumentError(
+        'Group name must be between 1 and $maxGroupNameLength characters',
+      );
+    }
+    if (description != null && description.length > maxGroupDescriptionLength) {
+      throw ArgumentError(
+        'Group description must be at most $maxGroupDescriptionLength characters',
+      );
+    }
+
+    // Client-side admin check (RLS is the real gate)
+    final adminCheck = await _client
+        .from('group_members')
+        .select('role')
+        .eq('group_id', groupId)
+        .eq('user_id', userId)
+        .maybeSingle();
+
+    if (adminCheck == null || adminCheck['role'] != 'admin') {
+      throw StateError('Only group admins can update the group');
+    }
+
+    final updates = <String, dynamic>{};
+    if (name != null) updates['name'] = name;
+    if (description != null) updates['description'] = description;
+
+    if (updates.isNotEmpty) {
+      await _client.from('groups').update(updates).eq('id', groupId);
+    }
+  }
+
+  /// Delete a group (admin only)
+  Future<void> deleteGroup(String groupId) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    // Client-side admin check
+    final adminCheck = await _client
+        .from('group_members')
+        .select('role')
+        .eq('group_id', groupId)
+        .eq('user_id', userId)
+        .maybeSingle();
+
+    if (adminCheck == null || adminCheck['role'] != 'admin') {
+      throw StateError('Only group admins can delete the group');
+    }
+
+    await _client.from('groups').delete().eq('id', groupId);
+  }
+
+  /// Update a member's role (admin only)
+  Future<void> updateMemberRole({
+    required String groupId,
+    required String userId,
+    required String role,
+  }) async {
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null) throw StateError('User not authenticated');
+
+    // Client-side admin check
+    final adminCheck = await _client
+        .from('group_members')
+        .select('role')
+        .eq('group_id', groupId)
+        .eq('user_id', currentUserId)
+        .maybeSingle();
+
+    if (adminCheck == null || adminCheck['role'] != 'admin') {
+      throw StateError('Only group admins can change member roles');
+    }
+
+    await _client
+        .from('group_members')
+        .update({'role': role})
+        .eq('group_id', groupId)
+        .eq('user_id', userId);
+  }
+
+  // ==================== Group Posts ====================
+
+  /// Get posts for a group
+  Future<List<GroupPost>> getGroupPosts(String groupId) async {
+    final response = await _client
+        .from('group_posts')
+        .select('''
+          id,
+          group_id,
+          content,
+          created_at,
+          author:profiles!group_posts_user_id_fkey(id, name, avatar_url)
+        ''')
+        .eq('group_id', groupId)
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .map((json) => GroupPost.fromJson(json))
+        .toList();
+  }
+
+  /// Create a post in a group
+  Future<GroupPost> createGroupPost({
+    required String groupId,
+    required String content,
+  }) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    if (content.isEmpty || content.length > maxGroupPostLength) {
+      throw ArgumentError(
+        'Post content must be between 1 and $maxGroupPostLength characters',
+      );
+    }
+
+    final response = await _client.from('group_posts').insert({
+      'group_id': groupId,
+      'user_id': userId,
+      'content': content,
+    }).select('''
+          id,
+          group_id,
+          content,
+          created_at,
+          author:profiles!group_posts_user_id_fkey(id, name, avatar_url)
+        ''').single();
+
+    return GroupPost.fromJson(response);
+  }
+
+  /// Delete a group post (ownership check client-side, RLS is the real gate)
+  Future<void> deleteGroupPost(String postId) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) throw StateError('User not authenticated');
+
+    await _client.from('group_posts').delete().eq('id', postId);
+  }
+
+  // ==================== Group Shared Charts ====================
+
+  /// Get charts shared with a group
+  Future<List<SharedChart>> getGroupSharedCharts(String groupId) async {
+    final response = await _client
+        .from('shares')
+        .select('''
+          id,
+          chart:charts(id, name, type),
+          shared_by:profiles!shares_shared_by_fkey(id, name, avatar_url),
+          created_at
+        ''')
+        .eq('group_id', groupId)
+        .eq('share_type', 'group')
+        .order('created_at', ascending: false);
+
+    return (response as List)
+        .map((json) => SharedChart.fromJson(json))
+        .toList();
+  }
+
+  // ==================== User Search for Invite ====================
+
+  /// Search friends (users you follow) by name, excluding existing group members
+  Future<List<UserSearchResult>> searchUsersForInvite({
+    required String query,
+    required String groupId,
+  }) async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) return [];
+    if (query.trim().length < 2) return [];
+
+    // Get existing member user IDs
+    final members = await _client
+        .from('group_members')
+        .select('user_id')
+        .eq('group_id', groupId);
+
+    final memberIds = (members as List)
+        .map((m) => m['user_id'] as String)
+        .toSet();
+
+    // Get IDs of users the current user follows (friends)
+    final follows = await _client
+        .from('user_follows')
+        .select('following_id')
+        .eq('follower_id', userId);
+
+    final friendIds = (follows as List)
+        .map((f) => f['following_id'] as String)
+        .where((id) => !memberIds.contains(id))
+        .toList();
+
+    if (friendIds.isEmpty) return [];
+
+    // Search among friends by name
+    final response = await _client
+        .from('profiles')
+        .select('id, name, avatar_url, hd_type')
+        .inFilter('id', friendIds)
+        .ilike('name', '%${query.trim()}%')
+        .limit(20);
+
+    return (response as List)
+        .map((json) => UserSearchResult.fromJson(json))
+        .toList();
+  }
+
   // ==================== Realtime ====================
 
   /// Subscribe to comments for a chart
@@ -502,6 +728,62 @@ class GroupMember {
       avatarUrl: user['avatar_url'] as String?,
       role: json['role'] as String,
       joinedAt: DateTime.parse(json['joined_at'] as String),
+    );
+  }
+}
+
+class GroupPost {
+  const GroupPost({
+    required this.id,
+    required this.groupId,
+    required this.userId,
+    required this.userName,
+    this.userAvatarUrl,
+    required this.content,
+    required this.createdAt,
+  });
+
+  final String id;
+  final String groupId;
+  final String userId;
+  final String userName;
+  final String? userAvatarUrl;
+  final String content;
+  final DateTime createdAt;
+
+  factory GroupPost.fromJson(Map<String, dynamic> json) {
+    final author = json['author'] as Map<String, dynamic>?;
+    return GroupPost(
+      id: json['id'] as String,
+      groupId: json['group_id'] as String,
+      userId: author?['id'] as String? ?? '',
+      userName: author?['name'] as String? ?? 'Unknown',
+      userAvatarUrl: author?['avatar_url'] as String?,
+      content: json['content'] as String,
+      createdAt: DateTime.parse(json['created_at'] as String),
+    );
+  }
+}
+
+class UserSearchResult {
+  const UserSearchResult({
+    required this.id,
+    required this.name,
+    this.avatarUrl,
+    this.hdType,
+  });
+
+  final String id;
+  final String name;
+  final String? avatarUrl;
+  final String? hdType;
+
+  factory UserSearchResult.fromJson(Map<String, dynamic> json) {
+    return UserSearchResult(
+      id: json['id'] as String,
+      name: json['name'] as String? ?? 'Unknown',
+      avatarUrl: json['avatar_url'] as String?,
+      hdType: json['hd_type'] as String?,
     );
   }
 }

@@ -122,6 +122,14 @@ class AuthErrorMessages {
            message.contains('no user');
   }
 
+  /// Check if the error is an Apple Sign In cancellation (user dismissed the dialog)
+  static bool isAppleSignInCancelled(dynamic exception) {
+    final message = exception.toString().toLowerCase();
+    return message.contains('authorizationerrorcode.canceled') ||
+        message.contains('com.apple.authenticationservices.authorizationerror error 1001') ||
+        message.contains('asauthorizationerror') && message.contains('cancel');
+  }
+
   /// Check if the error is about rate limiting
   static bool isRateLimited(dynamic exception) {
     final message = exception.toString().toLowerCase();

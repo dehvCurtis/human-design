@@ -25,7 +25,7 @@ lib/
 │   ├── profile/          # User profile
 │   ├── settings/         # App settings
 │   ├── sharing/          # Chart export & sharing
-│   ├── social/           # Following & groups
+│   ├── social/           # Following, groups & HD study circles
 │   ├── stories/          # 24h ephemeral content
 │   └── subscription/     # Premium features & message packs
 └── shared/
