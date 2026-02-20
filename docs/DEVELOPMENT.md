@@ -33,7 +33,19 @@ Supabase credentials are loaded from `.env` via `flutter_dotenv`.
 ## Testing
 
 ```bash
+# Run all tests (167 passing)
 flutter test
+
+# Run specific suites
+flutter test test/calculate_chart_test.dart       # Chart calculation (22 tests)
+flutter test test/gate_wheel_offset_test.dart     # HD wheel offset
+flutter test test/feed_post_test.dart             # Post model (40 tests)
+flutter test test/ai_usage_test.dart              # AI quota (35 tests)
+flutter test test/auth_repository_test.dart       # Nonce & SHA-256 (21 tests)
+flutter test test/auth_notifier_test.dart         # Auth state (33 tests)
+flutter test test/create_post_chart_id_test.dart  # Chart ID logic (9 tests)
+
+# Static analysis
 flutter analyze
 ```
 

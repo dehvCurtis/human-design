@@ -1295,6 +1295,13 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settings_sendFeedback => 'Enviar Feedback';
 
   @override
+  String get settings_telegramSupport => 'Suporte no Telegram';
+
+  @override
+  String get settings_telegramSupportSubtitle =>
+      'Obtenha ajuda no nosso grupo do Telegram';
+
+  @override
   String get settings_themeLight => 'Claro';
 
   @override

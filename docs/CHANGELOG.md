@@ -2,6 +2,56 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.17] - 2026-02-20
+
+### Fixed
+
+#### Social Group Creation
+- **Group Creation RLS Fix** - Fixed PostgrestException when creating social groups
+  - Root cause: SELECT policy on `groups` table only allowed viewing groups where user was already in `group_members`
+  - The `.insert().select().single()` pattern failed because the creator couldn't SELECT the group they just created
+  - Added `created_by = auth.uid()` to groups SELECT policy so creators can see their own groups immediately
+  - Cleaned up orphan RLS policies from initial schema that were never dropped by subsequent migrations
+  - Consolidated group_members INSERT policy with three cases: creator bootstrap, admin add, self-join
+
+#### Chart Sharing in Posts
+- **Chart ID Placeholder Fix** - Fixed "Unable to complete the operation" error when sharing chart in a post
+  - The user's own chart uses placeholder ID `'user'` which is not a valid UUID
+  - Now skips sending `chart_id` when it's the `'user'` placeholder
+
+### Added
+
+#### Telegram Support
+- **Telegram Support Channel** - Added Telegram support link in Settings > About section
+  - Localized in all 8 languages (EN, RU, UK, DE, ES, PT, RO, BE)
+
+#### Unit Tests
+- **Auth Repository Tests** - 21 tests for nonce generation (length, charset, uniqueness) and SHA-256 hashing
+- **Auth Notifier Tests** - 33 tests for auth state transitions, error messages, and clearError behavior
+- **Chart ID Logic Tests** - 9 tests for chart ID sentinel value handling in post creation
+- Total test count: 167 (up from 113)
+
+### Changed
+
+#### UI Consistency
+- **Centered TabBars** - All tab bar sub-menus now use centered alignment across 14 screens
+  - Applied `isScrollable: true` and `tabAlignment: TabAlignment.center` consistently
+
+### Technical Details
+
+Database migrations:
+- `20260219200000_fix_group_creation_rls.sql` - Clean INSERT policies for groups and group_members
+- `20260220000000_fix_groups_select_for_creator.sql` - Groups SELECT policy includes creator check
+
+Files modified:
+- `create_post_sheet.dart` - Skip chart_id for 'user' placeholder
+- `settings_screen.dart` - Added Telegram support tile
+- 14 screens - TabBar centering
+- 8 ARB files - Telegram support localization keys
+- 3 new test files in `test/`
+
+---
+
 ## [0.2.16] - 2026-02-18
 
 ### Added

@@ -500,6 +500,8 @@
   "settings_appVersion": "Versión de la Aplicación",
   "settings_rateApp": "Calificar la Aplicación",
   "settings_sendFeedback": "Enviar Retroalimentación",
+  "settings_telegramSupport": "Soporte en Telegram",
+  "settings_telegramSupportSubtitle": "Obtén ayuda en nuestro grupo de Telegram",
   "settings_themeLight": "Claro",
   "settings_themeDark": "Oscuro",
   "settings_themeSystem": "Sistema",

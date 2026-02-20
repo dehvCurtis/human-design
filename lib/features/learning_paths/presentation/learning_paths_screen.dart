@@ -20,6 +20,8 @@ class LearningPathsScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(l10n.learningPaths_title),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: l10n.learningPaths_explore),
               Tab(text: l10n.learningPaths_inProgress),

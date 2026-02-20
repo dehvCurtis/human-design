@@ -81,6 +81,8 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen>
         ],
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: const [
             Tab(text: 'Discover'),
             Tab(text: 'Following'),

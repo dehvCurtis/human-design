@@ -56,7 +56,7 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabAlignment: TabAlignment.start,
+          tabAlignment: TabAlignment.center,
           tabs: [
             Tab(text: l10n.social_thoughts),
             Tab(text: l10n.social_discover),

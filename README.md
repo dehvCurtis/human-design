@@ -29,6 +29,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **Stories** - 24-hour ephemeral content with HD color themes
 - **Direct Messaging** - Real-time conversations with chart/transit sharing
 - **Groups** - Build your HD community with group sharing
+- **Telegram Support** - Direct support channel accessible from Settings
 
 ### Learning & Quizzes
 - **Quiz System** - 138+ factual Human Design questions across 7 categories
@@ -188,7 +189,7 @@ Sun, Earth, Moon, North Node, South Node, Mercury, Venus, Mars, Jupiter, Saturn,
 ## Testing
 
 ```bash
-# Run all tests (113 passing)
+# Run all tests (167 passing)
 flutter test
 
 # Run specific test suites
@@ -196,6 +197,9 @@ flutter test test/calculate_chart_test.dart    # Type, Authority, Definition
 flutter test test/gate_wheel_offset_test.dart  # HD wheel offset verification
 flutter test test/feed_post_test.dart          # Post model & enums
 flutter test test/ai_usage_test.dart           # AI quota & usage
+flutter test test/auth_repository_test.dart    # Nonce generation & SHA-256
+flutter test test/auth_notifier_test.dart      # Auth state & error handling
+flutter test test/create_post_chart_id_test.dart  # Chart ID sentinel logic
 ```
 
 ## Key Commands

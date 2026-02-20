@@ -47,6 +47,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         ),
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: const [
             Tab(text: 'Weekly'),
             Tab(text: 'Monthly'),

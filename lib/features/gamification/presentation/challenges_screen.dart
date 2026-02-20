@@ -50,6 +50,8 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
         ),
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: const [
             Tab(text: 'Daily'),
             Tab(text: 'Weekly'),

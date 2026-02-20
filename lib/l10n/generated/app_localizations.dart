@@ -2504,6 +2504,18 @@ abstract class AppLocalizations {
   /// **'Send Feedback'**
   String get settings_sendFeedback;
 
+  /// No description provided for @settings_telegramSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Telegram Support'**
+  String get settings_telegramSupport;
+
+  /// No description provided for @settings_telegramSupportSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Get help in our Telegram group'**
+  String get settings_telegramSupportSubtitle;
+
   /// No description provided for @settings_themeLight.
   ///
   /// In en, this message translates to:

@@ -21,6 +21,8 @@ class TrendingHashtagsScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(l10n.hashtags_explore),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: l10n.hashtags_trending),
               Tab(text: l10n.hashtags_popular),

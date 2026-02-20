@@ -121,6 +121,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
     try {
       await ref.read(authNotifierProvider.notifier).signInWithApple();
+      final authState = ref.read(authNotifierProvider);
+      if (authState.status == AuthStatus.error && mounted) {
+        setState(() {
+          _errorMessage = authState.errorMessage;
+        });
+      }
     } catch (e) {
       if (mounted) {
         setState(() {

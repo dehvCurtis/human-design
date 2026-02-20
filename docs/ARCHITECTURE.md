@@ -138,6 +138,7 @@ All Supabase tables use RLS policies:
 - **Posts**: Public/followers-only/private visibility
 - **DMs**: Only participants can read/write
 - **Stories**: Auto-expire after 24h
+- **Groups**: Creator can see/manage their groups; members can view; SECURITY DEFINER helper functions (`is_group_admin`, `is_group_creator`, `get_user_group_ids`) prevent RLS recursion
 - **Gamification**: Users can only modify their own data
 - **Premium content**: Restricted to subscribers
 
