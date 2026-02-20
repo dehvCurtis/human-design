@@ -1,6 +1,6 @@
 -- Create charts table for storing saved Human Design charts
 CREATE TABLE IF NOT EXISTS charts (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
   birth_datetime TIMESTAMPTZ NOT NULL,

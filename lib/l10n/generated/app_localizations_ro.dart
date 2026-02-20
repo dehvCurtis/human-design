@@ -282,9 +282,6 @@ class AppLocalizationsRo extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Înregistrează-te cu Google';
 
   @override
-  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
-
-  @override
   String get auth_enterName => 'Introdu numele tău';
 
   @override
@@ -3411,58 +3408,58 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get ai_transitInsightTitle => 'Today\'s Transit Insight';
+  String get ai_transitInsightTitle => 'Perspectiva Tranzitului de Azi';
 
   @override
   String get ai_transitInsightDesc =>
-      'Get a personalized AI interpretation of how today\'s transits affect your chart.';
+      'Obține o interpretare personalizată AI despre cum tranzitele de azi afectează harta ta.';
 
   @override
-  String get ai_chartReadingTitle => 'AI Chart Reading';
+  String get ai_chartReadingTitle => 'Citire AI a Hărții';
 
   @override
   String get ai_chartReadingDesc =>
-      'Generate a comprehensive AI reading of your Human Design chart.';
+      'Generează o citire AI cuprinzătoare a hărții tale de Design Uman.';
 
   @override
   String get ai_chartReadingCost =>
-      'This reading uses 3 AI messages from your quota.';
+      'Această citire folosește 3 mesaje AI din cota ta.';
 
   @override
-  String get ai_compatibilityTitle => 'AI Compatibility Reading';
+  String get ai_compatibilityTitle => 'Citire AI de Compatibilitate';
 
   @override
-  String get ai_compatibilityReading => 'AI Compatibility Analysis';
+  String get ai_compatibilityReading => 'Analiză AI de Compatibilitate';
 
   @override
-  String get ai_dreamJournalTitle => 'Dream Journal';
+  String get ai_dreamJournalTitle => 'Jurnal de Vise';
 
   @override
   String get ai_dreamEntryHint =>
-      'Record your dreams to discover hidden insights from your design...';
+      'Înregistrează visele pentru a descoperi perspective ascunse din designul tău...';
 
   @override
-  String get ai_interpretDream => 'Interpret Dream';
+  String get ai_interpretDream => 'Interpretează Visul';
 
   @override
-  String get ai_journalPromptsTitle => 'Journal Prompts';
+  String get ai_journalPromptsTitle => 'Subiecte pentru Jurnal';
 
   @override
   String get ai_journalPromptsDesc =>
-      'Get personalized journaling prompts based on your chart and today\'s transits.';
+      'Obține subiecte personalizate pentru jurnal bazate pe harta ta și tranzitele de azi.';
 
   @override
-  String get ai_generating => 'Generating...';
+  String get ai_generating => 'Se generează...';
 
   @override
-  String get ai_askFollowUp => 'Ask Follow-up';
+  String get ai_askFollowUp => 'Întreabă în Continuare';
 
   @override
-  String get ai_regenerate => 'Regenerate';
+  String get ai_regenerate => 'Regenerează';
 
   @override
-  String get ai_exportPdf => 'Export PDF';
+  String get ai_exportPdf => 'Exportă PDF';
 
   @override
-  String get ai_shareReading => 'Share Reading';
+  String get ai_shareReading => 'Distribuie Citirea';
 }

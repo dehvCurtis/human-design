@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/error_handler.dart';
+import '../data/question_generators/all_generators.dart';
 import '../domain/models/quiz.dart';
 import '../domain/quiz_providers.dart';
 
@@ -105,7 +106,7 @@ class QuizDetailScreen extends ConsumerWidget {
                     Expanded(
                       child: _InfoCard(
                         icon: Icons.help_outline,
-                        value: '${quiz.questionCount}',
+                        value: '${_getQuestionCount(quiz)}',
                         label: 'Questions',
                       ),
                     ),
@@ -285,6 +286,15 @@ class QuizDetailScreen extends ConsumerWidget {
         );
       }
     }
+  }
+
+  /// Get the question count, falling back to generated questions if DB is empty
+  int _getQuestionCount(Quiz quiz) {
+    if (quiz.questionCount > 0) return quiz.questionCount;
+    final generator = CombinedQuestionGenerator();
+    return generator
+        .generateForCategoryAndDifficulty(quiz.category, quiz.difficulty)
+        .length;
   }
 
   String _formatTime(int seconds) {

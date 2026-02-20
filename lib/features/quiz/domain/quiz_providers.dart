@@ -270,9 +270,28 @@ class QuizSessionNotifier extends Notifier<QuizSessionState?> {
 
   /// Start a new quiz session
   Future<void> startQuiz(String quizId) async {
-    final quizWithQuestions = await _repository.getQuizWithQuestions(quizId);
-    if (quizWithQuestions == null) {
-      throw StateError('Quiz not found');
+    var quizWithQuestions = await _repository.getQuizWithQuestions(quizId);
+
+    // Fallback to generated questions when DB has none
+    if (quizWithQuestions == null || quizWithQuestions.questions.isEmpty) {
+      final quiz = quizWithQuestions?.quiz ?? await _repository.getQuizById(quizId);
+      if (quiz == null) {
+        throw StateError('Quiz not found');
+      }
+      final generator = CombinedQuestionGenerator();
+      final questions = generator.generateForCategoryAndDifficulty(
+        quiz.category,
+        quiz.difficulty,
+      );
+      final questionCount = quiz.questionCount > 0 ? quiz.questionCount : 10;
+      final selectedQuestions = (List<QuizQuestion>.from(questions)..shuffle())
+          .take(questionCount)
+          .toList();
+      quizWithQuestions = QuizWithQuestions(quiz: quiz, questions: selectedQuestions);
+    }
+
+    if (quizWithQuestions.questions.isEmpty) {
+      throw StateError('No questions available for this quiz');
     }
 
     // Shuffle questions for variety

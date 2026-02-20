@@ -164,22 +164,28 @@ class FeedRepository {
       throw ArgumentError('Post content exceeds $maxPostLength characters');
     }
 
-    final response = await _client.from('posts').insert({
+    final insertData = <String, dynamic>{
       'user_id': userId,
       'content': content,
       'post_type': postType.dbValue,
       'visibility': visibility.name,
-      'media_urls': mediaUrls,
-      'chart_id': chartId,
-      'chart_data': chartData,
-      'gate_number': gateNumber,
-      'channel_id': channelId,
-      'transit_data': transitData,
-      'badge_id': badgeId,
-    }).select('''
+    };
+    if (mediaUrls != null) insertData['media_urls'] = mediaUrls;
+    if (chartId != null) insertData['chart_id'] = chartId;
+    if (chartData != null) insertData['chart_data'] = chartData;
+    if (gateNumber != null) insertData['gate_number'] = gateNumber;
+    if (channelId != null) insertData['channel_id'] = channelId;
+    if (transitData != null) insertData['transit_data'] = transitData;
+    if (badgeId != null) insertData['badge_id'] = badgeId;
+
+    final response = await _client
+        .from('posts')
+        .insert(insertData)
+        .select('''
           *,
           user:profiles!posts_user_id_fkey(id, name, avatar_url, hd_type)
-        ''').single();
+        ''')
+        .single();
 
     return Post.fromJson(response);
   }

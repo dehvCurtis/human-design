@@ -608,12 +608,6 @@ abstract class AppLocalizations {
   /// **'Sign up with Google'**
   String get auth_signUpWithGoogle;
 
-  /// No description provided for @auth_signUpWithMicrosoft.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign up with Microsoft'**
-  String get auth_signUpWithMicrosoft;
-
   /// No description provided for @auth_enterName.
   ///
   /// In en, this message translates to:

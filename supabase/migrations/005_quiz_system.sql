@@ -8,7 +8,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- Quiz Questions Table
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS quiz_questions (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   question_type TEXT NOT NULL CHECK (question_type IN ('multiple_choice', 'true_false')),
   category TEXT NOT NULL CHECK (category IN ('types', 'centers', 'authorities', 'profiles', 'gates', 'channels', 'definitions', 'general')),
   difficulty TEXT NOT NULL CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),
@@ -31,7 +31,7 @@ CREATE INDEX idx_quiz_questions_active ON quiz_questions(is_active) WHERE is_act
 -- Quizzes Table
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS quizzes (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title TEXT NOT NULL,
   description TEXT,
   category TEXT NOT NULL CHECK (category IN ('types', 'centers', 'authorities', 'profiles', 'gates', 'channels', 'definitions', 'general')),
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS quiz_progress (
 -- Quiz Attempts Table
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS quiz_attempts (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   quiz_id UUID NOT NULL REFERENCES quizzes(id) ON DELETE CASCADE,
   score INT DEFAULT 0, -- percentage 0-100

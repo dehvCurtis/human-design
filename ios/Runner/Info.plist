@@ -59,8 +59,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>FlutterDeepLinkingEnabled</key>
-	<true/>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to personalize your experience and show relevant content.</string>
 	<key>NSCameraUsageDescription</key>

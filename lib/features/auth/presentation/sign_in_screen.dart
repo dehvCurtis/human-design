@@ -27,7 +27,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   bool _isLoading = false;
   bool _isGoogleLoading = false;
   bool _isAppleLoading = false;
-  bool _isMicrosoftLoading = false;
   String? _errorMessage;
   bool _showResendConfirmation = false;
 
@@ -149,29 +148,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     }
   }
 
-  Future<void> _signInWithMicrosoft() async {
-    setState(() {
-      _isMicrosoftLoading = true;
-      _errorMessage = null;
-    });
-
-    try {
-      await ref.read(authNotifierProvider.notifier).signInWithMicrosoft();
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _errorMessage = AuthErrorMessages.fromException(e);
-        });
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isMicrosoftLoading = false;
-        });
-      }
-    }
-  }
-
   void _showForgotPasswordDialog() {
     final emailController = TextEditingController(text: _emailController.text);
     final l10n = AppLocalizations.of(context)!;
@@ -227,7 +203,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final anyLoading = _isLoading || _isGoogleLoading || _isAppleLoading || _isMicrosoftLoading;
+    final anyLoading = _isLoading || _isGoogleLoading || _isAppleLoading;
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -323,11 +299,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 GoogleSignInButton(
                   onPressed: anyLoading ? null : _signInWithGoogle,
                   isLoading: _isGoogleLoading,
-                ),
-                const SizedBox(height: 12),
-                MicrosoftSignInButton(
-                  onPressed: anyLoading ? null : _signInWithMicrosoft,
-                  isLoading: _isMicrosoftLoading,
                 ),
 
                 const OAuthDivider(),

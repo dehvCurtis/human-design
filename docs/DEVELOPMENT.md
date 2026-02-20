@@ -19,14 +19,16 @@ flutter devices
 flutter run -v
 ```
 
-## Auth Bypass
+## Authentication
 
-For development, auth can be bypassed. To toggle:
+### Apple Sign-In (Native)
+Uses `sign_in_with_apple` package — shows the native iOS sheet, passes ID token to Supabase via `signInWithIdToken`. No browser redirect needed.
 
-```dart
-// lib/features/auth/domain/auth_providers.dart:8
-const bool kBypassAuth = true;  // Set to false for production
-```
+### Google Sign-In (OAuth)
+Opens external Safari with PKCE flow. After auth, redirects to `io.humandesign.app://auth/callback`. Supabase Flutter's built-in `app_links` listener handles the callback automatically.
+
+### Environment
+Supabase credentials are loaded from `.env` via `flutter_dotenv`.
 
 ## Testing
 

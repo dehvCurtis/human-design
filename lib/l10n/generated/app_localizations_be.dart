@@ -284,9 +284,6 @@ class AppLocalizationsBe extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Рэгістрацыя праз Google';
 
   @override
-  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
-
-  @override
   String get auth_enterName => 'Увядзіце ваша імя';
 
   @override
@@ -3395,58 +3392,58 @@ class AppLocalizationsBe extends AppLocalizations {
   }
 
   @override
-  String get ai_transitInsightTitle => 'Today\'s Transit Insight';
+  String get ai_transitInsightTitle => 'Транзітны інсайт дня';
 
   @override
   String get ai_transitInsightDesc =>
-      'Get a personalized AI interpretation of how today\'s transits affect your chart.';
+      'Атрымайце персанальную AI-інтэрпрэтацыю ўплыву сённяшніх транзітаў на вашу карту.';
 
   @override
-  String get ai_chartReadingTitle => 'AI Chart Reading';
+  String get ai_chartReadingTitle => 'AI Чытанне карты';
 
   @override
   String get ai_chartReadingDesc =>
-      'Generate a comprehensive AI reading of your Human Design chart.';
+      'Стварыце падрабязнае AI-чытанне вашай карты Дызайну Чалавека.';
 
   @override
   String get ai_chartReadingCost =>
-      'This reading uses 3 AI messages from your quota.';
+      'Гэта чытанне выкарыстоўвае 3 AI паведамленні з вашай квоты.';
 
   @override
-  String get ai_compatibilityTitle => 'AI Compatibility Reading';
+  String get ai_compatibilityTitle => 'AI Чытанне сумяшчальнасці';
 
   @override
-  String get ai_compatibilityReading => 'AI Compatibility Analysis';
+  String get ai_compatibilityReading => 'AI Аналіз сумяшчальнасці';
 
   @override
-  String get ai_dreamJournalTitle => 'Dream Journal';
+  String get ai_dreamJournalTitle => 'Дзённік сноў';
 
   @override
   String get ai_dreamEntryHint =>
-      'Record your dreams to discover hidden insights from your design...';
+      'Запісвайце сны, каб раскрыць схаваныя інсайты вашага дызайну...';
 
   @override
-  String get ai_interpretDream => 'Interpret Dream';
+  String get ai_interpretDream => 'Інтэрпрэтаваць сон';
 
   @override
-  String get ai_journalPromptsTitle => 'Journal Prompts';
+  String get ai_journalPromptsTitle => 'Тэмы для дзённіка';
 
   @override
   String get ai_journalPromptsDesc =>
-      'Get personalized journaling prompts based on your chart and today\'s transits.';
+      'Атрымайце персанальныя тэмы для дзённіка на аснове вашай карты і сённяшніх транзітаў.';
 
   @override
-  String get ai_generating => 'Generating...';
+  String get ai_generating => 'Генерацыя...';
 
   @override
-  String get ai_askFollowUp => 'Ask Follow-up';
+  String get ai_askFollowUp => 'Задаць удакладненне';
 
   @override
-  String get ai_regenerate => 'Regenerate';
+  String get ai_regenerate => 'Згенераваць нанова';
 
   @override
-  String get ai_exportPdf => 'Export PDF';
+  String get ai_exportPdf => 'Экспарт у PDF';
 
   @override
-  String get ai_shareReading => 'Share Reading';
+  String get ai_shareReading => 'Падзяліцца чытаннем';
 }
