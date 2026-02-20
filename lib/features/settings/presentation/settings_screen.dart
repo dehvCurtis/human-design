@@ -188,6 +188,12 @@ class SettingsScreen extends ConsumerWidget {
             title: l10n.settings_sendFeedback,
             onTap: () => _sendFeedback(context),
           ),
+          _SettingsTile(
+            icon: Icons.telegram,
+            title: l10n.settings_telegramSupport,
+            subtitle: l10n.settings_telegramSupportSubtitle,
+            onTap: () => _openUrl('https://t.me/insideme_hd'),
+          ),
 
           const SizedBox(height: 32),
         ],

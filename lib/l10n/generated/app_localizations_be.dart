@@ -1293,6 +1293,13 @@ class AppLocalizationsBe extends AppLocalizations {
   String get settings_sendFeedback => 'Адправіць водгук';
 
   @override
+  String get settings_telegramSupport => 'Падтрымка ў Telegram';
+
+  @override
+  String get settings_telegramSupportSubtitle =>
+      'Атрымайце дапамогу ў нашай групе Telegram';
+
+  @override
   String get settings_themeLight => 'Светлая';
 
   @override

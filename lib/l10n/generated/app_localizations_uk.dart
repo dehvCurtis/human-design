@@ -1297,6 +1297,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get settings_sendFeedback => 'Надіслати відгук';
 
   @override
+  String get settings_telegramSupport => 'Підтримка в Telegram';
+
+  @override
+  String get settings_telegramSupportSubtitle =>
+      'Отримайте допомогу в нашій групі Telegram';
+
+  @override
   String get settings_themeLight => 'Світла';
 
   @override

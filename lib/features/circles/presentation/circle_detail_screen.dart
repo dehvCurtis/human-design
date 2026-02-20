@@ -78,6 +78,8 @@ class CircleDetailScreen extends ConsumerWidget {
                 ),
               ],
               bottom: TabBar(
+                isScrollable: true,
+                tabAlignment: TabAlignment.center,
                 tabs: [
                   Tab(text: l10n.circles_members),
                   Tab(text: l10n.circles_analysis),

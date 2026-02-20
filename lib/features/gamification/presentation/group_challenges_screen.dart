@@ -20,6 +20,8 @@ class GroupChallengesScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(l10n.groupChallenges_title),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: l10n.groupChallenges_myTeams),
               Tab(text: l10n.groupChallenges_challenges),

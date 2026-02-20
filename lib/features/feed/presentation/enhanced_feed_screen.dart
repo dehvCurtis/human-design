@@ -54,6 +54,8 @@ class _EnhancedFeedScreenState extends ConsumerState<EnhancedFeedScreen>
         ],
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: [
             Tab(text: l10n.feed_forYou),
             Tab(text: l10n.feed_trending),

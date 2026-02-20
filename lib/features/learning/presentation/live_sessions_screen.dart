@@ -49,6 +49,8 @@ class _LiveSessionsScreenState extends ConsumerState<LiveSessionsScreen>
         ),
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: [
             Tab(text: l10n.liveSessions_upcoming),
             Tab(text: l10n.liveSessions_mySessions),

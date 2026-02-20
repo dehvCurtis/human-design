@@ -529,6 +529,8 @@
   "settings_appVersion": "App Version",
   "settings_rateApp": "Rate the App",
   "settings_sendFeedback": "Send Feedback",
+  "settings_telegramSupport": "Telegram Support",
+  "settings_telegramSupportSubtitle": "Get help in our Telegram group",
   "settings_themeLight": "Light",
   "settings_themeDark": "Dark",
   "settings_themeSystem": "System",

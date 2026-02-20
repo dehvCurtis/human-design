@@ -51,6 +51,7 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: const [
             Tab(text: 'All'),
             Tab(text: 'Types'),

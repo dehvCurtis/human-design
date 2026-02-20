@@ -48,6 +48,8 @@ class _EventsScreenState extends ConsumerState<EventsScreen>
         ],
         bottom: TabBar(
           controller: _tabController,
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: [
             Tab(text: l10n.events_upcoming),
             Tab(text: l10n.events_past),

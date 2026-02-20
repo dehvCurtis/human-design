@@ -464,6 +464,8 @@
   "settings_appVersion": "Версія прыкладання",
   "settings_rateApp": "Ацаніць прыкладанне",
   "settings_sendFeedback": "Адправіць водгук",
+  "settings_telegramSupport": "Падтрымка ў Telegram",
+  "settings_telegramSupportSubtitle": "Атрымайце дапамогу ў нашай групе Telegram",
   "settings_themeLight": "Светлая",
   "settings_themeDark": "Цёмная",
   "settings_themeSystem": "Сістэмная",

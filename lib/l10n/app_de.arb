@@ -500,6 +500,8 @@
   "settings_appVersion": "App-Version",
   "settings_rateApp": "App bewerten",
   "settings_sendFeedback": "Feedback senden",
+  "settings_telegramSupport": "Telegram-Support",
+  "settings_telegramSupportSubtitle": "Hilfe in unserer Telegram-Gruppe erhalten",
   "settings_themeLight": "Hell",
   "settings_themeDark": "Dunkel",
   "settings_themeSystem": "System",

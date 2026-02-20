@@ -20,6 +20,8 @@ class CirclesScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(l10n.circles_title),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: l10n.circles_myCircles),
               Tab(text: l10n.circles_invitations),

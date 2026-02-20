@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
@@ -106,7 +107,9 @@ class AuthNotifier extends Notifier<AppAuthState> {
       } else {
         state = AppAuthState.error('Apple sign in failed. Please try again.');
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Apple sign-in error: $e');
+      debugPrint('Stack trace: $stackTrace');
       state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
   }

@@ -500,6 +500,8 @@
   "settings_appVersion": "Versiune Aplicație",
   "settings_rateApp": "Evaluează Aplicația",
   "settings_sendFeedback": "Trimite Feedback",
+  "settings_telegramSupport": "Suport Telegram",
+  "settings_telegramSupportSubtitle": "Obține ajutor în grupul nostru de Telegram",
   "settings_themeLight": "Luminos",
   "settings_themeDark": "Întunecat",
   "settings_themeSystem": "Sistem",

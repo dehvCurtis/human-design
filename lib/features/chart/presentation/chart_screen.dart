@@ -111,6 +111,7 @@ class _ChartScreenState extends ConsumerState<ChartScreen>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
+          tabAlignment: TabAlignment.center,
           tabs: [
             Tab(text: l10n.chart_bodygraph),
             Tab(text: l10n.chart_planets),

@@ -21,6 +21,8 @@ class TransitEventsScreen extends ConsumerWidget {
         appBar: AppBar(
           title: Text(l10n.transit_events_title),
           bottom: TabBar(
+            isScrollable: true,
+            tabAlignment: TabAlignment.center,
             tabs: [
               Tab(text: l10n.transit_events_happening),
               Tab(text: l10n.transit_events_upcoming),

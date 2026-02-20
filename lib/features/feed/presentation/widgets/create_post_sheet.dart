@@ -504,12 +504,17 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         }
       }
 
+      // Only send chart_id if it's a real UUID (not the 'user' placeholder)
+      final chartIdForDb = _selectedChartId != null && _selectedChartId != 'user'
+          ? _selectedChartId
+          : null;
+
       await ref.read(feedNotifierProvider.notifier).createPost(
             content: content,
             postType: _selectedType,
             visibility: _visibility,
             mediaUrls: mediaUrls,
-            chartId: _selectedChartId,
+            chartId: chartIdForDb,
             chartData: chartData,
             gateNumber: _selectedGate,
             channelId: _selectedChannelId,
