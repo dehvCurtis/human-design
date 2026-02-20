@@ -73,6 +73,7 @@ import '../../features/dream_journal/presentation/dream_entry_screen.dart';
 import '../../features/events/presentation/events_screen.dart';
 import '../../features/events/presentation/event_detail_screen.dart';
 import '../../features/events/presentation/create_event_screen.dart';
+import '../../features/social/presentation/group_detail_screen.dart';
 
 /// Route names
 class AppRoutes {
@@ -170,6 +171,9 @@ class AppRoutes {
   static const String dreamJournal = '/dream-journal';
   static const String dreamEntry = '/dream-journal/new';
   static const String journalPrompts = '/journal-prompts';
+
+  // Group detail route
+  static const String groupDetail = '/group/:id';
 
   // Community events routes
   static const String events = '/events';
@@ -430,6 +434,14 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) {
               final id = state.pathParameters['id']!;
               return TeamDetailScreen(teamId: id);
+            },
+          ),
+          GoRoute(
+            path: '/group/:id',
+            name: 'groupDetail',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return GroupDetailScreen(groupId: id);
             },
           ),
           GoRoute(
@@ -909,6 +921,7 @@ class MainShell extends StatelessWidget {
         location.startsWith(AppRoutes.messages) ||
         location.startsWith(AppRoutes.stories) ||
         location.startsWith(AppRoutes.circles) ||
+        location.startsWith('/group/') ||
         location.startsWith(AppRoutes.events) ||
         location.startsWith('/event')) {
       return 3;

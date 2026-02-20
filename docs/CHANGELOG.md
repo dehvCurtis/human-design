@@ -2,6 +2,65 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.18] - 2026-02-19
+
+### Added
+
+#### HD Study Circles (Groups Detail Screen)
+- **Group Detail Screen** - Full 3-tab group experience (Members, Shared Charts, Feed)
+  - Members tab: view members with HD type badges, role chips (admin/member)
+  - Shared Charts tab: browse charts shared to the group, share your own charts via chart picker
+  - Feed tab: inline post composer with group discussion, delete own posts
+- **Admin Controls** - Group admins can promote/demote members, remove members, edit group name/description, delete group
+- **Friends-Only Invite** - Invite system limited to followed users to prevent spam
+  - Search with 400ms debounce, results show user name, avatar, HD type
+- **Chart Sharing to Groups** - Share saved charts exclusively within a group via bottom sheet picker
+- **Group Posts Table** - New `group_posts` database table with RLS policies
+  - SELECT/INSERT gated by `get_user_group_ids()` security definer function
+  - DELETE allows post author or group admin
+  - CHECK constraint on content length (1-5000 chars)
+- **Group Validation** - CHECK constraints on groups table (name 1-100 chars, description max 500 chars)
+
+#### Apple Sign-In Fix
+- **Cancellation Handling** - Apple Sign-In no longer flashes and disappears
+  - Detects `AuthorizationErrorCode.canceled` and `ASAuthorizationError 1001`
+  - Returns to unauthenticated state instead of showing error
+  - Applied to both sign-in and sign-up screens
+
+#### Unit Tests
+- **Group Detail Tests** - 16 tests for GroupPost/UserSearchResult parsing, validation constants, Group/GroupMember models, InviteSearchParams equality
+- Total test count: 183 (up from 167)
+
+### Changed
+
+#### Security (Defense-in-Depth)
+- UI: admin actions conditionally rendered, maxLength on all inputs
+- Repository: auth check, admin role check, input length validation on every method
+- Database RLS: SECURITY DEFINER functions gate all operations
+- DB Constraints: CHECK constraints on text lengths
+- Error Display: ErrorHandler.getUserMessage() sanitizes all errors
+
+### Technical Details
+
+Database migration:
+- `20260220100000_group_posts.sql` - group_posts table, RLS policies, CHECK constraints
+
+New files:
+- `lib/features/social/presentation/group_detail_screen.dart` - 3-tab group detail UI
+- `test/group_detail_test.dart` - 16 unit tests
+
+Files modified:
+- `social_repository.dart` - 8 new methods (updateGroup, deleteGroup, updateMemberRole, getGroupPosts, createGroupPost, deleteGroupPost, getGroupSharedCharts, searchUsersForInvite) + GroupPost/UserSearchResult models
+- `social_providers.dart` - 4 new providers + 8 notifier methods
+- `app_router.dart` - New `/group/:id` route
+- `social_screen.dart` - Fixed group navigation (was going to Penta)
+- `auth_errors.dart` - Added isAppleSignInCancelled()
+- `auth_providers.dart` - Catches Apple Sign-In cancellation
+- `sign_in_screen.dart`, `sign_up_screen.dart` - Skip error display on cancellation
+- 8 ARB files + generated l10n files - ~35 new group localization keys
+
+---
+
 ## [0.2.17] - 2026-02-20
 
 ### Fixed

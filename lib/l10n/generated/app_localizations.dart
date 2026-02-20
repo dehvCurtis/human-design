@@ -6391,6 +6391,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share Reading'**
   String get ai_shareReading;
+
+  /// No description provided for @group_notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Group not found'**
+  String get group_notFound;
+
+  /// No description provided for @group_members.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get group_members;
+
+  /// No description provided for @group_sharedCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared Charts'**
+  String get group_sharedCharts;
+
+  /// No description provided for @group_feed.
+  ///
+  /// In en, this message translates to:
+  /// **'Feed'**
+  String get group_feed;
+
+  /// No description provided for @group_invite.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite'**
+  String get group_invite;
+
+  /// No description provided for @group_inviteMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite Members'**
+  String get group_inviteMembers;
+
+  /// No description provided for @group_searchUsers.
+  ///
+  /// In en, this message translates to:
+  /// **'Search friends by name...'**
+  String get group_searchUsers;
+
+  /// No description provided for @group_searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type at least 2 characters to search your friends'**
+  String get group_searchHint;
+
+  /// No description provided for @group_noUsersFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No friends found'**
+  String get group_noUsersFound;
+
+  /// No description provided for @group_memberAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} added to group'**
+  String group_memberAdded(String name);
+
+  /// No description provided for @group_addMemberFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add member'**
+  String get group_addMemberFailed;
+
+  /// No description provided for @group_noMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'No members yet'**
+  String get group_noMembers;
+
+  /// No description provided for @group_promote.
+  ///
+  /// In en, this message translates to:
+  /// **'Promote to Admin'**
+  String get group_promote;
+
+  /// No description provided for @group_demote.
+  ///
+  /// In en, this message translates to:
+  /// **'Demote to Member'**
+  String get group_demote;
+
+  /// No description provided for @group_removeMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get group_removeMember;
+
+  /// No description provided for @group_promoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Promote Member'**
+  String get group_promoteTitle;
+
+  /// No description provided for @group_promoteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Make {name} an admin of this group?'**
+  String group_promoteConfirmation(String name);
+
+  /// No description provided for @group_demoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Demote Member'**
+  String get group_demoteTitle;
+
+  /// No description provided for @group_demoteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove admin role from {name}?'**
+  String group_demoteConfirmation(String name);
+
+  /// No description provided for @group_removeMemberTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Member'**
+  String get group_removeMemberTitle;
+
+  /// No description provided for @group_removeMemberConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name} from this group?'**
+  String group_removeMemberConfirmation(String name);
+
+  /// No description provided for @group_editName.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Name'**
+  String get group_editName;
+
+  /// No description provided for @group_editDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Description'**
+  String get group_editDescription;
+
+  /// No description provided for @group_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Group'**
+  String get group_delete;
+
+  /// No description provided for @group_deleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Group'**
+  String get group_deleteTitle;
+
+  /// No description provided for @group_deleteConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{name}\"? This cannot be undone.'**
+  String group_deleteConfirmation(String name);
+
+  /// No description provided for @group_deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Group deleted'**
+  String get group_deleted;
+
+  /// No description provided for @group_leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Group'**
+  String get group_leave;
+
+  /// No description provided for @group_leaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Group'**
+  String get group_leaveTitle;
+
+  /// No description provided for @group_leaveConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to leave \"{name}\"?'**
+  String group_leaveConfirmation(String name);
+
+  /// No description provided for @group_left.
+  ///
+  /// In en, this message translates to:
+  /// **'You left the group'**
+  String get group_left;
+
+  /// No description provided for @group_updated.
+  ///
+  /// In en, this message translates to:
+  /// **'Group updated'**
+  String get group_updated;
+
+  /// No description provided for @group_noSharedCharts.
+  ///
+  /// In en, this message translates to:
+  /// **'No Shared Charts'**
+  String get group_noSharedCharts;
+
+  /// No description provided for @group_noSharedChartsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your chart with the group from the chart screen.'**
+  String get group_noSharedChartsMessage;
+
+  /// No description provided for @group_writePost.
+  ///
+  /// In en, this message translates to:
+  /// **'Write something...'**
+  String get group_writePost;
+
+  /// No description provided for @group_noPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No Posts Yet'**
+  String get group_noPosts;
+
+  /// No description provided for @group_beFirstToPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Start the conversation!'**
+  String get group_beFirstToPost;
+
+  /// No description provided for @group_deletePostConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this post?'**
+  String get group_deletePostConfirmation;
+
+  /// No description provided for @group_shareChart.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Chart'**
+  String get group_shareChart;
+
+  /// No description provided for @group_share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get group_share;
+
+  /// No description provided for @group_chartShared.
+  ///
+  /// In en, this message translates to:
+  /// **'Chart shared with group'**
+  String get group_chartShared;
+
+  /// No description provided for @group_noChartsToShare.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved charts to share. Create a chart first.'**
+  String get group_noChartsToShare;
 }
 
 class _AppLocalizationsDelegate

@@ -134,7 +134,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     try {
       await ref.read(authNotifierProvider.notifier).signInWithApple();
     } catch (e) {
-      if (mounted) {
+      if (mounted && !AuthErrorMessages.isAppleSignInCancelled(e)) {
         setState(() {
           _errorMessage = AuthErrorMessages.fromException(e);
         });

@@ -108,6 +108,11 @@ class AuthNotifier extends Notifier<AppAuthState> {
         state = AppAuthState.error('Apple sign in failed. Please try again.');
       }
     } catch (e, stackTrace) {
+      // User cancelled the Apple Sign In dialog — not an error
+      if (AuthErrorMessages.isAppleSignInCancelled(e)) {
+        state = AppAuthState.unauthenticated();
+        return;
+      }
       debugPrint('Apple sign-in error: $e');
       debugPrint('Stack trace: $stackTrace');
       state = AppAuthState.error(AuthErrorMessages.fromException(e));

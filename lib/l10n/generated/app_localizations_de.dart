@@ -3488,4 +3488,145 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get ai_shareReading => 'Lesung teilen';
+
+  @override
+  String get group_notFound => 'Gruppe nicht gefunden';
+
+  @override
+  String get group_members => 'Mitglieder';
+
+  @override
+  String get group_sharedCharts => 'Geteilte Charts';
+
+  @override
+  String get group_feed => 'Feed';
+
+  @override
+  String get group_invite => 'Einladen';
+
+  @override
+  String get group_inviteMembers => 'Mitglieder einladen';
+
+  @override
+  String get group_searchUsers => 'Nach Name suchen...';
+
+  @override
+  String get group_searchHint => 'Mindestens 2 Zeichen eingeben, um zu suchen';
+
+  @override
+  String get group_noUsersFound => 'Keine Benutzer gefunden';
+
+  @override
+  String group_memberAdded(String name) {
+    return '$name zur Gruppe hinzugefügt';
+  }
+
+  @override
+  String get group_addMemberFailed =>
+      'Mitglied konnte nicht hinzugefügt werden';
+
+  @override
+  String get group_noMembers => 'Noch keine Mitglieder';
+
+  @override
+  String get group_promote => 'Zum Administrator ernennen';
+
+  @override
+  String get group_demote => 'Administratorrechte entziehen';
+
+  @override
+  String get group_removeMember => 'Entfernen';
+
+  @override
+  String get group_promoteTitle => 'Mitglied befördern';
+
+  @override
+  String group_promoteConfirmation(String name) {
+    return '$name zum Administrator dieser Gruppe machen?';
+  }
+
+  @override
+  String get group_demoteTitle => 'Mitglied degradieren';
+
+  @override
+  String group_demoteConfirmation(String name) {
+    return 'Administratorrolle von $name entfernen?';
+  }
+
+  @override
+  String get group_removeMemberTitle => 'Mitglied entfernen';
+
+  @override
+  String group_removeMemberConfirmation(String name) {
+    return '$name aus dieser Gruppe entfernen?';
+  }
+
+  @override
+  String get group_editName => 'Name bearbeiten';
+
+  @override
+  String get group_editDescription => 'Beschreibung bearbeiten';
+
+  @override
+  String get group_delete => 'Gruppe löschen';
+
+  @override
+  String get group_deleteTitle => 'Gruppe löschen';
+
+  @override
+  String group_deleteConfirmation(String name) {
+    return 'Möchten Sie \"$name\" wirklich löschen? Dies kann nicht rückgängig gemacht werden.';
+  }
+
+  @override
+  String get group_deleted => 'Gruppe gelöscht';
+
+  @override
+  String get group_leave => 'Gruppe verlassen';
+
+  @override
+  String get group_leaveTitle => 'Gruppe verlassen';
+
+  @override
+  String group_leaveConfirmation(String name) {
+    return 'Möchten Sie \"$name\" wirklich verlassen?';
+  }
+
+  @override
+  String get group_left => 'Sie haben die Gruppe verlassen';
+
+  @override
+  String get group_updated => 'Gruppe aktualisiert';
+
+  @override
+  String get group_noSharedCharts => 'Keine geteilten Charts';
+
+  @override
+  String get group_noSharedChartsMessage =>
+      'Teilen Sie Ihren Chart mit der Gruppe über den Chart-Bildschirm.';
+
+  @override
+  String get group_writePost => 'Schreiben Sie etwas...';
+
+  @override
+  String get group_noPosts => 'Noch keine Beiträge';
+
+  @override
+  String get group_beFirstToPost => 'Beginnen Sie das Gespräch!';
+
+  @override
+  String get group_deletePostConfirmation => 'Diesen Beitrag löschen?';
+
+  @override
+  String get group_shareChart => 'Karte teilen';
+
+  @override
+  String get group_share => 'Teilen';
+
+  @override
+  String get group_chartShared => 'Karte wurde mit der Gruppe geteilt';
+
+  @override
+  String get group_noChartsToShare =>
+      'Keine gespeicherten Karten zum Teilen. Erstelle zuerst eine Karte.';
 }

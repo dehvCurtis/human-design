@@ -28,7 +28,13 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - **Comments System** - Reply to comments, like comments, delete own comments, nested replies
 - **Stories** - 24-hour ephemeral content with HD color themes
 - **Direct Messaging** - Real-time conversations with chart/transit sharing
-- **Groups** - Build your HD community with group sharing
+- **HD Study Circles (Groups)** - Full group experience with member management, group feed, and chart sharing
+  - 3-tab group detail: Members, Shared Charts, Feed
+  - Admin controls: promote/demote members, edit group, delete group
+  - Friends-only invite system to prevent spam
+  - Share charts exclusively within your group
+  - Group discussion feed with post composer
+  - Defense-in-depth security (UI, repository, RLS, DB constraints)
 - **Telegram Support** - Direct support channel accessible from Settings
 
 ### Learning & Quizzes
@@ -189,7 +195,7 @@ Sun, Earth, Moon, North Node, South Node, Mercury, Venus, Mars, Jupiter, Saturn,
 ## Testing
 
 ```bash
-# Run all tests (167 passing)
+# Run all tests (183 passing)
 flutter test
 
 # Run specific test suites
@@ -200,6 +206,7 @@ flutter test test/ai_usage_test.dart           # AI quota & usage
 flutter test test/auth_repository_test.dart    # Nonce generation & SHA-256
 flutter test test/auth_notifier_test.dart      # Auth state & error handling
 flutter test test/create_post_chart_id_test.dart  # Chart ID sentinel logic
+flutter test test/group_detail_test.dart         # Group models & validation
 ```
 
 ## Key Commands

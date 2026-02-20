@@ -1531,5 +1531,78 @@
   "ai_askFollowUp": "Ask Follow-up",
   "ai_regenerate": "Regenerate",
   "ai_exportPdf": "Export PDF",
-  "ai_shareReading": "Share Reading"
+  "ai_shareReading": "Share Reading",
+
+  "group_notFound": "Group not found",
+  "group_members": "Members",
+  "group_sharedCharts": "Shared Charts",
+  "group_feed": "Feed",
+  "group_invite": "Invite",
+  "group_inviteMembers": "Invite Members",
+  "group_searchUsers": "Search friends by name...",
+  "group_searchHint": "Type at least 2 characters to search your friends",
+  "group_noUsersFound": "No friends found",
+  "group_memberAdded": "{name} added to group",
+  "@group_memberAdded": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "group_addMemberFailed": "Failed to add member",
+  "group_noMembers": "No members yet",
+  "group_promote": "Promote to Admin",
+  "group_demote": "Demote to Member",
+  "group_removeMember": "Remove",
+  "group_promoteTitle": "Promote Member",
+  "group_promoteConfirmation": "Make {name} an admin of this group?",
+  "@group_promoteConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "group_demoteTitle": "Demote Member",
+  "group_demoteConfirmation": "Remove admin role from {name}?",
+  "@group_demoteConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "group_removeMemberTitle": "Remove Member",
+  "group_removeMemberConfirmation": "Remove {name} from this group?",
+  "@group_removeMemberConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "group_editName": "Edit Name",
+  "group_editDescription": "Edit Description",
+  "group_delete": "Delete Group",
+  "group_deleteTitle": "Delete Group",
+  "group_deleteConfirmation": "Are you sure you want to delete \"{name}\"? This cannot be undone.",
+  "@group_deleteConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "group_deleted": "Group deleted",
+  "group_leave": "Leave Group",
+  "group_leaveTitle": "Leave Group",
+  "group_leaveConfirmation": "Are you sure you want to leave \"{name}\"?",
+  "@group_leaveConfirmation": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "group_left": "You left the group",
+  "group_updated": "Group updated",
+  "group_noSharedCharts": "No Shared Charts",
+  "group_noSharedChartsMessage": "Share your chart with the group from the chart screen.",
+  "group_writePost": "Write something...",
+  "group_noPosts": "No Posts Yet",
+  "group_beFirstToPost": "Start the conversation!",
+  "group_deletePostConfirmation": "Delete this post?",
+  "group_shareChart": "Share Chart",
+  "group_share": "Share",
+  "group_chartShared": "Chart shared with group",
+  "group_noChartsToShare": "No saved charts to share. Create a chart first."
 }

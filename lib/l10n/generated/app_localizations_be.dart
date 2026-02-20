@@ -3453,4 +3453,144 @@ class AppLocalizationsBe extends AppLocalizations {
 
   @override
   String get ai_shareReading => 'Падзяліцца чытаннем';
+
+  @override
+  String get group_notFound => 'Група не знойдзена';
+
+  @override
+  String get group_members => 'Удзельнікі';
+
+  @override
+  String get group_sharedCharts => 'Агульныя карты';
+
+  @override
+  String get group_feed => 'Стужка';
+
+  @override
+  String get group_invite => 'Запрасіць';
+
+  @override
+  String get group_inviteMembers => 'Запрасіць удзельнікаў';
+
+  @override
+  String get group_searchUsers => 'Пошук па імені...';
+
+  @override
+  String get group_searchHint => 'Увядзіце не менш за 2 сімвалы для пошуку';
+
+  @override
+  String get group_noUsersFound => 'Карыстальнікі не знойдзены';
+
+  @override
+  String group_memberAdded(String name) {
+    return '$name дададзены ў групу';
+  }
+
+  @override
+  String get group_addMemberFailed => 'Не ўдалося дадаць удзельніка';
+
+  @override
+  String get group_noMembers => 'Удзельнікаў пакуль няма';
+
+  @override
+  String get group_promote => 'Прызначыць адміністратарам';
+
+  @override
+  String get group_demote => 'Зняць правы адміністратара';
+
+  @override
+  String get group_removeMember => 'Выдаліць';
+
+  @override
+  String get group_promoteTitle => 'Прызначыць адміністратара';
+
+  @override
+  String group_promoteConfirmation(String name) {
+    return 'Зрабіць $name адміністратарам гэтай групы?';
+  }
+
+  @override
+  String get group_demoteTitle => 'Зняць правы адміністратара';
+
+  @override
+  String group_demoteConfirmation(String name) {
+    return 'Зняць ролю адміністратара з $name?';
+  }
+
+  @override
+  String get group_removeMemberTitle => 'Выдаліць удзельніка';
+
+  @override
+  String group_removeMemberConfirmation(String name) {
+    return 'Выдаліць $name з гэтай групы?';
+  }
+
+  @override
+  String get group_editName => 'Змяніць назву';
+
+  @override
+  String get group_editDescription => 'Змяніць апісанне';
+
+  @override
+  String get group_delete => 'Выдаліць групу';
+
+  @override
+  String get group_deleteTitle => 'Выдаліць групу';
+
+  @override
+  String group_deleteConfirmation(String name) {
+    return 'Вы ўпэўнены, што хочаце выдаліць \"$name\"? Гэта дзеянне нельга адмяніць.';
+  }
+
+  @override
+  String get group_deleted => 'Групу выдалена';
+
+  @override
+  String get group_leave => 'Пакінуць групу';
+
+  @override
+  String get group_leaveTitle => 'Пакінуць групу';
+
+  @override
+  String group_leaveConfirmation(String name) {
+    return 'Вы ўпэўнены, што хочаце пакінуць \"$name\"?';
+  }
+
+  @override
+  String get group_left => 'Вы пакінулі групу';
+
+  @override
+  String get group_updated => 'Групу абноўлена';
+
+  @override
+  String get group_noSharedCharts => 'Няма агульных карт';
+
+  @override
+  String get group_noSharedChartsMessage =>
+      'Падзяліцеся сваёй картай з групай з экрана карты.';
+
+  @override
+  String get group_writePost => 'Напішыце нешта...';
+
+  @override
+  String get group_noPosts => 'Публікацый пакуль няма';
+
+  @override
+  String get group_beFirstToPost => 'Пачніце размову!';
+
+  @override
+  String get group_deletePostConfirmation => 'Выдаліць гэту публікацыю?';
+
+  @override
+  String get group_shareChart => 'Падзяліцца картай';
+
+  @override
+  String get group_share => 'Падзяліцца';
+
+  @override
+  String get group_chartShared => 'Карта падзелена з групай';
+
+  @override
+  String get group_noChartsToShare =>
+      'Няма захаваных карт для абагульвання. Спачатку стварыце карту.';
 }

@@ -128,7 +128,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         });
       }
     } catch (e) {
-      if (mounted) {
+      if (mounted && !AuthErrorMessages.isAppleSignInCancelled(e)) {
         setState(() {
           _errorMessage = AuthErrorMessages.fromException(e);
         });

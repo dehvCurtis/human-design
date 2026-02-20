@@ -471,8 +471,7 @@ class _GroupsTab extends ConsumerWidget {
               return _GroupCard(
                 group: group,
                 onTap: () {
-                  // Navigate to group penta analysis
-                  context.push(AppRoutes.penta);
+                  context.push('/group/${group.id}');
                 },
               );
             },
