@@ -114,7 +114,6 @@
   "auth_signUpSubtitle": "Start your Human Design journey today",
   "auth_signUpWithApple": "Sign up with Apple",
   "auth_signUpWithGoogle": "Sign up with Google",
-  "auth_signUpWithMicrosoft": "Sign up with Microsoft",
   "auth_enterName": "Enter your name",
   "auth_nameRequired": "Name is required",
   "auth_termsOfService": "Terms of Service",

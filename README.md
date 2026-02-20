@@ -71,7 +71,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 |-----------|------------|
 | Framework | Flutter 3.x (Dart) |
 | State Management | Riverpod |
-| Backend | Supabase (Auth, Database, Realtime) |
+| Backend | Supabase (Auth, Database, Realtime, Storage) |
 | Chart Calculations | Swiss Ephemeris (sweph) |
 | Navigation | GoRouter |
 | Subscriptions | RevenueCat |
@@ -130,7 +130,7 @@ lib/
 │   ├── router/           # GoRouter navigation
 │   └── theme/            # Design system (colors, typography)
 ├── features/
-│   ├── auth/             # Authentication (email, Apple, Google, Microsoft)
+│   ├── auth/             # Authentication (email, native Apple, Google OAuth)
 │   ├── ai_assistant/     # AI chat (Claude/Gemini/OpenAI)
 │   ├── chart/            # Chart calculation & bodygraph display
 │   ├── composite/        # Relationship charts

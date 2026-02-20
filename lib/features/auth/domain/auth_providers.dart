@@ -100,8 +100,12 @@ class AuthNotifier extends Notifier<AppAuthState> {
   Future<void> signInWithApple() async {
     state = AppAuthState.loading();
     try {
-      await _repository.signInWithApple();
-      // OAuth flow will redirect, state will be updated by auth listener
+      final response = await _repository.signInWithApple();
+      if (response.user != null) {
+        state = AppAuthState.authenticated(response.user!);
+      } else {
+        state = AppAuthState.error('Apple sign in failed. Please try again.');
+      }
     } catch (e) {
       state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }
@@ -111,16 +115,6 @@ class AuthNotifier extends Notifier<AppAuthState> {
     state = AppAuthState.loading();
     try {
       await _repository.signInWithGoogle();
-      // OAuth flow will redirect, state will be updated by auth listener
-    } catch (e) {
-      state = AppAuthState.error(AuthErrorMessages.fromException(e));
-    }
-  }
-
-  Future<void> signInWithMicrosoft() async {
-    state = AppAuthState.loading();
-    try {
-      await _repository.signInWithMicrosoft();
       // OAuth flow will redirect, state will be updated by auth listener
     } catch (e) {
       state = AppAuthState.error(AuthErrorMessages.fromException(e));

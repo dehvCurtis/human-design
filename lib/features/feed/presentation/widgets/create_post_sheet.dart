@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -521,7 +522,9 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
           const SnackBar(content: Text('Post created successfully!')),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Create post error: $e');
+      debugPrint('Stack trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(ErrorHandler.getUserMessage(e, context: 'create post'))),

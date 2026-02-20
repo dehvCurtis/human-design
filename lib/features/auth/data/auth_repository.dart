@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
-import 'package:supabase_flutter/supabase_flutter.dart' show User, UserAttributes, UserResponse, OAuthProvider, LaunchMode;
-import 'package:uuid/uuid.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show User, UserAttributes, UserResponse, OAuthProvider;
+import 'package:url_launcher/url_launcher.dart' show LaunchMode;
 
 /// Repository for authentication operations
 class AuthRepository {
@@ -12,9 +15,6 @@ class AuthRepository {
       : _client = supabaseClient;
 
   final supabase.SupabaseClient _client;
-
-  /// Pending OAuth state for CSRF protection
-  String? _pendingOAuthState;
 
   /// Get the current user
   User? get currentUser => _client.auth.currentUser;
@@ -47,62 +47,45 @@ class AuthRepository {
     );
   }
 
-  /// Sign in with Apple
-  ///
-  /// Includes CSRF protection via state parameter.
-  Future<bool> signInWithApple() async {
-    _pendingOAuthState = const Uuid().v4();
-    return await _client.auth.signInWithOAuth(
-      OAuthProvider.apple,
-      redirectTo: _getRedirectUrl(),
-      authScreenLaunchMode: LaunchMode.externalApplication,
-      queryParams: {'state': _pendingOAuthState!},
+  /// Sign in with Apple (native)
+  Future<supabase.AuthResponse> signInWithApple() async {
+    final rawNonce = _generateNonce();
+    final hashedNonce = sha256.convert(utf8.encode(rawNonce)).toString();
+
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: hashedNonce,
+    );
+
+    final idToken = credential.identityToken;
+    if (idToken == null) {
+      throw const supabase.AuthException('Apple Sign-In failed: no identity token received.');
+    }
+
+    return await _client.auth.signInWithIdToken(
+      provider: OAuthProvider.apple,
+      idToken: idToken,
+      nonce: rawNonce,
     );
   }
 
+  /// Generate a cryptographically secure nonce
+  String _generateNonce([int length = 32]) {
+    const charset = '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(length, (_) => charset[random.nextInt(charset.length)]).join();
+  }
+
   /// Sign in with Google
-  ///
-  /// Includes CSRF protection via state parameter.
   Future<bool> signInWithGoogle() async {
-    _pendingOAuthState = const Uuid().v4();
     return await _client.auth.signInWithOAuth(
       OAuthProvider.google,
       redirectTo: _getRedirectUrl(),
       authScreenLaunchMode: LaunchMode.externalApplication,
-      queryParams: {'state': _pendingOAuthState!},
     );
-  }
-
-  /// Sign in with Microsoft (Azure)
-  Future<bool> signInWithMicrosoft() async {
-    _pendingOAuthState = const Uuid().v4();
-    return await _client.auth.signInWithOAuth(
-      OAuthProvider.azure,
-      redirectTo: _getRedirectUrl(),
-      authScreenLaunchMode: LaunchMode.externalApplication,
-      queryParams: {'state': _pendingOAuthState!},
-    );
-  }
-
-  /// Validate OAuth state parameter (call after OAuth redirect)
-  ///
-  /// Returns true if state matches, false otherwise.
-  /// Always clears the pending state after validation.
-  ///
-  /// Note: With PKCE auth flow enabled (AuthFlowType.pkce), CSRF protection
-  /// is already provided by the code_verifier/code_challenge exchange.
-  /// This state parameter provides additional defense-in-depth.
-  bool validateOAuthState(String? returnedState) {
-    final isValid = _pendingOAuthState != null &&
-        returnedState != null &&
-        _pendingOAuthState == returnedState;
-    _pendingOAuthState = null;
-    return isValid;
-  }
-
-  /// Clear pending OAuth state (call on cancel or error)
-  void clearPendingOAuthState() {
-    _pendingOAuthState = null;
   }
 
   /// Sign out

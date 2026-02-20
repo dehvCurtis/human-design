@@ -39,7 +39,7 @@ CREATE TRIGGER on_auth_user_created
 
 -- ==================== Charts ====================
 CREATE TABLE public.charts (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   name TEXT NOT NULL,
   birth_datetime TIMESTAMPTZ NOT NULL,
@@ -62,7 +62,7 @@ CREATE INDEX idx_charts_visibility ON public.charts(visibility);
 
 -- ==================== Friendships ====================
 CREATE TABLE public.friendships (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   friend_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'blocked')),
@@ -77,7 +77,7 @@ CREATE INDEX idx_friendships_status ON public.friendships(status);
 
 -- ==================== Groups ====================
 CREATE TABLE public.groups (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT,
   avatar_url TEXT,
@@ -87,7 +87,7 @@ CREATE TABLE public.groups (
 );
 
 CREATE TABLE public.group_members (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   group_id UUID REFERENCES public.groups(id) ON DELETE CASCADE NOT NULL,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   role TEXT DEFAULT 'member' CHECK (role IN ('admin', 'member')),
@@ -100,7 +100,7 @@ CREATE INDEX idx_group_members_user_id ON public.group_members(user_id);
 
 -- ==================== Shares ====================
 CREATE TABLE public.shares (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   chart_id UUID REFERENCES public.charts(id) ON DELETE CASCADE NOT NULL,
   shared_by UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   shared_with UUID REFERENCES public.profiles(id) ON DELETE CASCADE,
@@ -123,7 +123,7 @@ CREATE INDEX idx_shares_group_id ON public.shares(group_id);
 
 -- ==================== Comments ====================
 CREATE TABLE public.comments (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   chart_id UUID REFERENCES public.charts(id) ON DELETE CASCADE NOT NULL,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content TEXT NOT NULL,
@@ -140,7 +140,7 @@ CREATE INDEX idx_comments_parent_id ON public.comments(parent_id);
 
 -- ==================== Saved Affirmations ====================
 CREATE TABLE public.saved_affirmations (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   text TEXT NOT NULL,
   source TEXT NOT NULL,
@@ -152,7 +152,7 @@ CREATE INDEX idx_saved_affirmations_user_id ON public.saved_affirmations(user_id
 
 -- ==================== Journal Entries ====================
 CREATE TABLE public.journal_entries (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content TEXT NOT NULL,
   mood INTEGER CHECK (mood >= 1 AND mood <= 5),
@@ -167,7 +167,7 @@ CREATE INDEX idx_journal_entries_created_at ON public.journal_entries(created_at
 
 -- ==================== Pentas ====================
 CREATE TABLE public.pentas (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   created_by UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   member_ids UUID[] NOT NULL,

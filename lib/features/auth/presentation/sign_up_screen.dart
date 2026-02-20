@@ -29,7 +29,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   bool _isLoading = false;
   bool _isGoogleLoading = false;
   bool _isAppleLoading = false;
-  bool _isMicrosoftLoading = false;
   bool _acceptedTerms = false;
   String? _errorMessage;
   bool _showConfirmationMessage = false;
@@ -137,34 +136,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     }
   }
 
-  Future<void> _signUpWithMicrosoft() async {
-    setState(() {
-      _isMicrosoftLoading = true;
-      _errorMessage = null;
-    });
-
-    try {
-      await ref.read(authNotifierProvider.notifier).signInWithMicrosoft();
-    } catch (e) {
-      if (mounted) {
-        setState(() {
-          _errorMessage = AuthErrorMessages.fromException(e);
-        });
-      }
-    } finally {
-      if (mounted) {
-        setState(() {
-          _isMicrosoftLoading = false;
-        });
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final anyLoading = _isLoading || _isGoogleLoading || _isAppleLoading || _isMicrosoftLoading;
+    final anyLoading = _isLoading || _isGoogleLoading || _isAppleLoading;
     final l10n = AppLocalizations.of(context)!;
 
     // Show confirmation success screen
@@ -318,12 +294,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   onPressed: anyLoading ? null : _signUpWithGoogle,
                   isLoading: _isGoogleLoading,
                   label: l10n.auth_signUpWithGoogle,
-                ),
-                const SizedBox(height: 12),
-                MicrosoftSignInButton(
-                  onPressed: anyLoading ? null : _signUpWithMicrosoft,
-                  isLoading: _isMicrosoftLoading,
-                  label: l10n.auth_signUpWithMicrosoft,
                 ),
 
                 const OAuthDivider(),

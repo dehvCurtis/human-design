@@ -18,7 +18,7 @@ ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS following_count INTEGER DEF
 
 -- ==================== User Follows (Twitter-style) ====================
 CREATE TABLE public.user_follows (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   follower_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   following_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -51,7 +51,7 @@ CREATE TRIGGER on_follow_change
 
 -- ==================== Posts (Content Feed) ====================
 CREATE TABLE public.posts (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content TEXT NOT NULL,
   post_type TEXT NOT NULL CHECK (post_type IN ('insight', 'reflection', 'transit_share', 'chart_share', 'question', 'achievement')),
@@ -78,7 +78,7 @@ CREATE INDEX idx_posts_gate_number ON public.posts(gate_number) WHERE gate_numbe
 
 -- ==================== Post Comments ====================
 CREATE TABLE public.post_comments (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   post_id UUID REFERENCES public.posts(id) ON DELETE CASCADE NOT NULL,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content TEXT NOT NULL,
@@ -111,7 +111,7 @@ CREATE TRIGGER on_post_comment_change
 
 -- ==================== Reactions ====================
 CREATE TABLE public.reactions (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   post_id UUID REFERENCES public.posts(id) ON DELETE CASCADE,
   comment_id UUID REFERENCES public.post_comments(id) ON DELETE CASCADE,
@@ -156,7 +156,7 @@ CREATE TRIGGER on_reaction_change
 
 -- ==================== Stories (24h Ephemeral) ====================
 CREATE TABLE public.stories (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content TEXT,
   media_url TEXT,
@@ -176,7 +176,7 @@ CREATE INDEX idx_stories_created_at ON public.stories(created_at DESC);
 
 -- Story views tracking
 CREATE TABLE public.story_views (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   story_id UUID REFERENCES public.stories(id) ON DELETE CASCADE NOT NULL,
   viewer_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   viewed_at TIMESTAMPTZ DEFAULT NOW(),
@@ -201,7 +201,7 @@ CREATE TRIGGER on_story_view
 
 -- ==================== Direct Messaging ====================
 CREATE TABLE public.conversations (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   participant_ids UUID[] NOT NULL,
   last_message_at TIMESTAMPTZ DEFAULT NOW(),
   last_message_preview TEXT,
@@ -213,7 +213,7 @@ CREATE INDEX idx_conversations_participants ON public.conversations USING GIN (p
 CREATE INDEX idx_conversations_last_message ON public.conversations(last_message_at DESC);
 
 CREATE TABLE public.direct_messages (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   conversation_id UUID REFERENCES public.conversations(id) ON DELETE CASCADE NOT NULL,
   sender_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content TEXT NOT NULL,
@@ -250,7 +250,7 @@ CREATE TRIGGER on_new_message
 
 -- ==================== Gamification: Points ====================
 CREATE TABLE public.user_points (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL UNIQUE,
   total_points INTEGER DEFAULT 0,
   current_level INTEGER DEFAULT 1,
@@ -270,7 +270,7 @@ CREATE INDEX idx_user_points_weekly ON public.user_points(weekly_points DESC);
 CREATE INDEX idx_user_points_monthly ON public.user_points(monthly_points DESC);
 
 CREATE TABLE public.point_transactions (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   points INTEGER NOT NULL,
   action_type TEXT NOT NULL CHECK (action_type IN (
@@ -350,7 +350,7 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
 -- ==================== Gamification: Badges ====================
 CREATE TABLE public.badges (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
   description TEXT NOT NULL,
   icon_name TEXT NOT NULL,
@@ -391,7 +391,7 @@ INSERT INTO public.badges (name, description, icon_name, category, requirement_t
 ('helper', 'Received 100 reactions on comments', 'volunteer_activism', 'achievement', 'count', 100, 75, 42);
 
 CREATE TABLE public.user_badges (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   badge_id UUID REFERENCES public.badges(id) ON DELETE CASCADE NOT NULL,
   earned_at TIMESTAMPTZ DEFAULT NOW(),
@@ -406,7 +406,7 @@ CREATE INDEX idx_user_badges_earned_at ON public.user_badges(earned_at);
 
 -- ==================== Gamification: Challenges ====================
 CREATE TABLE public.challenges (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   challenge_type TEXT NOT NULL CHECK (challenge_type IN ('daily', 'weekly', 'monthly', 'special')),
@@ -440,7 +440,7 @@ INSERT INTO public.challenges (title, description, challenge_type, action_type, 
 ('Social Star', 'Add 2 new connections', 'weekly', 'friend_added', 2, 40);
 
 CREATE TABLE public.user_challenges (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   challenge_id UUID REFERENCES public.challenges(id) ON DELETE CASCADE NOT NULL,
   progress INTEGER DEFAULT 0,
@@ -457,7 +457,7 @@ CREATE INDEX idx_user_challenges_completed ON public.user_challenges(is_complete
 
 -- ==================== Content Library ====================
 CREATE TABLE public.content_library (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
   content TEXT NOT NULL,
   content_type TEXT NOT NULL CHECK (content_type IN ('article', 'guide', 'quiz', 'video', 'infographic')),
@@ -488,7 +488,7 @@ CREATE INDEX idx_content_library_published ON public.content_library(is_publishe
 CREATE INDEX idx_content_library_premium ON public.content_library(is_premium);
 
 CREATE TABLE public.content_progress (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content_id UUID REFERENCES public.content_library(id) ON DELETE CASCADE NOT NULL,
   is_completed BOOLEAN DEFAULT FALSE,
@@ -503,7 +503,7 @@ CREATE INDEX idx_content_progress_user ON public.content_progress(user_id);
 
 -- ==================== Mentorship ====================
 CREATE TABLE public.mentorship_profiles (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL UNIQUE,
   is_mentor BOOLEAN DEFAULT FALSE,
   is_mentee BOOLEAN DEFAULT FALSE,
@@ -526,7 +526,7 @@ CREATE INDEX idx_mentorship_profiles_verified ON public.mentorship_profiles(is_v
 CREATE INDEX idx_mentorship_profiles_rating ON public.mentorship_profiles(rating DESC);
 
 CREATE TABLE public.mentorship_requests (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   mentor_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   mentee_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'accepted', 'declined', 'completed', 'cancelled')),
@@ -543,7 +543,7 @@ CREATE INDEX idx_mentorship_requests_status ON public.mentorship_requests(status
 
 -- ==================== Live Sessions ====================
 CREATE TABLE public.live_sessions (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   host_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   title TEXT NOT NULL,
   description TEXT,
@@ -567,7 +567,7 @@ CREATE INDEX idx_live_sessions_scheduled ON public.live_sessions(scheduled_at);
 CREATE INDEX idx_live_sessions_status ON public.live_sessions(status);
 
 CREATE TABLE public.session_participants (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   session_id UUID REFERENCES public.live_sessions(id) ON DELETE CASCADE NOT NULL,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   rsvp_status TEXT DEFAULT 'registered' CHECK (rsvp_status IN ('registered', 'attended', 'no_show', 'cancelled')),
@@ -581,7 +581,7 @@ CREATE INDEX idx_session_participants_user ON public.session_participants(user_i
 
 -- ==================== Blocked Users ====================
 CREATE TABLE public.blocked_users (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   blocker_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   blocked_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   reason TEXT,
@@ -594,7 +594,7 @@ CREATE INDEX idx_blocked_users_blocked ON public.blocked_users(blocked_id);
 
 -- ==================== Content Reports ====================
 CREATE TABLE public.content_reports (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   reporter_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   content_type TEXT NOT NULL CHECK (content_type IN ('post', 'comment', 'story', 'message', 'profile')),
   content_id UUID NOT NULL,
@@ -612,7 +612,7 @@ CREATE INDEX idx_content_reports_content ON public.content_reports(content_type,
 
 -- ==================== Notifications ====================
 CREATE TABLE public.notifications (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
   type TEXT NOT NULL CHECK (type IN (
     'follow', 'reaction', 'comment', 'mention', 'message',

@@ -10,7 +10,7 @@ lib/
 │   ├── router/           # GoRouter navigation
 │   └── theme/            # Design system
 ├── features/
-│   ├── auth/             # Authentication (Supabase)
+│   ├── auth/             # Authentication (native Apple, Google OAuth, email)
 │   ├── chart/            # Chart calculation & bodygraph
 │   ├── discovery/        # User discovery & matching
 │   ├── ephemeris/        # Swiss Ephemeris integration
@@ -141,11 +141,18 @@ All Supabase tables use RLS policies:
 - **Gamification**: Users can only modify their own data
 - **Premium content**: Restricted to subscribers
 
+### Authentication
+
+- **Apple Sign-In**: Native iOS flow via `sign_in_with_apple` → `signInWithIdToken`
+- **Google Sign-In**: OAuth PKCE via external browser → deep link callback
+- **Email/Password**: Direct Supabase auth
+
 ### iOS Deep Linking
 
 - URL Scheme: `io.humandesign.app://`
 - Universal Links: `humandesign.app`
-- OAuth callback handling configured
+- OAuth callback: `io.humandesign.app://auth/callback`
+- Google OAuth opens in external Safari for reliable redirect handling
 
 ## Database Schema
 

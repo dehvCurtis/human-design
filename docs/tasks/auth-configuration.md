@@ -6,11 +6,11 @@ Configure authentication methods and email confirmation settings for the Human D
 
 ## Current Auth Methods
 
-| Method | Status | Email Confirmation |
-|--------|--------|-------------------|
-| Apple Sign-In | Enabled | Not required (Apple verifies) |
-| Google Sign-In | Enabled | Not required (Google verifies) |
-| Email/Password | Enabled | Required by default |
+| Method | Flow | Email Confirmation |
+|--------|------|-------------------|
+| Apple Sign-In | Native (sign_in_with_apple) | Not required (Apple verifies) |
+| Google Sign-In | OAuth (external browser + PKCE) | Not required (Google verifies) |
+| Email/Password | Direct Supabase auth | Required by default |
 
 ## Supabase Configuration
 
@@ -26,16 +26,24 @@ To disable email confirmation for email/password signups:
 
 ### OAuth Provider Setup
 
-#### Apple Sign-In
-- Requires Apple Developer account
-- Configure in Supabase: Authentication → Providers → Apple
-- Required: Service ID, Team ID, Key ID, Private Key
+#### Apple Sign-In (Native)
+- Uses `sign_in_with_apple` package for native iOS Sign in with Apple sheet
+- ID token is passed directly to Supabase via `signInWithIdToken`
+- No browser redirect needed — better UX and no deep link issues
+- Supabase Dashboard: Authentication → Providers → Apple
+  - Set **Client IDs** to your iOS bundle ID (e.g., `com.insideme.humandesign`)
+  - Secret Key is **not required** for native sign-in
 - iOS entitlements configured in `ios/Runner/Runner.entitlements`
+- Uses a cryptographic nonce (SHA-256 hashed) for security
 
-#### Google Sign-In
-- Requires Google Cloud Console project
-- Configure in Supabase: Authentication → Providers → Google
-- Required: Client ID, Client Secret
+#### Google Sign-In (OAuth)
+- Uses Supabase OAuth with PKCE flow via external browser
+- Launches in external Safari (`LaunchMode.externalApplication`)
+- Redirects back to app via `io.humandesign.app://auth/callback` URL scheme
+- Supabase Dashboard: Authentication → Providers → Google
+  - Required: Client ID, Client Secret (from Google Cloud Console)
+- Supabase Dashboard: Authentication → URL Configuration
+  - Add `io.humandesign.app://auth/callback` to Redirect URLs
 - iOS URL schemes configured in `ios/Runner/Info.plist`
 
 ## Files Related to Auth
@@ -68,13 +76,20 @@ To disable email confirmation for email/password signups:
 3. **Rate Limiting** - Supabase has built-in rate limiting for auth
 4. **Password Requirements** - Configure minimum password strength in Supabase
 
+## Dependencies
+
+| Package | Purpose |
+|---------|---------|
+| `supabase_flutter` | OAuth flow, session management, `signInWithIdToken` |
+| `sign_in_with_apple` | Native Apple Sign-In sheet on iOS |
+| `crypto` | SHA-256 nonce hashing for Apple Sign-In |
+| `url_launcher` | External browser launch for Google OAuth |
+
 ## Environment Variables
 
-The app uses these Supabase credentials (passed via `--dart-define`):
+The app uses Supabase credentials loaded from `.env` via `flutter_dotenv`:
 
 ```bash
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your-anon-key
 ```
-
-These are configured in the build command and accessed via `String.fromEnvironment()`.

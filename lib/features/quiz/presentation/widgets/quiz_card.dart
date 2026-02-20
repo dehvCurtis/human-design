@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../data/question_generators/all_generators.dart';
 import '../../domain/models/quiz.dart';
 
 /// Card widget displaying a quiz in the list
@@ -142,7 +143,7 @@ class QuizCard extends StatelessWidget {
         ),
         const SizedBox(width: 4),
         Text(
-          '${quiz.questionCount} questions',
+          '${_getQuestionCount(quiz)} questions',
           style: const TextStyle(
             fontSize: 12,
             color: AppColors.textSecondaryLight,
@@ -267,6 +268,14 @@ class QuizCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  int _getQuestionCount(Quiz quiz) {
+    if (quiz.questionCount > 0) return quiz.questionCount;
+    final generator = CombinedQuestionGenerator();
+    return generator
+        .generateForCategoryAndDifficulty(quiz.category, quiz.difficulty)
+        .length;
   }
 
   IconData _getCategoryIcon(QuizCategory category) {

@@ -282,9 +282,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Registrarse con Google';
 
   @override
-  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
-
-  @override
   String get auth_enterName => 'Ingresa tu nombre';
 
   @override
@@ -3414,58 +3411,58 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get ai_transitInsightTitle => 'Today\'s Transit Insight';
+  String get ai_transitInsightTitle => 'Perspectiva de Tránsito del Día';
 
   @override
   String get ai_transitInsightDesc =>
-      'Get a personalized AI interpretation of how today\'s transits affect your chart.';
+      'Obtén una interpretación personalizada de IA sobre cómo los tránsitos de hoy afectan tu carta.';
 
   @override
-  String get ai_chartReadingTitle => 'AI Chart Reading';
+  String get ai_chartReadingTitle => 'Lectura de Carta con IA';
 
   @override
   String get ai_chartReadingDesc =>
-      'Generate a comprehensive AI reading of your Human Design chart.';
+      'Genera una lectura completa de IA de tu carta de Diseño Humano.';
 
   @override
   String get ai_chartReadingCost =>
-      'This reading uses 3 AI messages from your quota.';
+      'Esta lectura usa 3 mensajes de IA de tu cuota.';
 
   @override
-  String get ai_compatibilityTitle => 'AI Compatibility Reading';
+  String get ai_compatibilityTitle => 'Lectura de Compatibilidad con IA';
 
   @override
-  String get ai_compatibilityReading => 'AI Compatibility Analysis';
+  String get ai_compatibilityReading => 'Análisis de Compatibilidad con IA';
 
   @override
-  String get ai_dreamJournalTitle => 'Dream Journal';
+  String get ai_dreamJournalTitle => 'Diario de Sueños';
 
   @override
   String get ai_dreamEntryHint =>
-      'Record your dreams to discover hidden insights from your design...';
+      'Registra tus sueños para descubrir perspectivas ocultas de tu diseño...';
 
   @override
-  String get ai_interpretDream => 'Interpret Dream';
+  String get ai_interpretDream => 'Interpretar Sueño';
 
   @override
-  String get ai_journalPromptsTitle => 'Journal Prompts';
+  String get ai_journalPromptsTitle => 'Temas para el Diario';
 
   @override
   String get ai_journalPromptsDesc =>
-      'Get personalized journaling prompts based on your chart and today\'s transits.';
+      'Obtén temas personalizados para tu diario basados en tu carta y los tránsitos de hoy.';
 
   @override
-  String get ai_generating => 'Generating...';
+  String get ai_generating => 'Generando...';
 
   @override
-  String get ai_askFollowUp => 'Ask Follow-up';
+  String get ai_askFollowUp => 'Hacer Seguimiento';
 
   @override
-  String get ai_regenerate => 'Regenerate';
+  String get ai_regenerate => 'Regenerar';
 
   @override
-  String get ai_exportPdf => 'Export PDF';
+  String get ai_exportPdf => 'Exportar PDF';
 
   @override
-  String get ai_shareReading => 'Share Reading';
+  String get ai_shareReading => 'Compartir Lectura';
 }
