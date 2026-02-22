@@ -129,6 +129,24 @@ class AuthNotifier extends Notifier<AppAuthState> {
     }
   }
 
+  Future<void> signInWithMicrosoft() async {
+    state = AppAuthState.loading();
+    try {
+      await _repository.signInWithMicrosoft();
+    } catch (e) {
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
+    }
+  }
+
+  Future<void> signInWithFacebook() async {
+    state = AppAuthState.loading();
+    try {
+      await _repository.signInWithFacebook();
+    } catch (e) {
+      state = AppAuthState.error(AuthErrorMessages.fromException(e));
+    }
+  }
+
   Future<void> signOut() async {
     state = AppAuthState.loading();
     try {

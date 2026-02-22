@@ -284,6 +284,22 @@ class AppLocalizationsBe extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Рэгістрацыя праз Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Зарэгістравацца праз Microsoft';
+
+  @override
+  String get auth_signUpWithFacebook => 'Зарэгістравацца праз Facebook';
+
+  @override
+  String get auth_signInWithMicrosoft => 'Увайсці праз Microsoft';
+
+  @override
+  String get auth_signInWithFacebook => 'Увайсці праз Facebook';
+
+  @override
+  String get auth_oauthTermsNotice =>
+      'Працягваючы, вы згаджаецеся з Умовамі выкарыстання і Палітыкай канфідэнцыяльнасці.';
+
+  @override
   String get auth_enterName => 'Увядзіце ваша імя';
 
   @override

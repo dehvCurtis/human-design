@@ -6,7 +6,6 @@ import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
 import '../../../shared/widgets/widgets.dart';
-import '../data/auth_repository.dart';
 import '../domain/auth_errors.dart';
 import '../domain/auth_providers.dart';
 
@@ -18,86 +17,37 @@ class SignInScreen extends ConsumerStatefulWidget {
 }
 
 class _SignInScreenState extends ConsumerState<SignInScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _emailFocusNode = FocusNode();
-  final _passwordFocusNode = FocusNode();
-
-  bool _isLoading = false;
-  bool _isGoogleLoading = false;
   bool _isAppleLoading = false;
+  bool _isGoogleLoading = false;
+  bool _isMicrosoftLoading = false;
+  bool _isFacebookLoading = false;
   String? _errorMessage;
-  bool _showResendConfirmation = false;
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _emailFocusNode.dispose();
-    _passwordFocusNode.dispose();
-    super.dispose();
-  }
+  bool get _anyLoading =>
+      _isAppleLoading ||
+      _isGoogleLoading ||
+      _isMicrosoftLoading ||
+      _isFacebookLoading;
 
-  Future<void> _signInWithEmail() async {
-    if (!_formKey.currentState!.validate()) return;
-
+  Future<void> _signInWithApple() async {
     setState(() {
-      _isLoading = true;
+      _isAppleLoading = true;
       _errorMessage = null;
-      _showResendConfirmation = false;
     });
 
     try {
-      await ref.read(authNotifierProvider.notifier).signInWithEmail(
-            email: _emailController.text.trim(),
-            password: _passwordController.text,
-          );
-
-      final authState = ref.read(authNotifierProvider);
-      if (authState.status == AuthStatus.error && mounted) {
+      await ref.read(authNotifierProvider.notifier).signInWithApple();
+    } catch (e) {
+      if (mounted && !AuthErrorMessages.isAppleSignInCancelled(e)) {
         setState(() {
-          _errorMessage = authState.errorMessage;
-          _showResendConfirmation = authState.errorMessage?.contains('confirmation') ?? false;
-          _isLoading = false;
+          _errorMessage = AuthErrorMessages.fromException(e);
         });
       }
-    } catch (e) {
+    } finally {
       if (mounted) {
-        final friendlyMessage = AuthErrorMessages.fromException(e);
         setState(() {
-          _errorMessage = friendlyMessage;
-          _showResendConfirmation = AuthErrorMessages.isEmailNotConfirmed(e);
-          _isLoading = false;
+          _isAppleLoading = false;
         });
-      }
-    }
-  }
-
-  Future<void> _resendConfirmationEmail() async {
-    final email = _emailController.text.trim();
-    if (email.isEmpty) return;
-
-    final l10n = AppLocalizations.of(context)!;
-
-    try {
-      await ref.read(authNotifierProvider.notifier).resendConfirmationEmail(email);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.auth_confirmationSent),
-            backgroundColor: AppColors.success,
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AuthErrorMessages.fromException(e)),
-            backgroundColor: AppColors.error,
-          ),
-        );
       }
     }
   }
@@ -125,16 +75,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     }
   }
 
-  Future<void> _signInWithApple() async {
+  Future<void> _signInWithMicrosoft() async {
     setState(() {
-      _isAppleLoading = true;
+      _isMicrosoftLoading = true;
       _errorMessage = null;
     });
 
     try {
-      await ref.read(authNotifierProvider.notifier).signInWithApple();
+      await ref.read(authNotifierProvider.notifier).signInWithMicrosoft();
     } catch (e) {
-      if (mounted && !AuthErrorMessages.isAppleSignInCancelled(e)) {
+      if (mounted) {
         setState(() {
           _errorMessage = AuthErrorMessages.fromException(e);
         });
@@ -142,68 +92,39 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     } finally {
       if (mounted) {
         setState(() {
-          _isAppleLoading = false;
+          _isMicrosoftLoading = false;
         });
       }
     }
   }
 
-  void _showForgotPasswordDialog() {
-    final emailController = TextEditingController(text: _emailController.text);
-    final l10n = AppLocalizations.of(context)!;
+  Future<void> _signInWithFacebook() async {
+    setState(() {
+      _isFacebookLoading = true;
+      _errorMessage = null;
+    });
 
-    showDialog(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.auth_resetPasswordTitle),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(l10n.auth_resetPasswordPrompt),
-            const SizedBox(height: 16),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: l10n.auth_email,
-                hintText: l10n.auth_enterEmail,
-              ),
-              keyboardType: TextInputType.emailAddress,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: Text(l10n.common_cancel),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              if (emailController.text.isNotEmpty) {
-                await ref
-                    .read(authNotifierProvider.notifier)
-                    .sendPasswordReset(emailController.text.trim());
-                if (dialogContext.mounted) {
-                  Navigator.pop(dialogContext);
-                  ScaffoldMessenger.of(dialogContext).showSnackBar(
-                    SnackBar(
-                      content: Text(l10n.auth_resetEmailSent),
-                    ),
-                  );
-                }
-              }
-            },
-            child: Text(l10n.common_send),
-          ),
-        ],
-      ),
-    );
+    try {
+      await ref.read(authNotifierProvider.notifier).signInWithFacebook();
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _errorMessage = AuthErrorMessages.fromException(e);
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isFacebookLoading = false;
+        });
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final anyLoading = _isLoading || _isGoogleLoading || _isAppleLoading;
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -213,150 +134,107 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
-            color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+            color: isDark
+                ? AppColors.textPrimaryDark
+                : AppColors.textPrimaryLight,
           ),
-          onPressed: () => context.canPop() ? context.pop() : context.go(AppRoutes.onboarding),
+          onPressed: () => context.canPop()
+              ? context.pop()
+              : context.go(AppRoutes.onboarding),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                // Header
-                Text(
-                  l10n.auth_welcomeBack,
-                  style: theme.textTheme.displaySmall,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16),
+              // Header
+              Text(
+                l10n.auth_welcomeBack,
+                style: theme.textTheme.displaySmall,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.auth_signInSubtitle,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  l10n.auth_signInSubtitle,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: isDark
-                        ? AppColors.textSecondaryDark
-                        : AppColors.textSecondaryLight,
-                  ),
-                ),
-                const SizedBox(height: 40),
+              ),
+              const SizedBox(height: 40),
 
-                // Error message
-                if (_errorMessage != null) ...[
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.error.withAlpha(25),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: AppColors.error.withAlpha(128)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.error_outline,
-                                color: AppColors.error, size: 20),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                _errorMessage!,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: AppColors.error,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (_showResendConfirmation) ...[
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: double.infinity,
-                            child: TextButton.icon(
-                              onPressed: _resendConfirmationEmail,
-                              icon: const Icon(Icons.email_outlined, size: 18),
-                              label: Text(l10n.auth_resendConfirmation),
-                              style: TextButton.styleFrom(
-                                foregroundColor: AppColors.primary,
-                              ),
-                            ),
+              // Error message
+              if (_errorMessage != null) ...[
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withAlpha(25),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: AppColors.error.withAlpha(128)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.error_outline,
+                          color: AppColors.error, size: 20),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          _errorMessage!,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: AppColors.error,
                           ),
-                        ],
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                ],
-
-                // OAuth buttons
-                AppleSignInButton(
-                  onPressed: anyLoading ? null : _signInWithApple,
-                  isLoading: _isAppleLoading,
-                ),
-                const SizedBox(height: 12),
-                GoogleSignInButton(
-                  onPressed: anyLoading ? null : _signInWithGoogle,
-                  isLoading: _isGoogleLoading,
-                ),
-
-                const OAuthDivider(),
-
-                // Email field
-                EmailTextField(
-                  controller: _emailController,
-                  focusNode: _emailFocusNode,
-                  enabled: !anyLoading,
-                  onSubmitted: (_) => _passwordFocusNode.requestFocus(),
-                ),
-                const SizedBox(height: 16),
-
-                // Password field
-                PasswordTextField(
-                  controller: _passwordController,
-                  focusNode: _passwordFocusNode,
-                  enabled: !anyLoading,
-                  validateStrength: false,
-                  onSubmitted: (_) => _signInWithEmail(),
-                ),
-                const SizedBox(height: 8),
-
-                // Forgot password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: anyLoading ? null : _showForgotPasswordDialog,
-                    child: Text(l10n.auth_forgotPassword),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Sign in button
-                PrimaryButton(
-                  onPressed: anyLoading ? null : _signInWithEmail,
-                  label: l10n.auth_signIn,
-                  isLoading: _isLoading,
-                ),
-                const SizedBox(height: 24),
-
-                // Sign up link
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      l10n.auth_noAccount,
-                      style: theme.textTheme.bodyMedium,
-                    ),
-                    TextButton(
-                      onPressed:
-                          anyLoading ? null : () => context.go(AppRoutes.signUp),
-                      child: Text(l10n.auth_signUp),
-                    ),
-                  ],
-                ),
               ],
-            ),
+
+              // OAuth buttons
+              AppleSignInButton(
+                onPressed: _anyLoading ? null : _signInWithApple,
+                isLoading: _isAppleLoading,
+              ),
+              const SizedBox(height: 12),
+              GoogleSignInButton(
+                onPressed: _anyLoading ? null : _signInWithGoogle,
+                isLoading: _isGoogleLoading,
+              ),
+              const SizedBox(height: 12),
+              MicrosoftSignInButton(
+                onPressed: _anyLoading ? null : _signInWithMicrosoft,
+                isLoading: _isMicrosoftLoading,
+                label: l10n.auth_signInWithMicrosoft,
+              ),
+              const SizedBox(height: 12),
+              FacebookSignInButton(
+                onPressed: _anyLoading ? null : _signInWithFacebook,
+                isLoading: _isFacebookLoading,
+                label: l10n.auth_signInWithFacebook,
+              ),
+              const SizedBox(height: 32),
+
+              // Sign up link
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    l10n.auth_noAccount,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  TextButton(
+                    onPressed: _anyLoading
+                        ? null
+                        : () => context.go(AppRoutes.signUp),
+                    child: Text(l10n.auth_signUp),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

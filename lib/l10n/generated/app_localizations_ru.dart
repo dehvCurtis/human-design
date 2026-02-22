@@ -284,6 +284,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Регистрация через Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Зарегистрироваться через Microsoft';
+
+  @override
+  String get auth_signUpWithFacebook => 'Зарегистрироваться через Facebook';
+
+  @override
+  String get auth_signInWithMicrosoft => 'Войти через Microsoft';
+
+  @override
+  String get auth_signInWithFacebook => 'Войти через Facebook';
+
+  @override
+  String get auth_oauthTermsNotice =>
+      'Продолжая, вы соглашаетесь с Условиями использования и Политикой конфиденциальности.';
+
+  @override
   String get auth_enterName => 'Введите ваше имя';
 
   @override

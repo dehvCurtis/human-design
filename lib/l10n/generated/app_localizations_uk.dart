@@ -285,6 +285,22 @@ class AppLocalizationsUk extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Реєстрація через Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Зареєструватися через Microsoft';
+
+  @override
+  String get auth_signUpWithFacebook => 'Зареєструватися через Facebook';
+
+  @override
+  String get auth_signInWithMicrosoft => 'Увійти через Microsoft';
+
+  @override
+  String get auth_signInWithFacebook => 'Увійти через Facebook';
+
+  @override
+  String get auth_oauthTermsNotice =>
+      'Продовжуючи, ви погоджуєтеся з Умовами використання та Політикою конфіденційності.';
+
+  @override
   String get auth_enterName => 'Введіть ваше ім\'я';
 
   @override

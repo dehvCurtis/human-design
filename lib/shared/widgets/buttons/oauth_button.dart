@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 /// OAuth provider types
-enum OAuthProvider { apple, google }
+enum OAuthProvider { apple, google, microsoft, facebook }
 
 /// OAuth sign-in button with provider branding
 class OAuthButton extends StatelessWidget {
@@ -85,6 +85,14 @@ class OAuthButton extends StatelessWidget {
         );
       case OAuthProvider.google:
         return _GoogleLogo(size: 20);
+      case OAuthProvider.microsoft:
+        return _MicrosoftLogo(size: 20);
+      case OAuthProvider.facebook:
+        return Icon(
+          Icons.facebook,
+          size: 24,
+          color: _getForegroundColor(isDark),
+        );
     }
   }
 
@@ -93,7 +101,10 @@ class OAuthButton extends StatelessWidget {
       case OAuthProvider.apple:
         return isDark ? Colors.white : Colors.black;
       case OAuthProvider.google:
+      case OAuthProvider.microsoft:
         return isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
+      case OAuthProvider.facebook:
+        return const Color(0xFF1877F2);
     }
   }
 
@@ -102,7 +113,10 @@ class OAuthButton extends StatelessWidget {
       case OAuthProvider.apple:
         return isDark ? Colors.black : Colors.white;
       case OAuthProvider.google:
+      case OAuthProvider.microsoft:
         return isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+      case OAuthProvider.facebook:
+        return Colors.white;
     }
   }
 
@@ -112,6 +126,10 @@ class OAuthButton extends StatelessWidget {
         return 'Continue with Apple';
       case OAuthProvider.google:
         return 'Continue with Google';
+      case OAuthProvider.microsoft:
+        return 'Continue with Microsoft';
+      case OAuthProvider.facebook:
+        return 'Continue with Facebook';
     }
   }
 }
@@ -255,6 +273,106 @@ class _GoogleLogoPainter extends CustomPainter {
       ..lineTo(size.width * 0.5, size.height * 0.4)
       ..close();
     canvas.drawPath(gPath, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+/// Microsoft Sign In button
+class MicrosoftSignInButton extends StatelessWidget {
+  const MicrosoftSignInButton({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+    this.enabled = true,
+    this.label = 'Continue with Microsoft',
+  });
+
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool enabled;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return OAuthButton(
+      provider: OAuthProvider.microsoft,
+      onPressed: onPressed,
+      isLoading: isLoading,
+      enabled: enabled,
+      label: label,
+    );
+  }
+}
+
+/// Facebook Sign In button
+class FacebookSignInButton extends StatelessWidget {
+  const FacebookSignInButton({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+    this.enabled = true,
+    this.label = 'Continue with Facebook',
+  });
+
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final bool enabled;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return OAuthButton(
+      provider: OAuthProvider.facebook,
+      onPressed: onPressed,
+      isLoading: isLoading,
+      enabled: enabled,
+      label: label,
+    );
+  }
+}
+
+/// Custom Microsoft logo widget
+class _MicrosoftLogo extends StatelessWidget {
+  const _MicrosoftLogo({this.size = 24});
+
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: size,
+      height: size,
+      child: CustomPaint(
+        painter: _MicrosoftLogoPainter(),
+      ),
+    );
+  }
+}
+
+class _MicrosoftLogoPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..style = PaintingStyle.fill;
+    final gap = size.width * 0.08;
+    final half = (size.width - gap) / 2;
+
+    // Top-left (red)
+    paint.color = const Color(0xFFF25022);
+    canvas.drawRect(Rect.fromLTWH(0, 0, half, half), paint);
+
+    // Top-right (green)
+    paint.color = const Color(0xFF7FBA00);
+    canvas.drawRect(Rect.fromLTWH(half + gap, 0, half, half), paint);
+
+    // Bottom-left (blue)
+    paint.color = const Color(0xFF00A4EF);
+    canvas.drawRect(Rect.fromLTWH(0, half + gap, half, half), paint);
+
+    // Bottom-right (yellow)
+    paint.color = const Color(0xFFFFB900);
+    canvas.drawRect(Rect.fromLTWH(half + gap, half + gap, half, half), paint);
   }
 
   @override

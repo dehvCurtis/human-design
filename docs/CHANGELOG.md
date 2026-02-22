@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.19] - 2026-02-22
+
+### Changed
+
+#### OAuth-Only Authentication
+- **Removed Email/Password Sign-In and Sign-Up** - Authentication is now exclusively via OAuth providers
+  - Apple Sign-In (native)
+  - Google Sign-In (OAuth)
+  - Microsoft Sign-In (Azure AD OAuth) - new
+  - Facebook Sign-In (OAuth) - new
+- **Simplified Auth Screens** - Removed email/password forms, forgot password dialog, terms checkbox, email confirmation flow
+- **Terms Notice** - Replaced checkbox with a passive terms notice below OAuth buttons
+- **Microsoft Button** - Custom 4-square logo with branded styling
+- **Facebook Button** - Uses branded blue (#1877F2) background with Facebook icon
+
+### Technical Details
+
+Files modified:
+- `auth_repository.dart` - Added `signInWithMicrosoft()` and `signInWithFacebook()` methods
+- `auth_providers.dart` - Added `signInWithMicrosoft()` and `signInWithFacebook()` notifier methods
+- `oauth_button.dart` - Added `microsoft` and `facebook` to OAuthProvider enum, MicrosoftSignInButton, FacebookSignInButton, _MicrosoftLogo painter
+- `sign_in_screen.dart` - Rewritten as OAuth-only (4 buttons, no email form)
+- `sign_up_screen.dart` - Rewritten as OAuth-only (4 buttons, no email form)
+- 8 ARB files + generated l10n - 5 new keys (auth_signUpWithMicrosoft, auth_signUpWithFacebook, auth_signInWithMicrosoft, auth_signInWithFacebook, auth_oauthTermsNotice)
+
+---
+
 ## [0.2.18] - 2026-02-19
 
 ### Added

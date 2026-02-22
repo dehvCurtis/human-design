@@ -608,6 +608,36 @@ abstract class AppLocalizations {
   /// **'Sign up with Google'**
   String get auth_signUpWithGoogle;
 
+  /// No description provided for @auth_signUpWithMicrosoft.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Microsoft'**
+  String get auth_signUpWithMicrosoft;
+
+  /// No description provided for @auth_signUpWithFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up with Facebook'**
+  String get auth_signUpWithFacebook;
+
+  /// No description provided for @auth_signInWithMicrosoft.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Microsoft'**
+  String get auth_signInWithMicrosoft;
+
+  /// No description provided for @auth_signInWithFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Facebook'**
+  String get auth_signInWithFacebook;
+
+  /// No description provided for @auth_oauthTermsNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing, you agree to our Terms of Service and Privacy Policy.'**
+  String get auth_oauthTermsNotice;
+
   /// No description provided for @auth_enterName.
   ///
   /// In en, this message translates to:
