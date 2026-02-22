@@ -281,6 +281,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Sign up with Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Sign up with Microsoft';
+
+  @override
+  String get auth_signUpWithFacebook => 'Sign up with Facebook';
+
+  @override
+  String get auth_signInWithMicrosoft => 'Sign in with Microsoft';
+
+  @override
+  String get auth_signInWithFacebook => 'Sign in with Facebook';
+
+  @override
+  String get auth_oauthTermsNotice =>
+      'By continuing, you agree to our Terms of Service and Privacy Policy.';
+
+  @override
   String get auth_enterName => 'Enter your name';
 
   @override

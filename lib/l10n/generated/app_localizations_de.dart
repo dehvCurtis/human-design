@@ -283,6 +283,22 @@ class AppLocalizationsDe extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Mit Google registrieren';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Registrieren mit Microsoft';
+
+  @override
+  String get auth_signUpWithFacebook => 'Registrieren mit Facebook';
+
+  @override
+  String get auth_signInWithMicrosoft => 'Anmelden mit Microsoft';
+
+  @override
+  String get auth_signInWithFacebook => 'Anmelden mit Facebook';
+
+  @override
+  String get auth_oauthTermsNotice =>
+      'Durch Fortfahren stimmen Sie unseren Nutzungsbedingungen und Datenschutzrichtlinien zu.';
+
+  @override
   String get auth_enterName => 'Geben Sie Ihren Namen ein';
 
   @override

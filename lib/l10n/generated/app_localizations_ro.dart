@@ -282,6 +282,22 @@ class AppLocalizationsRo extends AppLocalizations {
   String get auth_signUpWithGoogle => 'Înregistrează-te cu Google';
 
   @override
+  String get auth_signUpWithMicrosoft => 'Înregistrare cu Microsoft';
+
+  @override
+  String get auth_signUpWithFacebook => 'Înregistrare cu Facebook';
+
+  @override
+  String get auth_signInWithMicrosoft => 'Autentificare cu Microsoft';
+
+  @override
+  String get auth_signInWithFacebook => 'Autentificare cu Facebook';
+
+  @override
+  String get auth_oauthTermsNotice =>
+      'Continuând, sunteți de acord cu Termenii de utilizare și Politica de confidențialitate.';
+
+  @override
   String get auth_enterName => 'Introdu numele tău';
 
   @override

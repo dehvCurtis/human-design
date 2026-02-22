@@ -10,7 +10,7 @@ lib/
 │   ├── router/           # GoRouter navigation
 │   └── theme/            # Design system
 ├── features/
-│   ├── auth/             # Authentication (native Apple, Google OAuth, email)
+│   ├── auth/             # Authentication (Apple, Google, Microsoft, Facebook)
 │   ├── chart/            # Chart calculation & bodygraph
 │   ├── discovery/        # User discovery & matching
 │   ├── ephemeris/        # Swiss Ephemeris integration

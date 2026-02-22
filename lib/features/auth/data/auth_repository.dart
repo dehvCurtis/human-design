@@ -88,6 +88,24 @@ class AuthRepository {
     );
   }
 
+  /// Sign in with Microsoft (Azure AD)
+  Future<bool> signInWithMicrosoft() async {
+    return await _client.auth.signInWithOAuth(
+      OAuthProvider.azure,
+      redirectTo: _getRedirectUrl(),
+      authScreenLaunchMode: LaunchMode.externalApplication,
+    );
+  }
+
+  /// Sign in with Facebook
+  Future<bool> signInWithFacebook() async {
+    return await _client.auth.signInWithOAuth(
+      OAuthProvider.facebook,
+      redirectTo: _getRedirectUrl(),
+      authScreenLaunchMode: LaunchMode.externalApplication,
+    );
+  }
+
   /// Sign out
   Future<void> signOut() async {
     await _client.auth.signOut();
