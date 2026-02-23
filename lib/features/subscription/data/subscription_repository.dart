@@ -423,7 +423,7 @@ class SubscriptionRepository {
       final response = await _client
           .from('shares')
           .select('id')
-          .eq('shared_by_user_id', userId)
+          .eq('shared_by', userId)
           .gte('created_at', monthStart.toIso8601String());
 
       final shareCount = (response as List).length;

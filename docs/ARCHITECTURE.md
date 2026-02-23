@@ -116,9 +116,9 @@ UI (Widget) → Provider → Repository/Service → Supabase/Ephemeris
 | `aiConversationsProvider` | FutureProvider | Conversation list |
 | `aiMessagesProvider` | FutureProvider.family | Messages per conversation |
 | `suggestedQuestionsProvider` | Provider.family | Chart-based question suggestions |
-| `transitInsightProvider` | FutureProvider | Today's AI transit insight |
+| `transitInsightProvider` | FutureProvider.autoDispose | Today's AI transit insight |
 | `chartReadingProvider` | FutureProvider.autoDispose | AI chart reading generation |
-| `journalingPromptsProvider` | FutureProvider | Today's AI journaling prompts |
+| `journalingPromptsProvider` | FutureProvider.autoDispose | Today's AI journaling prompts |
 
 ### Dream Journal Providers
 
@@ -139,14 +139,19 @@ All Supabase tables use RLS policies:
 - **DMs**: Only participants can read/write
 - **Stories**: Auto-expire after 24h
 - **Groups**: Creator can see/manage their groups; members can view; SECURITY DEFINER helper functions (`is_group_admin`, `is_group_creator`, `get_user_group_ids`) prevent RLS recursion
-- **Gamification**: Users can only modify their own data
+- **Circles**: `get_user_circle_ids()` SECURITY DEFINER function prevents infinite recursion in circle_members SELECT policy
+- **Pentas**: Separate SELECT/INSERT/UPDATE/DELETE policies with WITH CHECK clauses
+- **Direct Messages**: UPDATE restricted to marking received messages as read only
+- **Gamification**: Users can only modify their own data; leaderboard policy removed to prevent data exposure
 - **Premium content**: Restricted to subscribers
 
 ### Authentication
 
 - **Apple Sign-In**: Native iOS flow via `sign_in_with_apple` → `signInWithIdToken`
 - **Google Sign-In**: OAuth PKCE via external browser → deep link callback
-- **Email/Password**: Direct Supabase auth
+- **Microsoft Sign-In**: Azure AD OAuth via external browser
+- **Facebook Sign-In**: Facebook OAuth via external browser
+- **OAuth Timeout**: Browser-based OAuth methods (Google, Microsoft, Facebook) reset loading state after 30 seconds if auth callback never fires
 
 ### iOS Deep Linking
 

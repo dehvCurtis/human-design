@@ -18,13 +18,27 @@ class StoriesRepository {
     final userId = _currentUserId;
     if (userId == null) return [];
 
-    // Get stories from followed users and public stories, not expired
+    // Get IDs of users the current user follows
+    final followsResponse = await _client
+        .from('user_follows')
+        .select('following_id')
+        .eq('follower_id', userId);
+
+    final followedIds = (followsResponse as List)
+        .map((f) => f['following_id'] as String)
+        .toList();
+
+    // Include current user's own stories + followed users' stories
+    final allowedUserIds = [userId, ...followedIds];
+
+    // Get stories only from followed users and self, not expired
     final response = await _client
         .from('stories')
         .select('''
           *,
           user:profiles!stories_user_id_fkey(id, name, avatar_url)
         ''')
+        .inFilter('user_id', allowedUserIds)
         .gt('expires_at', DateTime.now().toIso8601String())
         .order('created_at', ascending: false);
 
@@ -398,14 +412,18 @@ class StoriesRepository {
 
   // ==================== Cleanup ====================
 
-  /// Clean up expired stories
-  /// Deletes stories that have passed their expiration time
-  /// Returns the number of stories deleted
+  /// Clean up expired stories for the current user only.
+  /// Deletes the current user's stories that have passed their expiration time.
+  /// Returns the number of stories deleted.
   Future<int> cleanupExpiredStories() async {
-    // Get expired story IDs first for counting
+    final userId = _currentUserId;
+    if (userId == null) return 0;
+
+    // Only clean up the current user's expired stories
     final expiredResponse = await _client
         .from('stories')
         .select('id')
+        .eq('user_id', userId)
         .lt('expires_at', DateTime.now().toIso8601String());
 
     final expiredIds = (expiredResponse as List)

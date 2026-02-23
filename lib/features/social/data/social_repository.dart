@@ -439,7 +439,11 @@ class SocialRepository {
     final userId = _client.auth.currentUser?.id;
     if (userId == null) throw StateError('User not authenticated');
 
-    await _client.from('group_posts').delete().eq('id', postId);
+    await _client
+        .from('group_posts')
+        .delete()
+        .eq('id', postId)
+        .eq('user_id', userId);
   }
 
   // ==================== Group Shared Charts ====================
@@ -528,9 +532,29 @@ class SocialRepository {
             column: 'chart_id',
             value: chartId,
           ),
-          callback: (payload) {
-            final comment = Comment.fromJson(payload.newRecord);
-            onNewComment(comment);
+          callback: (payload) async {
+            // Re-fetch the comment with author join to get full user data
+            try {
+              final response = await _client
+                  .from('comments')
+                  .select('''
+                    id,
+                    content,
+                    element_type,
+                    element_id,
+                    author:profiles!comments_user_id_fkey(id, name, avatar_url),
+                    parent_id,
+                    created_at,
+                    updated_at
+                  ''')
+                  .eq('id', payload.newRecord['id'] as String)
+                  .single();
+
+              onNewComment(Comment.fromJson(response));
+            } catch (_) {
+              // Fallback to raw payload if re-fetch fails
+              onNewComment(Comment.fromJson(payload.newRecord));
+            }
           },
         )
         .subscribe();

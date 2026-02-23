@@ -208,7 +208,13 @@ class EphemerisService {
   double findPrenatalSunPosition(double birthJulianDay) {
     // Get sun position at birth
     final birthPositions = calculatePlanetaryPositions(birthJulianDay);
-    final birthSunLongitude = birthPositions[HumanDesignPlanet.sun]!;
+    final birthSunLongitude = birthPositions[HumanDesignPlanet.sun];
+    if (birthSunLongitude == null) {
+      throw StateError(
+        'Could not calculate Sun position at Julian Day $birthJulianDay. '
+        'Ensure ephemeris data files are loaded correctly.',
+      );
+    }
 
     // Calculate target longitude (88 degrees before birth)
     double targetLongitude = birthSunLongitude - 88.0;
@@ -221,7 +227,8 @@ class EphemerisService {
     // Binary search to find exact position
     for (int iteration = 0; iteration < 50; iteration++) {
       final positions = calculatePlanetaryPositions(searchJd);
-      final sunLongitude = positions[HumanDesignPlanet.sun]!;
+      final sunLongitude = positions[HumanDesignPlanet.sun];
+      if (sunLongitude == null) break;
 
       // Calculate difference (accounting for 360° wraparound)
       double diff = targetLongitude - sunLongitude;

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -178,11 +179,13 @@ class SettingsScreen extends ConsumerWidget {
             title: l10n.settings_appVersion,
             subtitle: '1.0.0',
           ),
-          _SettingsTile(
-            icon: Icons.star_outline,
-            title: l10n.settings_rateApp,
-            onTap: () => _rateApp(context),
-          ),
+          // Hidden until real App Store ID is available
+          if (kDebugMode)
+            _SettingsTile(
+              icon: Icons.star_outline,
+              title: l10n.settings_rateApp,
+              onTap: () => _rateApp(context),
+            ),
           _SettingsTile(
             icon: Icons.feedback_outlined,
             title: l10n.settings_sendFeedback,
