@@ -176,7 +176,9 @@ class _BirthDataScreenState extends ConsumerState<BirthDataScreen> {
         title: Text(l10n.auth_birthInformation),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () => context.canPop()
+              ? context.pop()
+              : context.go(AppRoutes.home),
         ),
         actions: [
           TextButton(

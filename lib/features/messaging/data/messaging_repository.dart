@@ -316,8 +316,8 @@ class MessagingRepository {
     if (userId == null) throw StateError('User not authenticated');
 
     await _client.from('blocked_users').upsert({
-      'user_id': userId,
-      'blocked_user_id': blockedUserId,
+      'blocker_id': userId,
+      'blocked_id': blockedUserId,
     });
   }
 
@@ -329,8 +329,8 @@ class MessagingRepository {
     await _client
         .from('blocked_users')
         .delete()
-        .eq('user_id', userId)
-        .eq('blocked_user_id', blockedUserId);
+        .eq('blocker_id', userId)
+        .eq('blocked_id', blockedUserId);
   }
 
   /// Delete a conversation (soft-delete: removes current user from participants)

@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.20] - 2026-02-22
+
+### Fixed
+
+#### Critical & High Priority Launch Audit Fixes
+- **Share Limit Bypass (CRITICAL)** - Fixed incorrect column name (`shared_by_user_id` → `shared_by`) that allowed free users to bypass share limits entirely
+- **App Store ID Placeholder (CRITICAL)** - Hidden "Rate App" behind debug mode until real App Store ID is configured
+- **OAuth Loading State Stuck (HIGH)** - Added 30-second timeout for browser-based OAuth (Google, Microsoft, Facebook) that resets state if auth callback never fires
+- **BirthDataScreen Back Button Crash (HIGH)** - Added `canPop()` guard before `pop()` to prevent crash during onboarding flow
+- **Ephemeris Sun Force-Unwrap (HIGH)** - Replaced crash-prone `!` operator with null check and descriptive `StateError`
+- **Transit Service Force-Unwraps (HIGH)** - Replaced all `!` operators with null guards, `firstOrNull` patterns, and descriptive errors on getters
+- **AI Providers Quota Leak (HIGH)** - Changed `transitInsightProvider` and `journalingPromptsProvider` to `FutureProvider.autoDispose` to prevent silent quota consumption
+- **Stories Privacy Leak (HIGH)** - `getFeedStories()` now filters to only followed users + current user (was returning all non-expired stories)
+- **Story Cleanup Scope (HIGH)** - `cleanupExpiredStories()` now scoped to current user's stories only (was deleting other users' expired stories)
+- **Blocked Users Schema Mismatch (HIGH)** - Aligned messaging to use `blocker_id`/`blocked_id` columns (matching discovery feature)
+- **Realtime Comments Missing Author (HIGH)** - Re-fetches comment with author join instead of parsing raw payload that always showed "Unknown"
+- **Group Post Delete Missing Ownership (HIGH)** - Added `user_id` filter to `deleteGroupPost` to enforce ownership
+
+#### Database RLS Fixes
+- **circle_members RLS Infinite Recursion (HIGH)** - Created `get_user_circle_ids()` SECURITY DEFINER function to break recursive policy
+- **user_points Open SELECT Policy (HIGH)** - Dropped overly permissive `USING (TRUE)` leaderboard policy that exposed all user points
+- **pentas Missing WITH CHECK (HIGH)** - Split FOR ALL into separate SELECT/INSERT/UPDATE/DELETE policies with proper WITH CHECK clauses
+- **direct_messages UPDATE Too Broad (HIGH)** - Restricted UPDATE to marking received messages as read only (was allowing any column update)
+
+### Technical Details
+
+Database migration:
+- `20260222100000_fix_critical_audit_issues.sql` - 4 RLS policy fixes
+
+Files modified:
+- `subscription_repository.dart` - Fixed column name
+- `settings_screen.dart` - Hidden Rate App behind kDebugMode
+- `auth_providers.dart` - Added OAuth timeout with Timer
+- `birth_data_screen.dart` - Added canPop() guard
+- `ephemeris_service.dart` - Null-safe Sun position lookup
+- `transit_service.dart` - Null-safe gate lookups and getters
+- `ai_providers.dart` - autoDispose on transit/journaling providers
+- `stories_repository.dart` - Follow-filtered feed, user-scoped cleanup
+- `messaging_repository.dart` - Aligned blocked_users columns
+- `social_repository.dart` - Re-fetch comments with author, ownership on delete
+
+---
+
 ## [0.2.19] - 2026-02-22
 
 ### Changed

@@ -60,26 +60,40 @@ class TransitService {
         if ((channel.gate1 == transitGate || channel.gate2 == transitGate) &&
             personalChart.allGates.contains(otherGate) &&
             !personalChart.allGates.contains(transitGate)) {
-          channelImpacts.add(TransitChannelImpact(
-            channel: channel,
-            transitGate: transitGate,
-            personalGate: otherGate,
-            activation: transits.activations.values
-                .firstWhere((a) => a.gate == transitGate),
-          ));
+          final channelActivation = transits.activations.values
+              .where((a) => a.gate == transitGate)
+              .firstOrNull;
+          if (channelActivation != null) {
+            channelImpacts.add(TransitChannelImpact(
+              channel: channel,
+              transitGate: transitGate,
+              personalGate: otherGate,
+              activation: channelActivation,
+            ));
+          }
         }
       }
 
-      // Record gate impact
+      // Record gate impact (skip if gate data is missing)
+      final gateData = gates[transitGate];
+      if (gateData == null) continue;
+
+      final activation = transits.activations.values
+          .where((a) => a.gate == transitGate)
+          .firstOrNull;
+      if (activation == null) continue;
+
+      final planetEntry = transits.activations.entries
+          .where((e) => e.value.gate == transitGate)
+          .firstOrNull;
+      if (planetEntry == null) continue;
+
       gateImpacts.add(TransitGateImpact(
         gateNumber: transitGate,
-        gateData: gates[transitGate]!,
-        activation: transits.activations.values
-            .firstWhere((a) => a.gate == transitGate),
+        gateData: gateData,
+        activation: activation,
         isInPersonalChart: hasGate,
-        planet: transits.activations.entries
-            .firstWhere((e) => e.value.gate == transitGate)
-            .key,
+        planet: planetEntry.key,
       ));
     }
 
@@ -114,7 +128,7 @@ class TransitService {
   /// Get the Sun gate for a specific date (main energy of the day)
   GateActivation getSunGateForDate(DateTime date) {
     final transits = calculateTransitsForDate(date);
-    return transits.activations[HumanDesignPlanet.sun]!;
+    return transits.sunGate;
   }
 
   /// Get upcoming gate changes for the Sun
@@ -160,13 +174,19 @@ class TransitChart {
   final Set<HumanDesignCenter> definedCenters;
 
   /// Get the Sun gate (primary energy)
-  GateActivation get sunGate => activations[HumanDesignPlanet.sun]!;
+  GateActivation get sunGate =>
+      activations[HumanDesignPlanet.sun] ??
+      (throw StateError('Sun transit position unavailable'));
 
   /// Get the Earth gate (grounding energy)
-  GateActivation get earthGate => activations[HumanDesignPlanet.earth]!;
+  GateActivation get earthGate =>
+      activations[HumanDesignPlanet.earth] ??
+      (throw StateError('Earth transit position unavailable'));
 
   /// Get the Moon gate (emotional/intuitive energy)
-  GateActivation get moonGate => activations[HumanDesignPlanet.moon]!;
+  GateActivation get moonGate =>
+      activations[HumanDesignPlanet.moon] ??
+      (throw StateError('Moon transit position unavailable'));
 }
 
 /// Analysis of how transits affect a personal chart

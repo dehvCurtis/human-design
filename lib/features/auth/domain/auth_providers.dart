@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
@@ -120,28 +122,31 @@ class AuthNotifier extends Notifier<AppAuthState> {
   }
 
   Future<void> signInWithGoogle() async {
-    state = AppAuthState.loading();
-    try {
-      await _repository.signInWithGoogle();
-      // OAuth flow will redirect, state will be updated by auth listener
-    } catch (e) {
-      state = AppAuthState.error(AuthErrorMessages.fromException(e));
-    }
+    await _signInWithBrowserOAuth(() => _repository.signInWithGoogle());
   }
 
   Future<void> signInWithMicrosoft() async {
-    state = AppAuthState.loading();
-    try {
-      await _repository.signInWithMicrosoft();
-    } catch (e) {
-      state = AppAuthState.error(AuthErrorMessages.fromException(e));
-    }
+    await _signInWithBrowserOAuth(() => _repository.signInWithMicrosoft());
   }
 
   Future<void> signInWithFacebook() async {
+    await _signInWithBrowserOAuth(() => _repository.signInWithFacebook());
+  }
+
+  /// Shared handler for browser-based OAuth flows (Google, Microsoft, Facebook).
+  /// Starts a 30-second timer that resets loading state if the auth listener
+  /// hasn't fired (e.g. user closed the browser without completing sign-in).
+  Future<void> _signInWithBrowserOAuth(Future<bool> Function() oauthCall) async {
     state = AppAuthState.loading();
     try {
-      await _repository.signInWithFacebook();
+      await oauthCall();
+      // Start a timeout: if the auth state hasn't changed to authenticated
+      // after 30 seconds, reset to unauthenticated (user likely cancelled).
+      Timer(const Duration(seconds: 30), () {
+        if (state.status == AuthStatus.loading) {
+          state = AppAuthState.unauthenticated();
+        }
+      });
     } catch (e) {
       state = AppAuthState.error(AuthErrorMessages.fromException(e));
     }

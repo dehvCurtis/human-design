@@ -236,7 +236,7 @@ const _generalQuestions = [
 
 /// Provider for today's AI transit insight.
 /// Auto-fetches once per session; cached until invalidated.
-final transitInsightProvider = FutureProvider<AiMessage?>((ref) async {
+final transitInsightProvider = FutureProvider.autoDispose<AiMessage?>((ref) async {
   final chart = await ref.watch(userChartProvider.future);
   if (chart == null) return null;
 
@@ -263,7 +263,7 @@ final chartReadingProvider =
 });
 
 /// Provider for today's AI journaling prompts.
-final journalingPromptsProvider = FutureProvider<AiMessage?>((ref) async {
+final journalingPromptsProvider = FutureProvider.autoDispose<AiMessage?>((ref) async {
   final chart = await ref.watch(userChartProvider.future);
   if (chart == null) return null;
 
