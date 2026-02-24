@@ -11,7 +11,7 @@ enum ChartVisibility {
   private,
   /// Mutual followers can view the chart
   friends,
-  /// Anyone can view the chart
+  /// Anyone who follows them can view the chart
   public;
 
   /// Parse from string (for database values)

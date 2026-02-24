@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.23] - 2026-02-24
+
+### Security
+
+#### Remaining App-Wide Audit Fixes
+- **OR Filter Injection in Learning Search (HIGH)** — Unsanitized `searchQuery` interpolated into `.or()` filter in `learning_repository.dart`; added `_escapeIlike()` helper
+- **OR Filter Injection in Expert Search (HIGH)** — Same injection pattern in `expert_repository.dart`; added `_escapeIlike()` helper
+- **ILIKE Wildcard Injection in Hashtag Search (MEDIUM)** — Unescaped user input in `.ilike()` in `hashtag_repository.dart`; added inline wildcard escaping
+- **Unsafe int.parse in Compatibility Report (MEDIUM)** — `int.parse()` on profile strings could crash on malformed data in `sharing_repository.dart`; switched to `int.tryParse()` with fallback
+- **ChartVisibility Enum Doc Mismatch (LOW)** — Enum doc said "Anyone can view" but implementation requires following; updated doc to match behavior
+
+### Added
+- 3 new functional DB tests (H1-H3): NULL content, invalid group role, oversized post content
+- Total automated tests: 80 SQL + 183 Flutter = 263
+
+---
+
 ## [0.2.22] - 2026-02-23
 
 ### Security
