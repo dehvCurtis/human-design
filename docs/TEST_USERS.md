@@ -96,6 +96,42 @@ The test users cover all 5 Human Design types:
 | 5/1 | Emma |
 | 6/2 | Frank |
 
+## RLS Test Users
+
+These test users are created by the automated RLS test suite (`supabase/tests/`) and are cleaned up after each run.
+
+| User | Email | UUID | Tier | Profile | Relationships |
+|------|-------|------|------|---------|---------------|
+| **user_free** | `test_free@rls.test` | `aaaa...0001` | Free | Public | Follows premium (mutual), blocked user_blocked |
+| **user_premium** | `test_premium@rls.test` | `aaaa...0002` | Premium | Public | Follows free (mutual), group member |
+| **user_private** | `test_private@rls.test` | `aaaa...0003` | Free | Private | Follows free (one-way) |
+| **user_blocked** | `test_blocked@rls.test` | `aaaa...0004` | Free | Public | Blocked by free |
+| **user_stranger** | `test_stranger@rls.test` | `aaaa...0005` | Free | Public | No relationships |
+
+### RLS Test Data
+
+The test suite creates the following data for each run:
+- **Posts**: Public + followers-only from free user, public from premium
+- **Stories**: Public + followers-only + expired from free user
+- **Groups**: 1 group with free (admin) + premium (member) + group post
+- **Circles**: 1 private circle with free (creator) + premium (member)
+- **Conversations**: 1 DM conversation between free and premium
+- **AI Data**: 1 AI conversation + usage record for free user
+- **Gamification**: Points for free (100) and premium (500)
+- **Charts**: 1 chart each for free and premium
+- **Journal**: 1 journal entry for free user
+
+### Running RLS Tests
+
+```bash
+# Run full suite (creates users, runs 77 tests, cleans up)
+cd supabase/tests
+psql $DATABASE_URL -f run_all_tests.sql
+
+# Results: look for [PASS]/[FAIL] in NOTICE output
+# 54 RLS privacy tests + 23 functional smoke tests
+```
+
 ## Recreating Test Data
 
 If you need to recreate the test data, run the seed script:
@@ -110,6 +146,7 @@ If you need to recreate the test data, run the seed script:
 The seed scripts are located at:
 - `supabase/seed_test_users.sql` - Full seed with auth users
 - `supabase/seed_test_social_data.sql` - Social relationships only
+- `supabase/tests/00_setup_test_users.sql` - RLS test users (automated)
 
 ## Cleanup
 
@@ -117,3 +154,5 @@ To remove test users, delete them from the Supabase Dashboard:
 1. Go to Authentication > Users
 2. Delete users with `@test.hd` email domain
 3. The cascade delete will remove all related data (profiles, posts, follows)
+
+RLS test users (`@rls.test`) are automatically cleaned up by `run_all_tests.sql`.

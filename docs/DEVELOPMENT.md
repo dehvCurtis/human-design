@@ -32,8 +32,10 @@ Supabase credentials are loaded from `.env` via `flutter_dotenv`.
 
 ## Testing
 
+### Unit & Widget Tests
+
 ```bash
-# Run all tests (167 passing)
+# Run all tests (183 passing)
 flutter test
 
 # Run specific suites
@@ -48,6 +50,46 @@ flutter test test/create_post_chart_id_test.dart  # Chart ID logic (9 tests)
 # Static analysis
 flutter analyze
 ```
+
+### RLS & Database Tests (77 tests)
+
+SQL-based test suite that verifies Row Level Security policies and social platform functionality against the live Supabase database.
+
+```bash
+# Run full suite (setup → RLS tests → functional tests → cleanup)
+cd supabase/tests
+psql $DATABASE_URL -f run_all_tests.sql
+
+# Or run individual phases:
+psql $DATABASE_URL -f 00_setup_test_users.sql    # Create 5 test users + data
+psql $DATABASE_URL -f 01_rls_privacy_tests.sql   # 54 RLS privacy tests
+psql $DATABASE_URL -f 02_functional_tests.sql    # 23 functional smoke tests
+```
+
+**Test users** (fixed UUIDs for reproducibility):
+
+| User | UUID Suffix | Tier | Profile | Purpose |
+|------|-------------|------|---------|---------|
+| `user_free` | `...0001` | Free | Public | Free user limits |
+| `user_premium` | `...0002` | Premium | Public | Premium access |
+| `user_private` | `...0003` | Free | Private | Privacy enforcement |
+| `user_blocked` | `...0004` | Free | Public | Block list enforcement |
+| `user_stranger` | `...0005` | Free | Public | Zero-relationship access |
+
+**RLS test coverage** (54 tests):
+- A. Profile Privacy (5) - public/private visibility, premium escalation, cross-user update
+- B. Posts & Feed (8) - public/followers-only, block filter, create/delete auth
+- C. Stories (6) - visibility, expiry, block filter
+- D. Direct Messages (6) - participant access, sender spoofing, read marking
+- E. Groups (7) - member/non-member access, admin-only updates
+- F. Circles (5) - private circle isolation, creator-only delete
+- G. AI & Usage (5) - conversation/usage isolation
+- H. Gamification (4) - points/challenges isolation
+- I. Cross-User Isolation (5) - charts, transactions, journal, notifications
+- J. Block List (3) - follow blocking, block list visibility
+
+**Functional test coverage** (23 tests):
+- Social graph CRUD, posts/comments/reactions, groups, stories, messaging, AI, gamification
 
 ## Key Files
 

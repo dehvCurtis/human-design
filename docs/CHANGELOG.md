@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.21] - 2026-02-23
+
+### Security
+
+#### LLM Abuse Prevention & Rate Limiting
+- **AI Purchase Exploit (CRITICAL)** - Added `redeemed` and `redeemed_at` columns to `ai_purchases` to prevent unlimited message pack redemptions
+- **Chart Context Key Mismatch (HIGH)** - Fixed allowlist in Edge Function from camelCase to snake_case, matching `ChartContextBuilder` output (AI was receiving no chart data)
+- **Free Message Quota Mismatch (HIGH)** - Aligned client-side quota (`freeAiMessagesPerMonth`) from 10 to 5 to match server's authoritative limit
+- **DB-Backed Rate Limiting (HIGH)** - Replaced per-instance in-memory rate limiter with persistent `ai_rate_limits` table and atomic `check_ai_rate_limit` function
+- **Usage Pre-Increment (HIGH)** - Moved AI usage increment before the AI call with decrement on failure, preventing quota escape via timeouts
+- **Client Max Tokens Override (HIGH)** - Removed client ability to override `max_tokens`, now server-side only
+- **Feature AI Quota Bypass (MEDIUM)** - Added `canUseAiProvider` checks to `transitInsightProvider`, `chartReadingProvider`, and `journalingPromptsProvider`
+
+### Added
+
+#### RLS & Functional Test Suite (77 tests)
+- **Test User Setup** (`supabase/tests/00_setup_test_users.sql`) - 5 test users with different tiers, privacy settings, and relationships
+- **RLS Privacy Tests** (`supabase/tests/01_rls_privacy_tests.sql`) - 54 tests covering profiles, posts, stories, DMs, groups, circles, AI, gamification, block lists, and cross-user data isolation
+- **Functional Smoke Tests** (`supabase/tests/02_functional_tests.sql`) - 23 tests verifying social graph, posts/comments/reactions, groups, stories, messaging, AI, and gamification RPCs
+- **Test Runner** (`supabase/tests/run_all_tests.sql`) - Orchestrator that runs all phases and cleans up test data
+
 ## [0.2.20] - 2026-02-22
 
 ### Fixed

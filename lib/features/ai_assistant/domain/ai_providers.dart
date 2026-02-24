@@ -236,7 +236,11 @@ const _generalQuestions = [
 
 /// Provider for today's AI transit insight.
 /// Auto-fetches once per session; cached until invalidated.
+/// Checks quota before calling AI — returns null if quota exceeded.
 final transitInsightProvider = FutureProvider.autoDispose<AiMessage?>((ref) async {
+  final canUse = await ref.watch(canUseAiProvider.future);
+  if (!canUse) return null;
+
   final chart = await ref.watch(userChartProvider.future);
   if (chart == null) return null;
 
@@ -253,8 +257,12 @@ final transitInsightProvider = FutureProvider.autoDispose<AiMessage?>((ref) asyn
 
 /// Provider for AI chart reading. Takes a chart ID.
 /// This is an autoDispose family provider so each chart gets its own reading.
+/// Checks quota before calling AI — returns null if quota exceeded.
 final chartReadingProvider =
     FutureProvider.autoDispose<AiMessage?>((ref) async {
+  final canUse = await ref.watch(canUseAiProvider.future);
+  if (!canUse) return null;
+
   final chart = await ref.watch(userChartProvider.future);
   if (chart == null) return null;
 
@@ -263,7 +271,11 @@ final chartReadingProvider =
 });
 
 /// Provider for today's AI journaling prompts.
+/// Checks quota before calling AI — returns null if quota exceeded.
 final journalingPromptsProvider = FutureProvider.autoDispose<AiMessage?>((ref) async {
+  final canUse = await ref.watch(canUseAiProvider.future);
+  if (!canUse) return null;
+
   final chart = await ref.watch(userChartProvider.future);
   if (chart == null) return null;
 

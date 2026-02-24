@@ -81,7 +81,7 @@ class AppConfig {
   /// Free tier limits
   static const int freeSharesPerMonth = 3;
   static const int freeGroupLimit = 0;
-  static const int freeAiMessagesPerMonth = 10;
+  static const int freeAiMessagesPerMonth = 5;
 
   /// AI Edge Function name
   static const String aiChatFunctionName = 'ai-chat';

@@ -1,10 +1,10 @@
 # QA Functional Checklist - Human Design App
 
-> **Version:** 1.1
-> **Last Updated:** 2026-02-02
-> **Total Test Cases:** 250+
+> **Version:** 1.2
+> **Last Updated:** 2026-02-23
+> **Total Test Cases:** 250+ (manual) + 260 (automated)
 > **Platforms:** iOS, Android
-> **QA Run Date:** 2026-02-02
+> **QA Run Date:** 2026-02-23
 
 ---
 
@@ -14,10 +14,10 @@
 
 | Test Suite | Status | Pass/Total | Notes |
 |------------|--------|------------|-------|
-| Gate Wheel Offset Tests | **PASSED** | 9/9 | Critical 58° offset verified |
-| Timezone Fix Tests | **PASSED** | 5/5 | All timezone conversions correct |
-| Widget Tests | **FAILED** | 0/2 | Firebase mock issue (see Bug #001) |
-| **Overall** | **PARTIAL** | 14/16 | 87.5% pass rate |
+| Unit & Widget Tests (Flutter) | **PASSED** | 183/183 | Chart, auth, AI, feed, groups |
+| RLS Privacy Tests (SQL) | **PASSED** | 54/54 | Profiles, posts, stories, DMs, groups, circles, AI, gamification, blocks |
+| Functional Smoke Tests (SQL) | **PASSED** | 23/23 | Social graph, CRUD, messaging, gamification RPCs |
+| **Overall** | **PASSED** | 260/260 | 100% pass rate |
 
 ### Code Verification Summary
 

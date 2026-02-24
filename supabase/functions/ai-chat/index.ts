@@ -4,7 +4,8 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-// Allowed origins for CORS (restrict in production)
+// PRODUCTION: Set ALLOWED_ORIGINS env var to your app's domain(s).
+// Mobile apps don't use CORS, but restrict this for any web-based access.
 const ALLOWED_ORIGINS = (Deno.env.get("ALLOWED_ORIGINS") || "*").split(",");
 
 function getCorsHeaders(req: Request): Record<string, string> {
@@ -239,12 +240,9 @@ const MAX_TOKENS_BY_CONTEXT: Record<string, number> = {
   general: 1024,
 };
 
-function getMaxTokens(contextType: string, requestedMaxTokens?: number): number {
-  const contextDefault = MAX_TOKENS_BY_CONTEXT[contextType] ?? 1024;
-  if (requestedMaxTokens && requestedMaxTokens > 0) {
-    return Math.min(requestedMaxTokens, 4096);
-  }
-  return contextDefault;
+function getMaxTokens(contextType: string): number {
+  // Server-defined only — client cannot override max_tokens to inflate cost
+  return MAX_TOKENS_BY_CONTEXT[contextType] ?? 1024;
 }
 
 function buildSystemPrompt(contextType: string, chartContext?: Record<string, unknown>): string {
@@ -419,17 +417,20 @@ function validateChartContext(ctx: unknown): Record<string, unknown> | undefined
     );
   }
 
-  // Only allow known top-level keys (matches ChartContextBuilder output)
+  // Only allow known top-level keys (matches ChartContextBuilder output — snake_case)
   const allowedKeys = new Set([
+    // Core chart context (ChartContextBuilder.buildChartContext)
     "name", "type", "strategy", "authority", "profile", "definition",
-    "definedCenters", "undefinedCenters", "channels", "consciousGates",
-    "unconsciousGates", "incarnationCross",
-    // Transit context
-    "transitGates", "transitChannels", "newChannels", "activatedGates",
-    // Compatibility context
-    "person1", "person2", "compositeResult",
-    "electromagneticChannels", "companionshipChannels",
-    "dominanceChannels", "compromiseChannels",
+    "defined_centers", "undefined_centers", "conscious_gates",
+    "unconscious_gates", "active_channels", "incarnation_cross",
+    // Transit context (ChartContextBuilder.buildTransitContext)
+    "today_transits", "transit_sun_gate", "transit_earth_gate",
+    "completed_channels", "highlighted_personal_gates", "new_gate_activations",
+    // Compatibility context (ChartContextBuilder.buildCompatibilityContext)
+    "person1", "person2",
+    "compatibility_score", "connection_theme", "combined_defined_centers",
+    "electromagnetic_channels", "companionship_channels",
+    "dominance_channels", "compromise_channels",
   ]);
 
   const obj = ctx as Record<string, unknown>;
@@ -442,24 +443,41 @@ function validateChartContext(ctx: unknown): Record<string, unknown> | undefined
   return obj;
 }
 
-// In-memory rate limiter (per-instance; resets on cold start)
+// In-memory rate limiter (fast first-pass; defense-in-depth only)
 const rateLimitMap = new Map<string, number[]>();
 
-function checkRateLimit(userId: string): boolean {
+function checkLocalRateLimit(userId: string): boolean {
   const now = Date.now();
   const timestamps = rateLimitMap.get(userId) ?? [];
-
-  // Remove expired entries
   const recent = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
 
   if (recent.length >= RATE_LIMIT_PER_MINUTE) {
     rateLimitMap.set(userId, recent);
-    return false; // Rate limited
+    return false;
   }
 
   recent.push(now);
   rateLimitMap.set(userId, recent);
   return true;
+}
+
+// DB-backed rate limiter (authoritative; works across all Edge Function instances)
+async function checkDbRateLimit(
+  adminClient: ReturnType<typeof createClient>,
+  userId: string
+): Promise<boolean> {
+  const { data, error } = await adminClient.rpc("check_ai_rate_limit", {
+    p_user_id: userId,
+    p_window_seconds: Math.floor(RATE_LIMIT_WINDOW_MS / 1000),
+    p_max_requests: RATE_LIMIT_PER_MINUTE,
+  });
+
+  if (error) {
+    console.error("DB rate limit check failed, falling back to local:", error);
+    return true; // Fail open — local rate limit is still enforced
+  }
+
+  return data === true;
 }
 
 // ============================================================================
@@ -507,8 +525,8 @@ Deno.serve(async (req) => {
 
     const userId = user.id;
 
-    // ---- Rate limit check (before any DB work) ----
-    if (!checkRateLimit(userId)) {
+    // ---- Rate limit check: local first (fast), then DB (authoritative) ----
+    if (!checkLocalRateLimit(userId)) {
       return new Response(
         JSON.stringify({ error: "Too many requests. Please wait a moment." }),
         { status: 429, headers: { ...cors, "Content-Type": "application/json" } }
@@ -521,11 +539,18 @@ Deno.serve(async (req) => {
     const conversationId = validateUuid(body.conversation_id);
     const contextType = validateContextType(body.context_type);
     const chartContext = validateChartContext(body.chart_context);
-    const requestedMaxTokens = typeof body.max_tokens === "number" ? body.max_tokens : undefined;
 
     // ---- 3. Check usage quota (server-side authoritative) ----
     // Use service role client for database operations
     const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+
+    // DB-backed rate limit (authoritative, cross-instance)
+    if (!(await checkDbRateLimit(adminClient, userId))) {
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please wait a moment." }),
+        { status: 429, headers: { ...cors, "Content-Type": "application/json" } }
+      );
+    }
 
     // Check if user is premium
     const { data: subscription } = await adminClient
@@ -650,11 +675,56 @@ Deno.serve(async (req) => {
       })
     );
 
+    // ---- 6b. Pre-increment usage BEFORE AI call (prevents uncounted messages) ----
+    let usageIncremented = false;
+    if (!isPremium) {
+      const now = new Date();
+      const periodStart = `${now.getFullYear()}-${String(
+        now.getMonth() + 1
+      ).padStart(2, "0")}-01`;
+
+      const { error: usageError } = await adminClient.rpc("increment_ai_usage", {
+        p_user_id: userId,
+        p_period_start: periodStart,
+      });
+
+      if (usageError) {
+        console.error("Failed to increment usage (blocking AI call):", usageError);
+        return new Response(
+          JSON.stringify({ error: "Service temporarily unavailable. Please try again." }),
+          { status: 503, headers: { ...cors, "Content-Type": "application/json" } }
+        );
+      }
+      usageIncremented = true;
+    }
+
     // ---- 7. Call AI provider ----
     const provider = createAiProvider();
-    const maxTokens = getMaxTokens(contextType, requestedMaxTokens);
+    const maxTokens = getMaxTokens(contextType);
     const systemPrompt = buildSystemPrompt(contextType, chartContext);
-    const aiResponse = await provider.chat(systemPrompt, conversationMessages, maxTokens);
+
+    let aiResponse: string;
+    try {
+      aiResponse = await provider.chat(systemPrompt, conversationMessages, maxTokens);
+    } catch (aiError) {
+      // AI call failed — decrement usage so the user isn't charged for a failed request
+      if (usageIncremented) {
+        try {
+          const now = new Date();
+          const periodStart = `${now.getFullYear()}-${String(
+            now.getMonth() + 1
+          ).padStart(2, "0")}-01`;
+
+          await adminClient.rpc("decrement_ai_usage", {
+            p_user_id: userId,
+            p_period_start: periodStart,
+          });
+        } catch (decrementError) {
+          console.error("Failed to decrement usage after AI error:", decrementError);
+        }
+      }
+      throw aiError;
+    }
 
     // ---- 8. Store AI response ----
     const { data: storedMessage, error: storeError } = await adminClient
@@ -686,20 +756,9 @@ Deno.serve(async (req) => {
       })
       .eq("id", activeConversationId);
 
-    // ---- 10. Update usage counter ----
-    if (!isPremium) {
-      const now = new Date();
-      const periodStart = `${now.getFullYear()}-${String(
-        now.getMonth() + 1
-      ).padStart(2, "0")}-01`;
+    // (Usage already incremented in step 6b, before AI call)
 
-      await adminClient.rpc("increment_ai_usage", {
-        p_user_id: userId,
-        p_period_start: periodStart,
-      });
-    }
-
-    // ---- 11. Return response ----
+    // ---- 10. Return response ----
     return new Response(
       JSON.stringify({
         message: {
