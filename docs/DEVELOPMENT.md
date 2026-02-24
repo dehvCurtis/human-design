@@ -91,6 +91,16 @@ psql $DATABASE_URL -f 02_functional_tests.sql    # 23 functional smoke tests
 **Functional test coverage** (23 tests):
 - Social graph CRUD, posts/comments/reactions, groups, stories, messaging, AI, gamification
 
+### Security Migrations
+
+| Migration | Purpose |
+|-----------|---------|
+| `20260208_security_hardening.sql` | Team/circle function auth checks, AI usage lockdown |
+| `20260217000000_security_audit_fixes.sql` | LLM rate limiting, contribute_points_to_team fix |
+| `20260222100000_fix_critical_audit_issues.sql` | RLS policy fixes (circles, points, pentas, DMs) |
+| `20260223100000_llm_security_hardening.sql` | AI purchase redemption tracking, rate limit table |
+| `20260224000000_fix_team_functions.sql` | Fix team functions to reference `challenge_teams` |
+
 ## Key Files
 
 ### Core

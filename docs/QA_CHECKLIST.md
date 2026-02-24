@@ -1,6 +1,6 @@
 # QA Functional Checklist - Human Design App
 
-> **Version:** 1.2
+> **Version:** 1.3
 > **Last Updated:** 2026-02-23
 > **Total Test Cases:** 250+ (manual) + 260 (automated)
 > **Platforms:** iOS, Android

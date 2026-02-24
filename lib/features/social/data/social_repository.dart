@@ -7,6 +7,10 @@ class SocialRepository {
 
   final SupabaseClient _client;
 
+  /// Escape ILIKE special characters to prevent wildcard injection
+  static String _escapeIlike(String input) =>
+      input.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_');
+
   /// Maximum allowed comment content length (matches DB constraint)
   static const int maxCommentLength = 2000;
 
@@ -242,7 +246,7 @@ class SocialRepository {
     await _client.from('group_members').insert({
       'group_id': groupId,
       'user_id': userId,
-      'role': role,
+      'role': userId == currentUserId ? 'member' : role,
     });
   }
 
@@ -362,6 +366,11 @@ class SocialRepository {
     required String userId,
     required String role,
   }) async {
+    const validRoles = {'member', 'moderator', 'admin'};
+    if (!validRoles.contains(role)) {
+      throw ArgumentError('Invalid role: $role');
+    }
+
     final currentUserId = _client.auth.currentUser?.id;
     if (currentUserId == null) throw StateError('User not authenticated');
 
@@ -506,7 +515,7 @@ class SocialRepository {
         .from('profiles')
         .select('id, name, avatar_url, hd_type')
         .inFilter('id', friendIds)
-        .ilike('name', '%${query.trim()}%')
+        .ilike('name', '%${_escapeIlike(query.trim())}%')
         .limit(20);
 
     return (response as List)

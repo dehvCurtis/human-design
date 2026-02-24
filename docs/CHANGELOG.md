@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.22] - 2026-02-23
+
+### Security
+
+#### Medium Priority Audit Fixes
+- **Share Count Column Mismatch (MEDIUM)** — `getMonthlyShareCount()` queried `user_id` instead of `shared_by`, always returning 0 for share limit checks
+- **Empty Post Content (MEDIUM)** — `createPost()` only validated max length, not empty/whitespace-only content; added `trim().isEmpty` check
+- **ILIKE Wildcard Injection (MEDIUM)** — User input in friend search was interpolated directly into ILIKE patterns; added `_escapeIlike()` helper to escape `%`, `_`, `\`
+- **Group Self-Add Role Bypass (MEDIUM)** — `addGroupMember()` passed `role` parameter unchecked when user was adding themselves; forced `role: 'member'` for self-addition
+- **Arbitrary Group Roles (MEDIUM)** — `updateMemberRole()` accepted any string as role; added allowlist validation (`member`, `moderator`, `admin`)
+- **Notification ID Overflow (MEDIUM)** — `notification.hashCode` could be negative or exceed 32-bit int range; applied `.abs() & 0x7FFFFFFF`
+- **Team Functions Wrong Table (MEDIUM)** — `increment_team_member_count`, `decrement_team_member_count`, and `contribute_points_to_team` referenced non-existent `public.teams` instead of `public.challenge_teams`
+
+### Changed
+- New migration: `20260224000000_fix_team_functions.sql`
+
+---
+
 ## [0.2.21] - 2026-02-23
 
 ### Security
