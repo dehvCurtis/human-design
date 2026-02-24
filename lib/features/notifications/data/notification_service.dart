@@ -126,7 +126,7 @@ class NotificationService {
 
     // Show local notification
     _localNotifications.show(
-      notification.hashCode,
+      notification.hashCode.abs() & 0x7FFFFFFF,
       notification.title,
       notification.body,
       NotificationDetails(

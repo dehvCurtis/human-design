@@ -159,7 +159,10 @@ class FeedRepository {
     final userId = _currentUserId;
     if (userId == null) throw StateError('User not authenticated');
 
-    // Enforce content length limit
+    // Enforce content validation
+    if (content.trim().isEmpty) {
+      throw ArgumentError('Post content cannot be empty');
+    }
     if (content.length > maxPostLength) {
       throw ArgumentError('Post content exceeds $maxPostLength characters');
     }

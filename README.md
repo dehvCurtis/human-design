@@ -229,6 +229,21 @@ psql $DATABASE_URL -f run_all_tests.sql
 
 See [docs/TEST_USERS.md](docs/TEST_USERS.md) for test user details.
 
+## Security
+
+The app employs defense-in-depth security across multiple layers:
+
+- **Row Level Security (RLS)** — 54 RLS policies enforcing data isolation per user
+- **Input Validation** — Client-side validation with server-side constraints as backstop
+  - ILIKE wildcard injection prevention in search queries
+  - Content length and emptiness checks on posts and comments
+  - Role allowlist enforcement on group member operations
+- **LLM Abuse Prevention** — DB-backed rate limiting, usage pre-increment, server-side token caps
+- **Notification Safety** — Safe 32-bit positive IDs for local notification display
+- **DB Function Integrity** — All team/challenge functions reference correct tables with auth checks
+
+See [docs/CHANGELOG.md](docs/CHANGELOG.md) for the full audit fix history.
+
 ## Key Commands
 
 ```bash

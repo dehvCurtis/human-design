@@ -286,7 +286,7 @@ class ProfileRepository {
     final response = await _client
         .from('shares')
         .select('id')
-        .eq('user_id', userId)
+        .eq('shared_by', userId)
         .gte('created_at', startOfMonth.toIso8601String());
 
     return (response as List).length;
