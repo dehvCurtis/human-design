@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.24] - 2026-02-24
+
+### Fixed
+- **Dream Interpretation System Prompt** — AI was not interpreting dreams because the system prompt did not explicitly frame the user's message as a dream to interpret; reworded to make dream interpretation the primary directive
+
+### Added
+- **AI Features Pipeline Documentation** — `docs/pipelines/AI_FEATURES.md` covering all 6 AI features with data flows, context building, system prompts, quota/rate limiting, and context data matrix
+- **Documentation links** in README
+
+---
+
 ## [0.2.23] - 2026-02-24
 
 ### Security

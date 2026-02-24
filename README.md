@@ -266,6 +266,14 @@ flutter build ios
 flutter build macos
 ```
 
+## Documentation
+
+- [Development Guide](docs/DEVELOPMENT.md) - Setup, testing, code style
+- [Changelog](docs/CHANGELOG.md) - Version history
+- [AI Features Pipeline](docs/pipelines/AI_FEATURES.md) - AI feature data flows, context building, system prompts
+- [QA Checklist](docs/QA_CHECKLIST.md) - Automated and manual test coverage
+- [Test Users](docs/TEST_USERS.md) - Test account details and RLS test users
+
 ## Links
 
 - [Privacy Policy](https://dehvcurtis.github.io/inside-me-human-design/privacy-policy)
