@@ -51,7 +51,7 @@ flutter test test/create_post_chart_id_test.dart  # Chart ID logic (9 tests)
 flutter analyze
 ```
 
-### RLS & Database Tests (77 tests)
+### RLS & Database Tests (80 tests)
 
 SQL-based test suite that verifies Row Level Security policies and social platform functionality against the live Supabase database.
 
@@ -88,8 +88,8 @@ psql $DATABASE_URL -f 02_functional_tests.sql    # 23 functional smoke tests
 - I. Cross-User Isolation (5) - charts, transactions, journal, notifications
 - J. Block List (3) - follow blocking, block list visibility
 
-**Functional test coverage** (23 tests):
-- Social graph CRUD, posts/comments/reactions, groups, stories, messaging, AI, gamification
+**Functional test coverage** (26 tests):
+- Social graph CRUD, posts/comments/reactions, groups, stories, messaging, AI, gamification, input validation
 
 ### Security Migrations
 

@@ -241,8 +241,8 @@ class SharingRepository {
   }
 
   ProfileHarmonicsSection _calculateProfileHarmonics(String profile1, String profile2) {
-    final lines1 = profile1.split('/').map(int.parse).toList();
-    final lines2 = profile2.split('/').map(int.parse).toList();
+    final lines1 = profile1.split('/').map((s) => int.tryParse(s) ?? 0).toList();
+    final lines2 = profile2.split('/').map((s) => int.tryParse(s) ?? 0).toList();
 
     final shared = lines1.where((l) => lines2.contains(l)).toList();
     final complementary = <int>[];

@@ -9,6 +9,10 @@ class ExpertRepository {
 
   final SupabaseClient _client;
 
+  /// Escape ILIKE special characters to prevent wildcard injection
+  static String _escapeIlike(String input) =>
+      input.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_');
+
   String? get _currentUserId => _client.auth.currentUser?.id;
 
   // ==================== Expert Profiles ====================
@@ -85,7 +89,7 @@ class ExpertRepository {
           user:profiles!experts_user_id_fkey(id, name, avatar_url)
         ''')
         .eq('verification_status', 'verified')
-        .or('title.ilike.%$query%,bio.ilike.%$query%')
+        .or('title.ilike.%${_escapeIlike(query)}%,bio.ilike.%${_escapeIlike(query)}%')
         .order('follower_count', ascending: false)
         .limit(limit);
 

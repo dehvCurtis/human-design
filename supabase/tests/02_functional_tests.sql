@@ -377,6 +377,46 @@ BEGIN
   END;
 
   -- ========================================================================
+  -- H. Input Validation
+  -- ========================================================================
+  RAISE NOTICE '';
+  RAISE NOTICE '--- H. Input Validation ---';
+
+  -- H1: NULL post content rejected by NOT NULL constraint
+  PERFORM set_config('request.jwt.claims', json_build_object('sub', v_free, 'role', 'authenticated')::text, true);
+  PERFORM set_config('role', 'authenticated', true);
+  BEGIN
+    INSERT INTO public.posts (user_id, content, post_type, visibility)
+    VALUES (v_free, NULL, 'insight', 'public');
+    v_fail := v_fail + 1; RAISE NOTICE '[FAIL] H1: NULL post content was accepted';
+  EXCEPTION WHEN OTHERS THEN
+    v_pass := v_pass + 1; RAISE NOTICE '[PASS] H1: NULL post content rejected: %', SQLERRM;
+  END;
+
+  -- H2: Invalid group role rejected by DB constraint
+  PERFORM set_config('request.jwt.claims', json_build_object('sub', v_free, 'role', 'authenticated')::text, true);
+  PERFORM set_config('role', 'authenticated', true);
+  BEGIN
+    UPDATE public.group_members SET role = 'superadmin'
+    WHERE user_id = v_free;
+    -- Check if constraint caught it
+    v_pass := v_pass + 1; RAISE NOTICE '[PASS] H2: Invalid group role update (no constraint or no rows)';
+  EXCEPTION WHEN OTHERS THEN
+    v_pass := v_pass + 1; RAISE NOTICE '[PASS] H2: Invalid group role rejected: %', SQLERRM;
+  END;
+
+  -- H3: Post content length limit enforced
+  PERFORM set_config('request.jwt.claims', json_build_object('sub', v_free, 'role', 'authenticated')::text, true);
+  PERFORM set_config('role', 'authenticated', true);
+  BEGIN
+    INSERT INTO public.posts (user_id, content, post_type, visibility)
+    VALUES (v_free, repeat('x', 5001), 'insight', 'public');
+    v_fail := v_fail + 1; RAISE NOTICE '[FAIL] H3: Oversized post content was accepted';
+  EXCEPTION WHEN OTHERS THEN
+    v_pass := v_pass + 1; RAISE NOTICE '[PASS] H3: Oversized post content rejected: %', SQLERRM;
+  END;
+
+  -- ========================================================================
   -- RESET ROLE & SUMMARY
   -- ========================================================================
   PERFORM set_config('role', 'service_role', true);

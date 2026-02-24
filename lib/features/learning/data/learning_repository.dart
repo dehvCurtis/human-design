@@ -9,6 +9,10 @@ class LearningRepository {
 
   final SupabaseClient _client;
 
+  /// Escape ILIKE special characters to prevent wildcard injection
+  static String _escapeIlike(String input) =>
+      input.replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_');
+
   String? get _currentUserId => _client.auth.currentUser?.id;
 
   // ==================== Content Library ====================
@@ -48,7 +52,8 @@ class LearningRepository {
       query = query.eq('is_premium', isPremium);
     }
     if (searchQuery != null && searchQuery.isNotEmpty) {
-      query = query.or('title.ilike.%$searchQuery%,content.ilike.%$searchQuery%');
+      final sanitized = _escapeIlike(searchQuery);
+      query = query.or('title.ilike.%$sanitized%,content.ilike.%$sanitized%');
     }
 
     final response = await query

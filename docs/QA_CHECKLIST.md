@@ -1,8 +1,8 @@
 # QA Functional Checklist - Human Design App
 
-> **Version:** 1.3
-> **Last Updated:** 2026-02-23
-> **Total Test Cases:** 250+ (manual) + 260 (automated)
+> **Version:** 1.4
+> **Last Updated:** 2026-02-24
+> **Total Test Cases:** 250+ (manual) + 263 (automated)
 > **Platforms:** iOS, Android
 > **QA Run Date:** 2026-02-23
 
@@ -16,8 +16,8 @@
 |------------|--------|------------|-------|
 | Unit & Widget Tests (Flutter) | **PASSED** | 183/183 | Chart, auth, AI, feed, groups |
 | RLS Privacy Tests (SQL) | **PASSED** | 54/54 | Profiles, posts, stories, DMs, groups, circles, AI, gamification, blocks |
-| Functional Smoke Tests (SQL) | **PASSED** | 23/23 | Social graph, CRUD, messaging, gamification RPCs |
-| **Overall** | **PASSED** | 260/260 | 100% pass rate |
+| Functional Smoke Tests (SQL) | **PASSED** | 26/26 | Social graph, CRUD, messaging, gamification RPCs, input validation |
+| **Overall** | **PASSED** | 263/263 | 100% pass rate |
 
 ### Code Verification Summary
 

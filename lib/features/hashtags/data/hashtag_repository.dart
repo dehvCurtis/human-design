@@ -65,7 +65,7 @@ class HashtagRepository {
     final response = await _client
         .from('hashtags')
         .select()
-        .ilike('name', '${query.toLowerCase()}%')
+        .ilike('name', '${query.toLowerCase().replaceAll('\\', '\\\\').replaceAll('%', '\\%').replaceAll('_', '\\_')}%')
         .order('post_count', ascending: false)
         .limit(limit);
 

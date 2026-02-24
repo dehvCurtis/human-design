@@ -212,7 +212,7 @@ flutter test test/create_post_chart_id_test.dart  # Chart ID sentinel logic
 flutter test test/group_detail_test.dart         # Group models & validation
 ```
 
-### RLS & Database Tests (77 tests)
+### RLS & Database Tests (80 tests)
 
 SQL-based test suite that runs directly against the Supabase database to verify Row Level Security policies and social platform functionality.
 
@@ -225,7 +225,7 @@ psql $DATABASE_URL -f run_all_tests.sql
 | Suite | Tests | Coverage |
 |-------|-------|----------|
 | **RLS Privacy** | 54 | Profiles, posts, stories, DMs, groups, circles, AI, gamification, blocks, cross-user isolation |
-| **Functional Smoke** | 23 | Social graph CRUD, posts/comments/reactions, groups, stories, messaging, AI, gamification |
+| **Functional Smoke** | 26 | Social graph CRUD, posts/comments/reactions, groups, stories, messaging, AI, gamification, input validation |
 
 See [docs/TEST_USERS.md](docs/TEST_USERS.md) for test user details.
 
