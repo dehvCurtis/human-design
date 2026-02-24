@@ -12,6 +12,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/config/app_config.dart';
+import 'firebase_options.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/ephemeris/data/ephemeris_service.dart';
@@ -39,7 +40,9 @@ void main() async {
 
   // Initialize Firebase (requires firebase_options.dart from flutterfire configure)
   try {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     firebaseConfigured = true;
   } catch (e) {
     debugPrint('Firebase initialization failed: $e');
