@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.25] - 2026-02-24
+
+### Added
+- **Firebase Configuration** — FlutterFire setup with platform-specific config files (`firebase_options.dart`, `GoogleService-Info.plist`, `google-services.json`), APNs key for iOS push notifications, `main.dart` updated to use `DefaultFirebaseOptions.currentPlatform`
+- Firebase project step added to README installation guide
+
+---
+
 ## [0.2.24] - 2026-02-24
 
 ### Fixed
