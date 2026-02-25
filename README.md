@@ -94,6 +94,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 - Flutter SDK ^3.8.0
 - Xcode (for iOS/macOS development)
 - Supabase project (for backend)
+- Firebase project (for push notifications)
 
 ### Installation
 
@@ -113,17 +114,23 @@ flutter pub get
    - Add your Supabase URL and Anon Key
    - Add RevenueCat API keys (optional)
 
-4. Run Supabase migrations:
+4. Configure Firebase (for push notifications):
+```bash
+dart pub global activate flutterfire_cli
+flutterfire configure --project=<your-firebase-project>
+```
+
+5. Run Supabase migrations:
 ```bash
 supabase db push
 ```
 
-5. Generate localizations:
+6. Generate localizations:
 ```bash
 flutter gen-l10n
 ```
 
-6. Run the app:
+7. Run the app:
 ```bash
 flutter run
 ```
