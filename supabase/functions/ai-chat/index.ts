@@ -1,6 +1,12 @@
 // AI Chat Edge Function
 // Security: JWT validation, rate limiting, input sanitization, usage quota enforcement
 // Provider-agnostic: supports Gemini, Claude, and OpenAI via AI_PROVIDER env var
+//
+// NOTE: Deployed with --no-verify-jwt because the Supabase Edge Functions gateway
+// only supports HS256 JWT verification, but this project uses ES256 asymmetric keys.
+// Auth is verified inside the function via getUser() which validates against the
+// Supabase Auth service (more secure — catches revoked tokens in real-time).
+// See: https://github.com/supabase/supabase/issues/42810
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 

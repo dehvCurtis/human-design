@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -79,6 +80,11 @@ class _AiJournalPromptsScreenState
               _buildGenerateButton(context)
             else
               _buildPromptsContent(context),
+
+            const SizedBox(height: 24),
+
+            // Past journal entries
+            _buildPastEntries(context),
 
             const SizedBox(height: 32),
           ],
@@ -278,6 +284,88 @@ class _AiJournalPromptsScreenState
         _expandedPrompts[index] = false;
       });
     }
+  }
+
+  Widget _buildPastEntries(BuildContext context) {
+    final entriesAsync = ref.watch(journalEntriesProvider);
+    final theme = Theme.of(context);
+
+    return entriesAsync.when(
+      data: (entries) {
+        if (entries.isEmpty) return const SizedBox.shrink();
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Divider(),
+            const SizedBox(height: 8),
+            Text(
+              'Past Entries',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            for (final entry in entries) _buildPastEntryCard(context, entry),
+          ],
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, _) => const SizedBox.shrink(),
+    );
+  }
+
+  Widget _buildPastEntryCard(BuildContext context, JournalEntry entry) {
+    final theme = Theme.of(context);
+    final dateStr = DateFormat.yMMMd().add_jm().format(entry.createdAt.toLocal());
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.edit_note, size: 16, color: AppColors.primary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    dateStr,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+                if (entry.transitSunGate != null)
+                  Text(
+                    'Gate ${entry.transitSunGate}',
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: Colors.amber.shade700,
+                    ),
+                  ),
+              ],
+            ),
+            if (entry.prompt != null) ...[
+              const SizedBox(height: 8),
+              Text(
+                entry.prompt!,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  fontStyle: FontStyle.italic,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+            const SizedBox(height: 8),
+            Text(
+              entry.content,
+              style: theme.textTheme.bodyMedium,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   List<String> _parsePrompts(String content) {
