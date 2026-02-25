@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 - **Journal Prompts past entries** — Saved journal responses now display on the Journal Prompts screen with date, transit gate, prompt text, and user response
 - **RevenueCat production configuration** — Connected Apple App Store app with `Inside Me Pro` entitlement, `premium_monthly` and `premium_yearly` products, and default offering
+- **App Store encryption compliance** — Added `ITSAppUsesNonExemptEncryption = NO` to Info.plist to skip compliance prompt on future TestFlight uploads
+- **First TestFlight build** — Build 1 uploaded and ready for testing
 
 ---
 
