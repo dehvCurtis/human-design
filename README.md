@@ -248,6 +248,7 @@ The app employs defense-in-depth security across multiple layers:
 - **LLM Abuse Prevention** — DB-backed rate limiting, usage pre-increment, server-side token caps
 - **Notification Safety** — Safe 32-bit positive IDs for local notification display
 - **DB Function Integrity** — All team/challenge functions reference correct tables with auth checks
+- **Edge Function Auth** — ES256 JWT verification via `getUser()` (Supabase Auth API) instead of gateway-level HS256 check, providing real-time token revocation support
 
 See [docs/CHANGELOG.md](docs/CHANGELOG.md) for the full audit fix history.
 

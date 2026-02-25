@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.26] - 2026-02-25
+
+### Fixed
+- **Edge Function ES256 JWT compatibility** — Supabase Edge Functions gateway only supports HS256 JWT verification, but project uses ES256 asymmetric keys. Deployed with `--no-verify-jwt`; auth verified inside function via `getUser()` (more secure — catches revoked tokens in real-time)
+
+### Added
+- **Journal Prompts past entries** — Saved journal responses now display on the Journal Prompts screen with date, transit gate, prompt text, and user response
+- **RevenueCat production configuration** — Connected Apple App Store app with `Inside Me Pro` entitlement, `premium_monthly` and `premium_yearly` products, and default offering
+
+---
+
 ## [0.2.25] - 2026-02-24
 
 ### Added
