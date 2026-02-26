@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2026-02-26
+
+### Fixed
+- **Location search locale support** — Nominatim API now receives `Accept-Language` header matching the user's app language, so searching in Russian, Ukrainian, German, etc. returns correct results in the user's script
+- **Removed mock location provider** — Deleted 450-line `MockLocationSearchProvider` with hardcoded 45-city list; `searchProvider` is now a required parameter backed by the real Nominatim API with worldwide coverage
+
+---
+
 ## [1.1.0] - 2026-02-25
 
 ### Added

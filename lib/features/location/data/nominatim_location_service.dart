@@ -15,9 +15,15 @@ import '../../../shared/widgets/forms/location_search_field.dart';
 class NominatimLocationSearchProvider implements LocationSearchProvider {
   NominatimLocationSearchProvider({
     http.Client? httpClient,
+    this.locale,
   }) : _httpClient = httpClient ?? http.Client();
 
   final http.Client _httpClient;
+
+  /// Locale for search results (e.g., 'ru', 'en', 'de')
+  /// When set, Nominatim returns results in this language and
+  /// better handles queries in that script.
+  final String? locale;
 
   /// Rate limiting: track last request time
   DateTime? _lastRequestTime;
@@ -53,9 +59,14 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
         },
       );
 
+      final headers = <String, String>{
+        'User-Agent': _userAgent,
+        if (locale != null) 'Accept-Language': locale!,
+      };
+
       final response = await _httpClient.get(
         uri,
-        headers: {'User-Agent': _userAgent},
+        headers: headers,
       ).timeout(const Duration(seconds: 10));
 
       _lastRequestTime = DateTime.now();
@@ -107,9 +118,14 @@ class NominatimLocationSearchProvider implements LocationSearchProvider {
         },
       );
 
+      final headers = <String, String>{
+        'User-Agent': _userAgent,
+        if (locale != null) 'Accept-Language': locale!,
+      };
+
       final response = await _httpClient.get(
         uri,
-        headers: {'User-Agent': _userAgent},
+        headers: headers,
       ).timeout(const Duration(seconds: 10));
 
       _lastRequestTime = DateTime.now();
