@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/utils/error_handler.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/stories_providers.dart';
 import '../../domain/models/story.dart';
 
@@ -43,6 +44,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final storiesState = ref.watch(storiesNotifierProvider);
 
     return DraggableScrollableSheet(
@@ -77,7 +79,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Cancel'),
+                      child: Text(l10n.common_cancel),
                     ),
                     Text(
                       'Create Story',
@@ -93,7 +95,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                               height: 20,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : const Text('Share'),
+                          : Text(l10n.common_share),
                     ),
                   ],
                 ),
@@ -131,7 +133,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Text(
-                                      'Gate $_selectedTransitGate',
+                                      l10n.story_gateNumber(_selectedTransitGate!),
                                       style: TextStyle(
                                         color: _textColor,
                                         fontSize: 14,
@@ -151,7 +153,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                                   textAlign: TextAlign.center,
                                   maxLines: 5,
                                   decoration: InputDecoration(
-                                    hintText: 'Type your story...',
+                                    hintText: l10n.story_typeYourStory,
                                     hintStyle: TextStyle(
                                       color: _textColor.withValues(alpha: 0.5),
                                       fontSize: 24,
@@ -255,7 +257,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                         runSpacing: 8,
                         children: [
                           ChoiceChip(
-                            label: const Text('None'),
+                            label: Text(l10n.story_none),
                             selected: _selectedTransitGate == null,
                             onSelected: (_) {
                               setState(() => _selectedTransitGate = null);
@@ -264,7 +266,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                           // Just show a few example gates - in real app this would be more dynamic
                           for (final gate in [1, 13, 25, 46, 64])
                             ChoiceChip(
-                              label: Text('Gate $gate'),
+                              label: Text(l10n.story_gateNumber(gate)),
                               selected: _selectedTransitGate == gate,
                               onSelected: (_) {
                                 setState(() => _selectedTransitGate = gate);
@@ -284,16 +286,16 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
                       ),
                       const SizedBox(height: 8),
                       SegmentedButton<StoryVisibility>(
-                        segments: const [
+                        segments: [
                           ButtonSegment(
                             value: StoryVisibility.followers,
-                            label: Text('Followers'),
-                            icon: Icon(Icons.people),
+                            label: Text(l10n.common_followers),
+                            icon: const Icon(Icons.people),
                           ),
                           ButtonSegment(
                             value: StoryVisibility.public,
-                            label: Text('Everyone'),
-                            icon: Icon(Icons.public),
+                            label: Text(l10n.story_everyone),
+                            icon: const Icon(Icons.public),
                           ),
                         ],
                         selected: {_visibility},
@@ -318,7 +320,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
     final content = _contentController.text.trim();
     if (content.isEmpty && _selectedTransitGate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please add some content to your story')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.story_addContent)),
       );
       return;
     }
@@ -337,7 +339,7 @@ class _CreateStorySheetState extends ConsumerState<CreateStorySheet> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Story created!')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.story_created)),
         );
       }
     } catch (e) {

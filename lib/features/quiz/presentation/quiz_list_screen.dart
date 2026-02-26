@@ -19,15 +19,16 @@ class QuizListScreen extends ConsumerWidget {
     final filters = ref.watch(quizFiltersProvider);
     final quizzesAsync = ref.watch(quizzesWithStatusProvider);
     final progressAsync = ref.watch(quizProgressProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quizzes'),
+        title: Text(l10n.quiz_quizzes),
         actions: [
           IconButton(
             icon: const Icon(Icons.bar_chart),
             onPressed: () => _showStatsSheet(context, ref),
-            tooltip: 'Quiz Stats',
+            tooltip: l10n.quiz_quizStats,
           ),
         ],
       ),
@@ -159,6 +160,7 @@ class QuizListScreen extends ConsumerWidget {
     WidgetRef ref,
     QuizFilters filters,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       height: 48,
       child: ListView(
@@ -167,7 +169,7 @@ class QuizListScreen extends ConsumerWidget {
         children: [
           _buildFilterChip(
             context,
-            label: 'All',
+            label: l10n.quiz_all,
             isSelected: filters.category == null,
             onSelected: (_) => ref.read(quizFiltersProvider.notifier).setCategory(null),
           ),

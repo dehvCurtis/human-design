@@ -10,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' show FileOptions;
 import 'package:uuid/uuid.dart';
 
 import '../../../../core/utils/error_handler.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../shared/providers/supabase_provider.dart';
 import '../../../chart/domain/chart_providers.dart';
 import '../../domain/feed_providers.dart';
@@ -68,6 +69,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final mediaQuery = MediaQuery.of(context);
 
     return Container(
@@ -102,7 +104,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancel'),
+                    child: Text(l10n.feed_cancel),
                   ),
                   Text(
                     'Create Post',
@@ -120,7 +122,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                               strokeWidth: 2,
                             ),
                           )
-                        : const Text('Post'),
+                        : Text(l10n.common_post),
                   ),
                 ],
               ),
@@ -240,13 +242,13 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                   children: [
                     if (_selectedGate != null)
                       Chip(
-                        label: Text('Gate $_selectedGate'),
+                        label: Text(l10n.feed_gateTag(_selectedGate!)),
                         onDeleted: () => setState(() => _selectedGate = null),
                         deleteIcon: const Icon(Icons.close, size: 16),
                       ),
                     if (_selectedChannelId != null)
                       Chip(
-                        label: Text('Channel $_selectedChannelId'),
+                        label: Text(l10n.feed_channelTag(_selectedChannelId!)),
                         onDeleted: () => setState(() => _selectedChannelId = null),
                         deleteIcon: const Icon(Icons.close, size: 16),
                       ),
@@ -277,7 +279,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                   IconButton(
                     icon: const Icon(Icons.image_outlined),
                     onPressed: _pickImage,
-                    tooltip: 'Add image',
+                    tooltip: l10n.feed_addImage,
                   ),
                   IconButton(
                     icon: Icon(
@@ -287,12 +289,12 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
                           : null,
                     ),
                     onPressed: _showChartPicker,
-                    tooltip: 'Attach chart',
+                    tooltip: l10n.feed_attachChart,
                   ),
                   IconButton(
                     icon: const Icon(Icons.tag),
                     onPressed: _showGateChannelPicker,
-                    tooltip: 'Tag gate or channel',
+                    tooltip: l10n.feed_tagGateOrChannel,
                   ),
                 ],
               ),
@@ -323,7 +325,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
         if (pickedFiles.length > 4 - _selectedImages.length) {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Maximum 4 images allowed')),
+              SnackBar(content: Text(AppLocalizations.of(context)!.feed_maxImagesAllowed)),
             );
           }
         }
@@ -481,7 +483,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
     final content = _contentController.text.trim();
     if (content.isEmpty && _selectedImages.isEmpty && _selectedChartId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter some content or add an image')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.feed_enterContentOrImage)),
       );
       return;
     }
@@ -524,7 +526,7 @@ class _CreatePostSheetState extends ConsumerState<CreatePostSheet> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Post created successfully!')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.feed_postCreated)),
         );
       }
     } catch (e, stackTrace) {
@@ -606,22 +608,23 @@ class _VisibilitySelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SegmentedButton<PostVisibility>(
-      segments: const [
+      segments: [
         ButtonSegment(
           value: PostVisibility.public,
-          icon: Icon(Icons.public, size: 18),
-          label: Text('Public'),
+          icon: const Icon(Icons.public, size: 18),
+          label: Text(l10n.common_public),
         ),
         ButtonSegment(
           value: PostVisibility.followers,
-          icon: Icon(Icons.group, size: 18),
-          label: Text('Followers'),
+          icon: const Icon(Icons.group, size: 18),
+          label: Text(l10n.common_followers),
         ),
         ButtonSegment(
           value: PostVisibility.private,
-          icon: Icon(Icons.lock, size: 18),
-          label: Text('Private'),
+          icon: const Icon(Icons.lock, size: 18),
+          label: Text(l10n.common_private),
         ),
       ],
       selected: {visibility},

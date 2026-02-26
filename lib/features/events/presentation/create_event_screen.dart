@@ -286,8 +286,9 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     if (_endsAt.isBefore(_startsAt)) {
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('End date must be after start date')),
+        SnackBar(content: Text(l10n.event_endDateAfterStart)),
       );
       return;
     }

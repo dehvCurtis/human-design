@@ -1587,5 +1587,216 @@
   "group_shareChart": "Karte teilen",
   "group_share": "Teilen",
   "group_chartShared": "Karte wurde mit der Gruppe geteilt",
-  "group_noChartsToShare": "Keine gespeicherten Karten zum Teilen. Erstelle zuerst eine Karte."
+  "group_noChartsToShare": "Keine gespeicherten Karten zum Teilen. Erstelle zuerst eine Karte.",
+
+  "common_confirm": "Bestätigen",
+  "common_gotIt": "Verstanden",
+  "common_post": "Veröffentlichen",
+  "common_public": "Öffentlich",
+  "common_followers": "Follower",
+  "common_private": "Privat",
+  "common_messages": "Nachrichten",
+  "common_or": "oder",
+  "common_comment": "Kommentar",
+  "common_apply": "Anwenden",
+  "common_reset": "Zurücksetzen",
+
+  "form_emailRequired": "E-Mail ist erforderlich",
+  "form_emailInvalid": "Bitte geben Sie eine gültige E-Mail ein",
+  "form_passwordRequired": "Passwort ist erforderlich",
+  "form_passwordTooShort": "Passwort muss mindestens 6 Zeichen lang sein",
+  "form_passwordTooShortStrong": "Passwort muss mindestens 12 Zeichen lang sein",
+  "form_passwordNeedsUppercase": "Passwort muss einen Großbuchstaben enthalten",
+  "form_passwordNeedsLowercase": "Passwort muss einen Kleinbuchstaben enthalten",
+  "form_passwordNeedsNumber": "Passwort muss eine Zahl enthalten",
+  "form_passwordNeedsSpecial": "Passwort muss ein Sonderzeichen enthalten",
+  "form_unknownBirthTime": "Ich kenne meine Geburtszeit nicht",
+  "form_birthTimeHelp": "Eine genaue Geburtszeit hilft bei der Erstellung einer präziseren Karte",
+  "form_networkError": "Netzwerkfehler. Überprüfen Sie Ihre Verbindung.",
+  "form_searchFailed": "Suche fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  "form_noCitiesFound": "Keine Städte gefunden. Versuchen Sie eine andere Suche.",
+  "form_timezoneAuto": "Ihre Zeitzone wird automatisch erkannt",
+  "form_timezoneValue": "Zeitzone: {timezone}",
+  "@form_timezoneValue": {
+    "placeholders": {
+      "timezone": {"type": "String"}
+    }
+  },
+
+  "oauth_continueWithApple": "Weiter mit Apple",
+  "oauth_continueWithGoogle": "Weiter mit Google",
+  "oauth_continueWithMicrosoft": "Weiter mit Microsoft",
+  "oauth_continueWithFacebook": "Weiter mit Facebook",
+  "oauth_changeLanguage": "Sprache ändern",
+
+  "messaging_conversation": "Unterhaltung",
+  "messaging_typeMessage": "Nachricht eingeben...",
+  "messaging_shareChart": "Karte teilen",
+  "messaging_shareTransit": "Transit teilen",
+  "messaging_sendImage": "Bild senden",
+  "messaging_noChartsAvailable": "Keine Karten zum Teilen verfügbar",
+  "messaging_selectChart": "Karte zum Teilen auswählen",
+  "messaging_you": "Du",
+  "messaging_searchConversations": "Unterhaltungen suchen...",
+  "messaging_newMessage": "Neue Nachricht",
+  "messaging_errorLoading": "Fehler beim Laden der Unterhaltungen",
+  "messaging_signInRequired": "Bitte melden Sie sich an, um Nachrichten zu senden",
+  "messaging_signIn": "Anmelden",
+
+  "discovery_searchUsers": "Benutzer suchen...",
+  "discovery_discover": "Entdecken",
+  "discovery_popularCharts": "Beliebte Karten",
+  "discovery_hasChart": "Hat Karte",
+  "discovery_mutual": "Gegenseitig",
+  "discovery_clearAll": "Alle löschen",
+  "discovery_onlyWithChart": "Nur Benutzer mit Karte",
+  "discovery_showWithBirthData": "Benutzer mit Geburtsdaten anzeigen",
+  "discovery_mutualFollowsOnly": "Nur gegenseitige Follows",
+  "discovery_showMutualFollows": "Nur Personen anzeigen, denen Sie beide folgen",
+  "discovery_applyFilters": "Filter anwenden",
+  "discovery_typeCompatibility": "Typkompatibilität",
+  "discovery_profileHarmonics": "Profilharmonik",
+  "discovery_channelComplementarity": "Kanalkomplementarität",
+  "discovery_definitionBridging": "Definitionsbrücke",
+
+  "feed_cancel": "Abbrechen",
+  "feed_post": "Veröffentlichen",
+  "feed_gateTag": "Tor {gate}",
+  "@feed_gateTag": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+  "feed_channelTag": "Kanal {channel}",
+  "@feed_channelTag": {
+    "placeholders": {
+      "channel": {"type": "String"}
+    }
+  },
+  "feed_addImage": "Bild hinzufügen",
+  "feed_attachChart": "Karte anhängen",
+  "feed_tagGateOrChannel": "Tor oder Kanal markieren",
+  "feed_maxImagesAllowed": "Maximal 4 Bilder erlaubt",
+  "feed_enterContentOrImage": "Bitte Inhalt eingeben oder ein Bild hinzufügen",
+  "feed_postCreated": "Beitrag erfolgreich erstellt!",
+  "feed_addCommentOptional": "Kommentar hinzufügen (optional)",
+  "feed_regenerate": "Neu generieren",
+  "feed_searchGatesChannels": "Tore oder Kanäle suchen...",
+  "feed_shareAboutGate": "Über dieses Tor berichten",
+  "feed_createPostAboutGate": "Beitrag über Tor {gate} erstellen",
+  "@feed_createPostAboutGate": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+
+  "quiz_quizzes": "Quizze",
+  "quiz_quizStats": "Quiz-Statistiken",
+  "quiz_quizNotFound": "Quiz nicht gefunden",
+  "quiz_questionsLabel": "Fragen",
+  "quiz_pointsLabel": "Punkte",
+  "quiz_difficultyLabel": "Schwierigkeit",
+  "quiz_timeLimit": "Zeitlimit",
+  "quiz_correct": "Richtig",
+
+  "profile_achievements": "Erfolge",
+  "profile_learning": "Lernen",
+  "profile_plan": "Plan",
+  "profile_planFree": "Kostenlos",
+  "profile_manageSubscription": "Abonnement verwalten",
+  "profile_upgradeToPremium": "Auf Premium upgraden",
+  "profile_aiMessages": "KI-Nachrichten",
+  "profile_aiUnlimited": "Unbegrenzt",
+  "profile_aiRemaining": "{remaining} / {limit} übrig",
+  "@profile_aiRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "profile_bonusMessages": "Bonusnachrichten",
+  "profile_noProfile": "Kein Profil gefunden",
+  "profile_takePhoto": "Foto aufnehmen",
+  "profile_chooseFromGallery": "Aus Galerie wählen",
+  "profile_avatarUpdated": "Avatar erfolgreich aktualisiert",
+  "profile_profileUpdated": "Profil erfolgreich aktualisiert",
+  "profile_changePhoto": "Foto ändern",
+  "profile_enterName": "Geben Sie Ihren Namen ein",
+  "profile_date": "Datum",
+  "profile_time": "Uhrzeit",
+  "profile_location": "Standort",
+  "profile_timezone": "Zeitzone",
+  "profile_preferences": "Einstellungen",
+  "profile_language": "Sprache",
+
+  "learning_learn": "Lernen",
+  "learning_searchContent": "Inhalte suchen...",
+  "learning_mentorship": "Mentoring",
+  "learning_errorLoading": "Fehler beim Laden der Inhalte",
+  "learning_contentNotFound": "Inhalt nicht gefunden",
+  "learning_goBack": "Zurück",
+  "learning_mentor": "Mentor",
+  "learning_mentee": "Mentee",
+  "learning_request": "Anfrage",
+  "learning_full": "Voll",
+  "learning_selectRole": "Bitte wählen Sie mindestens eine Rolle",
+  "learning_profileCreated": "Mentoring-Profil erstellt!",
+  "learning_menteeDesc": "Ich möchte von erfahrenen Praktikern lernen",
+  "learning_mentorDesc": "Ich möchte mein Wissen teilen und andere anleiten",
+  "learning_bioHint": "Erzählen Sie von Ihrer Human Design Reise...",
+  "learning_yearsExperience": "Jahre Erfahrung",
+  "learning_maxMentees": "Maximale Mentees",
+  "learning_createProfile": "Profil erstellen",
+
+  "gamification_totalPoints": "Gesamtpunkte",
+  "gamification_errorLoading": "Fehler beim Laden der Herausforderungen",
+  "gamification_noRankings": "Noch keine Ranglisten",
+
+  "story_stories": "Stories",
+  "story_failedToLoad": "Stories konnten nicht geladen werden",
+  "story_addContent": "Bitte fügen Sie Ihrer Story Inhalt hinzu",
+  "story_created": "Story erstellt!",
+  "story_viewViewers": "Zuschauer anzeigen",
+  "story_noViewers": "Noch keine Zuschauer",
+
+  "transit_selectDate": "Datum auswählen",
+  "transit_previousDay": "Vorheriger Tag",
+  "transit_backToToday": "Zurück zu heute",
+  "transit_nextDay": "Nächster Tag",
+  "transit_shareAbout": "Über {title} berichten",
+  "@transit_shareAbout": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+
+  "sharing_noChartAvailable": "Keine Karte zum Exportieren verfügbar",
+  "sharing_failedToCapture": "Kartenbild konnte nicht erfasst werden",
+  "sharing_copyLink": "Link kopieren",
+
+  "ai_writeThoughts": "Schreiben Sie Ihre Gedanken...",
+  "ai_entrySaved": "Eintrag gespeichert!",
+  "ai_yourReading": "Ihre Lesung",
+  "ai_sharingReading": "Lesung wird geteilt...",
+  "ai_copiedToClipboard": "In die Zwischenablage kopiert",
+  "ai_pastEntries": "Vergangene Einträge",
+
+  "event_endDateAfterStart": "Enddatum muss nach dem Startdatum liegen",
+  "event_participants": "Teilnehmer",
+
+  "social_failedToRegenerate": "Neugenerierung fehlgeschlagen: {error}",
+  "@social_failedToRegenerate": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+
+  "penta_chooseGroup": "Gruppe für Analyse auswählen",
+  "penta_createGroup": "Gruppe erstellen",
+
+  "chart_center": "Zentrum",
+  "chart_keynote": "Kernaussage",
+  "chart_element": "Element",
+  "chart_locationLabel": "Position",
+  "chart_hdCenters": "HD-Zentren"
 }

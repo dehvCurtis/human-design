@@ -1710,7 +1710,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String quiz_correct(int count) {
-    return '$count правильно';
+    return 'Правильно';
   }
 
   @override
@@ -1818,10 +1818,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get quiz_explanation => 'Пояснення';
 
   @override
-  String get quiz_quizzes => 'Тести';
+  String get quiz_quizzes => 'Вікторини';
 
   @override
-  String get quiz_questionsLabel => 'Питання';
+  String get quiz_questionsLabel => 'Запитання';
 
   @override
   String get quiz_shareProgress => 'Поділитися прогресом';
@@ -2901,10 +2901,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get profile_chooseFromGallery => 'Обрати з галереї';
 
   @override
-  String get profile_avatarUpdated => 'Аватар успішно оновлено';
+  String get profile_avatarUpdated => 'Аватар оновлено';
 
   @override
-  String get profile_profileUpdated => 'Профіль успішно оновлено';
+  String get profile_profileUpdated => 'Профіль оновлено';
 
   @override
   String get profile_noProfileFound => 'Профіль не знайдено';
@@ -3614,4 +3614,457 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get group_noChartsToShare =>
       'Немає збережених чартів для публікації. Спочатку створіть чарт.';
+
+  @override
+  String get common_confirm => 'Підтвердити';
+
+  @override
+  String get common_gotIt => 'Зрозуміло';
+
+  @override
+  String get common_post => 'Опублікувати';
+
+  @override
+  String get common_public => 'Публічний';
+
+  @override
+  String get common_followers => 'Підписники';
+
+  @override
+  String get common_private => 'Приватний';
+
+  @override
+  String get common_messages => 'Повідомлення';
+
+  @override
+  String get common_or => 'або';
+
+  @override
+  String get common_comment => 'Коментар';
+
+  @override
+  String get common_apply => 'Застосувати';
+
+  @override
+  String get common_reset => 'Скинути';
+
+  @override
+  String get form_emailRequired => 'Потрібна електронна пошта';
+
+  @override
+  String get form_emailInvalid => 'Введіть коректну електронну пошту';
+
+  @override
+  String get form_passwordRequired => 'Потрібен пароль';
+
+  @override
+  String get form_passwordTooShort =>
+      'Пароль має містити щонайменше 6 символів';
+
+  @override
+  String get form_passwordTooShortStrong =>
+      'Пароль має містити щонайменше 12 символів';
+
+  @override
+  String get form_passwordNeedsUppercase => 'Пароль має містити велику літеру';
+
+  @override
+  String get form_passwordNeedsLowercase => 'Пароль має містити малу літеру';
+
+  @override
+  String get form_passwordNeedsNumber => 'Пароль має містити цифру';
+
+  @override
+  String get form_passwordNeedsSpecial => 'Пароль має містити спецсимвол';
+
+  @override
+  String get form_unknownBirthTime => 'Я не знаю час народження';
+
+  @override
+  String get form_birthTimeHelp =>
+      'Точний час народження допомагає створити більш точну карту';
+
+  @override
+  String get form_networkError => 'Помилка мережі. Перевірте підключення.';
+
+  @override
+  String get form_searchFailed => 'Помилка пошуку. Спробуйте ще раз.';
+
+  @override
+  String get form_noCitiesFound => 'Міст не знайдено. Спробуйте інший запит.';
+
+  @override
+  String get form_timezoneAuto => 'Ваш часовий пояс буде визначено автоматично';
+
+  @override
+  String form_timezoneValue(String timezone) {
+    return 'Часовий пояс: $timezone';
+  }
+
+  @override
+  String get oauth_continueWithApple => 'Продовжити з Apple';
+
+  @override
+  String get oauth_continueWithGoogle => 'Продовжити з Google';
+
+  @override
+  String get oauth_continueWithMicrosoft => 'Продовжити з Microsoft';
+
+  @override
+  String get oauth_continueWithFacebook => 'Продовжити з Facebook';
+
+  @override
+  String get oauth_changeLanguage => 'Змінити мову';
+
+  @override
+  String get messaging_conversation => 'Бесіда';
+
+  @override
+  String get messaging_typeMessage => 'Введіть повідомлення...';
+
+  @override
+  String get messaging_shareChart => 'Поділитися картою';
+
+  @override
+  String get messaging_shareTransit => 'Поділитися транзитом';
+
+  @override
+  String get messaging_sendImage => 'Надіслати зображення';
+
+  @override
+  String get messaging_noChartsAvailable => 'Немає карт для надсилання';
+
+  @override
+  String get messaging_selectChart => 'Оберіть карту для надсилання';
+
+  @override
+  String get messaging_you => 'Ви';
+
+  @override
+  String get messaging_searchConversations => 'Пошук бесід...';
+
+  @override
+  String get messaging_newMessage => 'Нове повідомлення';
+
+  @override
+  String get messaging_errorLoading => 'Помилка завантаження бесід';
+
+  @override
+  String get messaging_signInRequired => 'Увійдіть, щоб надсилати повідомлення';
+
+  @override
+  String get messaging_signIn => 'Увійти';
+
+  @override
+  String get discovery_discover => 'Знайти';
+
+  @override
+  String get discovery_popularCharts => 'Популярні карти';
+
+  @override
+  String get discovery_hasChart => 'Є карта';
+
+  @override
+  String get discovery_mutual => 'Взаємні';
+
+  @override
+  String get discovery_onlyWithChart => 'Тільки з картою';
+
+  @override
+  String get discovery_showWithBirthData =>
+      'Показати користувачів з даними народження';
+
+  @override
+  String get discovery_mutualFollowsOnly => 'Тільки взаємні підписки';
+
+  @override
+  String get discovery_showMutualFollows =>
+      'Показати лише тих, на кого ви обидва підписані';
+
+  @override
+  String get discovery_applyFilters => 'Застосувати фільтри';
+
+  @override
+  String get discovery_typeCompatibility => 'Сумісність типів';
+
+  @override
+  String get discovery_profileHarmonics => 'Гармоніки профілю';
+
+  @override
+  String get discovery_channelComplementarity => 'Комплементарність каналів';
+
+  @override
+  String get discovery_definitionBridging => 'Місток визначеності';
+
+  @override
+  String get feed_cancel => 'Скасувати';
+
+  @override
+  String get feed_post => 'Опублікувати';
+
+  @override
+  String feed_gateTag(int gate) {
+    return 'Ворота $gate';
+  }
+
+  @override
+  String feed_channelTag(String channel) {
+    return 'Канал $channel';
+  }
+
+  @override
+  String get feed_addImage => 'Додати зображення';
+
+  @override
+  String get feed_attachChart => 'Прикріпити карту';
+
+  @override
+  String get feed_tagGateOrChannel => 'Позначити ворота або канал';
+
+  @override
+  String get feed_maxImagesAllowed => 'Максимум 4 зображення';
+
+  @override
+  String get feed_enterContentOrImage => 'Введіть текст або додайте зображення';
+
+  @override
+  String get feed_postCreated => 'Публікацію створено!';
+
+  @override
+  String get feed_addCommentOptional => 'Додати коментар (необов\'язково)';
+
+  @override
+  String get feed_regenerate => 'Згенерувати знову';
+
+  @override
+  String get feed_searchGatesChannels => 'Пошук воріт або каналів...';
+
+  @override
+  String get feed_shareAboutGate => 'Розповісти про ці ворота';
+
+  @override
+  String feed_createPostAboutGate(int gate) {
+    return 'Створити публікацію про Ворота $gate';
+  }
+
+  @override
+  String get quiz_quizStats => 'Статистика вікторин';
+
+  @override
+  String get quiz_quizNotFound => 'Вікторину не знайдено';
+
+  @override
+  String get quiz_pointsLabel => 'Очки';
+
+  @override
+  String get quiz_difficultyLabel => 'Складність';
+
+  @override
+  String get quiz_timeLimit => 'Обмеження часу';
+
+  @override
+  String get profile_achievements => 'Досягнення';
+
+  @override
+  String get profile_learning => 'Навчання';
+
+  @override
+  String get profile_plan => 'Тариф';
+
+  @override
+  String get profile_planFree => 'Безкоштовний';
+
+  @override
+  String get profile_manageSubscription => 'Керування підпискою';
+
+  @override
+  String get profile_upgradeToPremium => 'Перейти на Преміум';
+
+  @override
+  String get profile_aiMessages => 'Повідомлення ШІ';
+
+  @override
+  String get profile_aiUnlimited => 'Безлімітно';
+
+  @override
+  String profile_aiRemaining(int remaining, int limit) {
+    return '$remaining / $limit залишилось';
+  }
+
+  @override
+  String get profile_bonusMessages => 'Бонусні повідомлення';
+
+  @override
+  String get profile_noProfile => 'Профіль не знайдено';
+
+  @override
+  String get profile_changePhoto => 'Змінити фото';
+
+  @override
+  String get profile_enterName => 'Введіть ваше ім\'я';
+
+  @override
+  String get profile_date => 'Дата';
+
+  @override
+  String get profile_time => 'Час';
+
+  @override
+  String get profile_location => 'Місцезнаходження';
+
+  @override
+  String get profile_timezone => 'Часовий пояс';
+
+  @override
+  String get profile_preferences => 'Налаштування';
+
+  @override
+  String get profile_language => 'Мова';
+
+  @override
+  String get learning_learn => 'Вчитися';
+
+  @override
+  String get learning_searchContent => 'Пошук матеріалів...';
+
+  @override
+  String get learning_mentorship => 'Наставництво';
+
+  @override
+  String get learning_errorLoading => 'Помилка завантаження контенту';
+
+  @override
+  String get learning_contentNotFound => 'Контент не знайдено';
+
+  @override
+  String get learning_goBack => 'Назад';
+
+  @override
+  String get learning_mentor => 'Наставник';
+
+  @override
+  String get learning_mentee => 'Учень';
+
+  @override
+  String get learning_request => 'Запит';
+
+  @override
+  String get learning_full => 'Заповнено';
+
+  @override
+  String get learning_selectRole => 'Оберіть хоча б одну роль';
+
+  @override
+  String get learning_profileCreated => 'Профіль наставництва створено!';
+
+  @override
+  String get learning_menteeDesc => 'Хочу вчитися у досвідчених практиків';
+
+  @override
+  String get learning_mentorDesc =>
+      'Хочу ділитися знаннями та допомагати іншим';
+
+  @override
+  String get learning_bioHint => 'Розкажіть про свій шлях у Дизайні Людини...';
+
+  @override
+  String get learning_yearsExperience => 'Років досвіду';
+
+  @override
+  String get learning_maxMentees => 'Максимум учнів';
+
+  @override
+  String get learning_createProfile => 'Створити профіль';
+
+  @override
+  String get gamification_totalPoints => 'Загалом очок';
+
+  @override
+  String get gamification_errorLoading => 'Помилка завантаження завдань';
+
+  @override
+  String get gamification_noRankings => 'Рейтинг поки порожній';
+
+  @override
+  String get story_stories => 'Історії';
+
+  @override
+  String get story_failedToLoad => 'Не вдалося завантажити історії';
+
+  @override
+  String get story_addContent => 'Додайте контент до вашої історії';
+
+  @override
+  String get story_created => 'Історію створено!';
+
+  @override
+  String get story_viewViewers => 'Перегляди';
+
+  @override
+  String get story_noViewers => 'Поки немає переглядів';
+
+  @override
+  String get transit_selectDate => 'Обрати дату';
+
+  @override
+  String get transit_previousDay => 'Попередній день';
+
+  @override
+  String get transit_backToToday => 'Повернутися до сьогодні';
+
+  @override
+  String get transit_nextDay => 'Наступний день';
+
+  @override
+  String transit_shareAbout(String title) {
+    return 'Розповісти про $title';
+  }
+
+  @override
+  String get sharing_noChartAvailable => 'Немає карти для експорту';
+
+  @override
+  String get sharing_failedToCapture => 'Не вдалося захопити зображення карти';
+
+  @override
+  String get sharing_copyLink => 'Копіювати посилання';
+
+  @override
+  String get ai_writeThoughts => 'Запишіть свої думки...';
+
+  @override
+  String get ai_entrySaved => 'Запис збережено!';
+
+  @override
+  String get ai_yourReading => 'Ваше читання';
+
+  @override
+  String get ai_sharingReading => 'Надсилання читання...';
+
+  @override
+  String get ai_copiedToClipboard => 'Скопійовано до буфера обміну';
+
+  @override
+  String get ai_pastEntries => 'Минулі записи';
+
+  @override
+  String get event_endDateAfterStart =>
+      'Дата закінчення має бути після дати початку';
+
+  @override
+  String get event_participants => 'Учасники';
+
+  @override
+  String social_failedToRegenerate(String error) {
+    return 'Не вдалося згенерувати знову: $error';
+  }
+
+  @override
+  String get penta_chooseGroup => 'Оберіть групу для аналізу';
+
+  @override
+  String get penta_createGroup => 'Створити групу';
+
+  @override
+  String get chart_locationLabel => 'Розташування';
 }

@@ -181,7 +181,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
         ),
         title: conversationAsync.when(
           data: (conversation) {
-            if (conversation == null) return const Text('Conversation');
+            if (conversation == null) return Text(AppLocalizations.of(context)!.messaging_conversation);
             final other = conversation.getOtherParticipant(currentUserId ?? '');
             return Row(
               children: [
@@ -328,7 +328,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
                     child: TextField(
                       controller: _messageController,
                       decoration: InputDecoration(
-                        hintText: 'Type a message...',
+                        hintText: AppLocalizations.of(context)!.messaging_typeMessage,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(24),
                           borderSide: BorderSide.none,
@@ -394,6 +394,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
   }
 
   void _showAttachmentOptions(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       builder: (context) => SafeArea(
@@ -402,7 +403,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.auto_graph),
-              title: const Text('Share Chart'),
+              title: Text(l10n.messaging_shareChart),
               onTap: () {
                 Navigator.pop(context);
                 _shareChart();
@@ -410,7 +411,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.wb_sunny),
-              title: const Text('Share Transit'),
+              title: Text(l10n.messaging_shareTransit),
               onTap: () {
                 Navigator.pop(context);
                 _shareTransit();
@@ -418,7 +419,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
             ),
             ListTile(
               leading: const Icon(Icons.image),
-              title: const Text('Send Image'),
+              title: Text(l10n.messaging_sendImage),
               onTap: () {
                 Navigator.pop(context);
                 _sendImage();
@@ -439,16 +440,17 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
 
     if (charts.isEmpty && userChart == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No charts available to share')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.messaging_noChartsAvailable)),
       );
       return;
     }
 
     // Show chart selector dialog
+    final l10n = AppLocalizations.of(context)!;
     final selectedChart = await showDialog<ChartSummary>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Select Chart to Share'),
+        title: Text(l10n.messaging_selectChart),
         content: SizedBox(
           width: double.maxFinite,
           child: ListView.builder(
@@ -463,7 +465,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
                 title: Text(chart.name),
                 subtitle: Text('${chart.type.displayName} - ${chart.profile}'),
                 trailing: chart.isCurrentUser
-                    ? const Chip(label: Text('You'))
+                    ? Chip(label: Text(l10n.messaging_you))
                     : null,
                 onTap: () => Navigator.pop(context, chart),
               );
@@ -473,7 +475,7 @@ class _MessageDetailScreenState extends ConsumerState<MessageDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.common_cancel),
           ),
         ],
       ),

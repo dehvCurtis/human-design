@@ -497,6 +497,7 @@ class _ChartCard extends ConsumerWidget {
   void _showGateDetail(BuildContext context, int gateNumber) {
     final gateInfo = gates[gateNumber];
     if (gateInfo == null) return;
+    final l10n = AppLocalizations.of(context)!;
 
     DetailBottomSheet.show(
       context: context,
@@ -506,12 +507,12 @@ class _ChartCard extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _DetailRow(
-            label: 'Center',
+            label: l10n.chart_center,
             value: gateInfo.center.displayName,
           ),
           const Divider(),
           _DetailRow(
-            label: 'Keynote',
+            label: l10n.chart_keynote,
             value: gateInfo.keynote,
           ),
         ],

@@ -4,6 +4,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+
+import '../../../l10n/generated/app_localizations.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -42,8 +44,10 @@ class ChartExportService {
     final bytes = await captureWidgetAsImage(repaintBoundaryKey);
     if (bytes == null) {
       if (context.mounted) {
+        // ignore: use_build_context_synchronously
+        final l10n = AppLocalizations.of(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to capture chart image')),
+          SnackBar(content: Text(l10n?.sharing_failedToCapture ?? 'Failed to capture chart image')),
         );
       }
       return;

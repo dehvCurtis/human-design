@@ -235,7 +235,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     final chart = userChartAsync.hasValue ? userChartAsync.value : null;
     if (chart == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No chart available to export')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.sharing_noChartAvailable)),
       );
       return;
     }
@@ -271,7 +271,7 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     final chart = userChartAsync.hasValue ? userChartAsync.value : null;
     if (chart == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No chart available to export')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.sharing_noChartAvailable)),
       );
       return;
     }

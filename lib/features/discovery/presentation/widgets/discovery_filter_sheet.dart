@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/models/user_discovery.dart';
 import '../../domain/discovery_providers.dart';
 
@@ -26,6 +27,7 @@ class _DiscoveryFilterSheetState extends ConsumerState<DiscoveryFilterSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -71,7 +73,7 @@ class _DiscoveryFilterSheetState extends ConsumerState<DiscoveryFilterSheet> {
                           _filter = const DiscoveryFilter();
                         });
                       },
-                      child: const Text('Reset'),
+                      child: Text(l10n.common_reset),
                     ),
                   ],
                 ),
@@ -130,9 +132,9 @@ class _DiscoveryFilterSheetState extends ConsumerState<DiscoveryFilterSheet> {
                       title: 'Additional Filters',
                       children: [
                         SwitchListTile(
-                          title: const Text('Only users with chart'),
+                          title: Text(l10n.discovery_onlyWithChart),
                           subtitle:
-                              const Text('Show users who have entered birth data'),
+                              Text(l10n.discovery_showWithBirthData),
                           value: _filter.showOnlyWithChart,
                           onChanged: (value) {
                             setState(() {
@@ -141,8 +143,8 @@ class _DiscoveryFilterSheetState extends ConsumerState<DiscoveryFilterSheet> {
                           },
                         ),
                         SwitchListTile(
-                          title: const Text('Mutual follows only'),
-                          subtitle: const Text('Show only people you both follow'),
+                          title: Text(l10n.discovery_mutualFollowsOnly),
+                          subtitle: Text(l10n.discovery_showMutualFollows),
                           value: _filter.showOnlyMutualFollows,
                           onChanged: (value) {
                             setState(() {
@@ -167,7 +169,7 @@ class _DiscoveryFilterSheetState extends ConsumerState<DiscoveryFilterSheet> {
                       ref.read(discoveryFilterProvider.notifier).state = _filter;
                       Navigator.pop(context);
                     },
-                    child: const Text('Apply Filters'),
+                    child: Text(l10n.discovery_applyFilters),
                   ),
                 ),
               ),

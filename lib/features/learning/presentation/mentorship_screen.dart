@@ -349,14 +349,14 @@ class _MyMentorshipCard extends StatelessWidget {
               children: [
                 if (profile.isMentor)
                   Chip(
-                    label: const Text('Mentor'),
+                    label: Text(AppLocalizations.of(context)!.learning_mentor),
                     visualDensity: VisualDensity.compact,
                     avatar: const Icon(Icons.school, size: 16),
                   ),
                 if (profile.isMentee) ...[
                   const SizedBox(width: 8),
                   Chip(
-                    label: const Text('Mentee'),
+                    label: Text(AppLocalizations.of(context)!.learning_mentee),
                     visualDensity: VisualDensity.compact,
                     avatar: const Icon(Icons.person, size: 16),
                   ),
@@ -518,12 +518,12 @@ class _MentorCard extends StatelessWidget {
                 if (mentor.hasAvailability)
                   FilledButton.tonal(
                     onPressed: onRequestMentorship,
-                    child: const Text('Request'),
+                    child: Text(AppLocalizations.of(context)!.learning_request),
                   )
                 else
                   OutlinedButton(
                     onPressed: null,
-                    child: const Text('Full'),
+                    child: Text(AppLocalizations.of(context)!.learning_full),
                   ),
               ],
             ),
@@ -627,7 +627,7 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
 
     if (!_isMentor && !_isMentee) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please select at least one role')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.learning_selectRole)),
       );
       return;
     }
@@ -647,7 +647,7 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Mentorship profile created!')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.learning_profileCreated)),
         );
       }
     } catch (e) {
@@ -666,6 +666,7 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return DraggableScrollableSheet(
       initialChildSize: 0.9,
@@ -715,16 +716,16 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
               CheckboxListTile(
                 value: _isMentee,
                 onChanged: (value) => setState(() => _isMentee = value ?? false),
-                title: const Text('Mentee'),
-                subtitle: const Text('I want to learn from experienced practitioners'),
+                title: Text(l10n.learning_mentee),
+                subtitle: Text(l10n.learning_menteeDesc),
                 controlAffinity: ListTileControlAffinity.leading,
                 contentPadding: EdgeInsets.zero,
               ),
               CheckboxListTile(
                 value: _isMentor,
                 onChanged: (value) => setState(() => _isMentor = value ?? false),
-                title: const Text('Mentor'),
-                subtitle: const Text('I want to share my knowledge and guide others'),
+                title: Text(l10n.learning_mentor),
+                subtitle: Text(l10n.learning_mentorDesc),
                 controlAffinity: ListTileControlAffinity.leading,
                 contentPadding: EdgeInsets.zero,
               ),
@@ -742,9 +743,9 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
                 controller: _bioController,
                 maxLines: 4,
                 maxLength: 500,
-                decoration: const InputDecoration(
-                  hintText: 'Tell others about your Human Design journey...',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: l10n.learning_bioHint,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
@@ -792,7 +793,7 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
                 // Experience years
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Years of Experience'),
+                  title: Text(l10n.learning_yearsExperience),
                   trailing: SizedBox(
                     width: 120,
                     child: Row(
@@ -820,7 +821,7 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
                 // Max mentees
                 ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Maximum Mentees'),
+                  title: Text(l10n.learning_maxMentees),
                   trailing: SizedBox(
                     width: 120,
                     child: Row(
@@ -858,7 +859,7 @@ class _MentorshipSetupSheetState extends ConsumerState<_MentorshipSetupSheet> {
                         height: 20,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text('Create Profile'),
+                    : Text(l10n.learning_createProfile),
               ),
               const SizedBox(height: 16),
             ],

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/messaging_providers.dart';
 import '../domain/models/message.dart';
 import '../../../shared/providers/supabase_provider.dart';
@@ -52,7 +53,7 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
                 controller: _searchController,
                 autofocus: true,
                 decoration: InputDecoration(
-                  hintText: 'Search conversations...',
+                  hintText: AppLocalizations.of(context)!.messaging_searchConversations,
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
@@ -67,7 +68,7 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
                   });
                 },
               )
-            : const Text('Messages'),
+            : Text(AppLocalizations.of(context)!.common_messages),
         leading: IconButton(
           icon: Icon(_isSearching ? Icons.close : Icons.arrow_back),
           onPressed: () {
@@ -147,7 +148,7 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
                     FilledButton.icon(
                       onPressed: () => _showNewConversationSheet(context),
                       icon: const Icon(Icons.edit),
-                      label: const Text('New Message'),
+                      label: Text(AppLocalizations.of(context)!.messaging_newMessage),
                     ),
                   ],
                 ),
@@ -208,11 +209,11 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
                   color: Theme.of(context).colorScheme.error,
                 ),
                 const SizedBox(height: 16),
-                Text('Error loading conversations'),
+                Text(AppLocalizations.of(context)!.messaging_errorLoading),
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () => ref.invalidate(conversationsProvider),
-                  child: const Text('Retry'),
+                  child: Text(AppLocalizations.of(context)!.common_retry),
                 ),
               ],
             ),
@@ -229,11 +230,12 @@ class _ConversationsScreenState extends ConsumerState<ConversationsScreen> {
   void _showNewConversationSheet(BuildContext context) {
     final currentUser = ref.read(supabaseClientProvider).auth.currentUser;
     if (currentUser == null) {
+      final l10n = AppLocalizations.of(context)!;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Please sign in to send messages'),
+          content: Text(l10n.messaging_signInRequired),
           action: SnackBarAction(
-            label: 'Sign In',
+            label: l10n.messaging_signIn,
             onPressed: () => context.go(AppRoutes.signIn),
           ),
         ),

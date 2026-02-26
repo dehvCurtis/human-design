@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/models/user_discovery.dart';
 import '../../domain/discovery_providers.dart';
 import 'compatibility_badge.dart';
@@ -305,7 +306,7 @@ class _FollowButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           minimumSize: const Size(0, 36),
         ),
-        child: const Text('Following'),
+        child: Text(AppLocalizations.of(context)!.discovery_following),
       );
     }
 

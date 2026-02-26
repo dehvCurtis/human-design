@@ -239,7 +239,7 @@ class _AiJournalPromptsScreenState
                 controller: _controllers[index],
                 maxLines: 5,
                 decoration: InputDecoration(
-                  hintText: 'Write your thoughts...',
+                  hintText: AppLocalizations.of(context)!.ai_writeThoughts,
                   border: const OutlineInputBorder(),
                 ),
               ),
@@ -277,7 +277,7 @@ class _AiJournalPromptsScreenState
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Entry saved!')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.ai_entrySaved)),
       );
       _controllers[index]?.clear();
       setState(() {
@@ -300,7 +300,7 @@ class _AiJournalPromptsScreenState
             const Divider(),
             const SizedBox(height: 8),
             Text(
-              'Past Entries',
+              AppLocalizations.of(context)!.ai_pastEntries,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),

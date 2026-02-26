@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/settings/domain/settings_providers.dart';
 import '../../features/settings/domain/settings_state.dart';
+import '../../l10n/generated/app_localizations.dart';
 
 /// A compact language selector showing flag emojis
 /// Tapping shows a popup menu to change language
@@ -16,12 +17,13 @@ class LanguageSelector extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.watch(settingsProvider.select((s) => s.locale));
 
+    final l10n = AppLocalizations.of(context)!;
     return PopupMenuButton<AppLocale>(
       initialValue: currentLocale,
       onSelected: (locale) {
         ref.read(settingsProvider.notifier).setLocale(locale);
       },
-      tooltip: 'Change Language',
+      tooltip: l10n.oauth_changeLanguage,
       itemBuilder: (context) => AppLocale.values.map((locale) {
         return PopupMenuItem<AppLocale>(
           value: locale,

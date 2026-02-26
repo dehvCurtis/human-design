@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/human_design_constants.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 
 /// Bottom sheet for selecting a gate or channel to tag in a post
 class GateChannelPickerSheet extends StatefulWidget {
@@ -48,6 +49,7 @@ class _GateChannelPickerSheetState extends State<GateChannelPickerSheet>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final mediaQuery = MediaQuery.of(context);
 
     return Container(
@@ -79,7 +81,7 @@ class _GateChannelPickerSheetState extends State<GateChannelPickerSheet>
               children: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel'),
+                  child: Text(l10n.common_cancel),
                 ),
                 Text(
                   'Tag Gate or Channel',
@@ -98,7 +100,7 @@ class _GateChannelPickerSheetState extends State<GateChannelPickerSheet>
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search gates or channels...',
+                hintText: l10n.feed_searchGatesChannels,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchQuery.isNotEmpty
                     ? IconButton(

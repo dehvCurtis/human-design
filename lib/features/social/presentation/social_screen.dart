@@ -50,7 +50,7 @@ class _SocialScreenState extends ConsumerState<SocialScreen>
           IconButton(
             icon: const Icon(Icons.chat_bubble_outline),
             onPressed: () => context.push(AppRoutes.messages),
-            tooltip: 'Messages',
+            tooltip: l10n.common_messages,
           ),
         ],
         bottom: TabBar(
@@ -260,7 +260,7 @@ class _ThoughtsTab extends ConsumerWidget {
                   } catch (e) {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Failed to regenerate: $e')),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.social_failedToRegenerate(e.toString()))),
                       );
                     }
                   }

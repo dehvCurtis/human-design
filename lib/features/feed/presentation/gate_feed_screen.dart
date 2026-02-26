@@ -104,7 +104,9 @@ class GateFeedScreen extends ConsumerWidget {
           _showCreatePostForGate(context, gateNumber);
         },
         icon: const Icon(Icons.add),
-        label: const Text('Share about this gate'),
+        label: Builder(
+          builder: (context) => Text(AppLocalizations.of(context)!.feed_shareAboutGate),
+        ),
       ),
     );
   }
@@ -112,7 +114,7 @@ class GateFeedScreen extends ConsumerWidget {
   void _showCreatePostForGate(BuildContext context, int gateNumber) {
     // This would open the create post sheet with the gate pre-selected
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Create post about Gate $gateNumber')),
+      SnackBar(content: Text(AppLocalizations.of(context)!.feed_createPostAboutGate(gateNumber))),
     );
   }
 }

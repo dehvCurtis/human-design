@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/error_handler.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../social/data/social_repository.dart';
 import '../../../social/domain/social_providers.dart';
 
@@ -53,7 +54,7 @@ class GroupSelector extends ConsumerWidget {
                 DropdownButtonFormField<String>(
                   initialValue: selectedGroupId,
                   decoration: InputDecoration(
-                    hintText: 'Choose a group for analysis',
+                    hintText: AppLocalizations.of(context)!.penta_chooseGroup,
                     prefixIcon: const Icon(Icons.groups_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -128,7 +129,7 @@ class GroupSelector extends ConsumerWidget {
             OutlinedButton.icon(
               onPressed: () => context.go(AppRoutes.social),
               icon: const Icon(Icons.add),
-              label: const Text('Create Group'),
+              label: Text(AppLocalizations.of(context)!.penta_createGroup),
             ),
           ],
         ),

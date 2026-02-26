@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../data/question_generators/all_generators.dart';
 import '../domain/models/quiz.dart';
 import '../domain/quiz_providers.dart';
@@ -23,11 +24,12 @@ class QuizDetailScreen extends ConsumerWidget {
     final bestScoreAsync = ref.watch(quizBestScoreProvider(quizId));
     final attemptsAsync = ref.watch(quizAttemptsProvider(quizId));
 
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: quizAsync.when(
         data: (quiz) {
           if (quiz == null) {
-            return const Center(child: Text('Quiz not found'));
+            return Center(child: Text(l10n.quiz_quizNotFound));
           }
           return _buildContent(context, ref, quiz, bestScoreAsync, attemptsAsync);
         },
@@ -45,6 +47,7 @@ class QuizDetailScreen extends ConsumerWidget {
     AsyncValue<List<QuizAttempt>> attemptsAsync,
   ) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return CustomScrollView(
       slivers: [
@@ -107,7 +110,7 @@ class QuizDetailScreen extends ConsumerWidget {
                       child: _InfoCard(
                         icon: Icons.help_outline,
                         value: '${_getQuestionCount(quiz)}',
-                        label: 'Questions',
+                        label: l10n.quiz_questionsLabel,
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -115,7 +118,7 @@ class QuizDetailScreen extends ConsumerWidget {
                       child: _InfoCard(
                         icon: Icons.stars,
                         value: '+${quiz.pointsReward}',
-                        label: 'Points',
+                        label: l10n.quiz_pointsLabel,
                         color: AppColors.accent,
                       ),
                     ),
@@ -124,7 +127,7 @@ class QuizDetailScreen extends ConsumerWidget {
                       child: _InfoCard(
                         icon: Icons.speed,
                         value: quiz.difficulty.displayName,
-                        label: 'Difficulty',
+                        label: l10n.quiz_difficultyLabel,
                         color: _getDifficultyColor(quiz.difficulty),
                       ),
                     ),
@@ -135,7 +138,7 @@ class QuizDetailScreen extends ConsumerWidget {
                   _InfoCard(
                     icon: Icons.timer,
                     value: _formatTime(quiz.timeLimit!),
-                    label: 'Time Limit',
+                    label: l10n.quiz_timeLimit,
                   ),
                 ],
                 const SizedBox(height: 24),

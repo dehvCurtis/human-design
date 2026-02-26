@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 /// OAuth provider types
 enum OAuthProvider { apple, google, microsoft, facebook }
@@ -63,7 +64,7 @@ class OAuthButton extends StatelessWidget {
               _buildProviderIcon(isDark),
             const SizedBox(width: 12),
             Text(
-              label ?? _getDefaultLabel(),
+              label ?? _getDefaultLabel(AppLocalizations.of(context)!),
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -120,16 +121,16 @@ class OAuthButton extends StatelessWidget {
     }
   }
 
-  String _getDefaultLabel() {
+  String _getDefaultLabel(AppLocalizations l10n) {
     switch (provider) {
       case OAuthProvider.apple:
-        return 'Continue with Apple';
+        return l10n.oauth_continueWithApple;
       case OAuthProvider.google:
-        return 'Continue with Google';
+        return l10n.oauth_continueWithGoogle;
       case OAuthProvider.microsoft:
-        return 'Continue with Microsoft';
+        return l10n.oauth_continueWithMicrosoft;
       case OAuthProvider.facebook:
-        return 'Continue with Facebook';
+        return l10n.oauth_continueWithFacebook;
     }
   }
 }
@@ -141,13 +142,13 @@ class AppleSignInButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.enabled = true,
-    this.label = 'Continue with Apple',
+    this.label,
   });
 
   final VoidCallback? onPressed;
   final bool isLoading;
   final bool enabled;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +157,7 @@ class AppleSignInButton extends StatelessWidget {
       onPressed: onPressed,
       isLoading: isLoading,
       enabled: enabled,
-      label: label,
+      label: label ?? AppLocalizations.of(context)!.oauth_continueWithApple,
     );
   }
 }
@@ -168,13 +169,13 @@ class GoogleSignInButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.enabled = true,
-    this.label = 'Continue with Google',
+    this.label,
   });
 
   final VoidCallback? onPressed;
   final bool isLoading;
   final bool enabled;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +184,7 @@ class GoogleSignInButton extends StatelessWidget {
       onPressed: onPressed,
       isLoading: isLoading,
       enabled: enabled,
-      label: label,
+      label: label ?? AppLocalizations.of(context)!.oauth_continueWithGoogle,
     );
   }
 }
@@ -286,13 +287,13 @@ class MicrosoftSignInButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.enabled = true,
-    this.label = 'Continue with Microsoft',
+    this.label,
   });
 
   final VoidCallback? onPressed;
   final bool isLoading;
   final bool enabled;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -301,7 +302,7 @@ class MicrosoftSignInButton extends StatelessWidget {
       onPressed: onPressed,
       isLoading: isLoading,
       enabled: enabled,
-      label: label,
+      label: label ?? AppLocalizations.of(context)!.oauth_continueWithMicrosoft,
     );
   }
 }
@@ -313,13 +314,13 @@ class FacebookSignInButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.enabled = true,
-    this.label = 'Continue with Facebook',
+    this.label,
   });
 
   final VoidCallback? onPressed;
   final bool isLoading;
   final bool enabled;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -328,7 +329,7 @@ class FacebookSignInButton extends StatelessWidget {
       onPressed: onPressed,
       isLoading: isLoading,
       enabled: enabled,
-      label: label,
+      label: label ?? AppLocalizations.of(context)!.oauth_continueWithFacebook,
     );
   }
 }
@@ -383,10 +384,10 @@ class _MicrosoftLogoPainter extends CustomPainter {
 class OAuthDivider extends StatelessWidget {
   const OAuthDivider({
     super.key,
-    this.text = 'or',
+    this.text,
   });
 
-  final String text;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -394,6 +395,7 @@ class OAuthDivider extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final color =
         isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
+    final l10n = AppLocalizations.of(context)!;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
@@ -407,7 +409,7 @@ class OAuthDivider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              text,
+              text ?? l10n.common_or,
               style: theme.textTheme.bodyMedium?.copyWith(color: color),
             ),
           ),

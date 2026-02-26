@@ -1719,7 +1719,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String quiz_correct(int count) {
-    return '$count correctas';
+    return 'Correcto';
   }
 
   @override
@@ -2906,16 +2906,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get messages_startConversation => '¡Inicia la conversación!';
 
   @override
-  String get profile_takePhoto => 'Tomar Foto';
+  String get profile_takePhoto => 'Tomar foto';
 
   @override
-  String get profile_chooseFromGallery => 'Elegir de la Galería';
+  String get profile_chooseFromGallery => 'Elegir de la galería';
 
   @override
-  String get profile_avatarUpdated => 'Avatar actualizado exitosamente';
+  String get profile_avatarUpdated => 'Avatar actualizado';
 
   @override
-  String get profile_profileUpdated => 'Perfil actualizado exitosamente';
+  String get profile_profileUpdated => 'Perfil actualizado';
 
   @override
   String get profile_noProfileFound => 'No se encontró perfil';
@@ -2955,7 +2955,7 @@ class AppLocalizationsEs extends AppLocalizations {
       'Comparte tus conocimientos para ganar seguidores';
 
   @override
-  String get discovery_clearAll => 'Limpiar todo';
+  String get discovery_clearAll => 'Borrar todo';
 
   @override
   String chart_gate(int number) {
@@ -2971,7 +2971,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chart_center => 'Centro';
 
   @override
-  String get chart_keynote => 'Nota Clave';
+  String get chart_keynote => 'Nota clave';
 
   @override
   String get chart_element => 'Elemento';
@@ -2980,7 +2980,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chart_location => 'Ubicación';
 
   @override
-  String get chart_hdCenters => 'Centros DH';
+  String get chart_hdCenters => 'Centros HD';
 
   @override
   String get reaction_comment => 'Comentar';
@@ -3628,4 +3628,467 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get group_noChartsToShare =>
       'No hay cartas guardadas para compartir. Crea una carta primero.';
+
+  @override
+  String get common_confirm => 'Confirmar';
+
+  @override
+  String get common_gotIt => 'Entendido';
+
+  @override
+  String get common_post => 'Publicar';
+
+  @override
+  String get common_public => 'Público';
+
+  @override
+  String get common_followers => 'Seguidores';
+
+  @override
+  String get common_private => 'Privado';
+
+  @override
+  String get common_messages => 'Mensajes';
+
+  @override
+  String get common_or => 'o';
+
+  @override
+  String get common_comment => 'Comentario';
+
+  @override
+  String get common_apply => 'Aplicar';
+
+  @override
+  String get common_reset => 'Restablecer';
+
+  @override
+  String get form_emailRequired => 'El email es obligatorio';
+
+  @override
+  String get form_emailInvalid => 'Introduce un email válido';
+
+  @override
+  String get form_passwordRequired => 'La contraseña es obligatoria';
+
+  @override
+  String get form_passwordTooShort =>
+      'La contraseña debe tener al menos 6 caracteres';
+
+  @override
+  String get form_passwordTooShortStrong =>
+      'La contraseña debe tener al menos 12 caracteres';
+
+  @override
+  String get form_passwordNeedsUppercase =>
+      'La contraseña debe contener una mayúscula';
+
+  @override
+  String get form_passwordNeedsLowercase =>
+      'La contraseña debe contener una minúscula';
+
+  @override
+  String get form_passwordNeedsNumber =>
+      'La contraseña debe contener un número';
+
+  @override
+  String get form_passwordNeedsSpecial =>
+      'La contraseña debe contener un carácter especial';
+
+  @override
+  String get form_unknownBirthTime => 'No conozco mi hora de nacimiento';
+
+  @override
+  String get form_birthTimeHelp =>
+      'Una hora de nacimiento precisa ayuda a crear una carta más exacta';
+
+  @override
+  String get form_networkError => 'Error de red. Verifica tu conexión.';
+
+  @override
+  String get form_searchFailed => 'Error en la búsqueda. Inténtalo de nuevo.';
+
+  @override
+  String get form_noCitiesFound =>
+      'No se encontraron ciudades. Prueba otra búsqueda.';
+
+  @override
+  String get form_timezoneAuto =>
+      'Tu zona horaria se detectará automáticamente';
+
+  @override
+  String form_timezoneValue(String timezone) {
+    return 'Zona horaria: $timezone';
+  }
+
+  @override
+  String get oauth_continueWithApple => 'Continuar con Apple';
+
+  @override
+  String get oauth_continueWithGoogle => 'Continuar con Google';
+
+  @override
+  String get oauth_continueWithMicrosoft => 'Continuar con Microsoft';
+
+  @override
+  String get oauth_continueWithFacebook => 'Continuar con Facebook';
+
+  @override
+  String get oauth_changeLanguage => 'Cambiar idioma';
+
+  @override
+  String get messaging_conversation => 'Conversación';
+
+  @override
+  String get messaging_typeMessage => 'Escribe un mensaje...';
+
+  @override
+  String get messaging_shareChart => 'Compartir carta';
+
+  @override
+  String get messaging_shareTransit => 'Compartir tránsito';
+
+  @override
+  String get messaging_sendImage => 'Enviar imagen';
+
+  @override
+  String get messaging_noChartsAvailable =>
+      'No hay cartas disponibles para compartir';
+
+  @override
+  String get messaging_selectChart => 'Seleccionar carta para compartir';
+
+  @override
+  String get messaging_you => 'Tú';
+
+  @override
+  String get messaging_searchConversations => 'Buscar conversaciones...';
+
+  @override
+  String get messaging_newMessage => 'Nuevo mensaje';
+
+  @override
+  String get messaging_errorLoading => 'Error al cargar conversaciones';
+
+  @override
+  String get messaging_signInRequired => 'Inicia sesión para enviar mensajes';
+
+  @override
+  String get messaging_signIn => 'Iniciar sesión';
+
+  @override
+  String get discovery_discover => 'Descubrir';
+
+  @override
+  String get discovery_popularCharts => 'Cartas populares';
+
+  @override
+  String get discovery_hasChart => 'Tiene carta';
+
+  @override
+  String get discovery_mutual => 'Mutuos';
+
+  @override
+  String get discovery_onlyWithChart => 'Solo usuarios con carta';
+
+  @override
+  String get discovery_showWithBirthData =>
+      'Mostrar usuarios con datos de nacimiento';
+
+  @override
+  String get discovery_mutualFollowsOnly => 'Solo seguimientos mutuos';
+
+  @override
+  String get discovery_showMutualFollows =>
+      'Mostrar solo personas que ambos siguen';
+
+  @override
+  String get discovery_applyFilters => 'Aplicar filtros';
+
+  @override
+  String get discovery_typeCompatibility => 'Compatibilidad de tipo';
+
+  @override
+  String get discovery_profileHarmonics => 'Armónicos de perfil';
+
+  @override
+  String get discovery_channelComplementarity => 'Complementariedad de canales';
+
+  @override
+  String get discovery_definitionBridging => 'Puente de definición';
+
+  @override
+  String get feed_cancel => 'Cancelar';
+
+  @override
+  String get feed_post => 'Publicar';
+
+  @override
+  String feed_gateTag(int gate) {
+    return 'Puerta $gate';
+  }
+
+  @override
+  String feed_channelTag(String channel) {
+    return 'Canal $channel';
+  }
+
+  @override
+  String get feed_addImage => 'Añadir imagen';
+
+  @override
+  String get feed_attachChart => 'Adjuntar carta';
+
+  @override
+  String get feed_tagGateOrChannel => 'Etiquetar puerta o canal';
+
+  @override
+  String get feed_maxImagesAllowed => 'Máximo 4 imágenes permitidas';
+
+  @override
+  String get feed_enterContentOrImage =>
+      'Introduce contenido o añade una imagen';
+
+  @override
+  String get feed_postCreated => '¡Publicación creada!';
+
+  @override
+  String get feed_addCommentOptional => 'Añadir comentario (opcional)';
+
+  @override
+  String get feed_regenerate => 'Regenerar';
+
+  @override
+  String get feed_searchGatesChannels => 'Buscar puertas o canales...';
+
+  @override
+  String get feed_shareAboutGate => 'Compartir sobre esta puerta';
+
+  @override
+  String feed_createPostAboutGate(int gate) {
+    return 'Crear publicación sobre la Puerta $gate';
+  }
+
+  @override
+  String get quiz_quizStats => 'Estadísticas';
+
+  @override
+  String get quiz_quizNotFound => 'Cuestionario no encontrado';
+
+  @override
+  String get quiz_pointsLabel => 'Puntos';
+
+  @override
+  String get quiz_difficultyLabel => 'Dificultad';
+
+  @override
+  String get quiz_timeLimit => 'Límite de tiempo';
+
+  @override
+  String get profile_achievements => 'Logros';
+
+  @override
+  String get profile_learning => 'Aprendizaje';
+
+  @override
+  String get profile_plan => 'Plan';
+
+  @override
+  String get profile_planFree => 'Gratis';
+
+  @override
+  String get profile_manageSubscription => 'Gestionar suscripción';
+
+  @override
+  String get profile_upgradeToPremium => 'Mejorar a Premium';
+
+  @override
+  String get profile_aiMessages => 'Mensajes IA';
+
+  @override
+  String get profile_aiUnlimited => 'Ilimitado';
+
+  @override
+  String profile_aiRemaining(int remaining, int limit) {
+    return '$remaining / $limit restantes';
+  }
+
+  @override
+  String get profile_bonusMessages => 'Mensajes bonus';
+
+  @override
+  String get profile_noProfile => 'Perfil no encontrado';
+
+  @override
+  String get profile_changePhoto => 'Cambiar foto';
+
+  @override
+  String get profile_enterName => 'Introduce tu nombre';
+
+  @override
+  String get profile_date => 'Fecha';
+
+  @override
+  String get profile_time => 'Hora';
+
+  @override
+  String get profile_location => 'Ubicación';
+
+  @override
+  String get profile_timezone => 'Zona horaria';
+
+  @override
+  String get profile_preferences => 'Preferencias';
+
+  @override
+  String get profile_language => 'Idioma';
+
+  @override
+  String get learning_learn => 'Aprender';
+
+  @override
+  String get learning_searchContent => 'Buscar contenido...';
+
+  @override
+  String get learning_mentorship => 'Mentoría';
+
+  @override
+  String get learning_errorLoading => 'Error al cargar contenido';
+
+  @override
+  String get learning_contentNotFound => 'Contenido no encontrado';
+
+  @override
+  String get learning_goBack => 'Volver';
+
+  @override
+  String get learning_mentor => 'Mentor';
+
+  @override
+  String get learning_mentee => 'Aprendiz';
+
+  @override
+  String get learning_request => 'Solicitar';
+
+  @override
+  String get learning_full => 'Completo';
+
+  @override
+  String get learning_selectRole => 'Selecciona al menos un rol';
+
+  @override
+  String get learning_profileCreated => '¡Perfil de mentoría creado!';
+
+  @override
+  String get learning_menteeDesc =>
+      'Quiero aprender de practicantes experimentados';
+
+  @override
+  String get learning_mentorDesc =>
+      'Quiero compartir mi conocimiento y guiar a otros';
+
+  @override
+  String get learning_bioHint => 'Cuéntanos sobre tu viaje en Diseño Humano...';
+
+  @override
+  String get learning_yearsExperience => 'Años de experiencia';
+
+  @override
+  String get learning_maxMentees => 'Máximo de aprendices';
+
+  @override
+  String get learning_createProfile => 'Crear perfil';
+
+  @override
+  String get gamification_totalPoints => 'Puntos totales';
+
+  @override
+  String get gamification_errorLoading => 'Error al cargar desafíos';
+
+  @override
+  String get gamification_noRankings => 'Aún no hay clasificaciones';
+
+  @override
+  String get story_stories => 'Historias';
+
+  @override
+  String get story_failedToLoad => 'Error al cargar historias';
+
+  @override
+  String get story_addContent => 'Añade contenido a tu historia';
+
+  @override
+  String get story_created => '¡Historia creada!';
+
+  @override
+  String get story_viewViewers => 'Ver espectadores';
+
+  @override
+  String get story_noViewers => 'Aún no hay espectadores';
+
+  @override
+  String get transit_selectDate => 'Seleccionar fecha';
+
+  @override
+  String get transit_previousDay => 'Día anterior';
+
+  @override
+  String get transit_backToToday => 'Volver a hoy';
+
+  @override
+  String get transit_nextDay => 'Día siguiente';
+
+  @override
+  String transit_shareAbout(String title) {
+    return 'Compartir sobre $title';
+  }
+
+  @override
+  String get sharing_noChartAvailable =>
+      'No hay carta disponible para exportar';
+
+  @override
+  String get sharing_failedToCapture => 'Error al capturar imagen de la carta';
+
+  @override
+  String get sharing_copyLink => 'Copiar enlace';
+
+  @override
+  String get ai_writeThoughts => 'Escribe tus pensamientos...';
+
+  @override
+  String get ai_entrySaved => '¡Entrada guardada!';
+
+  @override
+  String get ai_yourReading => 'Tu lectura';
+
+  @override
+  String get ai_sharingReading => 'Compartiendo lectura...';
+
+  @override
+  String get ai_copiedToClipboard => 'Copiado al portapapeles';
+
+  @override
+  String get ai_pastEntries => 'Entradas anteriores';
+
+  @override
+  String get event_endDateAfterStart =>
+      'La fecha de fin debe ser posterior a la de inicio';
+
+  @override
+  String get event_participants => 'Participantes';
+
+  @override
+  String social_failedToRegenerate(String error) {
+    return 'Error al regenerar: $error';
+  }
+
+  @override
+  String get penta_chooseGroup => 'Elige un grupo para analizar';
+
+  @override
+  String get penta_createGroup => 'Crear grupo';
+
+  @override
+  String get chart_locationLabel => 'Ubicación';
 }

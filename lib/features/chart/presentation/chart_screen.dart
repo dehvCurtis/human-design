@@ -286,6 +286,7 @@ class _BodygraphTabState extends State<_BodygraphTab> {
   void _showGateDetail(BuildContext context, int gateNumber) {
     final gateInfo = gates[gateNumber];
     if (gateInfo == null) return;
+    final l10n = AppLocalizations.of(context)!;
 
     DetailBottomSheet.show(
       context: context,
@@ -295,12 +296,12 @@ class _BodygraphTabState extends State<_BodygraphTab> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _DetailRow(
-            label: 'Center',
+            label: l10n.chart_center,
             value: gateInfo.center.displayName,
           ),
           const Divider(),
           _DetailRow(
-            label: 'Keynote',
+            label: l10n.chart_keynote,
             value: gateInfo.keynote,
           ),
         ],
@@ -437,6 +438,7 @@ class _PlanetsTab extends StatelessWidget {
   void _showGateDetail(BuildContext context, int gateNumber) {
     final gateInfo = gates[gateNumber];
     if (gateInfo == null) return;
+    final l10n = AppLocalizations.of(context)!;
 
     DetailBottomSheet.show(
       context: context,
@@ -446,12 +448,12 @@ class _PlanetsTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _DetailRow(
-            label: 'Center',
+            label: l10n.chart_center,
             value: gateInfo.center.displayName,
           ),
           const Divider(),
           _DetailRow(
-            label: 'Keynote',
+            label: l10n.chart_keynote,
             value: gateInfo.keynote,
           ),
         ],
@@ -801,10 +803,10 @@ class _ChakrasTab extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const Divider(height: 24),
-          _DetailRow(label: 'Element', value: chakra.element),
-          _DetailRow(label: 'Location', value: chakra.location),
+          _DetailRow(label: AppLocalizations.of(context)!.chart_element, value: chakra.element),
+          _DetailRow(label: AppLocalizations.of(context)!.chart_locationLabel, value: chakra.location),
           _DetailRow(
-            label: 'HD Centers',
+            label: AppLocalizations.of(context)!.chart_hdCenters,
             value: chakra.hdCenters.map((c) => c.displayName).join(', '),
           ),
         ],

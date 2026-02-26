@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/models/user_discovery.dart';
 
 class TypeFilterChips extends StatelessWidget {
@@ -14,6 +15,7 @@ class TypeFilterChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final chips = <Widget>[];
 
     // Type chips
@@ -52,7 +54,7 @@ class TypeFilterChips extends StatelessWidget {
     // Other filters
     if (filter.showOnlyWithChart) {
       chips.add(_FilterChip(
-        label: 'Has Chart',
+        label: l10n.discovery_hasChart,
         color: Colors.teal,
         onRemove: () => onFilterChanged(
           filter.copyWith(showOnlyWithChart: false),
@@ -62,7 +64,7 @@ class TypeFilterChips extends StatelessWidget {
 
     if (filter.showOnlyMutualFollows) {
       chips.add(_FilterChip(
-        label: 'Mutual',
+        label: l10n.discovery_mutual,
         color: Colors.green,
         onRemove: () => onFilterChanged(
           filter.copyWith(showOnlyMutualFollows: false),
@@ -74,7 +76,7 @@ class TypeFilterChips extends StatelessWidget {
     if (chips.isNotEmpty) {
       chips.add(
         ActionChip(
-          label: const Text('Clear all'),
+          label: Text(l10n.discovery_clearAll),
           onPressed: () => onFilterChanged(const DiscoveryFilter()),
           avatar: const Icon(Icons.clear_all, size: 18),
         ),

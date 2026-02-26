@@ -247,8 +247,9 @@ class TransitEventDetailScreen extends ConsumerWidget {
   }
 
   void _showCreatePostForEvent(BuildContext context, TransitEvent event) {
+    final l10n = AppLocalizations.of(context)!;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Share about ${event.title}')),
+      SnackBar(content: Text(l10n.transit_shareAbout(event.title))),
     );
   }
 

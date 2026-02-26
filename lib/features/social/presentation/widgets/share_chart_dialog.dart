@@ -357,7 +357,7 @@ class _ShareLinkSection extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.copy, size: 20),
                     onPressed: onCopyLink,
-                    tooltip: 'Copy link',
+                    tooltip: AppLocalizations.of(context)!.sharing_copyLink,
                   ),
                 ],
               ),

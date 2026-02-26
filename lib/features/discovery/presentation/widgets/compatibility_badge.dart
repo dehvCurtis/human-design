@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/models/user_discovery.dart';
 
 class CompatibilityBadge extends StatelessWidget {
@@ -101,6 +102,7 @@ class _DetailedCompatibilityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final color = _getScoreColor(score);
 
     return Card(
@@ -162,21 +164,21 @@ class _DetailedCompatibilityCard extends StatelessWidget {
 
             // Score breakdown
             _ScoreBar(
-              label: 'Type Compatibility',
+              label: l10n.discovery_typeCompatibility,
               score: details.typeScore,
               maxScore: 25,
               description: details.typeCompatibility,
             ),
             const SizedBox(height: 8),
             _ScoreBar(
-              label: 'Profile Harmonics',
+              label: l10n.discovery_profileHarmonics,
               score: details.profileScore,
               maxScore: 25,
               description: details.profileHarmonics,
             ),
             const SizedBox(height: 8),
             _ScoreBar(
-              label: 'Channel Complementarity',
+              label: l10n.discovery_channelComplementarity,
               score: details.channelScore,
               maxScore: 25,
               description: details.complementaryChannels?.isNotEmpty == true
@@ -185,7 +187,7 @@ class _DetailedCompatibilityCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             _ScoreBar(
-              label: 'Definition Bridging',
+              label: l10n.discovery_definitionBridging,
               score: details.definitionScore,
               maxScore: 25,
               description: details.bridgingOpportunities?.isNotEmpty == true

@@ -85,7 +85,7 @@ A comprehensive Flutter mobile application for Human Design chart generation, le
 | Subscriptions | RevenueCat |
 | Push Notifications | Firebase Cloud Messaging |
 | AI Chat | Supabase Edge Functions + Claude/Gemini/OpenAI |
-| Localization | EN, RU, UK, DE, ES, PT, RO, BE |
+| Localization | EN, RU, UK, DE, ES, PT, RO, BE (1,300+ keys) |
 
 ## Getting Started
 
