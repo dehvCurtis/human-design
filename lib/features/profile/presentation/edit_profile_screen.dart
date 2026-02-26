@@ -59,12 +59,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           children: [
             ListTile(
               leading: const Icon(Icons.camera_alt),
-              title: const Text('Take Photo'),
+              title: Text(AppLocalizations.of(context)!.profile_takePhoto),
               onTap: () => Navigator.pop(context, ImageSource.camera),
             ),
             ListTile(
               leading: const Icon(Icons.photo_library),
-              title: const Text('Choose from Gallery'),
+              title: Text(AppLocalizations.of(context)!.profile_chooseFromGallery),
               onTap: () => Navigator.pop(context, ImageSource.gallery),
             ),
           ],
@@ -94,8 +94,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Avatar updated successfully'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.profile_avatarUpdated),
             backgroundColor: AppColors.success,
           ),
         );
@@ -121,6 +121,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   Future<void> _saveProfile() async {
     if (!_formKey.currentState!.validate()) return;
 
+    // Capture l10n before async gap
+    final noProfileMsg = AppLocalizations.of(context)!.profile_noProfile;
+
     setState(() {
       _isLoading = true;
       _errorMessage = null;
@@ -129,7 +132,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     try {
       final currentProfile = await ref.read(userProfileProvider.future);
       if (currentProfile == null) {
-        throw Exception('No profile found');
+        throw Exception(noProfileMsg);
       }
 
       final updatedProfile = currentProfile.copyWith(
@@ -144,8 +147,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Profile updated successfully'),
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.profile_profileUpdated),
             backgroundColor: AppColors.success,
           ),
         );
@@ -193,7 +196,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       body: profileAsync.when(
         data: (profile) {
           if (profile == null) {
-            return const Center(child: Text('No profile found'));
+            return Center(child: Text(l10n.profile_noProfile));
           }
 
           return SingleChildScrollView(
@@ -291,7 +294,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                                     strokeWidth: 2,
                                   ),
                                 )
-                              : const Text('Change Photo'),
+                              : Text(l10n.profile_changePhoto),
                         ),
                       ],
                     ),
@@ -310,7 +313,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     controller: _nameController,
                     enabled: !_isLoading,
                     decoration: InputDecoration(
-                      hintText: 'Enter your name',
+                      hintText: l10n.profile_enterName,
                       prefixIcon: const Icon(Icons.person_outline),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -373,7 +376,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       children: [
                         _InfoRow(
                           icon: Icons.calendar_today,
-                          label: 'Date',
+                          label: l10n.profile_date,
                           value: _formatDate(
                             profile.birthDate!,
                             profile.timezone,
@@ -381,7 +384,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         ),
                         _InfoRow(
                           icon: Icons.access_time,
-                          label: 'Time',
+                          label: l10n.profile_time,
                           value: _formatTime(
                             profile.birthDate!,
                             profile.timezone,
@@ -390,13 +393,13 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         if (profile.birthLocation != null)
                           _InfoRow(
                             icon: Icons.location_on,
-                            label: 'Location',
+                            label: l10n.profile_location,
                             value: profile.birthLocation!.displayName,
                           ),
                         if (profile.timezone != null)
                           _InfoRow(
                             icon: Icons.schedule,
-                            label: 'Timezone',
+                            label: l10n.profile_timezone,
                             value: profile.timezone!,
                           ),
                       ],
@@ -425,13 +428,13 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                   const SizedBox(height: 32),
 
                   // Language preference
-                  _SectionHeader(title: 'Preferences'),
+                  _SectionHeader(title: l10n.profile_preferences),
                   const SizedBox(height: 12),
                   _InfoCard(
                     children: [
                       ListTile(
                         leading: const Icon(Icons.language),
-                        title: const Text('Language'),
+                        title: Text(l10n.profile_language),
                         subtitle: Text(
                           _getLanguageName(profile.preferredLanguage),
                         ),

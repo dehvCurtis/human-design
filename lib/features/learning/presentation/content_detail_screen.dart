@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:share_plus/share_plus.dart' show ShareParams, SharePlus;
 
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -30,6 +31,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final contentAsync = ref.watch(contentDetailProvider(widget.contentId));
 
     return Scaffold(
@@ -42,11 +44,11 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                 children: [
                   Icon(Icons.error_outline, size: 64, color: theme.colorScheme.error),
                   const SizedBox(height: 16),
-                  const Text('Content not found'),
+                  Text(l10n.learning_contentNotFound),
                   const SizedBox(height: 16),
                   TextButton(
                     onPressed: () => context.pop(),
-                    child: const Text('Go back'),
+                    child: Text(l10n.learning_goBack),
                   ),
                 ],
               ),
@@ -128,7 +130,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
                           if (content.gateNumber != null)
                             _MetaChip(
                               icon: Icons.hexagon,
-                              label: 'Gate ${content.gateNumber}',
+                              label: l10n.transit_gate(content.gateNumber!),
                             ),
                           if (content.estimatedReadTime != null)
                             _MetaChip(
@@ -365,7 +367,7 @@ class _ContentDetailScreenState extends ConsumerState<ContentDetailScreen> {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () => ref.invalidate(contentDetailProvider(widget.contentId)),
-                child: const Text('Retry'),
+                child: Text(l10n.common_retry),
               ),
             ],
           ),

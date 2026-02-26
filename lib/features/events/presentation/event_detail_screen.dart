@@ -97,7 +97,7 @@ class EventDetailScreen extends ConsumerWidget {
                 // Participants count
                 _InfoRow(
                   icon: Icons.people_outline,
-                  label: 'Participants',
+                  label: l10n.event_participants,
                   value: event.maxParticipants != null
                       ? '${event.currentParticipants}/${event.maxParticipants}'
                       : '${event.currentParticipants}',
@@ -165,7 +165,7 @@ class EventDetailScreen extends ConsumerWidget {
 
                 // Participant list
                 Text(
-                  'Participants',
+                  l10n.event_participants,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/gamification_providers.dart';
 import '../domain/models/gamification.dart';
 
@@ -32,12 +33,13 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final userChallengesAsync = ref.watch(userChallengesProvider);
     final pointsAsync = ref.watch(userPointsProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Challenges'),
+        title: Text(l10n.gamification_challenges),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -108,11 +110,11 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                   children: [
                     Icon(Icons.error_outline, size: 48, color: theme.colorScheme.error),
                     const SizedBox(height: 16),
-                    Text('Error loading challenges'),
+                    Text(l10n.gamification_errorLoading),
                     const SizedBox(height: 8),
                     TextButton(
                       onPressed: () => ref.invalidate(userChallengesProvider),
-                      child: const Text('Retry'),
+                      child: Text(l10n.common_retry),
                     ),
                   ],
                 ),
@@ -146,6 +148,7 @@ class _PointsSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       margin: const EdgeInsets.all(16),
@@ -159,7 +162,7 @@ class _PointsSummary extends StatelessWidget {
         children: [
           _MiniStat(
             icon: Icons.diamond,
-            label: 'Total Points',
+            label: l10n.gamification_totalPoints,
             value: _formatNumber(points.totalPoints),
           ),
           Container(
@@ -169,7 +172,7 @@ class _PointsSummary extends StatelessWidget {
           ),
           _MiniStat(
             icon: Icons.local_fire_department,
-            label: 'Streak',
+            label: l10n.gamification_streak,
             value: '${points.currentStreak} days',
           ),
           Container(
@@ -179,7 +182,7 @@ class _PointsSummary extends StatelessWidget {
           ),
           _MiniStat(
             icon: Icons.star,
-            label: 'Level',
+            label: l10n.gamification_level,
             value: points.currentLevel.toString(),
           ),
         ],

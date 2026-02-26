@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/discovery_providers.dart';
 import '../domain/models/user_discovery.dart';
 import 'widgets/user_card.dart';
@@ -46,7 +47,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen>
                 controller: _searchController,
                 autofocus: true,
                 decoration: InputDecoration(
-                  hintText: 'Search users...',
+                  hintText: AppLocalizations.of(context)!.discovery_searchUsers,
                   border: InputBorder.none,
                   hintStyle: TextStyle(color: theme.hintColor),
                 ),
@@ -56,7 +57,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen>
                   setState(() {});
                 },
               )
-            : const Text('Discover'),
+            : Text(AppLocalizations.of(context)!.discovery_discover),
         actions: [
           IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),
@@ -71,7 +72,7 @@ class _DiscoveryScreenState extends ConsumerState<DiscoveryScreen>
           ),
           IconButton(
             icon: const Icon(Icons.star_outlined),
-            tooltip: 'Popular Charts',
+            tooltip: AppLocalizations.of(context)!.discovery_popularCharts,
             onPressed: () => context.push(AppRoutes.popularCharts),
           ),
           IconButton(
@@ -393,7 +394,7 @@ class _ErrorState extends StatelessWidget {
             FilledButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(AppLocalizations.of(context)!.common_retry),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/models/post.dart';
 
 class ReactionBar extends StatelessWidget {
@@ -18,6 +19,7 @@ class ReactionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -27,12 +29,12 @@ class ReactionBar extends StatelessWidget {
         ),
         _ActionButton(
           icon: Icons.chat_bubble_outline,
-          label: 'Comment',
+          label: l10n.common_comment,
           onTap: onComment,
         ),
         _ActionButton(
           icon: Icons.share_outlined,
-          label: 'Share',
+          label: l10n.common_share,
           onTap: onShare,
         ),
       ],

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/gamification_providers.dart';
 import '../domain/models/gamification.dart';
 
@@ -32,9 +33,10 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Leaderboard'),
+        title: Text(l10n.gamification_leaderboard),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -81,13 +83,13 @@ class _LeaderboardTab extends ConsumerWidget {
     return leaderboardAsync.when(
       data: (entries) {
         if (entries.isEmpty) {
-          return const Center(
+          return Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.leaderboard_outlined, size: 64, color: Colors.grey),
-                SizedBox(height: 16),
-                Text('No rankings yet'),
+                const Icon(Icons.leaderboard_outlined, size: 64, color: Colors.grey),
+                const SizedBox(height: 16),
+                Text(AppLocalizations.of(context)!.gamification_noRankings),
               ],
             ),
           );
@@ -137,7 +139,7 @@ class _LeaderboardTab extends ConsumerWidget {
             const SizedBox(height: 8),
             TextButton(
               onPressed: () => ref.invalidate(leaderboardProvider(type)),
-              child: const Text('Retry'),
+              child: Text(AppLocalizations.of(context)!.common_retry),
             ),
           ],
         ),

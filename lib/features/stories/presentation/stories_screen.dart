@@ -18,10 +18,11 @@ class StoriesScreen extends ConsumerWidget {
     final feedStoriesAsync = ref.watch(feedStoriesProvider);
     final myStoriesAsync = ref.watch(myStoriesProvider);
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Stories'),
+        title: Text(l10n.story_stories),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -160,11 +161,11 @@ class StoriesScreen extends ConsumerWidget {
                       Icon(Icons.error_outline,
                           size: 48, color: theme.colorScheme.error),
                       const SizedBox(height: 16),
-                      Text('Failed to load stories'),
+                      Text(l10n.story_failedToLoad),
                       const SizedBox(height: 8),
                       TextButton(
                         onPressed: () => ref.invalidate(feedStoriesProvider),
-                        child: const Text('Retry'),
+                        child: Text(l10n.common_retry),
                       ),
                     ],
                   ),

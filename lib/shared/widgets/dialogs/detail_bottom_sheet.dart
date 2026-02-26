@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 /// A reusable bottom sheet for showing details
 class DetailBottomSheet extends StatelessWidget {
@@ -165,16 +166,16 @@ class ConfirmationBottomSheet extends StatelessWidget {
     super.key,
     required this.title,
     required this.message,
-    this.confirmLabel = 'Confirm',
-    this.cancelLabel = 'Cancel',
+    this.confirmLabel,
+    this.cancelLabel,
     this.isDestructive = false,
     this.icon,
   });
 
   final String title;
   final String message;
-  final String confirmLabel;
-  final String cancelLabel;
+  final String? confirmLabel;
+  final String? cancelLabel;
   final bool isDestructive;
   final IconData? icon;
 
@@ -183,8 +184,8 @@ class ConfirmationBottomSheet extends StatelessWidget {
     required BuildContext context,
     required String title,
     required String message,
-    String confirmLabel = 'Confirm',
-    String cancelLabel = 'Cancel',
+    String? confirmLabel,
+    String? cancelLabel,
     bool isDestructive = false,
     IconData? icon,
   }) {
@@ -207,6 +208,7 @@ class ConfirmationBottomSheet extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final mediaQuery = MediaQuery.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -263,7 +265,7 @@ class ConfirmationBottomSheet extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: Text(cancelLabel),
+                  child: Text(cancelLabel ?? l10n.common_cancel),
                 ),
               ),
               const SizedBox(width: 12),
@@ -275,7 +277,7 @@ class ConfirmationBottomSheet extends StatelessWidget {
                         isDestructive ? AppColors.error : AppColors.primary,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  child: Text(confirmLabel),
+                  child: Text(confirmLabel ?? l10n.common_confirm),
                 ),
               ),
             ],
@@ -293,20 +295,20 @@ class InfoBottomSheet extends StatelessWidget {
     required this.title,
     required this.content,
     this.icon,
-    this.buttonLabel = 'Got it',
+    this.buttonLabel,
   });
 
   final String title;
   final String content;
   final IconData? icon;
-  final String buttonLabel;
+  final String? buttonLabel;
 
   static Future<void> show({
     required BuildContext context,
     required String title,
     required String content,
     IconData? icon,
-    String buttonLabel = 'Got it',
+    String? buttonLabel,
   }) {
     return showModalBottomSheet(
       context: context,
@@ -325,6 +327,7 @@ class InfoBottomSheet extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final mediaQuery = MediaQuery.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       decoration: BoxDecoration(
@@ -371,7 +374,7 @@ class InfoBottomSheet extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
-              child: Text(buttonLabel),
+              child: Text(buttonLabel ?? l10n.common_gotIt),
             ),
           ),
         ],

@@ -1587,5 +1587,216 @@
   "group_shareChart": "Distribuiți harta",
   "group_share": "Distribuiți",
   "group_chartShared": "Harta a fost distribuită grupului",
-  "group_noChartsToShare": "Nu există hărți salvate de distribuit. Creați mai întâi o hartă."
+  "group_noChartsToShare": "Nu există hărți salvate de distribuit. Creați mai întâi o hartă.",
+
+  "common_confirm": "Confirmă",
+  "common_gotIt": "Am înțeles",
+  "common_post": "Publică",
+  "common_public": "Public",
+  "common_followers": "Urmăritori",
+  "common_private": "Privat",
+  "common_messages": "Mesaje",
+  "common_or": "sau",
+  "common_comment": "Comentariu",
+  "common_apply": "Aplică",
+  "common_reset": "Resetează",
+
+  "form_emailRequired": "Email-ul este obligatoriu",
+  "form_emailInvalid": "Introduceți un email valid",
+  "form_passwordRequired": "Parola este obligatorie",
+  "form_passwordTooShort": "Parola trebuie să aibă cel puțin 6 caractere",
+  "form_passwordTooShortStrong": "Parola trebuie să aibă cel puțin 12 caractere",
+  "form_passwordNeedsUppercase": "Parola trebuie să conțină o literă mare",
+  "form_passwordNeedsLowercase": "Parola trebuie să conțină o literă mică",
+  "form_passwordNeedsNumber": "Parola trebuie să conțină o cifră",
+  "form_passwordNeedsSpecial": "Parola trebuie să conțină un caracter special",
+  "form_unknownBirthTime": "Nu știu ora nașterii mele",
+  "form_birthTimeHelp": "O oră de naștere precisă ajută la crearea unei hărți mai exacte",
+  "form_networkError": "Eroare de rețea. Verificați conexiunea.",
+  "form_searchFailed": "Căutarea a eșuat. Încercați din nou.",
+  "form_noCitiesFound": "Nu s-au găsit orașe. Încercați altă căutare.",
+  "form_timezoneAuto": "Fusul orar va fi detectat automat",
+  "form_timezoneValue": "Fus orar: {timezone}",
+  "@form_timezoneValue": {
+    "placeholders": {
+      "timezone": {"type": "String"}
+    }
+  },
+
+  "oauth_continueWithApple": "Continuă cu Apple",
+  "oauth_continueWithGoogle": "Continuă cu Google",
+  "oauth_continueWithMicrosoft": "Continuă cu Microsoft",
+  "oauth_continueWithFacebook": "Continuă cu Facebook",
+  "oauth_changeLanguage": "Schimbă limba",
+
+  "messaging_conversation": "Conversație",
+  "messaging_typeMessage": "Scrie un mesaj...",
+  "messaging_shareChart": "Distribuie harta",
+  "messaging_shareTransit": "Distribuie tranzitul",
+  "messaging_sendImage": "Trimite imagine",
+  "messaging_noChartsAvailable": "Nu există hărți disponibile pentru distribuire",
+  "messaging_selectChart": "Selectează harta de distribuit",
+  "messaging_you": "Tu",
+  "messaging_searchConversations": "Caută conversații...",
+  "messaging_newMessage": "Mesaj nou",
+  "messaging_errorLoading": "Eroare la încărcarea conversațiilor",
+  "messaging_signInRequired": "Autentificați-vă pentru a trimite mesaje",
+  "messaging_signIn": "Autentificare",
+
+  "discovery_searchUsers": "Caută utilizatori...",
+  "discovery_discover": "Descoperă",
+  "discovery_popularCharts": "Hărți populare",
+  "discovery_hasChart": "Are hartă",
+  "discovery_mutual": "Reciproci",
+  "discovery_clearAll": "Șterge tot",
+  "discovery_onlyWithChart": "Doar utilizatori cu hartă",
+  "discovery_showWithBirthData": "Arată utilizatorii cu date de naștere",
+  "discovery_mutualFollowsOnly": "Doar urmăriri reciproce",
+  "discovery_showMutualFollows": "Arată doar persoanele pe care le urmăriți amândoi",
+  "discovery_applyFilters": "Aplică filtrele",
+  "discovery_typeCompatibility": "Compatibilitate de tip",
+  "discovery_profileHarmonics": "Armonicele profilului",
+  "discovery_channelComplementarity": "Complementaritatea canalelor",
+  "discovery_definitionBridging": "Punte de definiție",
+
+  "feed_cancel": "Anulează",
+  "feed_post": "Publică",
+  "feed_gateTag": "Poarta {gate}",
+  "@feed_gateTag": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+  "feed_channelTag": "Canal {channel}",
+  "@feed_channelTag": {
+    "placeholders": {
+      "channel": {"type": "String"}
+    }
+  },
+  "feed_addImage": "Adaugă imagine",
+  "feed_attachChart": "Atașează harta",
+  "feed_tagGateOrChannel": "Etichetează poartă sau canal",
+  "feed_maxImagesAllowed": "Maximum 4 imagini permise",
+  "feed_enterContentOrImage": "Introduceți conținut sau adăugați o imagine",
+  "feed_postCreated": "Postare creată cu succes!",
+  "feed_addCommentOptional": "Adaugă un comentariu (opțional)",
+  "feed_regenerate": "Regenerează",
+  "feed_searchGatesChannels": "Caută porți sau canale...",
+  "feed_shareAboutGate": "Distribuie despre această poartă",
+  "feed_createPostAboutGate": "Creează postare despre Poarta {gate}",
+  "@feed_createPostAboutGate": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+
+  "quiz_quizzes": "Chestionare",
+  "quiz_quizStats": "Statistici",
+  "quiz_quizNotFound": "Chestionarul nu a fost găsit",
+  "quiz_questionsLabel": "Întrebări",
+  "quiz_pointsLabel": "Puncte",
+  "quiz_difficultyLabel": "Dificultate",
+  "quiz_timeLimit": "Limită de timp",
+  "quiz_correct": "Corect",
+
+  "profile_achievements": "Realizări",
+  "profile_learning": "Învățare",
+  "profile_plan": "Plan",
+  "profile_planFree": "Gratuit",
+  "profile_manageSubscription": "Gestionare abonament",
+  "profile_upgradeToPremium": "Upgradare la Premium",
+  "profile_aiMessages": "Mesaje IA",
+  "profile_aiUnlimited": "Nelimitat",
+  "profile_aiRemaining": "{remaining} / {limit} rămase",
+  "@profile_aiRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "profile_bonusMessages": "Mesaje bonus",
+  "profile_noProfile": "Profil negăsit",
+  "profile_takePhoto": "Fă o fotografie",
+  "profile_chooseFromGallery": "Alege din galerie",
+  "profile_avatarUpdated": "Avatar actualizat cu succes",
+  "profile_profileUpdated": "Profil actualizat cu succes",
+  "profile_changePhoto": "Schimbă fotografia",
+  "profile_enterName": "Introduceți numele dvs.",
+  "profile_date": "Data",
+  "profile_time": "Ora",
+  "profile_location": "Locație",
+  "profile_timezone": "Fus orar",
+  "profile_preferences": "Preferințe",
+  "profile_language": "Limbă",
+
+  "learning_learn": "Învață",
+  "learning_searchContent": "Caută conținut...",
+  "learning_mentorship": "Mentorat",
+  "learning_errorLoading": "Eroare la încărcarea conținutului",
+  "learning_contentNotFound": "Conținut negăsit",
+  "learning_goBack": "Înapoi",
+  "learning_mentor": "Mentor",
+  "learning_mentee": "Ucenic",
+  "learning_request": "Solicită",
+  "learning_full": "Plin",
+  "learning_selectRole": "Selectați cel puțin un rol",
+  "learning_profileCreated": "Profil de mentorat creat!",
+  "learning_menteeDesc": "Vreau să învăț de la practicanți experimentați",
+  "learning_mentorDesc": "Vreau să împărtășesc cunoștințele mele și să ghidez pe alții",
+  "learning_bioHint": "Povestește despre călătoria ta în Human Design...",
+  "learning_yearsExperience": "Ani de experiență",
+  "learning_maxMentees": "Număr maxim de ucenici",
+  "learning_createProfile": "Creează profil",
+
+  "gamification_totalPoints": "Puncte totale",
+  "gamification_errorLoading": "Eroare la încărcarea provocărilor",
+  "gamification_noRankings": "Încă nu există clasamente",
+
+  "story_stories": "Povești",
+  "story_failedToLoad": "Eroare la încărcarea poveștilor",
+  "story_addContent": "Adăugați conținut poveștii dvs.",
+  "story_created": "Poveste creată!",
+  "story_viewViewers": "Vezi vizualizările",
+  "story_noViewers": "Încă nu există vizualizări",
+
+  "transit_selectDate": "Selectează data",
+  "transit_previousDay": "Ziua anterioară",
+  "transit_backToToday": "Înapoi la azi",
+  "transit_nextDay": "Ziua următoare",
+  "transit_shareAbout": "Distribuie despre {title}",
+  "@transit_shareAbout": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+
+  "sharing_noChartAvailable": "Nu există hartă disponibilă pentru export",
+  "sharing_failedToCapture": "Eroare la captura imaginii hărții",
+  "sharing_copyLink": "Copiază linkul",
+
+  "ai_writeThoughts": "Scrie-ți gândurile...",
+  "ai_entrySaved": "Înregistrare salvată!",
+  "ai_yourReading": "Lectura ta",
+  "ai_sharingReading": "Se distribuie lectura...",
+  "ai_copiedToClipboard": "Copiat în clipboard",
+  "ai_pastEntries": "Înregistrări anterioare",
+
+  "event_endDateAfterStart": "Data de sfârșit trebuie să fie după data de început",
+  "event_participants": "Participanți",
+
+  "social_failedToRegenerate": "Eroare la regenerare: {error}",
+  "@social_failedToRegenerate": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+
+  "penta_chooseGroup": "Alege un grup pentru analiză",
+  "penta_createGroup": "Creează grup",
+
+  "chart_center": "Centru",
+  "chart_keynote": "Notă cheie",
+  "chart_element": "Element",
+  "chart_locationLabel": "Locație",
+  "chart_hdCenters": "Centre HD"
 }

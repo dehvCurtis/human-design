@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 /// Location data model
 class LocationResult {
@@ -603,8 +604,8 @@ class _LocationSearchFieldState extends State<LocationSearchField> {
           _hasSearched = true;
           _isLoading = false;
           _searchError = e.toString().contains('Network')
-              ? 'Network error. Check your connection.'
-              : 'Search failed. Please try again.';
+              ? AppLocalizations.of(context)!.form_networkError
+              : AppLocalizations.of(context)!.form_searchFailed;
         });
       }
     }
@@ -621,6 +622,7 @@ class _LocationSearchFieldState extends State<LocationSearchField> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -726,7 +728,7 @@ class _LocationSearchFieldState extends State<LocationSearchField> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                'No cities found. Try a different search.',
+                                l10n.form_noCitiesFound,
                                 style: theme.textTheme.bodyMedium?.copyWith(
                                   color: isDark
                                       ? AppColors.textSecondaryDark
@@ -789,6 +791,7 @@ class BirthLocationField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -800,7 +803,7 @@ class BirthLocationField extends StatelessWidget {
           hint: hint,
           enabled: enabled,
           errorText: errorText,
-          helperText: 'Your timezone will be detected automatically',
+          helperText: l10n.form_timezoneAuto,
           searchProvider: searchProvider,
         ),
         if (value != null && value!.timezone != null) ...[
@@ -816,7 +819,7 @@ class BirthLocationField extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'Timezone: ${value!.timezone}',
+                l10n.form_timezoneValue(value!.timezone!),
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Theme.of(context).brightness == Brightness.dark
                           ? AppColors.textSecondaryDark

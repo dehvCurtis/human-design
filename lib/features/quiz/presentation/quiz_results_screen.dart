@@ -40,11 +40,12 @@ class QuizResultsScreen extends ConsumerWidget {
       );
     }
 
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       body: quizAsync.when(
         data: (quiz) {
           if (quiz == null) {
-            return const Center(child: Text('Quiz not found'));
+            return Center(child: Text(l10n.quiz_quizNotFound));
           }
           return _buildResults(context, ref, quiz, effectiveAttempt);
         },
@@ -61,6 +62,7 @@ class QuizResultsScreen extends ConsumerWidget {
     QuizAttempt attempt,
   ) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final isPerfect = attempt.isPerfect;
     final score = attempt.score;
 
@@ -97,7 +99,7 @@ class QuizResultsScreen extends ConsumerWidget {
                   child: _StatCard(
                     icon: Icons.check_circle,
                     value: '${attempt.correctCount}/${attempt.totalQuestions}',
-                    label: 'Correct',
+                    label: l10n.quiz_correct(attempt.correctCount),
                     color: AppColors.success,
                   ),
                 ),
@@ -106,7 +108,7 @@ class QuizResultsScreen extends ConsumerWidget {
                   child: _StatCard(
                     icon: Icons.stars,
                     value: '+$pointsEarned',
-                    label: 'Points',
+                    label: l10n.quiz_pointsLabel,
                     color: AppColors.accent,
                   ),
                 ),
@@ -130,7 +132,7 @@ class QuizResultsScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text('Try Again'),
+                child: Text(l10n.quiz_tryAgain),
               ),
             ),
             const SizedBox(height: 12),
@@ -144,14 +146,14 @@ class QuizResultsScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text('Back to Quizzes'),
+                child: Text(l10n.quiz_backToQuizzes),
               ),
             ),
             const SizedBox(height: 12),
             TextButton.icon(
               onPressed: () => _shareResults(context, quiz, attempt),
               icon: const Icon(Icons.share),
-              label: const Text('Share Results'),
+              label: Text(l10n.quiz_shareResults),
             ),
           ],
         ),
@@ -221,12 +223,13 @@ class QuizResultsScreen extends ConsumerWidget {
     bool isNewBest,
     bool streakUpdated,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     final achievements = <Widget>[];
 
     if (isPerfect) {
       achievements.add(_AchievementBadge(
         icon: Icons.emoji_events,
-        label: 'Perfect Score!',
+        label: l10n.quiz_perfectScore,
         color: AppColors.gold,
       ));
     }
@@ -234,7 +237,7 @@ class QuizResultsScreen extends ConsumerWidget {
     if (isNewBest && !isPerfect) {
       achievements.add(_AchievementBadge(
         icon: Icons.trending_up,
-        label: 'New Best!',
+        label: l10n.quiz_newBest,
         color: AppColors.success,
       ));
     }
@@ -242,7 +245,7 @@ class QuizResultsScreen extends ConsumerWidget {
     if (streakUpdated) {
       achievements.add(_AchievementBadge(
         icon: Icons.local_fire_department,
-        label: 'Streak Extended!',
+        label: l10n.quiz_streakExtended,
         color: AppColors.accent,
       ));
     }

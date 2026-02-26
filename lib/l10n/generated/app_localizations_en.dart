@@ -1705,7 +1705,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String quiz_correct(int count) {
-    return '$count correct';
+    return 'Correct';
   }
 
   @override
@@ -3602,4 +3602,461 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get group_noChartsToShare =>
       'No saved charts to share. Create a chart first.';
+
+  @override
+  String get common_confirm => 'Confirm';
+
+  @override
+  String get common_gotIt => 'Got it';
+
+  @override
+  String get common_post => 'Post';
+
+  @override
+  String get common_public => 'Public';
+
+  @override
+  String get common_followers => 'Followers';
+
+  @override
+  String get common_private => 'Private';
+
+  @override
+  String get common_messages => 'Messages';
+
+  @override
+  String get common_or => 'or';
+
+  @override
+  String get common_comment => 'Comment';
+
+  @override
+  String get common_apply => 'Apply';
+
+  @override
+  String get common_reset => 'Reset';
+
+  @override
+  String get form_emailRequired => 'Email is required';
+
+  @override
+  String get form_emailInvalid => 'Please enter a valid email';
+
+  @override
+  String get form_passwordRequired => 'Password is required';
+
+  @override
+  String get form_passwordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get form_passwordTooShortStrong =>
+      'Password must be at least 12 characters';
+
+  @override
+  String get form_passwordNeedsUppercase =>
+      'Password must contain an uppercase letter';
+
+  @override
+  String get form_passwordNeedsLowercase =>
+      'Password must contain a lowercase letter';
+
+  @override
+  String get form_passwordNeedsNumber => 'Password must contain a number';
+
+  @override
+  String get form_passwordNeedsSpecial =>
+      'Password must contain a special character';
+
+  @override
+  String get form_unknownBirthTime => 'I don\'t know my birth time';
+
+  @override
+  String get form_birthTimeHelp =>
+      'Accurate birth time helps create a more precise chart';
+
+  @override
+  String get form_networkError => 'Network error. Check your connection.';
+
+  @override
+  String get form_searchFailed => 'Search failed. Please try again.';
+
+  @override
+  String get form_noCitiesFound => 'No cities found. Try a different search.';
+
+  @override
+  String get form_timezoneAuto =>
+      'Your timezone will be detected automatically';
+
+  @override
+  String form_timezoneValue(String timezone) {
+    return 'Timezone: $timezone';
+  }
+
+  @override
+  String get oauth_continueWithApple => 'Continue with Apple';
+
+  @override
+  String get oauth_continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get oauth_continueWithMicrosoft => 'Continue with Microsoft';
+
+  @override
+  String get oauth_continueWithFacebook => 'Continue with Facebook';
+
+  @override
+  String get oauth_changeLanguage => 'Change Language';
+
+  @override
+  String get messaging_conversation => 'Conversation';
+
+  @override
+  String get messaging_typeMessage => 'Type a message...';
+
+  @override
+  String get messaging_shareChart => 'Share Chart';
+
+  @override
+  String get messaging_shareTransit => 'Share Transit';
+
+  @override
+  String get messaging_sendImage => 'Send Image';
+
+  @override
+  String get messaging_noChartsAvailable => 'No charts available to share';
+
+  @override
+  String get messaging_selectChart => 'Select Chart to Share';
+
+  @override
+  String get messaging_you => 'You';
+
+  @override
+  String get messaging_searchConversations => 'Search conversations...';
+
+  @override
+  String get messaging_newMessage => 'New Message';
+
+  @override
+  String get messaging_errorLoading => 'Error loading conversations';
+
+  @override
+  String get messaging_signInRequired => 'Please sign in to send messages';
+
+  @override
+  String get messaging_signIn => 'Sign In';
+
+  @override
+  String get discovery_discover => 'Discover';
+
+  @override
+  String get discovery_popularCharts => 'Popular Charts';
+
+  @override
+  String get discovery_hasChart => 'Has Chart';
+
+  @override
+  String get discovery_mutual => 'Mutual';
+
+  @override
+  String get discovery_onlyWithChart => 'Only users with chart';
+
+  @override
+  String get discovery_showWithBirthData =>
+      'Show users who have entered birth data';
+
+  @override
+  String get discovery_mutualFollowsOnly => 'Mutual follows only';
+
+  @override
+  String get discovery_showMutualFollows => 'Show only people you both follow';
+
+  @override
+  String get discovery_applyFilters => 'Apply Filters';
+
+  @override
+  String get discovery_typeCompatibility => 'Type Compatibility';
+
+  @override
+  String get discovery_profileHarmonics => 'Profile Harmonics';
+
+  @override
+  String get discovery_channelComplementarity => 'Channel Complementarity';
+
+  @override
+  String get discovery_definitionBridging => 'Definition Bridging';
+
+  @override
+  String get feed_cancel => 'Cancel';
+
+  @override
+  String get feed_post => 'Post';
+
+  @override
+  String feed_gateTag(int gate) {
+    return 'Gate $gate';
+  }
+
+  @override
+  String feed_channelTag(String channel) {
+    return 'Channel $channel';
+  }
+
+  @override
+  String get feed_addImage => 'Add image';
+
+  @override
+  String get feed_attachChart => 'Attach chart';
+
+  @override
+  String get feed_tagGateOrChannel => 'Tag gate or channel';
+
+  @override
+  String get feed_maxImagesAllowed => 'Maximum 4 images allowed';
+
+  @override
+  String get feed_enterContentOrImage =>
+      'Please enter some content or add an image';
+
+  @override
+  String get feed_postCreated => 'Post created successfully!';
+
+  @override
+  String get feed_addCommentOptional => 'Add a comment (optional)';
+
+  @override
+  String get feed_regenerate => 'Regenerate';
+
+  @override
+  String get feed_searchGatesChannels => 'Search gates or channels...';
+
+  @override
+  String get feed_shareAboutGate => 'Share about this gate';
+
+  @override
+  String feed_createPostAboutGate(int gate) {
+    return 'Create post about Gate $gate';
+  }
+
+  @override
+  String get quiz_quizStats => 'Quiz Stats';
+
+  @override
+  String get quiz_quizNotFound => 'Quiz not found';
+
+  @override
+  String get quiz_pointsLabel => 'Points';
+
+  @override
+  String get quiz_difficultyLabel => 'Difficulty';
+
+  @override
+  String get quiz_timeLimit => 'Time Limit';
+
+  @override
+  String get profile_achievements => 'Achievements';
+
+  @override
+  String get profile_learning => 'Learning';
+
+  @override
+  String get profile_plan => 'Plan';
+
+  @override
+  String get profile_planFree => 'Free';
+
+  @override
+  String get profile_manageSubscription => 'Manage Subscription';
+
+  @override
+  String get profile_upgradeToPremium => 'Upgrade to Premium';
+
+  @override
+  String get profile_aiMessages => 'AI Messages';
+
+  @override
+  String get profile_aiUnlimited => 'Unlimited';
+
+  @override
+  String profile_aiRemaining(int remaining, int limit) {
+    return '$remaining / $limit remaining';
+  }
+
+  @override
+  String get profile_bonusMessages => 'Bonus Messages';
+
+  @override
+  String get profile_noProfile => 'No profile found';
+
+  @override
+  String get profile_changePhoto => 'Change Photo';
+
+  @override
+  String get profile_enterName => 'Enter your name';
+
+  @override
+  String get profile_date => 'Date';
+
+  @override
+  String get profile_time => 'Time';
+
+  @override
+  String get profile_location => 'Location';
+
+  @override
+  String get profile_timezone => 'Timezone';
+
+  @override
+  String get profile_preferences => 'Preferences';
+
+  @override
+  String get profile_language => 'Language';
+
+  @override
+  String get learning_learn => 'Learn';
+
+  @override
+  String get learning_searchContent => 'Search content...';
+
+  @override
+  String get learning_mentorship => 'Mentorship';
+
+  @override
+  String get learning_errorLoading => 'Error loading content';
+
+  @override
+  String get learning_contentNotFound => 'Content not found';
+
+  @override
+  String get learning_goBack => 'Go back';
+
+  @override
+  String get learning_mentor => 'Mentor';
+
+  @override
+  String get learning_mentee => 'Mentee';
+
+  @override
+  String get learning_request => 'Request';
+
+  @override
+  String get learning_full => 'Full';
+
+  @override
+  String get learning_selectRole => 'Please select at least one role';
+
+  @override
+  String get learning_profileCreated => 'Mentorship profile created!';
+
+  @override
+  String get learning_menteeDesc =>
+      'I want to learn from experienced practitioners';
+
+  @override
+  String get learning_mentorDesc =>
+      'I want to share my knowledge and guide others';
+
+  @override
+  String get learning_bioHint =>
+      'Tell others about your Human Design journey...';
+
+  @override
+  String get learning_yearsExperience => 'Years of Experience';
+
+  @override
+  String get learning_maxMentees => 'Maximum Mentees';
+
+  @override
+  String get learning_createProfile => 'Create Profile';
+
+  @override
+  String get gamification_totalPoints => 'Total Points';
+
+  @override
+  String get gamification_errorLoading => 'Error loading challenges';
+
+  @override
+  String get gamification_noRankings => 'No rankings yet';
+
+  @override
+  String get story_stories => 'Stories';
+
+  @override
+  String get story_failedToLoad => 'Failed to load stories';
+
+  @override
+  String get story_addContent => 'Please add some content to your story';
+
+  @override
+  String get story_created => 'Story created!';
+
+  @override
+  String get story_viewViewers => 'View viewers';
+
+  @override
+  String get story_noViewers => 'No viewers yet';
+
+  @override
+  String get transit_selectDate => 'Select Date';
+
+  @override
+  String get transit_previousDay => 'Previous Day';
+
+  @override
+  String get transit_backToToday => 'Back to Today';
+
+  @override
+  String get transit_nextDay => 'Next Day';
+
+  @override
+  String transit_shareAbout(String title) {
+    return 'Share about $title';
+  }
+
+  @override
+  String get sharing_noChartAvailable => 'No chart available to export';
+
+  @override
+  String get sharing_failedToCapture => 'Failed to capture chart image';
+
+  @override
+  String get sharing_copyLink => 'Copy link';
+
+  @override
+  String get ai_writeThoughts => 'Write your thoughts...';
+
+  @override
+  String get ai_entrySaved => 'Entry saved!';
+
+  @override
+  String get ai_yourReading => 'Your Reading';
+
+  @override
+  String get ai_sharingReading => 'Sharing reading...';
+
+  @override
+  String get ai_copiedToClipboard => 'Copied to clipboard';
+
+  @override
+  String get ai_pastEntries => 'Past Entries';
+
+  @override
+  String get event_endDateAfterStart => 'End date must be after start date';
+
+  @override
+  String get event_participants => 'Participants';
+
+  @override
+  String social_failedToRegenerate(String error) {
+    return 'Failed to regenerate: $error';
+  }
+
+  @override
+  String get penta_chooseGroup => 'Choose a group for analysis';
+
+  @override
+  String get penta_createGroup => 'Create Group';
+
+  @override
+  String get chart_locationLabel => 'Location';
 }

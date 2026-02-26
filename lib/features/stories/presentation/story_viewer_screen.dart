@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/stories_providers.dart';
 import '../domain/models/story.dart';
 
@@ -340,7 +341,7 @@ class _StoryViewerScreenState extends ConsumerState<StoryViewerScreen>
           children: [
             ListTile(
               leading: const Icon(Icons.visibility),
-              title: const Text('View viewers'),
+              title: Text(AppLocalizations.of(context)!.story_viewViewers),
               onTap: () {
                 Navigator.pop(context);
                 _showViewers(context, story.id);
@@ -377,8 +378,8 @@ class _StoryViewerScreenState extends ConsumerState<StoryViewerScreen>
               return viewersAsync.when(
                 data: (viewers) {
                   if (viewers.isEmpty) {
-                    return const Center(
-                      child: Text('No viewers yet'),
+                    return Center(
+                      child: Text(AppLocalizations.of(context)!.story_noViewers),
                     );
                   }
 

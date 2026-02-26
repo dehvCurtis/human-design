@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../core/constants/human_design_constants.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../../ephemeris/mappers/degree_to_gate_mapper.dart';
 import '../../home/domain/home_providers.dart';
 import '../../lifestyle/domain/transit_service.dart';
@@ -38,6 +39,7 @@ class TransitsScreen extends ConsumerWidget {
     final selectedDate = ref.watch(_selectedTransitDateProvider);
     final transits = ref.watch(_transitsForDateProvider);
     final impactAsync = ref.watch(_transitImpactForDateProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +47,7 @@ class TransitsScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.calendar_today),
-            tooltip: 'Select Date',
+            tooltip: l10n.transit_selectDate,
             onPressed: () => _selectDate(context, ref, selectedDate),
           ),
         ],
@@ -175,13 +177,14 @@ class _DateHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final dayFormat = DateFormat('EEEE');
     final dateFormat = DateFormat('MMMM d, y');
+    final l10n = AppLocalizations.of(context)!;
 
     return Row(
       children: [
         IconButton(
           icon: const Icon(Icons.chevron_left),
           onPressed: onPreviousDay,
-          tooltip: 'Previous Day',
+          tooltip: l10n.transit_previousDay,
         ),
         Expanded(
           child: Column(
@@ -205,7 +208,7 @@ class _DateHeader extends StatelessWidget {
                 TextButton.icon(
                   onPressed: onToday,
                   icon: const Icon(Icons.today, size: 16),
-                  label: const Text('Back to Today'),
+                  label: Text(l10n.transit_backToToday),
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     minimumSize: Size.zero,
@@ -219,7 +222,7 @@ class _DateHeader extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.chevron_right),
           onPressed: onNextDay,
-          tooltip: 'Next Day',
+          tooltip: l10n.transit_nextDay,
         ),
       ],
     );

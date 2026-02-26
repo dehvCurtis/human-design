@@ -153,7 +153,7 @@ class _AiChartReadingScreenState extends ConsumerState<AiChartReadingScreen> {
         }
 
         // Parse sections from markdown
-        final sections = _parseSections(message.content);
+        final sections = _parseSections(message.content, l10n.ai_yourReading);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -239,10 +239,10 @@ class _AiChartReadingScreenState extends ConsumerState<AiChartReadingScreen> {
     );
   }
 
-  List<_ReadingSection> _parseSections(String content) {
+  List<_ReadingSection> _parseSections(String content, [String defaultTitle = 'Reading']) {
     final sections = <_ReadingSection>[];
     final lines = content.split('\n');
-    String currentTitle = 'Reading';
+    String currentTitle = defaultTitle;
     final currentContent = StringBuffer();
 
     for (final line in lines) {
@@ -272,7 +272,7 @@ class _AiChartReadingScreenState extends ConsumerState<AiChartReadingScreen> {
     // If no sections were parsed, wrap entire content as one
     if (sections.isEmpty) {
       sections.add(_ReadingSection(
-        title: 'Your Reading',
+        title: defaultTitle,
         content: content.trim(),
       ));
     }
@@ -281,12 +281,13 @@ class _AiChartReadingScreenState extends ConsumerState<AiChartReadingScreen> {
   }
 
   void _shareReading(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final reading = ref.read(chartReadingProvider);
     reading.whenData((message) {
       if (message != null) {
         // Use share_plus through chart export service
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Sharing reading...')),
+          SnackBar(content: Text(l10n.ai_sharingReading)),
         );
       }
     });

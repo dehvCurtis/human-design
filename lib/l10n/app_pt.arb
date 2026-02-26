@@ -1587,5 +1587,216 @@
   "group_shareChart": "Compartilhar mapa",
   "group_share": "Compartilhar",
   "group_chartShared": "Mapa compartilhado com o grupo",
-  "group_noChartsToShare": "Nenhum mapa salvo para compartilhar. Crie um mapa primeiro."
+  "group_noChartsToShare": "Nenhum mapa salvo para compartilhar. Crie um mapa primeiro.",
+
+  "common_confirm": "Confirmar",
+  "common_gotIt": "Entendi",
+  "common_post": "Publicar",
+  "common_public": "Público",
+  "common_followers": "Seguidores",
+  "common_private": "Privado",
+  "common_messages": "Mensagens",
+  "common_or": "ou",
+  "common_comment": "Comentário",
+  "common_apply": "Aplicar",
+  "common_reset": "Redefinir",
+
+  "form_emailRequired": "O email é obrigatório",
+  "form_emailInvalid": "Insira um email válido",
+  "form_passwordRequired": "A senha é obrigatória",
+  "form_passwordTooShort": "A senha deve ter pelo menos 6 caracteres",
+  "form_passwordTooShortStrong": "A senha deve ter pelo menos 12 caracteres",
+  "form_passwordNeedsUppercase": "A senha deve conter uma letra maiúscula",
+  "form_passwordNeedsLowercase": "A senha deve conter uma letra minúscula",
+  "form_passwordNeedsNumber": "A senha deve conter um número",
+  "form_passwordNeedsSpecial": "A senha deve conter um caractere especial",
+  "form_unknownBirthTime": "Não sei meu horário de nascimento",
+  "form_birthTimeHelp": "Um horário de nascimento preciso ajuda a criar um mapa mais exato",
+  "form_networkError": "Erro de rede. Verifique sua conexão.",
+  "form_searchFailed": "Falha na busca. Tente novamente.",
+  "form_noCitiesFound": "Nenhuma cidade encontrada. Tente outra busca.",
+  "form_timezoneAuto": "Seu fuso horário será detectado automaticamente",
+  "form_timezoneValue": "Fuso horário: {timezone}",
+  "@form_timezoneValue": {
+    "placeholders": {
+      "timezone": {"type": "String"}
+    }
+  },
+
+  "oauth_continueWithApple": "Continuar com Apple",
+  "oauth_continueWithGoogle": "Continuar com Google",
+  "oauth_continueWithMicrosoft": "Continuar com Microsoft",
+  "oauth_continueWithFacebook": "Continuar com Facebook",
+  "oauth_changeLanguage": "Mudar idioma",
+
+  "messaging_conversation": "Conversa",
+  "messaging_typeMessage": "Digite uma mensagem...",
+  "messaging_shareChart": "Compartilhar mapa",
+  "messaging_shareTransit": "Compartilhar trânsito",
+  "messaging_sendImage": "Enviar imagem",
+  "messaging_noChartsAvailable": "Nenhum mapa disponível para compartilhar",
+  "messaging_selectChart": "Selecionar mapa para compartilhar",
+  "messaging_you": "Você",
+  "messaging_searchConversations": "Buscar conversas...",
+  "messaging_newMessage": "Nova mensagem",
+  "messaging_errorLoading": "Erro ao carregar conversas",
+  "messaging_signInRequired": "Faça login para enviar mensagens",
+  "messaging_signIn": "Entrar",
+
+  "discovery_searchUsers": "Buscar usuários...",
+  "discovery_discover": "Descobrir",
+  "discovery_popularCharts": "Mapas populares",
+  "discovery_hasChart": "Tem mapa",
+  "discovery_mutual": "Mútuos",
+  "discovery_clearAll": "Limpar tudo",
+  "discovery_onlyWithChart": "Apenas usuários com mapa",
+  "discovery_showWithBirthData": "Mostrar usuários com dados de nascimento",
+  "discovery_mutualFollowsOnly": "Apenas seguidores mútuos",
+  "discovery_showMutualFollows": "Mostrar apenas pessoas que vocês dois seguem",
+  "discovery_applyFilters": "Aplicar filtros",
+  "discovery_typeCompatibility": "Compatibilidade de tipo",
+  "discovery_profileHarmonics": "Harmônicos de perfil",
+  "discovery_channelComplementarity": "Complementaridade de canais",
+  "discovery_definitionBridging": "Ponte de definição",
+
+  "feed_cancel": "Cancelar",
+  "feed_post": "Publicar",
+  "feed_gateTag": "Porta {gate}",
+  "@feed_gateTag": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+  "feed_channelTag": "Canal {channel}",
+  "@feed_channelTag": {
+    "placeholders": {
+      "channel": {"type": "String"}
+    }
+  },
+  "feed_addImage": "Adicionar imagem",
+  "feed_attachChart": "Anexar mapa",
+  "feed_tagGateOrChannel": "Marcar porta ou canal",
+  "feed_maxImagesAllowed": "Máximo de 4 imagens permitidas",
+  "feed_enterContentOrImage": "Insira conteúdo ou adicione uma imagem",
+  "feed_postCreated": "Publicação criada!",
+  "feed_addCommentOptional": "Adicionar comentário (opcional)",
+  "feed_regenerate": "Regenerar",
+  "feed_searchGatesChannels": "Buscar portas ou canais...",
+  "feed_shareAboutGate": "Compartilhar sobre esta porta",
+  "feed_createPostAboutGate": "Criar publicação sobre a Porta {gate}",
+  "@feed_createPostAboutGate": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+
+  "quiz_quizzes": "Questionários",
+  "quiz_quizStats": "Estatísticas",
+  "quiz_quizNotFound": "Questionário não encontrado",
+  "quiz_questionsLabel": "Perguntas",
+  "quiz_pointsLabel": "Pontos",
+  "quiz_difficultyLabel": "Dificuldade",
+  "quiz_timeLimit": "Limite de tempo",
+  "quiz_correct": "Correto",
+
+  "profile_achievements": "Conquistas",
+  "profile_learning": "Aprendizado",
+  "profile_plan": "Plano",
+  "profile_planFree": "Grátis",
+  "profile_manageSubscription": "Gerenciar assinatura",
+  "profile_upgradeToPremium": "Atualizar para Premium",
+  "profile_aiMessages": "Mensagens IA",
+  "profile_aiUnlimited": "Ilimitado",
+  "profile_aiRemaining": "{remaining} / {limit} restantes",
+  "@profile_aiRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "profile_bonusMessages": "Mensagens bônus",
+  "profile_noProfile": "Perfil não encontrado",
+  "profile_takePhoto": "Tirar foto",
+  "profile_chooseFromGallery": "Escolher da galeria",
+  "profile_avatarUpdated": "Avatar atualizado",
+  "profile_profileUpdated": "Perfil atualizado",
+  "profile_changePhoto": "Mudar foto",
+  "profile_enterName": "Insira seu nome",
+  "profile_date": "Data",
+  "profile_time": "Hora",
+  "profile_location": "Localização",
+  "profile_timezone": "Fuso horário",
+  "profile_preferences": "Preferências",
+  "profile_language": "Idioma",
+
+  "learning_learn": "Aprender",
+  "learning_searchContent": "Buscar conteúdo...",
+  "learning_mentorship": "Mentoria",
+  "learning_errorLoading": "Erro ao carregar conteúdo",
+  "learning_contentNotFound": "Conteúdo não encontrado",
+  "learning_goBack": "Voltar",
+  "learning_mentor": "Mentor",
+  "learning_mentee": "Aprendiz",
+  "learning_request": "Solicitar",
+  "learning_full": "Completo",
+  "learning_selectRole": "Selecione pelo menos uma função",
+  "learning_profileCreated": "Perfil de mentoria criado!",
+  "learning_menteeDesc": "Quero aprender com praticantes experientes",
+  "learning_mentorDesc": "Quero compartilhar meu conhecimento e orientar outros",
+  "learning_bioHint": "Conte sobre sua jornada no Design Humano...",
+  "learning_yearsExperience": "Anos de experiência",
+  "learning_maxMentees": "Máximo de aprendizes",
+  "learning_createProfile": "Criar perfil",
+
+  "gamification_totalPoints": "Pontos totais",
+  "gamification_errorLoading": "Erro ao carregar desafios",
+  "gamification_noRankings": "Ainda sem classificações",
+
+  "story_stories": "Histórias",
+  "story_failedToLoad": "Erro ao carregar histórias",
+  "story_addContent": "Adicione conteúdo à sua história",
+  "story_created": "História criada!",
+  "story_viewViewers": "Ver visualizações",
+  "story_noViewers": "Ainda sem visualizações",
+
+  "transit_selectDate": "Selecionar data",
+  "transit_previousDay": "Dia anterior",
+  "transit_backToToday": "Voltar para hoje",
+  "transit_nextDay": "Dia seguinte",
+  "transit_shareAbout": "Compartilhar sobre {title}",
+  "@transit_shareAbout": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+
+  "sharing_noChartAvailable": "Nenhum mapa disponível para exportar",
+  "sharing_failedToCapture": "Falha ao capturar imagem do mapa",
+  "sharing_copyLink": "Copiar link",
+
+  "ai_writeThoughts": "Escreva seus pensamentos...",
+  "ai_entrySaved": "Entrada salva!",
+  "ai_yourReading": "Sua leitura",
+  "ai_sharingReading": "Compartilhando leitura...",
+  "ai_copiedToClipboard": "Copiado para a área de transferência",
+  "ai_pastEntries": "Entradas anteriores",
+
+  "event_endDateAfterStart": "A data final deve ser posterior à data inicial",
+  "event_participants": "Participantes",
+
+  "social_failedToRegenerate": "Falha ao regenerar: {error}",
+  "@social_failedToRegenerate": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+
+  "penta_chooseGroup": "Escolha um grupo para análise",
+  "penta_createGroup": "Criar grupo",
+
+  "chart_center": "Centro",
+  "chart_keynote": "Nota-chave",
+  "chart_element": "Elemento",
+  "chart_locationLabel": "Localização",
+  "chart_hdCenters": "Centros HD"
 }

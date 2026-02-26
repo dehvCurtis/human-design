@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Badge;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/utils/error_handler.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/gamification_providers.dart';
 import '../domain/models/gamification.dart';
 
@@ -12,10 +13,11 @@ class AchievementsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pointsAsync = ref.watch(userPointsProvider);
     final badgesAsync = ref.watch(badgesWithProgressProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Achievements'),
+        title: Text(l10n.profile_achievements),
       ),
       body: CustomScrollView(
         slivers: [
@@ -68,6 +70,7 @@ class _StatsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       margin: const EdgeInsets.all(16),
@@ -90,17 +93,17 @@ class _StatsHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _StatItem(
-                label: 'Level',
+                label: l10n.gamification_level,
                 value: points.currentLevel.toString(),
                 icon: Icons.star,
               ),
               _StatItem(
-                label: 'Total Points',
+                label: l10n.gamification_totalPoints,
                 value: _formatNumber(points.totalPoints),
                 icon: Icons.diamond,
               ),
               _StatItem(
-                label: 'Streak',
+                label: l10n.gamification_streak,
                 value: '${points.currentStreak} days',
                 icon: Icons.local_fire_department,
               ),
@@ -409,7 +412,7 @@ class _BadgeCard extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(AppLocalizations.of(context)!.common_close),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/models/post.dart';
 
 /// Dialog for confirming and customizing a regenerate (repost) action
@@ -33,6 +34,7 @@ class _RegenerateDialogState extends State<RegenerateDialog> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final originalPost = widget.originalPost;
 
     return Dialog(
@@ -140,7 +142,7 @@ class _RegenerateDialogState extends State<RegenerateDialog> {
               TextField(
                 controller: _commentController,
                 decoration: InputDecoration(
-                  hintText: 'Add a comment (optional)',
+                  hintText: l10n.feed_addCommentOptional,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -165,14 +167,14 @@ class _RegenerateDialogState extends State<RegenerateDialog> {
               Row(
                 children: [
                   _VisibilityChip(
-                    label: 'Public',
+                    label: l10n.common_public,
                     icon: Icons.public,
                     isSelected: _visibility == PostVisibility.public,
                     onTap: () => setState(() => _visibility = PostVisibility.public),
                   ),
                   const SizedBox(width: 8),
                   _VisibilityChip(
-                    label: 'Followers',
+                    label: l10n.common_followers,
                     icon: Icons.people_outline,
                     isSelected: _visibility == PostVisibility.followers,
                     onTap: () => setState(() => _visibility = PostVisibility.followers),
@@ -187,7 +189,7 @@ class _RegenerateDialogState extends State<RegenerateDialog> {
                 children: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
+                    child: Text(l10n.common_cancel),
                   ),
                   const SizedBox(width: 12),
                   FilledButton.icon(
@@ -201,7 +203,7 @@ class _RegenerateDialogState extends State<RegenerateDialog> {
                       );
                     },
                     icon: const Icon(Icons.repeat, size: 18),
-                    label: const Text('Regenerate'),
+                    label: Text(l10n.feed_regenerate),
                   ),
                 ],
               ),

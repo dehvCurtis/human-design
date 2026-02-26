@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import '../../../l10n/generated/app_localizations.dart';
 
 /// A time picker field widget
 class TimePickerField extends StatefulWidget {
@@ -83,7 +84,7 @@ class _TimePickerFieldState extends State<TimePickerField> {
             ),
             child: Text(
               widget.isUnknown
-                  ? "I don't know"
+                  ? AppLocalizations.of(context)!.form_unknownBirthTime
                   : (widget.value != null ? _formatTime(widget.value!) : widget.hint),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: (widget.value != null || widget.isUnknown)
@@ -101,7 +102,7 @@ class _TimePickerFieldState extends State<TimePickerField> {
           TextButton.icon(
             onPressed: widget.onUnknownSelected,
             icon: const Icon(Icons.help_outline, size: 18),
-            label: const Text("I don't know my birth time"),
+            label: Text(AppLocalizations.of(context)!.form_unknownBirthTime),
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
               foregroundColor: AppColors.textSecondaryLight,
@@ -166,6 +167,7 @@ class BirthTimePickerField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return TimePickerField(
       value: value,
       onChanged: onChanged,
@@ -173,8 +175,7 @@ class BirthTimePickerField extends StatelessWidget {
       hint: hint,
       enabled: enabled,
       errorText: errorText,
-      helperText: helperText ??
-          'Accurate birth time helps create a more precise chart',
+      helperText: helperText ?? l10n.form_birthTimeHelp,
       showUnknownOption: true,
       onUnknownSelected: onUnknownSelected,
       isUnknown: isUnknown,

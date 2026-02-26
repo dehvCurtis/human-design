@@ -1609,5 +1609,216 @@
   "group_shareChart": "Share Chart",
   "group_share": "Share",
   "group_chartShared": "Chart shared with group",
-  "group_noChartsToShare": "No saved charts to share. Create a chart first."
+  "group_noChartsToShare": "No saved charts to share. Create a chart first.",
+
+  "common_confirm": "Confirm",
+  "common_gotIt": "Got it",
+  "common_post": "Post",
+  "common_public": "Public",
+  "common_followers": "Followers",
+  "common_private": "Private",
+  "common_messages": "Messages",
+  "common_or": "or",
+  "common_comment": "Comment",
+  "common_apply": "Apply",
+  "common_reset": "Reset",
+
+  "form_emailRequired": "Email is required",
+  "form_emailInvalid": "Please enter a valid email",
+  "form_passwordRequired": "Password is required",
+  "form_passwordTooShort": "Password must be at least 6 characters",
+  "form_passwordTooShortStrong": "Password must be at least 12 characters",
+  "form_passwordNeedsUppercase": "Password must contain an uppercase letter",
+  "form_passwordNeedsLowercase": "Password must contain a lowercase letter",
+  "form_passwordNeedsNumber": "Password must contain a number",
+  "form_passwordNeedsSpecial": "Password must contain a special character",
+  "form_unknownBirthTime": "I don't know my birth time",
+  "form_birthTimeHelp": "Accurate birth time helps create a more precise chart",
+  "form_networkError": "Network error. Check your connection.",
+  "form_searchFailed": "Search failed. Please try again.",
+  "form_noCitiesFound": "No cities found. Try a different search.",
+  "form_timezoneAuto": "Your timezone will be detected automatically",
+  "form_timezoneValue": "Timezone: {timezone}",
+  "@form_timezoneValue": {
+    "placeholders": {
+      "timezone": {"type": "String"}
+    }
+  },
+
+  "oauth_continueWithApple": "Continue with Apple",
+  "oauth_continueWithGoogle": "Continue with Google",
+  "oauth_continueWithMicrosoft": "Continue with Microsoft",
+  "oauth_continueWithFacebook": "Continue with Facebook",
+  "oauth_changeLanguage": "Change Language",
+
+  "messaging_conversation": "Conversation",
+  "messaging_typeMessage": "Type a message...",
+  "messaging_shareChart": "Share Chart",
+  "messaging_shareTransit": "Share Transit",
+  "messaging_sendImage": "Send Image",
+  "messaging_noChartsAvailable": "No charts available to share",
+  "messaging_selectChart": "Select Chart to Share",
+  "messaging_you": "You",
+  "messaging_searchConversations": "Search conversations...",
+  "messaging_newMessage": "New Message",
+  "messaging_errorLoading": "Error loading conversations",
+  "messaging_signInRequired": "Please sign in to send messages",
+  "messaging_signIn": "Sign In",
+
+  "discovery_searchUsers": "Search users...",
+  "discovery_discover": "Discover",
+  "discovery_popularCharts": "Popular Charts",
+  "discovery_hasChart": "Has Chart",
+  "discovery_mutual": "Mutual",
+  "discovery_clearAll": "Clear all",
+  "discovery_onlyWithChart": "Only users with chart",
+  "discovery_showWithBirthData": "Show users who have entered birth data",
+  "discovery_mutualFollowsOnly": "Mutual follows only",
+  "discovery_showMutualFollows": "Show only people you both follow",
+  "discovery_applyFilters": "Apply Filters",
+  "discovery_typeCompatibility": "Type Compatibility",
+  "discovery_profileHarmonics": "Profile Harmonics",
+  "discovery_channelComplementarity": "Channel Complementarity",
+  "discovery_definitionBridging": "Definition Bridging",
+
+  "feed_cancel": "Cancel",
+  "feed_post": "Post",
+  "feed_gateTag": "Gate {gate}",
+  "@feed_gateTag": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+  "feed_channelTag": "Channel {channel}",
+  "@feed_channelTag": {
+    "placeholders": {
+      "channel": {"type": "String"}
+    }
+  },
+  "feed_addImage": "Add image",
+  "feed_attachChart": "Attach chart",
+  "feed_tagGateOrChannel": "Tag gate or channel",
+  "feed_maxImagesAllowed": "Maximum 4 images allowed",
+  "feed_enterContentOrImage": "Please enter some content or add an image",
+  "feed_postCreated": "Post created successfully!",
+  "feed_addCommentOptional": "Add a comment (optional)",
+  "feed_regenerate": "Regenerate",
+  "feed_searchGatesChannels": "Search gates or channels...",
+  "feed_shareAboutGate": "Share about this gate",
+  "feed_createPostAboutGate": "Create post about Gate {gate}",
+  "@feed_createPostAboutGate": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+
+  "quiz_quizzes": "Quizzes",
+  "quiz_quizStats": "Quiz Stats",
+  "quiz_quizNotFound": "Quiz not found",
+  "quiz_questionsLabel": "Questions",
+  "quiz_pointsLabel": "Points",
+  "quiz_difficultyLabel": "Difficulty",
+  "quiz_timeLimit": "Time Limit",
+  "quiz_correct": "Correct",
+
+  "profile_achievements": "Achievements",
+  "profile_learning": "Learning",
+  "profile_plan": "Plan",
+  "profile_planFree": "Free",
+  "profile_manageSubscription": "Manage Subscription",
+  "profile_upgradeToPremium": "Upgrade to Premium",
+  "profile_aiMessages": "AI Messages",
+  "profile_aiUnlimited": "Unlimited",
+  "profile_aiRemaining": "{remaining} / {limit} remaining",
+  "@profile_aiRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "profile_bonusMessages": "Bonus Messages",
+  "profile_noProfile": "No profile found",
+  "profile_takePhoto": "Take Photo",
+  "profile_chooseFromGallery": "Choose from Gallery",
+  "profile_avatarUpdated": "Avatar updated successfully",
+  "profile_profileUpdated": "Profile updated successfully",
+  "profile_changePhoto": "Change Photo",
+  "profile_enterName": "Enter your name",
+  "profile_date": "Date",
+  "profile_time": "Time",
+  "profile_location": "Location",
+  "profile_timezone": "Timezone",
+  "profile_preferences": "Preferences",
+  "profile_language": "Language",
+
+  "learning_learn": "Learn",
+  "learning_searchContent": "Search content...",
+  "learning_mentorship": "Mentorship",
+  "learning_errorLoading": "Error loading content",
+  "learning_contentNotFound": "Content not found",
+  "learning_goBack": "Go back",
+  "learning_mentor": "Mentor",
+  "learning_mentee": "Mentee",
+  "learning_request": "Request",
+  "learning_full": "Full",
+  "learning_selectRole": "Please select at least one role",
+  "learning_profileCreated": "Mentorship profile created!",
+  "learning_menteeDesc": "I want to learn from experienced practitioners",
+  "learning_mentorDesc": "I want to share my knowledge and guide others",
+  "learning_bioHint": "Tell others about your Human Design journey...",
+  "learning_yearsExperience": "Years of Experience",
+  "learning_maxMentees": "Maximum Mentees",
+  "learning_createProfile": "Create Profile",
+
+  "gamification_totalPoints": "Total Points",
+  "gamification_errorLoading": "Error loading challenges",
+  "gamification_noRankings": "No rankings yet",
+
+  "story_stories": "Stories",
+  "story_failedToLoad": "Failed to load stories",
+  "story_addContent": "Please add some content to your story",
+  "story_created": "Story created!",
+  "story_viewViewers": "View viewers",
+  "story_noViewers": "No viewers yet",
+
+  "transit_selectDate": "Select Date",
+  "transit_previousDay": "Previous Day",
+  "transit_backToToday": "Back to Today",
+  "transit_nextDay": "Next Day",
+  "transit_shareAbout": "Share about {title}",
+  "@transit_shareAbout": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+
+  "sharing_noChartAvailable": "No chart available to export",
+  "sharing_failedToCapture": "Failed to capture chart image",
+  "sharing_copyLink": "Copy link",
+
+  "ai_writeThoughts": "Write your thoughts...",
+  "ai_entrySaved": "Entry saved!",
+  "ai_yourReading": "Your Reading",
+  "ai_sharingReading": "Sharing reading...",
+  "ai_copiedToClipboard": "Copied to clipboard",
+  "ai_pastEntries": "Past Entries",
+
+  "event_endDateAfterStart": "End date must be after start date",
+  "event_participants": "Participants",
+
+  "social_failedToRegenerate": "Failed to regenerate: {error}",
+  "@social_failedToRegenerate": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+
+  "penta_chooseGroup": "Choose a group for analysis",
+  "penta_createGroup": "Create Group",
+
+  "chart_center": "Center",
+  "chart_keynote": "Keynote",
+  "chart_element": "Element",
+  "chart_locationLabel": "Location",
+  "chart_hdCenters": "HD Centers"
 }

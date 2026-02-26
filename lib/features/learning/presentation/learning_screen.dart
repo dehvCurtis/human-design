@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/router/app_router.dart';
+import '../../../l10n/generated/app_localizations.dart';
 import '../domain/learning_providers.dart';
 import '../domain/models/learning.dart';
 
@@ -34,10 +35,11 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Learn'),
+        title: Text(l10n.learning_learn),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -52,11 +54,11 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
           controller: _tabController,
           isScrollable: true,
           tabAlignment: TabAlignment.center,
-          tabs: const [
-            Tab(text: 'All'),
-            Tab(text: 'Types'),
-            Tab(text: 'Gates'),
-            Tab(text: 'Centers'),
+          tabs: [
+            Tab(text: l10n.learning_all),
+            Tab(text: l10n.learning_types),
+            Tab(text: l10n.learning_gates),
+            Tab(text: l10n.learning_centers),
           ],
         ),
       ),
@@ -68,7 +70,7 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search content...',
+                hintText: l10n.learning_searchContent,
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -93,7 +95,7 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
                 Expanded(
                   child: _QuickActionCard(
                     icon: Icons.school,
-                    label: 'Mentorship',
+                    label: l10n.learning_mentorship,
                     onTap: () => context.push(AppRoutes.mentorship),
                   ),
                 ),
@@ -101,7 +103,7 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
                 Expanded(
                   child: _QuickActionCard(
                     icon: Icons.live_tv,
-                    label: 'Live Sessions',
+                    label: l10n.learning_liveSessions,
                     onTap: () => context.push(AppRoutes.sessions),
                   ),
                 ),
@@ -232,11 +234,11 @@ class _ContentTab extends ConsumerWidget {
             children: [
               Icon(Icons.error_outline, size: 48, color: theme.colorScheme.error),
               const SizedBox(height: 16),
-              Text('Error loading content'),
+              Text(AppLocalizations.of(context)!.learning_errorLoading),
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () => ref.invalidate(contentLibraryProvider(effectiveFilter)),
-                child: const Text('Retry'),
+                child: Text(AppLocalizations.of(context)!.common_retry),
               ),
             ],
           ),

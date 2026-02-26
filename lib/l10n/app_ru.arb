@@ -1542,5 +1542,216 @@
   "group_shareChart": "Поделиться чартом",
   "group_share": "Поделиться",
   "group_chartShared": "Чарт поделён с группой",
-  "group_noChartsToShare": "Нет сохранённых чартов для публикации. Сначала создайте чарт."
+  "group_noChartsToShare": "Нет сохранённых чартов для публикации. Сначала создайте чарт.",
+
+  "common_confirm": "Подтвердить",
+  "common_gotIt": "Понятно",
+  "common_post": "Опубликовать",
+  "common_public": "Публичный",
+  "common_followers": "Подписчики",
+  "common_private": "Приватный",
+  "common_messages": "Сообщения",
+  "common_or": "или",
+  "common_comment": "Комментарий",
+  "common_apply": "Применить",
+  "common_reset": "Сбросить",
+
+  "form_emailRequired": "Требуется email",
+  "form_emailInvalid": "Введите корректный email",
+  "form_passwordRequired": "Требуется пароль",
+  "form_passwordTooShort": "Пароль должен содержать не менее 6 символов",
+  "form_passwordTooShortStrong": "Пароль должен содержать не менее 12 символов",
+  "form_passwordNeedsUppercase": "Пароль должен содержать заглавную букву",
+  "form_passwordNeedsLowercase": "Пароль должен содержать строчную букву",
+  "form_passwordNeedsNumber": "Пароль должен содержать цифру",
+  "form_passwordNeedsSpecial": "Пароль должен содержать спецсимвол",
+  "form_unknownBirthTime": "Я не знаю время рождения",
+  "form_birthTimeHelp": "Точное время рождения помогает создать более точную карту",
+  "form_networkError": "Ошибка сети. Проверьте подключение.",
+  "form_searchFailed": "Поиск не удался. Попробуйте ещё раз.",
+  "form_noCitiesFound": "Города не найдены. Попробуйте другой запрос.",
+  "form_timezoneAuto": "Ваш часовой пояс будет определён автоматически",
+  "form_timezoneValue": "Часовой пояс: {timezone}",
+  "@form_timezoneValue": {
+    "placeholders": {
+      "timezone": {"type": "String"}
+    }
+  },
+
+  "oauth_continueWithApple": "Продолжить с Apple",
+  "oauth_continueWithGoogle": "Продолжить с Google",
+  "oauth_continueWithMicrosoft": "Продолжить с Microsoft",
+  "oauth_continueWithFacebook": "Продолжить с Facebook",
+  "oauth_changeLanguage": "Сменить язык",
+
+  "messaging_conversation": "Беседа",
+  "messaging_typeMessage": "Введите сообщение...",
+  "messaging_shareChart": "Поделиться картой",
+  "messaging_shareTransit": "Поделиться транзитом",
+  "messaging_sendImage": "Отправить изображение",
+  "messaging_noChartsAvailable": "Нет доступных карт для отправки",
+  "messaging_selectChart": "Выберите карту для отправки",
+  "messaging_you": "Вы",
+  "messaging_searchConversations": "Поиск бесед...",
+  "messaging_newMessage": "Новое сообщение",
+  "messaging_errorLoading": "Ошибка загрузки бесед",
+  "messaging_signInRequired": "Войдите, чтобы отправлять сообщения",
+  "messaging_signIn": "Войти",
+
+  "discovery_searchUsers": "Поиск пользователей...",
+  "discovery_discover": "Поиск",
+  "discovery_popularCharts": "Популярные карты",
+  "discovery_hasChart": "Есть карта",
+  "discovery_mutual": "Взаимные",
+  "discovery_clearAll": "Очистить все",
+  "discovery_onlyWithChart": "Только с картой",
+  "discovery_showWithBirthData": "Показать пользователей с данными рождения",
+  "discovery_mutualFollowsOnly": "Только взаимные подписки",
+  "discovery_showMutualFollows": "Показать только тех, на кого вы оба подписаны",
+  "discovery_applyFilters": "Применить фильтры",
+  "discovery_typeCompatibility": "Совместимость типов",
+  "discovery_profileHarmonics": "Гармоники профиля",
+  "discovery_channelComplementarity": "Комплементарность каналов",
+  "discovery_definitionBridging": "Мостик определённости",
+
+  "feed_cancel": "Отмена",
+  "feed_post": "Опубликовать",
+  "feed_gateTag": "Ворота {gate}",
+  "@feed_gateTag": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+  "feed_channelTag": "Канал {channel}",
+  "@feed_channelTag": {
+    "placeholders": {
+      "channel": {"type": "String"}
+    }
+  },
+  "feed_addImage": "Добавить изображение",
+  "feed_attachChart": "Прикрепить карту",
+  "feed_tagGateOrChannel": "Отметить ворота или канал",
+  "feed_maxImagesAllowed": "Максимум 4 изображения",
+  "feed_enterContentOrImage": "Введите текст или добавьте изображение",
+  "feed_postCreated": "Публикация создана!",
+  "feed_addCommentOptional": "Добавить комментарий (необязательно)",
+  "feed_regenerate": "Сгенерировать заново",
+  "feed_searchGatesChannels": "Поиск ворот или каналов...",
+  "feed_shareAboutGate": "Рассказать об этих воротах",
+  "feed_createPostAboutGate": "Создать публикацию о Воротах {gate}",
+  "@feed_createPostAboutGate": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+
+  "quiz_quizzes": "Викторины",
+  "quiz_quizStats": "Статистика викторин",
+  "quiz_quizNotFound": "Викторина не найдена",
+  "quiz_questionsLabel": "Вопросы",
+  "quiz_pointsLabel": "Очки",
+  "quiz_difficultyLabel": "Сложность",
+  "quiz_timeLimit": "Ограничение по времени",
+  "quiz_correct": "Правильно",
+
+  "profile_achievements": "Достижения",
+  "profile_learning": "Обучение",
+  "profile_plan": "Тариф",
+  "profile_planFree": "Бесплатный",
+  "profile_manageSubscription": "Управление подпиской",
+  "profile_upgradeToPremium": "Перейти на Премиум",
+  "profile_aiMessages": "Сообщения ИИ",
+  "profile_aiUnlimited": "Безлимитно",
+  "profile_aiRemaining": "{remaining} / {limit} осталось",
+  "@profile_aiRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "profile_bonusMessages": "Бонусные сообщения",
+  "profile_noProfile": "Профиль не найден",
+  "profile_takePhoto": "Сделать фото",
+  "profile_chooseFromGallery": "Выбрать из галереи",
+  "profile_avatarUpdated": "Аватар обновлён",
+  "profile_profileUpdated": "Профиль обновлён",
+  "profile_changePhoto": "Сменить фото",
+  "profile_enterName": "Введите ваше имя",
+  "profile_date": "Дата",
+  "profile_time": "Время",
+  "profile_location": "Местоположение",
+  "profile_timezone": "Часовой пояс",
+  "profile_preferences": "Настройки",
+  "profile_language": "Язык",
+
+  "learning_learn": "Учиться",
+  "learning_searchContent": "Поиск материалов...",
+  "learning_mentorship": "Наставничество",
+  "learning_errorLoading": "Ошибка загрузки контента",
+  "learning_contentNotFound": "Контент не найден",
+  "learning_goBack": "Назад",
+  "learning_mentor": "Наставник",
+  "learning_mentee": "Ученик",
+  "learning_request": "Запрос",
+  "learning_full": "Заполнено",
+  "learning_selectRole": "Выберите хотя бы одну роль",
+  "learning_profileCreated": "Профиль наставничества создан!",
+  "learning_menteeDesc": "Хочу учиться у опытных практиков",
+  "learning_mentorDesc": "Хочу делиться знаниями и помогать другим",
+  "learning_bioHint": "Расскажите о своём пути в Дизайне Человека...",
+  "learning_yearsExperience": "Лет опыта",
+  "learning_maxMentees": "Максимум учеников",
+  "learning_createProfile": "Создать профиль",
+
+  "gamification_totalPoints": "Всего очков",
+  "gamification_errorLoading": "Ошибка загрузки заданий",
+  "gamification_noRankings": "Рейтинг пока пуст",
+
+  "story_stories": "Истории",
+  "story_failedToLoad": "Не удалось загрузить истории",
+  "story_addContent": "Добавьте контент к вашей истории",
+  "story_created": "История создана!",
+  "story_viewViewers": "Просмотры",
+  "story_noViewers": "Пока нет просмотров",
+
+  "transit_selectDate": "Выбрать дату",
+  "transit_previousDay": "Предыдущий день",
+  "transit_backToToday": "Вернуться к сегодня",
+  "transit_nextDay": "Следующий день",
+  "transit_shareAbout": "Рассказать о {title}",
+  "@transit_shareAbout": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+
+  "sharing_noChartAvailable": "Нет карты для экспорта",
+  "sharing_failedToCapture": "Не удалось захватить изображение карты",
+  "sharing_copyLink": "Копировать ссылку",
+
+  "ai_writeThoughts": "Запишите свои мысли...",
+  "ai_entrySaved": "Запись сохранена!",
+  "ai_yourReading": "Ваше чтение",
+  "ai_sharingReading": "Отправка чтения...",
+  "ai_copiedToClipboard": "Скопировано в буфер обмена",
+  "ai_pastEntries": "Прошлые записи",
+
+  "event_endDateAfterStart": "Дата окончания должна быть после даты начала",
+  "event_participants": "Участники",
+
+  "social_failedToRegenerate": "Не удалось сгенерировать заново: {error}",
+  "@social_failedToRegenerate": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+
+  "penta_chooseGroup": "Выберите группу для анализа",
+  "penta_createGroup": "Создать группу",
+
+  "chart_center": "Центр",
+  "chart_keynote": "Ключевая нота",
+  "chart_element": "Элемент",
+  "chart_locationLabel": "Расположение",
+  "chart_hdCenters": "Центры HD"
 }

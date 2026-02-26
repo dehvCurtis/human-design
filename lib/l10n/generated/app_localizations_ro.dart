@@ -1720,7 +1720,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String quiz_correct(int count) {
-    return '$count corecte';
+    return 'Corect';
   }
 
   @override
@@ -2903,10 +2903,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get messages_startConversation => 'Începe conversația!';
 
   @override
-  String get profile_takePhoto => 'Fă o Fotografie';
+  String get profile_takePhoto => 'Fă o fotografie';
 
   @override
-  String get profile_chooseFromGallery => 'Alege din Galerie';
+  String get profile_chooseFromGallery => 'Alege din galerie';
 
   @override
   String get profile_avatarUpdated => 'Avatar actualizat cu succes';
@@ -2968,7 +2968,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get chart_center => 'Centru';
 
   @override
-  String get chart_keynote => 'Notă Cheie';
+  String get chart_keynote => 'Notă cheie';
 
   @override
   String get chart_element => 'Element';
@@ -3625,4 +3625,467 @@ class AppLocalizationsRo extends AppLocalizations {
   @override
   String get group_noChartsToShare =>
       'Nu există hărți salvate de distribuit. Creați mai întâi o hartă.';
+
+  @override
+  String get common_confirm => 'Confirmă';
+
+  @override
+  String get common_gotIt => 'Am înțeles';
+
+  @override
+  String get common_post => 'Publică';
+
+  @override
+  String get common_public => 'Public';
+
+  @override
+  String get common_followers => 'Urmăritori';
+
+  @override
+  String get common_private => 'Privat';
+
+  @override
+  String get common_messages => 'Mesaje';
+
+  @override
+  String get common_or => 'sau';
+
+  @override
+  String get common_comment => 'Comentariu';
+
+  @override
+  String get common_apply => 'Aplică';
+
+  @override
+  String get common_reset => 'Resetează';
+
+  @override
+  String get form_emailRequired => 'Email-ul este obligatoriu';
+
+  @override
+  String get form_emailInvalid => 'Introduceți un email valid';
+
+  @override
+  String get form_passwordRequired => 'Parola este obligatorie';
+
+  @override
+  String get form_passwordTooShort =>
+      'Parola trebuie să aibă cel puțin 6 caractere';
+
+  @override
+  String get form_passwordTooShortStrong =>
+      'Parola trebuie să aibă cel puțin 12 caractere';
+
+  @override
+  String get form_passwordNeedsUppercase =>
+      'Parola trebuie să conțină o literă mare';
+
+  @override
+  String get form_passwordNeedsLowercase =>
+      'Parola trebuie să conțină o literă mică';
+
+  @override
+  String get form_passwordNeedsNumber => 'Parola trebuie să conțină o cifră';
+
+  @override
+  String get form_passwordNeedsSpecial =>
+      'Parola trebuie să conțină un caracter special';
+
+  @override
+  String get form_unknownBirthTime => 'Nu știu ora nașterii mele';
+
+  @override
+  String get form_birthTimeHelp =>
+      'O oră de naștere precisă ajută la crearea unei hărți mai exacte';
+
+  @override
+  String get form_networkError => 'Eroare de rețea. Verificați conexiunea.';
+
+  @override
+  String get form_searchFailed => 'Căutarea a eșuat. Încercați din nou.';
+
+  @override
+  String get form_noCitiesFound =>
+      'Nu s-au găsit orașe. Încercați altă căutare.';
+
+  @override
+  String get form_timezoneAuto => 'Fusul orar va fi detectat automat';
+
+  @override
+  String form_timezoneValue(String timezone) {
+    return 'Fus orar: $timezone';
+  }
+
+  @override
+  String get oauth_continueWithApple => 'Continuă cu Apple';
+
+  @override
+  String get oauth_continueWithGoogle => 'Continuă cu Google';
+
+  @override
+  String get oauth_continueWithMicrosoft => 'Continuă cu Microsoft';
+
+  @override
+  String get oauth_continueWithFacebook => 'Continuă cu Facebook';
+
+  @override
+  String get oauth_changeLanguage => 'Schimbă limba';
+
+  @override
+  String get messaging_conversation => 'Conversație';
+
+  @override
+  String get messaging_typeMessage => 'Scrie un mesaj...';
+
+  @override
+  String get messaging_shareChart => 'Distribuie harta';
+
+  @override
+  String get messaging_shareTransit => 'Distribuie tranzitul';
+
+  @override
+  String get messaging_sendImage => 'Trimite imagine';
+
+  @override
+  String get messaging_noChartsAvailable =>
+      'Nu există hărți disponibile pentru distribuire';
+
+  @override
+  String get messaging_selectChart => 'Selectează harta de distribuit';
+
+  @override
+  String get messaging_you => 'Tu';
+
+  @override
+  String get messaging_searchConversations => 'Caută conversații...';
+
+  @override
+  String get messaging_newMessage => 'Mesaj nou';
+
+  @override
+  String get messaging_errorLoading => 'Eroare la încărcarea conversațiilor';
+
+  @override
+  String get messaging_signInRequired =>
+      'Autentificați-vă pentru a trimite mesaje';
+
+  @override
+  String get messaging_signIn => 'Autentificare';
+
+  @override
+  String get discovery_discover => 'Descoperă';
+
+  @override
+  String get discovery_popularCharts => 'Hărți populare';
+
+  @override
+  String get discovery_hasChart => 'Are hartă';
+
+  @override
+  String get discovery_mutual => 'Reciproci';
+
+  @override
+  String get discovery_onlyWithChart => 'Doar utilizatori cu hartă';
+
+  @override
+  String get discovery_showWithBirthData =>
+      'Arată utilizatorii cu date de naștere';
+
+  @override
+  String get discovery_mutualFollowsOnly => 'Doar urmăriri reciproce';
+
+  @override
+  String get discovery_showMutualFollows =>
+      'Arată doar persoanele pe care le urmăriți amândoi';
+
+  @override
+  String get discovery_applyFilters => 'Aplică filtrele';
+
+  @override
+  String get discovery_typeCompatibility => 'Compatibilitate de tip';
+
+  @override
+  String get discovery_profileHarmonics => 'Armonicele profilului';
+
+  @override
+  String get discovery_channelComplementarity => 'Complementaritatea canalelor';
+
+  @override
+  String get discovery_definitionBridging => 'Punte de definiție';
+
+  @override
+  String get feed_cancel => 'Anulează';
+
+  @override
+  String get feed_post => 'Publică';
+
+  @override
+  String feed_gateTag(int gate) {
+    return 'Poarta $gate';
+  }
+
+  @override
+  String feed_channelTag(String channel) {
+    return 'Canal $channel';
+  }
+
+  @override
+  String get feed_addImage => 'Adaugă imagine';
+
+  @override
+  String get feed_attachChart => 'Atașează harta';
+
+  @override
+  String get feed_tagGateOrChannel => 'Etichetează poartă sau canal';
+
+  @override
+  String get feed_maxImagesAllowed => 'Maximum 4 imagini permise';
+
+  @override
+  String get feed_enterContentOrImage =>
+      'Introduceți conținut sau adăugați o imagine';
+
+  @override
+  String get feed_postCreated => 'Postare creată cu succes!';
+
+  @override
+  String get feed_addCommentOptional => 'Adaugă un comentariu (opțional)';
+
+  @override
+  String get feed_regenerate => 'Regenerează';
+
+  @override
+  String get feed_searchGatesChannels => 'Caută porți sau canale...';
+
+  @override
+  String get feed_shareAboutGate => 'Distribuie despre această poartă';
+
+  @override
+  String feed_createPostAboutGate(int gate) {
+    return 'Creează postare despre Poarta $gate';
+  }
+
+  @override
+  String get quiz_quizStats => 'Statistici';
+
+  @override
+  String get quiz_quizNotFound => 'Chestionarul nu a fost găsit';
+
+  @override
+  String get quiz_pointsLabel => 'Puncte';
+
+  @override
+  String get quiz_difficultyLabel => 'Dificultate';
+
+  @override
+  String get quiz_timeLimit => 'Limită de timp';
+
+  @override
+  String get profile_achievements => 'Realizări';
+
+  @override
+  String get profile_learning => 'Învățare';
+
+  @override
+  String get profile_plan => 'Plan';
+
+  @override
+  String get profile_planFree => 'Gratuit';
+
+  @override
+  String get profile_manageSubscription => 'Gestionare abonament';
+
+  @override
+  String get profile_upgradeToPremium => 'Upgradare la Premium';
+
+  @override
+  String get profile_aiMessages => 'Mesaje IA';
+
+  @override
+  String get profile_aiUnlimited => 'Nelimitat';
+
+  @override
+  String profile_aiRemaining(int remaining, int limit) {
+    return '$remaining / $limit rămase';
+  }
+
+  @override
+  String get profile_bonusMessages => 'Mesaje bonus';
+
+  @override
+  String get profile_noProfile => 'Profil negăsit';
+
+  @override
+  String get profile_changePhoto => 'Schimbă fotografia';
+
+  @override
+  String get profile_enterName => 'Introduceți numele dvs.';
+
+  @override
+  String get profile_date => 'Data';
+
+  @override
+  String get profile_time => 'Ora';
+
+  @override
+  String get profile_location => 'Locație';
+
+  @override
+  String get profile_timezone => 'Fus orar';
+
+  @override
+  String get profile_preferences => 'Preferințe';
+
+  @override
+  String get profile_language => 'Limbă';
+
+  @override
+  String get learning_learn => 'Învață';
+
+  @override
+  String get learning_searchContent => 'Caută conținut...';
+
+  @override
+  String get learning_mentorship => 'Mentorat';
+
+  @override
+  String get learning_errorLoading => 'Eroare la încărcarea conținutului';
+
+  @override
+  String get learning_contentNotFound => 'Conținut negăsit';
+
+  @override
+  String get learning_goBack => 'Înapoi';
+
+  @override
+  String get learning_mentor => 'Mentor';
+
+  @override
+  String get learning_mentee => 'Ucenic';
+
+  @override
+  String get learning_request => 'Solicită';
+
+  @override
+  String get learning_full => 'Plin';
+
+  @override
+  String get learning_selectRole => 'Selectați cel puțin un rol';
+
+  @override
+  String get learning_profileCreated => 'Profil de mentorat creat!';
+
+  @override
+  String get learning_menteeDesc =>
+      'Vreau să învăț de la practicanți experimentați';
+
+  @override
+  String get learning_mentorDesc =>
+      'Vreau să împărtășesc cunoștințele mele și să ghidez pe alții';
+
+  @override
+  String get learning_bioHint =>
+      'Povestește despre călătoria ta în Human Design...';
+
+  @override
+  String get learning_yearsExperience => 'Ani de experiență';
+
+  @override
+  String get learning_maxMentees => 'Număr maxim de ucenici';
+
+  @override
+  String get learning_createProfile => 'Creează profil';
+
+  @override
+  String get gamification_totalPoints => 'Puncte totale';
+
+  @override
+  String get gamification_errorLoading => 'Eroare la încărcarea provocărilor';
+
+  @override
+  String get gamification_noRankings => 'Încă nu există clasamente';
+
+  @override
+  String get story_stories => 'Povești';
+
+  @override
+  String get story_failedToLoad => 'Eroare la încărcarea poveștilor';
+
+  @override
+  String get story_addContent => 'Adăugați conținut poveștii dvs.';
+
+  @override
+  String get story_created => 'Poveste creată!';
+
+  @override
+  String get story_viewViewers => 'Vezi vizualizările';
+
+  @override
+  String get story_noViewers => 'Încă nu există vizualizări';
+
+  @override
+  String get transit_selectDate => 'Selectează data';
+
+  @override
+  String get transit_previousDay => 'Ziua anterioară';
+
+  @override
+  String get transit_backToToday => 'Înapoi la azi';
+
+  @override
+  String get transit_nextDay => 'Ziua următoare';
+
+  @override
+  String transit_shareAbout(String title) {
+    return 'Distribuie despre $title';
+  }
+
+  @override
+  String get sharing_noChartAvailable =>
+      'Nu există hartă disponibilă pentru export';
+
+  @override
+  String get sharing_failedToCapture => 'Eroare la captura imaginii hărții';
+
+  @override
+  String get sharing_copyLink => 'Copiază linkul';
+
+  @override
+  String get ai_writeThoughts => 'Scrie-ți gândurile...';
+
+  @override
+  String get ai_entrySaved => 'Înregistrare salvată!';
+
+  @override
+  String get ai_yourReading => 'Lectura ta';
+
+  @override
+  String get ai_sharingReading => 'Se distribuie lectura...';
+
+  @override
+  String get ai_copiedToClipboard => 'Copiat în clipboard';
+
+  @override
+  String get ai_pastEntries => 'Înregistrări anterioare';
+
+  @override
+  String get event_endDateAfterStart =>
+      'Data de sfârșit trebuie să fie după data de început';
+
+  @override
+  String get event_participants => 'Participanți';
+
+  @override
+  String social_failedToRegenerate(String error) {
+    return 'Eroare la regenerare: $error';
+  }
+
+  @override
+  String get penta_chooseGroup => 'Alege un grup pentru analiză';
+
+  @override
+  String get penta_createGroup => 'Creează grup';
+
+  @override
+  String get chart_locationLabel => 'Locație';
 }

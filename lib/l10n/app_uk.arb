@@ -1542,5 +1542,216 @@
   "group_shareChart": "Поділитися чартом",
   "group_share": "Поділитися",
   "group_chartShared": "Чарт поділено з групою",
-  "group_noChartsToShare": "Немає збережених чартів для публікації. Спочатку створіть чарт."
+  "group_noChartsToShare": "Немає збережених чартів для публікації. Спочатку створіть чарт.",
+
+  "common_confirm": "Підтвердити",
+  "common_gotIt": "Зрозуміло",
+  "common_post": "Опублікувати",
+  "common_public": "Публічний",
+  "common_followers": "Підписники",
+  "common_private": "Приватний",
+  "common_messages": "Повідомлення",
+  "common_or": "або",
+  "common_comment": "Коментар",
+  "common_apply": "Застосувати",
+  "common_reset": "Скинути",
+
+  "form_emailRequired": "Потрібна електронна пошта",
+  "form_emailInvalid": "Введіть коректну електронну пошту",
+  "form_passwordRequired": "Потрібен пароль",
+  "form_passwordTooShort": "Пароль має містити щонайменше 6 символів",
+  "form_passwordTooShortStrong": "Пароль має містити щонайменше 12 символів",
+  "form_passwordNeedsUppercase": "Пароль має містити велику літеру",
+  "form_passwordNeedsLowercase": "Пароль має містити малу літеру",
+  "form_passwordNeedsNumber": "Пароль має містити цифру",
+  "form_passwordNeedsSpecial": "Пароль має містити спецсимвол",
+  "form_unknownBirthTime": "Я не знаю час народження",
+  "form_birthTimeHelp": "Точний час народження допомагає створити більш точну карту",
+  "form_networkError": "Помилка мережі. Перевірте підключення.",
+  "form_searchFailed": "Помилка пошуку. Спробуйте ще раз.",
+  "form_noCitiesFound": "Міст не знайдено. Спробуйте інший запит.",
+  "form_timezoneAuto": "Ваш часовий пояс буде визначено автоматично",
+  "form_timezoneValue": "Часовий пояс: {timezone}",
+  "@form_timezoneValue": {
+    "placeholders": {
+      "timezone": {"type": "String"}
+    }
+  },
+
+  "oauth_continueWithApple": "Продовжити з Apple",
+  "oauth_continueWithGoogle": "Продовжити з Google",
+  "oauth_continueWithMicrosoft": "Продовжити з Microsoft",
+  "oauth_continueWithFacebook": "Продовжити з Facebook",
+  "oauth_changeLanguage": "Змінити мову",
+
+  "messaging_conversation": "Бесіда",
+  "messaging_typeMessage": "Введіть повідомлення...",
+  "messaging_shareChart": "Поділитися картою",
+  "messaging_shareTransit": "Поділитися транзитом",
+  "messaging_sendImage": "Надіслати зображення",
+  "messaging_noChartsAvailable": "Немає карт для надсилання",
+  "messaging_selectChart": "Оберіть карту для надсилання",
+  "messaging_you": "Ви",
+  "messaging_searchConversations": "Пошук бесід...",
+  "messaging_newMessage": "Нове повідомлення",
+  "messaging_errorLoading": "Помилка завантаження бесід",
+  "messaging_signInRequired": "Увійдіть, щоб надсилати повідомлення",
+  "messaging_signIn": "Увійти",
+
+  "discovery_searchUsers": "Пошук користувачів...",
+  "discovery_discover": "Знайти",
+  "discovery_popularCharts": "Популярні карти",
+  "discovery_hasChart": "Є карта",
+  "discovery_mutual": "Взаємні",
+  "discovery_clearAll": "Очистити все",
+  "discovery_onlyWithChart": "Тільки з картою",
+  "discovery_showWithBirthData": "Показати користувачів з даними народження",
+  "discovery_mutualFollowsOnly": "Тільки взаємні підписки",
+  "discovery_showMutualFollows": "Показати лише тих, на кого ви обидва підписані",
+  "discovery_applyFilters": "Застосувати фільтри",
+  "discovery_typeCompatibility": "Сумісність типів",
+  "discovery_profileHarmonics": "Гармоніки профілю",
+  "discovery_channelComplementarity": "Комплементарність каналів",
+  "discovery_definitionBridging": "Місток визначеності",
+
+  "feed_cancel": "Скасувати",
+  "feed_post": "Опублікувати",
+  "feed_gateTag": "Ворота {gate}",
+  "@feed_gateTag": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+  "feed_channelTag": "Канал {channel}",
+  "@feed_channelTag": {
+    "placeholders": {
+      "channel": {"type": "String"}
+    }
+  },
+  "feed_addImage": "Додати зображення",
+  "feed_attachChart": "Прикріпити карту",
+  "feed_tagGateOrChannel": "Позначити ворота або канал",
+  "feed_maxImagesAllowed": "Максимум 4 зображення",
+  "feed_enterContentOrImage": "Введіть текст або додайте зображення",
+  "feed_postCreated": "Публікацію створено!",
+  "feed_addCommentOptional": "Додати коментар (необов'язково)",
+  "feed_regenerate": "Згенерувати знову",
+  "feed_searchGatesChannels": "Пошук воріт або каналів...",
+  "feed_shareAboutGate": "Розповісти про ці ворота",
+  "feed_createPostAboutGate": "Створити публікацію про Ворота {gate}",
+  "@feed_createPostAboutGate": {
+    "placeholders": {
+      "gate": {"type": "int"}
+    }
+  },
+
+  "quiz_quizzes": "Вікторини",
+  "quiz_quizStats": "Статистика вікторин",
+  "quiz_quizNotFound": "Вікторину не знайдено",
+  "quiz_questionsLabel": "Запитання",
+  "quiz_pointsLabel": "Очки",
+  "quiz_difficultyLabel": "Складність",
+  "quiz_timeLimit": "Обмеження часу",
+  "quiz_correct": "Правильно",
+
+  "profile_achievements": "Досягнення",
+  "profile_learning": "Навчання",
+  "profile_plan": "Тариф",
+  "profile_planFree": "Безкоштовний",
+  "profile_manageSubscription": "Керування підпискою",
+  "profile_upgradeToPremium": "Перейти на Преміум",
+  "profile_aiMessages": "Повідомлення ШІ",
+  "profile_aiUnlimited": "Безлімітно",
+  "profile_aiRemaining": "{remaining} / {limit} залишилось",
+  "@profile_aiRemaining": {
+    "placeholders": {
+      "remaining": {"type": "int"},
+      "limit": {"type": "int"}
+    }
+  },
+  "profile_bonusMessages": "Бонусні повідомлення",
+  "profile_noProfile": "Профіль не знайдено",
+  "profile_takePhoto": "Зробити фото",
+  "profile_chooseFromGallery": "Обрати з галереї",
+  "profile_avatarUpdated": "Аватар оновлено",
+  "profile_profileUpdated": "Профіль оновлено",
+  "profile_changePhoto": "Змінити фото",
+  "profile_enterName": "Введіть ваше ім'я",
+  "profile_date": "Дата",
+  "profile_time": "Час",
+  "profile_location": "Місцезнаходження",
+  "profile_timezone": "Часовий пояс",
+  "profile_preferences": "Налаштування",
+  "profile_language": "Мова",
+
+  "learning_learn": "Вчитися",
+  "learning_searchContent": "Пошук матеріалів...",
+  "learning_mentorship": "Наставництво",
+  "learning_errorLoading": "Помилка завантаження контенту",
+  "learning_contentNotFound": "Контент не знайдено",
+  "learning_goBack": "Назад",
+  "learning_mentor": "Наставник",
+  "learning_mentee": "Учень",
+  "learning_request": "Запит",
+  "learning_full": "Заповнено",
+  "learning_selectRole": "Оберіть хоча б одну роль",
+  "learning_profileCreated": "Профіль наставництва створено!",
+  "learning_menteeDesc": "Хочу вчитися у досвідчених практиків",
+  "learning_mentorDesc": "Хочу ділитися знаннями та допомагати іншим",
+  "learning_bioHint": "Розкажіть про свій шлях у Дизайні Людини...",
+  "learning_yearsExperience": "Років досвіду",
+  "learning_maxMentees": "Максимум учнів",
+  "learning_createProfile": "Створити профіль",
+
+  "gamification_totalPoints": "Загалом очок",
+  "gamification_errorLoading": "Помилка завантаження завдань",
+  "gamification_noRankings": "Рейтинг поки порожній",
+
+  "story_stories": "Історії",
+  "story_failedToLoad": "Не вдалося завантажити історії",
+  "story_addContent": "Додайте контент до вашої історії",
+  "story_created": "Історію створено!",
+  "story_viewViewers": "Перегляди",
+  "story_noViewers": "Поки немає переглядів",
+
+  "transit_selectDate": "Обрати дату",
+  "transit_previousDay": "Попередній день",
+  "transit_backToToday": "Повернутися до сьогодні",
+  "transit_nextDay": "Наступний день",
+  "transit_shareAbout": "Розповісти про {title}",
+  "@transit_shareAbout": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+
+  "sharing_noChartAvailable": "Немає карти для експорту",
+  "sharing_failedToCapture": "Не вдалося захопити зображення карти",
+  "sharing_copyLink": "Копіювати посилання",
+
+  "ai_writeThoughts": "Запишіть свої думки...",
+  "ai_entrySaved": "Запис збережено!",
+  "ai_yourReading": "Ваше читання",
+  "ai_sharingReading": "Надсилання читання...",
+  "ai_copiedToClipboard": "Скопійовано до буфера обміну",
+  "ai_pastEntries": "Минулі записи",
+
+  "event_endDateAfterStart": "Дата закінчення має бути після дати початку",
+  "event_participants": "Учасники",
+
+  "social_failedToRegenerate": "Не вдалося згенерувати знову: {error}",
+  "@social_failedToRegenerate": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+
+  "penta_chooseGroup": "Оберіть групу для аналізу",
+  "penta_createGroup": "Створити групу",
+
+  "chart_center": "Центр",
+  "chart_keynote": "Ключова нота",
+  "chart_element": "Елемент",
+  "chart_locationLabel": "Розташування",
+  "chart_hdCenters": "Центри HD"
 }

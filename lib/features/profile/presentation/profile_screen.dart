@@ -78,13 +78,13 @@ class ProfileScreen extends ConsumerWidget {
               const SizedBox(height: 8),
               _ActionButton(
                 icon: Icons.emoji_events_outlined,
-                label: 'Achievements',
+                label: l10n.profile_achievements,
                 onTap: () => context.push(AppRoutes.achievements),
               ),
               const SizedBox(height: 8),
               _ActionButton(
                 icon: Icons.school_outlined,
-                label: 'Learning',
+                label: l10n.profile_learning,
                 onTap: () => context.push(AppRoutes.learning),
               ),
               const SizedBox(height: 8),
@@ -478,7 +478,10 @@ class _SubscriptionCreditsCard extends ConsumerWidget {
                 padding: EdgeInsets.symmetric(vertical: 8),
                 child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
               ),
-              error: (_, _) => _SummaryRow(label: 'Plan', value: 'Free'),
+              error: (_, _) {
+                final l10n = AppLocalizations.of(context)!;
+                return _SummaryRow(label: l10n.profile_plan, value: l10n.profile_planFree);
+              },
             ),
             aiUsageAsync.when(
               data: (usage) => _buildAiUsageInfo(context, usage, subscriptionAsync.value),
@@ -490,28 +493,34 @@ class _SubscriptionCreditsCard extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             subscriptionAsync.when(
-              data: (subscription) => SizedBox(
-                width: double.infinity,
-                child: subscription.isPremium
-                    ? OutlinedButton(
-                        onPressed: () => context.push(AppRoutes.premium),
-                        child: const Text('Manage Subscription'),
-                      )
-                    : ElevatedButton.icon(
-                        onPressed: () => context.push(AppRoutes.premium),
-                        icon: const Icon(Icons.workspace_premium_outlined, size: 18),
-                        label: const Text('Upgrade to Premium'),
-                      ),
-              ),
+              data: (subscription) {
+                final l10n = AppLocalizations.of(context)!;
+                return SizedBox(
+                  width: double.infinity,
+                  child: subscription.isPremium
+                      ? OutlinedButton(
+                          onPressed: () => context.push(AppRoutes.premium),
+                          child: Text(l10n.profile_manageSubscription),
+                        )
+                      : ElevatedButton.icon(
+                          onPressed: () => context.push(AppRoutes.premium),
+                          icon: const Icon(Icons.workspace_premium_outlined, size: 18),
+                          label: Text(l10n.profile_upgradeToPremium),
+                        ),
+                );
+              },
               loading: () => const SizedBox.shrink(),
-              error: (_, _) => SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: () => context.push(AppRoutes.premium),
-                  icon: const Icon(Icons.workspace_premium_outlined, size: 18),
-                  label: const Text('Upgrade to Premium'),
-                ),
-              ),
+              error: (_, _) {
+                final l10n = AppLocalizations.of(context)!;
+                return SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: () => context.push(AppRoutes.premium),
+                    icon: const Icon(Icons.workspace_premium_outlined, size: 18),
+                    label: Text(l10n.profile_upgradeToPremium),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -520,20 +529,22 @@ class _SubscriptionCreditsCard extends ConsumerWidget {
   }
 
   Widget _buildSubscriptionInfo(BuildContext context, Subscription subscription) {
+    final l10n = AppLocalizations.of(context)!;
     final tierLabel = subscription.tier.displayName;
     final statusLabel = subscription.isTrial ? 'Trial' : (subscription.isPremium ? 'Active' : '');
 
     return _SummaryRow(
-      label: 'Plan',
+      label: l10n.profile_plan,
       value: statusLabel.isNotEmpty ? '$tierLabel ($statusLabel)' : tierLabel,
     );
   }
 
   Widget _buildAiUsageInfo(BuildContext context, AiUsage usage, Subscription? subscription) {
+    final l10n = AppLocalizations.of(context)!;
     final isPremium = subscription?.isPremium ?? false;
 
     if (isPremium) {
-      return const _SummaryRow(label: 'AI Messages', value: 'Unlimited');
+      return _SummaryRow(label: l10n.profile_aiMessages, value: l10n.profile_aiUnlimited);
     }
 
     final remaining = usage.remaining;
@@ -543,7 +554,10 @@ class _SubscriptionCreditsCard extends ConsumerWidget {
 
     return Column(
       children: [
-        _SummaryRow(label: 'AI Messages', value: '$remaining / $effectiveLimit remaining'),
+        _SummaryRow(
+          label: l10n.profile_aiMessages,
+          value: l10n.profile_aiRemaining(remaining, effectiveLimit),
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 4, bottom: 4),
           child: LinearProgressIndicator(
@@ -556,7 +570,7 @@ class _SubscriptionCreditsCard extends ConsumerWidget {
           ),
         ),
         if (usage.bonusMessages > 0)
-          _SummaryRow(label: 'Bonus Messages', value: '${usage.bonusMessages}'),
+          _SummaryRow(label: l10n.profile_bonusMessages, value: '${usage.bonusMessages}'),
       ],
     );
   }
