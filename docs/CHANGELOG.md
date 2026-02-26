@@ -2,13 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.27] - 2026-02-25
+## [1.1.0] - 2026-02-25
 
 ### Added
 - **Full app localization** — Replaced 150+ hardcoded English strings across 40+ presentation files with localized `l10n` references
 - **150 new localization keys** — Added keys for forms, OAuth, messaging, discovery, feed, stories, quiz, learning, gamification, profile, transits, chart, AI, sharing, social, penta, and events
 - **Translations for all 8 languages** — New keys translated to Russian, Ukrainian, German, Spanish, Portuguese, Romanian, and Belarusian
 - **Localized shared widgets** — OAuth buttons, dialogs, form fields, and language selector now use l10n system
+- **Versioning standard** — Established semantic versioning (MAJOR.MINOR.PATCH+BUILD) documented in `docs/standards/VERSIONING.md`
 
 ---
 
