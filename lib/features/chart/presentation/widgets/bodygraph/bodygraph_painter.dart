@@ -349,9 +349,9 @@ class BodygraphPainter extends CustomPainter {
     // Define backbone points (20-57 path is the main diagonal - straight line)
     // These coordinates match the custom channel paths in bodygraph_layout_standard.dart
     // Gate 10→J1 is parallel to Gate 34→J2
-    const gate20 = Offset(170, 210);
-    const j1 = Offset(136, 274);  // Junction where Gate 10 connects (on 20-57 line)
-    const j2 = Offset(102, 337);  // Junction where Gate 34 connects (on 20-57 line)
+    const gate20 = Offset(161, 210);
+    const j1 = Offset(130, 274);  // Junction where Gate 10 connects (on 20-57 line)
+    const j2 = Offset(98, 337);   // Junction where Gate 34 connects (on 20-57 line)
     const gate57 = Offset(80, 379);
     const gate10 = Offset(165, 310);
     const gate34 = Offset(170, 420);
@@ -505,6 +505,9 @@ class BodygraphPainter extends CustomPainter {
         case CenterShape.circle:
           _drawCircleCenter(canvas, position, fillPaint, strokePaint);
           break;
+        case CenterShape.hexagon:
+          _drawHexagon(canvas, position, fillPaint, strokePaint);
+          break;
       }
     }
   }
@@ -606,12 +609,29 @@ class BodygraphPainter extends CustomPainter {
       final position = _layout.centerPositions[center];
       if (position != null) {
         highlightPaint.strokeWidth = 4;
-        final rect = Rect.fromCenter(
-          center: position.position,
-          width: position.width + 8,
-          height: position.height + 8,
-        );
-        canvas.drawRect(rect, highlightPaint);
+        if (position.shape == CenterShape.hexagon) {
+          final r = (position.width + 8) / 2;
+          final path = Path();
+          for (int i = 0; i < 6; i++) {
+            final angle = (60.0 * i) * math.pi / 180.0;
+            final vx = position.x + r * math.cos(angle);
+            final vy = position.y - r * math.sin(angle);
+            if (i == 0) {
+              path.moveTo(vx, vy);
+            } else {
+              path.lineTo(vx, vy);
+            }
+          }
+          path.close();
+          canvas.drawPath(path, highlightPaint);
+        } else {
+          final rect = Rect.fromCenter(
+            center: position.position,
+            width: position.width + 8,
+            height: position.height + 8,
+          );
+          canvas.drawRect(rect, highlightPaint);
+        }
       }
     } else if (selectedElement is ChannelElement) {
       final channelId = (selectedElement as ChannelElement).channelId;
@@ -767,6 +787,34 @@ class BodygraphPainter extends CustomPainter {
 
     canvas.drawRect(rect, fillPaint);
     canvas.drawRect(rect, strokePaint);
+  }
+
+  void _drawHexagon(
+    Canvas canvas,
+    CenterPosition position,
+    Paint fillPaint,
+    Paint strokePaint,
+  ) {
+    final path = Path();
+    final r = position.width / 2; // circumradius
+    final cx = position.x;
+    final cy = position.y;
+
+    // Flat-top regular hexagon: vertices at 0°, 60°, 120°, 180°, 240°, 300°
+    for (int i = 0; i < 6; i++) {
+      final angle = (60.0 * i) * math.pi / 180.0;
+      final vx = cx + r * math.cos(angle);
+      final vy = cy - r * math.sin(angle);
+      if (i == 0) {
+        path.moveTo(vx, vy);
+      } else {
+        path.lineTo(vx, vy);
+      }
+    }
+    path.close();
+
+    canvas.drawPath(path, fillPaint);
+    canvas.drawPath(path, strokePaint);
   }
 
   void _drawDiamond(

@@ -53,14 +53,14 @@ class GeometricBodygraphLayout extends BodygraphLayout {
       height: 44,
       shape: CenterShape.triangle,
     ),
-    // UPPER MIDDLE - Throat centered
+    // UPPER MIDDLE - Throat hexagon
     HumanDesignCenter.throat: CenterPosition(
       center: HumanDesignCenter.throat,
       x: 200,
       y: 185,
       width: 44,
-      height: 44,
-      shape: CenterShape.square,
+      height: 38,  // flat-to-flat: 22 * sqrt(3) ≈ 38
+      shape: CenterShape.hexagon,
     ),
     // MIDDLE SECTION - G center with Heart to right
     HumanDesignCenter.g: CenterPosition(
@@ -137,23 +137,27 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     11: GatePosition(gate: 11, center: HumanDesignCenter.ajna, x: 230, y: 138),
 
     // ============================================
-    // THROAT CENTER GATES (11 gates) - ring around center
+    // THROAT CENTER GATES (11 gates) - on hexagon edges
+    // Hex vertices: V0(222,185) V1(211,166) V2(189,166) V3(178,185) V4(189,204) V5(211,204)
     // ============================================
-    // Top row
-    62: GatePosition(gate: 62, center: HumanDesignCenter.throat, x: 160, y: 162),
-    23: GatePosition(gate: 23, center: HumanDesignCenter.throat, x: 185, y: 160),
-    56: GatePosition(gate: 56, center: HumanDesignCenter.throat, x: 215, y: 160),
-    16: GatePosition(gate: 16, center: HumanDesignCenter.throat, x: 240, y: 162),
-    // Left side
-    20: GatePosition(gate: 20, center: HumanDesignCenter.throat, x: 150, y: 185),
-    45: GatePosition(gate: 45, center: HumanDesignCenter.throat, x: 150, y: 205),
-    // Right side
-    35: GatePosition(gate: 35, center: HumanDesignCenter.throat, x: 250, y: 185),
-    12: GatePosition(gate: 12, center: HumanDesignCenter.throat, x: 250, y: 205),
-    // Bottom row
-    31: GatePosition(gate: 31, center: HumanDesignCenter.throat, x: 165, y: 212),
-    8: GatePosition(gate: 8, center: HumanDesignCenter.throat, x: 190, y: 215),
-    33: GatePosition(gate: 33, center: HumanDesignCenter.throat, x: 215, y: 215),
+    // Top flat edge V2→V1 (connecting to Ajna)
+    62: GatePosition(gate: 62, center: HumanDesignCenter.throat, x: 193, y: 166),
+    23: GatePosition(gate: 23, center: HumanDesignCenter.throat, x: 200, y: 166),
+    56: GatePosition(gate: 56, center: HumanDesignCenter.throat, x: 207, y: 166),
+    // Upper-right edge V1→V0
+    16: GatePosition(gate: 16, center: HumanDesignCenter.throat, x: 218, y: 174),
+    // Right vertex V0
+    35: GatePosition(gate: 35, center: HumanDesignCenter.throat, x: 222, y: 185),
+    // Lower-right edge V0→V5
+    12: GatePosition(gate: 12, center: HumanDesignCenter.throat, x: 218, y: 196),
+    // Left vertex V3
+    20: GatePosition(gate: 20, center: HumanDesignCenter.throat, x: 178, y: 185),
+    // Lower-left edge V3→V4
+    45: GatePosition(gate: 45, center: HumanDesignCenter.throat, x: 182, y: 196),
+    // Bottom flat edge V4→V5 (connecting to G)
+    31: GatePosition(gate: 31, center: HumanDesignCenter.throat, x: 193, y: 204),
+    8: GatePosition(gate: 8, center: HumanDesignCenter.throat, x: 200, y: 204),
+    33: GatePosition(gate: 33, center: HumanDesignCenter.throat, x: 207, y: 204),
 
     // ============================================
     // G CENTER GATES (8 gates) - diamond points
@@ -240,38 +244,38 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     // ============================================
     // AJNA TO THROAT (3 PARALLEL channels)
     // ============================================
-    '17-62': [Offset(170, 142), Offset(165, 162)],
-    '23-43': [Offset(200, 145), Offset(190, 160)],
-    '11-56': [Offset(230, 142), Offset(220, 160)],
+    '17-62': [Offset(170, 142), Offset(193, 166)],
+    '23-43': [Offset(200, 145), Offset(200, 166)],
+    '11-56': [Offset(230, 142), Offset(207, 166)],
 
     // ============================================
     // THROAT TO G CENTER (4 channels)
     // ============================================
-    '7-31': [Offset(168, 215), Offset(200, 240), Offset(235, 280)],
-    '1-8': [Offset(192, 218), Offset(180, 252)],
-    '13-33': [Offset(218, 218), Offset(205, 248)],
-    '10-20': [Offset(165, 280), Offset(74, 319), Offset(148, 190)],  // Gate 10 connects at 27-50 angle
+    '7-31': [Offset(193, 204), Offset(200, 240), Offset(235, 280)],
+    '1-8': [Offset(200, 204), Offset(180, 252)],
+    '13-33': [Offset(207, 204), Offset(205, 248)],
+    '10-20': [Offset(165, 280), Offset(74, 319), Offset(178, 185)],  // Gate 10 connects at 27-50 angle
 
     // ============================================
     // THROAT TO HEART (long diagonal to far right)
     // ============================================
-    '21-45': [Offset(152, 208), Offset(230, 220), Offset(310, 228)],
+    '21-45': [Offset(182, 196), Offset(230, 220), Offset(310, 228)],
 
     // ============================================
     // THROAT TO SPLEEN (long diagonal to far left)
     // ============================================
-    '16-48': [Offset(242, 165), Offset(145, 260), Offset(45, 355)],
+    '16-48': [Offset(218, 174), Offset(145, 260), Offset(45, 355)],
 
     // ============================================
     // THROAT TO SOLAR PLEXUS (diagonals to far right)
     // ============================================
-    '12-22': [Offset(252, 208), Offset(305, 285), Offset(355, 362)],
-    '35-36': [Offset(252, 188), Offset(280, 270), Offset(305, 358)],
+    '12-22': [Offset(218, 196), Offset(305, 285), Offset(355, 362)],
+    '35-36': [Offset(222, 185), Offset(280, 270), Offset(305, 358)],
 
     // ============================================
     // THROAT TO SACRAL (integration - down center)
     // ============================================
-    '20-34': [Offset(148, 190), Offset(74, 319), Offset(60, 355), Offset(152, 395)],  // Via both junctions
+    '20-34': [Offset(178, 185), Offset(74, 319), Offset(60, 355), Offset(152, 395)],  // Via both junctions
 
     // ============================================
     // G CENTER TO HEART (diagonal to far right)
@@ -317,7 +321,7 @@ class GeometricBodygraphLayout extends BodygraphLayout {
     // ============================================
     // SPLEEN TO THROAT (integration - left diagonal)
     // ============================================
-    '20-57': [Offset(148, 190), Offset(74, 319), Offset(60, 355), Offset(40, 378)],  // Through both junctions
+    '20-57': [Offset(178, 185), Offset(74, 319), Offset(60, 355), Offset(40, 378)],  // Through both junctions
 
     // ============================================
     // SACRAL TO SOLAR PLEXUS (center to right)

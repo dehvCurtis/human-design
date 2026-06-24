@@ -136,7 +136,7 @@ class ClaudeProvider implements AiProvider {
         "anthropic-version": "2023-06-01",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5-20250929",
+        model: "claude-sonnet-4-5",
         max_tokens: maxTokens,
         system: systemPrompt,
         messages: messages.map((m) => ({
@@ -506,7 +506,7 @@ Deno.serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) {
       return new Response(
-        JSON.stringify({ error: "Missing authorization header" }),
+        JSON.stringify({ error: "Missing authorization header", code: "AUTH_MISSING" }),
         { status: 401, headers: { ...cors, "Content-Type": "application/json" } }
       );
     }
@@ -527,7 +527,7 @@ Deno.serve(async (req) => {
 
     if (authError || !user) {
       return new Response(
-        JSON.stringify({ error: "Invalid or expired token" }),
+        JSON.stringify({ error: "Invalid or expired token", code: "AUTH_INVALID" }),
         { status: 401, headers: { ...cors, "Content-Type": "application/json" } }
       );
     }
@@ -537,7 +537,7 @@ Deno.serve(async (req) => {
     // ---- Rate limit check: local first (fast), then DB (authoritative) ----
     if (!checkLocalRateLimit(userId)) {
       return new Response(
-        JSON.stringify({ error: "Too many requests. Please wait a moment." }),
+        JSON.stringify({ error: "Too many requests. Please wait a moment.", code: "RATE_LIMITED" }),
         { status: 429, headers: { ...cors, "Content-Type": "application/json" } }
       );
     }
@@ -556,7 +556,7 @@ Deno.serve(async (req) => {
     // DB-backed rate limit (authoritative, cross-instance)
     if (!(await checkDbRateLimit(adminClient, userId))) {
       return new Response(
-        JSON.stringify({ error: "Too many requests. Please wait a moment." }),
+        JSON.stringify({ error: "Too many requests. Please wait a moment.", code: "RATE_LIMITED" }),
         { status: 429, headers: { ...cors, "Content-Type": "application/json" } }
       );
     }
@@ -642,7 +642,10 @@ Deno.serve(async (req) => {
 
       if (convoError) {
         console.error("Failed to create conversation:", convoError);
-        throw new Error("Failed to create conversation");
+        return new Response(
+          JSON.stringify({ error: "Failed to create conversation", code: "CONVERSATION_CREATE_FAILED" }),
+          { status: 500, headers: { ...cors, "Content-Type": "application/json" } }
+        );
       }
 
       activeConversationId = newConvo.id;
@@ -656,7 +659,7 @@ Deno.serve(async (req) => {
 
       if (!existingConvo || existingConvo.user_id !== userId) {
         return new Response(
-          JSON.stringify({ error: "Conversation not found" }),
+          JSON.stringify({ error: "Conversation not found", code: "CONVERSATION_NOT_FOUND" }),
           { status: 404, headers: { ...cors, "Content-Type": "application/json" } }
         );
       }
@@ -700,7 +703,7 @@ Deno.serve(async (req) => {
       if (usageError) {
         console.error("Failed to increment usage (blocking AI call):", usageError);
         return new Response(
-          JSON.stringify({ error: "Service temporarily unavailable. Please try again." }),
+          JSON.stringify({ error: "Service temporarily unavailable. Please try again.", code: "USAGE_TRACKING_FAILED" }),
           { status: 503, headers: { ...cors, "Content-Type": "application/json" } }
         );
       }
@@ -790,13 +793,29 @@ Deno.serve(async (req) => {
 
     if (error instanceof ValidationError) {
       return new Response(
-        JSON.stringify({ error: error.message }),
+        JSON.stringify({ error: error.message, code: "VALIDATION_ERROR" }),
         { status: 400, headers: { ...cors, "Content-Type": "application/json" } }
       );
     }
 
+    // Detect AI provider errors
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    if (errorMsg.includes("API error")) {
+      return new Response(
+        JSON.stringify({ error: "AI provider is temporarily unavailable. Please try again.", code: "AI_PROVIDER_ERROR" }),
+        { status: 502, headers: { ...cors, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (errorMsg.includes("API_KEY") || errorMsg.includes("not set")) {
+      return new Response(
+        JSON.stringify({ error: "AI service is not configured. Contact support.", code: "AI_NOT_CONFIGURED" }),
+        { status: 500, headers: { ...cors, "Content-Type": "application/json" } }
+      );
+    }
+
     return new Response(
-      JSON.stringify({ error: "An internal error occurred" }),
+      JSON.stringify({ error: "An internal error occurred", code: "INTERNAL_ERROR" }),
       { status: 500, headers: { ...cors, "Content-Type": "application/json" } }
     );
   }

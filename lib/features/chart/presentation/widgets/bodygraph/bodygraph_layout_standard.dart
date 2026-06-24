@@ -73,14 +73,14 @@ class StandardBodygraphLayout extends BodygraphLayout {
       height: 60, // equilateral height (width * 0.866)
       shape: CenterShape.triangle,
     ),
-    // THROAT - Square (equal sides)
+    // THROAT - Hexagon (flat-top, circumradius 39)
     HumanDesignCenter.throat: CenterPosition(
       center: HumanDesignCenter.throat,
       x: 200,
       y: 210,
-      width: 60,
-      height: 60,
-      shape: CenterShape.square,
+      width: 78,
+      height: 68,  // flat-to-flat: 39 * sqrt(3) ≈ 68
+      shape: CenterShape.hexagon,
     ),
     // G CENTER - Heart shape (Self/Identity center)
     // Made wider (84) to fix "too tall and skinny" appearance
@@ -167,24 +167,26 @@ class StandardBodygraphLayout extends BodygraphLayout {
     11: GatePosition(gate: 11, center: HumanDesignCenter.ajna, x: 220, y: 125), // RIGHT edge - to 56 (aligned with 63)
 
     // ============================================
-    // THROAT CENTER GATES (11 gates around edges)
-    // Connects to Ajna (top), G (bottom), Spleen (left), Heart (right), Solar Plexus (right)
+    // THROAT CENTER GATES (11 gates on hexagon edges)
+    // Hexagon vertices: V0(239,210) V1(220,176) V2(181,176) V3(161,210) V4(181,244) V5(220,244)
     // ============================================
-    // Top edge (connecting UP to Ajna)
-    62: GatePosition(gate: 62, center: HumanDesignCenter.throat, x: 180, y: 180), // to 17 - aligned with 64
-    23: GatePosition(gate: 23, center: HumanDesignCenter.throat, x: 200, y: 180), // to 43 (center)
-    56: GatePosition(gate: 56, center: HumanDesignCenter.throat, x: 220, y: 180), // to 11 - aligned with 63
-    // Left edge (connecting to Spleen/G)
-    16: GatePosition(gate: 16, center: HumanDesignCenter.throat, x: 170, y: 195), // to 48 (Spleen)
-    20: GatePosition(gate: 20, center: HumanDesignCenter.throat, x: 170, y: 210), // to 57 (Spleen), 34 (Sacral), 10 (G)
-    // Right edge (connecting to Heart/Solar Plexus)
-    35: GatePosition(gate: 35, center: HumanDesignCenter.throat, x: 230, y: 195), // to 36 (Solar Plexus)
-    12: GatePosition(gate: 12, center: HumanDesignCenter.throat, x: 230, y: 210), // to 22 (Solar Plexus)
-    // Bottom edge (connecting DOWN to G) - aligned with bottom of square y: 240
-    31: GatePosition(gate: 31, center: HumanDesignCenter.throat, x: 180, y: 240), // to 7 (G)
-    8: GatePosition(gate: 8, center: HumanDesignCenter.throat, x: 200, y: 240),   // to 1 (G)
-    33: GatePosition(gate: 33, center: HumanDesignCenter.throat, x: 220, y: 240), // to 13 (G)
-    45: GatePosition(gate: 45, center: HumanDesignCenter.throat, x: 230, y: 240), // to 21 (Heart) - bottom right
+    // Top flat edge V2→V1 (connecting UP to Ajna)
+    62: GatePosition(gate: 62, center: HumanDesignCenter.throat, x: 187, y: 176), // to 17
+    23: GatePosition(gate: 23, center: HumanDesignCenter.throat, x: 200, y: 176), // to 43 (center)
+    56: GatePosition(gate: 56, center: HumanDesignCenter.throat, x: 213, y: 176), // to 11
+    // Upper-left edge V3→V2 (connecting to Spleen)
+    16: GatePosition(gate: 16, center: HumanDesignCenter.throat, x: 169, y: 191), // to 48 (Spleen)
+    // Left vertex V3 (connecting to integration backbone)
+    20: GatePosition(gate: 20, center: HumanDesignCenter.throat, x: 161, y: 210), // to 57 (Spleen), 34 (Sacral), 10 (G)
+    // Upper-right edge V1→V0 (connecting to Solar Plexus)
+    35: GatePosition(gate: 35, center: HumanDesignCenter.throat, x: 232, y: 196), // to 36 (Solar Plexus)
+    // Lower-right edge V0→V5 (connecting to Solar Plexus/Heart)
+    12: GatePosition(gate: 12, center: HumanDesignCenter.throat, x: 234, y: 218), // to 22 (Solar Plexus)
+    45: GatePosition(gate: 45, center: HumanDesignCenter.throat, x: 229, y: 232), // to 21 (Heart)
+    // Bottom flat edge V4→V5 (connecting DOWN to G)
+    31: GatePosition(gate: 31, center: HumanDesignCenter.throat, x: 187, y: 244), // to 7 (G)
+    8: GatePosition(gate: 8, center: HumanDesignCenter.throat, x: 200, y: 244),   // to 1 (G)
+    33: GatePosition(gate: 33, center: HumanDesignCenter.throat, x: 213, y: 244), // to 13 (G)
 
     // ============================================
     // G CENTER GATES (8 gates around diamond)
@@ -293,19 +295,19 @@ class StandardBodygraphLayout extends BodygraphLayout {
   static const Map<String, List<Offset>> _customChannelPaths = {
     // Throat to Spleen - needs routing around G center
     '16-48': [
-      Offset(170, 195),  // Gate 16 on Throat (left edge)
+      Offset(169, 191),  // Gate 16 on Throat (upper-left hex edge)
       Offset(116, 282),  // Waypoint left of G
       Offset(62, 368),   // Gate 48 on Spleen (top tip)
     ],
 
     // Throat to Solar Plexus - diagonal routes
     '12-22': [
-      Offset(230, 210),  // Gate 12 on Throat (right edge)
+      Offset(234, 218),  // Gate 12 on Throat (lower-right hex edge)
       Offset(275, 295),  // Waypoint
       Offset(320, 379),  // Gate 22 on Solar Plexus (top edge middle)
     ],
     '35-36': [
-      Offset(230, 195),  // Gate 35 on Throat (right edge)
+      Offset(232, 196),  // Gate 35 on Throat (upper-right hex edge)
       Offset(284, 282),  // Waypoint
       Offset(338, 368),  // Gate 36 on Solar Plexus (top right corner)
     ],
@@ -316,36 +318,36 @@ class StandardBodygraphLayout extends BodygraphLayout {
     // Gate 10→J1 is parallel to Gate 34→J2
     '10-20': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(136, 274),  // Junction J1 (on 20-57 line, parallel to 34-J2)
-      Offset(170, 210),  // Gate 20 on Throat (left edge)
+      Offset(130, 274),  // Junction J1 (on 20-57 line)
+      Offset(161, 210),  // Gate 20 on Throat (left vertex)
     ],
     '10-57': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(136, 274),  // Junction J1
-      Offset(102, 337),  // Junction J2
+      Offset(130, 274),  // Junction J1
+      Offset(98, 337),   // Junction J2
       Offset(80, 379),   // Gate 57 on Spleen
     ],
     '20-34': [
-      Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(136, 274),  // Junction J1
-      Offset(102, 337),  // Junction J2
+      Offset(161, 210),  // Gate 20 on Throat (left vertex)
+      Offset(130, 274),  // Junction J1
+      Offset(98, 337),   // Junction J2
       Offset(170, 420),  // Gate 34 on Sacral (left edge)
     ],
     '20-57': [
-      Offset(170, 210),  // Gate 20 on Throat (left edge)
-      Offset(136, 274),  // Junction J1 (where 10 connects)
-      Offset(102, 337),  // Junction J2 (where 34 connects)
+      Offset(161, 210),  // Gate 20 on Throat (left vertex)
+      Offset(130, 274),  // Junction J1 (where 10 connects)
+      Offset(98, 337),   // Junction J2 (where 34 connects)
       Offset(80, 379),   // Gate 57 on Spleen
     ],
     '34-57': [
       Offset(170, 420),  // Gate 34 on Sacral (left edge)
-      Offset(102, 337),  // Junction J2
+      Offset(98, 337),   // Junction J2
       Offset(80, 379),   // Gate 57 on Spleen
     ],
     '10-34': [
       Offset(165, 310),  // Gate 10 on G (left side)
-      Offset(136, 274),  // Junction J1
-      Offset(102, 337),  // Junction J2
+      Offset(130, 274),  // Junction J1
+      Offset(98, 337),   // Junction J2
       Offset(170, 420),  // Gate 34 on Sacral (left edge)
     ],
 
@@ -358,8 +360,8 @@ class StandardBodygraphLayout extends BodygraphLayout {
 
     // Throat to Heart - routes down-right to Heart
     '21-45': [
-      Offset(230, 240),  // Gate 45 on Throat (bottom right)
-      Offset(253, 289),  // Waypoint
+      Offset(229, 232),  // Gate 45 on Throat (lower-right hex edge)
+      Offset(254, 285),  // Waypoint
       Offset(276, 338),  // Gate 21 on Heart (TOP RIGHT)
     ],
 
